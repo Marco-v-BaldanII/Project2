@@ -84,9 +84,14 @@ bool Map::Update(float dt)
 
                     // L06: DONE 9: Complete the draw function
                     app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
+
+                    if (i == 50) {
+                        LOG("test");
+                    }
+
                     // testing if the tile's associated color is drawn
                     if (mapLayer->data->myTiles[0][0] != nullptr) {
-                        app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->GetTile(gid)->color, true, false);
+                        if(mapLayer->data->myTiles[i][j] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[i][j]->color, true, true);
                     }
                 }
             }
@@ -245,16 +250,25 @@ bool Map::Load(SString mapFileName)
 
                 
                 // acess  in myTiles matrix
-                mapLayer->myTiles[i % lastTileSet->columns][j] = new Tile(b2Color (1,0,1,1));
+                if (j % 2 == 0 && i%2 == 0) {
+                    mapLayer->myTiles[j][i % mapLayer->width] = new Tile(b2Color(1, 0, 1, 1));
+                }
+                else {
+                    mapLayer->myTiles[j][i % mapLayer->width] = new Tile(b2Color(0, 1, 1, 1));
+                }
 
 
-                        if (i != 0 && i % lastTileSet->columns == 0) {
+                        if (i != 0 && i % mapLayer->width == 0) {
                             j++;
                         }
                    
 
                 i++;
+
+                
             }
+
+         
 
             //add the layer to the map
             mapData.layers.Add(mapLayer);
