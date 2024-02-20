@@ -7,8 +7,10 @@
 #include "PQueue.h"
 #include "DynArray.h"
 #include "Pathfinding.h"
-
+#include "Box2D/Box2D/Box2D.h"
 #include "PugiXml\src\pugixml.hpp"
+
+#define MAX_TILE_AMOUNT 300
 
 // L09: DONE 2: Define a property to store the MapType and Load it from the map
 enum MapOrientation
@@ -16,6 +18,13 @@ enum MapOrientation
     ORTOGRAPHIC = 0,
     ISOMETRIC
 };
+
+struct Tile {
+
+    b2Color color = b2Color(1,0,0,1);
+
+};
+
 
 // L05: DONE 2: Create a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
@@ -32,6 +41,9 @@ struct TileSet
 
     SDL_Texture* texture;
 
+    // matrix of tiles
+    Tile* myTiles[MAX_TILE_AMOUNT][MAX_TILE_AMOUNT] = { nullptr };
+
     // L06: DONE 7: Implement the method that receives the gid and returns a Rect
 
     SDL_Rect GetRect(uint gid) {
@@ -46,6 +58,8 @@ struct TileSet
         return rect;
     }
 };
+
+
 
 // L08: DONE 5: Add attributes to the property structure
 struct Properties
