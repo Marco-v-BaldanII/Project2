@@ -84,7 +84,10 @@ bool Map::Update(float dt)
 
                     // L06: DONE 9: Complete the draw function
                     app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
-
+                    // testing if the tile's associated color is drawn
+                    if (mapLayer->data->myTiles[0][0] != nullptr) {
+                        app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->GetTile(gid)->color, true, false);
+                    }
                 }
             }
         }
@@ -179,8 +182,12 @@ bool Map::Load(SString mapFileName)
             ret = false; 
         }
 
+        TileSet* lastTileSet = nullptr;
+
+
         // L05: DONE 4: Implement the LoadTileSet function to load the tileset properties
        // Iterate the Tileset
+        int i = 0;
         for (pugi::xml_node tilesetNode = mapFileXML.child("map").child("tileset"); tilesetNode != NULL; tilesetNode = tilesetNode.next_sibling("tileset")) {
 
             TileSet* tileset = new TileSet();
@@ -201,6 +208,11 @@ bool Map::Load(SString mapFileName)
             tileset->texture = app->tex->Load(mapTex.GetString());
 
             mapData.tilesets.Add(tileset);
+
+            if (i == 0) {
+                lastTileSet = tileset;
+            }
+            
 
         }
 
@@ -223,9 +235,24 @@ bool Map::Load(SString mapFileName)
             memset(mapLayer->tiles, 0, mapLayer->width * mapLayer->height);
 
             //Iterate over all the tiles and assign the values in the data array
-            int i = 0;
+
+            // I want to iterate the gids as a matrix to save into the myTiles matrix
+
+            int i = 0; int j = 0;
+            // this loop iterates all tiles in a layer
             for (pugi::xml_node tileNode = layerNode.child("data").child("tile"); tileNode != NULL; tileNode = tileNode.next_sibling("tile")) {
                 mapLayer->tiles[i] = tileNode.attribute("gid").as_uint();
+
+                
+                // acess  in myTiles matrix
+                mapLayer->myTiles[i % lastTileSet->columns][j] = new Tile(b2Color (1,0,1,1));
+
+
+                        if (i != 0 && i % lastTileSet->columns == 0) {
+                            j++;
+                        }
+                   
+
                 i++;
             }
 

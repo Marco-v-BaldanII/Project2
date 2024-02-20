@@ -21,6 +21,11 @@ enum MapOrientation
 
 struct Tile {
 
+    Tile(b2Color col) {
+        color = col;
+    }
+
+
     b2Color color = b2Color(1,0,0,1);
 
 };
@@ -41,8 +46,7 @@ struct TileSet
 
     SDL_Texture* texture;
 
-    // matrix of tiles
-    Tile* myTiles[MAX_TILE_AMOUNT][MAX_TILE_AMOUNT] = { nullptr };
+    
 
     // L06: DONE 7: Implement the method that receives the gid and returns a Rect
 
@@ -57,6 +61,11 @@ struct TileSet
 
         return rect;
     }
+
+   
+
+    // Include a method to return a selected tileStruct
+
 };
 
 
@@ -103,10 +112,22 @@ struct MapLayer
     uint* tiles;
     Properties properties;
 
+    // matrix of tiles
+    Tile* myTiles[MAX_TILE_AMOUNT][MAX_TILE_AMOUNT] = { nullptr };
+
     // L06: DONE 6: Short function to get the gid value of x,y
     uint Get(int x, int y) const
     {
         return tiles[(y * width) + x];
+    }
+
+    Tile* GetTile(uint gid) {
+
+        int row = gid / width;
+        int   column = gid % height;
+
+        return myTiles[row][column];
+
     }
 };
 
