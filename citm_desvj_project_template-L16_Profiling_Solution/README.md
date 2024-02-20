@@ -17,10 +17,14 @@
 
 ## Developers
 
- - {Marco} - {Role(s)}
- - {Dev02} - {Role(s)}
- - {Dev03} - {Role(s)}
- - {Dev04} - {Role(s)}
+ - {Pablo Longaron} - {Team Lead}
+ - {Sergi Gantzer} - {Art Director}
+ - {Marco Di Modica} - {Lead Developer}
+ - {Jordi Tur} - {programer/artist}
+ - {Pau Mora} - {programmer}
+ - {Danniel Berrios} - {artist}
+ - {Ivo Montes} - {designer}
+ - {Marco Baldan} - {Technical artist/writer}
 
 ## License
 
