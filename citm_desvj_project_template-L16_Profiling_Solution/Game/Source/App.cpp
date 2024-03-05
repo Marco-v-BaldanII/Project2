@@ -242,8 +242,14 @@ void App::FinishUpdate()
 	// Shows the time measurements in the window title
 	// check sprintf formats here https://cplusplus.com/reference/cstdio/printf/
 	static char title[256];
-	sprintf_s(title, 256, "%s: Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %I32u Frame Count: %I64u ", 
-		gameTitle.GetString(), averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+	int mouseX, mouseY;
+	app->input->GetMousePosition(mouseX, mouseY);
+	iPoint mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x, mouseY - app->render->camera.y);
+	//sprintf_s(title,256,"Tile:[%d,%d]", mouseTile.x, mouseTile.y);
+
+
+	sprintf_s(title, 256, "%s: Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %I32u Frame Count: %I64u, Tile: %d,%d", 
+		gameTitle.GetString(), averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount, mouseTile.x, mouseTile.y);
 
 	app->win->SetTitle(title);
 

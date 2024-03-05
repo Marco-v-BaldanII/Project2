@@ -8,7 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
-
+#include "Map.h"
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -55,6 +55,16 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		position.y += 0.2 * dt;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+	{
+
+		int mouseX, mouseY;
+		app->input->GetMousePosition(mouseX, mouseY);
+		iPoint mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x, mouseY - app->render->camera.y);
+
+		position.x = mouseTile.x * 32;
+		position.y = mouseTile.y * 32;	
 	}
 		
 	app->render->DrawTexture(texture,position.x,position.y);
