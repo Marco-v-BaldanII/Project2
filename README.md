@@ -20,7 +20,7 @@
 ## Developers
 
  - {Marco} - {Role(s)}
- - {Dev02} - {Role(s)}
+ - {Pablo} - {Role(s)}
  - {Dev03} - {Role(s)}
  - {Dev04} - {Role(s)}
 
