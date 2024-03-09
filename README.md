@@ -9,14 +9,14 @@
 
 ## Developers
 
- - {Pablo} - {Team Lead}
- - {Marco Di Modica} - {Lead Programer(s)}
- - {Sergi} - {Lead Artist}
- - {Marco Baldan} - {Lead Designer}
- - {Ivo} - {Level designer & Support Programer}
- - {Jordi} - {Artist & Programer}
- - {Pau} - {Programer}
- - {Daniel} - {Artist}
+ - [Pablo](https://github.com/PabloL2003) - {Team Lead}
+ - [Marco Di Modica](https://github.com/MarcoDiModica) - {Lead Programer(s)}
+ - [Sergi](https://github.com/sgantzer12) - {Lead Artist}
+ - [Marco Baldan](https://github.com/Marco-v-BaldanII) - {Lead Designer}
+ - [Ivo](https://github.com/Ivomm9) - {Level designer & Support Programer}
+ - [Jordi](https://github.com/Jordopol) - {Artist & Programer}
+ - [Pau](https://github.com/Peluchomp) - {Programer}
+ - [Daniel](https://github.com/Onnda) - {Artist}
 
 
 ## Documentation
