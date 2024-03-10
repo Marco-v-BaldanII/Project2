@@ -4,7 +4,19 @@
 
 ## Description
 
-{project description}
+The War of Roses: Acts of Ambition is an isometric tactical RPG that takes inspiration from 16 and 32 bit rpgs FireEmblem and Advanced Wars.
+The game will be a short 1h experience were players will be able to participate in tactical combat based on unit and resource management. 
+The game toys with the concept of the 4th wall as it is a representation of a representation of The Wars of the roses a play from William Shakespeare , adapted by John Barton which is in itself a representation of the english civil War of the Roses between the riegel houses of York and Lancaster during 15th century England.
+
+The player will play the part of house Tudor allied with house Lancaster as they drive off the York family who usurped the throne. The structure of gameplay and its combats will follow a simplification of some of the most important and decisive battles of the war of the roses. Characters in your party will be acted out by actors of your choosing , the actors are chosen when starting the game. We offer a wide variety of actors from different backgrounds promoting and injecting diversity into this war narrative. The main concern is not to be historically accurate rather to build upon the recorded history of the Roses and elevate the tale into an epic performance of theatrics and comedy.
+
+The game will visibly take place in a theater where the audience will respond dynamically to the player’s actions. They will throw roses upon your victory and tomatoes upon your defeat, among other gags.
+
+The main game pillars are:
+- Tactical Gameplay
+- Theatrical ambience
+- Epic emotional story
+
 
 
 ## Developers
