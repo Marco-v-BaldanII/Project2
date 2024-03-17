@@ -2,11 +2,13 @@
 #include "Window.h"
 #include "Render.h"
 #include "Box2D/Box2D/Box2D.h"
-
+#include <string>
 #include "Defs.h"
 #include "Log.h"
 
 #define VSYNC true
+
+#define LINE_LENGTH 70
 
 Render::Render() : Module()
 {
@@ -15,6 +17,12 @@ Render::Render() : Module()
 	background.g = 0;
 	background.b = 0;
 	background.a = 0;
+}
+
+
+
+int Clamp(int value, int min, int max) {
+	return std::max(min, std::min(value, max));
 }
 
 // Destructor
@@ -265,71 +273,50 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::DrawText(const char* text, int posx, int posy, int w, int h) {
 
+
+bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h) {
 	SDL_Color color;
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 
-	int numletters = 0;
+	int numletters = text.length();
 
-	while (text[numletters] != '\0') {
-		numletters++;
-	}
-
-	float numLines = (float)numletters / 70.0f; // 70 characters per line
+	float numLines = static_cast<float>(numletters) / LINE_LENGTH; // 70 characters per line
 	if (numLines > 1.0f) {
-
 		// Copy rest to a new string
-		char* newLine = new char[70];
-		int i = 70;
-		for (i = 70; text[i] != '\0'; ++i) {
-
-			newLine[i - 70] = text[i];
-		}
-		newLine[i - 70] = '\0';
-
+		std::string newLine = text.substr(LINE_LENGTH);
 		DrawText(newLine, posx, posy + h, w, h);
 
-		// create the actual string for this lien with a max of 70 chars
-		char* thisLine = new char[71];
-		int j = 0;
-		for (j = 0; j < 70; ++j) {
-			thisLine[j] = text[j];
-			if (text[j] == '\0') { break; }
-		}
-		thisLine[j] = '\0';
+		// Create the actual string for this line with a max of LINE_LENGTH chars
+		std::string thisLine = text.substr(0, LINE_LENGTH);
 
-
-		 color = { 0, 0, 0 };
-		 surface = TTF_RenderText_Solid(font, thisLine, color);
-		 texture = SDL_CreateTextureFromSurface(renderer, surface);
-
-		 delete[] thisLine;
+		color = { 0, 0, 0 };
+		surface = TTF_RenderText_Solid(font, thisLine.c_str(), color);
+		texture = SDL_CreateTextureFromSurface(renderer, surface);
 	}
 	else {
-
-
-		 color = { 0, 0, 0 };
-		 surface = TTF_RenderText_Solid(font, text, color);
-		 texture = SDL_CreateTextureFromSurface(renderer, surface);
+		color = { 0, 0, 0 };
+		surface = TTF_RenderText_Solid(font, text.c_str(), color);
+		texture = SDL_CreateTextureFromSurface(renderer, surface);
 	}
-		int texW = 0;
-		int texH = 0;
-		SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+
+	w = w / 70 * Clamp(numletters, 0,70);
 
 
+	int texW = 0;
+	int texH = 0;
+	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 
-		SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-		SDL_Rect dstrect = { posx, posy, w, h };
+	SDL_Rect dstrect = { posx, posy, w, h };
+	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
-		SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(surface);
 
-		SDL_DestroyTexture(texture);
-		SDL_FreeSurface(surface);
-	
 	return true;
 }
+
 
 // L14: TODO 6: Implement a method to load the state
 // for now load camera's x and y

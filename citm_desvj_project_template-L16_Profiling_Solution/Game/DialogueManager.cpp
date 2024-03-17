@@ -75,7 +75,7 @@ bool DialogueManager::Update(float dt)
 	//If the position of the mouse if inside the bounds of the box 
 	if (mouseX > dialogueBox.x && mouseX < dialogueBox.x + dialogueBox.w && mouseY > dialogueBox.y && mouseY < dialogueBox.y + dialogueBox.h) {
 
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 			dialogueIndex++;
 		}
 	}
