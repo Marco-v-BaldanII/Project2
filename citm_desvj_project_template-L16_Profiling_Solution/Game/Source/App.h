@@ -23,6 +23,7 @@ class Map;
 //L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
+class DialogueManager;
 
 class App
 {
@@ -106,6 +107,7 @@ public:
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;
+	DialogueManager* dialogueManager;
 
 private:
 
@@ -119,6 +121,8 @@ private:
 	// L04: DONE 2 - Create a variable to load and store the XML file in memory
 	// xml_document to store the config file
 	pugi::xml_document configFile;
+
+	pugi::xml_document dialogueFile;
 	
 	uint frames;
 	float dt;

@@ -267,20 +267,67 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 
 bool Render::DrawText(const char* text, int posx, int posy, int w, int h) {
 
-	SDL_Color color = { 255, 255, 255 };
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_Color color;
+	SDL_Surface* surface;
+	SDL_Texture* texture;
 
-	int texW = 0;
-	int texH = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = { posx, posy, w, h };
+	int numletters = 0;
 
-	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+	while (text[numletters] != '\0') {
+		numletters++;
+	}
 
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
+	float numLines = (float)numletters / 70.0f; // 70 characters per line
+	if (numLines > 1.0f) {
 
+		// Copy rest to a new string
+		char* newLine = new char[70];
+		int i = 70;
+		for (i = 70; text[i] != '\0'; ++i) {
+
+			newLine[i - 70] = text[i];
+		}
+		newLine[i - 70] = '\0';
+
+		DrawText(newLine, posx, posy + h, w, h);
+
+		// create the actual string for this lien with a max of 70 chars
+		char* thisLine = new char[71];
+		int j = 0;
+		for (j = 0; j < 70; ++j) {
+			thisLine[j] = text[j];
+			if (text[j] == '\0') { break; }
+		}
+		thisLine[j] = '\0';
+
+
+		 color = { 0, 0, 0 };
+		 surface = TTF_RenderText_Solid(font, thisLine, color);
+		 texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+		 delete[] thisLine;
+	}
+	else {
+
+
+		 color = { 0, 0, 0 };
+		 surface = TTF_RenderText_Solid(font, text, color);
+		 texture = SDL_CreateTextureFromSurface(renderer, surface);
+	}
+		int texW = 0;
+		int texH = 0;
+		SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+
+
+
+		SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+		SDL_Rect dstrect = { posx, posy, w, h };
+
+		SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
+		SDL_DestroyTexture(texture);
+		SDL_FreeSurface(surface);
+	
 	return true;
 }
 

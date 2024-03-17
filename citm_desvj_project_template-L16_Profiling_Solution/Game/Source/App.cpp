@@ -9,6 +9,7 @@
 #include "Physics.h"
 #include "GuiManager.h"
 #include "Optick/include/optick.h"
+#include "../DialogueManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -40,6 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
+	dialogueManager = new DialogueManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -54,7 +56,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(guiManager);
-
+	AddModule(dialogueManager);
 	// Render last to swap buffer
 	AddModule(render);
 
@@ -108,9 +110,15 @@ bool App::Awake()
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
-
-			ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
-			item = item->next;
+			if (item->data != dialogueManager) {
+				ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
+				item = item->next;
+			}
+			else {
+				LOG("dialogueManager");
+				ret = item->data->Awake(dialogueFile);
+				item = item->next;
+			}
 		}
 	}
 
@@ -184,6 +192,11 @@ bool App::LoadConfig()
 	{
 		LOG("Error loading config.xml: %s",result.description());
 	}
+
+	
+	pugi::xml_parse_result res2 = dialogueFile.load_file("dialogue.xml");
+
+
 
 	return ret;
 }
