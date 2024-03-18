@@ -6,8 +6,6 @@
 #include "Window.h"
 #include "Intro.h"
 #include "LevelManagement.h"
-#include "Ease.h"
-
 
 #include "Defs.h"
 #include "Log.h"

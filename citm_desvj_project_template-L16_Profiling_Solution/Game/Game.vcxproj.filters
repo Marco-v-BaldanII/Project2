@@ -26,6 +26,15 @@
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="Source\FadeToBlack.cpp" />
+    <ClCompile Include="Source\GuiPanel.cpp" />
+    <ClCompile Include="Source\GuiSlider.cpp" />
+    <ClCompile Include="Source\GuiToggle.cpp" />
+    <ClCompile Include="Source\Intro.cpp" />
+    <ClCompile Include="Source\LevelManagement.cpp" />
+    <ClCompile Include="Source\MainMenuPanel.cpp" />
+    <ClCompile Include="Source\SettingsPanel.cpp" />
+    <ClCompile Include="Source\StartMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -79,6 +88,16 @@
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="DialogueManager.h" />
+    <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\FadeToBlack.h" />
+    <ClInclude Include="Source\GuiPanel.h" />
+    <ClInclude Include="Source\GuiSlider.h" />
+    <ClInclude Include="Source\GuiToggle.h" />
+    <ClInclude Include="Source\Intro.h" />
+    <ClInclude Include="Source\LevelManagement.h" />
+    <ClInclude Include="Source\MainMenuPanel.h" />
+    <ClInclude Include="Source\SettingsPanel.h" />
+    <ClInclude Include="Source\StartMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
