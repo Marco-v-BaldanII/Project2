@@ -5,7 +5,7 @@
 #include "App.h"
 #include "Intro.h"
 #include "StartMenu.h"
-#include "GameOver.h"
+//#include "GameOver.h"
 #include "FadeToBlack.h"
 #include "Render.h"
 #include "Input.h"
@@ -52,8 +52,8 @@ public:
 	void LoadScene(GameScene scene);
 
 	// Load / Save
-	bool LoadState(pugi::xml_node& data) override;
-	bool SaveState(pugi::xml_node& data) const override;
+	//bool LoadState(pugi::xml_node& data) override;
+	//bool SaveState(pugi::xml_node& data) const override;
 	
 	GameScene gameScene;
 	GameScene lastOpenWorldScene;

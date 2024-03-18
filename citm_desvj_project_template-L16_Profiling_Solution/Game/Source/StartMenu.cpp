@@ -40,7 +40,7 @@ bool StartMenu::Start()
 	music = app->audio->PlayMusic("assets/audio/music/song_menu.wav", 0.5f);
 	rect = { 0, 0,1280,720 };
 	//app->render->ResetCameraPosition();
-	app->guiManager->OpenPanel(PanelID::P_START_MENU);
+	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  IMPORTANT
 	return true;
 }
 
@@ -61,7 +61,7 @@ bool StartMenu::Update(float dt)
 bool StartMenu::PostUpdate()
 {
 	bool ret = true;
-	app->render->DrawTexture(img, 0, 0, &rect, 0, 0, 0, 0, 0.5f);
+	//app->render->DrawTexture(img, 0, 0, &rect, 0, 0, 0, 0, 0.5f);
 	return ret;
 }
 
@@ -70,8 +70,8 @@ bool StartMenu::CleanUp()
 {
 	LOG("Freeing scene main menu ");
 	img = nullptr;
-	app->guiManager->pn_start->Disable();
-	app->audio->StopMusic();
+	//app->guiManager->pn_start->Disable();
+	//app->audio->StopMusic();
 	return true;
 	
 }
