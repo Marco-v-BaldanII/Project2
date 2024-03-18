@@ -48,7 +48,7 @@ bool LevelManagement::Start()
 bool LevelManagement::PreUpdate()
 {
 
-	if ((app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) && currentScene->active == true)
+	/*if ((app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) && currentScene->active == true)
 	{
 		app->levelManagement->inCombat = false;
 		gameScene = lastOpenWorldScene;
@@ -62,7 +62,7 @@ bool LevelManagement::PreUpdate()
 	{
 		app->levelManagement->inCombat = false;
 		gameScene = START;
-	}
+	}*/
 	
 
 	switch (gameScene)
@@ -83,7 +83,7 @@ bool LevelManagement::PreUpdate()
 
 	}
 		break;
-	case GAME_OVER:
+	/*case GAME_OVER:
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && currentScene->active == true)
 		{
 			gameScene = START;
@@ -94,7 +94,7 @@ bool LevelManagement::PreUpdate()
 		{
 			app->LoadGameRequest();
 		}
-		break;
+		break;*/
 	default:
 		break;
 	}
@@ -119,16 +119,16 @@ bool LevelManagement::Update(float dt)
 		break;
 	case START:
 
-		if (currentScene != (Module*)app->start) {
+		if (currentScene != (Module*)app->mainMenu) {
 			
-			if (app->fade->Fade(currentScene, (Module*)app->start, 60))
+			if (app->fade->Fade(currentScene, (Module*)app->mainMenu, 60))
 			{
-				currentScene = (Module*)app->start;
-				LOG("START");
+				currentScene = (Module*)app->mainMenu;
+				LOG("MainMenu");
 			}
 		}
 		break;
-	case GAME_OVER:
+	/*case GAME_OVER:
 
 		if (currentScene != (Module*)app->gameOver) {
 			if (app->fade->Fade(currentScene, (Module*)app->gameOver, 30))
@@ -278,7 +278,7 @@ bool LevelManagement::Update(float dt)
 				LOG("Credits");
 			}
 		
-		break;
+		break;*/
 	default:
 		break;
 
@@ -287,18 +287,18 @@ bool LevelManagement::Update(float dt)
 	return true;
 }
 
-void LevelManagement::NextLevel()
-{
-	switch (gameScene) {
-	case GameScene::SCENE1:
-		if (levelsPassed < 1) {
-			levelsPassed++;
-		}
-		break;
-	default:
-		break;
-	}
-}
+//void LevelManagement::NextLevel()
+//{
+//	switch (gameScene) {
+//	case GameScene::SCENE1:
+//		if (levelsPassed < 1) {
+//			levelsPassed++;
+//		}
+//		break;
+//	default:
+//		break;
+//	}
+//}
 
 void LevelManagement::ReturnToMainMenu()
 {
@@ -310,7 +310,7 @@ void LevelManagement::ReturnToMainMenu()
 
 void LevelManagement::RestartLevel()
 {
-	if (app->entities->playerInstance->stats.hp < 0)
+	/*if (app->entities->playerInstance->stats.hp < 0)
 	{
 		gameScene = GAME_OVER;
 	
@@ -318,7 +318,7 @@ void LevelManagement::RestartLevel()
 	}
 	else {
 		app->fade->Fade(currentScene, currentLevel, 60.0f);
-	}
+	}*/
 }
 
 void LevelManagement::LoadScene(GameScene scene)

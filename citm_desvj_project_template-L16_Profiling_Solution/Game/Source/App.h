@@ -11,6 +11,10 @@
 
 // L03: DONE 1: Add the EntityManager Module to App
 
+#define SCREEN_WIDTH 256
+#define SCREEN_HEIGHT 192
+#define SCREEN_SIZE 3
+
 // Modules
 class Window;
 class Input;

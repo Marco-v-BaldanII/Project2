@@ -8,15 +8,15 @@
 #include "App.h"
 #include "GuiManager.h"
 #include "LevelManagement.h"
-#include "Fonts.h"
+//#include "Fonts.h"
 #include "Defs.h"
 #include "Log.h"
 
 StartMenu::StartMenu(bool isActive) : Module(isActive)
 {
 	name.Create("start_menu");
-	toSave = false;
-	saveConfigs = false;
+	//toSave = false;
+	//saveConfigs = false;
 }
 
 // Destructor
@@ -39,7 +39,7 @@ bool StartMenu::Start()
 	img = app->tex->Load("Assets/Sprites/UI/screen_title.jpg");
 	music = app->audio->PlayMusic("assets/audio/music/song_menu.wav", 0.5f);
 	rect = { 0, 0,1280,720 };
-	app->render->ResetCameraPosition();
+	//app->render->ResetCameraPosition();
 	app->guiManager->OpenPanel(PanelID::P_START_MENU);
 	return true;
 }

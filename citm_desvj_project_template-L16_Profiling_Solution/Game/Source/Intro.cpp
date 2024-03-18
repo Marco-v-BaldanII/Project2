@@ -13,8 +13,8 @@
 Intro::Intro(bool isActive) : Module(isActive)
 {
 	name.Create("intro");
-	toSave = false;
-	saveConfigs = false;
+	//toSave = false;
+	//saveConfigs = false;
 }
 
 // Destructor
@@ -53,14 +53,14 @@ bool Intro::PreUpdate()
 bool Intro::Update(float dt)
 {
 	
-	if (counter < easingTime)
+	/*if (counter < easingTime)
 	{
 
 		auto easingFunction = getEasingFunction(EaseOutBounce);
 		double progress = easingFunction(UpdateProgress(counter, 0, 100, 0, 1));
 		logoXpos =(int) UpdateProgress(progress, 0, 1, -100, 0);
 		counter++;
-	}
+	}*/
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -72,7 +72,7 @@ bool Intro::Update(float dt)
 	}
 
 	if (waitTime < 0)
-		app->levelManagement->LoadScene(GameScene::START);
+		app->levelManager->LoadScene(GameScene::START);
 	
 	return true;
 }
@@ -81,7 +81,7 @@ bool Intro::Update(float dt)
 bool Intro::PostUpdate()
 {
 
-	app->render->DrawTexture(img, logoXpos, 0, &rect, 0, 0, 0, 0, 0.5f);
+	//app->render->DrawTexture(img, logoXpos, 0, &rect, 0, 0, 0, 0, 0.5f);
 
 	return true;
 }
