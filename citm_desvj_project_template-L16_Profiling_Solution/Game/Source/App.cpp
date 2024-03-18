@@ -13,9 +13,22 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "Intro.h"
+#include "StartMenu.h"
+#include "SettingsPanel.h"
 
 #include <iostream>
 #include <sstream>
+#include "Pathfinding.h"
+
+
+#include "Intro.h"
+#include "StartMenu.h"
+
+#include "SettingsPanel.h"
+
+#include "Defs.h"
+#include "Log.h"
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
