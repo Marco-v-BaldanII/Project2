@@ -25,6 +25,8 @@
 #include "StartMenu.h"
 
 #include "SettingsPanel.h"
+#include "FadeToBlack.h"
+#include "LevelManagement.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -42,18 +44,24 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	// L3: DONE 1: Add the EntityManager Module to App
 
-	win = new Window();
-	input = new Input();
-	render = new Render();
-	tex = new Textures();
-	audio = new Audio();
+	win = new Window(true);
+	input = new Input(true);
+	render = new Render(true);
+	tex = new Textures(true);
+	audio = new Audio(true);
 	//L07 DONE 2: Add Physics module
-	physics = new Physics();
-	scene = new Scene();
-	map = new Map();
-	entityManager = new EntityManager();
-	guiManager = new GuiManager();
-	dialogueManager = new DialogueManager();
+	physics = new Physics(true);
+	//scene = new Scene();
+	map = new Map(true);
+	entityManager = new EntityManager(true);
+	guiManager = new GuiManager(true);
+	dialogueManager = new DialogueManager(true);
+	fade = new FadeToBlack(true);
+	levelManager = new LevelManagement(true);
+
+	//scenes
+	intro = new Intro(false);
+	mainMenu = new StartMenu(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -61,11 +69,17 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
+	AddModule(fade);
+	AddModule(levelManager);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
 
 	AddModule(map);
-	AddModule(scene);
+
+	//AddModule(scene);
+	AddModule(intro);
+	AddModule(mainMenu);
+
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(dialogueManager);

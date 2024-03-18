@@ -24,6 +24,12 @@ class Map;
 class Physics;
 class GuiManager;
 class DialogueManager;
+class FadeToBlack;
+class LevelManagement;
+
+ //Scenes
+class Intro;
+class StartMenu;
 
 class App
 {
@@ -108,6 +114,12 @@ public:
 	Physics* physics;
 	GuiManager* guiManager;
 	DialogueManager* dialogueManager;
+	FadeToBlack* fade;
+	LevelManagement* levelManager;
+
+	//scenes
+	Intro* intro;
+	StartMenu* mainMenu;
 
 private:
 

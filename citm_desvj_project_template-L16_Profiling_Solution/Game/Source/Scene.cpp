@@ -14,7 +14,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 
-Scene::Scene() : Module()
+Scene::Scene(bool isActive) : Module(isActive)
 {
 	name.Create("scene");
 }

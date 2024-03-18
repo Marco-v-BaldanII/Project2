@@ -13,7 +13,7 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
-Map::Map() : Module(), mapLoaded(false)
+Map::Map(bool isActive) : Module(isActive), mapLoaded(false)
 {
     name.Create("map");
 }

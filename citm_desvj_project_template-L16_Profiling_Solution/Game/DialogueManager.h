@@ -31,7 +31,7 @@ class DialogueManager : public Module
 {
 public:
 
-	DialogueManager();
+	DialogueManager(bool isActive);
 
 	// Destructor
 	virtual ~DialogueManager();

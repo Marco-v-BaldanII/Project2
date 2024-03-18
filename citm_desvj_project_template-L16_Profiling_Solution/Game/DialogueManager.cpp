@@ -8,7 +8,7 @@
 #include "Source/Defs.h"
 #include "Source/Log.h"
 
-DialogueManager::DialogueManager() : Module()
+DialogueManager::DialogueManager(bool isActive) : Module(isActive)
 {
 	name.Create("dialoguemanager");
 }

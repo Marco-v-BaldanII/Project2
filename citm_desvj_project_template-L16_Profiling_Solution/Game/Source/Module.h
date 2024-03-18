@@ -12,12 +12,11 @@ class Module
 {
 public:
 
-	Module() : active(false)
+	Module(bool isActive) : active(isActive)
 	{}
 
 	void Init()
 	{
-		active = true;
 	}
 
 	// Called before render is available
@@ -73,6 +72,24 @@ public:
 	virtual bool OnGuiMouseClickEvent(GuiControl* control)
 	{
 		return true;
+	}
+
+	void Module::Enable()
+	{
+		if (!active)
+		{
+			active = true;
+			Start();
+		}
+	}
+
+	void Module::Disable()
+	{
+		if (active)
+		{
+			active = false;
+			CleanUp();
+		}
 	}
 
 public:
