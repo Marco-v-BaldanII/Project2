@@ -52,16 +52,17 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//L07 DONE 2: Add Physics module
 	physics = new Physics(true);
 	//scene = new Scene();
-	map = new Map(true);
+	map = new Map(false); //Esta ROTO
 	entityManager = new EntityManager(true);
 	guiManager = new GuiManager(true);
-	dialogueManager = new DialogueManager(true);
-	fade = new FadeToBlack(true);
+	dialogueManager = new DialogueManager(false);
+	
 	levelManager = new LevelManagement(true);
 
 	//scenes
 	intro = new Intro(false);
 	mainMenu = new StartMenu(false);
+	fade = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

@@ -37,9 +37,8 @@ bool Intro::Start()
 	intro = app->audio->LoadFx("Assets/audio/fx/intro.wav");
 	app->audio->PlayFx(intro);
 	waitTime = 200;
-	img = app->tex->Load("Assets/Sprites/UI/screen_logo.jpg");
-	rect = { 0, 0, 1280, 720 };
-	logoXpos = - 100;
+	img = app->tex->Load("Assets/Textures/Player64x64.png");
+	rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 	return true;
 }
 
@@ -81,7 +80,7 @@ bool Intro::Update(float dt)
 bool Intro::PostUpdate()
 {
 
-	//app->render->DrawTexture(img, logoXpos, 0, &rect, 0, 0, 0, 0, 0.5f);
+	app->render->DrawTexture(img, 0, 0, &rect, 0, 0, 0, 0, 0.5f);
 
 	return true;
 }

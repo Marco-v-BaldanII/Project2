@@ -36,11 +36,11 @@ bool StartMenu::Awake()
 bool StartMenu::Start()
 {
 
-	img = app->tex->Load("Assets/Sprites/UI/screen_title.jpg");
+	img = app->tex->Load("Assets/Textures/player1.png");
 	music = app->audio->PlayMusic("assets/audio/music/song_menu.wav", 0.5f);
-	rect = { 0, 0,1280,720 };
+	rect = { 0, 0,SCREEN_WIDTH,SCREEN_HEIGHT };
 	//app->render->ResetCameraPosition();
-	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  IMPORTANT
+	app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
 	return true;
 }
 
@@ -61,7 +61,7 @@ bool StartMenu::Update(float dt)
 bool StartMenu::PostUpdate()
 {
 	bool ret = true;
-	//app->render->DrawTexture(img, 0, 0, &rect, 0, 0, 0, 0, 0.5f);
+	app->render->DrawTexture(img, 0, 0, &rect, 0, 0, 0, 0, 0.5f);
 	return ret;
 }
 
@@ -70,7 +70,7 @@ bool StartMenu::CleanUp()
 {
 	LOG("Freeing scene main menu ");
 	img = nullptr;
-	//app->guiManager->pn_start->Disable();
+	app->guiManager->Main_Menu_Panel->Disable();
 	//app->audio->StopMusic();
 	return true;
 	
