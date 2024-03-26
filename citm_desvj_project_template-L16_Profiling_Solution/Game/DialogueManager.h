@@ -10,6 +10,7 @@
 #include <string>
 using namespace std;
 
+#define DIALOGUE_SIZE 8
 
 struct Dialogue {
 
@@ -48,7 +49,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-
+	bool PostUpdate();
 
 private:
 
@@ -57,7 +58,7 @@ private:
 	uint dialogueSize = 0;
 	uint dialogueIndex = 0;
 
-	SDL_Rect dialogueBox = SDL_Rect{ 12,528,631,220 };
+	SDL_Rect dialogueBox = SDL_Rect{ 0,0,160,100 };
 
 };
 

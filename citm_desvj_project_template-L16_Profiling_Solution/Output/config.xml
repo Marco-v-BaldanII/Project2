@@ -2,7 +2,7 @@
 <!-- L01: DONE 1: Create configuration file-->
 <config>
   <app>
-    <title>My video game</title>
+    <title>War of Roses</title>
     <maxFrameDuration value="16"/>
   </app>
 
@@ -11,7 +11,7 @@
   </renderer>
 
   <window>
-    <resolution width="256" height="192" scale="6"/>
+    <resolution width="256" height="192" scale="4"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>

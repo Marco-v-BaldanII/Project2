@@ -4,7 +4,7 @@
 #include "Source/App.h"
 #include "Source/Textures.h"
 #include "Source/Scene.h"
-
+#include "Source/Window.h"
 #include "Source/Defs.h"
 #include "Source/Log.h"
 
@@ -80,10 +80,18 @@ bool DialogueManager::Update(float dt)
 		}
 	}
 
-
 	app->render->DrawRectangle(dialogueBox, b2Color(10, 10, 10, 1), true, true);
 	const char* text = dialogues[dialogueIndex]->text.c_str();
-	app->render->DrawText(text, dialogueBox.x + 10, dialogueBox.y + 10, dialogueBox.w, 30);
+	app->render->DrawText(text, dialogueBox.x + 3 * app->win->GetScale(), dialogueBox.y + 10 * app->win->GetScale(), dialogueBox.w * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale());
 
 	return ret;
+}
+
+
+bool DialogueManager::PostUpdate() {
+
+	app->render->DrawText("smebulock", 0, 0, 100, 20);
+	
+
+	return true;
 }

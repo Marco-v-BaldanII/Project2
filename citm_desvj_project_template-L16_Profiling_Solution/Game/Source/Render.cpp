@@ -8,7 +8,7 @@
 
 #define VSYNC true
 
-#define LINE_LENGTH 70
+#define LINE_LENGTH 60
 
 Render::Render(bool isActive) : Module(isActive)
 {
@@ -65,7 +65,7 @@ bool Render::Awake(pugi::xml_node config)
 	TTF_Init();
 
 	//load a font into memory
-	font = TTF_OpenFont("Assets/Fonts/arial/arial.ttf", 25);
+	font = TTF_OpenFont("Assets/Fonts/PixelFJVerdana12pt.ttf", 25);                       
 
 	return ret;
 }
@@ -280,6 +280,8 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h)
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 
+	
+
 	int numletters = text.length();
 
 	float numLines = static_cast<float>(numletters) / LINE_LENGTH; // 70 characters per line
@@ -291,12 +293,12 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h)
 		// Create the actual string for this line with a max of LINE_LENGTH chars
 		std::string thisLine = text.substr(0, LINE_LENGTH);
 
-		color = { 0, 0, 0 };
+		color = { 0, 0, 0 ,255};
 		surface = TTF_RenderText_Solid(font, thisLine.c_str(), color);
 		texture = SDL_CreateTextureFromSurface(renderer, surface);
 	}
 	else {
-		color = { 0, 0, 0 };
+		color = { 0, 0, 0 ,255};
 		surface = TTF_RenderText_Solid(font, text.c_str(), color);
 		texture = SDL_CreateTextureFromSurface(renderer, surface);
 	}
@@ -306,7 +308,7 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h)
 
 	int texW = 0;
 	int texH = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+	int check = SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 
 	SDL_Rect dstrect = { posx, posy, w, h };
 	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
