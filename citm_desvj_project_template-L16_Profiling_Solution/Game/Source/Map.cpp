@@ -35,7 +35,7 @@ bool Map::Start() {
 
     //Calls the functon to load the map, make sure that the filename is assigned
     SString mapPath = path;
-    mapPath += name;
+    mapPath = "Assets/Maps/MapTemplate.tmx";
     Load(mapPath);
 
     //Initialize pathfinding 

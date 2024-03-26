@@ -11,7 +11,7 @@
 #include "GuiSlider.h"
 #include "p2List.h"
 #include "App.h"
-#include "Ease.h"
+
 
 enum PanelID {
 	P_START_MENU,

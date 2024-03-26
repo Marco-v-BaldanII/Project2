@@ -4,7 +4,7 @@
 #include "GuiManager.h"
 #include "LevelManagement.h"
 #include "Audio.h"
-#include "QuestManager.h"
+
 
 
 MainMenuPanel::MainMenuPanel(bool active) : GuiPanel(active) 
@@ -55,7 +55,7 @@ bool MainMenuPanel::Start()
 
 bool MainMenuPanel::Update(float dt, bool doLogic)
 {
-    if (counter < easingTime)
+   /* if (counter < easingTime)
     {
 
         auto easingFunction = getEasingFunction(EaseOutBounce);
@@ -64,7 +64,7 @@ bool MainMenuPanel::Update(float dt, bool doLogic)
         position.y = easePosY;
         counter++;
     }
-    GuiPanel::Update(dt, doLogic);
+    GuiPanel::Update(dt, doLogic);*/
     return true;
 }
 
@@ -81,30 +81,30 @@ bool MainMenuPanel::CleanUp()
 
 bool MainMenuPanel::OnGuiMouseClickEvent(GuiControl* control)
 {
-    if(control->id == bt_newGame->id)
-    {
-        app->audio->StopMusic();
-        app->levelManagement->gameScene = GameScene::THE_FALL;
-        app->questManager->ActivateQuest(0);
-        app->gamePaused = false;
-        app->guiManager->OnPause(false);
-    }
-    else if (control->id == bt_loadGame->id)
-    {
-        //load Game
-        app->LoadGameRequest();
-        app->gamePaused = false;
-        app->guiManager->OnPause(false); 
-    }
-    else if (control->id == bt_settings->id)
-    {
-        app->guiManager->OpenPanel(PanelID::P_SETTINGS);
-    }
-    else if (control->id == bt_quit->id)
-    {
-        //close game
-        app->exit = true;
-    }
+    //if(control->id == bt_newGame->id)
+    //{
+    //    app->audio->StopMusic();
+    //    app->levelManagement->gameScene = GameScene::THE_FALL;
+    //    app->questManager->ActivateQuest(0);
+    //    app->gamePaused = false;
+    //    app->guiManager->OnPause(false);
+    //}
+    //else if (control->id == bt_loadGame->id)
+    //{
+    //    //load Game
+    //    app->LoadGameRequest();
+    //    app->gamePaused = false;
+    //    app->guiManager->OnPause(false); 
+    //}
+    //else if (control->id == bt_settings->id)
+    //{
+    //    app->guiManager->OpenPanel(PanelID::P_SETTINGS);
+    //}
+    //else if (control->id == bt_quit->id)
+    //{
+    //    //close game
+    //    app->exit = true;
+    //}
 
     return true;
 }

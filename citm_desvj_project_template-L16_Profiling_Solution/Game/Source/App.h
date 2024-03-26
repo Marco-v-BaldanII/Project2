@@ -21,6 +21,7 @@ class Input;
 class Render;
 class Textures;
 class Audio;
+class Fonts;
 class Scene;
 class EntityManager;
 class Map;
@@ -114,6 +115,7 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	Fonts* fonts;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;

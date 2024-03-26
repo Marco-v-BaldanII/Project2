@@ -1,7 +1,7 @@
 #include "LevelManagement.h"
 #include "Log.h"
 #include "Player.h"
-#include "Entities.h"
+//#include "Entities.h"
 #include "Map.h"
 #include <string>
 #include <iostream>
@@ -12,8 +12,7 @@ using namespace std;
 LevelManagement::LevelManagement(bool isActive) : Module(isActive)
 {
 	name.Create("Level_manager");
-	toSave = true;
-	saveConfigs = false;
+
 }
 
 LevelManagement::~LevelManagement()
@@ -329,26 +328,26 @@ void LevelManagement::LoadScene(GameScene scene)
 	}
 }
 
-bool LevelManagement::LoadState(pugi::xml_node& data)
-{
-
-	pugi::xml_node lm = data.child("levelManager");
-
-	gameScene =  static_cast<GameScene>(lm.attribute("currentLevel").as_int());
-	
-	loadLevel = true;
-	return true;
-}
-
-bool LevelManagement::SaveState(pugi::xml_node& data) const
-{
-	pugi::xml_node manager = data.append_child("levelManager");
-
-	manager.append_attribute("currentLevel") = gameScene;
-
-
-	return true;
-}
+//bool LevelManagement::LoadState(pugi::xml_node& data)
+//{
+//
+//	pugi::xml_node lm = data.child("levelManager");
+//
+//	gameScene =  static_cast<GameScene>(lm.attribute("currentLevel").as_int());
+//	
+//	loadLevel = true;
+//	return true;
+//}
+//
+//bool LevelManagement::SaveState(pugi::xml_node& data) const
+//{
+//	pugi::xml_node manager = data.append_child("levelManager");
+//
+//	manager.append_attribute("currentLevel") = gameScene;
+//
+//
+//	return true;
+//}
 
 bool LevelManagement::CleanUp()
 {

@@ -69,7 +69,7 @@ bool SettingsPanel::Start()
 }
 
 bool SettingsPanel::Update(float dt, bool doLogic)
-{
+{/*
 	if (counter < easingTime)
 	{
 
@@ -79,7 +79,7 @@ bool SettingsPanel::Update(float dt, bool doLogic)
 		position.y = easePosY;
 		counter++;
 	}
-	GuiPanel::Update(dt, doLogic);
+	GuiPanel::Update(dt, doLogic);*/
 	return true;
 }
 
@@ -101,7 +101,7 @@ bool SettingsPanel::CleanUp()
 bool SettingsPanel::OnGuiMouseClickEvent(GuiControl* control)
 {
 
-	if (control->id == bt_return->id)
+	/*if (control->id == bt_return->id)
 	{
 		app->guiManager->OpenPanel(app->guiManager->lastPanel);
 	}
@@ -121,7 +121,7 @@ bool SettingsPanel::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == sl_music->id) 
 	{
 		app->audio->SetMusicVolume(sl_music->GetValue());
-	}
+	}*/
 
 	return true;
 }

@@ -35,6 +35,8 @@
     <ClCompile Include="Source\MainMenuPanel.cpp" />
     <ClCompile Include="Source\SettingsPanel.cpp" />
     <ClCompile Include="Source\StartMenu.cpp" />
+    <ClCompile Include="Source\GuiButton.cpp" />
+    <ClCompile Include="Source\Fonts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -98,6 +100,9 @@
     <ClInclude Include="Source\MainMenuPanel.h" />
     <ClInclude Include="Source\SettingsPanel.h" />
     <ClInclude Include="Source\StartMenu.h" />
+    <ClInclude Include="Source\p2List.h" />
+    <ClInclude Include="Source\GuiButton.h" />
+    <ClInclude Include="Source\Fonts.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
