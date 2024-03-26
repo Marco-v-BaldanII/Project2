@@ -8,6 +8,7 @@
 #include "App.h"
 #include "GuiManager.h"
 #include "LevelManagement.h"
+#include "../DialogueManager.h"
 //#include "Fonts.h"
 #include "Defs.h"
 #include "Log.h"
@@ -38,9 +39,10 @@ bool StartMenu::Start()
 
 	img = app->tex->Load("Assets/Textures/player1.png");
 	music = app->audio->PlayMusic("assets/audio/music/song_menu.wav", 0.5f);
+	app->dialogueManager->Enable();
 	rect = { 0, 0,SCREEN_WIDTH,SCREEN_HEIGHT };
 	//app->render->ResetCameraPosition();
-	app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
+	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
 	return true;
 }
 
@@ -70,7 +72,7 @@ bool StartMenu::CleanUp()
 {
 	LOG("Freeing scene main menu ");
 	img = nullptr;
-	app->guiManager->Main_Menu_Panel->Disable();
+	//app->guiManager->Main_Menu_Panel->Disable();
 	//app->audio->StopMusic();
 	return true;
 	
