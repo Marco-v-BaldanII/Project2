@@ -8,9 +8,11 @@
 #include "Source/List.h"
 #include "Source/DynArray.h"
 #include <string>
+#include "../Timer.h"
 using namespace std;
 
 #define DIALOGUE_SIZE 8
+
 
 struct Dialogue {
 
@@ -46,10 +48,21 @@ public:
 	// Called every frame
 	bool Update(float dt);
 
+	void ManageScrolling();
+
+	void ResetScroll();
+
+	bool HasScrollFinished();
+
+	void FinishScrolling();
+
 	// Called before quitting
 	bool CleanUp();
 
 	bool PostUpdate();
+
+public:
+	int numLines = 0;
 
 private:
 
@@ -59,6 +72,14 @@ private:
 	uint dialogueIndex = 0;
 
 	SDL_Rect dialogueBox = SDL_Rect{ 0,0,160,100 };
+
+	bool scrolling = true;
+
+	// values used for interpolation of scrolling effect
+	int w1_1 = -dialogueBox.w;
+	int w2_1 = -dialogueBox.w;
+	int w3_1 = -dialogueBox.w;
+	int w4_1 = -dialogueBox.w;
 
 };
 

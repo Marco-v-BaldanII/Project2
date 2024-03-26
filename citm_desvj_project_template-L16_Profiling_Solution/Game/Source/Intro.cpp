@@ -80,7 +80,7 @@ bool Intro::Update(float dt)
 bool Intro::PostUpdate()
 {
 
-	app->render->DrawTexture(img, 0, 0, &rect, 0, 0, 0, 0, 0.5f);
+	app->render->DrawTexture(img, 0, 0, &rect);
 
 	return true;
 }

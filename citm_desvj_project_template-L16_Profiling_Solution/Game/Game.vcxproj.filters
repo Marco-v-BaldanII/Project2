@@ -103,6 +103,8 @@
     <ClInclude Include="Source\p2List.h" />
     <ClInclude Include="Source\GuiButton.h" />
     <ClInclude Include="Source\Fonts.h" />
+    <ClInclude Include="frame.h" />
+    <ClInclude Include="Interpolation.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

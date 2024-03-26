@@ -7,6 +7,7 @@
 #include "Source/Window.h"
 #include "Source/Defs.h"
 #include "Source/Log.h"
+#include "Interpolation.h"
 
 DialogueManager::DialogueManager(bool isActive) : Module(isActive)
 {
@@ -76,22 +77,100 @@ bool DialogueManager::Update(float dt)
 	if (mouseX > dialogueBox.x && mouseX < dialogueBox.x + dialogueBox.w && mouseY > dialogueBox.y && mouseY < dialogueBox.y + dialogueBox.h) {
 
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
-			dialogueIndex++;
+			// If all the text has finished skip to next dialogue, else skip scrolling
+			if (HasScrollFinished()) {
+				dialogueIndex++;
+				scrolling = true;
+				numLines = 0;
+				ResetScroll();
+			}
+			else {
+				FinishScrolling();
+
+			}
+			
 		}
 	}
 
 	app->render->DrawRectangle(dialogueBox, b2Color(10, 10, 10, 1), true, true);
 	const char* text = dialogues[dialogueIndex]->text.c_str();
-	app->render->DrawText(text, dialogueBox.x + 3 * app->win->GetScale(), dialogueBox.y + 10 * app->win->GetScale(), dialogueBox.w * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale());
+	numLines = 0;
+	app->render->DrawText(text, dialogueBox.x + 3 * app->win->GetScale(), dialogueBox.y + 10 * app->win->GetScale(), dialogueBox.w * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true);
+
+	if (scrolling) {
+		ManageScrolling();
+	}
+	
 
 	return ret;
 }
 
+void DialogueManager::ManageScrolling() {
+
+	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10, -dialogueBox.w , DIALOGUE_SIZE };
+	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + DIALOGUE_SIZE, -dialogueBox.w , DIALOGUE_SIZE };
+	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE*2), -dialogueBox.w , DIALOGUE_SIZE };
+	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 3), -dialogueBox.w , DIALOGUE_SIZE };
+
+	//Must investigate more robotic type of interpolation such as STEP
+	Lerp(w1_1, 0.002, 0);
+	r1.w = w1_1;
+
+	if (w1_1 >= 0) /*first line interpolation finished*/ {
+		Lerp(w2_1, 0.002, 0);
+		r2.w = w2_1;
+	}
+
+	if (w2_1 >= 0) /*second line interpolation finished*/ {
+		Lerp(w3_1, 0.002, 0);
+		r3.w = w3_1;
+	}
+	if (w3_1 >= 0) /*third line interpolation finished*/ {
+		Lerp(w4_1, 0.002, 0);
+		r4.w = w4_1;
+	}
+	app->render->DrawRectangle(r1, b2Color{ 10,10,10,1 }, true, true);
+	app->render->DrawRectangle(r2, b2Color{ 10,10,10,1 }, true, true);
+	app->render->DrawRectangle(r3, b2Color{ 10,10,10,1 }, true, true);
+	app->render->DrawRectangle(r4, b2Color{ 10,10,10,1 }, true, true);
+
+}
 
 bool DialogueManager::PostUpdate() {
 
-	app->render->DrawText("smebulock", 0, 0, 100, 20);
-	
 
 	return true;
+}
+
+void DialogueManager::ResetScroll() {
+	w1_1 = -dialogueBox.w;
+	w2_1 = -dialogueBox.w;
+	w3_1 = -dialogueBox.w;
+	w4_1 = -dialogueBox.w;
+}
+
+bool DialogueManager::HasScrollFinished() {
+
+	if (numLines == 1 && w1_1 == 0) {
+		return true;
+	}
+	else if (numLines == 2 && w2_1 == 0) {
+		return true;
+	}
+	else if (numLines == 3 && w3_1 == 0) {
+		return true;
+	}
+	else if (numLines == 4 && w4_1 == 0) {
+		return true;
+	}
+
+	return false;
+
+}
+
+void DialogueManager::FinishScrolling() {
+	w1_1 = 0;
+	w2_1 = 0;
+	w3_1 = 0;
+	w4_1 = 0;
 }

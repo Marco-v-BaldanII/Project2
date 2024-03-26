@@ -126,6 +126,8 @@
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="DialogueManager.h" />
+    <ClInclude Include="frame.h" />
+    <ClInclude Include="Interpolation.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
