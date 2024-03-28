@@ -50,15 +50,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	audio = new Audio(true);
 	//L07 DONE 2: Add Physics module
-	physics = new Physics(true);
+	physics = new Physics(false);
 	//scene = new Scene();
 	map = new Map(false); //Esta ROTO
-	entityManager = new EntityManager(true);
+	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);
 	dialogueManager = new DialogueManager(false);
 	
 	levelManager = new LevelManagement(true);
-
+	fonts = new Fonts(true);
 	//scenes
 	intro = new Intro(false);
 	mainMenu = new StartMenu(false);
@@ -70,7 +70,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(fade);
+	
 	AddModule(levelManager);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
@@ -82,10 +82,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(mainMenu);
 
 	AddModule(entityManager);
+	AddModule(fonts);
 	AddModule(guiManager);
 	AddModule(dialogueManager);
+	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);
+	
 
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
 }
@@ -183,6 +186,9 @@ bool App::Update()
 
 	bool ret = true;
 	PrepareUpdate();
+
+	if(exitRequest == true)
+		ret = false;
 
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;

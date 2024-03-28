@@ -9,7 +9,7 @@
 
 FadeToBlack::FadeToBlack(bool isActive) : Module(isActive)
 {
-	screenRect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+	screenRect = { 0, 0, SCREEN_WIDTH * 6, SCREEN_HEIGHT * 6 };
 	name.Create("Fade");
 	//toSave = false;
 	//saveConfigs = false;

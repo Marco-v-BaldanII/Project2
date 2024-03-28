@@ -127,6 +127,8 @@ public:
 	Intro* intro;
 	StartMenu* mainMenu;
 
+	bool exitRequest = false;
+
 private:
 
 	int argc;

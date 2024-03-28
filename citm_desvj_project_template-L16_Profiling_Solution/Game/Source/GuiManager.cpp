@@ -1,6 +1,7 @@
 #include "GuiManager.h"
 #include "App.h"
 #include "Textures.h"
+#include "MainMenuPanel.h"
 
 #include "GuiControlButton.h"
 #include "Audio.h"
@@ -14,14 +15,24 @@ GuiManager::~GuiManager() {}
 
 bool GuiManager::Start()
 {
-	//Main_Menu_Panel = new MainMenuPanel(false);
+	Main_Menu_Panel = new MainMenuPanel(false);
 	//Options_Panel = new OptionsPanel(false);
 	//Pause_Panel = new PausePanel(false);
 	//MORE PANELS TOO ADD
 
-	//panels.add(Main_Menu_Panel);
+	panels.add(Main_Menu_Panel);
 	//panels.add(Options_Panel);
 	//panels.add(Pause_Panel);
+
+	//LOAD TEXTURES
+	UItexture = app->tex->Load("Assets/Textures/goldCoin.png");
+	UItexture2 = app->tex->Load("Assets/Textures/UI2.png");
+	tex_smallPanel = app->tex->Load("Assets/Textures/smallPanel.png");
+	tex_mediumPanel = app->tex->Load("Assets/Textures/mediumPanel.png");
+	tex_bigPanel = app->tex->Load("Assets/Textures/bigPanel.png");
+	tex_inventory = app->tex->Load("Assets/Textures/inventory.png");
+	tex_inventory_tabs = app->tex->Load("Assets/Textures/inventory_tabs.png");
+	tex_inventory_Items = app->tex->Load("Assets/Textures/inventory_Items.png");
 
 	p2ListItem<GuiPanel*>* panel = panels.start;
 
