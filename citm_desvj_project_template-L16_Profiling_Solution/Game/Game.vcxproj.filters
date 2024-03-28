@@ -23,20 +23,42 @@
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
-    <ClCompile Include="Source\GuiControlButton.cpp" />
-    <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
-    <ClCompile Include="Source\GuiPanel.cpp" />
-    <ClCompile Include="Source\GuiSlider.cpp" />
-    <ClCompile Include="Source\GuiToggle.cpp" />
-    <ClCompile Include="Source\Intro.cpp" />
-    <ClCompile Include="Source\LevelManagement.cpp" />
-    <ClCompile Include="Source\MainMenuPanel.cpp" />
-    <ClCompile Include="Source\SettingsPanel.cpp" />
-    <ClCompile Include="Source\StartMenu.cpp" />
-    <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
+    <ClCompile Include="Source\Intro.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LevelManagement.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StartMenu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiButton.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiToggle.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiSlider.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiPanel.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiControlButton.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MainMenuPanel.cpp">
+      <Filter>Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SettingsPanel.cpp">
+      <Filter>Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -86,25 +108,51 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\Pathfinding.h" />
-    <ClInclude Include="Source\GuiControl.h" />
-    <ClInclude Include="Source\GuiControlButton.h" />
-    <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="DialogueManager.h" />
-    <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
-    <ClInclude Include="Source\GuiPanel.h" />
-    <ClInclude Include="Source\GuiSlider.h" />
-    <ClInclude Include="Source\GuiToggle.h" />
-    <ClInclude Include="Source\Intro.h" />
-    <ClInclude Include="Source\LevelManagement.h" />
-    <ClInclude Include="Source\MainMenuPanel.h" />
-    <ClInclude Include="Source\SettingsPanel.h" />
-    <ClInclude Include="Source\StartMenu.h" />
     <ClInclude Include="Source\p2List.h" />
-    <ClInclude Include="Source\GuiButton.h" />
     <ClInclude Include="Source\Fonts.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="Interpolation.h" />
+    <ClInclude Include="Source\Intro.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LevelManagement.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StartMenu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiToggle.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiSlider.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiPanel.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControlButton.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiButton.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MainMenuPanel.h">
+      <Filter>Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SettingsPanel.h">
+      <Filter>Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -115,6 +163,15 @@
     </Filter>
     <Filter Include="External\PugiXml">
       <UniqueIdentifier>{2855ff7f-53a1-413d-a75b-18b4ade921dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{7542cd3a-c2c5-43a6-916b-07f879c89270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{c9a4f4b3-5e48-4da3-94d3-499e54534171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Panels">
+      <UniqueIdentifier>{0a9a0d9e-983d-4931-be44-61a5d076646e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
