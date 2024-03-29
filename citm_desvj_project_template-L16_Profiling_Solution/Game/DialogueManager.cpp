@@ -18,6 +18,8 @@ DialogueManager::DialogueManager(bool isActive) : Module(isActive)
 DialogueManager::~DialogueManager()
 {}
 
+// NOTA recuerda hacer esta movida modular para que el textbox pueda estar MODULAR CON LOS BOCADILLOS QUE APAREZCAN EN DISTINTOS LADOS, estoy cansado buenas noches
+
 // Called before render is available
 bool DialogueManager::Awake(pugi::xml_node config)
 {
@@ -92,10 +94,13 @@ bool DialogueManager::Update(float dt)
 		}
 	}
 
-	app->render->DrawRectangle(dialogueBox, b2Color(10, 10, 10, 1), true, true);
+	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
+	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
+	app->render->DrawRectangle(dialogueBox, b2Color(0,0,46.0f/255.0f,1), true, true);
+	
 	const char* text = dialogues[dialogueIndex]->text.c_str();
 	numLines = 0;
-	app->render->DrawText(text, dialogueBox.x + 3 * app->win->GetScale(), dialogueBox.y + 10 * app->win->GetScale(), dialogueBox.w * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true);
+	app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true);
 
 	if (scrolling) {
 		ManageScrolling();
@@ -129,16 +134,16 @@ void DialogueManager::ManageScrolling() {
 		Lerp(w4_1, 0.002, 0);
 		r4.w = w4_1;
 	}
-	app->render->DrawRectangle(r1, b2Color{ 10,10,10,1 }, true, true);
-	app->render->DrawRectangle(r2, b2Color{ 10,10,10,1 }, true, true);
-	app->render->DrawRectangle(r3, b2Color{ 10,10,10,1 }, true, true);
-	app->render->DrawRectangle(r4, b2Color{ 10,10,10,1 }, true, true);
+	// Put colors in a separate header file
+	app->render->DrawRectangle(r1, b2Color(0, 0, 46.0f / 255.0f, 1), true, true);
+	app->render->DrawRectangle(r2, b2Color(0, 0, 46.0f / 255.0f, 1), true, true);
+	app->render->DrawRectangle(r3, b2Color(0, 0, 46.0f / 255.0f, 1), true, true);
+	app->render->DrawRectangle(r4, b2Color(0, 0, 46.0f / 255.0f, 1), true, true);
 
 }
 
 bool DialogueManager::PostUpdate() {
-
-
+	
 	return true;
 }
 

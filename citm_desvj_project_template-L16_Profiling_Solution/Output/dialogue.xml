@@ -5,23 +5,22 @@
 
 
 
-<dialogue text = "Aqui hay unos dialogos de prueba
+<dialogue text = "In the middle of 15th century england is in a dire political position.  Henry vi is the eleventh plantagenet monarch of the state.  Crown'd at 1 year fusty after his father and former king's passing.
 	  
 "   owner = "Narrator"  />
-<dialogue text = "That gent wast a feeble and meak monarch responsible for england’s defeat and loss of territories to the french.
-	    England hast just hath lost the 100 year longeth war with france, the peace however shall not lasteth longeth
+<dialogue text = "That gent wast a feeble and meak monarch responsible for england's defeat and loss of territories to the french.  England hast just hath lost the 100 year longeth war with france, the piece however shall not lasteth longeth
 "   owner = "Narrator"  />
 
-<dialogue text = "Ostia que chulo no? Programar estos dialogos en SLD ha sido una flipada. Te voy a contar un chiste chato
-"   owner = "Narrator"  />
-<dialogue text = "Ostia que chulo no? Programar estos dialogos en SLD ha sido una flipada. Te voy a contar un chiste chato
-"   owner = "Narrator"  />
+<dialogue text = "Edward ?, Edward ? oh yond issue of mineth!.  Edward ! the duke of york and his sons has't arrived ! a prince shouldst greeteth important guests himself. 
+"   owner = "Margaret"  />
+<dialogue text = "mine own queen, if 't be true you're looking f'r the young prince, i did see that gent earlier in the backeth garden playing with the young Earl of Richmond.
+"   owner = "Guard"  />
 
-<dialogue text = "¿Cuál es el colmo de un electricista?
-"   owner = "Narrator"  />
+<dialogue text = "Henry Tudor? has't thee seen his uncle 'round?
+"   owner = "Margaret"  />
 
-<dialogue text = "Tener mala corriente.
-"   owner = "Narrator"  />
+<dialogue text = "The Earl of Pembroke wast visiting the king’s chambers
+"   owner = "Guard"  />
 
 <dialogue text = "me parto de risa
 "   owner = "Narrator"  />

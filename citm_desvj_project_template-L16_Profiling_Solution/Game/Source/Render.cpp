@@ -307,12 +307,12 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h,
 		// Create the actual string for this line with a max of LINE_LENGTH chars
 		std::string thisLine = text.substr(0, LINE_LENGTH);
 
-		color = { 0, 0, 0 ,255};
+		color = { 255, 255, 255 ,255};
 		surface = TTF_RenderText_Solid(font, thisLine.c_str(), color);
 		texture = SDL_CreateTextureFromSurface(renderer, surface);
 	}
 	else {
-		color = { 0, 0, 0 ,255};
+		color = { 255, 255, 255 ,255};
 		surface = TTF_RenderText_Solid(font, text.c_str(), color);
 		texture = SDL_CreateTextureFromSurface(renderer, surface);
 

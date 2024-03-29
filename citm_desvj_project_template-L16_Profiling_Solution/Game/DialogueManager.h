@@ -11,7 +11,7 @@
 #include "../Timer.h"
 using namespace std;
 
-#define DIALOGUE_SIZE 8
+#define DIALOGUE_SIZE 7
 
 
 struct Dialogue {
@@ -71,7 +71,7 @@ private:
 	uint dialogueSize = 0;
 	uint dialogueIndex = 0;
 
-	SDL_Rect dialogueBox = SDL_Rect{ 0,0,160,100 };
+	SDL_Rect dialogueBox = SDL_Rect{ 45,100,160,60 };
 
 	bool scrolling = true;
 
