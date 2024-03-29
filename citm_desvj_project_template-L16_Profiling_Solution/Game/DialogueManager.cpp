@@ -8,6 +8,8 @@
 #include "Source/Defs.h"
 #include "Source/Log.h"
 #include "Interpolation.h"
+#include "someColors.h"
+
 
 DialogueManager::DialogueManager(bool isActive) : Module(isActive)
 {
@@ -20,7 +22,7 @@ DialogueManager::~DialogueManager()
 
 // NOTA recuerda hacer esta movida modular para que el textbox pueda estar MODULAR CON LOS BOCADILLOS QUE APAREZCAN EN DISTINTOS LADOS, estoy cansado buenas noches
 
-// Called before render is available
+// Called before render is availableposition
 bool DialogueManager::Awake(pugi::xml_node config)
 {
 	LOG("Loading Dialogue Manager");
@@ -29,6 +31,13 @@ bool DialogueManager::Awake(pugi::xml_node config)
 	for (pugi::xml_node dialogueNode = config.child("dialogues").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 
 		Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
+		int p = dialogueNode.attribute("position").as_int();
+		if (p == 1) {
+			D->myPos = RIGHT;
+		}
+		else if (p == 2) {
+			D->myPos = LEFT;
+		}
 		dialogues.PushBack(D);
 		dialogueSize++;
 	}
@@ -75,6 +84,13 @@ bool DialogueManager::Update(float dt)
 
 	app->input->GetMousePosition(mouseX, mouseY);
 
+	currentPos = dialogues[dialogueIndex]->myPos;
+
+	// Change font color to black for speech dialogues
+	if (currentPos != MIDDLE) { TextColor = black; }
+
+
+
 	//If the position of the mouse if inside the bounds of the box 
 	if (mouseX > dialogueBox.x && mouseX < dialogueBox.x + dialogueBox.w && mouseY > dialogueBox.y && mouseY < dialogueBox.y + dialogueBox.h) {
 
@@ -94,14 +110,12 @@ bool DialogueManager::Update(float dt)
 		}
 	}
 
-	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
-	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
-	app->render->DrawRectangle(dialogueBox, b2Color(0,0,46.0f/255.0f,1), true, true);
-	
-	const char* text = dialogues[dialogueIndex]->text.c_str();
-	numLines = 0;
-	app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true);
+	// Adjust the position of the text box
 
+	DrawTextBox(dialogues[dialogueIndex]->myPos);
+
+
+	
 	if (scrolling) {
 		ManageScrolling();
 	}
@@ -112,10 +126,22 @@ bool DialogueManager::Update(float dt)
 
 void DialogueManager::ManageScrolling() {
 
+
 	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10, -dialogueBox.w , DIALOGUE_SIZE };
 	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + DIALOGUE_SIZE, -dialogueBox.w , DIALOGUE_SIZE };
-	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE*2), -dialogueBox.w , DIALOGUE_SIZE };
+	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 2), -dialogueBox.w , DIALOGUE_SIZE };
 	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 3), -dialogueBox.w , DIALOGUE_SIZE };
+
+	if (dialogues[dialogueIndex]->myPos != MIDDLE) {
+		 r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 , -dialogueBox.w , DIALOGUE_SIZE };
+		 r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE), -dialogueBox.w , DIALOGUE_SIZE };
+		 r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE *2), -dialogueBox.w , DIALOGUE_SIZE };
+		 r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 3), -dialogueBox.w , DIALOGUE_SIZE };
+	}
+	
+		
+	
+
 
 	//Must investigate more robotic type of interpolation such as STEP
 	Lerp(w1_1, 0.002, 0);
@@ -134,12 +160,19 @@ void DialogueManager::ManageScrolling() {
 		Lerp(w4_1, 0.002, 0);
 		r4.w = w4_1;
 	}
-	// Put colors in a separate header file
-	app->render->DrawRectangle(r1, b2Color(0, 0, 46.0f / 255.0f, 1), true, true);
-	app->render->DrawRectangle(r2, b2Color(0, 0, 46.0f / 255.0f, 1), true, true);
-	app->render->DrawRectangle(r3, b2Color(0, 0, 46.0f / 255.0f, 1), true, true);
-	app->render->DrawRectangle(r4, b2Color(0, 0, 46.0f / 255.0f, 1), true, true);
+	if (currentPos != MIDDLE) {
+		app->render->DrawRectangle(r1, whitey, true, true);
+		app->render->DrawRectangle(r2, whitey, true, true);
+		app->render->DrawRectangle(r3, whitey, true, true);
+		app->render->DrawRectangle(r4, whitey, true, true);
+	}
+	else {
 
+		app->render->DrawRectangle(r1, royalBlue, true, true);
+		app->render->DrawRectangle(r2, royalBlue, true, true);
+		app->render->DrawRectangle(r3, royalBlue, true, true);
+		app->render->DrawRectangle(r4, royalBlue, true, true);
+	}
 }
 
 bool DialogueManager::PostUpdate() {
@@ -170,6 +203,50 @@ bool DialogueManager::HasScrollFinished() {
 	}
 
 	return false;
+
+}
+
+void DialogueManager::DrawTextBox(Position pos) {
+
+
+	const char* text = dialogues[dialogueIndex]->text.c_str();
+	const char* owner = dialogues[dialogueIndex]->owner.c_str();
+	numLines = 0;
+
+	if (dialogues[dialogueIndex]->myPos == MIDDLE) {
+		dialogueBox = narratorBox;
+
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
+		app->render->DrawRectangle(dialogueBox, royalBlue, true, true);
+
+		app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true);
+
+	}
+	else if (dialogues[dialogueIndex]->myPos == LEFT) {
+		dialogueBox = speechBox;
+
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+
+		app->render->DrawText(text, (dialogueBox.x + 8 ) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+
+		app->render->DrawRectangle(nameBoxL, black, true, true);
+		app->render->DrawText(owner, (nameBoxL.x +3) * app->win->GetScale(), (nameBoxL.y +3) * app->win->GetScale(), nameBoxL.w *6 * app->win->GetScale(), (DIALOGUE_SIZE ) * app->win->GetScale(), false, SDL_Color{255,255,255,255});
+	}
+	else {
+		dialogueBox = speechBoxRight;
+
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+
+		app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+
+		app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE)*app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+	}
+
 
 }
 

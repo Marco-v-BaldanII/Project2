@@ -12,7 +12,13 @@
 using namespace std;
 
 #define DIALOGUE_SIZE 7
+#define BOX_OFFSET 20
 
+enum Position {
+	LEFT,
+	RIGHT,
+	MIDDLE
+};
 
 struct Dialogue {
 
@@ -21,9 +27,12 @@ public:
 
 	string text;
 
+	Position myPos;
+
 	Dialogue(string owner, string text) {
 		this->owner = owner;
 		this->text = text;
+		myPos = MIDDLE;
 	}
 	
 
@@ -61,6 +70,11 @@ public:
 
 	bool PostUpdate();
 
+
+	void DrawTextBox(Position pos);
+
+
+
 public:
 	int numLines = 0;
 
@@ -71,7 +85,13 @@ private:
 	uint dialogueSize = 0;
 	uint dialogueIndex = 0;
 
-	SDL_Rect dialogueBox = SDL_Rect{ 45,100,160,60 };
+	SDL_Rect dialogueBox = SDL_Rect{ 0,00,0,0};
+	SDL_Rect narratorBox = SDL_Rect{ 45,100,160,60 };
+	SDL_Rect speechBox = SDL_Rect{ narratorBox.x - 3 - BOX_OFFSET, narratorBox.y - 3 - BOX_OFFSET, narratorBox.w + 6, narratorBox.h -25 };
+	SDL_Rect speechBoxRight = SDL_Rect{ narratorBox.x - 3 + BOX_OFFSET, narratorBox.y - 3 - BOX_OFFSET, narratorBox.w + 6, narratorBox.h - 25 };
+
+	SDL_Rect nameBoxL = SDL_Rect{ speechBox.x, speechBox.y - 12,32,12 };
+	SDL_Rect nameBoxR = SDL_Rect{ speechBoxRight.x, speechBoxRight.y - 12,32,12 };
 
 	bool scrolling = true;
 
@@ -81,6 +101,9 @@ private:
 	int w3_1 = -dialogueBox.w;
 	int w4_1 = -dialogueBox.w;
 
+
+	Position currentPos;
+	b2Color TextColor;
 };
 
 #endif // __DIALOGUEMANAGER_H__

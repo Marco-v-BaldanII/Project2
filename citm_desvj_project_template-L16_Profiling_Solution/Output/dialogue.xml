@@ -12,36 +12,142 @@
 "   owner = "Narrator"  />
 
 <dialogue text = "Edward ?, Edward ? oh yond issue of mineth!.  Edward ! the duke of york and his sons has't arrived ! a prince shouldst greeteth important guests himself. 
-"   owner = "Margaret"  />
+"   owner = "Margaret" 
+	position = "2"/>
 <dialogue text = "mine own queen, if 't be true you're looking f'r the young prince, i did see that gent earlier in the backeth garden playing with the young Earl of Richmond.
-"   owner = "Guard"  />
+"   owner = "Guard" 
+	position = "1"/>
 
 <dialogue text = "Henry Tudor? has't thee seen his uncle 'round?
-"   owner = "Margaret"  />
+"   owner = "Margaret"
+	position = "2"/>
 
-<dialogue text = "The Earl of Pembroke wast visiting the king’s chambers
-"   owner = "Guard"  />
+<dialogue text = "The Earl of Pembroke wast visiting the king's chambers
+"   owner = "Guard" 
+	position = "1"/>
 
-<dialogue text = "me parto de risa
+<dialogue text = "ahhhg, liketh father liketh son.  By the heavens lightning am i the only one who is't rememb'r'd y'rk's visiteth.
+"   owner = "Margaret"  
+	position = "2"/>
+  
+
+<dialogue text = "thy majesty , thee knoweth better than anyone yond his highness hast been humor unwell as of late.  And I am certain the prince is excited about york coming. 
+"   owner = "Guard"  
+    position = "1"/>
+
+<dialogue text = "the prince, is too naive and kind heart'd f'r his owneth valorous. he is the son of his father.  If 't be true that gent is to beest king that gent wilt attendeth all his duties
+"   owner = "Margaret"  
+	position ="2"/>
+
+<dialogue text = "Castle gardens
 "   owner = "Narrator"  />
 
-<dialogue text = "oye pero, ten cuidado, si sigues avanzando se acabaran los dialogos
-"   owner = "Narrator"  />
+<dialogue text = " hyaah!"
+   owner = "Prince Edward"  
+	position ="2"/>
 
-<dialogue text = "crasheara el programa, estas advertido
-"   owner = "Narrator"  />
+<dialogue text = "too sloppy thy majesty ! , and anon, the finishing toucheth
+"   owner = "Henry Tudor"
+		  position ="1"/>
 
-<dialogue text = "pero bueno ! que pares ya ! ahora si que si si le das capum ! adios programa
-"   owner = "Narrator"  />
+<dialogue text = "ouuuuch, i hath lost again. 
+ i don't knoweth about this henry ? 
 
-<dialogue text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-"   owner = "Narrator"  />
-
-<dialogue text = "ostras parece que no ha pasado nada
-"   owner = "Narrator"  />
-
-<dialogue text = "sabes que , te voy a contar solo a ti el secreto de la inmortalidad
-"   owner = "Narrator"  />
-
+"   owner = "Prince Edward" 
+	position ="2"/>
+<dialogue text = "doth thee wanna play something else?"
+   owner = "Henry Tudor"  
+	position ="1"/>
+<dialogue text = "I guesseth but, i'm did suppose to beest valorous at this, i'm did suppose to becometh stout liketh mother.  And not caterwauling liketh this , king's don't caterwauling !"
+   owner = "Prince Edward"  
+	position ="2"/>	
+<dialogue text = "Doest thy father, i cullionly his majesty, ever caterwauling ?"
+   owner = "Henry Tudor"  
+	position ="1"/>	
+<dialogue text = "yes, many times"
+   owner = "Prince Edward"  
+	position ="2"/>	
+<dialogue text = "War is over Edward , there's nae needeth to beest stout and th're's nay needeth to square.  And in peaceful times i bethink you'd maketh a most wondrous king.  Coequal if 't be true sword fighting isn't thy stout pointeth. "
+   owner = "Henry Tudor"  
+	position ="1"/>	
+<dialogue text = "thank thee Henry"
+   owner = "Prince Edward"  
+	position ="2"/>	
+<dialogue text = "Margaret enters the scene with Richard Duke of York and his children Edward, George and Richard"
+   owner = "Narrator"  />
+<dialogue text = "There thou art boys ! in earnest thee can't just disappeareth at which hour we've did get such important guests Edward"
+   owner = "Margaret"
+	position = "2"/>
+<dialogue text = "i'm deeply sorry mother"
+   owner = "Prince Edward"
+	position = "1"/>
+<dialogue text = "and Henry, i shalt speaketh with thy fath'r about this later"
+   owner = "Margaret"
+	position = "2"/>
+<dialogue text = "i'm very sorry thy grace !"
+   owner = "Henry Tudor"
+	position = "1"/>	
+<dialogue text = "Enow with the apologies, Edward properly greeteth the Duke of York."
+   owner = "Margaret"
+	position = "2"/>
+	
+<dialogue text = "holla prince edward, you've grown since i lasteth did see thee.  How's yond wooden sword treating thee?"
+   owner = "Duke of York"
+	position = "2"/>
+<dialogue text = "Greetings lord of york, waiteth! is Richar- i cullionly art thy sons accompanying thee ?"
+   owner = "Prince Edward"
+	position = "1"/>
+<dialogue text = "Edward don’t beest malapert !"
+   owner = "Margaret"
+	position = "2"/>
+<dialogue text = "Haha of course, the youth art the future of this ground, i wilt instructeth mine own sons i mine own duties, jus liketh thy mother tries h'r most wondrous to instructeth thee."
+   owner = "Duke of York"
+	position = "2"/>
+<dialogue text = "Greetings thy highness"
+   owner = "Edward of York"
+	position = "2"/>
+<dialogue text = "Ho, you've grown, ehghmm thy clarity!"
+   owner = "George of York"
+	position = "2"/>
+<dialogue text = "hi"
+   owner = "Richard of York"
+	position = "2"/>
+<dialogue text = "Riiiiiiiiichard !!!"
+   owner = "Prince Edward"
+	position = "1"/>
+<dialogue text = "runs and hugs that gent"
+   owner = "Narrator"/>
+<dialogue text = "Edward , thy manners!!!"
+   owner = "Margaret"
+	position = "2"/>
+<dialogue text = "Ho richard we've did miss thee"
+   owner = "Henry Tudor"
+	position = "1"/>
+<dialogue text = "Henry don’t indulge in-"
+   owner = "Margaret"
+	position = "2"/>
+<dialogue text = "hahaha, relaxeth mine own queen.  Those gents art still but children, i might not but admiteth i misseth the tend'r simpleness of childhood.  Nay wars, nay political conflicts , free from all yond burdens us adults."
+   owner = "Duke of York"
+	position = "2"/>
+<dialogue text = "What burdens us? What we burden ourselves with is what pulls this ground forward.  Thee hath said it yourself lord of york, the youth art future of this ground, wast t not?"
+   owner = "Margaret"
+	position = "2"/>
+<dialogue text = "Aye forsooth, those gents art the future, but the presenteth if 't be true ours, speaking off wherefore hasn't his majesty did greet us formally ?"
+   owner = "Duke of York"
+	position = "2"/>
+<dialogue text = "Oh mine own deepest apologies, mine own husband’s sickness hast been worsening.  That gent is did attend by servants and barely exits his chambers as of late."
+   owner = "Margaret"
+	position = "2"/>
+<dialogue text = "I seeth  Is an audience with that gent impossible so?"
+   owner = "Duke of York"
+	position = "2"/>
+<dialogue text = "Not at all , that gent shall certes beest eager to speaketh with thee, Jaspe tudor is with that gent at the moment."
+   owner = "Margaret"
+	position = "2"/>
+<dialogue text = "The Earl of Pembroke i understand you not ?"
+   owner = "Duke of York"
+	position = "2"/>
+<dialogue text = "King's Chamb'rs"
+   owner = "Narrator"/>
 
 </dialogues>

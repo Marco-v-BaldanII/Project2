@@ -289,8 +289,8 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 
 
 
-bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h, bool isDialogue) {
-	SDL_Color color;
+bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h, bool isDialogue, SDL_Color color) {
+	
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 
@@ -302,24 +302,24 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h,
 	if (numLines > 1.0f) {
 		// Copy rest to a new string
 		std::string newLine = text.substr(LINE_LENGTH);
-		DrawText(newLine, posx, posy + h, w, h);
+		DrawText(newLine, posx, posy + h, w, h,isDialogue, color);
 
 		// Create the actual string for this line with a max of LINE_LENGTH chars
 		std::string thisLine = text.substr(0, LINE_LENGTH);
 
-		color = { 255, 255, 255 ,255};
+		
 		surface = TTF_RenderText_Solid(font, thisLine.c_str(), color);
 		texture = SDL_CreateTextureFromSurface(renderer, surface);
 	}
 	else {
-		color = { 255, 255, 255 ,255};
+		
 		surface = TTF_RenderText_Solid(font, text.c_str(), color);
 		texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 		
 	}
 
-	w = w / 70 * Clamp(numletters, 0,70);
+	w = w / LINE_LENGTH * Clamp(numletters, 0,LINE_LENGTH);
 
 
 	int texW = 0;

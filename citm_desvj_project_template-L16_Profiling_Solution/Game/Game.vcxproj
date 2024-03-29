@@ -128,6 +128,7 @@
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="Interpolation.h" />
+    <ClInclude Include="someColors.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
