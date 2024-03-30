@@ -2,7 +2,7 @@
 #define __TEXTURES_H__
 
 #include "Module.h"
-
+#include <string>
 #include "List.h"
 
 struct SDL_Texture;
@@ -35,6 +35,13 @@ public:
 public:
 
 	List<SDL_Texture*> textures;
+};
+
+
+struct TextureDef {
+public:
+	SDL_Texture* texture;
+	std::string name;
 };
 
 

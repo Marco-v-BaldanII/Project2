@@ -8,7 +8,10 @@
 #include "Source/List.h"
 #include "Source/DynArray.h"
 #include <string>
+#include <map>
 #include "../Timer.h"
+#include "Source/Textures.h"
+
 using namespace std;
 
 #define DIALOGUE_SIZE 7
@@ -20,6 +23,11 @@ enum Position {
 	MIDDLE
 };
 
+enum Language {
+	SHAKESPEREAN,
+	ENGLISH
+};
+
 struct Dialogue {
 
 public:
@@ -28,6 +36,8 @@ public:
 	string text;
 
 	Position myPos;
+
+	SDL_Texture* texture = nullptr;
 
 	Dialogue(string owner, string text) {
 		this->owner = owner;
@@ -73,14 +83,24 @@ public:
 
 	void DrawTextBox(Position pos);
 
+	void DrawPortrait();
 
+	void ChangeLanguage();
+
+	void AdvanceText();
 
 public:
 	int numLines = 0;
 
 private:
 
+	pugi::xml_node myConfig;
+
+	DynArray<Dialogue*>* currentDialogues = nullptr;
+
 	DynArray<Dialogue*> dialogues;
+	DynArray<Dialogue*> shakespeareDialogues;
+	std::map <std::string, SDL_Texture*> portraitTextures; // diccionary used to identify textures by a name
 
 	uint dialogueSize = 0;
 	uint dialogueIndex = 0;
@@ -104,6 +124,13 @@ private:
 
 	Position currentPos;
 	b2Color TextColor;
+
+	// CHANGE with correct portrait size
+	SDL_Rect portraitBoxL = SDL_Rect{ 0,0,52,56 };
+	SDL_Rect portraitBoxR = SDL_Rect{ 0,0,52,56 };
+
+	Language myLanguage;
+
 };
 
 #endif // __DIALOGUEMANAGER_H__

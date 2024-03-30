@@ -9,7 +9,10 @@
 #include "Source/Log.h"
 #include "Interpolation.h"
 #include "someColors.h"
+#include <string>
+#include <map>
 
+using namespace std;
 
 DialogueManager::DialogueManager(bool isActive) : Module(isActive)
 {
@@ -28,7 +31,38 @@ bool DialogueManager::Awake(pugi::xml_node config)
 	LOG("Loading Dialogue Manager");
 	bool ret = true;
 
-	for (pugi::xml_node dialogueNode = config.child("dialogues").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
+	// Load all the portrait textures
+	
+	myLanguage = ENGLISH;
+	
+	myConfig = config;
+
+	return ret;
+
+}
+
+bool DialogueManager::Start() {
+
+	bool ret = true;
+
+
+	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("portrait"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("portrait")) {
+
+		TextureDef* texD = new TextureDef;
+		const char* path = dialogueNode.attribute("texturePath").as_string();
+		texD->texture = app->tex->Load(path);
+		texD->name = dialogueNode.attribute("texturePath").as_string();
+
+		texD->name.erase(0, 26);
+		texD->name.erase(texD->name.length() - 4, 4);
+
+
+		// insert TextureDefinition to the map diccionary
+		portraitTextures.insert(std::make_pair(texD->name, texD->texture));
+
+	}
+
+	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("english").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 
 		Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
 		int p = dialogueNode.attribute("position").as_int();
@@ -38,19 +72,42 @@ bool DialogueManager::Awake(pugi::xml_node config)
 		else if (p == 2) {
 			D->myPos = LEFT;
 		}
+
+		// Assign a texture portrait
+		if (D->owner != "Narrator") {
+			// use the keycode (owner name) to find the correct portrait
+			D->texture = portraitTextures[D->owner];
+		
+		}
+
+
+
+
+
 		dialogues.PushBack(D);
 		dialogueSize++;
 	}
+	// Shakespearean dialogues
+	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("shakesperean").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 
+		Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
+		int p = dialogueNode.attribute("position").as_int();
+		if (p == 1) {
+			D->myPos = RIGHT;
+		}
+		else if (p == 2) {
+			D->myPos = LEFT;
+		}
 
+		// Assign a texture portrait
+		if (D->owner != "Narrator") {
+			// use the keycode (owner name) to find the correct portrait
+			D->texture = portraitTextures[D->owner];
 
-	return ret;
-
-}
-
-bool DialogueManager::Start() {
-
-	bool ret = true;
+		}
+		shakespeareDialogues.PushBack(D);
+		//dialogueSize++;
+	}
 
 	//Iterates over the entities and calls Start
 
@@ -80,46 +137,30 @@ bool DialogueManager::Update(float dt)
 {
 	bool ret = true;
 	
-	int mouseX, mouseY;
-
-	app->input->GetMousePosition(mouseX, mouseY);
-
+	
 	currentPos = dialogues[dialogueIndex]->myPos;
 
 	// Change font color to black for speech dialogues
 	if (currentPos != MIDDLE) { TextColor = black; }
 
-
-
-	//If the position of the mouse if inside the bounds of the box 
-	if (mouseX > dialogueBox.x && mouseX < dialogueBox.x + dialogueBox.w && mouseY > dialogueBox.y && mouseY < dialogueBox.y + dialogueBox.h) {
-
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
-			// If all the text has finished skip to next dialogue, else skip scrolling
-			if (HasScrollFinished()) {
-				dialogueIndex++;
-				scrolling = true;
-				numLines = 0;
-				ResetScroll();
-			}
-			else {
-				FinishScrolling();
-
-			}
-			
-		}
-	}
-
+	// This method checks for the input to advance to the next dialogue
+	AdvanceText();
+	
 	// Adjust the position of the text box
 
 	DrawTextBox(dialogues[dialogueIndex]->myPos);
 
+	DrawPortrait();
 
 	
 	if (scrolling) {
 		ManageScrolling();
 	}
 	
+	// Check to change dialogue language
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+		ChangeLanguage();
+	}
 
 	return ret;
 }
@@ -208,8 +249,14 @@ bool DialogueManager::HasScrollFinished() {
 
 void DialogueManager::DrawTextBox(Position pos) {
 
-
-	const char* text = dialogues[dialogueIndex]->text.c_str();
+	string txt = "fhfjf";
+	if (myLanguage == ENGLISH) {
+		txt = dialogues[dialogueIndex]->text.c_str();
+	}
+	else if (myLanguage == SHAKESPEREAN) {
+		txt = shakespeareDialogues[dialogueIndex]->text.c_str();
+	}
+	const char* text = txt.c_str();
 	const char* owner = dialogues[dialogueIndex]->owner.c_str();
 	numLines = 0;
 
@@ -255,4 +302,74 @@ void DialogueManager::FinishScrolling() {
 	w2_1 = 0;
 	w3_1 = 0;
 	w4_1 = 0;
+}
+
+void DialogueManager::DrawPortrait(){
+
+	// for the moment portrait size is assumed as 56x52 (whatever it ends up being it will have to be the same texture size for all)
+	int i = 0;
+	if (dialogueIndex > 0) {
+		i = dialogueIndex - 1;
+	}
+
+	// Prints on screen the current and previous dialogue's portrait
+	for (i; i <= dialogueIndex; ++i) {
+		if (dialogues[i]->myPos == LEFT) {
+			app->render->DrawTexture(dialogues[i]->texture, 0, 136, &portraitBoxL, true);
+		}
+		else if (dialogues[i]->myPos == RIGHT) {
+			app->render->DrawTexture(dialogues[i]->texture, 204, 136, &portraitBoxR, false);
+		}
+	}
+}
+
+void DialogueManager::AdvanceText() {
+
+	int mouseX, mouseY;
+
+	app->input->GetMousePosition(mouseX, mouseY);
+
+	//If the position of the mouse if inside the bounds of the box 
+	if (mouseX > dialogueBox.x && mouseX < dialogueBox.x + dialogueBox.w && mouseY > dialogueBox.y && mouseY < dialogueBox.y + dialogueBox.h) {
+
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+			// If all the text has finished skip to next dialogue, else skip scrolling
+			if (HasScrollFinished()) {
+				dialogueIndex++;
+				scrolling = true;
+				numLines = 0;
+				ResetScroll();
+			}
+			else {
+				FinishScrolling();
+
+			}
+
+		}
+	}
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		if (HasScrollFinished()) {
+			dialogueIndex++;
+			scrolling = true;
+			numLines = 0;
+			ResetScroll();
+		}
+		else {
+			FinishScrolling();
+
+		}
+	}
+
+
+}
+
+void DialogueManager::ChangeLanguage() {
+
+	if (myLanguage == ENGLISH) {
+		myLanguage = SHAKESPEREAN;
+	}
+	else {
+		myLanguage = ENGLISH;
+	}
+
 }

@@ -1,15 +1,26 @@
 <?xml version="1.0"?>
+
+
 <dialogues>
 
+<portrait texturePath ="Assets/Textures/Portraits/Margaret.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/Guard.png"/>
 
 
-
+<shakesperean>
 
 <dialogue text = "In the middle of 15th century england is in a dire political position.  Henry vi is the eleventh plantagenet monarch of the state.  Crown'd at 1 year fusty after his father and former king's passing.
 	  
 "   owner = "Narrator"  />
-<dialogue text = "That gent wast a feeble and meak monarch responsible for england's defeat and loss of territories to the french.  England hast just hath lost the 100 year longeth war with france, the piece however shall not lasteth longeth
-"   owner = "Narrator"  />
+<dialogue text = "That gent wast a feeble and meak monarch responsible for england's defeat and loss of territories to the french."
+   owner = "Narrator"  />
+	
+<dialogue text =" England hast just hath lost the 100 year longeth war with france, the piece however shall not lasteth longeth" owner ="Narrator"/>	
+	
+<dialogue text ="Castle gardens" owner ="Narrator"/>
+	
+<dialogue text="Queen Margaret is looking for Prince Edward, the lady runs into a servant"
+   owner="Narrator" />
 
 <dialogue text = "Edward ?, Edward ? oh yond issue of mineth!.  Edward ! the duke of york and his sons has't arrived ! a prince shouldst greeteth important guests himself. 
 "   owner = "Margaret" 
@@ -41,6 +52,12 @@
 
 <dialogue text = "Castle gardens
 "   owner = "Narrator"  />
+	
+<dialogue text = "Prince Edward and Henry Tudor art playing with wooden swords.  Those gents art interrupted by Margaret leading the Yorks.  All the sons of York art did introduce."  
+		  owner = "Narrator"  />
+	
+	<dialogue text = "The youngest (Richard) heads off to playeth with Edward and Henry (they art cater-cousins).  Meanwhile, the duke and his eldest son headeth off with Margaret as those gents sayeth those gents has't political business to break with."
+		  owner = "Narrator"  />
 
 <dialogue text = " hyaah!"
    owner = "Prince Edward"  
@@ -115,7 +132,7 @@
 <dialogue text = "Riiiiiiiiichard !!!"
    owner = "Prince Edward"
 	position = "1"/>
-<dialogue text = "runs and hugs that gent"
+<dialogue text = "Runs and hugs that gent"
    owner = "Narrator"/>
 <dialogue text = "Edward , thy manners!!!"
    owner = "Margaret"
@@ -123,7 +140,7 @@
 <dialogue text = "Ho richard we've did miss thee"
    owner = "Henry Tudor"
 	position = "1"/>
-<dialogue text = "Henry don’t indulge in-"
+<dialogue text = "Henry don't indulge in-"
    owner = "Margaret"
 	position = "2"/>
 <dialogue text = "hahaha, relaxeth mine own queen.  Those gents art still but children, i might not but admiteth i misseth the tend'r simpleness of childhood.  Nay wars, nay political conflicts , free from all yond burdens us adults."
@@ -149,5 +166,157 @@
 	position = "2"/>
 <dialogue text = "King's Chamb'rs"
    owner = "Narrator"/>
+
+
+</shakesperean>
+
+<english>
+			
+<dialogue text="In the middle of the 15th century, England is in a dire political position. Henry VI is the eleventh Plantagenet monarch of the country. "
+   owner="Narrator" />
+<dialogue text= "Crowned at 1 year old after his father and former king’s passing. He was a feeble and meek monarch responsible for England’s defeat and loss of territories to the French."
+		  
+   owner="Narrator" />
+<dialogue text="England has just lost the 100-year-long war with France, but the peace will not last long."
+   owner="Narrator" />
+<dialogue text="Castle gardens"
+   owner="Narrator" />
+<dialogue text="Queen Margaret is looking for Prince Edward, she runs into a servant."
+   owner="Narrator" />
+<dialogue text="Edward? Edward? Oh, that child of mine! Edward! The Duke of York and his sons have arrived! A prince should greet important guests himself."
+   owner="Margaret"
+   position="2" />
+<dialogue text="My Queen, if you’re looking for the young Prince, I saw him earlier in the back garden playing with the young Earl of Richmond."
+   owner="Guard"
+   position="1" />
+<dialogue text="Henry Tudor? Have you seen his uncle around?"
+   owner="Margaret"
+   position="2" />
+<dialogue text="The Earl of Pembroke was visiting the King’s Chambers."
+   owner="Guard"
+   position="1" />
+<dialogue text="Ah, like father like son. By the heavens, am I the only one who remembered York’s visit?"
+   owner="Margaret"
+   position="2" />
+<dialogue text="Your Majesty, you know better than anyone that his highness has been feeling unwell as of late. And I am certain that the prince is excited about York coming."
+   owner="Guard"
+   position="1" />
+<dialogue text="The prince is too naive and kind-hearted for his own good - he is the son of his father. If he is to be king, he must attend to all his duties."
+   owner="Margaret"
+   position="2" />
+<dialogue text="Castle back garden"
+   owner="Narrator" />
+<dialogue text="Prince Edward and Henry Tudor are playing with wooden swords. They are interrupted by Margaret leading the Yorks. All the sons of York are introduced. "
+   owner="Narrator" />
+<dialogue text="The youngest (Richard) heads off to play with Edward and Henry (they are friends). Meanwhile, the duke and his eldest son head off with Margaret as they say they have political business to discuss."
+   owner="Narrator"/>
+	
+<dialogue text="Hyaah!"
+   owner="Prince Edward"
+   position="2" />
+<dialogue text="(Mocking) Too sloppy, Your Majesty! And now, the finishing touch."
+   owner="Henry Tudor"
+   position="1" />
+<dialogue text="Ouch, I lost again. I don’t know about this, Henry?"
+   owner="Prince Edward"
+   position="2" />
+<dialogue text="Do you wanna play something else?"
+   owner="Henry Tudor"
+   position="1" />
+<dialogue text="I guess, but… I’m supposed to be good at this. I’m supposed to become strong like mother. And not cry like this, kings don’t cry!"
+   owner="Prince Edward"
+   position="2" />
+<dialogue text="Does your father, I mean his majesty, ever cry?"
+   owner="Henry Tudor"
+   position="1" />
+<dialogue text="Yes, many times."
+   owner="Prince Edward"
+   position="2" />
+<dialogue text="War is over, Edward. There’s no need to be strong, and there’s no need to fight. And in peaceful times, I think you’d make a great king. Even if sword fighting isn’t your strong point."
+   owner="Henry Tudor"
+   position="1" />
+<dialogue text="Thank you."
+   owner="Prince Edward"
+   position="2" />
+<dialogue text="Margaret enters the scene with Richard, Duke of York, Edward, George, and Richard."
+   owner="Narrator" />
+<dialogue text="There you are, boys! Honestly, you can’t just disappear when we’ve got such important guests, Edward."
+   owner="Margaret"
+   position="2" />
+<dialogue text="I’m deeply sorry, mother."
+   owner="Prince Edward"
+   position="1" />
+<dialogue text="And Henry, I shall speak with your father about this later."
+   owner="Margaret"
+   position="2" />
+<dialogue text="I’m very sorry, Your Grace!"
+   owner="Henry Tudor"
+   position="1" />
+<dialogue text="Enough with the apologies, Edward properly greets the Duke of York."
+   owner="Margaret"
+   position="2" />
+<dialogue text="Hello, Prince Edward. You’ve grown since I last saw you. How’s that wooden sword treating you?"
+   owner="Richard of York"
+   position="2" />
+<dialogue text="Greetings, Lord of York. Wait! Is Richard - I mean, are your sons accompanying you?"
+   owner="Prince Edward"
+   position="1" />
+<dialogue text="Edward, don’t be rude!"
+   owner="Margaret"
+   position="2" />
+<dialogue text="Haha, of course, the youth are the future of this country. I must instruct my sons in my duties, just like your mother tries her best to instruct you."
+   owner="Richard of York"
+   position="2" />
+<dialogue text="Greetings, Your Highness."
+   owner="Edward of York"
+   position="2" />
+<dialogue text="Hey, you’ve grown, uh, Your Clarity!"
+   owner="George of York"
+   position="2" />
+<dialogue text="Hi."
+   owner="Richard of York"
+   position="2" />
+<dialogue text="Riiiichard!!!"
+   owner="Prince Edward"
+   position="1" />
+<dialogue text="Prince Edward runs and hugs him."
+   owner="Narrator" />
+<dialogue text="Edward, your manners!!!"
+   owner="Margaret"
+   position="2" />
+<dialogue text="Hey, Richard, we’ve missed you."
+   owner="Henry Tudor"
+   position="1" />
+<dialogue text="Henry, don’t indulge in -"
+   owner="Margaret"
+   position="2" />
+<dialogue text="Hahaha, relax, my queen. They are still but children. I must admit I miss the tender simplicity of childhood. No wars, no political conflicts, free from all that burdens us adults."
+   owner="Richard of York"
+   position="2" />
+<dialogue text="What burdens us? What we burden ourselves with is what pulls this country forward. You said it yourself, Lord of York, the youth are the future of this country. Was it not?"
+   owner="Margaret"
+   position="2" />
+<dialogue text="Yes, indeed, they are the future, but the present is ours. Speaking of which, why hasn’t his majesty greeted us formally?"
+   owner="Richard of York"
+   position="2" />
+<dialogue text="Oh, my deepest apologies. My husband’s sickness has been worsening. He is attended by servants and barely exits his chambers as of late."
+   owner="Margaret"
+   position="2" />
+<dialogue text="I see. Is an audience with him impossible then?"
+   owner="Richard of York"
+   position="2" />
+<dialogue text="Not at all, he will surely be eager to speak with you. Jasper Tudor is with him at the moment."
+   owner="Margaret"
+   position="2" />
+<dialogue text="The Earl of Pembroke, huh?"
+   owner="Richard of York"
+   position="2" />
+<dialogue text="King’s chambers"
+   owner="Narrator" />	
+		
+
+</english>		
+
+
 
 </dialogues>
