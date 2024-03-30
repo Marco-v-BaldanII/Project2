@@ -45,11 +45,14 @@ bool MainMenuPanel::Start()
     bt_settings->focusedRec = { 0,120,170,60 };
     bt_settings->pressedRec = { 0,59,170,60 };
 
-    bt_quit = (GuiButton*)CreateGuiButton(3, app->guiManager, this, { this->position.x , this->position.y  }, "Quit", app->fonts->globalFont, app->fonts->c_Menus);
-    bt_quit->texture = app->guiManager->UItexture;
-    bt_quit->normalRec = { 0,0,170,60 };
-    bt_quit->focusedRec = { 0,120,170,60 };
-    bt_quit->pressedRec = { 0,59,170,60 };
+    bt_quit = (GuiButton*)CreateGuiControl(GuiControlType::BUTTON, 3, {50,50,50,50}, app->guiManager, this, "Exit", app->fonts->globalFont);
+    bt_quit->color = { 55,55,55,255 };
+    bt_quit->state = GuiControlState::NORMAL;
+    //bt_quit->normalRec = { 0,0,170,60 };
+    //bt_quit->focusedRec = { 0,120,170,60 };
+    //bt_quit->pressedRec = { 0,59,170,60 };
+
+
 
     return true;
 }

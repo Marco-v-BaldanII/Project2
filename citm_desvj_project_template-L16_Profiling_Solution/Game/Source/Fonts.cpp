@@ -41,7 +41,7 @@ bool Fonts::Start()
 		fonts[i] = nullptr;
 
 	//This takes in the path to the font file and the point size we want to render at.
-	globalFont = LoadTIFF("./Assets/Fonts/PixelFJVerdana12pt.ttf", 24);
+	globalFont = LoadTIFF("Assets/Fonts/PixelFJVerdana12pt.ttf", 24);
 	titles = LoadTIFF("./Assets/Sprites/UI/Fonts/Rye-Regular.ttf",48);
 	menuButtonFont = LoadTIFF("./Assets/Sprites/UI/Fonts/SeaweedScript-Regular.ttf", 34);
 	battleMenu = LoadTIFF("./Assets/Sprites/UI/Fonts/SecularOne-Regular.ttf", 24);
