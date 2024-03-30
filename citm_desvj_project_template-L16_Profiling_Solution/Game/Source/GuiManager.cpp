@@ -3,7 +3,7 @@
 #include "Textures.h"
 #include "MainMenuPanel.h"
 
-#include "GuiControlButton.h"
+//#include "GuiControlButton.h"
 #include "Audio.h"
 
 GuiManager::GuiManager(bool isActive) :Module(isActive)
@@ -25,7 +25,7 @@ bool GuiManager::Start()
 	//panels.add(Pause_Panel);
 
 	//LOAD TEXTURES
-	UItexture = app->tex->Load("Assets/Textures/goldCoin.png");
+	UItexture = app->tex->Load("Assets/Textures/test.png");
 	UItexture2 = app->tex->Load("Assets/Textures/UI2.png");
 	tex_smallPanel = app->tex->Load("Assets/Textures/smallPanel.png");
 	tex_mediumPanel = app->tex->Load("Assets/Textures/mediumPanel.png");
@@ -59,13 +59,13 @@ bool GuiManager::Update(float dt)
 		doLogic = false;
 	}
 
-	ListItem<GuiControl*>* control = guiControlsList.start;
+	//ListItem<GuiControl*>* control = guiControlsList.start;
 
-	while (control != nullptr)
-	{
-		control->data->Update(dt);
-		control = control->next;
-	}
+	//while (control != nullptr)
+	//{
+	//	control->data->Update(dt);
+	//	control = control->next;
+	//}
 
 	return true;
 }
@@ -102,26 +102,26 @@ bool GuiManager::PostUpdate() {
 }
 
 // L15: DONE1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
-{
-	GuiControl* guiControl = nullptr;
-
-	//Call the constructor according to the GuiControlType
-	switch (type)
-	{
-	case GuiControlType::BUTTON:
-		guiControl = new GuiControlButton(id, bounds, text);
-		break;
-	}
-
-	//Set the observer
-	guiControl->observer = observer;
-
-	// Created GuiControls are add it to the list of controls
-	guiControlsList.Add(guiControl);
-
-	return guiControl;
-}
+//GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
+//{
+//	GuiControl* guiControl = nullptr;
+//
+//	//Call the constructor according to the GuiControlType
+//	switch (type)
+//	{
+//	case GuiControlType::BUTTON:
+//		guiControl = new GuiControlButton(id, bounds, text);
+//		break;
+//	}
+//
+//	//Set the observer
+//	guiControl->observer = observer;
+//
+//	// Created GuiControls are add it to the list of controls
+//	guiControlsList.Add(guiControl);
+//
+//	return guiControl;
+//}
 
 bool GuiManager::CleanUp()
 {
