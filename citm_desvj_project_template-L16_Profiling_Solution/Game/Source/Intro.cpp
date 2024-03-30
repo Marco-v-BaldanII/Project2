@@ -37,7 +37,7 @@ bool Intro::Start()
 	intro = app->audio->LoadFx("Assets/audio/fx/intro.wav");
 	app->audio->PlayFx(intro);
 	waitTime = 200;
-	img = app->tex->Load("Assets/Textures/Player64x64.png");
+	img = app->tex->Load("Assets/Textures/WOTR-MainScreen.png");
 	rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 	return true;
 }
