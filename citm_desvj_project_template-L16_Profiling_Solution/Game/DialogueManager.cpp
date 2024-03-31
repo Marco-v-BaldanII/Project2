@@ -69,7 +69,7 @@ bool DialogueManager::Start() {
 		if (p == 1) {
 			D->myPos = RIGHT;
 		}
-		else if (p == 2) {
+		else if (p == 2 || p == 4) {
 			D->myPos = LEFT;
 		}
 
@@ -95,7 +95,7 @@ bool DialogueManager::Start() {
 		if (p == 1) {
 			D->myPos = RIGHT;
 		}
-		else if (p == 2) {
+		else if (p == 2 || p == 4) {
 			D->myPos = LEFT;
 		}
 

@@ -55,7 +55,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(false); //Esta ROTO
 	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);
-	dialogueManager = new DialogueManager(false); //editar despues//
+	dialogueManager = new DialogueManager(true); //editar despues//
 	
 	levelManager = new LevelManagement(true);
 	fonts = new Fonts(true);
