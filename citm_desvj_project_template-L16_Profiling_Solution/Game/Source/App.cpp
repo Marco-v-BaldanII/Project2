@@ -23,6 +23,7 @@
 
 #include "Intro.h"
 #include "StartMenu.h"
+#include "BattleScene.h"
 
 #include "SettingsPanel.h"
 #include "FadeToBlack.h"
@@ -62,6 +63,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//scenes
 	intro = new Intro(false);
 	mainMenu = new StartMenu(false);
+	battleScene = new BattleScene(false);
 	fade = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
@@ -80,6 +82,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//AddModule(scene);
 	AddModule(intro);
 	AddModule(mainMenu);
+	AddModule(battleScene);
 
 	AddModule(entityManager);
 	AddModule(fonts);

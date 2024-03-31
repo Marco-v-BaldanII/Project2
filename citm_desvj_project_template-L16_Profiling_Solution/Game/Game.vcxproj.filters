@@ -59,6 +59,10 @@
     <ClCompile Include="Source\SettingsPanel.cpp">
       <Filter>Panels</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\BattleScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -155,6 +159,10 @@
     </ClInclude>
     <ClInclude Include="someColors.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\BattleScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
