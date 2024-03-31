@@ -23,6 +23,7 @@
 
 #include "Intro.h"
 #include "StartMenu.h"
+#include "BattleScene.h"
 
 #include "SettingsPanel.h"
 #include "FadeToBlack.h"
@@ -55,13 +56,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(false); //Esta ROTO
 	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);
-	dialogueManager = new DialogueManager(false); //editar despues//
+	dialogueManager = new DialogueManager(true); //editar despues//
 	
 	levelManager = new LevelManagement(true);
 	fonts = new Fonts(true);
 	//scenes
 	intro = new Intro(false);
 	mainMenu = new StartMenu(false);
+	battleScene = new BattleScene(false);
 	fade = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
@@ -80,6 +82,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//AddModule(scene);
 	AddModule(intro);
 	AddModule(mainMenu);
+	AddModule(battleScene);
 
 	AddModule(entityManager);
 	AddModule(fonts);

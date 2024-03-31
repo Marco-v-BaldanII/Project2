@@ -10,6 +10,7 @@ enum class EntityType
 {
 	PLAYER,
 	ITEM,
+	ENEMY,
 	UNKNOWN
 };
 
@@ -85,6 +86,14 @@ public:
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
 	iPoint position;       
+	
+	float attack;
+	float hp;
+	float precision;
+	float luck;
+	float speed;
+	float movement;
+
 	bool renderable = true;
 };
 
