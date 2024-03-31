@@ -72,7 +72,7 @@ bool LevelManagement::PreUpdate()
 
 		app->audio->PlayMusic("assets/audio/music/song_menu.wav");*/
 		playMusic = false;
-		if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) && currentScene->active == true)
+		if ((app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) && currentScene->active == true)
 		{
 			gameScene = START;
 		}
@@ -126,6 +126,8 @@ bool LevelManagement::Update(float dt)
 				LOG("MainMenu");
 			}
 		}
+
+
 		break;
 	/*case GAME_OVER:
 
