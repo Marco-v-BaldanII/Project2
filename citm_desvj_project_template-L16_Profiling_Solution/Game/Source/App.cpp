@@ -54,7 +54,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics(false);
 	//scene = new Scene();
 	map = new Map(false); //Esta ROTO
-	entityManager = new EntityManager(false);
+	entityManager = new EntityManager(true);
 	guiManager = new GuiManager(true);
 	dialogueManager = new DialogueManager(true); //editar despues//
 	

@@ -201,7 +201,8 @@ void DialogueManager::ManageScrolling() {
 		Lerp(w4_1, 0.002, 0);
 		r4.w = w4_1;
 	}
-	if (currentPos != MIDDLE) {
+
+	if (myState == NPCS ||  currentPos != MIDDLE) {
 		app->render->DrawRectangle(r1, whitey, true, true);
 		app->render->DrawRectangle(r2, whitey, true, true);
 		app->render->DrawRectangle(r3, whitey, true, true);
@@ -249,49 +250,73 @@ bool DialogueManager::HasScrollFinished() {
 
 void DialogueManager::DrawTextBox(Position pos) {
 
-	string txt = "fhfjf";
-	if (myLanguage == ENGLISH) {
-		txt = dialogues[dialogueIndex]->text.c_str();
-	}
-	else if (myLanguage == SHAKESPEREAN) {
-		txt = shakespeareDialogues[dialogueIndex]->text.c_str();
-	}
-	const char* text = txt.c_str();
-	const char* owner = dialogues[dialogueIndex]->owner.c_str();
-	numLines = 0;
 
-	if (dialogues[dialogueIndex]->myPos == MIDDLE) {
-		dialogueBox = narratorBox;
+	if (myState == CUTSCENE) {
+		string txt = "fhfjf";
+		if (myLanguage == ENGLISH) {
+			txt = dialogues[dialogueIndex]->text.c_str();
+		}
+		else if (myLanguage == SHAKESPEREAN) {
+			txt = shakespeareDialogues[dialogueIndex]->text.c_str();
+		}
+		const char* text = txt.c_str();
+		const char* owner = dialogues[dialogueIndex]->owner.c_str();
+		numLines = 0;
 
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
-		app->render->DrawRectangle(dialogueBox, royalBlue, true, true);
+		if (dialogues[dialogueIndex]->myPos == MIDDLE) {
+			dialogueBox = narratorBox;
 
-		app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
+			app->render->DrawRectangle(dialogueBox, royalBlue, true, true);
 
-	}
-	else if (dialogues[dialogueIndex]->myPos == LEFT) {
-		dialogueBox = speechBox;
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true);
 
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+		}
+ 		else if (dialogues[dialogueIndex]->myPos == LEFT) {
+			dialogueBox = speechBox;
 
-		app->render->DrawText(text, (dialogueBox.x + 8 ) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 
-		app->render->DrawRectangle(nameBoxL, black, true, true);
-		app->render->DrawText(owner, (nameBoxL.x +3) * app->win->GetScale(), (nameBoxL.y +3) * app->win->GetScale(), nameBoxL.w *6 * app->win->GetScale(), (DIALOGUE_SIZE ) * app->win->GetScale(), false, SDL_Color{255,255,255,255});
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+
+			app->render->DrawRectangle(nameBoxL, black, true, true);
+			app->render->DrawText(owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE)*app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+		}
+		else {
+			dialogueBox = speechBoxRight;
+
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+
+			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE)*app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+		}
 	}
 	else {
-		dialogueBox = speechBoxRight;
+		string txt = "fhfjf";
+		
+		txt = currentNPC_Dialogues[npcDialogueIndex]->text;
 
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+		const char* text = txt.c_str();
+		const char* owner = dialogues[dialogueIndex]->owner.c_str();
+		numLines = 0;
 
-		app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+		// For now i am drawing npc dialogue in the narrator box
+			dialogueBox = narratorBox;
 
-		app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE)*app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
+			app->render->DrawRectangle(dialogueBox, whitey, true, true);
+
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{0,0,0,1});
+
+		
+		
 	}
 
 
@@ -335,7 +360,8 @@ void DialogueManager::AdvanceText() {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 			// If all the text has finished skip to next dialogue, else skip scrolling
 			if (HasScrollFinished()) {
-				dialogueIndex++;
+				if (myState == CUTSCENE) dialogueIndex++;
+				else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
 				scrolling = true;
 				numLines = 0;
 				ResetScroll();
@@ -349,7 +375,8 @@ void DialogueManager::AdvanceText() {
 	}
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		if (HasScrollFinished()) {
-			dialogueIndex++;
+			if (myState == CUTSCENE) dialogueIndex++;
+			else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
 			scrolling = true;
 			numLines = 0;
 			ResetScroll();
@@ -372,4 +399,20 @@ void DialogueManager::ChangeLanguage() {
 		myLanguage = ENGLISH;
 	}
 
+}
+
+void DialogueManager::npcTalk(DynArray<Dialogue*>& npcDialogues) {
+
+	int size = npcDialogues.Count();
+
+	if (npcDialogueIndex < size -1) {
+		myState = NPCS;
+		this->currentNPC_Dialogues = npcDialogues;
+		npcDialogueIndex++;
+	}
+	else {
+		myState = CUTSCENE;
+		npcDialogueIndex = -1;
+		currentNPC_Dialogues.Clear();
+	}
 }

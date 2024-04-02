@@ -28,6 +28,14 @@ enum Language {
 	ENGLISH
 };
 
+
+enum DialogueStates {
+
+	CUTSCENE,
+	NPCS
+
+};
+
 struct Dialogue {
 
 public:
@@ -89,8 +97,12 @@ public:
 
 	void AdvanceText();
 
+	void npcTalk(DynArray<Dialogue*>& npcDialogues);
+
 public:
 	int numLines = 0;
+
+	DialogueStates myState = CUTSCENE;
 
 private:
 
@@ -130,6 +142,11 @@ private:
 	SDL_Rect portraitBoxR = SDL_Rect{ 0,0,52,56 };
 
 	Language myLanguage;
+
+
+
+	DynArray<Dialogue*> currentNPC_Dialogues;
+	int npcDialogueIndex = -1;
 
 };
 

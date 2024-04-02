@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Source\BattleScene.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
@@ -130,6 +131,8 @@
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="Interpolation.h" />
+    <ClInclude Include="NPC.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="someColors.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\BattleScene.h" />

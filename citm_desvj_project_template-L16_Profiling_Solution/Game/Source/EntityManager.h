@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Entity.h"
 #include "List.h"
+#include <string>
+
+using namespace std;
 
 class EntityManager : public Module
 {
@@ -32,6 +35,8 @@ public:
 	void DestroyEntity(Entity* entity);
 
 	void AddEntity(Entity* entity);
+
+	Entity* PlaceNPC(string name);
 
 public:
 

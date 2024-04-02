@@ -63,6 +63,7 @@
     <ClCompile Include="Source\BattleScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="NPC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -116,8 +117,6 @@
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Source\p2List.h" />
     <ClInclude Include="Source\Fonts.h" />
-    <ClInclude Include="frame.h" />
-    <ClInclude Include="Interpolation.h" />
     <ClInclude Include="Source\Intro.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -163,6 +162,16 @@
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\BattleScene.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h" />
+    <ClInclude Include="frame.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpolation.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="random.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

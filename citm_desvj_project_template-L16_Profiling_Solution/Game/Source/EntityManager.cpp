@@ -1,12 +1,15 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Item.h"
+#include "../NPC.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
-
+#include <string>
 #include "Defs.h"
 #include "Log.h"
+
+using namespace std;
 
 EntityManager::EntityManager(bool isActive) : Module(isActive)
 {
@@ -34,6 +37,23 @@ bool EntityManager::Awake(pugi::xml_node config)
 		if (pEntity->active == false) continue;
 		ret = item->data->Awake();
 	}
+
+	// NPCs
+	for (pugi::xml_node npcNode = config.child("npc"); npcNode != NULL; npcNode = npcNode.next_sibling("npc")) {
+
+		Npc* dude = (Npc*) PlaceNPC(npcNode.attribute("name").as_string());
+		
+
+		for (pugi::xml_node dialogueNode = npcNode.child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
+			// Create all the dialogues for the npc
+			string text = dialogueNode.attribute("text").as_string();
+			Dialogue* di = new Dialogue(npcNode.attribute("name").as_string(), text);
+
+			dude->myDialogues.PushBack(di);
+		}
+	}
+
+
 
 	return ret;
 
@@ -89,6 +109,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ITEM:
 		entity = new Item();
 		break;
+	
 	default:
 		break;
 	}
@@ -106,6 +127,14 @@ void EntityManager::DestroyEntity(Entity* entity)
 	{
 		if (item->data == entity) entities.Del(item);
 	}
+}
+
+Entity* EntityManager::PlaceNPC(string name) {
+
+	Entity* entity = new Npc(name);
+	entities.Add(entity);
+
+	return entity;
 }
 
 void EntityManager::AddEntity(Entity* entity)
