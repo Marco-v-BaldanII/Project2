@@ -1,0 +1,37 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "MapaNieve.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "MapaNieve.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2116,
+                "y": 1496
+            }
+        },
+        "tileset3.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/Ivo/Documents/GitHub/Project2/citm_desvj_project_template-L16_Profiling_Solution/Output/Assets/Textures",
+    "map.height": 45,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 45,
+    "openFiles": [
+        "MapaNieve.tmx",
+        "tileset3.tsx"
+    ],
+    "project": "sin nombre.tiled-project",
+    "recentFiles": [
+        "tileset3.tsx",
+        "MapaNieve.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
