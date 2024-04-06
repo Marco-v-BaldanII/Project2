@@ -36,6 +36,7 @@ class LevelManagement;
 class Intro;
 class StartMenu;
 class BattleScene;
+class BackStage;
 
 class App
 {
@@ -128,6 +129,7 @@ public:
 	Intro* intro;
 	StartMenu* mainMenu;
 	BattleScene* battleScene;
+	BackStage* backStage;
 
 	bool exitRequest = false;
 

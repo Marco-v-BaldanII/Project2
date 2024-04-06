@@ -47,56 +47,61 @@ bool LevelManagement::Start()
 bool LevelManagement::PreUpdate()
 {
 
-	/*if ((app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) && currentScene->active == true)
+	if ((app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) && currentScene->active == true)
 	{
-		app->levelManagement->inCombat = false;
-		gameScene = lastOpenWorldScene;
+		//app->levelManager->inCombat = false;
+		gameScene = INTRO;
 	}
 	if ((app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) && currentScene->active == true)
 	{
-		app->levelManagement->inCombat = true;
+		//app->levelManagement->inCombat = true;
 		gameScene = COMBAT;
 	}
 	if ((app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) && currentScene->active == true)
 	{
-		app->levelManagement->inCombat = false;
+		//app->levelManagement->inCombat = false;
 		gameScene = START;
-	}*/
+	}
+	if ((app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN) && currentScene->active == true)
+	{
+		//app->levelManagement->inCombat = false;
+		gameScene = BACKSTAGE;
+	}
 	
 
-	switch (gameScene)
-	{
-	case INTRO:
+	//switch (gameScene)
+	//{
+	//case INTRO:
 
-	/*	if ((app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) && currentScene->active == true)
+	///*	if ((app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) && currentScene->active == true)
 
-		app->audio->PlayMusic("assets/audio/music/song_menu.wav");*/
-		playMusic = false;
-		if ((app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) && currentScene->active == true)
-		{
-			gameScene = START;
-		}
-		break;
-	case START:
-	{
+	//	app->audio->PlayMusic("assets/audio/music/song_menu.wav");*/
+	//	playMusic = false;
+	//	if ((app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) && currentScene->active == true)
+	//	{
+	//		gameScene = START;
+	//	}
+	//	break;
+	//case START:
+	//{
 
-	}
-		break;
-	/*case GAME_OVER:
-		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && currentScene->active == true)
-		{
-			gameScene = START;
-			app->physics->ClearAllCollidersLists();
-		
-		}
-		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && currentScene->active == true)
-		{
-			app->LoadGameRequest();
-		}
-		break;*/
-	default:
-		break;
-	}
+	//}
+	//	break;
+	///*case GAME_OVER:
+	//	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && currentScene->active == true)
+	//	{
+	//		gameScene = START;
+	//		app->physics->ClearAllCollidersLists();
+	//	
+	//	}
+	//	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && currentScene->active == true)
+	//	{
+	//		app->LoadGameRequest();
+	//	}
+	//	break;*/
+	//default:
+	//	break;
+	//}
 	return true;
 }
 
@@ -117,7 +122,6 @@ bool LevelManagement::Update(float dt)
 		}
 		break;
 	case START:
-
 		if (currentScene != (Module*)app->mainMenu) {
 			
 			if (app->fade->Fade(currentScene, (Module*)app->mainMenu, 60))
@@ -126,8 +130,26 @@ bool LevelManagement::Update(float dt)
 				LOG("MainMenu");
 			}
 		}
+		break;
+	case COMBAT:
+		if (currentScene != (Module*)app->battleScene) {
 
+			if (app->fade->Fade(currentScene, (Module*)app->battleScene, 60))
+			{
+				currentScene = (Module*)app->battleScene;
+				LOG("BattleScene");
+			}
+		}
+		break;
+	case BACKSTAGE:
+		if (currentScene != (Module*)app->backStage) {
 
+			if (app->fade->Fade(currentScene, (Module*)app->backStage, 60))
+			{
+				currentScene = (Module*)app->backStage;
+				LOG("Backstage");
+			}
+		}
 		break;
 	/*case GAME_OVER:
 

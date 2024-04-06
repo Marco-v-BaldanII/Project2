@@ -17,22 +17,8 @@ enum GameScene {
 	INTRO = 1,
 	START = 2,
 	GAME_OVER = 3,
-	SCENE1 = 4,
-	THE_FALL = 5,
-	GREEN_PATH = 6,
-	RUINS = 7,
-	VILLAGE = 8,
-	FRACTURED_ROAD = 9,
-	DRAGON_CLIFF = 10,
-	COMBAT = 11,
-	WORLD_TEST = 12,
-	MAGE_ROOM  = 13,
-	GENERAL_ROOM = 14,
-	SHOP_ROOM = 15,
-	PLAIN = 16,
-	CASTLE = 17,
-	CAVES = 18,
-	FINALBATTLE = 19,
+	BACKSTAGE = 4,
+	COMBAT = 5,
 	CREDITS = 20
 };
 
@@ -77,7 +63,7 @@ public:
 	iPoint playerLastPos_FracturedRoad;
 	iPoint playerLastPos_DragonCliff;
 
-	GameScene combatScene = PLAIN;
+	//GameScene combatScene = PLAIN;
 
 	uint music;
 	bool playMusic = true;

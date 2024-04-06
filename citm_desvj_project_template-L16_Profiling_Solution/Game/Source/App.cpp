@@ -24,6 +24,7 @@
 #include "Intro.h"
 #include "StartMenu.h"
 #include "BattleScene.h"
+#include "BackStage.h"
 
 #include "SettingsPanel.h"
 #include "FadeToBlack.h"
@@ -64,6 +65,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	intro = new Intro(false);
 	mainMenu = new StartMenu(false);
 	battleScene = new BattleScene(false);
+	backStage = new BackStage(false);
 	fade = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
@@ -83,6 +85,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(intro);
 	AddModule(mainMenu);
 	AddModule(battleScene);
+	AddModule(backStage);
 
 	AddModule(entityManager);
 	AddModule(fonts);

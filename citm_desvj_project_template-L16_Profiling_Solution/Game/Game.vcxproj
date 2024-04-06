@@ -21,7 +21,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="Source\BackStage.cpp" />
     <ClCompile Include="Source\BattleScene.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="random.h" />
     <ClInclude Include="someColors.h" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\BackStage.h" />
     <ClInclude Include="Source\BattleScene.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />
