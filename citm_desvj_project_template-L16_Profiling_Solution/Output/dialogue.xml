@@ -11,7 +11,7 @@
 
 <dialogue text = "In the middle of 15th century england is in a dire political position.  Henry vi is the eleventh plantagenet monarch of the state.  Crown'd at 1 year fusty after his father and former king's passing.
 	  
-"   owner = "Narrator"  />
+"   owner = "Narrator"   />
 <dialogue text = "That gent wast a feeble and meak monarch responsible for england's defeat and loss of territories to the french."
    owner = "Narrator"  />
 	
@@ -250,7 +250,7 @@
 <english>
 			
 <dialogue text="In the middle of the 15th century, England is in a dire political position. Henry VI is the eleventh Plantagenet monarch of the country. "
-   owner="Narrator" />
+   owner="Narrator" background ="Assets/Textures/Backgrounds/England_Map.png"/>
 <dialogue text= "Crowned at 1 year old after his father and former king's passing. He was a feeble and meek monarch responsible for England’s defeat and loss of territories to the French."
 		  
    owner="Narrator" />
@@ -258,7 +258,7 @@
    owner="Narrator" />
 <dialogue text ="Act 1 -  A covenant for a gentler world" owner ="Narrator"/>
 	
-<dialogue text ="Scene 1 : Castle gardens" owner ="Narrator"/>
+<dialogue text ="Scene 1 : Castle gardens" owner ="Narrator" background ="Assets/Textures/Backgrounds/Castle_Gardens.png"/>
 	
 <dialogue text="Queen Margaret is looking for Prince Edward, she runs into a servant."
    owner="Narrator" />
@@ -391,7 +391,7 @@
    owner="Richard of York"
    position="2" />
 <dialogue text="Scene 3 King's chambers"
-   owner="Narrator" />	
+   owner="Narrator"  background="Assets/Textures/Backgrounds/King's_Chambers.png"/>	
 <dialogue text="My dear, Lord Richard was waiting for your greetings"
    owner="Margaret" position="2"  />
 <dialogue text="Ri-chard ?"

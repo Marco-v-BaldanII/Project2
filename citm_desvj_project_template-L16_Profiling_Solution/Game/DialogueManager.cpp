@@ -60,12 +60,18 @@ bool DialogueManager::Start() {
 		// insert TextureDefinition to the map diccionary
 		portraitTextures.insert(std::make_pair(texD->name, texD->texture));
 
+	
+
 	}
 
 	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("english").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 
 		Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
 		int p = dialogueNode.attribute("position").as_int();
+
+		string path = dialogueNode.attribute("background").as_string();
+		D->background = app->tex->Load(dialogueNode.attribute("background").as_string());
+
 		if (p == 1) {
 			D->myPos = RIGHT;
 		}
@@ -147,6 +153,7 @@ bool DialogueManager::Update(float dt)
 	AdvanceText();
 	
 	// Adjust the position of the text box
+	DrawBackground();
 
 	DrawTextBox(dialogues[dialogueIndex]->myPos);
 
@@ -163,6 +170,17 @@ bool DialogueManager::Update(float dt)
 	}
 
 	return ret;
+}
+
+void DialogueManager::DrawBackground() {
+
+	if (dialogues[dialogueIndex]->background != nullptr) { background = dialogues[dialogueIndex]->background; }
+
+	if (background != nullptr) {
+		SDL_Rect dsScreen = SDL_Rect{ 0,0,256,198 };
+		app->render->DrawTexture(background, 0, 0, &dsScreen);
+	}
+
 }
 
 void DialogueManager::ManageScrolling() {
@@ -362,6 +380,7 @@ void DialogueManager::AdvanceText() {
 			if (HasScrollFinished()) {
 				if (myState == CUTSCENE) dialogueIndex++;
 				else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
+				
 				scrolling = true;
 				numLines = 0;
 				ResetScroll();

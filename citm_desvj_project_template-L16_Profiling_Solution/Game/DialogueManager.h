@@ -53,6 +53,7 @@ public:
 		myPos = MIDDLE;
 	}
 	
+	SDL_Texture* background = nullptr;
 
 };
 
@@ -99,10 +100,14 @@ public:
 
 	void npcTalk(DynArray<Dialogue*>& npcDialogues);
 
+	void DrawBackground();
+
 public:
 	int numLines = 0;
 
 	DialogueStates myState = CUTSCENE;
+
+	SDL_Texture* background = nullptr;
 
 private:
 
