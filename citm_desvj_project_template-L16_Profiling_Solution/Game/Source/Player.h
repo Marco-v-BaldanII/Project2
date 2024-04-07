@@ -7,6 +7,8 @@
 
 struct SDL_Texture;
 
+
+
 class Player : public Entity
 {
 public:
@@ -18,7 +20,8 @@ public:
 	bool Awake();
 
 	bool Start();
-
+	bool PreUpdate() override;
+	bool PostUpdate() override;
 	bool Update(float dt);
 
 	bool CleanUp();
@@ -33,7 +36,7 @@ public:
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
-
+	int stepCounter = 0;
 	//Audio fx
 	int pickCoinFxId;
 

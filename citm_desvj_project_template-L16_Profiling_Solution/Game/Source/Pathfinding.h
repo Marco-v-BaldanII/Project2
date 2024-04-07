@@ -6,6 +6,8 @@
 #include "Point.h"
 #include "DynArray.h"
 #include "List.h"
+#include "p2List.h"
+#include "Queue.h"
 
 #define DEFAULT_PATH_LENGTH 50
 #define INVALID_WALK_CODE 255
@@ -28,11 +30,16 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Function to request path from A to B but visited tiles only
+	int CreateVisitedPath(const iPoint& origin, const iPoint& destination);
+
 	// Sets up the walkability map
 	void SetNavigationMap(uint w, uint h, uchar* data);
 
 	// Main function to request a path from A to B
 	int CreatePath(const iPoint& origin, const iPoint& destination);
+
+	bool IsVisited(const iPoint& pos) const;
 
 	// To request all tiles involved in the last generated path
 	const DynArray<iPoint>* GetLastPath() const;
@@ -46,20 +53,42 @@ public:
 	// Utility: returns true is the tile is walkable
 	bool IsWalkable(const iPoint& pos) const;
 
+	//Check if any entity is in the tile
+	bool IsTileEmpty(const iPoint& pos) const;
+
+	void ResetBFSPath();
+
 	// Utility: return the walkability value of a tile
 	uchar GetTileAt(const iPoint& pos) const;
 
+	//clear last path
+	void ClearPath();
+
+	void GenerateWalkeableArea(iPoint center, int range);
+
+	void InitBFS(iPoint pos);
+
+	void DrawBFSPath();
+
+	// we store the created path here
+	DynArray<iPoint> lastPath;
 private:
 
 	// size of the map
 	uint width;
 	uint height;
 
+	Queue<iPoint> frontier;
+	p2List<iPoint> visited;
+
+
+
 	// all map walkability values [0..255]
 	uchar* map;
 
-	// we store the created path here
-	DynArray<iPoint> lastPath;
+
+	
+
 };
 
 // forward declaration
@@ -80,6 +109,8 @@ struct PathNode
 	PathNode(int g, int h, const iPoint& pos, const PathNode* parent);
 	PathNode(const PathNode& node);
 
+	uint FindVisitedAdjacents(PathList& list_to_fill, PathFinding* path) const;
+
 	// Fills a list (PathList) of all valid adjacent pathnodes
 	uint FindWalkableAdjacents(PathList& list_to_fill) const;
 	// Calculates this tile score
@@ -94,13 +125,14 @@ struct PathNode
 struct PathList
 {
 	// Looks for a node in this list and returns it's list node or NULL
-	ListItem<PathNode>* Find(const iPoint& point) const;
+	p2ListItem<PathNode>* Find(const iPoint& point) const;
 
 	// Returns the Pathnode with lowest score in this list or NULL if empty
-	ListItem<PathNode>* GetNodeLowestScore() const;
+	p2ListItem<PathNode>* GetNodeLowestScore() const;
 
 	// The list itself, note they are not pointers!
-	List<PathNode> list;
+	p2List<PathNode> list;
+	
 };
 
 #endif // __PATHFINDING_H__

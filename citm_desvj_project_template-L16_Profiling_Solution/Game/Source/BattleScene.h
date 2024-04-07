@@ -8,7 +8,8 @@
 #include "Animation.h"
 #include "Audio.h"
 #include "GuiControlButton.h"
-
+#include "Player.h"
+#include "EntityManager.h"
 #include "GuiSlider.h"
 #include "GuiPanel.h"
 #include "GuiToggle.h"
@@ -55,7 +56,7 @@ private:
 	int enemyHp = 100;
 	GuiControlButton* AttackButton;
 	GuiControlButton* HealButton;
-
+	Player* player;
 	int waitTimer;
 	int attackPattern;
 	bool playerTurn = true;

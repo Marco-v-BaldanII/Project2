@@ -1,10 +1,13 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+
 #include "Point.h"
 #include "SString.h"
 #include "Input.h"
+#include "Pathfinding.h"
 #include "Render.h"
+#include "Map.h"
 
 enum class EntityType
 {
@@ -13,6 +16,11 @@ enum class EntityType
 	ENEMY,
 	NPC,
 	UNKNOWN
+};
+
+enum States {
+	MOVE,
+	IDLE
 };
 
 class PhysBody;
@@ -32,11 +40,20 @@ public:
 	{
 		return true;
 	}
+	virtual bool PreUpdate() 
+	{
+		return true;
+	}
 
 	virtual bool Update(float dt)
 	{
 		return true;
 	}
+	virtual bool PostUpdate() 
+	{
+		return true;
+	}
+
 
 	virtual bool CleanUp()
 	{
@@ -75,19 +92,43 @@ public:
 
 	};
 
+	bool MovePath();
 
+	bool InitPath(iPoint destiantion);
 
 public:
+
+
+
+	iPoint* currentP;
+	iPoint* nextP;
+	iPoint* direction;
+	//counts the tiles advanced in combat mode
+	int stepCounter = 0;
+	int moveRange;
+	int attackRange;
+	bool Move;
+	bool nextStep = true;
+	float moveTime = 32;
+	float counter = 0;
+	States state;
+
+	bool HasAttackAction = false;
+	bool HasMoveAction = false;
+
+	iPoint tilePos;
+	bool ExpandedBFS;
+	bool ConfirmMovement;
 
 	SString name;
 	EntityType type;
 	bool active = true;
-	pugi::xml_node parameters; 
+	pugi::xml_node parameters;
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
-	iPoint position;       
-	
+	iPoint position;
+
 	float attack;
 	float hp;
 	float precision;

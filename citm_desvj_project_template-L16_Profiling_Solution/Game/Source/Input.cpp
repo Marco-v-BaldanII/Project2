@@ -153,6 +153,12 @@ void Input::GetMousePosition(int& x, int& y)
 	y = mouseY;
 }
 
+void Input::GetMouseWorldPosition(int& x, int& y)
+{
+	x = mouseX + (app->render->camera.x * -1 / app->win->GetScale());
+	y = mouseY + (app->render->camera.y * -1 / app->win->GetScale());
+}
+
 void Input::GetMouseMotion(int& x, int& y)
 {
 	x = mouseMotionX;

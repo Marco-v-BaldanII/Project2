@@ -32,20 +32,26 @@ BattleScene::~BattleScene()
 bool BattleScene::Awake()
 {
 	LOG("Loading Start Scene");
-	bool ret = true;
+	
 
+	bool ret = true;
+	
 	return ret;
 }
 
 // Called before the first frame
 bool BattleScene::Start()
 {
+	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+
+	player->Awake();
 	time_t t;
 	srand((unsigned)time(&t));
 	SDL_Rect btPos = { 100, 500, 120,20 };
 	SDL_Rect btPos2 = { 100, 700, 120,20 };
-	AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
-	HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
+	app->entityManager->CreateEntity(EntityType::PLAYER);
+	//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
+	//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
 	//img = app->tex->Load("Assets/Textures/portrait1.png");
 	//music = app->audio->PlayMusic("assets/audio/music/song_menu.wav", 0.5f);
 	//app->dialogueManager->Enable();
@@ -65,21 +71,21 @@ bool BattleScene::PreUpdate()
 bool BattleScene::Update(float dt)
 {
 	
-	attackPattern = rand() % 2;
-
-	app->render->DrawText("Player Hp:" + to_string(playerHp), 100, 100, 1000, 100, false);
-
-	app->render->DrawText("Enemy Hp:" + to_string(enemyHp), 600, 100, 1000, 100, false);
-
-	waitTimer++;
-
-	if (playerTurn == false && attackPattern == 0 && waitTimer > 50) {
-		playerHp -= 10;
-		playerTurn = true;
-	} else if (playerTurn == false && attackPattern >= 1 && waitTimer > 50) {
-		enemyHp += 10;
-		playerTurn = true;
-	}
+	//attackPattern = rand() % 2;
+	//
+	//app->render->DrawText("Player Hp:" + to_string(playerHp), 100, 100, 1000, 100, false);
+	//
+	//app->render->DrawText("Enemy Hp:" + to_string(enemyHp), 600, 100, 1000, 100, false);
+	//
+	//waitTimer++;
+	//
+	//if (playerTurn == false && attackPattern == 0 && waitTimer > 50) {
+	//	playerHp -= 10;
+	//	playerTurn = true;
+	//} else if (playerTurn == false && attackPattern >= 1 && waitTimer > 50) {
+	//	enemyHp += 10;
+	//	playerTurn = true;
+	//}
 
 	return true;
 }
