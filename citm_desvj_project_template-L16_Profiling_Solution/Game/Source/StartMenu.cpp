@@ -38,7 +38,7 @@ bool StartMenu::Start()
 {
 
 	img = app->tex->Load("Assets/Textures/portrait1.png");
-	//music = app->audio->PlayMusic("assets/audio/music/song_menu.wav", 0.5f);
+	music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);
 	//app->dialogueManager->Enable();
 	rect = { 0,0,64,90 };
 	app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT

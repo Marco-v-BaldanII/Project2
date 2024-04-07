@@ -47,6 +47,7 @@ private:
 	int waitTime;
 
 	int logoXpos;
+	uint music;
 	float easingTime = 500; //millisec
 	float counter = 0;
 };
