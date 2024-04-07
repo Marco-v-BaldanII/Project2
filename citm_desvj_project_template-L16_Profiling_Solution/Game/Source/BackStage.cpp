@@ -25,7 +25,7 @@ bool BackStage::Awake(pugi::xml_node&)
 bool BackStage::Start()
 {
 	//app->levelManagement->inCombat = false;
-	//music = app->audio->PlayMusic("assets/audio/music/song_1_2.wav", 0);
+	music = app->audio->PlayMusic("assets/audio/music/Musica-overworld-_Big-Map_.wav", 0);
 	app->physics->Enable();
 	app->map->Load("level1.tmx");
 	app->entityManager->Enable();

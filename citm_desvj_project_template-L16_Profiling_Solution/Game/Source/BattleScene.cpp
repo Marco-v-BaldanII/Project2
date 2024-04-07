@@ -47,7 +47,7 @@ bool BattleScene::Start()
 	AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
 	HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
 	//img = app->tex->Load("Assets/Textures/portrait1.png");
-	//music = app->audio->PlayMusic("assets/audio/music/song_menu.wav", 0.5f);
+	music = app->audio->PlayMusic("assets/audio/music/Battle-screen-music.wav", 0.5f);
 	//app->dialogueManager->Enable();
 	
 	rect = { 0,0,64,90 };
