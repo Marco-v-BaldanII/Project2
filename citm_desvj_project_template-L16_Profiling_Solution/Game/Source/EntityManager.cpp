@@ -9,6 +9,7 @@
 #include <string>
 #include "Defs.h"
 #include "Log.h"
+#include "../BackstagePlayer.h"
 
 using namespace std;
 
@@ -112,6 +113,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ENEMY:
 		entity = new Enemy();
+		break;
+	case EntityType::BACKSTAGEPLAYER:
+		entity = new BackStagePlayer(iPoint(0, 0));
 		break;
 	default:
 		break;
