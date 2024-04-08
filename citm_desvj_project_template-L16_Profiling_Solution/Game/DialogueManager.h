@@ -136,12 +136,12 @@ private:
 	uint dialogueIndex = 0;
 
 	SDL_Rect dialogueBox = SDL_Rect{ 0,00,0,0};
-	SDL_Rect narratorBox = SDL_Rect{ 45,100,160,60 };
+	SDL_Rect narratorBox = SDL_Rect{ 45*2,100*2,160*2,60*2};
 	SDL_Rect speechBox = SDL_Rect{ narratorBox.x - 3 - BOX_OFFSET, narratorBox.y - 3 - BOX_OFFSET, narratorBox.w + 6, narratorBox.h -25 };
 	SDL_Rect speechBoxRight = SDL_Rect{ narratorBox.x - 3 + BOX_OFFSET, narratorBox.y - 3 - BOX_OFFSET, narratorBox.w + 6, narratorBox.h - 25 };
 
-	SDL_Rect nameBoxL = SDL_Rect{ speechBox.x, speechBox.y - 12,32,12 };
-	SDL_Rect nameBoxR = SDL_Rect{ speechBoxRight.x, speechBoxRight.y - 12,32,12 };
+	SDL_Rect nameBoxL = SDL_Rect{ speechBox.x, speechBox.y - 22,48*2,12*2 };
+	SDL_Rect nameBoxR = SDL_Rect{ speechBoxRight.x, speechBoxRight.y - 22,48*2,12*2};
 
 	bool scrolling = true;
 
@@ -156,8 +156,8 @@ private:
 	b2Color TextColor;
 
 	// CHANGE with correct portrait size
-	SDL_Rect portraitBoxL = SDL_Rect{ 0,0,52,56 };
-	SDL_Rect portraitBoxR = SDL_Rect{ 0,0,52,56 };
+	SDL_Rect portraitBoxL = SDL_Rect{ 0,0,52*2,56*2 };
+	SDL_Rect portraitBoxR = SDL_Rect{ 0,0,52*2,56*2 };
 
 	Language myLanguage;
 

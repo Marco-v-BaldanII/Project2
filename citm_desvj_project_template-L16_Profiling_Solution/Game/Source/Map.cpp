@@ -9,7 +9,7 @@
 
 #include "Defs.h"
 #include "Log.h"
-
+#include "BattleScene.h"
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
@@ -26,6 +26,7 @@ Map::~Map()
 bool Map::Awake(pugi::xml_node config)
 {
     LOG("Loading Map Parser");
+    myNode = config;
     bool ret = true;
 
     return ret;
@@ -33,10 +34,15 @@ bool Map::Awake(pugi::xml_node config)
 
 bool Map::Start() {
 
+    myNode = app->battleScene->mynode.next_sibling("map");
+
     //Calls the functon to load the map, make sure that the filename is assigned
     SString mapPath = path;
-    mapPath = "Assets/Maps/MapaNieve.tmx";
+    // CHANGE poner el en config
+    mapPath = myNode.child("lvl1").attribute("path").as_string();
     Load(mapPath);
+
+    miniMapTex = app->tex->Load(myNode.child("minimap").attribute("path").as_string());
 
     //Initialize pathfinding 
     pathfinding = new PathFinding();
@@ -89,6 +95,10 @@ bool Map::Update(float dt)
                         LOG("test");
                     }
 
+                    
+
+                    
+
                     // testing if the tile's associated color is drawn
                    /* if (mapLayer->data->myTiles[0][0] != nullptr) {
                         if(mapLayer->data->myTiles[i][j] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[i][j]->color, true, true);
@@ -97,6 +107,19 @@ bool Map::Update(float dt)
             }
         }
         mapLayer = mapLayer->next;
+    }
+
+
+
+    if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+
+        showMinimap = !showMinimap;
+
+    }
+
+    if (showMinimap) {
+
+        app->render->DrawTexture(miniMapTex, (350/2) - (app->render->camera.x/3), (192/2) - (app->render->camera.y/3), &minimap);
     }
 
     return ret;

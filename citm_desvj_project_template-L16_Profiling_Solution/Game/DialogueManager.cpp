@@ -189,7 +189,7 @@ void DialogueManager::DrawBackground() {
 	if (dialogues[dialogueIndex]->background != nullptr) { background = dialogues[dialogueIndex]->background; }
 
 	if (background != nullptr) {
-		SDL_Rect dsScreen = SDL_Rect{ 0,0,256,198 };
+		SDL_Rect dsScreen = SDL_Rect{ 0,0,256*2,198*2 };
 		app->render->DrawTexture(background, 0, 0, &dsScreen);
 	}
 
@@ -198,16 +198,16 @@ void DialogueManager::DrawBackground() {
 void DialogueManager::ManageScrolling() {
 
 
-	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10, -dialogueBox.w , DIALOGUE_SIZE };
-	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + DIALOGUE_SIZE, -dialogueBox.w , DIALOGUE_SIZE };
-	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 2), -dialogueBox.w , DIALOGUE_SIZE };
-	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 3), -dialogueBox.w , DIALOGUE_SIZE };
+	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10, -dialogueBox.w , DIALOGUE_SIZE *2 };
+	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + DIALOGUE_SIZE*2, -dialogueBox.w , DIALOGUE_SIZE*2};
+	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 2 *2), -dialogueBox.w , DIALOGUE_SIZE *2};
+	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 3 *2), -dialogueBox.w , DIALOGUE_SIZE *2};
 
 	if (dialogues[dialogueIndex]->myPos != MIDDLE) {
-		 r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 , -dialogueBox.w , DIALOGUE_SIZE };
-		 r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE), -dialogueBox.w , DIALOGUE_SIZE };
-		 r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE *2), -dialogueBox.w , DIALOGUE_SIZE };
-		 r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 3), -dialogueBox.w , DIALOGUE_SIZE };
+		 r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 , -dialogueBox.w , DIALOGUE_SIZE *2};
+		 r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE*2), -dialogueBox.w , DIALOGUE_SIZE*2 };
+		 r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE *2*2), -dialogueBox.w , DIALOGUE_SIZE*2 };
+		 r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 3*2), -dialogueBox.w , DIALOGUE_SIZE*2};
 	}
 	
 		
@@ -296,11 +296,11 @@ void DialogueManager::DrawTextBox(Position pos) {
 		if (dialogues[dialogueIndex]->myPos == MIDDLE) {
 			dialogueBox = narratorBox;
 
-			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
-			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , (dialogueBox.w + 6) , (dialogueBox.h + 6) }, b2Color(0, 0, 10, 1), true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , (dialogueBox.w + 4) , (dialogueBox.h + 4) }, b2Color(0, 0, 0.5f, 1), true, true);
 			app->render->DrawRectangle(dialogueBox, royalBlue, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true);
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2 * app->win->GetScale(), true);
 
 		}
  		else if (dialogues[dialogueIndex]->myPos == LEFT) {
@@ -310,10 +310,10 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2* app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
 			app->render->DrawRectangle(nameBoxL, black, true, true);
-			app->render->DrawText(owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE)*app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+			app->render->DrawText(owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
 		else {
 			dialogueBox = speechBoxRight;
@@ -322,9 +322,10 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
-			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE)*app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+			app->render->DrawRectangle(nameBoxR, black, true, true);
+			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
 	}
 	else {
@@ -370,10 +371,10 @@ void DialogueManager::DrawPortrait(){
 	// Prints on screen the current and previous dialogue's portrait
 	for (i; i <= dialogueIndex; ++i) {
 		if (dialogues[i]->myPos == LEFT) {
-			app->render->DrawTexture(dialogues[i]->texture, 0, 136, &portraitBoxL, true);
+			app->render->DrawTexture(dialogues[i]->texture, 0, 120*2, &portraitBoxL, true);
 		}
 		else if (dialogues[i]->myPos == RIGHT) {
-			app->render->DrawTexture(dialogues[i]->texture, 204, 136, &portraitBoxR, false);
+			app->render->DrawTexture(dialogues[i]->texture, 204*2, 120*2, &portraitBoxR, false);
 		}
 	}
 }

@@ -11,7 +11,7 @@
   </renderer>
 
   <window>
-    <resolution width="256" height="192" scale="3"/>
+    <resolution width="512" height="384" scale="3"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -71,10 +71,13 @@
 			
 		</battleMaps>
 		
-		
-		
-		
-		
 	</battle_scene>
-  
+
+
+	<map>
+		<lvl1  path="Assets/Maps/MapaNieve.tmx" />
+		<minimap path ="Assets/Textures/miniMap.png"/>
+		
+	</map>
+	
 </config>

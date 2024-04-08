@@ -68,7 +68,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//scenes
 	intro = new Intro(false);
 	mainMenu = new StartMenu(false);
-	battleScene = new BattleScene(false);
+	battleScene = new BattleScene(true);
 	backStage = new BackStage(false);
 	fade = new FadeToBlack(true);
 

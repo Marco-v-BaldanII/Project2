@@ -194,12 +194,21 @@ public:
     SString path;
     PathFinding* pathfinding;
 
+    SDL_Rect minimap = SDL_Rect{ 0,0, 150,150 };
+    bool showMinimap = false;
+
+    SDL_Texture* miniMapTex = nullptr;
+
 private:
     // L05: DONE 1: Declare a variable data of the struct MapData
     MapData mapData;
     bool mapLoaded;
     MapLayer* navigationLayer;
     int blockedGid = 49; //!!!! make sure that you assign blockedGid according to your map
+
+    pugi::xml_node myNode;
+
+
  };
 
 #endif // __MAP_H__
