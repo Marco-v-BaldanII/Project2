@@ -115,6 +115,18 @@ bool DialogueManager::Start() {
 		//dialogueSize++;
 	}
 
+
+
+
+	// Load the scens info
+	for (pugi::xml_node sNode = myConfig.child("dialogues").child("english").child("Scene"); sNode != NULL; sNode = sNode.next_sibling("Scene")) {
+		
+		Scene* aScene = new Scene(sNode.attribute("num").as_int(), sNode.attribute("dialogues").as_int());
+		Scenes.PushBack(aScene);
+
+	}
+
+
 	//Iterates over the entities and calls Start
 
 	return ret;

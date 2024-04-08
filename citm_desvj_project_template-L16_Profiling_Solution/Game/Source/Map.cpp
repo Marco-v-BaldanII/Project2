@@ -35,7 +35,7 @@ bool Map::Start() {
 
     //Calls the functon to load the map, make sure that the filename is assigned
     SString mapPath = path;
-    mapPath = "Assets/Maps/hello.tmx";
+    mapPath = "Assets/Maps/MapaNieve.tmx";
     Load(mapPath);
 
     //Initialize pathfinding 
@@ -52,7 +52,7 @@ bool Map::Start() {
 
 bool Map::Update(float dt)
 {
-    OPTICK_CATEGORY("Map", Optick::Category::GameLogic)
+    OPTICK_EVENT("Map::Update");
     bool ret = true;
 
     if(mapLoaded == false)
@@ -90,9 +90,9 @@ bool Map::Update(float dt)
                     }
 
                     // testing if the tile's associated color is drawn
-                    if (mapLayer->data->myTiles[0][0] != nullptr) {
+                   /* if (mapLayer->data->myTiles[0][0] != nullptr) {
                         if(mapLayer->data->myTiles[i][j] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[i][j]->color, true, true);
-                    }
+                    }*/
                 }
             }
         }
@@ -121,31 +121,31 @@ TileSet* Map::GetTilesetFromTileId(int gid) const
 // Called before quitting
 bool Map::CleanUp()
 {
-    LOG("Unloading map");
+    //LOG("Unloading map");
 
-    //Clean up pathfing class
-    pathfinding->CleanUp();
+    ////Clean up pathfing class
+    //pathfinding->CleanUp();
 
-    // L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
-    ListItem<TileSet*>* tileset;
-    tileset = mapData.tilesets.start;
-    
-    while (tileset != NULL) {
-        RELEASE(tileset->data);
-        tileset = tileset->next;
-    }
+    //// L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
+    //ListItem<TileSet*>* tileset;
+    //tileset = mapData.tilesets.start;
+    //
+    //while (tileset != NULL) {
+    //    RELEASE(tileset->data);
+    //    tileset = tileset->next;
+    //}
 
-    mapData.tilesets.Clear();
+    //mapData.tilesets.Clear();
 
-    // L06: DONE 2: clean up all layer data
-    ListItem<MapLayer*>* layerItem;
-    layerItem = mapData.layers.start;
+    //// L06: DONE 2: clean up all layer data
+    //ListItem<MapLayer*>* layerItem;
+    //layerItem = mapData.layers.start;
 
-    while (layerItem != NULL) {
-        RELEASE(layerItem->data->tiles);
-        RELEASE(layerItem->data);
-        layerItem = layerItem->next;
-    }
+    //while (layerItem != NULL) {
+    //    RELEASE(layerItem->data->tiles);
+    //    RELEASE(layerItem->data);
+    //    layerItem = layerItem->next;
+    //}
 
     return true;
 }

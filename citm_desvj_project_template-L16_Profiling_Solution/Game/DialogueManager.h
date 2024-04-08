@@ -57,6 +57,19 @@ public:
 
 };
 
+struct Scene {
+public:
+
+	Scene(int num, int numDialogues) {
+		this->num = num;
+		this->numDialogues = numDialogues;
+	}
+
+	int num;
+	int numDialogues;
+
+};
+
 
 class DialogueManager : public Module
 {
@@ -152,6 +165,8 @@ private:
 
 	DynArray<Dialogue*> currentNPC_Dialogues;
 	int npcDialogueIndex = -1;
+
+	DynArray<Scene*> Scenes;
 
 };
 

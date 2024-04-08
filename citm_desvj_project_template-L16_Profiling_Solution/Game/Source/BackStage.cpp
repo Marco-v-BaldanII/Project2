@@ -27,7 +27,7 @@ bool BackStage::Start()
 	//app->levelManagement->inCombat = false;
 	music = app->audio->PlayMusic("assets/audio/music/Musica-overworld-_Big-Map_.wav", 0);
 	app->physics->Enable();
-	app->map->Load("level1.tmx");
+	//app->map->Load("level1.tmx");
 	app->entityManager->Enable();
 
 	//uncheckableTiles[0] = { 15, 37 };

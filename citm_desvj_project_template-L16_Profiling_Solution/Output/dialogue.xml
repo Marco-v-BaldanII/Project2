@@ -257,6 +257,7 @@
 <dialogue text="England has just lost the 100-year-long war with France, but the peace will not last long."
    owner="Narrator" />
 <dialogue text ="Act 1 -  A covenant for a gentler world" owner ="Narrator"/>
+	<Scene num="1" dialogues ="9"/>
 	
 <dialogue text ="Scene 1 : Castle gardens" owner ="Narrator" background ="Assets/Textures/Backgrounds/Castle_Gardens.png"/>
 	
@@ -285,6 +286,9 @@
    position="2" />
 <dialogue text="Scene 2: Back garden"
    owner="Narrator" />
+
+	<Scene num="2" dialogues ="36"/>
+	
 <dialogue text="Prince Edward and Henry Tudor are playing with wooden swords. They are interrupted by Margaret leading the Yorks. All the sons of York are introduced. "
    owner="Narrator" />
 <dialogue text="The youngest (Richard) heads off to play with Edward and Henry (they are friends). Meanwhile, the duke and his eldest son head off with Margaret as they say they have political business to discuss."

@@ -55,7 +55,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//L07 DONE 2: Add Physics module
 	physics = new Physics(false);
 	//scene = new Scene();
-	map = new Map(false); //Esta ROTO
+	map = new Map(true); //Esta ROTO
 	entityManager = new EntityManager(true);
 	guiManager = new GuiManager(true);
 
