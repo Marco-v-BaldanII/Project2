@@ -18,9 +18,9 @@ Enemy::~Enemy() {}
 
 bool Enemy::Awake() {
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
+	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	name = config.attribute("name").as_string();
+	state = IDLE;
 
 	return true;
 }
@@ -28,19 +28,50 @@ bool Enemy::Awake() {
 bool Enemy::Start() {
 
 	//initilize textures
-	texture = app->tex->Load(texturePath);
+
 
 	return true;
 }
 
 bool Enemy::Update(float dt)
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+
+	switch (state)
+	{
+	case IDLE:
+		//update idle
+		break;
+	case MOVE:
+
+		//Expand tiles to available
+		if (!ExpandedBFS) {
+
+
+
+			app->map->pathfinding->GenerateWalkeableArea(tilePos, 3);
+
+			ExpandedBFS = true;
+		}
+
+		//move
+		MovePath();
+
+
+		break;
+	}
 
 	return true;
 }
 
+
 bool Enemy::CleanUp()
 {
+	return true;
+}
+
+bool Enemy::PostUpdate() {
+
+	app->render->DrawTexture(texture, position.x, position.y, &section);
+
 	return true;
 }

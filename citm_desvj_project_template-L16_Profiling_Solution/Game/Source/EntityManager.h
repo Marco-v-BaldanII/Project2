@@ -22,10 +22,10 @@ public:
 
 	// Called after Awake
 	bool Start();
-
+	bool PreUpdate() override;
 	// Called every frame
 	bool Update(float dt);
-
+	bool PostUpdate() override;
 	// Called before quitting
 	bool CleanUp();
 

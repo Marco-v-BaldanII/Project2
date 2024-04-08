@@ -346,8 +346,8 @@ iPoint Map::MapToWorld(int x, int y) const
     }
 
     if (mapData.orientation == MapOrientation::ISOMETRIC) {
-        ret.x = x * mapData.tilewidth / 2 - y * mapData.tilewidth / 2;
-        ret.y = x * mapData.tileheight / 2 + y * mapData.tileheight / 2;
+        ret.x = (x- y )* (mapData.tilewidth / 2);
+        ret.y = (x + y) *( mapData.tileheight / 2);
     }
 
     return ret;

@@ -10,6 +10,7 @@
 #include "GuiManager.h"
 #include "Optick/include/optick.h"
 #include "../DialogueManager.h"
+#include "../TurnManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -57,7 +58,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(false); //Esta ROTO
 	entityManager = new EntityManager(true);
 	guiManager = new GuiManager(true);
-	dialogueManager = new DialogueManager(true); //editar despues//
+
+	dialogueManager = new DialogueManager(false); //editar despues//
+	turnManager = new TurnManager(true);
+
 	
 	levelManager = new LevelManagement(true);
 	fonts = new Fonts(true);
@@ -88,6 +92,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(backStage);
 
 	AddModule(entityManager);
+	AddModule(turnManager);
 	AddModule(fonts);
 	AddModule(guiManager);
 	AddModule(dialogueManager);

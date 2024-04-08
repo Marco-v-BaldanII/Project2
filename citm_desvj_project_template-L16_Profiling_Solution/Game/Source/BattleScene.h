@@ -8,7 +8,9 @@
 #include "Animation.h"
 #include "Audio.h"
 #include "GuiControlButton.h"
-
+#include "Player.h"
+#include "Enemy.h"
+#include "EntityManager.h"
 #include "GuiSlider.h"
 #include "GuiPanel.h"
 #include "GuiToggle.h"
@@ -25,7 +27,7 @@ public:
 	virtual ~BattleScene();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(pugi::xml_node config);
 
 	// Called before the first frame
 	bool Start();
@@ -45,7 +47,7 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 private:
-	SDL_Texture* img;
+	SDL_Texture* spriteSheet;
 	SDL_Rect rect;
 	uint music;
 	bool playMusic = true;
@@ -55,10 +57,15 @@ private:
 	int enemyHp = 100;
 	GuiControlButton* AttackButton;
 	GuiControlButton* HealButton;
-
+	Player* player;
 	int waitTimer;
 	int attackPattern;
 	bool playerTurn = true;
+
+	List<Player*> party;
+	List<Enemy*> goons;
+	pugi::xml_node mynode;
+
 };
 #endif // __BATTLESCENE_H__
 

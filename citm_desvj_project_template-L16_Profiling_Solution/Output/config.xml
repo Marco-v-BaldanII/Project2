@@ -11,7 +11,7 @@
   </renderer>
 
   <window>
-    <resolution width="256" height="192" scale="4"/>
+    <resolution width="256" height="192" scale="3"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -52,5 +52,29 @@
 
 
 	</entitymanager>
+
+
+	<battle_scene>
+	
+	     <texture path="Assets/Textures/Overworld/overworld sprites finales.png"/>
+
+		<battleMaps>
+			<map name ="Northampton">
+				<player  name="Prince Edward"  x="0" y="0"/>
+				<player  name="Henry Tudor" x="32" y ="32" />
+				<player  name=" Margaret of Anjou" x="0" y="32" />
+
+				<enemy name= "Duke of York" x="128" y="64"/>
+
+			</map>
+			
+			
+		</battleMaps>
+		
+		
+		
+		
+		
+	</battle_scene>
   
 </config>
