@@ -6,6 +6,7 @@
 #include "../List.h"
 #include <string>
 #include "../Player.h"
+#include "../Enemy.h"
 
 using namespace std;
 
@@ -38,7 +39,7 @@ public:
 
 	void SelectPlayer(Player* player);
 
-	void InitializePlayers(List<Player*>* players);
+	void InitializeChessPieces(List<Player*>* players, List<Enemy*>* enemies);
 
 	bool EnemyTurn();
 
@@ -49,9 +50,15 @@ private:
 	List<Player*> players;
 	Player* currentPlayer = nullptr;
 
+	List<Enemy*> enemies;
+	Enemy* currentenemy = nullptr;
+
 	uint availablePlayers = 3;
 
 	Turn currentTurn = PLAYER;
+
+	uint enemyIndex = 0;
+	uint maxEnemies;
 
 };
 

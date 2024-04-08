@@ -35,7 +35,7 @@ bool TurnManager::Awake(pugi::xml_node config)
 bool TurnManager::Start() {
 
 	bool ret = true;
-
+	
 	
 	return ret;
 }
@@ -73,6 +73,7 @@ bool TurnManager::Update(float dt)
 	if (availablePlayers <= 0) {
 		// enemy turn
 		LOG("All players have moved, initiating enemy turn");
+		// if enemy turn has finished
 		if (EnemyTurn() == true) {
 
 			PlayerTurn();
@@ -101,9 +102,11 @@ void TurnManager::SelectPlayer(Player* player) {
 	}
 }
 
-void TurnManager::InitializePlayers(List<Player*>* players) {
+void TurnManager::InitializeChessPieces(List<Player*>* players, List<Enemy*>* enemies) {
 	
 	this->players = *players;
+	this->enemies = *enemies;
+	maxEnemies = enemies->Count();
 }
 
 bool TurnManager::EnemyTurn() {
@@ -111,6 +114,24 @@ bool TurnManager::EnemyTurn() {
 	LOG("insert enemy turn");
 	currentTurn = ENEMY;
 	bool finished = true;
+
+	// Update enemies
+	if (enemies[enemyIndex]->state != MOVE) enemies[enemyIndex]->state = MOVE;
+
+
+
+
+
+	ListItem<Enemy*>* it = enemies.start;
+	while (it != NULL) {
+		if (it->data->movedThisTurn == false) {
+			// don't end the turn unless all enemies have acted
+			finished = false;
+		}
+		it = it->next;
+	}
+
+
 
 
 	return finished;

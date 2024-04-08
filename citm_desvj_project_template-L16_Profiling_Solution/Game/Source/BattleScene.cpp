@@ -43,6 +43,7 @@ bool BattleScene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool BattleScene::Start()
 {
+	spriteSheet = app->tex->Load(mynode.child("texture").attribute("path").as_string());
 
 	time_t t;
 	srand((unsigned)time(&t));
@@ -56,9 +57,24 @@ bool BattleScene::Start()
 		p->config = Pnode;
 		p->Awake();
 		party.Add(p);
+		p->texture = spriteSheet;
 	}
+
+	// Read enemies from config and instantiate them
+	for (pugi::xml_node Enode = mynode.child("battleMaps").child("map").child("enemy"); Enode != NULL; Enode = Enode.next_sibling("enemy")) {
+
+		Enemy* e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		e->config = Enode;
+		e->Awake();
+		goons.Add(e);
+		e->texture = spriteSheet;
+	}
+
+
+
+
 	// pass the players to be monitoured by the turnManager
-	app->turnManager->InitializePlayers(&party);
+	app->turnManager->InitializeChessPieces(&party, &goons);
 
 	//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
 	//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
@@ -104,7 +120,7 @@ bool BattleScene::Update(float dt)
 bool BattleScene::PostUpdate()
 {
 	bool ret = true;
-	app->render->DrawTexture(img, 0, 0, &rect);
+	
 	return ret;
 }
 
@@ -112,7 +128,7 @@ bool BattleScene::PostUpdate()
 bool BattleScene::CleanUp()
 {
 	LOG("Freeing scene main menu ");
-	img = nullptr;
+	app->tex->UnLoad(spriteSheet);
 	
 	app->guiManager->Main_Menu_Panel->Disable();
 	//app->audio->StopMusic();

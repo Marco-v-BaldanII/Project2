@@ -16,7 +16,6 @@
       <Filter>External\PugiXml</Filter>
     </ClCompile>
     <ClCompile Include="Source\PerfTimer.cpp" />
-    <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Map.cpp" />
@@ -59,16 +58,25 @@
     <ClCompile Include="Source\SettingsPanel.cpp">
       <Filter>Panels</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\BattleScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Source\BackStage.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="TurnManager.cpp" />
+    <ClCompile Include="NPC.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -107,8 +115,6 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\PerfTimer.h" />
-    <ClInclude Include="Source\Timer.h" />
-    <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Map.h" />
@@ -164,11 +170,9 @@
     <ClInclude Include="someColors.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\BattleScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="NPC.h" />
     <ClInclude Include="frame.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -182,6 +186,18 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="TurnManager.h" />
+    <ClInclude Include="NPC.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -201,6 +217,9 @@
     </Filter>
     <Filter Include="Panels">
       <UniqueIdentifier>{0a9a0d9e-983d-4931-be44-61a5d076646e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{f083c7d3-6d91-4dd7-b681-4f70955d90c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

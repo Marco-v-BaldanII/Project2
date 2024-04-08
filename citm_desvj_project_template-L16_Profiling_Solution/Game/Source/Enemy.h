@@ -1,5 +1,5 @@
-#ifndef __ITEM_H__
-#define __ITEM_H__
+#ifndef __ENEMY_H__
+#define __ENEMY_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -20,17 +20,24 @@ public:
 
 	bool Update(float dt);
 
+	bool PostUpdate();
+
 	bool CleanUp();
 
 public:
 
 	bool isPicked = false;
 
-private:
+	pugi::xml_node config;
 
 	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;
+
+	bool movedThisTurn = false;
+
+	SDL_Rect section = SDL_Rect{ 75, 6, 26, 27 };
+
 };
 
-#endif // __ITEM_H__
+#endif // __ENEMY_H__

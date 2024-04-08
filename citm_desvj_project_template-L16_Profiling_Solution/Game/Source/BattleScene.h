@@ -9,6 +9,7 @@
 #include "Audio.h"
 #include "GuiControlButton.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "EntityManager.h"
 #include "GuiSlider.h"
 #include "GuiPanel.h"
@@ -46,7 +47,7 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 private:
-	SDL_Texture* img;
+	SDL_Texture* spriteSheet;
 	SDL_Rect rect;
 	uint music;
 	bool playMusic = true;
@@ -62,6 +63,7 @@ private:
 	bool playerTurn = true;
 
 	List<Player*> party;
+	List<Enemy*> goons;
 	pugi::xml_node mynode;
 
 };
