@@ -41,7 +41,7 @@ bool EntityManager::Awake(pugi::xml_node config)
 	// NPCs
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode != NULL; npcNode = npcNode.next_sibling("npc")) {
 
-		Npc* dude = (Npc*) PlaceNPC(npcNode.attribute("name").as_string());
+		Npc* dude = (Npc*) PlaceNPC(npcNode.attribute("name").as_string(), npcNode.attribute("x").as_int(), npcNode.attribute("wait").as_int());
 		
 
 		for (pugi::xml_node dialogueNode = npcNode.child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
@@ -129,9 +129,10 @@ void EntityManager::DestroyEntity(Entity* entity)
 	}
 }
 
-Entity* EntityManager::PlaceNPC(string name) {
+Entity* EntityManager::PlaceNPC(string name, int x, int wait) {
 
-	Entity* entity = new Npc(name);
+	Entity* entity = new Npc(name, x , wait);
+	entity->position.x = x;
 	entities.Add(entity);
 
 	return entity;

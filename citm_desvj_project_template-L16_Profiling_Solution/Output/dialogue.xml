@@ -250,7 +250,7 @@
 <english>
 			
 <dialogue text="In the middle of the 15th century, England is in a dire political position. Henry VI is the eleventh Plantagenet monarch of the country. "
-   owner="Narrator" background ="Assets/Textures/Backgrounds/England_Map.png"/>
+   owner="Narrator" />
 <dialogue text= "Crowned at 1 year old after his father and former king's passing. He was a feeble and meek monarch responsible for England’s defeat and loss of territories to the French."
 		  
    owner="Narrator" />

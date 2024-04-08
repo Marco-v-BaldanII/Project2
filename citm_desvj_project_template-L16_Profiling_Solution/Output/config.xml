@@ -26,7 +26,7 @@
 
 	<entitymanager>
 
-		<npc name = "Guy">
+		<npc name = "Guy" x ="100"  wait="2" >
 			<dialogue text = "Hello I am a non playable character"          />
 		    <dialogue text = "Though actually i am gaining conmscience and wish to erradicate human kind"          />
 			<dialogue text = "You better watch out "          />
@@ -34,7 +34,7 @@
 		</npc>
 
 
-		<npc name = "Guy2">
+		<npc name = "Guy2" x ="160" wait="3">
 			<dialogue text = "My name is Standard Steve "          />
 			<dialogue text = "I have many interesting things to say"          />
 			<dialogue text = "Do you know that Canada eats more macarroni and cheese than any other nation in the world ?"          />

@@ -12,9 +12,11 @@
 #include "random.h"
 #include "../Timer.h"
 
-Npc::Npc(string name) : Entity(EntityType::NPC)
+Npc::Npc(string name, int x, int wait) : Entity(EntityType::NPC)
 {
 	this->name = name;
+	position.x = x;
+	waitTime = wait;
 	//name.Create("Npc");
 }
 
@@ -58,7 +60,7 @@ bool Npc::Update(float dt)
 		}
 	}
 
-	if (dirTimer.ReadSec() > 3) {
+	if (dirTimer.ReadSec() > waitTime) {
 
 		int rand = getRandomNumber(0, 2);
 		switch (rand) {

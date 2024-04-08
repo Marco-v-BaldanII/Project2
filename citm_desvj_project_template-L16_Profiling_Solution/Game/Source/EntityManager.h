@@ -36,7 +36,7 @@ public:
 
 	void AddEntity(Entity* entity);
 
-	Entity* PlaceNPC(string name);
+	Entity* PlaceNPC(string name, int x, int wait);
 
 public:
 

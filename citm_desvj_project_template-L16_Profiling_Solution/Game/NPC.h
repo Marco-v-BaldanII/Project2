@@ -30,7 +30,7 @@ public:
 
 	};
 
-	Npc(string name);
+	Npc(string name, int x, int wait);
 
 	virtual ~Npc();
 
@@ -56,6 +56,8 @@ public:
 	SDL_Rect body = SDL_Rect{ 0,0,50,70 };
 
 	
+	int waitTime = 0;
+
 	float speed = 0.2f;
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
