@@ -9,6 +9,12 @@
 
 using namespace std;
 
+enum Turn {
+	PLAYER,
+	ENEMY,
+	DIALOGUE
+};
+
 class TurnManager : public Module
 {
 public:
@@ -32,12 +38,20 @@ public:
 
 	void SelectPlayer(Player* player);
 
+	void InitializePlayers(List<Player*>* players);
 
+	bool EnemyTurn();
 
-public:
+	void PlayerTurn();
+
+private:
 
 	List<Player*> players;
 	Player* currentPlayer = nullptr;
+
+	uint availablePlayers = 3;
+
+	Turn currentTurn = PLAYER;
 
 };
 

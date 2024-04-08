@@ -10,6 +10,7 @@
 #include "GuiControl.h"
 #include "LevelManagement.h"
 #include "../DialogueManager.h"
+#include "../TurnManager.h"
 //#include "Fonts.h"
 #include "Defs.h"
 #include "Log.h"
@@ -42,14 +43,11 @@ bool BattleScene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool BattleScene::Start()
 {
-	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 
-	player->Awake();
 	time_t t;
 	srand((unsigned)time(&t));
 	SDL_Rect btPos = { 100, 500, 120,20 };
 	SDL_Rect btPos2 = { 100, 700, 120,20 };
-	app->entityManager->CreateEntity(EntityType::PLAYER);
 
 	// Read party members form config and instanciate them
 	for (pugi::xml_node Pnode = mynode.child("battleMaps").child("map").child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
@@ -57,9 +55,10 @@ bool BattleScene::Start()
 		Player* p = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
 		p->config = Pnode;
 		p->Awake();
-		
+		party.Add(p);
 	}
-
+	// pass the players to be monitoured by the turnManager
+	app->turnManager->InitializePlayers(&party);
 
 	//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
 	//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);

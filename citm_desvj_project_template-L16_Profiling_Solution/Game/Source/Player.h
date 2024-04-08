@@ -44,6 +44,8 @@ public:
 
 	SDL_Rect clickBox = { 0,0,32,32 };
 
+	bool movedThisTurn = false;
+
 };
 
 #endif // __PLAYER_H__

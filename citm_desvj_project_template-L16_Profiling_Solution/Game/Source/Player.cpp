@@ -43,7 +43,10 @@ bool Player::Start() {
 
 bool Player::PreUpdate() 
 {
-	ClickOnMe();
+	// if the player hasn't moved this turn it can be clicked on
+	if (!movedThisTurn) {
+		ClickOnMe(); 
+	}
 
 	switch (state)
 	{

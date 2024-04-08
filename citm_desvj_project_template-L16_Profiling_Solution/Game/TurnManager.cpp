@@ -60,7 +60,27 @@ bool TurnManager::PreUpdate()
 bool TurnManager::Update(float dt)
 {
 	bool ret = true;
+
+	// my selected player has moved
+	if (currentPlayer != nullptr && currentPlayer->state == IDLE) {
+
+		
+		currentPlayer->movedThisTurn = true;
+		availablePlayers--;
+		currentPlayer = nullptr; // CHANGE THIS TO A FIGHTING STATE
+	}
 	
+	if (availablePlayers <= 0) {
+		// enemy turn
+		LOG("All players have moved, initiating enemy turn");
+		if (EnemyTurn() == true) {
+
+			PlayerTurn();
+
+		}
+	}
+
+
 
 	return ret;
 }
@@ -79,4 +99,36 @@ void TurnManager::SelectPlayer(Player* player) {
 
 		currentPlayer = player;
 	}
+}
+
+void TurnManager::InitializePlayers(List<Player*>* players) {
+	
+	this->players = *players;
+}
+
+bool TurnManager::EnemyTurn() {
+
+	LOG("insert enemy turn");
+	currentTurn = ENEMY;
+	bool finished = true;
+
+
+	return finished;
+}
+void TurnManager::PlayerTurn() {
+	LOG("Starting player turn");
+	currentTurn = PLAYER;
+
+	availablePlayers = players.Count();
+
+	ListItem<Player*>* p = players.start;
+	while (p != NULL) {
+		p->data->movedThisTurn = false;
+		p->data->state = IDLE;
+
+		p = p->next;
+	}
+
+
+
 }
