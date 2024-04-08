@@ -87,7 +87,7 @@ bool Player::Update(float dt)
 {
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+	/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		position.x += -0.2*dt;
 	}
 
@@ -101,7 +101,7 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		position.y += 0.2 * dt;
-	}
+	}*/
 
 	/*if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !Move) {
 		state = MOVE;

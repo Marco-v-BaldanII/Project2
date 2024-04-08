@@ -29,7 +29,8 @@ bool BackStage::Start()
 	app->physics->Enable();
 	//app->map->Load("level1.tmx");
 	app->entityManager->Enable();
-
+	app->entityManager->CreateEntity(EntityType::BACKSTAGEPLAYER);
+	//player = app->entityManager->CreateEntity(EntityType::BACKSTAGEPLAYER);
 	//uncheckableTiles[0] = { 15, 37 };
 	//uncheckableTiles[1] = { 16, 37 };
 	//uncheckableTiles[2] = { 17, 37 };

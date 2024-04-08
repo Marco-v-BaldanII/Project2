@@ -4,6 +4,8 @@
 #include "Defs.h"
 #include "Animation.h"
 #include "Point.h"
+#include "Entity.h"
+#include "../BackstagePlayer.h"
 
 struct SDL_Texture;
 
@@ -43,8 +45,7 @@ private:
 
 	uint music;
 
-
-
-
+	//create player
+	//Entity* player;
 };
 

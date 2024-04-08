@@ -15,6 +15,7 @@ enum class EntityType
 	ITEM,
 	ENEMY,
 	NPC,
+	BACKSTAGEPLAYER,
 	UNKNOWN
 };
 
