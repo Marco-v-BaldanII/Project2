@@ -6,6 +6,8 @@
 #include "Render.h"
 #include "Player.h"
 
+#define MOVE_SPEED 2
+
 
 bool Entity::InitPath(iPoint destiantion)
 {
@@ -73,12 +75,12 @@ bool Entity::MovePath()
 			//error control and set anim
 			if (direction->x >= 1)
 			{
-				direction->x = 1;
+				direction->x = MOVE_SPEED;
 				//currentAnim = &walkSide;
 			}
 			else if (direction->x <= -1)
 			{
-				direction->x = -1;
+				direction->x = -MOVE_SPEED;
 				//currentAnim = &walkSide;
 			}
 			else {
@@ -88,12 +90,12 @@ bool Entity::MovePath()
 
 			if (direction->y >= 1)
 			{
-				direction->y = 1;
+				direction->y = MOVE_SPEED;
 				//currentAnim = &walkDown;
 			}
 			else if (direction->y <= -1)
 			{
-				direction->y = -1;
+				direction->y = -MOVE_SPEED;
 				//currentAnim = &walkUp;
 			}
 			else {
@@ -101,9 +103,10 @@ bool Entity::MovePath()
 				//walkUp.Reset();
 				//walkDown.Reset();
 			}
+			// tiles
 			stepCounter++;
 		}
-
+		// pixels
 		counter -= 1;
 		if (counter >= 0 && !nextStep)
 		{
@@ -135,7 +138,7 @@ bool Entity::MovePath()
 				tilePos = pos;
 			}
 
-			counter = moveTime;
+			counter = moveTime/MOVE_SPEED;
 		}
 	}
 

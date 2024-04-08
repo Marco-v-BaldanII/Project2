@@ -52,5 +52,24 @@
 
 
 	</entitymanager>
+
+
+	<battle_scene>
+		<battleMaps>
+			<map name ="Northampton">
+				<player  name="Prince Edward"  x="0" y="0"/>
+				<player  name="Henry Tudor" x="32" y ="32" />
+				<player  name=" Margaret of Anjou" x="0" y="32" />
+
+			</map>
+			
+			
+		</battleMaps>
+		
+		
+		
+		
+		
+	</battle_scene>
   
 </config>

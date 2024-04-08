@@ -134,7 +134,7 @@ public:
 	float precision;
 	float luck;
 	float speed;
-	float movement;
+	float movement;                                                 
 
 	bool renderable = true;
 };

@@ -31,6 +31,7 @@ class GuiManager;
 class DialogueManager;
 class FadeToBlack;
 class LevelManagement;
+class TurnManager;
 
  //Scenes
 class Intro;
@@ -124,6 +125,7 @@ public:
 	DialogueManager* dialogueManager;
 	FadeToBlack* fade;
 	LevelManagement* levelManager;
+	TurnManager* turnManager;
 
 	//scenes
 	Intro* intro;

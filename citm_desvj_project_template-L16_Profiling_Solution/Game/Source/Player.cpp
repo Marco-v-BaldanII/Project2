@@ -9,6 +9,8 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Map.h"
+#include "../TurnManager.h"
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -22,6 +24,7 @@ bool Player::Awake() {
 
 	//L03: DONE 2: Initialize Player parameters
 	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	name = config.attribute("name").as_string();
 
 	return true;
 }
@@ -40,6 +43,7 @@ bool Player::Start() {
 
 bool Player::PreUpdate() 
 {
+	ClickOnMe();
 
 	switch (state)
 	{
@@ -96,9 +100,9 @@ bool Player::Update(float dt)
 		position.y += 0.2 * dt;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !Move) {
+	/*if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !Move) {
 		state = MOVE;
-	}
+	}*/
 
 	/*	int mouseX, mouseY;
 		app->input->GetMousePosition(mouseX, mouseY);
@@ -165,6 +169,28 @@ bool Player::PostUpdate()
 	}
 	}
 	return true;
+}
+
+void Player::ClickOnMe() {
+
+	clickBox.x = position.x; clickBox.y = position.y;
+
+	int mouseX, mouseY;
+
+	app->input->GetMousePosition(mouseX, mouseY);
+
+	//If the position of the mouse if inside the bounds of the box 
+	if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h) {
+
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+			
+			app->turnManager->SelectPlayer(this);
+			state = MOVE;
+
+		}
+	}
+	//app->render->DrawRectangle(clickBox, b2Color(1,0,1,1),false, true);
+
 }
 
 bool Player::CleanUp()

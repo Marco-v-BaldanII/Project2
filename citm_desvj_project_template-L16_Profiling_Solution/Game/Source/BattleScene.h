@@ -26,7 +26,7 @@ public:
 	virtual ~BattleScene();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(pugi::xml_node config);
 
 	// Called before the first frame
 	bool Start();
@@ -60,6 +60,10 @@ private:
 	int waitTimer;
 	int attackPattern;
 	bool playerTurn = true;
+
+	List<Player*> party;
+	pugi::xml_node mynode;
+
 };
 #endif // __BATTLESCENE_H__
 

@@ -29,10 +29,10 @@ BattleScene::~BattleScene()
 {}
 
 // Called before render is available
-bool BattleScene::Awake()
+bool BattleScene::Awake(pugi::xml_node config)
 {
 	LOG("Loading Start Scene");
-	
+	mynode = config;
 
 	bool ret = true;
 	
@@ -50,6 +50,17 @@ bool BattleScene::Start()
 	SDL_Rect btPos = { 100, 500, 120,20 };
 	SDL_Rect btPos2 = { 100, 700, 120,20 };
 	app->entityManager->CreateEntity(EntityType::PLAYER);
+
+	// Read party members form config and instanciate them
+	for (pugi::xml_node Pnode = mynode.child("battleMaps").child("map").child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
+
+		Player* p = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
+		p->config = Pnode;
+		p->Awake();
+		
+	}
+
+
 	//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
 	//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
 	//img = app->tex->Load("Assets/Textures/portrait1.png");

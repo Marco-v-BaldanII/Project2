@@ -68,6 +68,7 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Entity.cpp" />
+    <ClCompile Include="TurnManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Source\BackStage.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="TurnManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
