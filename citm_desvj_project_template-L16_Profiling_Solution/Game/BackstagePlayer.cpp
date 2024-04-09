@@ -29,10 +29,15 @@ bool BackStagePlayer::Start()
 	walkDown.loop = true;
 	walkDown.speed = walkSpeed;
 
-	walkSide.PushBack({ 0, 0, 32, 32 });
+	walkLeft.PushBack({ 0, 0, 32, 32 });
 	//mas
-	walkSide.loop = true;
-	walkSide.speed = walkSpeed;
+	walkLeft.loop = true;
+	walkLeft.speed = walkSpeed;
+
+	walkRight.PushBack({ 0, 0, 32, 32 });
+	//mas
+	walkRight.loop = true;
+	walkRight.speed = walkSpeed;
 
 
 	//idle
@@ -46,15 +51,23 @@ bool BackStagePlayer::Start()
 	idleDown.loop = true;
 	idleDown.speed = walkSpeed;
 
-	idleSide.PushBack({ 0, 0, 32, 32 });
+	idleLeft.PushBack({ 0, 0, 32, 32 });
 	//mas
-	idleSide.loop = true;
-	idleSide.speed = walkSpeed;
+	idleLeft.loop = true;
+	idleLeft.speed = walkSpeed;
+
+	idleRight.PushBack({ 0, 0, 32, 32 });
+	//mas
+	idleRight.loop = true;
+	idleRight.speed = walkSpeed;
 
 	currentAnimation = &idleDown;
 
 	// Set player direction
 	goingLeft = false;
+	goingRight = false;
+	goingUp = false;
+	goingDown = false;
 
 	// Set god mode
 	godMode = false;
@@ -95,29 +108,81 @@ bool BackStagePlayer::Update(float dt)
 		{
 			position.y -= velocity * dt;
 			goingLeft = false;
+			goingUp = true;
+			goingDown = false;
+			goingRight = false;
 			isMoving = true;
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
 			position.y += velocity * dt;
 			goingLeft = false;
+			goingUp = false;
+			goingDown = true;
+			goingRight = false;
 			isMoving = true;
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			position.x -= velocity * dt;
 			goingLeft = true;
+			goingUp = false;
+			goingDown = false;
+			goingRight = false;
 			isMoving = true;
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 			position.x += velocity * dt;
 			goingLeft = false;
+			goingUp = false;
+			goingDown = false;
+			goingRight = true;
 			isMoving = true;
 		}
 		else
 		{
 			isMoving = false;
+		}
+	}
+
+	// Set player animation
+	if (isMoving)
+	{
+		if (goingUp)
+		{
+			currentAnimation = &walkUp;
+		}
+		else if (goingDown)
+		{
+			currentAnimation = &walkDown;
+		}
+		else if (goingLeft)
+		{
+			currentAnimation = &walkLeft;
+		}
+		else if (goingRight)
+		{
+			currentAnimation = &walkRight;
+		}
+	}
+	else
+	{
+		if (goingUp)
+		{
+			currentAnimation = &idleUp;
+		}
+		else if (goingDown)
+		{
+			currentAnimation = &idleDown;
+		}
+		else if (goingLeft)
+		{
+			currentAnimation = &idleLeft;
+		}
+		else if (goingRight)
+		{
+			currentAnimation = &idleRight;
 		}
 	}
 

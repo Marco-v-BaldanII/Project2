@@ -51,14 +51,19 @@ private:
 	
 	Animation walkUp;
 	Animation walkDown;
-	Animation walkSide;
+	Animation walkLeft;
+	Animation walkRight;
 	Animation idleUp;
 	Animation idleDown;
-	Animation idleSide;
+	Animation idleLeft;
+	Animation idleRight;
 	Animation* currentAnimation;
 
 	float walkSpeed;
 	bool goingLeft;
+	bool goingRight;
+	bool goingUp;
+	bool goingDown;
 	bool godMode;
 	bool canMove;
 };

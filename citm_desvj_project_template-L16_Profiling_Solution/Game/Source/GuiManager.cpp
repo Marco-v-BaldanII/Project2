@@ -3,6 +3,8 @@
 #include "Textures.h"
 #include "MainMenuPanel.h"
 #include "GuiControlButton.h"
+#include "GuiSlider.h"
+#include "GuiPanel.h"
 
 //#include "GuiControlButton.h"
 #include "Audio.h"
@@ -113,6 +115,9 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	case GuiControlType::BUTTON:
 		guiControl = new GuiControlButton(id, bounds, text);
 		break;
+	/*case GuiControlType::SLIDER:
+		guiControl = new GuiSlider(id, bounds, text);
+		break;*/
 	}
 
 	//Set the observer

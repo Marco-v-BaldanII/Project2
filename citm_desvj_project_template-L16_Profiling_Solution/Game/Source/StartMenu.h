@@ -12,6 +12,8 @@
 #include "GuiSlider.h"
 #include "GuiPanel.h"
 #include "GuiToggle.h"
+#include "GuiControl.h"
+#include "GuiControlButton.h"
 
 struct SDL_Texture;
 
@@ -49,7 +51,22 @@ private:
 	SDL_Rect rect;
 	uint music;
 	bool playMusic = true;
+	bool goConfig = false;
 
+	//Menu Buttons
+	GuiControlButton* start;
+	GuiControlButton* load;
+	GuiControlButton* quit;
+	GuiControlButton* options;
+
+	//Config Buttons
+	GuiControlButton* back;
+	GuiControlButton* FullScreen;
+	GuiControlButton* VSync;
+	GuiControlButton* Music;
+	GuiControlButton* FX;
+
+	uint windowW, windowH;
 
 };
 #endif // __STARTMENU_H__
