@@ -46,47 +46,56 @@ bool StartMenu::Start()
 		windowW = 512 * 3;
 		windowH = 384 * 3;
 
-		SDL_Rect playPos = { windowW / 2 - 80, windowH / 2 + 10, 200,60 };
-		SDL_Rect loadPos = { windowW / 2 - 80, windowH / 2 + 90, 200,60 };
-		SDL_Rect quitPos = { windowW / 2 - 80, windowH / 2 + 180, 200,60 };
-		SDL_Rect optionsPos = { windowW / 2 - 80, windowH / 2 + 270, 200,60 };
+		SDL_Rect pos1 = { windowW / 2 - 80, windowH / 2 - 90, 200,60 };
+		SDL_Rect pos2 = { windowW / 2 - 80, windowH / 2 - 10, 200,60 };
+		SDL_Rect pos3 = { windowW / 2 - 80, windowH / 2 + 60, 200,60 };
+		SDL_Rect pos4 = { windowW / 2 - 80, windowH / 2 + 130, 200,60 };
+		SDL_Rect pos5 = { windowW / 2 - 80, windowH / 2 + 200, 200,60 };
+		SDL_Rect pos6 = { windowW / 2 - 80, windowH / 2 + 270, 200,60 };
+		SDL_Rect pos7 = { windowW / 2 - 80, windowH / 2 + 340, 200,60 };
+		SDL_Rect pos8 = { windowW / 2 - 80, windowH / 2 + 410, 200,60 };
 
-		start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, " Play ", playPos, this);
-		load = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Load ", loadPos, this);
-		options = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, " Opts ", quitPos, this);
-		quit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, " Quit ", optionsPos, this);
+		start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, " Play ", pos1, this);
+		load = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Load ", pos2, this);
+		options = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, " Opts ", pos3, this);
+		quit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, " Quit ", pos4, this);
 
 		start->state = GuiControlState::NORMAL;
 		load->state = GuiControlState::NORMAL;
 		quit->state = GuiControlState::NORMAL;
 		options->state = GuiControlState::NORMAL;
 
-		//Config Buttons
-		SDL_Rect backPos = { windowW / 2 - 80, windowH / 2 + 10, 200,60 };
-		SDL_Rect FullScreenPos = { windowW / 2 - 80, windowH / 2 + 90, 200,60 };
-		SDL_Rect VSyncPos = { windowW / 2 - 80, windowH / 2 + 180, 200,60 };
-		SDL_Rect MusicPos = { windowW / 2 - 80, windowH / 2 + 270, 200,60 };
-		SDL_Rect FXPos = { windowW / 2 - 80, windowH / 2 + 360, 200,60 };
-
-		back = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, " Back", backPos, this);
-		FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, " FullScreen", FullScreenPos, this);
-		VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, " VSync", VSyncPos, this);
-		Music = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, " Music", MusicPos, this);
-		FX = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, " FX", FXPos, this);
+		back = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, " Back", pos1, this);
+		FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, " FullScreen", pos2, this);
+		VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, " VSync", pos3, this);
+		Music = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, " Music", pos4, this);
+		FX = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, " FX", pos5, this);
+		if (app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
+		{
+			laguageText = " Laguage : Shakesperean";
+		}
+		else if (app->dialogueManager->myLanguage == Language::ENGLISH)
+		{
+			laguageText = " Laguage : English";
+		}
+		laguage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, laguageText, pos6, this);
+		textSpeed = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, " Text Speed : Normal", pos7, this);
 
 		back->state = GuiControlState::DISABLED;
 		FullScreen->state = GuiControlState::DISABLED;
 		VSync->state = GuiControlState::DISABLED;
 		Music->state = GuiControlState::DISABLED;
 		FX->state = GuiControlState::DISABLED;
+		laguage->state = GuiControlState::DISABLED;
+		textSpeed->state = GuiControlState::DISABLED;
 
-		backstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, " Backstage", loadPos, this);
-		combatstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, " Combatstage", quitPos, this);
+		backstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, " Backstage", pos2, this);
+		combatstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, " Combatstage", pos3, this);
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
 
-		resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, " Resume", backPos, this);
+		resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, " Resume", pos1, this);
 
 		resume->state = GuiControlState::DISABLED;
 	}
@@ -115,6 +124,8 @@ bool StartMenu::Update(float dt)
 		VSync->state = GuiControlState::DISABLED;
 		Music->state = GuiControlState::DISABLED;
 		FX->state = GuiControlState::DISABLED;
+		laguage->state = GuiControlState::DISABLED;
+		textSpeed->state = GuiControlState::DISABLED;
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
@@ -132,6 +143,8 @@ bool StartMenu::Update(float dt)
 		VSync->state = GuiControlState::NORMAL;
 		Music->state = GuiControlState::NORMAL;
 		FX->state = GuiControlState::NORMAL;
+		laguage->state = GuiControlState::NORMAL;
+		textSpeed->state = GuiControlState::NORMAL;
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
@@ -149,6 +162,8 @@ bool StartMenu::Update(float dt)
 		VSync->state = GuiControlState::DISABLED;
 		Music->state = GuiControlState::DISABLED;
 		FX->state = GuiControlState::DISABLED;
+		laguage->state = GuiControlState::DISABLED;
+		textSpeed->state = GuiControlState::DISABLED;
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
@@ -166,6 +181,8 @@ bool StartMenu::Update(float dt)
 		VSync->state = GuiControlState::DISABLED;
 		Music->state = GuiControlState::DISABLED;
 		FX->state = GuiControlState::DISABLED;
+		laguage->state = GuiControlState::DISABLED;
+		textSpeed->state = GuiControlState::DISABLED;
 
 		backstage->state = GuiControlState::NORMAL;
 		combatstage->state = GuiControlState::NORMAL;
@@ -183,6 +200,8 @@ bool StartMenu::Update(float dt)
 		VSync->state = GuiControlState::NORMAL;
 		Music->state = GuiControlState::NORMAL;
 		FX->state = GuiControlState::NORMAL;
+		laguage->state = GuiControlState::NORMAL;
+		textSpeed->state = GuiControlState::NORMAL;
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
@@ -199,6 +218,28 @@ bool StartMenu::Update(float dt)
 	if (cerrar)
 	{
 		return false;
+	}
+
+	if (app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
+	{
+		laguage->text = " Laguage : Shakesperean";
+	}
+	else if (app->dialogueManager->myLanguage == Language::ENGLISH)
+	{
+		laguage->text = " Laguage : English";
+	}
+
+	if (app->dialogueManager->textVelocity == app->dialogueManager->slowVelocity)
+	{
+		textSpeed->text = " Text Speed : Slow";
+	}
+	else if (app->dialogueManager->textVelocity == app->dialogueManager->normalVelocity)
+	{
+		textSpeed->text = " Text Speed : Normal";
+	}
+	else if (app->dialogueManager->textVelocity == app->dialogueManager->fastVelocity)
+	{
+		textSpeed->text = " Text Speed : Fast";
 	}
 
 	return true;
@@ -281,6 +322,28 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 12)
 	{
 		state = MenuState::OFF;
+	}
+	else if (control->id == 13 && app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
+	{
+		//lagunage
+		app->dialogueManager->SetLanguage(Language::ENGLISH);
+	}
+	else if (control->id == 13 && app->dialogueManager->myLanguage == Language::ENGLISH)
+	{
+		//lagunage
+		app->dialogueManager->SetLanguage(Language::SHAKESPEREAN);
+	}
+	else if (control->id == 14 && app->dialogueManager->textVelocity == app->dialogueManager->slowVelocity)
+	{
+		app->dialogueManager->SetTextVelocity(TextVelocity::NORMAL);
+	}
+	else if (control->id == 14 && app->dialogueManager->textVelocity == app->dialogueManager->normalVelocity)
+	{
+		app->dialogueManager->SetTextVelocity(TextVelocity::FAST);
+	}
+	else if (control->id == 14 && app->dialogueManager->textVelocity == app->dialogueManager->fastVelocity)
+	{
+		app->dialogueManager->SetTextVelocity(TextVelocity::SLOW);
 	}
 
 	return true;

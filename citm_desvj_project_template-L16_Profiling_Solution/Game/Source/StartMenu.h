@@ -66,6 +66,8 @@ private:
 	bool scenebuttons = false;
 	bool offbuttons = false;
 	bool pause = false;
+	bool inEnglish = true;
+	const char* laguageText;
 
 	//Menu Buttons
 	GuiControlButton* start;
@@ -79,6 +81,8 @@ private:
 	GuiControlButton* VSync;
 	GuiControlButton* Music;
 	GuiControlButton* FX;
+	GuiControlButton* laguage;
+	GuiControlButton* textSpeed;
 
 	//Scenes
 	GuiControlButton* backstage;

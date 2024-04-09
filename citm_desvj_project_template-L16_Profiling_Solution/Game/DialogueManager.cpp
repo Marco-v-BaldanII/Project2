@@ -215,20 +215,20 @@ void DialogueManager::ManageScrolling() {
 
 
 	//Must investigate more robotic type of interpolation such as STEP
-	Lerp(w1_1, 0.002, 0);
+	Lerp(w1_1, textVelocity, 0);
 	r1.w = w1_1;
 
 	if (w1_1 >= 0) /*first line interpolation finished*/ {
-		Lerp(w2_1, 0.002, 0);
+		Lerp(w2_1, textVelocity, 0);
 		r2.w = w2_1;
 	}
 
 	if (w2_1 >= 0) /*second line interpolation finished*/ {
-		Lerp(w3_1, 0.002, 0);
+		Lerp(w3_1, textVelocity, 0);
 		r3.w = w3_1;
 	}
 	if (w3_1 >= 0) /*third line interpolation finished*/ {
-		Lerp(w4_1, 0.002, 0);
+		Lerp(w4_1, textVelocity, 0);
 		r4.w = w4_1;
 	}
 
@@ -431,6 +431,22 @@ void DialogueManager::ChangeLanguage() {
 		myLanguage = ENGLISH;
 	}
 
+}
+
+void DialogueManager::SetLanguage(Language lang) {
+	myLanguage = lang;
+}
+
+void DialogueManager::SetTextVelocity(TextVelocity velocity) {
+	if (velocity == SLOW) {
+		textVelocity = slowVelocity;
+	}
+	else if (velocity == FAST) {
+		textVelocity = fastVelocity;
+	}
+	else if (velocity == NORMAL){
+		textVelocity = normalVelocity;
+	}
 }
 
 void DialogueManager::npcTalk(DynArray<Dialogue*>& npcDialogues) {

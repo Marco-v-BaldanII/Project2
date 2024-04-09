@@ -28,6 +28,12 @@ enum Language {
 	ENGLISH
 };
 
+enum TextVelocity {
+	SLOW,
+	FAST,
+	NORMAL
+};
+
 
 enum DialogueStates {
 
@@ -115,12 +121,25 @@ public:
 
 	void DrawBackground();
 
+	void SetLanguage(Language lang);
+
+	void SetTextVelocity(TextVelocity velocity);
+
 public:
 	int numLines = 0;
 
 	DialogueStates myState = CUTSCENE;
 
 	SDL_Texture* background = nullptr;
+
+	Language myLanguage;
+
+	//Text speed
+	float slowVelocity = 0.002;
+	float normalVelocity = 0.003;
+	float fastVelocity = 0.004;
+
+	float textVelocity = normalVelocity;
 
 private:
 
@@ -159,9 +178,7 @@ private:
 	SDL_Rect portraitBoxL = SDL_Rect{ 0,0,52*2,56*2 };
 	SDL_Rect portraitBoxR = SDL_Rect{ 0,0,52*2,56*2 };
 
-	Language myLanguage;
-
-
+	
 
 	DynArray<Dialogue*> currentNPC_Dialogues;
 	int npcDialogueIndex = -1;
