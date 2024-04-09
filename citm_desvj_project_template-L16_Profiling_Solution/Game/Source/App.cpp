@@ -59,7 +59,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager(true);
 	guiManager = new GuiManager(true);
 
-	dialogueManager = new DialogueManager(false); //editar despues//
+	dialogueManager = new DialogueManager(true); //editar despues//
 	turnManager = new TurnManager(true);
 
 	

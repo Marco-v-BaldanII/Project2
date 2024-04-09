@@ -6,7 +6,11 @@
 <portrait texturePath ="Assets/Textures/Portraits/Margaret.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Guard.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Henry VI.jpg"/>
-
+<portrait texturePath ="Assets/Textures/Portraits/Prince Edward.jpg"/>
+<portrait texturePath ="Assets/Textures/Portraits/Clarence.jpg"/>
+<portrait texturePath ="Assets/Textures/Portraits/Catesby.jpg"/>
+<portrait texturePath ="Assets/Textures/Portraits/Warwick.jpg"/>
+	
 <shakesperean>
 
 <dialogue text = "In the middle of 15th century england is in a dire political position.  Henry vi is the eleventh plantagenet monarch of the state.  Crown'd at 1 year fusty after his father and former king's passing.
