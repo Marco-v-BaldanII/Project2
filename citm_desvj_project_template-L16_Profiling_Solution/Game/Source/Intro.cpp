@@ -39,7 +39,7 @@ bool Intro::Start()
 	waitTime = 200;
 	music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);
 	img = app->tex->Load("Assets/Textures/WOTR-MainScreen.png");
-	rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+	rect = { 0, 0, 512, 384 };
 	return true;
 }
 

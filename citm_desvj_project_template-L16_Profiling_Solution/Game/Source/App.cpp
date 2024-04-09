@@ -53,14 +53,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	audio = new Audio(true);
 	//L07 DONE 2: Add Physics module
-	physics = new Physics(false);
+	physics = new Physics(true);
 	//scene = new Scene();
 	map = new Map(true); //Esta ROTO
-	entityManager = new EntityManager(true);
+	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);
 
 	dialogueManager = new DialogueManager(false); //editar despues//
-	turnManager = new TurnManager(true);
+	turnManager = new TurnManager(false);
 
 	
 	levelManager = new LevelManagement(true);
@@ -68,8 +68,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//scenes
 	intro = new Intro(false);
 	mainMenu = new StartMenu(false);
-	battleScene = new BattleScene(true);
-	backStage = new BackStage(true);
+	battleScene = new BattleScene(false);
+	backStage = new BackStage(false);
 	fade = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update

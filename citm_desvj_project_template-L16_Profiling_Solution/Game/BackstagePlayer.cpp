@@ -14,49 +14,49 @@ BackStagePlayer::~BackStagePlayer()
 bool BackStagePlayer::Start()
 {
 	// Set player texture
-	playerTexture = app->tex->Load("Assets/Textures/player1.png");
+	playerTexture = app->tex->Load("Assets/Textures/player2.png");
 	
 	// Load animations
 	walkSpeed = 0.1f;
 	//walk
-	walkUp.PushBack({ 0, 0, 32, 32 });
+	walkUp.PushBack({ 3, 67, 21, 23 });
 	//mas
 	walkUp.loop = true;
 	walkUp.speed = walkSpeed;
 
-	walkDown.PushBack({ 0, 0, 32, 32 });
+	walkDown.PushBack({ 3, 15, 21, 23 });
 	//mas
 	walkDown.loop = true;
 	walkDown.speed = walkSpeed;
 
-	walkLeft.PushBack({ 0, 0, 32, 32 });
+	walkLeft.PushBack({ 3, 42, 21, 23 });
 	//mas
 	walkLeft.loop = true;
 	walkLeft.speed = walkSpeed;
 
-	walkRight.PushBack({ 0, 0, 32, 32 });
+	walkRight.PushBack({ 3, 0, 21, 23 });
 	//mas
 	walkRight.loop = true;
 	walkRight.speed = walkSpeed;
 
 
 	//idle
-	idleUp.PushBack({ 0, 0, 32, 32 });
+	idleUp.PushBack({ 3, 0, 21, 23 });
 	//mas
 	idleUp.loop = true;
 	idleUp.speed = walkSpeed;
 
-	idleDown.PushBack({ 0, 0, 32, 32 });
+	idleDown.PushBack({ 3, 0, 21, 23 });
 	//mas
 	idleDown.loop = true;
 	idleDown.speed = walkSpeed;
 
-	idleLeft.PushBack({ 0, 0, 32, 32 });
+	idleLeft.PushBack({ 3, 0, 21, 23 });
 	//mas
 	idleLeft.loop = true;
 	idleLeft.speed = walkSpeed;
 
-	idleRight.PushBack({ 0, 0, 32, 32 });
+	idleRight.PushBack({ 3, 0, 21, 23 });
 	//mas
 	idleRight.loop = true;
 	idleRight.speed = walkSpeed;
@@ -103,6 +103,7 @@ bool BackStagePlayer::Update(float dt)
 	// Set player position
 	if (canMove)
 	{
+		SDL_RendererFlip flip = lastDirection;
 		// Set player direction
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
@@ -125,6 +126,7 @@ bool BackStagePlayer::Update(float dt)
 		else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			position.x -= velocity * dt;
+			flipHorizontal = SDL_FLIP_HORIZONTAL;
 			goingLeft = true;
 			goingUp = false;
 			goingDown = false;
@@ -134,6 +136,7 @@ bool BackStagePlayer::Update(float dt)
 		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 			position.x += velocity * dt;
+			flipHorizontal = SDL_FLIP_NONE;
 			goingLeft = false;
 			goingUp = false;
 			goingDown = false;
@@ -144,6 +147,8 @@ bool BackStagePlayer::Update(float dt)
 		{
 			isMoving = false;
 		}
+
+		lastDirection = flipHorizontal;
 	}
 
 	// Set player animation
@@ -198,7 +203,10 @@ bool BackStagePlayer::PostUpdate()
 	//IMPORTANTE
 
 	//Render player
-	app->render->DrawTexture(playerTexture, position.x, position.y);
+	SDL_RendererFlip flips = (SDL_RendererFlip)(flipHorizontal);
+	SDL_Rect currentFrame = currentAnimation->GetCurrentFrame();
+	SDL_Rect destRect = { position.x - 5, position.y - 8, currentFrame.w, currentFrame.h };
+	app->render->DrawTexture(playerTexture, destRect.x, destRect.y, &currentFrame, flips);
 
 	//camera follow player
 	app->render->camera.x = (-position.x + SCREEN_WIDTH / 2);

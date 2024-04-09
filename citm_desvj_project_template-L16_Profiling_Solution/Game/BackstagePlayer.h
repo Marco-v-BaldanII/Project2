@@ -59,6 +59,9 @@ private:
 	Animation idleRight;
 	Animation* currentAnimation;
 
+	SDL_RendererFlip lastDirection = SDL_FLIP_NONE;
+	SDL_RendererFlip flipHorizontal = lastDirection;
+
 	float walkSpeed;
 	bool goingLeft;
 	bool goingRight;

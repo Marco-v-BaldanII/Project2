@@ -46,6 +46,6 @@ private:
 	uint music;
 
 	//create player
-	//Entity* player;
+	Entity* player;
 };
 
