@@ -5,6 +5,8 @@
 #include "Entity.h"
 #include "List.h"
 #include <string>
+#include "p2List.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -38,9 +40,12 @@ public:
 
 	Entity* PlaceNPC(string name, int x, int wait);
 
+	p2ListItem<Entity*>* GetNearestPlayer(Entity* player);
+
 public:
 
 	List<Entity*> entities;
+	p2List<Entity*> players;
 
 };
 

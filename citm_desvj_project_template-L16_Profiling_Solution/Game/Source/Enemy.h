@@ -18,6 +18,8 @@ public:
 
 	bool Start();
 
+	bool PreUpdate();
+
 	bool Update(float dt);
 
 	bool PostUpdate();
@@ -35,6 +37,8 @@ public:
 	uint texW, texH;
 
 	bool movedThisTurn = false;
+
+	bool newTarget = false;
 
 	SDL_Rect section = SDL_Rect{ 75, 6, 26, 27 };
 

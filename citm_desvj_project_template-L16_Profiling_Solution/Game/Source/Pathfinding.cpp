@@ -460,15 +460,15 @@ bool PathFinding::IsTileEmpty(const iPoint& pos) const
 {
 
 	//create function later to check the list of all entities
-	/*for (int i = 0; i < app->entities->entities.count(); i++)
+	for (int i = 0; i < app->entityManager->entities.Count(); i++)
 	{
-		Entity* p;
-		app->entities->entities.at(i, p);
-		if (pos == p->tilePos)
+		
+		
+		if (pos == app->entityManager->entities.At(i)->data->tilePos)
 		{
 			return false;
 		}
-	}*/
+	}
 
 	return true;
 }
@@ -541,6 +541,36 @@ void PathFinding::DrawBFSPath()
 	//	rect.h = (app->map->mapData.tileHeight);
 	//	app->render->DrawRectangle(rect, 100, 0, 155, 100);
 	//}
+}
+
+// ----------------------------------------------------------------------------------
+// Actual BFS algorithm: return number of steps in the creation of the path or -1 ----
+// ----------------------------------------------------------------------------------
+
+
+void PathFinding::PropagateBFS()
+{
+	iPoint current;
+	if (frontier.Pop(current)) {
+
+		p2List<iPoint> neightbours;
+
+		neightbours.add(iPoint(current.x + 1, current.y));
+		neightbours.add(iPoint(current.x, current.y + 1));
+		neightbours.add(iPoint(current.x, current.y - 1));
+		neightbours.add(iPoint(current.x - 1, current.y));
+
+		p2ListItem<iPoint>* neightbour = neightbours.start;
+		while (neightbour != NULL)
+		{
+			if (visited.find(neightbour->data) == false && IsWalkable(neightbour->data))
+			{
+				frontier.Push(neightbour->data);
+				visited.add(neightbour->data);
+			}
+			neightbour = neightbour->next;
+		}
+	}
 }
 
 void PathFinding::ResetBFSPath()

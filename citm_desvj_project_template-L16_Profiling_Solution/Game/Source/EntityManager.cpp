@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include <string>
 #include "Defs.h"
+#include "Map.h"
 #include "Log.h"
 #include "../BackstagePlayer.h"
 
@@ -107,6 +108,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	{
 	case EntityType::PLAYER:
 		entity = new Player();
+		
 		break;
 	case EntityType::ITEM:
 		entity = new Item();
@@ -201,4 +203,33 @@ bool EntityManager::PostUpdate()
 
 
 	return ret;
+}
+
+p2ListItem<Entity*>* EntityManager::GetNearestPlayer(Entity* player)
+{
+	p2ListItem<Entity*>* ret = nullptr;
+	p2ListItem<Entity*>* uPlayer = players.getFirst();
+
+	if (uPlayer != NULL)
+	{
+		int closest = player->pathfinding->CreatePath(player->tilePos, uPlayer->data->tilePos);
+		ret = uPlayer;
+		while (uPlayer != nullptr)
+		{
+			int temp = player->pathfinding->CreatePath(player->tilePos, uPlayer->data->tilePos);
+
+			if (temp < closest)
+			{
+				closest = temp;
+				ret = uPlayer;
+			}
+
+			uPlayer = uPlayer->next;
+		}
+		player->pathfinding->ClearPath();
+		return ret;
+
+	}
+	else return ret;
+
 }

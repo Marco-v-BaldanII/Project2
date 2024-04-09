@@ -21,7 +21,9 @@ enum class EntityType
 
 enum States {
 	MOVE,
-	IDLE
+	IDLE,
+	DEAD,
+	BATTLE
 };
 
 class PhysBody;
@@ -124,9 +126,14 @@ public:
 	bool ConfirmMovement;
 
 	SString name;
+	PathFinding* pathfinding;
 	EntityType type;
 	bool active = true;
 	pugi::xml_node parameters;
+
+	Entity* target;
+	bool entityTurn = false;
+
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...

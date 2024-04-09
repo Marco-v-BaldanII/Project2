@@ -56,6 +56,8 @@ public:
 	//Check if any entity is in the tile
 	bool IsTileEmpty(const iPoint& pos) const;
 
+	void PropagateBFS();
+
 	void ResetBFSPath();
 
 	// Utility: return the walkability value of a tile

@@ -37,6 +37,7 @@ bool Player::Start() {
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 	state = IDLE;
+	app->entityManager->players.add(this);
 
 	return true;
 }
