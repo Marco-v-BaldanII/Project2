@@ -95,13 +95,13 @@ bool Map::Update(float dt)
                         LOG("test");
                     }
 
-                    
-
-                    
+                    if (showMinimap) {
+                        if (mapLayer->data->myTiles[i][j] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[i][j]->color, true, true);
+                    }
 
                     // testing if the tile's associated color is drawn
                    /* if (mapLayer->data->myTiles[0][0] != nullptr) {
-                        if(mapLayer->data->myTiles[i][j] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[i][j]->color, true, true);
+                        
                     }*/
                 }
             }
@@ -207,7 +207,7 @@ bool Map::Load(SString mapFileName)
         }
         else {
             LOG("Map orientation not found");
-            ret = false; 
+            ret = false;
         }
 
         TileSet* lastTileSet = nullptr;
@@ -240,14 +240,14 @@ bool Map::Load(SString mapFileName)
             if (i == 0) {
                 lastTileSet = tileset;
             }
-            
+
 
         }
 
         // L06: DONE 3: Iterate all layers in the TMX and load each of them
         for (pugi::xml_node layerNode = mapFileXML.child("map").child("layer"); layerNode != NULL; layerNode = layerNode.next_sibling("layer")) {
 
-            // L06: DONE 4: Implement a function that loads a single layer layer
+
             //Load the attributes and saved in a new MapLayer
             MapLayer* mapLayer = new MapLayer();
             mapLayer->id = layerNode.attribute("id").as_int();
@@ -263,39 +263,43 @@ bool Map::Load(SString mapFileName)
             memset(mapLayer->tiles, 0, mapLayer->width * mapLayer->height);
 
             //Iterate over all the tiles and assign the values in the data array
-
-            // I want to iterate the gids as a matrix to save into the myTiles matrix
-
-            int i = 0; int j = 0;
-            // this loop iterates all tiles in a layer
+            int i = 0;
             for (pugi::xml_node tileNode = layerNode.child("data").child("tile"); tileNode != NULL; tileNode = tileNode.next_sibling("tile")) {
                 mapLayer->tiles[i] = tileNode.attribute("gid").as_uint();
+                i++;
+            }
 
-                
+            i = 0; int j = 0;
+            for (pugi::xml_node tileNode = layerNode.child("data").child("tile"); tileNode != NULL; tileNode = tileNode.next_sibling("tile")) {
+                int gid = tileNode.attribute("gid").as_uint();
+
+
                 // acess  in myTiles matrix
-                if (j % 2 == 0 && i%2 == 0) {
-                    mapLayer->myTiles[j][i % mapLayer->width] = new Tile(b2Color(1, 0, 1, 1));
-                }
-                else {
-                    mapLayer->myTiles[j][i % mapLayer->width] = new Tile(b2Color(0, 1, 1, 1));
-                }
+
+                TileType type = SetTileType(mapLayer->tiles[i]);
 
 
-                        if (i != 0 && i % mapLayer->width == 0) {
-                            j++;
-                        }
-                   
+                mapLayer->myTiles[i % 96][j] = new Tile(b2Color(1, 1, 1, 1), type);
+
+
+
+                if (i != 0 && i % mapLayer->width == 0) {
+                    j++;
+
+                }
+
 
                 i++;
 
-                
             }
+        
 
-         
+        //add the layer to the map
+        mapData.layers.Add(mapLayer);
 
-            //add the layer to the map
-            mapData.layers.Add(mapLayer);
-        }
+
+
+    }
 
 
         // L07 DONE 3: Create colliders      
@@ -437,6 +441,18 @@ int Map::GetTileWidth() {
 
 int Map::GetTileHeight() {
     return mapData.tileheight;
+}
+
+TileType Map::SetTileType(int gid) {
+
+    if (gid == 13)return TileType::WOODS;
+
+    else if (gid == 27) { return TileType::WATER; }
+
+    else { return TileType::SNOW; }
+
+
+
 }
 
 // L13: Create navigationMap map for pathfinding

@@ -10,7 +10,7 @@
 #include "Box2D/Box2D/Box2D.h"
 #include "PugiXml\src\pugixml.hpp"
 
-#define MAX_TILE_AMOUNT 300
+#define MAX_TILE_AMOUNT 96
 
 // L09: DONE 2: Define a property to store the MapType and Load it from the map
 enum MapOrientation
@@ -19,14 +19,39 @@ enum MapOrientation
     ISOMETRIC
 };
 
+enum TileType {
+    SNOW,
+    WOODS,
+    WATER
+};
+
 struct Tile {
 
-    Tile(b2Color col) {
-        color = col;
+    Tile(b2Color col, TileType type) {
+        
+        this->type = type;
+
+        switch (type) {
+        case SNOW:
+            color = b2Color(1, 1, 1, 0.6f);
+            break;
+        case WOODS:
+            color = b2Color(0, 1,0, 0.6f);
+            break;
+        case WATER:
+            color = b2Color(0, 0, 1, 0.6f);
+            break;
+        }
+
     }
 
 
     b2Color color = b2Color(1,0,0,1);
+
+    float evasion;
+
+    TileType type;
+
 
 };
 
@@ -184,6 +209,8 @@ public:
 
     // L13: Create navigation map for pathfinding
     void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+
+    TileType SetTileType(int gid);
 
     int GetTileWidth();
     int GetTileHeight();
