@@ -52,6 +52,10 @@ private:
 	uint music;
 	bool playMusic = true;
 	bool goConfig = false;
+	bool cerrar = false;
+	bool full = false;
+	bool scenebuttons = false;
+	bool offbuttons = false;
 
 	//Menu Buttons
 	GuiControlButton* start;
@@ -65,6 +69,10 @@ private:
 	GuiControlButton* VSync;
 	GuiControlButton* Music;
 	GuiControlButton* FX;
+
+	//Scenes
+	GuiControlButton* backstage;
+	GuiControlButton* combatstage;
 
 	uint windowW, windowH;
 

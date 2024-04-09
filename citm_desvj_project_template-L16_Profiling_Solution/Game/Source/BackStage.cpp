@@ -24,32 +24,34 @@ bool BackStage::Awake(pugi::xml_node&)
 
 bool BackStage::Start()
 {
-	//app->levelManagement->inCombat = false;
-	music = app->audio->PlayMusic("assets/audio/music/Musica-overworld-_Big-Map_.wav", 0);
-	app->physics->Enable();
-	//app->map->Load("level1.tmx");
-	app->entityManager->Enable();
-	app->entityManager->CreateEntity(EntityType::BACKSTAGEPLAYER);
-	//player = app->entityManager->CreateEntity(EntityType::BACKSTAGEPLAYER);
-	//uncheckableTiles[0] = { 15, 37 };
-	//uncheckableTiles[1] = { 16, 37 };
-	//uncheckableTiles[2] = { 17, 37 };
-
-
-	/*if (app->entities->openWorld != nullptr)
+	if (active)
 	{
-		if (app->loadingScreen == false)
-		{
-			app->entities->openWorld->SetPositionFromPixels(app->levelManagement->playerLastPos_TheFall);
-		}
-		else
-		{
-			app->loadingScreen = false;
-		}
-	}*/
+		//app->levelManagement->inCombat = false;
+		music = app->audio->PlayMusic("assets/audio/music/Musica-overworld-_Big-Map_.wav", 0);
+		app->physics->Enable();
+		//app->map->Load("level1.tmx");
+		app->entityManager->Enable();
+		app->entityManager->CreateEntity(EntityType::BACKSTAGEPLAYER);
+		//player = app->entityManager->CreateEntity(EntityType::BACKSTAGEPLAYER);
+		//uncheckableTiles[0] = { 15, 37 };
+		//uncheckableTiles[1] = { 16, 37 };
+		//uncheckableTiles[2] = { 17, 37 };
 
-	hasBeenCreated = false;
 
+		/*if (app->entities->openWorld != nullptr)
+		{
+			if (app->loadingScreen == false)
+			{
+				app->entities->openWorld->SetPositionFromPixels(app->levelManagement->playerLastPos_TheFall);
+			}
+			else
+			{
+				app->loadingScreen = false;
+			}
+		}*/
+
+		hasBeenCreated = false;
+	}
 
 	return true;
 }
