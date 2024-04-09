@@ -9,8 +9,11 @@
 #include "Pathfinding.h"
 #include "Box2D/Box2D/Box2D.h"
 #include "PugiXml\src\pugixml.hpp"
+#include "Entity.h"
 
 #define MAX_TILE_AMOUNT 96
+
+class Entity;
 
 // L09: DONE 2: Define a property to store the MapType and Load it from the map
 enum MapOrientation
@@ -26,6 +29,10 @@ enum TileType {
 };
 
 struct Tile {
+private:
+    b2Color color = b2Color(1, 0, 0, 1);
+
+public:
 
     Tile(b2Color col, TileType type) {
         
@@ -45,12 +52,23 @@ struct Tile {
 
     }
 
+    Entity* myEntity = nullptr;
 
-    b2Color color = b2Color(1,0,0,1);
+    b2Color GetColor() {
+        if (myEntity == nullptr) {
+            return color;
+        }
+        else {
+            return b2Color(0.6f, 0.2f, 0.4f, 0.6f);
+        }
+    }
+    
 
     float evasion;
 
     TileType type;
+
+
 
 
 };
@@ -225,6 +243,10 @@ public:
     bool showMinimap = false;
 
     SDL_Texture* miniMapTex = nullptr;
+
+
+    Tile* myTiles[MAX_TILE_AMOUNT][MAX_TILE_AMOUNT] = { nullptr };
+
 
 private:
     // L05: DONE 1: Declare a variable data of the struct MapData

@@ -69,7 +69,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	intro = new Intro(false);
 	mainMenu = new StartMenu(false);
 	battleScene = new BattleScene(true);
-	backStage = new BackStage(false);
+	backStage = new BackStage(true);
 	fade = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update

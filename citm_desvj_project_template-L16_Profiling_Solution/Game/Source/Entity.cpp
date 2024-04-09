@@ -5,6 +5,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Player.h"
+#include "Map.h"
 
 #define MOVE_SPEED 2
 
@@ -136,6 +137,10 @@ bool Entity::MovePath()
 				pos = app->map->WorldToMap(pos.x, pos.y);
 
 				tilePos = pos;
+
+				AssocateEntity_Tile(pos);
+			
+				
 			}
 
 			counter = moveTime/MOVE_SPEED;
@@ -143,4 +148,18 @@ bool Entity::MovePath()
 	}
 
 	return false;
+}
+
+// Pass Map coordinates pls
+void Entity::AssocateEntity_Tile(iPoint position) {
+
+
+	if (currentTile != nullptr) {
+		currentTile->myEntity = nullptr; // Desacociate the entity from the tile
+	}
+
+	currentTile = app->map->myTiles[position.x][position.y]; // Associate the entity to the tile
+	currentTile->myEntity = this; // Associate the tile to the entity
+
+
 }

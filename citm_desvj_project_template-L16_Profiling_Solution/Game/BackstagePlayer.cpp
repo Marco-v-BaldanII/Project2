@@ -201,19 +201,19 @@ bool BackStagePlayer::PostUpdate()
 	app->render->DrawTexture(playerTexture, position.x, position.y);
 
 	//camera follow player
-	//app->render->camera.x = (-position.x + SCREEN_WIDTH / 2);
-	//app->render->camera.y = (-position.y + SCREEN_HEIGHT / 2);
+	app->render->camera.x = (-position.x + SCREEN_WIDTH / 2);
+	app->render->camera.y = (-position.y + SCREEN_HEIGHT / 2);
 	//
 
-	////camera boundaries in backStage
-	//if (app->render->camera.x > 0)
-	//{
-	//	app->render->camera.x = 0;
-	//}
-	//if (app->render->camera.y > 0)
-	//{
-	//	app->render->camera.y = 0;
-	//}
+	//camera boundaries in backStage
+	if (app->render->camera.x > 0)
+	{
+		app->render->camera.x = 0;
+	}
+	if (app->render->camera.y > 0)
+	{
+		app->render->camera.y = 0;
+	}
 
 	//player boundaries in backStage
 	if (position.x < 0)

@@ -115,21 +115,22 @@ bool TurnManager::EnemyTurn() {
 	currentTurn = ENEMY;
 	bool finished = true;
 
-	// Update enemies
-	if (enemies[enemyIndex]->state != MOVE) enemies[enemyIndex]->state = MOVE;
+	// Update enemies - comented for now
+
+	//if (enemies[enemyIndex]->state != MOVE) enemies[enemyIndex]->state = MOVE;
 
 
 
 
 
-	ListItem<Enemy*>* it = enemies.start;
-	while (it != NULL) {
-		if (it->data->movedThisTurn == false) {
-			// don't end the turn unless all enemies have acted
-			finished = false;
-		}
-		it = it->next;
-	}
+	//ListItem<Enemy*>* it = enemies.start;
+	//while (it != NULL) {
+	//	if (it->data->movedThisTurn == false) {
+	//		// don't end the turn unless all enemies have acted
+	//		finished = false;
+	//	}
+	//	it = it->next;
+	//}
 
 
 

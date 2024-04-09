@@ -96,7 +96,7 @@ bool Map::Update(float dt)
                     }
 
                     if (showMinimap) {
-                        if (mapLayer->data->myTiles[i][j] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[i][j]->color, true, true);
+                        if (mapLayer->data->myTiles[i][j] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[i][j]->GetColor(), true, true);
                     }
 
                     // testing if the tile's associated color is drawn
@@ -292,11 +292,19 @@ bool Map::Load(SString mapFileName)
                 i++;
 
             }
+
+            
         
 
         //add the layer to the map
         mapData.layers.Add(mapLayer);
-
+        
+        // Save the values of the map layer matrix to a globally accesible matrix that othe modlues might consult
+        for (int i = 0; i < MAX_TILE_AMOUNT; ++i) {
+            for (int j = 0; j < MAX_TILE_AMOUNT; ++j) {
+                myTiles[i][j] = mapLayer->myTiles[i][j];
+            }
+        }
 
 
     }
@@ -445,11 +453,18 @@ int Map::GetTileHeight() {
 
 TileType Map::SetTileType(int gid) {
 
-    if (gid == 13)return TileType::WOODS;
+  
 
-    else if (gid == 27) { return TileType::WATER; }
+    if (gid == 14 || gid == 5 || gid ==13|| gid == 7 || gid == 6 || gid == 15 || gid == 23 ||
+        gid == 22 || gid == 21 || gid == 53 || gid == 61 || gid == 69 || gid == 62 || gid == 41) {
+        return TileType::WOODS;
+    }
 
-    else { return TileType::SNOW; }
+    else if (gid == 27 ||  gid == 3 || gid == 25 ) { return TileType::WATER; }
+
+    else  { 
+        return TileType::SNOW; 
+    }
 
 
 

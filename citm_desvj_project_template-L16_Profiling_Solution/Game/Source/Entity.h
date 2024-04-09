@@ -97,6 +97,8 @@ public:
 
 	bool InitPath(iPoint destiantion);
 
+	void AssocateEntity_Tile(iPoint position);
+
 public:
 
 
@@ -129,6 +131,8 @@ public:
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
 	iPoint position;
+
+	Tile* currentTile = nullptr;
 
 	float attack;
 	float hp;
