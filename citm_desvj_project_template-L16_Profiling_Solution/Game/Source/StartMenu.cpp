@@ -85,6 +85,10 @@ bool StartMenu::Start()
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
+
+		resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, " Resume", backPos, this);
+
+		resume->state = GuiControlState::DISABLED;
 	}
 
 	return true;
@@ -98,9 +102,9 @@ bool StartMenu::PreUpdate()
 
 // Called each loop iteration
 bool StartMenu::Update(float dt)
-{
-	if (offbuttons)
-	{
+{	
+	switch (state) {
+	case MenuState::OFF:
 		start->state = GuiControlState::DISABLED;
 		load->state = GuiControlState::DISABLED;
 		quit->state = GuiControlState::DISABLED;
@@ -114,9 +118,10 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
-	}
-	else if (goConfig && !scenebuttons)
-	{
+
+		resume->state = GuiControlState::DISABLED;
+		break;
+	case MenuState::OPTIONS:
 		start->state = GuiControlState::DISABLED;
 		load->state = GuiControlState::DISABLED;
 		quit->state = GuiControlState::DISABLED;
@@ -130,9 +135,10 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
-	}
-	else if (!goConfig && !scenebuttons)
-	{
+
+		resume->state = GuiControlState::DISABLED;
+		break;
+	case MenuState::START:
 		start->state = GuiControlState::NORMAL;
 		load->state = GuiControlState::NORMAL;
 		quit->state = GuiControlState::NORMAL;
@@ -146,9 +152,10 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
-	}
-	else if (scenebuttons && !goConfig)
-	{
+
+		resume->state = GuiControlState::DISABLED;
+		break;
+	case MenuState::SCENES:
 		start->state = GuiControlState::DISABLED;
 		load->state = GuiControlState::DISABLED;
 		quit->state = GuiControlState::DISABLED;
@@ -162,6 +169,31 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::NORMAL;
 		combatstage->state = GuiControlState::NORMAL;
+
+		resume->state = GuiControlState::DISABLED;
+		break;
+	case MenuState::PAUSE:
+		start->state = GuiControlState::DISABLED;
+		load->state = GuiControlState::DISABLED;
+		quit->state = GuiControlState::DISABLED;
+		options->state = GuiControlState::DISABLED;
+
+		back->state = GuiControlState::DISABLED;
+		FullScreen->state = GuiControlState::NORMAL;
+		VSync->state = GuiControlState::NORMAL;
+		Music->state = GuiControlState::NORMAL;
+		FX->state = GuiControlState::NORMAL;
+
+		backstage->state = GuiControlState::DISABLED;
+		combatstage->state = GuiControlState::DISABLED;
+
+		resume->state = GuiControlState::NORMAL;
+		break;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		state = MenuState::PAUSE;
 	}
 
 	if (cerrar)
@@ -195,8 +227,7 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 {
 	if (control->id == 1)
 	{ 
-		scenebuttons = true;
-		goConfig = false;
+		state = MenuState::SCENES;
 	}
 	else if (control->id == 2)
 	{
@@ -204,7 +235,7 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	else if (control->id == 3)
 	{
-		goConfig = true;
+		state = MenuState::OPTIONS;
 	}
 	else if (control->id == 4)
 	{
@@ -212,8 +243,7 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	else if (control->id == 5)
 	{
-		goConfig = false;
-		scenebuttons = false;
+		state = MenuState::START;
 	}
 	else if (control->id == 6 && !full)
 	{
@@ -240,13 +270,17 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 10)
 	{
 		app->levelManager->LoadScene(GameScene::BACKSTAGE);
-		offbuttons = true;
+		state = MenuState::OFF;
 
 	}
 	else if (control->id == 11)
 	{
 		app->levelManager->LoadScene(GameScene::COMBAT);
-		offbuttons = true;
+		state = MenuState::OFF;
+	}
+	else if (control->id == 12)
+	{
+		state = MenuState::OFF;
 	}
 
 	return true;

@@ -17,6 +17,15 @@
 
 struct SDL_Texture;
 
+enum class MenuState
+{
+	START,
+	OPTIONS,
+	PAUSE,
+	SCENES,
+	OFF
+};
+
 class StartMenu : public Module
 {
 public:
@@ -56,6 +65,7 @@ private:
 	bool full = false;
 	bool scenebuttons = false;
 	bool offbuttons = false;
+	bool pause = false;
 
 	//Menu Buttons
 	GuiControlButton* start;
@@ -74,7 +84,12 @@ private:
 	GuiControlButton* backstage;
 	GuiControlButton* combatstage;
 
+	//Pause
+	GuiControlButton* resume;
+
 	uint windowW, windowH;
+
+	MenuState state = MenuState::START;
 
 };
 #endif // __STARTMENU_H__

@@ -31,7 +31,7 @@ bool BackStage::Start()
 		app->physics->Enable();
 		//app->map->Load("level1.tmx");
 		app->entityManager->Enable();
-		player = app->entityManager->CreateEntity(EntityType::BACKSTAGEPLAYER);
+		//player = app->entityManager->CreateEntity(EntityType::BACKSTAGEPLAYER);
 
 		hasBeenCreated = false;
 	}
