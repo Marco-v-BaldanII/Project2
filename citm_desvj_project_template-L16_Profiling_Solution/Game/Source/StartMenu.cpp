@@ -36,48 +36,51 @@ bool StartMenu::Awake()
 // Called before the first frame
 bool StartMenu::Start()
 {
-	img = app->tex->Load("Assets/Textures/portrait1.png");
-	music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);
-	//app->dialogueManager->Enable();
-	rect = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };
-	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
+	if (active)
+	{
+		img = app->tex->Load("Assets/Textures/portrait1.png");
+		music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);
+		//app->dialogueManager->Enable();
+		rect = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };
+		//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
 
-	//Menu Buttons
-	app->win->GetWindowSize(windowW, windowH);
+		//Menu Buttons
+		app->win->GetWindowSize(windowW, windowH);
 
-	SDL_Rect playPos = { windowW / 2 - 60, windowH / 2 + 10, 100,50 };
-	SDL_Rect loadPos = { windowW / 2 - 60, windowH / 2 + 90, 100,50 };
-	SDL_Rect quitPos = { windowW / 2 - 60, windowH / 2 + 180, 100,50 };
-	SDL_Rect optionsPos = { windowW / 2 - 60, windowH / 2 + 270, 100,50 };
+		SDL_Rect playPos = { windowW / 2 - 60, windowH / 2 + 10, 100,50 };
+		SDL_Rect loadPos = { windowW / 2 - 60, windowH / 2 + 90, 100,50 };
+		SDL_Rect quitPos = { windowW / 2 - 60, windowH / 2 + 180, 100,50 };
+		SDL_Rect optionsPos = { windowW / 2 - 60, windowH / 2 + 270, 100,50 };
 
-	start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "   Play   ", playPos, this);
-	load = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "   Load   ", loadPos, this);
-	options = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "   Options   ", optionsPos, this);
-	quit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "   Quit   ", quitPos, this);
+		start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "   Play   ", playPos, this);
+		load = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "   Load   ", loadPos, this);
+		options = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "   Options   ", optionsPos, this);
+		quit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "   Quit   ", quitPos, this);
 
-	start->state = GuiControlState::NORMAL;
-	load->state = GuiControlState::NORMAL;
-	quit->state = GuiControlState::NORMAL;
-	options->state = GuiControlState::NORMAL;
+		start->state = GuiControlState::NORMAL;
+		load->state = GuiControlState::NORMAL;
+		quit->state = GuiControlState::NORMAL;
+		options->state = GuiControlState::NORMAL;
 
-	//Config Buttons
-	SDL_Rect backPos = { windowW / 2 + 60, windowH / 2 + 10, 100,50 };
-	SDL_Rect FullScreenPos = { windowW / 2 + 60, windowH / 2 + 90, 100,50 };
-	SDL_Rect VSyncPos = { windowW / 2 + 60, windowH / 2 + 180, 100,50 };
-	SDL_Rect MusicPos = { windowW / 2 + 60, windowH / 2 + 270, 100,50 };
-	SDL_Rect FXPos = { windowW / 2 + 60, windowH / 2 + 360, 100,50 };
+		//Config Buttons
+		SDL_Rect backPos = { windowW / 2 + 60, windowH / 2 + 10, 100,50 };
+		SDL_Rect FullScreenPos = { windowW / 2 + 60, windowH / 2 + 90, 100,50 };
+		SDL_Rect VSyncPos = { windowW / 2 + 60, windowH / 2 + 180, 100,50 };
+		SDL_Rect MusicPos = { windowW / 2 + 60, windowH / 2 + 270, 100,50 };
+		SDL_Rect FXPos = { windowW / 2 + 60, windowH / 2 + 360, 100,50 };
 
-	back = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "   Back   ", backPos, this);
-	FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "   FullScreen   ", FullScreenPos, this);
-	VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "   VSync   ", VSyncPos, this);
-	Music = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "   Music   ", MusicPos, this);
-	FX = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "   FX   ", FXPos, this);
+		back = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "   Back   ", backPos, this);
+		FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "   FullScreen   ", FullScreenPos, this);
+		VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "   VSync   ", VSyncPos, this);
+		Music = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "   Music   ", MusicPos, this);
+		FX = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "   FX   ", FXPos, this);
 
-	back->state = GuiControlState::DISABLED;
-	FullScreen->state = GuiControlState::DISABLED;
-	VSync->state = GuiControlState::DISABLED;
-	Music->state = GuiControlState::DISABLED;
-	FX->state = GuiControlState::DISABLED;
+		back->state = GuiControlState::DISABLED;
+		FullScreen->state = GuiControlState::DISABLED;
+		VSync->state = GuiControlState::DISABLED;
+		Music->state = GuiControlState::DISABLED;
+		FX->state = GuiControlState::DISABLED;
+	}
 
 	return true;
 }
@@ -104,7 +107,7 @@ bool StartMenu::Update(float dt)
 		Music->state = GuiControlState::NORMAL;
 		FX->state = GuiControlState::NORMAL;
 	}
-	else
+	else if (!goConfig)
 	{
 		start->state = GuiControlState::NORMAL;
 		load->state = GuiControlState::NORMAL;
