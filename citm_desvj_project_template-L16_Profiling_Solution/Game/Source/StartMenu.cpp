@@ -9,6 +9,9 @@
 #include "GuiManager.h"
 #include "LevelManagement.h"
 #include "../DialogueManager.h"
+#include "BattleScene.h"
+#include "BackStage.h"
+#include "../TurnManager.h"
 //#include "Fonts.h"
 #include "Defs.h"
 #include "Log.h"
@@ -384,6 +387,8 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 11)
 	{
 		app->entityManager->Enable();
+		app->turnManager->Enable();
+		app->battleScene->Enable();
 		app->levelManager->LoadScene(GameScene::COMBAT);
 		state = MenuState::OFF;
 	}

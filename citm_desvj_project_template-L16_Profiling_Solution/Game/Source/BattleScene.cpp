@@ -43,7 +43,7 @@ bool BattleScene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool BattleScene::Start()
 {
-	if (active)
+	if (true)
 	{
 		spriteSheet = app->tex->Load(mynode.child("texture").attribute("path").as_string());
 
@@ -74,7 +74,7 @@ bool BattleScene::Start()
 
 
 
-
+		
 		// pass the players to be monitoured by the turnManager
 		app->turnManager->InitializeChessPieces(&party, &goons);
 
