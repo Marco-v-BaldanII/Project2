@@ -42,8 +42,8 @@ private:
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;
 
-	int fxVolume;
-	int musicVolume;
+	int fxVolume = 100;
+	int musicVolume = 100;
 };
 
 #endif // __AUDIO_H__

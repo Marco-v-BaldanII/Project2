@@ -68,6 +68,11 @@ private:
 	bool pause = false;
 	bool inEnglish = true;
 	const char* laguageText;
+	bool vsyncOn = false;
+	bool musicOn = true;
+	bool fxOn = true;
+	int lastFxVolume = 0;
+	int lastMusicVolume = 0;
 
 	//Menu Buttons
 	GuiControlButton* start;

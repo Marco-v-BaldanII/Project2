@@ -47,6 +47,9 @@ public:
 	SDL_Texture* tex_inventory_tabs = nullptr;
 	SDL_Texture* tex_inventory_Items = nullptr;
 
+	uint buttonClickFx = 0;
+	uint buttonHoverFx = 0;
+
 	int mainFont;
 	int numberFont;
 	bool Debug = false;

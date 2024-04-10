@@ -37,6 +37,10 @@ bool GuiManager::Start()
 	tex_inventory_tabs = app->tex->Load("Assets/Textures/inventory_tabs.png");
 	tex_inventory_Items = app->tex->Load("Assets/Textures/inventory_Items.png");
 
+	//Button effect
+	buttonHoverFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
+	buttonClickFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
+
 	p2ListItem<GuiPanel*>* panel = panels.start;
 
 	while (panel != nullptr)
