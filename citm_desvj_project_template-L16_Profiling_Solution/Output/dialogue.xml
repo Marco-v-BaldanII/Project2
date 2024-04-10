@@ -6,10 +6,10 @@
 <portrait texturePath ="Assets/Textures/Portraits/Margaret.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Guard.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Henry VI.jpg"/>
-<portrait texturePath ="Assets/Textures/Portraits/Prince Edward.jpg"/>
-<portrait texturePath ="Assets/Textures/Portraits/Clarence.jpg"/>
-<portrait texturePath ="Assets/Textures/Portraits/Catesby.jpg"/>
-<portrait texturePath ="Assets/Textures/Portraits/Warwick.jpg"/>
+<portrait texturePath ="Assets/Textures/Portraits/Edward of York.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/George of York.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/Catesby.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/Warwick.png"/>
 	
 <shakesperean>
 
@@ -31,7 +31,7 @@
 <dialogue text = "Edward ?, Edward ? oh yond issue of mineth!.  Edward ! the duke of york and his sons has't arrived ! a prince shouldst greeteth important guests himself. 
 "   owner = "Margaret" 
 	position = "2"/>
-<dialogue text = "mine own queen, if 't be true you're looking f'r the young prince, i did see that gent earlier in the backeth garden playing with the young Earl of Richmond.
+<dialogue text = "Mine own queen, if 't be true you're looking f'r the young prince, i did see that gent earlier in the backeth garden playing with the young Earl of Richmond.
 "   owner = "Guard" 
 	position = "1"/>
 
@@ -292,28 +292,28 @@
 <dialogue text ="The 2 armies meet in the field of Northampton, king Henry pledges for a diplomatic resolution but York denies, it seems that war is all but inevitable." owner ="Narrator"/>
  
 
-<dialogue text =" Brave men of England, from the most empowered nobles to the most humble ingrafters we all standeth here the present day as equals, the battlefield shows nay mercy nay matter thy ancestry" owner="Margaret" postion ="1"/>
+<dialogue text =" Brave men of England, from the most empowered nobles to the most humble ingrafters we all standeth here the present day as equals, the battlefield shows nay mercy nay matter thy ancestry" owner="Margaret" position ="1"/>
 
-<dialogue text =" It is thy strength and resolveth and the loyalty to thy state yond shall bringeth for us a glorious Lancaster victory here the present day!  For king Henry the Sixth !!! For Prince Edward !!!" owner="Margaret" postion ="1"/>
+<dialogue text =" It is thy strength and resolveth and the loyalty to thy state yond shall bringeth for us a glorious Lancaster victory here the present day!  For king Henry the Sixth !!! For Prince Edward !!!" owner="Margaret" position ="1"/>
 
 <dialogue text=" Longeth liveth the prince !!!" owner ="Soldiers"/>
 
 <dialogue text ="Meanwhile in the Prince's tent" owner ="Narrator"/>
 
-<dialogue text="Good now, it's not as flashy as a sword, but this bow and arrows shall leadeth mine own people to victory!" owner="Prince Edward" postion ="1"/>
-<dialogue text="Bravo! well hath said Edward, you're pulling yond facade quite well, has't thee ever considered acting?" owner="Henry Tudor" postion ="2"/>
-<dialogue text="Ha ha, thee seeth right through me.  I'm, i'm shaking in mine own boots again, Richard wouldst chuckle at me" owner="Prince Edward" postion ="1"/>
+<dialogue text="Good now, it's not as flashy as a sword, but this bow and arrows shall leadeth mine own people to victory!" owner="Prince Edward" position ="1"/>
+<dialogue text="Bravo! well hath said Edward, you're pulling yond facade quite well, has't thee ever considered acting?" owner="Henry Tudor" position ="2"/>
+<dialogue text="Ha ha, thee seeth right through me.  I'm, i'm shaking in mine own boots again, Richard wouldst chuckle at me" owner="Prince Edward" position ="1"/>
 <dialogue text="Richard shall wend home the present day with thy headeth if it be true thee alloweth that gent" owner="Henry Tudor"/>
-<dialogue text="Nay, that gent couldn't, not our Richard" owner="Prince Edward" postion ="1"/>
-<dialogue text="Tho're filthy traitors Edward! waketh up!" owner="Henry Tudor" postion ="2"/>
+<dialogue text="Nay, that gent couldn't, not our Richard" owner="Prince Edward" position ="1"/>
+<dialogue text="Tho're filthy traitors Edward! waketh up!" owner="Henry Tudor" position ="2"/>
 <dialogue text="Henry clutches his fists with rage" owner="Narrator"/>
-<dialogue text="I'm sure Richard didn't wanteth -" owner="Prince Edward" postion ="1"/>
-<dialogue text="Coequal if it be true that gent didn't, Richard loves his father, he'd followeth that gent to the ends of the world.  If 't be true this is York wisheth. Then I assureth thee it is his to" owner="Henry Tudor" postion ="2"/>
-<dialogue text="Haply if it be true i receiveth to talketh to him-" owner="Prince Edward" postion ="1"/>
-<dialogue text="You'll kicketh the bucket, he's not thy cousin, he's not our cousin anymore. In the battlefield thee shouldst knoweth: 'till our lasteth breath, square liketh the beast yond dwells within us all'" owner="Henry Tudor" postion ="2"/>
-<dialogue text="Thee sounded just liketh that gent" owner="Prince Edward" postion ="1"/>
-<dialogue text="Unfortunately for us, Richard is much better suited for war than us two" owner="Henry Tudor" postion ="2"/>
-
+<dialogue text="I'm sure Richard didn't wanteth -" owner="Prince Edward" position ="1"/>
+<dialogue text="Coequal if it be true that gent didn't, Richard loves his father, he'd followeth that gent to the ends of the world.  If 't be true this is York wisheth. Then I assureth thee it is his to" owner="Henry Tudor" position ="2"/>
+<dialogue text="Haply if it be true i receiveth to talketh to him-" owner="Prince Edward" position ="1"/>
+<dialogue text="You'll kicketh the bucket, he's not thy cousin, he's not our cousin anymore. In the battlefield thee shouldst knoweth: 'till our lasteth breath, square liketh the beast yond dwells within us all'" owner="Henry Tudor" position ="2"/>
+<dialogue text="Thee sounded just liketh that gent" owner="Prince Edward" position ="1"/>
+<dialogue text="Unfortunately for us, Richard is much better suited for war than us two" owner="Henry Tudor" position ="2"/>
+<dialogue text="Unfortunately for us, Richard is much better suited for war than us two" owner="Henry Tudor" position ="2"/>
 
 </shakesperean>
 
@@ -337,9 +337,9 @@
 
 	<Scene num="1" dialogues ="13"/>
 			
-<dialogue text="In the middle of the 15th century, England is in a dire political position. Henry VI is the eleventh Plantagenet monarch of the country. "
+<dialogue text="In the middle of the 15th century, England is in a dire political position. Henry VI is the eleventh Plantagenet monarch of the country. " background ="Assets/Textures/Backgrounds/England_Map.png"
    owner="Narrator" />
-<dialogue text= "Crowned at 1 year old after his father and former king's passing. He was a feeble and meek monarch responsible for England’s defeat and loss of territories to the French."
+<dialogue text= "Crowned at 1 year old after his father and former king's passing. He was a feeble and meek monarch responsible for England's defeat and loss of territories to the French."
 		  
    owner="Narrator" />
 <dialogue text="England has just lost the 100-year-long war with France, but the peace will not last long."
@@ -376,7 +376,7 @@
 
 	<Scene num="2" dialogues ="37"/>
 
-<dialogue text="Scene 2: Back garden"
+<dialogue text="Scene 2: Back garden" background ="Assets/Textures/Backgrounds/Castle_Gardens.png"
    owner="Narrator" />
 
 	
@@ -485,6 +485,11 @@
 <dialogue text="The Earl of Pembroke, huh?"
    owner="Richard of York"
    position="2" />
+
+
+
+	<Scene num="3" dialogues ="17"/>
+
 <dialogue text="Scene 3 King's chambers"
    owner="Narrator"  background="Assets/Textures/Backgrounds/King's_Chambers.png"/>	
 <dialogue text="My dear, Lord Richard was waiting for your greetings"
@@ -518,8 +523,13 @@
 <dialogue text="Your majesty, I have a suggestion- to relinquishing you from the pain of this crown"
    owner="Richard of York"  position="2" />
 <dialogue text="Richard ?"
-   owner="Henry VI" position="1" />		
-<dialogue text="Scene 4 - back garden" owner ="Narrator"/>
+   owner="Henry VI" position="1" />	
+
+
+
+	<Scene num="4" dialogues ="27"/>
+
+<dialogue text="Scene 4 - Back garden" owner ="Narrator" background ="Assets/Textures/Backgrounds/Castle_Gardens.png"/>
     <dialogue text="Growing up is so scary" owner="Edward" position="2"/>
     <dialogue text="Your grace?" owner="Richard" position="1"/>
     <dialogue text="Please, call me Edward. I understand that it may be unfit of a king to speak openly about these matters." owner="Edward" position="2"/>
@@ -551,7 +561,11 @@
 
 
 
-<dialogue text="Scene 5: Fields" owner="Narrator"/>
+
+
+	<Scene num="5" dialogues ="16"/>
+
+<dialogue text="Scene 5: Tower of London Outskirts" owner="Narrator"   background="Assets/Textures/Backgrounds/Castle_Outskirts.png"/>
 <dialogue position="1" text="Best be on our way, thank you Lady Margaret for your warm welcome, take good care of his majesty, let’s go boys!" owner="Richard of York"/>
 <dialogue position="2" text="Thanks to you, Lord Richard, for your continued services and devotion to my husband." owner="Margaret"/>
 <dialogue text="(the Yorks leave)" owner="Narrator"/>
@@ -568,7 +582,13 @@
 <dialogue position="4" text="We'll live up to the emblem of York." owner="George"/>
 <dialogue position="1" text="Yes father, for a just cause I will be your sword." owner="Richard"/>
 
-<dialogue text ="Battle I - Northampton" owner="Narrator"/>
+
+
+
+
+	<Scene num="6" dialogues ="24"/>
+
+<dialogue text ="Battle I - Northampton" owner="Narrator" background="Assets/Textures/Backgrounds/Northampton_Fields.png"/>
 
 <dialogue text ="York's army reunites with the Earl of Warwick, a powerful ally that  heavily augments the York's manpower by hearing the aid of mercenary bands." owner ="Narrator"/>
 <dialogue text="What starts as a bawbling uprising grows into a powerful force headed straight to London.  
@@ -579,28 +599,28 @@
 
 <dialogue text ="The 2 armies meet in the field of Northampton, king Henry pledges for a diplomatic resolution but York denies, it seems that war is all but inevitable." owner ="Narrator"/>
 
-<dialogue text =" Brave men of England, from the most empowered nobles to the most humble commoners we all stand here today as equals, the battlefield shows no mercy no matter your ancestry." owner="Margaret" postion ="1"/>
+<dialogue owner="Margaret" position ="1" text =" Brave men of England, from the most empowered nobles to the most humble commoners we all stand here today as equals, the battlefield shows no mercy no matter your ancestry." />
 
-<dialogue text =" It is your strength and resolve and the loyalty to your country that will bring for us a glorious Lancaster victory here today. For king Henry the sixth !!! For prince Edward !!!" owner="Margaret" postion ="1"/>
+<dialogue text =" It is your strength and resolve and the loyalty to your country that will bring for us a glorious Lancaster victory here today. For king Henry the sixth !!! For prince Edward !!!" owner="Margaret" position ="1"/>
 
 <dialogue text=" Long live the prince !!!" owner ="Soldiers" position ="2"/>
 
 <dialogue text ="Meanwhile in the prince's tent" owner ="Narrator"/>
 
-<dialogue text="Alright, it's not as flashy as a sword, but this bow and arrows will lead my people to victory!" owner="Prince Edward" postion ="1"/>
-<dialogue text="Bravo! Well said Edward, you're pulling that facade quite well, have you ever considered acting?" owner="Henry Tudor" postion ="2"/>
-<dialogue text="Ha ha, you see right through me. I'm, I'm shaking in my boots again, Richard would laugh at me." owner="Prince Edward" postion ="1"/>
-<dialogue text="Richard will go home today with your head if you let him." owner="Henry Tudor" postion ="2"/>
-<dialogue text="No, he couldn't, not our Richard." owner="Prince Edward" postion ="1"/>
-<dialogue text="They're filthy traitors Edward! Wake up!" owner="Henry Tudor" postion ="2"/>
+<dialogue text="Alright, it's not as flashy as a sword, but this bow and arrows will lead my people to victory!" owner="Prince Edward" position ="1"/>
+<dialogue text="Bravo! Well said Edward, you're pulling that facade quite well, have you ever considered acting?" owner="Henry Tudor" position ="2"/>
+<dialogue text="Ha ha, you see right through me. I'm, I'm shaking in my boots again, Richard would laugh at me." owner="Prince Edward" position ="1"/>
+<dialogue text="Richard will go home today with your head if you let him." owner="Henry Tudor" position ="2"/>
+<dialogue text="No, he couldn't, not our Richard." owner="Prince Edward" position ="1"/>
+<dialogue text="They're filthy traitors Edward! Wake up!" owner="Henry Tudor" position ="2"/>
 <dialogue text="Henry clutches his fists with rage" owner="Narrator"/>
-<dialogue text="I'm sure Richard didn't want -" owner="Prince Edward" postion ="1"/>
-<dialogue text="Even if he didn't, Richard loves his father, he'd follow him to the ends of the world. If this is York's wish. Then I assure you it is his to." owner="Henry Tudor" postion ="2"/>
-<dialogue text="Maybe if I get to talk to him-" owner="Prince Edward" postion ="1"/>
-<dialogue text="You'll die, he's not your friend, he's not our friend anymore. In the battlefield you should know: 'Till our last breath, fight like the beast that dwells within us all'." owner="Henry Tudor" postion ="2"/>
-<dialogue text="You sounded just like him" owner="Prince Edward" postion ="1"/>
+<dialogue text="I'm sure Richard didn't want -" owner="Prince Edward" position ="1"/>
+<dialogue text="Even if he didn't, Richard loves his father, he'd follow him to the ends of the world. If this is York's wish. Then I assure you it is his to." owner="Henry Tudor" position ="2"/>
+<dialogue text="Maybe if I get to talk to him-" owner="Prince Edward" position ="1"/>
+<dialogue text="You'll die, he's not your friend, he's not our friend anymore. In the battlefield you should know: 'Till our last breath, fight like the beast that dwells within us all'." owner="Henry Tudor" position ="2"/>
+<dialogue text="You sounded just like him" owner="Prince Edward" position ="1"/>
 <dialogue text="Unfortunately for us, Richard's much better suited for war than us two" owner="Henry Tudor"/>
-
+<dialogue text="Unfortunately for us, Richard's much better suited for war than us two" owner="Henry Tudor"/>
 
 </english>		
 

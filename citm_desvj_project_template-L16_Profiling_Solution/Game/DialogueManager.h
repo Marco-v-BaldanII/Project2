@@ -161,8 +161,8 @@ private:
 	b2Color TextColor;
 
 	// CHANGE with correct portrait size
-	SDL_Rect portraitBoxL = SDL_Rect{ 0,0,52*2,56*2 };
-	SDL_Rect portraitBoxR = SDL_Rect{ 0,0,52*2,56*2 };
+	SDL_Rect portraitBoxL = SDL_Rect{ 0,0,150,179 };
+	SDL_Rect portraitBoxR = SDL_Rect{ 0,0,150,179 };
 
 	Language myLanguage;
 
@@ -174,6 +174,12 @@ private:
 	DynArray<Scene*> Scenes;
 
 	uint sceneIndex = 0;
+	bool skipScene = false;
+
+	uint skipFrames = 0;
+
+	SDL_Rect skipRect = SDL_Rect{ 90,300,0,48 };
+	SDL_Texture* skipBttnTex = nullptr;
 
 };
 

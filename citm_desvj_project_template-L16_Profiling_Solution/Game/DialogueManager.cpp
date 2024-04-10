@@ -137,7 +137,7 @@ bool DialogueManager::Start() {
 
 		if (i != 0) { prevAmount += Scenes[i - 1]->numDialogues; } /*Acumulative offset*/
 
-
+		int o = Scenes[i]->numDialogues;
 		for (int j = 0; j < Scenes[i]->numDialogues; ++j) {
 
 			Scenes[i]->dialogues.PushBack(dialogues[j + prevAmount]);
@@ -146,6 +146,8 @@ bool DialogueManager::Start() {
 
 	}
 
+	//CHANGE
+	skipBttnTex = app->tex->Load("Assets/Textures/Skip_button.png");
 
 	return ret;
 }
@@ -200,12 +202,34 @@ bool DialogueManager::Update(float dt)
 		ChangeLanguage();
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+
+		skipFrames+=2;
+
+		if (skipFrames > 100){
+			skipFrames = 0;
+			skipScene = true;
+			Next_Dialogue();
+		}
+
+	}
+	else {
+		skipFrames = 0;
+	}
+
+	skipRect.w = skipFrames;
+
+	app->render->DrawTexture(skipBttnTex, skipRect.x, skipRect.y);
+
+	app->render->DrawRectangle(skipRect, b2Color(1, 1, 0, 0.5f), true,true);
+
+
 	return ret;
 }
 
 void DialogueManager::DrawBackground() {
 
-	if (dialogues[dialogueIndex]->background != nullptr) { background = dialogues[dialogueIndex]->background; }
+	if (Scenes[sceneIndex]->dialogues[dialogueIndex]->background != nullptr) { background = Scenes[sceneIndex]->dialogues[dialogueIndex]->background; }
 
 	if (background != nullptr) {
 		SDL_Rect dsScreen = SDL_Rect{ 0,0,256*2,198*2 };
@@ -222,7 +246,7 @@ void DialogueManager::ManageScrolling() {
 	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 2 *2), -dialogueBox.w , DIALOGUE_SIZE *2};
 	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 3 *2), -dialogueBox.w , DIALOGUE_SIZE *2};
 
-	if (dialogues[dialogueIndex]->myPos != MIDDLE) {
+	if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos != MIDDLE) {
 		 r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 , -dialogueBox.w , DIALOGUE_SIZE *2};
 		 r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE*2), -dialogueBox.w , DIALOGUE_SIZE*2 };
 		 r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE *2*2), -dialogueBox.w , DIALOGUE_SIZE*2 };
@@ -389,11 +413,11 @@ void DialogueManager::DrawPortrait(){
 
 	// Prints on screen the current and previous dialogue's portrait
 	for (i; i <= dialogueIndex; ++i) {
-		if (dialogues[i]->myPos == LEFT) {
-			app->render->DrawTexture(dialogues[i]->texture, 0, 120*2, &portraitBoxL, true);
+		if (Scenes[sceneIndex]->dialogues[i]->myPos == LEFT) {
+			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
 		}
-		else if (dialogues[i]->myPos == RIGHT) {
-			app->render->DrawTexture(dialogues[i]->texture, 204*2, 120*2, &portraitBoxR, false);
+		else if (Scenes[sceneIndex]->dialogues[i]->myPos == RIGHT) {
+			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 204*2, 200, &portraitBoxR, false);
 		}
 	}
 }
@@ -429,7 +453,7 @@ void DialogueManager::AdvanceText() {
 
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		if (HasScrollFinished()) {
 			if (myState == CUTSCENE) Next_Dialogue();
 			else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
@@ -478,10 +502,11 @@ void DialogueManager::Next_Dialogue() {
 	dialogueIndex++;
 
 	// checks if the scene has finished
-	if (dialogueIndex + 1 == Scenes[sceneIndex]->numDialogues) {
+	if (dialogueIndex + 1 == Scenes[sceneIndex]->numDialogues || skipScene) {
 
+		skipScene = false;
 		dialogueIndex = 0;
-		if (sceneIndex + 1 != Scenes.Count()) {
+ 		if (sceneIndex + 1 != Scenes.Count()) {
 			sceneIndex++;
 		}
 
