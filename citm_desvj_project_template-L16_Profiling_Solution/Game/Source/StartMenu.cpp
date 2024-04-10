@@ -383,6 +383,7 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	else if (control->id == 11)
 	{
+		app->entityManager->Enable();
 		app->levelManager->LoadScene(GameScene::COMBAT);
 		state = MenuState::OFF;
 	}

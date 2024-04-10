@@ -12,20 +12,19 @@
 #include "Source/Animation.h"
 #include "Source/Point.h"
 #include "Source/Textures.h"
+#include "Source/Module.h"
 
-class BackStagePlayer : public Entity
+class BackStagePlayer : public Module
 {
 public:
-	BackStagePlayer(iPoint pos);
+	BackStagePlayer(bool isActive);
 	~BackStagePlayer();
 
-	bool Start() override;
-	bool PreUpdate() override;
-	bool Update(float dt) override;
-	bool PostUpdate() override;
-	bool CleanUp() override;
-
-	void OnCollision(PhysBody* bodyA, PhysBody* bodyB) override;
+	bool Start();
+	bool PreUpdate();
+	bool Update(float dt);
+	bool PostUpdate();
+	bool CleanUp();
 
 	void SetPlayerPosition(iPoint pos);
 	void SetPlayerPosition(int x, int y);
@@ -45,6 +44,8 @@ public:
 	uint fxSteps;
 
 	bool isMoving = false;
+
+	iPoint position;
 
 private:
 	SDL_Texture* playerTexture = nullptr;

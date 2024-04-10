@@ -32,7 +32,7 @@ class DialogueManager;
 class FadeToBlack;
 class LevelManagement;
 class TurnManager;
-
+class BackStagePlayer;
  //Scenes
 class Intro;
 class StartMenu;
@@ -132,6 +132,7 @@ public:
 	StartMenu* mainMenu;
 	BattleScene* battleScene;
 	BackStage* backStage;
+	BackStagePlayer* backstageplayer;
 
 	bool exitRequest = false;
 

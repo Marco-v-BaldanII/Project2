@@ -1,85 +1,87 @@
 #include "BackstagePlayer.h"
 #include "Source/Log.h"
 
-BackStagePlayer::BackStagePlayer(iPoint pos) : Entity(EntityType::BACKSTAGEPLAYER)
+BackStagePlayer::BackStagePlayer(bool isActive) : Module(isActive)
 {
-	name.Create("BackStagePlayer");
-	position = pos;
 }
 
 BackStagePlayer::~BackStagePlayer()
 {
+
 }
 
 bool BackStagePlayer::Start()
 {
 	// Set player texture
-	playerTexture = app->tex->Load("Assets/Textures/player2.png");
-	
-	// Load animations
-	walkSpeed = 0.1f;
-	//walk
-	walkUp.PushBack({ 3, 67, 21, 23 });
-	//mas
-	walkUp.loop = true;
-	walkUp.speed = walkSpeed;
+	if (active)
+	{
+		playerTexture = app->tex->Load("Assets/Textures/player2.png");
 
-	walkDown.PushBack({ 3, 15, 21, 23 });
-	//mas
-	walkDown.loop = true;
-	walkDown.speed = walkSpeed;
+		// Load animationss
+		walkSpeed = 0.1f;
+		//walk
+		walkUp.PushBack({ 3, 67, 21, 23 });
+		//mas
+		walkUp.loop = true;
+		walkUp.speed = walkSpeed;
 
-	walkLeft.PushBack({ 3, 42, 21, 23 });
-	//mas
-	walkLeft.loop = true;
-	walkLeft.speed = walkSpeed;
+		walkDown.PushBack({ 3, 15, 21, 23 });
+		//mas
+		walkDown.loop = true;
+		walkDown.speed = walkSpeed;
 
-	walkRight.PushBack({ 3, 0, 21, 23 });
-	//mas
-	walkRight.loop = true;
-	walkRight.speed = walkSpeed;
+		walkLeft.PushBack({ 3, 42, 21, 23 });
+		//mas
+		walkLeft.loop = true;
+		walkLeft.speed = walkSpeed;
+
+		walkRight.PushBack({ 3, 0, 21, 23 });
+		//mas
+		walkRight.loop = true;
+		walkRight.speed = walkSpeed;
 
 
-	//idle
-	idleUp.PushBack({ 3, 0, 21, 23 });
-	//mas
-	idleUp.loop = true;
-	idleUp.speed = walkSpeed;
+		//idle
+		idleUp.PushBack({ 3, 0, 21, 23 });
+		//mas
+		idleUp.loop = true;
+		idleUp.speed = walkSpeed;
 
-	idleDown.PushBack({ 3, 0, 21, 23 });
-	//mas
-	idleDown.loop = true;
-	idleDown.speed = walkSpeed;
+		idleDown.PushBack({ 3, 0, 21, 23 });
+		//mas
+		idleDown.loop = true;
+		idleDown.speed = walkSpeed;
 
-	idleLeft.PushBack({ 3, 0, 21, 23 });
-	//mas
-	idleLeft.loop = true;
-	idleLeft.speed = walkSpeed;
+		idleLeft.PushBack({ 3, 0, 21, 23 });
+		//mas
+		idleLeft.loop = true;
+		idleLeft.speed = walkSpeed;
 
-	idleRight.PushBack({ 3, 0, 21, 23 });
-	//mas
-	idleRight.loop = true;
-	idleRight.speed = walkSpeed;
+		idleRight.PushBack({ 3, 0, 21, 23 });
+		//mas
+		idleRight.loop = true;
+		idleRight.speed = walkSpeed;
 
-	currentAnimation = &idleDown;
+		currentAnimation = &idleDown;
 
-	// Set player direction
-	goingLeft = false;
-	goingRight = false;
-	goingUp = false;
-	goingDown = false;
+		// Set player direction
+		goingLeft = false;
+		goingRight = false;
+		goingUp = false;
+		goingDown = false;
 
-	// Set god mode
-	godMode = false;
+		// Set god mode
+		godMode = false;
 
-	// Set player movement
-	canMove = true;
+		// Set player movement
+		canMove = true;
 
-	// Set player velocity
-	velocity = 0.0f;
+		// Set player velocity
+		velocity = 0.0f;
 
-	// Set player steps
-	fxSteps = app->audio->LoadFx("Assets/Audio/Fx/Steps.wav");
+		// Set player steps
+		fxSteps = app->audio->LoadFx("Assets/Audio/Fx/Steps.wav");
+	}
 
 	return true;
 }
@@ -122,6 +124,7 @@ bool BackStagePlayer::Update(float dt)
 			goingDown = true;
 			goingRight = false;
 			isMoving = true;
+			LOG("MOVING DOWN");
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
@@ -132,6 +135,7 @@ bool BackStagePlayer::Update(float dt)
 			goingDown = false;
 			goingRight = false;
 			isMoving = true;
+			LOG("MOVING LEFT");
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
@@ -189,6 +193,10 @@ bool BackStagePlayer::Update(float dt)
 		{
 			currentAnimation = &idleRight;
 		}
+		else
+		{
+			currentAnimation = &idleDown;
+		}
 	}
 
 	return true;
@@ -222,6 +230,14 @@ bool BackStagePlayer::PostUpdate()
 	{
 		app->render->camera.y = 0;
 	}
+	/*if (app->render->camera.x < 30000)
+	{
+		app->render->camera.x = 30000;
+	}
+	if (app->render->camera.y < 30000)
+	{
+		app->render->camera.y = 30000;
+	}*/
 
 	//player boundaries in backStage
 	if (position.x < 0)
@@ -232,13 +248,13 @@ bool BackStagePlayer::PostUpdate()
 	{
 		position.y = 0;
 	}
-	if (position.x > 3200)
+	if (position.x > 680)
 	{
-		position.x = 3200;
+		position.x = 680;
 	}
-	if (position.y > 3200)
+	if (position.y > 384)
 	{
-		position.y = 3200;
+		position.y = 384;
 	}
 
 
@@ -248,24 +264,6 @@ bool BackStagePlayer::PostUpdate()
 bool BackStagePlayer::CleanUp()
 {
 	return true;
-}
-
-void BackStagePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
-{
-	switch (bodyB->ctype)
-	{
-	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
-		break;
-	case ColliderType::ITEM:
-		LOG("Collision ITEM");
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-	default:
-		break;
-	}
 }
 
 void BackStagePlayer::SetPlayerPosition(iPoint pos)

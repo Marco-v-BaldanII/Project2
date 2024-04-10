@@ -41,8 +41,9 @@ public:
 
 private:
 	SDL_Texture* img;
+	SDL_Texture* background;
 	SDL_Rect rect;
-
+	bool createplayer = false;
 	uint music;
 
 	//create player

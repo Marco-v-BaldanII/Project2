@@ -43,46 +43,49 @@ bool BattleScene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool BattleScene::Start()
 {
-	spriteSheet = app->tex->Load(mynode.child("texture").attribute("path").as_string());
+	if (active)
+	{
+		spriteSheet = app->tex->Load(mynode.child("texture").attribute("path").as_string());
 
-	time_t t;
-	srand((unsigned)time(&t));
-	SDL_Rect btPos = { 100, 500, 120,20 };
-	SDL_Rect btPos2 = { 100, 700, 120,20 };
+		time_t t;
+		srand((unsigned)time(&t));
+		SDL_Rect btPos = { 100, 500, 120,20 };
+		SDL_Rect btPos2 = { 100, 700, 120,20 };
 
-	// Read party members form config and instanciate them
-	for (pugi::xml_node Pnode = mynode.child("battleMaps").child("map").child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
+		// Read party members form config and instanciate them
+		for (pugi::xml_node Pnode = mynode.child("battleMaps").child("map").child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
 
-		Player* p = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
-		p->config = Pnode;
-		p->Awake();
-		party.Add(p);
-		p->texture = spriteSheet;
+			Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+			p->config = Pnode;
+			p->Awake();
+			party.Add(p);
+			p->texture = spriteSheet;
+		}
+
+		// Read enemies from config and instantiate them
+		for (pugi::xml_node Enode = mynode.child("battleMaps").child("map").child("enemy"); Enode != NULL; Enode = Enode.next_sibling("enemy")) {
+
+			Enemy* e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+			e->config = Enode;
+			e->Awake();
+			goons.Add(e);
+			e->texture = spriteSheet;
+		}
+
+
+
+
+		// pass the players to be monitoured by the turnManager
+		app->turnManager->InitializeChessPieces(&party, &goons);
+
+		//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
+		//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
+		//img = app->tex->Load("Assets/Textures/portrait1.png");
+		music = app->audio->PlayMusic("assets/audio/music/Battle-screen-music.wav", 0.5f);
+		//app->dialogueManager->Enable();
+
+		rect = { 0,0,64,90 };
 	}
-
-	// Read enemies from config and instantiate them
-	for (pugi::xml_node Enode = mynode.child("battleMaps").child("map").child("enemy"); Enode != NULL; Enode = Enode.next_sibling("enemy")) {
-
-		Enemy* e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		e->config = Enode;
-		e->Awake();
-		goons.Add(e);
-		e->texture = spriteSheet;
-	}
-
-
-
-
-	// pass the players to be monitoured by the turnManager
-	app->turnManager->InitializeChessPieces(&party, &goons);
-
-	//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
-	//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
-	//img = app->tex->Load("Assets/Textures/portrait1.png");
-	music = app->audio->PlayMusic("assets/audio/music/Battle-screen-music.wav", 0.5f);
-	//app->dialogueManager->Enable();
-	
-	rect = { 0,0,64,90 };
 	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
 	return true;
 }

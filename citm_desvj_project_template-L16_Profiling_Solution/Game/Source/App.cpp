@@ -11,6 +11,7 @@
 #include "Optick/include/optick.h"
 #include "../DialogueManager.h"
 #include "../TurnManager.h"
+#include "../BackstagePlayer.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -56,7 +57,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics(true);
 	//scene = new Scene();
 	map = new Map(true); //Esta ROTO
-	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);
 
 	dialogueManager = new DialogueManager(false); //editar despues//
@@ -70,6 +70,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	mainMenu = new StartMenu(false);
 	battleScene = new BattleScene(false);
 	backStage = new BackStage(false);
+	entityManager = new EntityManager(true);
+	backstageplayer = new BackStagePlayer(false);
 	fade = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
@@ -91,11 +93,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(battleScene);
 	AddModule(backStage);
 
-	AddModule(entityManager);
 	AddModule(turnManager);
 	AddModule(fonts);
 	AddModule(guiManager);
 	AddModule(dialogueManager);
+	AddModule(entityManager);
+	AddModule(backstageplayer);
 	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);

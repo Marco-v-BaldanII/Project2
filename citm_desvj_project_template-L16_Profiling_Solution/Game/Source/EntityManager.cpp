@@ -116,9 +116,6 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;
-	case EntityType::BACKSTAGEPLAYER:
-		entity = new BackStagePlayer(iPoint(0, 0));
-		break;
 	default:
 		break;
 	}
