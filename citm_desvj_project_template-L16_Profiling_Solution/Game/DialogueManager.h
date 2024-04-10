@@ -68,6 +68,9 @@ public:
 	int num;
 	int numDialogues;
 
+	DynArray<Dialogue*> dialogues;
+	DynArray<Dialogue*> shakespeareDialogues;
+
 };
 
 
@@ -114,6 +117,8 @@ public:
 	void npcTalk(DynArray<Dialogue*>& npcDialogues);
 
 	void DrawBackground();
+
+	void Next_Dialogue();
 
 public:
 	int numLines = 0;
@@ -167,6 +172,8 @@ private:
 	int npcDialogueIndex = -1;
 
 	DynArray<Scene*> Scenes;
+
+	uint sceneIndex = 0;
 
 };
 

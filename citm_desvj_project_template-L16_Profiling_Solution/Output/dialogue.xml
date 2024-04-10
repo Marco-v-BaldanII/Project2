@@ -120,7 +120,7 @@
 <dialogue text = "Greetings lord of York, waiteth! is Richar- i cullionly art thy sons accompanying thee ?"
    owner = "Prince Edward"
 	position = "1"/>
-<dialogue text = "Edward don’t beest malapert !"
+<dialogue text = "Edward don't beest malapert !"
    owner = "Margaret"
 	position = "2"/>
 <dialogue text = "Haha of course, the youth art the future of this ground, i wilt instructeth mine own sons i mine own duties, jus liketh thy mother tries h'r most wondrous to instructeth thee."
@@ -158,7 +158,7 @@
 <dialogue text = "Aye forsooth, those gents art the future, but the presenteth if 't be true ours, speaking off wherefore hasn't his majesty did greet us formally ?"
    owner = "Duke of York"
 	position = "2"/>
-<dialogue text = "Oh mine own deepest apologies, mine own husband’s sickness hast been worsening.  That gent is did attend by servants and barely exits his chambers as of late."
+<dialogue text = "Oh mine own deepest apologies, mine own husband's sickness hast been worsening.  That gent is did attend by servants and barely exits his chambers as of late."
    owner = "Margaret"
 	position = "2"/>
 <dialogue text = "I seeth  Is an audience with that gent impossible so?"
@@ -186,7 +186,7 @@
    owner="Richard" position="2" />
 <dialogue text="At which hour didst? mother i wanteth to go home"
    owner="Henry VI" position="1" />
-<dialogue text="…"
+<dialogue text=". . ."
    owner="Richard" position="2" />
 <dialogue text="Mine own ladybird, hast thy fever gone up yet again? squire, bringeth that gent his medicine !"
    owner="Margaret" position="2" />
@@ -194,16 +194,36 @@
    owner="Henry VI" position="1" />
 <dialogue text="Heavy?"
    owner="Richard" position="2" />
-<dialogue text="Henry, our mother hasn’t visited for years"
+<dialogue text="Henry, our mother hasn't visited for years"
    owner="Jaspe" position="2" />
 <dialogue text="If 't be true i weareth this trinket, shall the lady behold at me?"
    owner="Henry VI" position="1" />
-<dialogue text="I can’t standeth to seeth thee liketh this henry ! (leaves the room)"
+<dialogue text="I can't standeth to seeth thee liketh this henry ! (leaves the room)"
    owner="Margaret" position="2" />
-<dialogue text="Thy majesty, i has't a suggestion… to relinquishing thee from the teen of this coronet"
+<dialogue text="Thy majesty, i has't a suggestion. . . to relinquishing thee from the teen of this coronet"
    owner="Richard"  position="2" />
 <dialogue text="Richard ?"
    owner="Henry VI" position="1" />		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 <dialogue text="Scene 4 - back garden" owner ="Narrator"/>
     <dialogue text="Growing up is so scary" owner="Edward" position="2"/>
@@ -211,27 +231,89 @@
 <dialogue text="I beg, calleth me Edward. I understand it may beest unfit of a king to speaketh openly about these matters." owner="Edward" position="2"/>
 <dialogue text="Very much Edward. How can a king who is shaking in his boots expecteth any of his subjects to followeth into war?" owner="Richard" position="1"/>
 <dialogue text="Richard, yond wast uncalled for!" owner="Henry Tudor" position="4"/>
-<dialogue text="Followeth me into war, nay. I’d liketh to reigneth over a peaceful landeth, where nay English nor foreign'r blood hast to beest pointlessly spilled" owner="Edward" position="2"/>
+<dialogue text="Followeth me into war, nay. I'd liketh to reigneth over a peaceful landeth, where nay English nor foreign'r blood hast to beest pointlessly spilled" owner="Edward" position="2"/>
 <dialogue text="What rubbish! With all respect Edward, just because we might knoweth a few years of peace, doesn’t cullionly it’ll stayeth liketh this forever. It’s man’s natural state." owner="Richard" position="1"/>
 <dialogue text="Thee very much bethink it so Richard?" owner="Henry Tudor" position="4"/>
-<dialogue text="They’ll never stand ho. Power, wage, family and love … people at each moment has't plenty reasons to square, wherever there's misprise, war shall ensue." owner="Richard" position="1"/>
-<dialogue text="Yond may be so, still wouldn’t thee liketh it Richard?" owner="Edward" position="2"/>
+<dialogue text="They'll never stand ho. Power, wage, family and love . . . people at each moment has't plenty reasons to square, wherever there's misprise, war shall ensue." owner="Richard" position="1"/>
+<dialogue text="Yond may be so, still wouldn't thee liketh it Richard?" owner="Edward" position="2"/>
 <dialogue text="me?" owner="Richard" position="1"/>
 <dialogue text="If 't be true the w'rld couldst stayeth liketh this, in this peace, at this age. If it be true we could  just stayeth the same, us three" owner="Edward" position="2"/>
-<dialogue text="That… is admittedly a nice though, thy majesty" owner="Richard" position="1"/>
-<dialogue text="I toldeth thee not to calleth me that… i wonder, how shall history remember me? A grandiose warrior liketh mine own grandfather? Yond doesn’t suiteth me." owner="Edward" position="2"/>
+<dialogue text="That. . . is admittedly a nice though, thy majesty" owner="Richard" position="1"/>
+<dialogue text="I toldeth thee not to calleth me that. . . i wonder, how shall history remember me? A grandiose warrior liketh mine own grandfather? Yond doesn’t suiteth me." owner="Edward" position="2"/>
 <dialogue text="Or a frail lunatic liketh thy father?" owner="Richard" position="1"/>
 <dialogue text="Richard, how dareth thee!" owner="Henry Tudor" position="4"/>
-<dialogue text="Tis what most nobles bethink, for certain you’ve hath heard." owner="Richard" position="1"/>
+<dialogue text="Tis what most nobles bethink, for certain you've hath heard." owner="Richard" position="1"/>
 <dialogue text="Tis eke very much the sooth, though it pains me to admiteth so. To admiteth yond the rightful king, mine own owneth father, wasn’t born eft to beest king. But such is the way of monarchy, i likely wasn’t born yond way either." owner="Edward" position="2"/>
 <dialogue text="Rubbish, thy empathic, not foolish thy majesty!" owner="Henry Tudor" position="4"/>
 <dialogue text="Jah! for once, i think i actually concur with henry" owner="Richard" position="1"/>
-<dialogue text="You guys… I'll beest a most wondrous king, and I'll needeth thy help.  At which hour we hadn't to fight, to preserve this peace, and these memories." owner="Edward" position="2"/>
+<dialogue text="You guys. . . I'll beest a most wondrous king, and I'll needeth thy help.  At which hour we hadn't to fight, to preserve this peace, and these memories." owner="Edward" position="2"/>
 <dialogue text="Aye f'r a gentl'r w'rld, us three togeth'r.  Yond can beest our covenant." owner="Henry Tudor" position="4"/>
 <dialogue text="Wow, so gentle Henry !" owner="Edward" position="2"/>
 <dialogue text="(sarcastic) To heareth this from the king !" owner="Henry Tudor" position="4"/>
 <dialogue text="So what doth thee sayeth Richy, thee in on the covenant ?" owner="Henry Tudor" position="4"/>
 <dialogue text="Aye, for a worthy causeth" owner="Richard" position="1"/>
+
+
+
+
+
+
+
+
+
+
+<dialogue text="Scene 5: Left Thy Swords" owner="Narrator"/>
+<dialogue position="1" text="Most wondrous beest on our way, thanketh thee Mistress Margaret for thy warmeth welcometh, taketh valorous art of his majesty, let’s wend boys!" owner="Richard of York"/>
+<dialogue position="2" text="Grant you mercy to thee Lord Richard, for thy hath continued services and devotion to mine own husband." owner="Margaret"/>
+<dialogue text="(the Yorks leaveth)" owner="Narrator"/>
+<dialogue position="1" text="So father, how wast the king?" owner="Richard"/>
+<dialogue position="2" text="An utter blinking idiot, deranged in a swamp of his owneth madness." owner="Richard of York"/>
+<dialogue position="1" text="Father?" owner="George"/>
+<dialogue position="2" text="Thee aren't planning on?" owner="Edward"/>
+<dialogue position="1" text="That gent may beest mine own cousin, but yond sir is not fiteth to beest king." owner="Richard of York"/>
+<dialogue position="1" text="Aren't thee being rash father?" owner="Richard (young)"/>
+<dialogue position="2" text="On the contrary Richard, this visiteth wast just a means to testeth the waters, Warwick hast already been making preparations. We marcheth for those Lancaster folks, to war!" owner="Richard of York"/>
+<dialogue position="1" text="What about the peace of the landeth? Is't right for us to drageth commoners into this family feud?" owner="Richard"/>
+<dialogue position="1" text="Richard, thee cross me? I worry so about the peace and well-being of the commoner folk. I promiseth our causeth is just, from the bloodshed a unified peaceful England shall emerge, this I swear." owner="Richard of York"/>
+<dialogue position="2" text="Thee has't our unconditional support father!" owner="Edward"/>
+<dialogue position="4" text="We'll liveth up to the emblem of York." owner="George"/>
+<dialogue position="1" text="Aye father, for a just causeth I shall beest thy sword." owner="Richard"/>
+
+
+<dialogue text ="Battle I - Northampton" owner="Narrator"/>
+
+<dialogue text ="York's army reunites with the Earl of Warwick, a powerful ally that  heavily augments the York's manpower by hearing the aid of mercenary bands." owner ="Narrator"/>
+<dialogue text="What starts as a bawbling uprising grows into a powerful force headed straight to London.  
+ " owner="Narrator" />
+ <dialogue text ="Queen Margaret hast been dubious of york's intent for a while, hence her attempts to exiliate that gent and taketh his lands, this however did prove futile" owner ="Narrator"/>
+<dialogue text =" With the imminent threat Margaret readies and army with the most loyal men to the Lancaster crown. She is determined to protect her husband and even more so her child, the crown prince Edward.
+" owner="Narrator"/>
+
+<dialogue text ="The 2 armies meet in the field of Northampton, king Henry pledges for a diplomatic resolution but York denies, it seems that war is all but inevitable." owner ="Narrator"/>
+ 
+
+<dialogue text =" Brave men of England, from the most empowered nobles to the most humble ingrafters we all standeth here the present day as equals, the battlefield shows nay mercy nay matter thy ancestry" owner="Margaret" postion ="1"/>
+
+<dialogue text =" It is thy strength and resolveth and the loyalty to thy state yond shall bringeth for us a glorious Lancaster victory here the present day!  For king Henry the Sixth !!! For Prince Edward !!!" owner="Margaret" postion ="1"/>
+
+<dialogue text=" Longeth liveth the prince !!!" owner ="Soldiers"/>
+
+<dialogue text ="Meanwhile in the Prince's tent" owner ="Narrator"/>
+
+<dialogue text="Good now, it's not as flashy as a sword, but this bow and arrows shall leadeth mine own people to victory!" owner="Prince Edward" postion ="1"/>
+<dialogue text="Bravo! well hath said Edward, you're pulling yond facade quite well, has't thee ever considered acting?" owner="Henry Tudor" postion ="2"/>
+<dialogue text="Ha ha, thee seeth right through me.  I'm, i'm shaking in mine own boots again, Richard wouldst chuckle at me" owner="Prince Edward" postion ="1"/>
+<dialogue text="Richard shall wend home the present day with thy headeth if it be true thee alloweth that gent" owner="Henry Tudor"/>
+<dialogue text="Nay, that gent couldn't, not our Richard" owner="Prince Edward" postion ="1"/>
+<dialogue text="Tho're filthy traitors Edward! waketh up!" owner="Henry Tudor" postion ="2"/>
+<dialogue text="Henry clutches his fists with rage" owner="Narrator"/>
+<dialogue text="I'm sure Richard didn't wanteth -" owner="Prince Edward" postion ="1"/>
+<dialogue text="Coequal if it be true that gent didn't, Richard loves his father, he'd followeth that gent to the ends of the world.  If 't be true this is York wisheth. Then I assureth thee it is his to" owner="Henry Tudor" postion ="2"/>
+<dialogue text="Haply if it be true i receiveth to talketh to him-" owner="Prince Edward" postion ="1"/>
+<dialogue text="You'll kicketh the bucket, he's not thy cousin, he's not our cousin anymore. In the battlefield thee shouldst knoweth: 'till our lasteth breath, square liketh the beast yond dwells within us all'" owner="Henry Tudor" postion ="2"/>
+<dialogue text="Thee sounded just liketh that gent" owner="Prince Edward" postion ="1"/>
+<dialogue text="Unfortunately for us, Richard is much better suited for war than us two" owner="Henry Tudor" postion ="2"/>
+
 
 </shakesperean>
 
@@ -252,6 +334,8 @@
 
 		
 <english>
+
+	<Scene num="1" dialogues ="13"/>
 			
 <dialogue text="In the middle of the 15th century, England is in a dire political position. Henry VI is the eleventh Plantagenet monarch of the country. "
    owner="Narrator" />
@@ -261,7 +345,7 @@
 <dialogue text="England has just lost the 100-year-long war with France, but the peace will not last long."
    owner="Narrator" />
 <dialogue text ="Act 1 -  A covenant for a gentler world" owner ="Narrator"/>
-	<Scene num="1" dialogues ="9"/>
+
 	
 <dialogue text ="Scene 1 : Castle gardens" owner ="Narrator" background ="Assets/Textures/Backgrounds/Castle_Gardens.png"/>
 	
@@ -288,10 +372,13 @@
 <dialogue text="The prince is too naive and kind-hearted for his own good - he is the son of his father. If he is to be king, he must attend to all his duties."
    owner="Margaret"
    position="2" />
+
+
+	<Scene num="2" dialogues ="37"/>
+
 <dialogue text="Scene 2: Back garden"
    owner="Narrator" />
 
-	<Scene num="2" dialogues ="36"/>
 	
 <dialogue text="Prince Edward and Henry Tudor are playing with wooden swords. They are interrupted by Margaret leading the Yorks. All the sons of York are introduced. "
    owner="Narrator" />
@@ -386,7 +473,7 @@
 <dialogue text="Yes, indeed, they are the future, but the present is ours. Speaking of which, why hasn't his majesty greeted us formally?"
    owner="Richard of York"
    position="2" />
-<dialogue text="Oh, my deepest apologies. My husband’s sickness has been worsening. He is attended by servants and barely exits his chambers as of late."
+<dialogue text="Oh, my deepest apologies. My husband's sickness has been worsening. He is attended by servants and barely exits his chambers as of late."
    owner="Margaret"
    position="2" />
 <dialogue text="I see. Is an audience with him impossible then?"
@@ -407,21 +494,21 @@
 <dialogue text="Richard of York, your majesty"
    owner="Jaspe" position="2" />
 <dialogue text="Good afternoon your highness"
-   owner="Richard" position="2" />
+   owner="Richard of York" position="2" />
 <dialogue text="Richard, my good cousin Richard, how are you ?"
    owner="Henry VI"  position="1" />
 <dialogue text="Quite well, your majesty"
-   owner="Richard" position="2" />
+   owner="Richard of York" position="2" />
 <dialogue text="When did? Mother I want to go home"
    owner="Henry VI" position="1" />
 <dialogue text= "what are you?"
-   owner="Richard" position="2" />
+   owner="Richard of York" position="2" />
 <dialogue text="My darling, has your fever gone up yet again? Squire, bring him his medicine !"
    owner="Margaret" position="2" />
 <dialogue text="Oh mother, this crown is so heavy"
    owner="Henry VI" position="1" />
 <dialogue text="Heavy?"
-   owner="Richard" position="2" />
+   owner="Richard of York" position="2" />
 <dialogue text="Henry, our mother hasn't visited for years"
    owner="Jaspe" position="2" />
 <dialogue text="If I wear this trinket, will she look at me?"
@@ -429,7 +516,7 @@
 <dialogue text="I can't stand to see you like this Henry ! (leaves the room)"
    owner="Margaret" position="2" />
 <dialogue text="Your majesty, I have a suggestion- to relinquishing you from the pain of this crown"
-   owner="Richard"  position="2" />
+   owner="Richard of York"  position="2" />
 <dialogue text="Richard ?"
    owner="Henry VI" position="1" />		
 <dialogue text="Scene 4 - back garden" owner ="Narrator"/>
@@ -438,27 +525,83 @@
     <dialogue text="Please, call me Edward. I understand that it may be unfit of a king to speak openly about these matters." owner="Edward" position="2"/>
     <dialogue position="1" text="Very much, Edward. How can a king who's shaking in his boots expect any of his subjects to follow him to war." owner="Richard" />
     <dialogue position="4" text="Richard, that was uncalled for!" owner="Henry Tudor" />
-    <dialogue position="2" text="Follow me into war, no. I’d like to reign over a peaceful land, where no English or foreigner blood has to be pointlessly spilled." owner="Prince Edward" />
+    <dialogue position="2" text="Follow me into war, no. I'd like to reign over a peaceful land, where no English or foreigner blood has to be pointlessly spilled." owner="Prince Edward" />
     <dialogue position="1" text="What rubbish! With all respect, Edward, just because we might know a few years of peace, doesn’t mean it’ll stay like this forever. It’s man’s natural state." owner="Richard" />
     <dialogue position="4" text="You really think it so, Richard?" owner="Henry Tudor" />
-    <dialogue position="1" text="They’ll never stop. Power, money, family, or love… people always have plenty of reasons to fight. Wherever there’s hate, war will soon ensue." owner="Richard" />
-    <dialogue position="2" text="That may be so, still wouldn’t you like it, Richard?" owner="Prince Edward" />
+    <dialogue position="1" text="They'll never stop. Power, money, family, or love . people always have plenty of reasons to fight. Wherever there’s hate, war will soon ensue." owner="Richard" />
+    <dialogue position="2" text="That may be so, still wouldn't you like it, Richard?" owner="Prince Edward" />
     <dialogue position="1" text="Me?" owner="Richard" />
     <dialogue position="2" text="If the world could stay like this, in this peace, at this age. If we could just stay the same, us three." owner="Prince Edward" />
-    <dialogue position="1" text="That… is admittedly a nice thought, your majesty." owner="Richard" />
-    <dialogue position="2" text="I told you not to call me that… I wonder, how will history remember me? A grandiose warrior like my grandfather? That doesn’t suit me." owner="Prince Edward" />
+    <dialogue position="1" text="That, is admittedly a nice thought, your majesty." owner="Richard" />
+    <dialogue position="2" text="I told you not to call me that. . . I wonder, how will history remember me? A grandiose warrior like my grandfather? That doesn’t suit me." owner="Prince Edward" />
     <dialogue position="1" text="Or a frail lunatic like your father?" owner="Richard" />
     <dialogue position="4" text="Richard, how dare you!" owner="Henry Tudor" />
-    <dialogue position="1" text="It is what most nobles think, surely you’ve heard." owner="Richard" />
-    <dialogue position="2" text="It’s also very much the truth, though it pains me to admit so. To admit that the rightful king, my own father, wasn’t born ready to be king. But such is the way of monarchy, I likely wasn’t born that way either." owner="Prince Edward" />
+    <dialogue position="1" text="It is what most nobles think, surely you've heard." owner="Richard" />
+    <dialogue position="2" text="It's also very much the truth, though it pains me to admit so. To admit that the rightful king, my own father, wasn’t born ready to be king. But such is the way of monarchy, I likely wasn’t born that way either." owner="Prince Edward" />
     <dialogue position="4" text=" Rubbish, you're empathic, not foolish, your majesty!" owner="Henry Tudor" />
     <dialogue position="1" text="Jah! For once, I think I actually agree with Henry." owner="Richard" />
-    <dialogue position="2" text="You guys… I’ll be a great king, and I’ll need your help. When we have to fight, to preserve this peace, and these memories, for a gentler world." owner="Prince Edward" />
+    <dialogue position="2" text="You guys . . . I'll be a great king, and I'll need your help. When we have to fight, to preserve this peace, and these memories, for a gentler world." owner="Prince Edward" />
     <dialogue position="4" text="Yes, for a gentler world, us three together. That can be our covenant." owner="Henry Tudor" />
     <dialogue position="2" text="Wow, so noble, Henry!" owner="Prince Edward" />
     <dialogue position="4" text="(sarcastic) To hear that from the king!" owner="Henry Tudor" />
     <dialogue position="4" text="So what do you say, Richy? You in on the covenant?" owner="Henry Tudor" />
     <dialogue position="1" text="Yes, a worthy cause." owner="Richard" />
+
+
+
+
+
+<dialogue text="Scene 5: Fields" owner="Narrator"/>
+<dialogue position="1" text="Best be on our way, thank you Lady Margaret for your warm welcome, take good care of his majesty, let’s go boys!" owner="Richard of York"/>
+<dialogue position="2" text="Thanks to you, Lord Richard, for your continued services and devotion to my husband." owner="Margaret"/>
+<dialogue text="(the Yorks leave)" owner="Narrator"/>
+<dialogue position="1" text="So father, how was the king?" owner="Richard"/>
+<dialogue position="2" text="An utter fool, deranged in a swamp of his own madness." owner="Richard of York"/>
+<dialogue position="1" text="Father?" owner="George"/>
+<dialogue position="2" text="You aren't planning on?" owner="Edward"/>
+<dialogue position="1" text="He may be my cousin, but that man is not fit to be king." owner="Richard of York"/>
+<dialogue position="1" text="Aren't you being rash, father?" owner="Richard"/>
+<dialogue position="2" text="On the contrary Richard, this visit was just a means to test the waters, Warwick has already been making preparations. We march for them, to war!" owner="Richard of York"/>
+<dialogue position="1" text="What about the peace of the land? Is it right for us to drag commoners into this family feud?" owner="Richard"/>
+<dialogue position="1" text="Richard, you oppose me? I worry so about the peace and well-being of the common folk. I promise our cause is just, from the bloodshed a unified peaceful England will emerge, this I swear." owner="Duke of York"/>
+<dialogue position="2" text="You have our unconditional support, father!" owner="Edward"/>
+<dialogue position="4" text="We'll live up to the emblem of York." owner="George"/>
+<dialogue position="1" text="Yes father, for a just cause I will be your sword." owner="Richard"/>
+
+<dialogue text ="Battle I - Northampton" owner="Narrator"/>
+
+<dialogue text ="York's army reunites with the Earl of Warwick, a powerful ally that  heavily augments the York's manpower by hearing the aid of mercenary bands." owner ="Narrator"/>
+<dialogue text="What starts as a bawbling uprising grows into a powerful force headed straight to London.  
+ " owner="Narrator" />
+ <dialogue text ="Queen Margaret hast been dubious of york's intent for a while, hence her attempts to exiliate that gent and taketh his lands, this however did prove futile" owner ="Narrator"/>
+<dialogue text =" With the imminent threat Margaret readies and army with the most loyal men to the Lancaster crown. She is determined to protect her husband and even more so her child, the crown prince Edward.
+" owner="Narrator"/>
+
+<dialogue text ="The 2 armies meet in the field of Northampton, king Henry pledges for a diplomatic resolution but York denies, it seems that war is all but inevitable." owner ="Narrator"/>
+
+<dialogue text =" Brave men of England, from the most empowered nobles to the most humble commoners we all stand here today as equals, the battlefield shows no mercy no matter your ancestry." owner="Margaret" postion ="1"/>
+
+<dialogue text =" It is your strength and resolve and the loyalty to your country that will bring for us a glorious Lancaster victory here today. For king Henry the sixth !!! For prince Edward !!!" owner="Margaret" postion ="1"/>
+
+<dialogue text=" Long live the prince !!!" owner ="Soldiers" position ="2"/>
+
+<dialogue text ="Meanwhile in the prince's tent" owner ="Narrator"/>
+
+<dialogue text="Alright, it's not as flashy as a sword, but this bow and arrows will lead my people to victory!" owner="Prince Edward" postion ="1"/>
+<dialogue text="Bravo! Well said Edward, you're pulling that facade quite well, have you ever considered acting?" owner="Henry Tudor" postion ="2"/>
+<dialogue text="Ha ha, you see right through me. I'm, I'm shaking in my boots again, Richard would laugh at me." owner="Prince Edward" postion ="1"/>
+<dialogue text="Richard will go home today with your head if you let him." owner="Henry Tudor" postion ="2"/>
+<dialogue text="No, he couldn't, not our Richard." owner="Prince Edward" postion ="1"/>
+<dialogue text="They're filthy traitors Edward! Wake up!" owner="Henry Tudor" postion ="2"/>
+<dialogue text="Henry clutches his fists with rage" owner="Narrator"/>
+<dialogue text="I'm sure Richard didn't want -" owner="Prince Edward" postion ="1"/>
+<dialogue text="Even if he didn't, Richard loves his father, he'd follow him to the ends of the world. If this is York's wish. Then I assure you it is his to." owner="Henry Tudor" postion ="2"/>
+<dialogue text="Maybe if I get to talk to him-" owner="Prince Edward" postion ="1"/>
+<dialogue text="You'll die, he's not your friend, he's not our friend anymore. In the battlefield you should know: 'Till our last breath, fight like the beast that dwells within us all'." owner="Henry Tudor" postion ="2"/>
+<dialogue text="You sounded just like him" owner="Prince Edward" postion ="1"/>
+<dialogue text="Unfortunately for us, Richard's much better suited for war than us two" owner="Henry Tudor"/>
+
+
 </english>		
 
 

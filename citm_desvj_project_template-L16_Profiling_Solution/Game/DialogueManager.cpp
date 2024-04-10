@@ -93,6 +93,10 @@ bool DialogueManager::Start() {
 		dialogues.PushBack(D);
 		dialogueSize++;
 	}
+
+
+
+
 	// Shakespearean dialogues
 	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("shakesperean").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 
@@ -126,8 +130,22 @@ bool DialogueManager::Start() {
 
 	}
 
+	// put dialogues in scenes
+	int prevAmount = 0;
 
-	//Iterates over the entities and calls Start
+	for (int i = 0; i < Scenes.Count(); ++i) {
+
+		if (i != 0) { prevAmount += Scenes[i - 1]->numDialogues; } /*Acumulative offset*/
+
+
+		for (int j = 0; j < Scenes[i]->numDialogues; ++j) {
+
+			Scenes[i]->dialogues.PushBack(dialogues[j + prevAmount]);
+			Scenes[i]->shakespeareDialogues.PushBack(shakespeareDialogues[j + prevAmount]);
+		}
+
+	}
+
 
 	return ret;
 }
@@ -156,7 +174,8 @@ bool DialogueManager::Update(float dt)
 	bool ret = true;
 	
 	
-	currentPos = dialogues[dialogueIndex]->myPos;
+	//currentPos = dialogues[dialogueIndex]->myPos;
+	currentPos = Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos;
 
 	// Change font color to black for speech dialogues
 	if (currentPos != MIDDLE) { TextColor = black; }
@@ -284,16 +303,16 @@ void DialogueManager::DrawTextBox(Position pos) {
 	if (myState == CUTSCENE) {
 		string txt = "fhfjf";
 		if (myLanguage == ENGLISH) {
-			txt = dialogues[dialogueIndex]->text.c_str();
+			txt = Scenes[sceneIndex]->dialogues[dialogueIndex]->text.c_str();
 		}
 		else if (myLanguage == SHAKESPEREAN) {
-			txt = shakespeareDialogues[dialogueIndex]->text.c_str();
+			txt = Scenes[sceneIndex]->shakespeareDialogues[dialogueIndex]->text.c_str();
 		}
 		const char* text = txt.c_str();
-		const char* owner = dialogues[dialogueIndex]->owner.c_str();
+		const char* owner = Scenes[sceneIndex]->dialogues[dialogueIndex]->owner.c_str();
 		numLines = 0;
 
-		if (dialogues[dialogueIndex]->myPos == MIDDLE) {
+		if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos == MIDDLE) {
 			dialogueBox = narratorBox;
 
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , (dialogueBox.w + 6) , (dialogueBox.h + 6) }, b2Color(0, 0, 10, 1), true, true);
@@ -303,7 +322,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2 * app->win->GetScale(), true);
 
 		}
- 		else if (dialogues[dialogueIndex]->myPos == LEFT) {
+ 		else if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos == LEFT) {
 			dialogueBox = speechBox;
 
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
@@ -391,7 +410,12 @@ void DialogueManager::AdvanceText() {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 			// If all the text has finished skip to next dialogue, else skip scrolling
 			if (HasScrollFinished()) {
-				if (myState == CUTSCENE) dialogueIndex++;
+				if (myState == CUTSCENE) {
+					
+					
+					Next_Dialogue();
+
+				}
 				else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
 				
 				scrolling = true;
@@ -407,7 +431,7 @@ void DialogueManager::AdvanceText() {
 	}
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		if (HasScrollFinished()) {
-			if (myState == CUTSCENE) dialogueIndex++;
+			if (myState == CUTSCENE) Next_Dialogue();
 			else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
 			scrolling = true;
 			numLines = 0;
@@ -447,4 +471,22 @@ void DialogueManager::npcTalk(DynArray<Dialogue*>& npcDialogues) {
 		npcDialogueIndex = -1;
 		currentNPC_Dialogues.Clear();
 	}
+}
+
+void DialogueManager::Next_Dialogue() {
+
+	dialogueIndex++;
+
+	// checks if the scene has finished
+	if (dialogueIndex + 1 == Scenes[sceneIndex]->numDialogues) {
+
+		dialogueIndex = 0;
+		if (sceneIndex + 1 != Scenes.Count()) {
+			sceneIndex++;
+		}
+
+	}
+
+
+
 }
