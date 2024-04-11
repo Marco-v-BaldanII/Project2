@@ -146,7 +146,7 @@ public:
 	EntityType type;
 	bool active = true;
 	pugi::xml_node parameters;
-
+	Entity* entity;
 	Entity* target;
 	bool entityTurn = false;
 
