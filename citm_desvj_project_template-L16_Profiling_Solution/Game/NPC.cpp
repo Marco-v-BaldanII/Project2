@@ -43,7 +43,6 @@ bool Npc::Update(float dt)
 
 	body.x = position.x;
 	
-	app->render->DrawRectangle(body, b2Color(1, 0, 0, 1), true,true);
 
 
 	int mouseX, mouseY;
@@ -79,6 +78,13 @@ bool Npc::Update(float dt)
 	
 	Walk();
 
+	return true;
+}
+
+bool Npc::PostUpdate()
+{
+	app->render->DrawRectangle(body, b2Color(1, 0, 0, 1), true, true);
+	
 	return true;
 }
 

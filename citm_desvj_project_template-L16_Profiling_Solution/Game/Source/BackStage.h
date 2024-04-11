@@ -39,6 +39,8 @@ public:
 	iPoint uncheckableTiles[3];
 	bool hasBeenCreated;
 
+	pugi::xml_node mynode;
+
 private:
 	SDL_Texture* img;
 	SDL_Texture* background;

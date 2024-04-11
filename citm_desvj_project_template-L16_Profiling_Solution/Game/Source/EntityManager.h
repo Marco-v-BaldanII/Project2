@@ -38,7 +38,7 @@ public:
 
 	void AddEntity(Entity* entity);
 
-	Entity* PlaceNPC(string name, int x, int wait);
+	Entity* PlaceNPC(string name, int x, int y, int wait);
 
 	p2ListItem<Entity*>* GetNearestPlayer(Entity* player);
 

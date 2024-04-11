@@ -5,6 +5,7 @@
 #include "Physics.h"
 #include "GuiManager.h"
 #include "BackStage.h"
+#include "../NPC.h"
 
 BackStage::BackStage(bool isActive) : Module(isActive)
 {
@@ -32,6 +33,20 @@ bool BackStage::Start()
 		app->backstageplayer->Enable();
 		app->backstageplayer->position.x = 100;
 		app->backstageplayer->position.y = 100;
+
+		//noc creation
+		for (pugi::xml_node npcNode = mynode.child("npc"); npcNode != NULL; npcNode = npcNode.next_sibling("npc")) {
+
+			Npc* dude = (Npc*)app->entityManager->PlaceNPC(npcNode.attribute("name").as_string(), npcNode.attribute("x").as_int(), npcNode.attribute("y").as_int(), npcNode.attribute("wait").as_int());
+
+			for (pugi::xml_node dialogueNode = npcNode.child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
+				// Create all the dialogues for the npc
+				string text = dialogueNode.attribute("text").as_string();
+				Dialogue* di = new Dialogue(npcNode.attribute("name").as_string(), text);
+
+				dude->myDialogues.PushBack(di);
+			}
+		}
 	}
 
 	return true;

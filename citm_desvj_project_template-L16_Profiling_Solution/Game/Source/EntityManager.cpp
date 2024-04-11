@@ -11,6 +11,7 @@
 #include "Map.h"
 #include "Log.h"
 #include "../BackstagePlayer.h"
+#include "BackStage.h"
 
 using namespace std;
 
@@ -41,20 +42,10 @@ bool EntityManager::Awake(pugi::xml_node config)
 		ret = item->data->Awake();
 	}
 
+	app->backStage->mynode = config;
+
 	// NPCs
-	for (pugi::xml_node npcNode = config.child("npc"); npcNode != NULL; npcNode = npcNode.next_sibling("npc")) {
-
-		Npc* dude = (Npc*) PlaceNPC(npcNode.attribute("name").as_string(), npcNode.attribute("x").as_int(), npcNode.attribute("wait").as_int());
-		
-
-		for (pugi::xml_node dialogueNode = npcNode.child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
-			// Create all the dialogues for the npc
-			string text = dialogueNode.attribute("text").as_string();
-			Dialogue* di = new Dialogue(npcNode.attribute("name").as_string(), text);
-
-			dude->myDialogues.PushBack(di);
-		}
-	}
+	
 
 
 
@@ -135,10 +126,11 @@ void EntityManager::DestroyEntity(Entity* entity)
 	}
 }
 
-Entity* EntityManager::PlaceNPC(string name, int x, int wait) {
+Entity* EntityManager::PlaceNPC(string name, int x, int y, int wait) {
 
 	Entity* entity = new Npc(name, x , wait);
 	entity->position.x = x;
+	entity->position.y = y;
 	entities.Add(entity);
 
 	return entity;
