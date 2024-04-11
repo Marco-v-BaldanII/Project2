@@ -73,10 +73,17 @@ bool BackStage::Update(float dt)
 		if (pEntity->active == false) continue;
 		if (app->backstageplayer->position.DistanceTo(pEntity->position) < 50) {
 			LOG("NEAR");
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-				LOG("TALKING");
+			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
+				//block movimiento de player
+				app->dialogueManager->npcTalk(pEntity->myDialogues);
 			}
 		}
+	}
+
+	// Activate Pause Menu
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		
 	}
 
 	return true;

@@ -27,7 +27,6 @@ Npc::~Npc() {
 
 bool Npc::Awake() {
 
-	
 	return true;
 }
 
