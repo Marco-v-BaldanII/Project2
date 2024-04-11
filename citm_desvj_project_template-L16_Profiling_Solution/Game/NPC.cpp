@@ -12,10 +12,11 @@
 #include "random.h"
 #include "../Timer.h"
 
-Npc::Npc(string name, int x, int wait) : Entity(EntityType::NPC)
+Npc::Npc(string name, int x, int y, int wait) : Entity(EntityType::NPC)
 {
 	this->name = name;
 	position.x = x;
+	position.y = y;
 	waitTime = wait;
 	//name.Create("Npc");
 }
@@ -39,10 +40,10 @@ bool Npc::Start() {
 
 bool Npc::Update(float dt)
 {
-	LOG(name.c_str());
+	//LOG(name.c_str());
 
 	body.x = position.x;
-	
+	body.y = position.y;
 
 
 	int mouseX, mouseY;

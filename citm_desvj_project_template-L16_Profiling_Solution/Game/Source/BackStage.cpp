@@ -6,6 +6,7 @@
 #include "GuiManager.h"
 #include "BackStage.h"
 #include "../NPC.h"
+#include "Log.h"
 
 BackStage::BackStage(bool isActive) : Module(isActive)
 {
@@ -46,6 +47,8 @@ bool BackStage::Start()
 
 				dude->myDialogues.PushBack(di);
 			}
+
+			npcsList.Add(dude);
 		}
 	}
 
@@ -53,12 +56,28 @@ bool BackStage::Start()
 }
 
 bool BackStage::PreUpdate()
-{
+{	
 	return true;
 }
 
 bool BackStage::Update(float dt)
 {
+	//recorrer la lista de npc y ver si el player esta cerca de alguno mostar un cubo para, y si le da a la E mostrar el dialogo
+	ListItem<Npc*>* item;
+	Npc* pEntity = NULL;
+
+	for (item = npcsList.start; item != NULL; item = item->next)
+	{
+		pEntity = item->data;
+
+		if (pEntity->active == false) continue;
+		if (app->backstageplayer->position.DistanceTo(pEntity->position) < 50) {
+			LOG("NEAR");
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+				LOG("TALKING");
+			}
+		}
+	}
 
 	return true;
 }
