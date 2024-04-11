@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "Entity.h"
 #include "../BackstagePlayer.h"
+#include "../NPC.h"
 
 struct SDL_Texture;
 
@@ -38,6 +39,10 @@ public:
 
 	iPoint uncheckableTiles[3];
 	bool hasBeenCreated;
+
+	pugi::xml_node mynode;
+
+	List<Npc*> npcsList;
 
 private:
 	SDL_Texture* img;

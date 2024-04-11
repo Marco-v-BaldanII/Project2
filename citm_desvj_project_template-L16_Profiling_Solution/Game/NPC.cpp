@@ -10,12 +10,14 @@
 #include "../Physics.h"
 #include "../Map.h"
 #include "random.h"
+#include "BackstagePlayer.h"
 #include "../Timer.h"
 
-Npc::Npc(string name, int x, int wait) : Entity(EntityType::NPC)
+Npc::Npc(string name, int x, int y, int wait) : Entity(EntityType::NPC)
 {
 	this->name = name;
 	position.x = x;
+	position.y = y;
 	waitTime = wait;
 	//name.Create("Npc");
 }
@@ -26,7 +28,6 @@ Npc::~Npc() {
 
 bool Npc::Awake() {
 
-	
 	return true;
 }
 
@@ -39,11 +40,10 @@ bool Npc::Start() {
 
 bool Npc::Update(float dt)
 {
-	LOG(name.c_str());
+	//LOG(name.c_str());
 
 	body.x = position.x;
-	
-	app->render->DrawRectangle(body, b2Color(1, 0, 0, 1), true,true);
+	body.y = position.y;
 
 
 	int mouseX, mouseY;
@@ -60,7 +60,9 @@ bool Npc::Update(float dt)
 		}
 	}
 
-	if (dirTimer.ReadSec() > waitTime) {
+	if (dirTimer.ReadMSec() > waitTime*1000) {
+
+		dirTimer.Start();
 
 		int rand = getRandomNumber(0, 2);
 		switch (rand) {
@@ -77,8 +79,17 @@ bool Npc::Update(float dt)
 
 	}
 	
-	Walk();
+	if (app->backstageplayer->talking == false) {
+		Walk();
+	}
 
+	return true;
+}
+
+bool Npc::PostUpdate()
+{
+	app->render->DrawRectangle(body, b2Color(1, 0, 0, 1), true, true);
+	
 	return true;
 }
 

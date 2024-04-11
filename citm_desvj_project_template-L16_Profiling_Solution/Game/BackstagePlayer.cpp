@@ -15,7 +15,7 @@ bool BackStagePlayer::Start()
 	// Set player texture
 	if (active)
 	{
-		playerTexture = app->tex->Load("Assets/Textures/player2.png");
+		playerTexture = app->tex->Load("Assets/Textures/Overworlds sombreados.png");
 
 		// Load animationss
 		walkSpeed = 0.1f;
@@ -103,7 +103,7 @@ bool BackStagePlayer::PreUpdate()
 bool BackStagePlayer::Update(float dt)
 {
 	// Set player position
-	if (canMove)
+	if (canMove && !talking)
 	{
 		SDL_RendererFlip flip = lastDirection;
 		// Set player direction
@@ -218,7 +218,7 @@ bool BackStagePlayer::PostUpdate()
 
 	//camera follow player
 	app->render->camera.x = (-position.x + SCREEN_WIDTH / 2);
-	app->render->camera.y = (-position.y + SCREEN_HEIGHT / 2);
+	//app->render->camera.y = (-position.y + SCREEN_HEIGHT / 2 * SCREEN_SIZE);
 	//
 
 	//camera boundaries in backStage
@@ -256,7 +256,6 @@ bool BackStagePlayer::PostUpdate()
 	{
 		position.y = 384;
 	}
-
 
 	return true;
 }

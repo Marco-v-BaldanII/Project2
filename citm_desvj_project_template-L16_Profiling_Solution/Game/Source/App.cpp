@@ -59,7 +59,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(true); //Esta ROTO
 	guiManager = new GuiManager(true);
 
-	dialogueManager = new DialogueManager(false); //editar despues//
+	dialogueManager = new DialogueManager(true); //editar despues//
 	turnManager = new TurnManager(false);
 
 	
@@ -96,9 +96,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(turnManager);
 	AddModule(fonts);
 	AddModule(guiManager);
-	AddModule(dialogueManager);
+	
 	AddModule(entityManager);
 	AddModule(backstageplayer);
+	AddModule(dialogueManager);
 	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);

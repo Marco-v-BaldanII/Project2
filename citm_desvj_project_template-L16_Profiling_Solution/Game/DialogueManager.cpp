@@ -11,6 +11,7 @@
 #include "someColors.h"
 #include <string>
 #include <map>
+#include "BackstagePlayer.h"
 
 using namespace std;
 
@@ -34,6 +35,7 @@ bool DialogueManager::Awake(pugi::xml_node config)
 	// Load all the portrait textures
 	
 	myLanguage = ENGLISH;
+	myState = NPCS;
 	
 	myConfig = config;
 
@@ -185,55 +187,70 @@ bool DialogueManager::Update(float dt)
 	// This method checks for the input to advance to the next dialogue
 	AdvanceText();
 	
-	// Adjust the position of the text box
-	DrawBackground();
-
-	DrawTextBox(dialogues[dialogueIndex]->myPos);
-
-	DrawPortrait();
+	
 
 	
 	if (scrolling) {
 		ManageScrolling();
 	}
 	
-	// Check to change dialogue language
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
-		ChangeLanguage();
-	}
+	if (myState == CUTSCENE) {
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 
-		skipFrames+=2;
 
-		if (skipFrames > 100){
-			skipFrames = 0;
-			skipScene = true;
-			Next_Dialogue();
+		// Check to change dialogue language
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+			ChangeLanguage();
 		}
 
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+
+			skipFrames += 2;
+
+			if (skipFrames > 100) {
+				skipFrames = 0;
+				skipScene = true;
+				Next_Dialogue();
+			}
+
+		}
+		else {
+			skipFrames = 0;
+		}
+
+		skipRect.w = skipFrames;
+
+		app->render->DrawTexture(skipBttnTex, skipRect.x, skipRect.y);
+
+		app->render->DrawRectangle(skipRect, b2Color(1, 1, 0, 0.5f), true, true);
 	}
-	else {
-		skipFrames = 0;
-	}
-
-	skipRect.w = skipFrames;
-
-	app->render->DrawTexture(skipBttnTex, skipRect.x, skipRect.y);
-
-	app->render->DrawRectangle(skipRect, b2Color(1, 1, 0, 0.5f), true,true);
-
 
 	return ret;
+}
+ 
+bool DialogueManager::PostUpdate() {
+
+	// Draw stuff
+	DrawBackground();
+
+	DrawTextBox(dialogues[dialogueIndex]->myPos);
+
+	DrawPortrait();
+
+	return true;
+
 }
 
 void DialogueManager::DrawBackground() {
 
-	if (Scenes[sceneIndex]->dialogues[dialogueIndex]->background != nullptr) { background = Scenes[sceneIndex]->dialogues[dialogueIndex]->background; }
+	if (myState == CUTSCENE) {
 
-	if (background != nullptr) {
-		SDL_Rect dsScreen = SDL_Rect{ 0,0,256*2,198*2 };
-		app->render->DrawTexture(background, 0, 0, &dsScreen);
+		if (Scenes[sceneIndex]->dialogues[dialogueIndex]->background != nullptr) { background = Scenes[sceneIndex]->dialogues[dialogueIndex]->background; }
+
+		if (background != nullptr) {
+			SDL_Rect dsScreen = SDL_Rect{ 0,0,256 * 2,198 * 2 };
+			app->render->DrawTexture(background, 0, 0, &dsScreen);
+		}
 	}
 
 }
@@ -290,10 +307,7 @@ void DialogueManager::ManageScrolling() {
 	}
 }
 
-bool DialogueManager::PostUpdate() {
-	
-	return true;
-}
+
 
 void DialogueManager::ResetScroll() {
 	w1_1 = -dialogueBox.w;
@@ -372,24 +386,26 @@ void DialogueManager::DrawTextBox(Position pos) {
 		}
 	}
 	else {
-		string txt = "fhfjf";
-		
-		txt = currentNPC_Dialogues[npcDialogueIndex]->text;
+		if (currentNPC_Dialogues.Count() != 0) {
 
-		const char* text = txt.c_str();
-		const char* owner = dialogues[dialogueIndex]->owner.c_str();
-		numLines = 0;
+			string txt = "fhfjf";
 
-		// For now i am drawing npc dialogue in the narrator box
+			txt = currentNPC_Dialogues[npcDialogueIndex]->text;
+
+			const char* text = txt.c_str();
+			const char* owner = dialogues[dialogueIndex]->owner.c_str();
+			numLines = 0;
+
+			// For now i am drawing npc dialogue in the narrator box
 			dialogueBox = narratorBox;
 
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
 			app->render->DrawRectangle(dialogueBox, whitey, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * app->win->GetScale(), true, SDL_Color{0,0,0,1});
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
 
-		
+		}
 		
 	}
 
@@ -505,9 +521,10 @@ void DialogueManager::npcTalk(DynArray<Dialogue*>& npcDialogues) {
 		myState = NPCS;
 		this->currentNPC_Dialogues = npcDialogues;
 		npcDialogueIndex++;
+		app->backstageplayer->talking = true;
 	}
 	else {
-		myState = CUTSCENE;
+		app->backstageplayer->talking = false;
 		npcDialogueIndex = -1;
 		currentNPC_Dialogues.Clear();
 	}
