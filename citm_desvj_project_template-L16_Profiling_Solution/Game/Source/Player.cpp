@@ -10,6 +10,8 @@
 #include "Physics.h"
 #include "Map.h"
 #include "../TurnManager.h"
+#include <string>
+#include "../frame.h" /*dont include this in .h*/
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -22,7 +24,7 @@ Player::~Player() {
 
 bool Player::Awake() {
 
-	//L03: DONE 2: Initialize Player parameters
+	//Initialize Player parameters
 	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 	name = config.attribute("name").as_string();
 
@@ -52,6 +54,9 @@ bool Player::Awake() {
 	}
 	InitializeStats(config);
 
+	
+
+
 	return true;
 }
 
@@ -64,6 +69,12 @@ bool Player::Start() {
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 	state = IDLE;
 	app->entityManager->players.add(this);
+
+	SDL_Texture* tex = app->tex->Load("Assets/Textures/UI/UnitUI.png");
+	
+	std::string s = config.attribute("name").as_string();
+
+	myFrame = new Frame(iPoint(512 +( - 94*2), 20), 4.0f, LEFTWARDS, SDL_Rect{0,0,94,99}, tex, attack, hp, precision, luck, speed, movement, s);
 
 	return true;
 }
@@ -185,6 +196,8 @@ bool Player::PostUpdate()
 	{
 		//Draw path
 		app->map->pathfinding->DrawBFSPath();
+
+		myFrame->Render(1.0/60.0);
 
 		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 		if (path != nullptr)

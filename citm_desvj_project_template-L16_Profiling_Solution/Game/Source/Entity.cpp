@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "Map.h"
 
+#include "../frame.h"
+
 #define MOVE_SPEED 2
 
 

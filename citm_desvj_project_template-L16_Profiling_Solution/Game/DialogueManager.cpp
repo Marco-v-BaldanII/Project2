@@ -7,6 +7,8 @@
 #include "Source/Window.h"
 #include "Source/Defs.h"
 #include "Source/Log.h"
+#include "TurnManager.h"
+#include "../BattleScene.h"
 #include "Interpolation.h"
 #include "someColors.h"
 #include <string>
@@ -24,7 +26,6 @@ DialogueManager::DialogueManager(bool isActive) : Module(isActive)
 DialogueManager::~DialogueManager()
 {}
 
-// NOTA recuerda hacer esta movida modular para que el textbox pueda estar MODULAR CON LOS BOCADILLOS QUE APAREZCAN EN DISTINTOS LADOS, estoy cansado buenas noches
 
 // Called before render is availableposition
 bool DialogueManager::Awake(pugi::xml_node config)
@@ -35,7 +36,7 @@ bool DialogueManager::Awake(pugi::xml_node config)
 	// Load all the portrait textures
 	
 	myLanguage = ENGLISH;
-	myState = NPCS;
+	myState = CUTSCENE;
 	
 	myConfig = config;
 
@@ -203,26 +204,7 @@ bool DialogueManager::Update(float dt)
 			ChangeLanguage();
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
-
-			skipFrames += 2;
-
-			if (skipFrames > 100) {
-				skipFrames = 0;
-				skipScene = true;
-				Next_Dialogue();
-			}
-
-		}
-		else {
-			skipFrames = 0;
-		}
-
-		skipRect.w = skipFrames;
-
-		app->render->DrawTexture(skipBttnTex, skipRect.x, skipRect.y);
-
-		app->render->DrawRectangle(skipRect, b2Color(1, 1, 0, 0.5f), true, true);
+		
 	}
 
 	return ret;
@@ -251,6 +233,8 @@ void DialogueManager::DrawBackground() {
 			SDL_Rect dsScreen = SDL_Rect{ 0,0,256 * 2,198 * 2 };
 			app->render->DrawTexture(background, 0, 0, &dsScreen);
 		}
+
+
 	}
 
 }
@@ -384,6 +368,27 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(nameBoxR, black, true, true);
 			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
+
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+
+			skipFrames += 2;
+
+			if (skipFrames > 100) {
+				skipFrames = 0;
+				skipScene = true;
+				Next_Dialogue();
+			}
+
+		}
+		else {
+			skipFrames = 0;
+		}
+
+		skipRect.w = skipFrames;
+
+		app->render->DrawTexture(skipBttnTex, skipRect.x, skipRect.y);
+
+		app->render->DrawRectangle(skipRect, b2Color(1, 1, 0, 0.5f), true, true);
 	}
 	else {
 		if (currentNPC_Dialogues.Count() != 0) {
@@ -539,8 +544,16 @@ void DialogueManager::Next_Dialogue() {
 
 		skipScene = false;
 		dialogueIndex = 0;
- 		if (sceneIndex + 1 != Scenes.Count()) {
+ 		if (sceneIndex + 1 != 6) {
 			sceneIndex++;
+		}
+		else {
+			// the cutscene for act 1 has finished
+			myState = NPCS;
+			app->entityManager->Enable();
+			app->turnManager->Enable();
+			app->battleScene->Enable();
+			app->levelManager->LoadScene(GameScene::COMBAT);
 		}
 
 	}

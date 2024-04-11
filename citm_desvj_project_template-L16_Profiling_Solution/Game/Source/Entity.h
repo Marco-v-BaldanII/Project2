@@ -9,6 +9,8 @@
 #include "Render.h"
 #include "Map.h"
 
+class Frame;
+
 enum class EntityType
 {
 	PLAYER,
@@ -133,6 +135,8 @@ public:
 	float moveTime = 32;
 	float counter = 0;
 	States state;
+
+	Frame* myFrame = nullptr;
 
 	bool HasAttackAction = false;
 	bool HasMoveAction = false;

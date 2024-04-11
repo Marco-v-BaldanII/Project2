@@ -319,7 +319,7 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h,
 		
 	}
 
-	w = w / LINE_LENGTH * Clamp(numletters, 0,LINE_LENGTH);
+	if(isDialogue) w = w / LINE_LENGTH * Clamp(numletters, 0,LINE_LENGTH);
 
 
 	int texW = 0;

@@ -33,6 +33,9 @@ public:
 
 public:
 
+	Frame* frames;
+
+
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
 	SDL_Texture* myTexture = NULL;
