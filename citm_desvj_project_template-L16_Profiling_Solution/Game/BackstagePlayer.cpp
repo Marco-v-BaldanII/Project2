@@ -103,7 +103,7 @@ bool BackStagePlayer::PreUpdate()
 bool BackStagePlayer::Update(float dt)
 {
 	// Set player position
-	if (canMove)
+	if (canMove && !talking)
 	{
 		SDL_RendererFlip flip = lastDirection;
 		// Set player direction

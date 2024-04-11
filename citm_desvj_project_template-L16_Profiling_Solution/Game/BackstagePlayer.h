@@ -47,6 +47,8 @@ public:
 
 	iPoint position;
 
+	bool talking = false;
+
 private:
 	SDL_Texture* playerTexture = nullptr;
 	

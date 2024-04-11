@@ -11,6 +11,7 @@
 #include "someColors.h"
 #include <string>
 #include <map>
+#include "BackstagePlayer.h"
 
 using namespace std;
 
@@ -520,9 +521,10 @@ void DialogueManager::npcTalk(DynArray<Dialogue*>& npcDialogues) {
 		myState = NPCS;
 		this->currentNPC_Dialogues = npcDialogues;
 		npcDialogueIndex++;
+		app->backstageplayer->talking = true;
 	}
 	else {
-		
+		app->backstageplayer->talking = false;
 		npcDialogueIndex = -1;
 		currentNPC_Dialogues.Clear();
 	}

@@ -10,6 +10,7 @@
 #include "../Physics.h"
 #include "../Map.h"
 #include "random.h"
+#include "BackstagePlayer.h"
 #include "../Timer.h"
 
 Npc::Npc(string name, int x, int y, int wait) : Entity(EntityType::NPC)
@@ -59,7 +60,9 @@ bool Npc::Update(float dt)
 		}
 	}
 
-	if (dirTimer.ReadSec() > waitTime) {
+	if (dirTimer.ReadMSec() > waitTime*1000) {
+
+		dirTimer.Start();
 
 		int rand = getRandomNumber(0, 2);
 		switch (rand) {
@@ -76,7 +79,9 @@ bool Npc::Update(float dt)
 
 	}
 	
-	Walk();
+	if (app->backstageplayer->talking == false) {
+		Walk();
+	}
 
 	return true;
 }
