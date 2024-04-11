@@ -64,6 +64,9 @@ private:
 
 	List<Player*> party;
 	List<Enemy*> goons;
+	
+	bool started = false;
+
 public:
 	pugi::xml_node mynode;
 

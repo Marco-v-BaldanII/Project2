@@ -28,6 +28,18 @@ enum States {
 
 class PhysBody;
 
+enum UnitType {
+
+	PALADIN,
+	ARCHER,
+	KNIGHT,
+	ARMOURED_KNIGHT,
+	MAGE,
+	DARK_MAGE
+
+
+};
+
 class Entity
 {
 public:
@@ -101,9 +113,13 @@ public:
 
 	void AssocateEntity_Tile(iPoint position);
 
+
+	void InitializeStats(pugi::xml_node config);
+
+
 public:
 
-
+	UnitType unitType;
 
 	iPoint* currentP;
 	iPoint* nextP;

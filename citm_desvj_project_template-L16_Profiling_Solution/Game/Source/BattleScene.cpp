@@ -43,7 +43,7 @@ bool BattleScene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool BattleScene::Start()
 {
-	if (true)
+	if (!started)
 	{
 		spriteSheet = app->tex->Load(mynode.child("texture").attribute("path").as_string());
 
@@ -59,7 +59,7 @@ bool BattleScene::Start()
 			p->config = Pnode;
 			p->Awake();
 			party.Add(p);
-			p->texture = spriteSheet;
+			p->myTexture = spriteSheet;
 		}
 
 		// Read enemies from config and instantiate them
@@ -85,6 +85,7 @@ bool BattleScene::Start()
 		//app->dialogueManager->Enable();
 
 		rect = { 0,0,64,90 };
+		started = true;
 	}
 	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
 	return true;

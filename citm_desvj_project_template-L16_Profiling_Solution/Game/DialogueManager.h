@@ -142,8 +142,8 @@ public:
 
 	//Text speed
 	float slowVelocity = 0.002;
-	float normalVelocity = 0.003;
-	float fastVelocity = 0.004;
+	float normalVelocity = 0.004;
+	float fastVelocity = 0.007;
 
 	float textVelocity = normalVelocity;
 

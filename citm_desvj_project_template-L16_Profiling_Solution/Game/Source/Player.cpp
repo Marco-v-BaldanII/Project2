@@ -26,12 +26,38 @@ bool Player::Awake() {
 	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
 	name = config.attribute("name").as_string();
 
+	int type = config.attribute("unit_type").as_int();
+
+	switch (type) {
+
+	case 0:
+		unitType = PALADIN;
+		break;
+	case 1:
+		unitType = ARCHER;
+		break;
+	case 2:
+		unitType = KNIGHT;
+		break;
+	case 3:
+		unitType = ARMOURED_KNIGHT;
+		break;
+	case 4:
+		unitType = MAGE;
+		break;
+	case 5: 
+		unitType = DARK_MAGE;
+		break;
+
+	}
+	InitializeStats(config);
+
 	return true;
 }
 
 bool Player::Start() {
 	//config.attribute("texturePath").as_string()
-	texture = app->tex->Load("Assets/Textures/player1.png");
+	
 	moveTime = 32;
 	counter = moveTime;
 	//initialize audio effect
@@ -81,6 +107,8 @@ bool Player::PreUpdate()
 		}
 		break;
 	}
+
+
 	return true;
 }
 
@@ -126,7 +154,7 @@ bool Player::Update(float dt)
 
 
 		    
-			app->map->pathfinding->GenerateWalkeableArea(tilePos, 3);
+			app->map->pathfinding->GenerateWalkeableArea(tilePos, movement);
 
 			ExpandedBFS = true;
 		}
@@ -138,7 +166,8 @@ bool Player::Update(float dt)
 		break;
 	}
 		
-	app->render->DrawTexture(texture,position.x,position.y);
+	SDL_Rect randRect = SDL_Rect{ 8,0,32,32 };
+	app->render->DrawTexture(myTexture,position.x,position.y, &randRect,false, 100);
 
 	return true;
 }
@@ -146,7 +175,7 @@ bool Player::Update(float dt)
 bool Player::PostUpdate() 
 {
 	//draw movement area
-	app->map->pathfinding->DrawBFSPath();
+	
 	switch (state)
 	{
 	case IDLE:
@@ -155,6 +184,8 @@ bool Player::PostUpdate()
 	case MOVE:
 	{
 		//Draw path
+		app->map->pathfinding->DrawBFSPath();
+
 		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 		if (path != nullptr)
 		{
@@ -177,22 +208,32 @@ bool Player::PostUpdate()
 
 void Player::ClickOnMe() {
 
-	clickBox.x = position.x; clickBox.y = position.y;
+	
 
-	int mouseX, mouseY;
+		clickBox.x = position.x; clickBox.y = position.y;
 
-	app->input->GetMousePosition(mouseX, mouseY);
+		int mouseX, mouseY;
 
-	//If the position of the mouse if inside the bounds of the box 
-	if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h) {
+		app->input->GetMousePosition(mouseX, mouseY);
 
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
-			
-			app->turnManager->SelectPlayer(this);
-			state = MOVE;
+		//If the position of the mouse if inside the bounds of the box 
+		if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h) {
 
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+				if (state == IDLE) {
+					app->turnManager->SelectPlayer(this);
+					state = MOVE;
+				}
+				else {
+					state = IDLE;
+					app->turnManager->DeSelectPlayer();
+				}
+
+			}
 		}
-	}
+
+	
+	
 	//app->render->DrawRectangle(clickBox, b2Color(1,0,1,1),false, true);
 
 }

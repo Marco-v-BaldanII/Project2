@@ -102,6 +102,14 @@ void TurnManager::SelectPlayer(Player* player) {
 	}
 }
 
+void TurnManager::DeSelectPlayer() {
+
+	if (currentPlayer != nullptr) {
+		currentPlayer = nullptr;
+	}
+
+}
+
 void TurnManager::InitializeChessPieces(List<Player*>* players, List<Enemy*>* enemies) {
 	
 	this->players = *players;

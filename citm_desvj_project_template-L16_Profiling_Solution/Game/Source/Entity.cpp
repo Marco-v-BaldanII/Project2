@@ -46,7 +46,7 @@ bool Entity::MovePath()
 			//For AI:
 			//if enemy has moved more than he can 
 			//clear the path to stop the movement
-			if (3 <= stepCounter)
+			if (movement <= stepCounter)
 				app->map->pathfinding->ClearPath();
 
 
@@ -161,5 +161,16 @@ void Entity::AssocateEntity_Tile(iPoint position) {
 	currentTile = app->map->myTiles[position.x][position.y]; // Associate the entity to the tile
 	currentTile->myEntity = this; // Associate the tile to the entity
 
+
+}
+
+void Entity::InitializeStats(pugi::xml_node config) {
+
+	attack = config.attribute("attack").as_int();
+	movement = config.attribute("movement").as_int();
+	hp = config.attribute("hp").as_int();
+	precision = config.attribute("precision").as_int();
+	luck = config.attribute("luck").as_int();
+	speed = config.attribute("speed").as_int();
 
 }

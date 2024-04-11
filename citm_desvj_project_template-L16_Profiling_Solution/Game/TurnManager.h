@@ -39,6 +39,8 @@ public:
 
 	void SelectPlayer(Player* player);
 
+	void DeSelectPlayer();
+
 	void InitializeChessPieces(List<Player*>* players, List<Enemy*>* enemies);
 
 	bool EnemyTurn();
