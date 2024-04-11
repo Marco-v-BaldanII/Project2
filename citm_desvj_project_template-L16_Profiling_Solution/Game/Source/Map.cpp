@@ -92,7 +92,7 @@ bool Map::Update(float dt)
                     app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
 
                     if (i == 50) {
-                        LOG("test");
+                        //LOG("test");
                     }
 
                     if (showMinimap) {

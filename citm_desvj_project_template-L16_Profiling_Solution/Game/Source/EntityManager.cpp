@@ -128,7 +128,7 @@ void EntityManager::DestroyEntity(Entity* entity)
 
 Entity* EntityManager::PlaceNPC(string name, int x, int y, int wait) {
 
-	Entity* entity = new Npc(name, x , wait);
+	Entity* entity = new Npc(name, x , y, wait);
 	entity->position.x = x;
 	entity->position.y = y;
 	entities.Add(entity);

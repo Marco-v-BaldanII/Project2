@@ -30,7 +30,7 @@ public:
 
 	};
 
-	Npc(string name, int x, int wait);
+	Npc(string name, int x, int y, int wait);
 
 	virtual ~Npc();
 

@@ -33,7 +33,7 @@
 		</npc>
 
 
-		<npc name = "Guy2" x ="160" y="100" wait="3">
+		<npc name = "Guy2" x ="160" y="200" wait="3">
 			<dialogue text = "My name is Standard Steve "          />
 			<dialogue text = "I have many interesting things to say"          />
 			<dialogue text = "Do you know that Canada eats more macarroni and cheese than any other nation in the world ?"          />
