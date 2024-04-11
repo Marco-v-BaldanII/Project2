@@ -69,6 +69,8 @@ bool Player::Start() {
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 	state = IDLE;
 	app->entityManager->players.add(this);
+	hp = 100;
+	attack = 20;
 
 	SDL_Texture* tex = app->tex->Load("Assets/Textures/UI/UnitUI.png");
 	
@@ -108,12 +110,26 @@ bool Player::PreUpdate()
 			iPoint p;
 			p.x = x;
 			p.y = y;
-			p = app->map->WorldToMap(p.x, p.y);
-
+			p = app->map->WorldToMap(p.x - app->render->camera.x, p.y - app->render->camera.y);
+			
+	
 			if (!InitPath(p)) {
 				ExpandedBFS = false;
 				app->map->pathfinding->ResetBFSPath();
 				state = IDLE;
+			}
+		}
+		else if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
+			int x, y;
+			app->input->GetMouseWorldPosition(x, y);
+			iPoint p;
+			p.x = x;
+			p.y = y;
+			p = app->map->WorldToMap(p.x - app->render->camera.x, p.y - app->render->camera.y);
+
+			if (app->entityManager->IsEnemyThere(p) != nullptr) {
+				oponent = app->entityManager->IsEnemyThere(p)->data->entity;
+				state = BATTLE;
 			}
 		}
 		break;
@@ -125,38 +141,12 @@ bool Player::PreUpdate()
 
 bool Player::Update(float dt)
 {
-	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 
-	/*if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		position.x += -0.2*dt;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		position.x += 0.2*dt;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		position.y += -0.2 * dt;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		position.y += 0.2 * dt;
-	}*/
-
-	/*if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !Move) {
-		state = MOVE;
-	}*/
-
-	/*	int mouseX, mouseY;
-		app->input->GetMousePosition(mouseX, mouseY);
-		iPoint mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x, mouseY - app->render->camera.y);
-
-		position.x = mouseTile.x * 32;
-		position.y = mouseTile.y * 32;*/
 	switch (state)
 	{
 	case IDLE:
-		//update idle
+		//if click enemy and enemay is on attack range engage combat
+		
 		break;
 	case MOVE:
 
@@ -173,7 +163,14 @@ bool Player::Update(float dt)
 		//move
 		MovePath();
 
-
+		break;
+	case BATTLE:
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) 
+		{
+			hp -= oponent->attack;
+			oponent->hp -= attack;
+			state = IDLE;
+		}
 		break;
 	}
 		
@@ -221,8 +218,6 @@ bool Player::PostUpdate()
 
 void Player::ClickOnMe() {
 
-	
-
 		clickBox.x = position.x; clickBox.y = position.y;
 
 		int mouseX, mouseY;
@@ -237,9 +232,9 @@ void Player::ClickOnMe() {
 					app->turnManager->SelectPlayer(this);
 					state = MOVE;
 				}
-				else {
-					state = IDLE;
-					app->turnManager->DeSelectPlayer();
+				else if (app->entityManager->IsEnemyThere(app->map->WorldToMap(mouseX - app->render->camera.x, mouseY - app->render->camera.y)) == nullptr)  {
+					//state = IDLE;
+					//app->turnManager->DeSelectPlayer();
 				}
 
 			}

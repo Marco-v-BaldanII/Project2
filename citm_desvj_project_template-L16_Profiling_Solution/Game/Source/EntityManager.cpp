@@ -222,3 +222,18 @@ p2ListItem<Entity*>* EntityManager::GetNearestPlayer(Entity* player)
 	else return ret;
 
 }
+
+ListItem<Entity*>* EntityManager::IsEnemyThere(const iPoint& pos) {
+
+
+	for (int i = 0; i < app->entityManager->enemies.Count(); i++)
+	{
+
+
+		if (pos == app->entityManager->enemies.At(i)->data->tilePos && app->entityManager->enemies.At(i)->data->state != DEAD)
+		{
+			return app->entityManager->enemies.At(i);
+		}
+	}
+	return nullptr;
+}

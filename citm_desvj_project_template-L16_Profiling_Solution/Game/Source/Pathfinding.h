@@ -9,6 +9,7 @@
 #include "p2List.h"
 #include "Queue.h"
 
+
 #define DEFAULT_PATH_LENGTH 50
 #define INVALID_WALK_CODE 255
 
@@ -55,6 +56,9 @@ public:
 
 	//Check if any entity is in the tile
 	bool IsTileEmpty(const iPoint& pos) const;
+
+	
+
 
 	void PropagateBFS();
 

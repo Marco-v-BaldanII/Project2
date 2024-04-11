@@ -40,11 +40,14 @@ public:
 
 	Entity* PlaceNPC(string name, int x, int y, int wait);
 
+	ListItem<Entity*>* IsEnemyThere(const iPoint& pos);
+
 	p2ListItem<Entity*>* GetNearestPlayer(Entity* player);
 
 public:
 
 	List<Entity*> entities;
+	List<Entity*> enemies;
 	p2List<Entity*> players;
 
 };

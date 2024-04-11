@@ -47,17 +47,20 @@ public:
 
 	void PlayerTurn();
 
+	Turn currentTurn = PLAYER;
+
+	Player* currentPlayer = nullptr;
 private:
 
 	List<Player*> players;
-	Player* currentPlayer = nullptr;
+
 
 	List<Enemy*> enemies;
 	Enemy* currentenemy = nullptr;
 
 	uint availablePlayers = 3;
 
-	Turn currentTurn = PLAYER;
+
 
 	uint enemyIndex = 0;
 	uint maxEnemies;

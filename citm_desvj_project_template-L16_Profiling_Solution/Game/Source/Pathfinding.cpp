@@ -543,9 +543,7 @@ void PathFinding::DrawBFSPath()
 	//}
 }
 
-// ----------------------------------------------------------------------------------
-// Actual BFS algorithm: return number of steps in the creation of the path or -1 ----
-// ----------------------------------------------------------------------------------
+
 
 
 void PathFinding::PropagateBFS()

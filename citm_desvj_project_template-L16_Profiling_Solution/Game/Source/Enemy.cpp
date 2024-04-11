@@ -28,9 +28,15 @@ bool Enemy::Awake() {
 	moveRange = 5;
 	state = IDLE;
 	moveTime = 32;
+	movement = 3;
+	attack = 50;
+	hp = 100;
+
 	counter = moveTime;
 	pathfinding = new PathFinding();
 	uchar* navigationMap = NULL;
+	app->entityManager->enemies.Add(this);
+	entity = this;
 
 	app->map->CreateNavigationMap(app->map->mapData.width, app->map->mapData.height, &navigationMap);
 	pathfinding->SetNavigationMap((uint)app->map->GetTileWidth(), (uint)app->map->GetTileHeight(), navigationMap);
@@ -69,7 +75,7 @@ bool Enemy::PreUpdate() {
 		if (entityTurn)
 		{
 
-			/*if (battleState == DEATH)
+			/*if (battleState == DEAD)
 				break;*/
 
 			if (target == nullptr)
@@ -127,7 +133,7 @@ bool Enemy::Update(float dt)
 	switch (state)
 	{
 	case IDLE:
-		
+	
 		break;
 	case MOVE:
 		
