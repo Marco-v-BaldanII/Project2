@@ -151,7 +151,7 @@ bool Player::Update(float dt)
 	{
 	case IDLE:
 		//if click enemy and enemay is on attack range engage combat
-		
+
 		break;
 	case MOVE:
 
@@ -159,7 +159,7 @@ bool Player::Update(float dt)
 		if (!ExpandedBFS) {
 
 
-		    
+
 			app->map->pathfinding->GenerateWalkeableArea(tilePos, movement);
 
 			ExpandedBFS = true;
@@ -170,17 +170,17 @@ bool Player::Update(float dt)
 
 		break;
 	case BATTLE:
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) 
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 		{
-			
+
 		}
 
 		battleTimer++;
 
 		if (battleTimer >= 1 && battleTimer < 300) {
 
-			app->render->DrawTexture(myBattleTexture, 0, 0, false , false,100);
-			app->render->DrawTexture(oponent->myBattleTexture, 0, 0, false, true, 100);
+			app->render->DrawTexture(myBattleTexture, 100, 100, false, false, 255);
+			app->render->DrawTexture(oponent->myBattleTexture, 250, 100, false, true, 255);
 		}
 
 		if (battleTimer == 298) {
@@ -191,12 +191,15 @@ bool Player::Update(float dt)
 
 		break;
 	}
-		
+
 	SDL_Rect randRect = SDL_Rect{ 8,0,32,32 };
-	app->render->DrawTexture(myTexture,position.x,position.y, &randRect,false, 100);
 
-	
-
+	if (movedThisTurn) {
+		app->render->DrawTexture(myTexture, position.x, position.y, &randRect, false, 100);
+	}
+	else {
+	app->render->DrawTexture(myTexture, position.x, position.y, &randRect, false, 255);
+	}
 	return true;
 }
 

@@ -78,6 +78,7 @@ public:
 
 	// we store the created path here
 	DynArray<iPoint> lastPath;
+	p2List<iPoint> visited;
 private:
 
 	// size of the map
@@ -85,7 +86,7 @@ private:
 	uint height;
 
 	Queue<iPoint> frontier;
-	p2List<iPoint> visited;
+	
 
 
 

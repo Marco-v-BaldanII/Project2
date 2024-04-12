@@ -36,6 +36,8 @@ bool Enemy::Awake() {
 
 	counter = moveTime;
 	pathfinding = new PathFinding();
+
+	
 	uchar* navigationMap = NULL;
 	app->entityManager->enemies.Add(this);
 	entity = this;
@@ -72,11 +74,15 @@ bool Enemy::PreUpdate() {
 
 		tilePos = pos;
 
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
+		{
 			entityTurn = true;
 			HasMoveAction = true;
+			drawPath = false;
+			target = nullptr;
 		}
-			
+	
 
 		if (entityTurn)
 		{
@@ -232,10 +238,18 @@ bool Enemy::PostUpdate() {
 	if (drawPath) {
 
 		myFrame->Render(1.0 / 60.0);
-
+		pathfinding->GenerateWalkeableArea(tilePos, movement + 1);
+		pathfinding->DrawBFSPath();
 
 
 	}
+	else 	
+	{
+		pathfinding->ClearPath();
+		pathfinding->ClearLastPath();
+		pathfinding->visited.clear();
+	}
+
 	myFrame->Update();
 
 	return true;
@@ -254,8 +268,8 @@ void Enemy::ClickOnMe() {
 
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 
-			drawPath = !drawPath;
-
+			drawPath = !drawPath; 
+		
 
 		}
 	}
