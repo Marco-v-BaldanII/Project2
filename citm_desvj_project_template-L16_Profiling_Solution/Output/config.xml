@@ -108,7 +108,7 @@
 	</map>
 
 	<intro>
-		<titleScreen path ="Assets/Textures/WOTR-MainScreen.png"/>
+		<titleScreen path ="Assets/Textures/Logo screen.png"/>
 		
 		
 	</intro>

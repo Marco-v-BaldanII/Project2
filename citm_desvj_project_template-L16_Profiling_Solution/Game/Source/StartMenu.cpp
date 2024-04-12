@@ -41,24 +41,24 @@ bool StartMenu::Start()
 {
 	if (active)
 	{
-		img = app->tex->Load("Assets/Textures/portrait1.png");
+		img = app->tex->Load("Assets/Textures/WOTR-MainScreen.png");
 		music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);
 		//app->dialogueManager->Enable();
-		rect = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };
+		rect = { 0,0,512,384 };
 		lastMusicVolume = app->audio->GetMusicVolume();
 		lastFxVolume = app->audio->GetFxVolume();
 
 		windowW = 512 * 3;
 		windowH = 384 * 3;
 
-		SDL_Rect pos1 = { windowW / 2 - 80, windowH / 2 - 90, 200,60 };
-		SDL_Rect pos2 = { windowW / 2 - 80, windowH / 2 - 10, 200,60 };
-		SDL_Rect pos3 = { windowW / 2 - 80, windowH / 2 + 60, 200,60 };
-		SDL_Rect pos4 = { windowW / 2 - 80, windowH / 2 + 130, 200,60 };
-		SDL_Rect pos5 = { windowW / 2 - 80, windowH / 2 + 200, 200,60 };
-		SDL_Rect pos6 = { windowW / 2 - 80, windowH / 2 + 270, 200,60 };
-		SDL_Rect pos7 = { windowW / 2 - 80, windowH / 2 + 340, 200,60 };
-		SDL_Rect pos8 = { windowW / 2 - 80, windowH / 2 + 410, 200,60 };
+		SDL_Rect pos1 = { windowW / 2 - 140, windowH / 2 - 140, 200,60 };
+		SDL_Rect pos2 = { windowW / 2 - 140, windowH / 2 - 70, 200,60 };
+		SDL_Rect pos3 = { windowW / 2 - 140, windowH / 2, 200,60 };
+		SDL_Rect pos4 = { windowW / 2 - 140, windowH / 2 + 70, 200,60 };
+		SDL_Rect pos5 = { windowW / 2 - 140, windowH / 2 + 140, 200,60 };
+		SDL_Rect pos6 = { windowW / 2 - 140, windowH / 2 + 210, 200,60 };
+		SDL_Rect pos7 = { windowW / 2 - 140, windowH / 2 + 280, 200,60 };
+		SDL_Rect pos8 = { windowW / 2 - 140, windowH / 2 + 350, 200,60 };
 
 		start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, " Start ", pos1, this);
 		load = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Load ", pos2, this);
@@ -103,6 +103,8 @@ bool StartMenu::Start()
 		resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, " Resume ", pos1, this);
 
 		resume->state = GuiControlState::DISABLED;
+
+		state = MenuState::START;
 	}
 
 	return true;
@@ -283,9 +285,6 @@ bool StartMenu::Update(float dt)
 		FX->text = " FX : Off ";
 	}
 
-	LOG("Music Volume %d", app->audio->GetMusicVolume());
-	LOG("Fx Volume %d", app->audio->GetFxVolume());
-
 	return true;
 }
 
@@ -293,7 +292,7 @@ bool StartMenu::Update(float dt)
 bool StartMenu::PostUpdate()
 {
 	bool ret = true;
-	//app->render->DrawTexture(img, 0, 0, &rect);
+	app->render->DrawTexture(img, 0, 0, &rect);
 	return ret;
 }
 
@@ -381,6 +380,7 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 10)
 	{
 		app->entityManager->Enable();
+		//app->dialogueManager->Enable();
 		app->levelManager->LoadScene(GameScene::BACKSTAGE);
 		state = MenuState::OFF;
 
