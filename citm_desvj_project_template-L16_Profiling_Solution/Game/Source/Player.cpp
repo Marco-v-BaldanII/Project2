@@ -72,6 +72,7 @@ bool Player::Start() {
 	hp = 100;
 	attack = 20;
 
+	myBattleTexture = app->tex->Load("Assets/Textures/BattleScreenSprites/PrinceEdwardBow.png");
 	SDL_Texture* tex = app->tex->Load("Assets/Textures/UI/UnitUI.png");
 	
 	std::string s = config.attribute("name").as_string();
@@ -167,10 +168,23 @@ bool Player::Update(float dt)
 	case BATTLE:
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) 
 		{
+			
+		}
+
+		battleTimer++;
+
+		if (battleTimer >= 1 && battleTimer < 300) {
+
+			app->render->DrawTexture(myBattleTexture, 0, 0, false , false,100);
+			app->render->DrawTexture(oponent->myBattleTexture, 0, 0, false, true, 100);
+		}
+
+		if (battleTimer == 298) {
 			hp -= oponent->attack;
 			oponent->hp -= attack;
 			state = IDLE;
 		}
+
 		break;
 	}
 		
@@ -233,8 +247,8 @@ void Player::ClickOnMe() {
 					state = MOVE;
 				}
 				else if (app->entityManager->IsEnemyThere(app->map->WorldToMap(mouseX - app->render->camera.x, mouseY - app->render->camera.y)) == nullptr)  {
-					//state = IDLE;
-					//app->turnManager->DeSelectPlayer();
+					state = IDLE;
+					app->turnManager->DeSelectPlayer();
 				}
 
 			}

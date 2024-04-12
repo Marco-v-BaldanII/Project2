@@ -154,7 +154,7 @@ public:
 	Entity* target;
 	bool entityTurn = false;
 
-
+	SDL_Texture* myBattleTexture = NULL;
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
 	iPoint position;
@@ -167,6 +167,8 @@ public:
 	float luck;
 	float speed;
 	float movement;                                                 
+
+	float battleTimer;
 
 	bool renderable = true;
 };

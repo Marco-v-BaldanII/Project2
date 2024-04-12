@@ -31,6 +31,7 @@ bool Enemy::Awake() {
 	movement = 3;
 	attack = 50;
 	hp = 100;
+	myBattleTexture = app->tex->Load("Assets/Textures/BattleScreenSprites/KnightBS.png");
 
 	counter = moveTime;
 	pathfinding = new PathFinding();
@@ -143,7 +144,7 @@ bool Enemy::Update(float dt)
 			if (!newTarget)
 			{
 				app->map->pathfinding->InitBFS(tilePos);
-				for (int i = 0; i < 20; i++)
+				for (int i = 0; i < 10; i++)
 				{
 					app->map->pathfinding->PropagateBFS();
 				}
@@ -201,17 +202,18 @@ bool Enemy::PostUpdate() {
 		app->map->pathfinding->DrawBFSPath();
 		//Search for new pos//Draw path
 		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-		if (path != nullptr)
+		if (path != nullptr && path->Count() > 0)
 		{
 			SDL_Rect rect;
-			for (uint i = 0; i < path->Count(); ++i)
+
+			for (uint i = 0; i < movement + 1 && i < path->Count(); ++i)
 			{
 				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 				rect.x = (pos.x);
 				rect.y = (pos.y);
 				rect.w = (app->map->GetTileWidth());
 				rect.h = (app->map->GetTileHeight());
-				//app->render->DrawRectangle(rect, 255, 125, 125, 150);
+				app->render->DrawRectangle(rect, 255, 125, 125, 150);
 			}
 		}
 	}
