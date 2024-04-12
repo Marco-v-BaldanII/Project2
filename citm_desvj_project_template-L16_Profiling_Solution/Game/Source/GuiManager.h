@@ -17,6 +17,8 @@ public:
 	// Destructor
 	virtual ~GuiManager();
 
+	bool Awake(pugi::xml_node config);
+
 	// Called before the first frame
 	bool Start();
 
@@ -46,6 +48,8 @@ public:
 	SDL_Texture* tex_inventory = nullptr;
 	SDL_Texture* tex_inventory_tabs = nullptr;
 	SDL_Texture* tex_inventory_Items = nullptr;
+
+	pugi::xml_node myNode;
 
 	uint buttonClickFx = 0;
 	uint buttonHoverFx = 0;

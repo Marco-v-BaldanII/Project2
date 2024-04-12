@@ -37,7 +37,7 @@ enum Appearance {
 class Frame {
 public:
 	// position where frame lands, time for interpolation, direction of interpolation, size of frame, time the frame is rendered, when does the frame start to get rendered
-	Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, int hp, int precision, int luck, int speed, int movement , string name) {
+	Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, float &hp, int precision, int luck, int speed, int movement , string name) {
 		this->t = t;
 		desiredPos = pos;
 		myAppearance = appr;
@@ -52,7 +52,7 @@ public:
 
 		// pass stats to strings
 		this->attack = to_string(attack);
-		this->hp = to_string(hp);
+		this->hp = to_string((int)hp);
 		this->precision = to_string(precision);
 		this->luck = to_string(luck);
 		this->movement = to_string(movement);
@@ -121,7 +121,7 @@ public:
 	}
 
 
-	void Render(float dt) {
+	void Render(float dt, int currentHP) {
 		//  we use linear interpolation from its given starting position to its target position
 		shown = true;
 
@@ -141,8 +141,13 @@ public:
 		}
 
 		// Render all the stats:
-		app->render->DrawText(attack, (startingPos.x  +95) *3, (startingPos.y +73) * 3, 30, 50, false, SDL_Color{254, 254, 0, 255});
-		app->render->DrawText(hp, (startingPos.x + 150) * 3, (startingPos.y + 73) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		
+		string HpText = to_string(currentHP);
+		string added = "/";
+		string HPString = HpText + added + hp;
+
+		app->render->DrawText(HPString, (startingPos.x + 90) * 3, (startingPos.y + 73) * 3, 70, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		app->render->DrawText(attack, (startingPos.x + 150) * 3, (startingPos.y + 73) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
 
 		app->render->DrawText(speed, (startingPos.x + 95) * 3, (startingPos.y + 100) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
 		app->render->DrawText(precision, (startingPos.x + 150) * 3, (startingPos.y + 100) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });

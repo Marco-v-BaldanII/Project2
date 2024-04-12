@@ -168,7 +168,7 @@
 <dialogue text = "I seeth  Is an audience with that gent impossible so?"
    owner = "Duke of York"
 	position = "2"/>
-<dialogue text = "Not at all , that gent shall certes beest eager to speaketh with thee, Jaspe tudor is with that gent at the moment."
+<dialogue text = "Not at all , that gent shall certes beest eager to speaketh with thee, Jasper tudor is with that gent at the moment."
    owner = "Margaret"
 	position = "2"/>
 <dialogue text = "The Earl of Pembroke i understand you not ?"
@@ -181,7 +181,7 @@
 <dialogue text="Ri-chard ?"
    owner="Henry VI" position="1"   />
 <dialogue text="Richard of york, thy majesty"
-   owner="Jaspe" position="2" />
+   owner="Jasper" position="2" />
 <dialogue text="Valorous afternoon thy highness"
    owner="Richard" position="2" />
 <dialogue text="Richard, mine own valorous cousin richard, how art thee ?"
@@ -199,7 +199,7 @@
 <dialogue text="Heavy?"
    owner="Richard" position="2" />
 <dialogue text="Henry, our mother hasn't visited for years"
-   owner="Jaspe" position="2" />
+   owner="Jasper" position="2" />
 <dialogue text="If 't be true i weareth this trinket, shall the lady behold at me?"
    owner="Henry VI" position="1" />
 <dialogue text="I can't standeth to seeth thee liketh this henry ! (leaves the room)"
@@ -501,7 +501,7 @@
 <dialogue text="Ri-chard ?"
    owner="Henry VI" position="1"   />
 <dialogue text="Richard of York, your majesty"
-   owner="Jaspe" position="2" />
+   owner="Jasper" position="2" />
 <dialogue text="Good afternoon your highness"
    owner="Richard of York" position="2" />
 <dialogue text="Richard, my good cousin Richard, how are you ?"
@@ -519,7 +519,7 @@
 <dialogue text="Heavy?"
    owner="Richard of York" position="2" />
 <dialogue text="Henry, our mother hasn't visited for years"
-   owner="Jaspe" position="2" />
+   owner="Jasper" position="2" />
 <dialogue text="If I wear this trinket, will she look at me?"
    owner="Henry VI" position="1" />
 <dialogue text="I can't stand to see you like this Henry ! (leaves the room)"
@@ -582,8 +582,8 @@
 <dialogue position="2" text="On the contrary Richard, this visit was just a means to test the waters, Warwick has already been making preparations. We march for them, to war!" owner="Richard of York"/>
 <dialogue position="1" text="What about the peace of the land? Is it right for us to drag commoners into this family feud?" owner="Richard"/>
 <dialogue position="1" text="Richard, you oppose me? I worry so about the peace and well-being of the common folk. I promise our cause is just, from the bloodshed a unified peaceful England will emerge, this I swear." owner="Duke of York"/>
-<dialogue position="2" text="You have our unconditional support, father!" owner="Edward"/>
-<dialogue position="4" text="We'll live up to the emblem of York." owner="George"/>
+<dialogue position="2" text="You have our unconditional support, father!" owner="Edward of York"/>
+<dialogue position="4" text="We'll live up to the emblem of York." owner="George of York"/>
 <dialogue position="1" text="Yes father, for a just cause I will be your sword." owner="Richard"/>
 
 

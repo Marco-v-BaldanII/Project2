@@ -36,7 +36,8 @@ public:
 
 	pugi::xml_node config;
 
-	SDL_Texture* texture;
+	SDL_Texture* texture; 
+	SDL_Texture* Uitex = nullptr;
 	const char* texturePath;
 	uint texW, texH;
 
