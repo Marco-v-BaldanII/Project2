@@ -57,9 +57,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics(true);
 	//scene = new Scene();
 	map = new Map(true); //Esta ROTO
-	guiManager = new GuiManager(true);
+	
 
-	dialogueManager = new DialogueManager(true); //editar despues//
+	dialogueManager = new DialogueManager(false); //editar despues//
 	turnManager = new TurnManager(false);
 
 	
@@ -72,6 +72,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	backStage = new BackStage(false);
 	entityManager = new EntityManager(false);
 	backstageplayer = new BackStagePlayer(false);
+	guiManager = new GuiManager(true);
 	fade = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
@@ -95,11 +96,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(turnManager);
 	AddModule(fonts);
-	AddModule(guiManager);
+	
 	
 	AddModule(entityManager);
 	AddModule(backstageplayer);
 	AddModule(dialogueManager);
+	AddModule(guiManager);
 	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);

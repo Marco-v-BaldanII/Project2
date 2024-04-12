@@ -39,6 +39,8 @@ public:
 		return canMove;
 	}
 
+
+
 	float32 velocity = 0.0f;
 
 	uint fxSteps;

@@ -55,7 +55,6 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-private:
 	SDL_Texture* img;
 	SDL_Rect rect;
 	uint music;
@@ -99,6 +98,9 @@ private:
 	uint windowW, windowH;
 
 	MenuState state = MenuState::START;
+
+private:
+	
 
 };
 #endif // __STARTMENU_H__

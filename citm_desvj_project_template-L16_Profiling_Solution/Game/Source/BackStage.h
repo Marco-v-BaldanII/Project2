@@ -37,6 +37,12 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
+	//bool Load(pugi::xml_node& data);
+
+	//bool Save(pugi::xml_node& data) const;
+
 	iPoint uncheckableTiles[3];
 	bool hasBeenCreated;
 
@@ -45,6 +51,24 @@ public:
 	List<Npc*> npcsList;
 
 private:
+	//buttons and variables
+	GuiControlButton* P_resume;
+	GuiControlButton* P_FullScreen;
+	GuiControlButton* P_VSync;
+	GuiControlButton* P_Music;
+	GuiControlButton* P_FX;
+	GuiControlButton* P_laguage;
+	GuiControlButton* P_textSpeed;
+	GuiControlButton* P_save;
+	GuiControlButton* P_backtomenu;
+
+	bool pausemenu;
+
+	const char* laguageText;
+
+	int windowH;
+	int windowW;
+
 	SDL_Texture* img;
 	SDL_Texture* background;
 	SDL_Rect rect;

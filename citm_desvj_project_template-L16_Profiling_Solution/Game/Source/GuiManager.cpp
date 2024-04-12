@@ -73,13 +73,7 @@ bool GuiManager::Update(float dt)
 		doLogic = false;
 	}
 
-	ListItem<GuiControl*>* control = guiControlsList.start;
-
-	while (control != nullptr)
-	{
-		control->data->Update(dt);
-		control = control->next;
-	}
+	
 
 	return true;
 }
@@ -110,6 +104,14 @@ bool GuiManager::PostUpdate() {
 			panel->data->Draw();
 
 		panel = panel->next;
+	}
+
+	ListItem<GuiControl*>* control = guiControlsList.start;
+
+	while (control != nullptr)
+	{
+		control->data->Update(0.16f);
+		control = control->next;
 	}
 
 	return true;
