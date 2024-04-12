@@ -36,21 +36,21 @@ bool BackStagePlayer::Start()
 		walkUp.speed = walkSpeed;
 
 		walkDown.PushBack({ 8, 434, 84, 122 });
-		/* walk down loop
+		// walk down loop
 		walkDown.PushBack({ 112, 432, 74, 124 });
 		walkDown.PushBack({ 216, 430, 66, 126 });
 		walkDown.PushBack({ 316, 432, 72, 122 });
 		walkDown.PushBack({ 416, 434, 72, 122 });
 		walkDown.PushBack({ 518, 432, 66, 124 });
 		walkDown.PushBack({ 616, 434, 66, 122 });
-		*/
+		
 
 		//mas
 		walkDown.loop = true;
 		walkDown.speed = walkSpeed;
 
 		walkLeft.PushBack({ 22, 154, 54, 122 });
-		/* walk left loop
+		 //walk left loop
 		walkLeft.PushBack({ 120, 150, 58, 126 });
 		walkLeft.PushBack({ 220, 148, 60, 128 });
 		walkLeft.PushBack({ 322, 156, 56, 120 });
@@ -58,13 +58,13 @@ bool BackStagePlayer::Start()
 		walkLeft.PushBack({ 520, 152, 60, 124 });
 		walkLeft.PushBack({ 618, 158, 60, 120 });
 		walkLeft.PushBack({ 724, 156, 56, 120 });
-		*/
+		
 		//mas
 		walkLeft.loop = true;
 		walkLeft.speed = walkSpeed;
 
 		walkRight.PushBack({ 22, 14, 54, 122 });
-		/* walk rigth loop
+		// walk rigth loop
 		walkRight.PushBack({ 116, 10, 58, 126 });
 		walkRight.PushBack({ 214, 8, 60, 128 });
 		walkRight.PushBack({ 316, 16, 56, 120 });
@@ -72,7 +72,7 @@ bool BackStagePlayer::Start()
 		walkRight.PushBack({ 514, 12, 60, 124 });
 		walkRight.PushBack({ 616, 18, 60, 120 });
 		walkRight.PushBack({ 714, 16, 56, 120 });
-		*/
+		
 
 		//mas
 		walkRight.loop = true;
@@ -140,6 +140,7 @@ bool BackStagePlayer::PreUpdate()
 
 bool BackStagePlayer::Update(float dt)
 {
+	currentAnimation->Update();
 	// Set player position
 	if (canMove && !talking)
 	{
