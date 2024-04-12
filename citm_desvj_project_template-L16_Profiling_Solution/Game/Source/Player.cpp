@@ -72,7 +72,7 @@ bool Player::Start() {
 	hp = 100;
 	attack = 20;
 
-	SDL_Texture* tex = app->tex->Load("Assets/Textures/UI/UnitUI.png");
+	SDL_Texture* tex = app->tex->Load("Assets/Textures/UI/Lancaster.png");
 	
 	std::string s = config.attribute("name").as_string();
 
@@ -177,6 +177,8 @@ bool Player::Update(float dt)
 	SDL_Rect randRect = SDL_Rect{ 8,0,32,32 };
 	app->render->DrawTexture(myTexture,position.x,position.y, &randRect,false, 100);
 
+	
+
 	return true;
 }
 
@@ -195,6 +197,7 @@ bool Player::PostUpdate()
 		app->map->pathfinding->DrawBFSPath();
 
 		myFrame->Render(1.0/60.0);
+		
 
 		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 		if (path != nullptr)
@@ -213,6 +216,8 @@ bool Player::PostUpdate()
 		break;
 	}
 	}
+	myFrame->Update();
+
 	return true;
 }
 
