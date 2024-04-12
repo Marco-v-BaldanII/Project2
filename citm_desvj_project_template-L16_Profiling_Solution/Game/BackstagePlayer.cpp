@@ -15,49 +15,49 @@ bool BackStagePlayer::Start()
 	// Set player texture
 	if (active)
 	{
-		playerTexture = app->tex->Load("Assets/Textures/Overworlds sombreados.png");
+		playerTexture = app->tex->Load("Assets/Textures/BackstageNPCs/SideBowEdward.png");
 
 		// Load animationss
 		walkSpeed = 0.1f;
 		//walk
-		walkUp.PushBack({ 3, 67, 21, 23 });
+		walkUp.PushBack({ 0, 0, 128, 128 });
 		//mas
 		walkUp.loop = true;
 		walkUp.speed = walkSpeed;
 
-		walkDown.PushBack({ 3, 15, 21, 23 });
+		walkDown.PushBack({ 0, 0, 128, 128 });
 		//mas
 		walkDown.loop = true;
 		walkDown.speed = walkSpeed;
 
-		walkLeft.PushBack({ 3, 42, 21, 23 });
+		walkLeft.PushBack({ 0, 0, 128, 128 });
 		//mas
 		walkLeft.loop = true;
 		walkLeft.speed = walkSpeed;
 
-		walkRight.PushBack({ 3, 0, 21, 23 });
+		walkRight.PushBack({ 0, 0, 128, 128 });
 		//mas
 		walkRight.loop = true;
 		walkRight.speed = walkSpeed;
 
 
 		//idle
-		idleUp.PushBack({ 3, 0, 21, 23 });
+		idleUp.PushBack({ 0, 0, 128, 128 });
 		//mas
 		idleUp.loop = true;
 		idleUp.speed = walkSpeed;
 
-		idleDown.PushBack({ 3, 0, 21, 23 });
+		idleDown.PushBack({ 0, 0, 128, 128 });
 		//mas
 		idleDown.loop = true;
 		idleDown.speed = walkSpeed;
 
-		idleLeft.PushBack({ 3, 0, 21, 23 });
+		idleLeft.PushBack({ 0, 0, 128, 128 });
 		//mas
 		idleLeft.loop = true;
 		idleLeft.speed = walkSpeed;
 
-		idleRight.PushBack({ 3, 0, 21, 23 });
+		idleRight.PushBack({ 0, 0, 128, 128 });
 		//mas
 		idleRight.loop = true;
 		idleRight.speed = walkSpeed;
@@ -240,21 +240,21 @@ bool BackStagePlayer::PostUpdate()
 	}*/
 
 	//player boundaries in backStage
-	if (position.x < 0)
+	if (position.x < 30)
 	{
-		position.x = 0;
+		position.x = 30;
 	}
-	if (position.y < 0)
+	if (position.y < 120)
 	{
-		position.y = 0;
+		position.y = 120;
 	}
-	if (position.x > 680)
+	if (position.x > 580)
 	{
-		position.x = 680;
+		position.x = 580;
 	}
-	if (position.y > 384)
+	if (position.y > 264)
 	{
-		position.y = 384;
+		position.y = 264;
 	}
 
 	return true;
