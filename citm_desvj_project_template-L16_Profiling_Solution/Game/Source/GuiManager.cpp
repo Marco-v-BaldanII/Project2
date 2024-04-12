@@ -16,6 +16,12 @@ GuiManager::GuiManager(bool isActive) :Module(isActive)
 
 GuiManager::~GuiManager() {}
 
+bool GuiManager::Awake(pugi::xml_node config) {
+
+	myNode = config;
+	return true;
+}
+
 bool GuiManager::Start()
 {
 	Main_Menu_Panel = new MainMenuPanel(false);
@@ -28,14 +34,15 @@ bool GuiManager::Start()
 	//panels.add(Pause_Panel);
 
 	//LOAD TEXTURES
-	UItexture = app->tex->Load("Assets/Textures/test.png");
-	UItexture2 = app->tex->Load("Assets/Textures/UI2.png");
-	tex_smallPanel = app->tex->Load("Assets/Textures/smallPanel.png");
-	tex_mediumPanel = app->tex->Load("Assets/Textures/mediumPanel.png");
-	tex_bigPanel = app->tex->Load("Assets/Textures/bigPanel.png");
-	tex_inventory = app->tex->Load("Assets/Textures/inventory.png");
-	tex_inventory_tabs = app->tex->Load("Assets/Textures/inventory_tabs.png");
-	tex_inventory_Items = app->tex->Load("Assets/Textures/inventory_Items.png");
+	string s = myNode.child("UItexture").attribute("path").as_string();
+	UItexture = app->tex->Load(myNode.child("UItexture").attribute("path").as_string());
+	UItexture2 = app->tex->Load(myNode.child("UItexture2").attribute("path").as_string());
+	tex_smallPanel = app->tex->Load(myNode.child("tex_smallPanel").attribute("path").as_string());
+	tex_mediumPanel = app->tex->Load(myNode.child("tex_mediumPanel").attribute("path").as_string());
+	tex_bigPanel = app->tex->Load(myNode.child("tex_bigPanel").attribute("path").as_string());
+	tex_inventory = app->tex->Load(myNode.child("tex_inventory").attribute("path").as_string());
+	tex_inventory_tabs = app->tex->Load(myNode.child("tex_inventory_tabs").attribute("path").as_string());
+	tex_inventory_Items = app->tex->Load(myNode.child("tex_inventory_Items").attribute("path").as_string());
 
 	//Button effect
 	buttonHoverFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");

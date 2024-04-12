@@ -22,10 +22,11 @@ Intro::~Intro()
 {}
 
 // Called before render is available
-bool Intro::Awake()
+bool Intro::Awake(pugi::xml_node config)
 {
 	LOG("Loading Intro Scene");
 	bool ret = true;
+	myNode = config;
 
 	return ret;
 }
@@ -38,7 +39,7 @@ bool Intro::Start()
 	app->audio->PlayFx(intro);
 	waitTime = 200;
 	music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);
-	img = app->tex->Load("Assets/Textures/WOTR-MainScreen.png");
+	img = app->tex->Load(myNode.child("titleScreen").attribute("path").as_string());
 	rect = { 0, 0, 512, 384 };
 	return true;
 }

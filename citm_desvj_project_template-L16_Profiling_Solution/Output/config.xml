@@ -51,6 +51,8 @@
 	<battle_scene>
 	
 	     <texture path="Assets/Textures/Overworld/overworld sprites finales.png"/>
+		<yorkUI path ="Assets/Textures/UI/York.png"/>
+		<lancasterUI path ="Assets/Textures/UI/Lancaster.png"/>
 
 		<battleMaps>
 			<map name ="Northampton">
@@ -66,14 +68,37 @@
 				<player  name="Henry Tudor" x="32" y ="32" unit_type="0" movement="10" />
 				<player  name=" Margaret of Anjou" x="0" y="32" unit_type="3"  movement="6"/>
 
-				<enemy name= "Duke of York" x="128" y="64"/>
+				<enemy name= "Duke of York" x="128" y="64" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
 
 			</map>
 			
 			
 		</battleMaps>
+
+		<battleSprites>
+			<Sprite path="Assets/Textures/BattleScreenSprites/PrinceEdward.png"/>
+			
+			
+		</battleSprites>
+		
 		
 	</battle_scene>
+
+	<guiManager>
+
+
+		<UItexture path ="Assets/Textures/test.png"/>
+		<UItexture2 path ="Assets/Textures/UI2.png"/>
+		<tex_smallPanel path="Assets/Textures/smallPanel.png"/>
+		<tex_mediumPanel path ="Assets/Textures/mediumPanel.png"/>
+		<tex_bigPanel path ="Assets/Textures/bigPanel.png"/>
+		<tex_inventory path ="Assets/Textures/inventory.png"/>
+		<tex_inventory_tabs path ="Assets/Textures/inventory_tabs.png"/>
+		<tex_inventory_Items path ="Assets/Textures/inventory_Items.png"/>
+		
+		
+		
+	</guiManager>
 
 
 	<map>
@@ -81,5 +106,11 @@
 		<minimap path ="Assets/Textures/miniMap.png"/>
 		
 	</map>
+
+	<intro>
+		<titleScreen path ="Assets/Textures/WOTR-MainScreen.png"/>
+		
+		
+	</intro>
 	
 </config>

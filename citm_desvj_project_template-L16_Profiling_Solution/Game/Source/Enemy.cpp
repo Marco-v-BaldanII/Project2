@@ -34,6 +34,35 @@ bool Enemy::Awake() {
 	hp = 100;
 	myBattleTexture = app->tex->Load("Assets/Textures/BattleScreenSprites/KnightBS.png");
 
+	name = config.attribute("name").as_string();
+
+	int type = config.attribute("unit_type").as_int();
+
+	switch (type) {
+
+	case 0:
+		unitType = PALADIN;
+		break;
+	case 1:
+		unitType = ARCHER;
+		break;
+	case 2:
+		unitType = KNIGHT;
+		break;
+	case 3:
+		unitType = ARMOURED_KNIGHT;
+		break;
+	case 4:
+		unitType = MAGE;
+		break;
+	case 5:
+		unitType = DARK_MAGE;
+		break;
+
+	}
+	InitializeStats(config);
+
+
 	counter = moveTime;
 	pathfinding = new PathFinding();
 
@@ -52,11 +81,12 @@ bool Enemy::Awake() {
 bool Enemy::Start() {
 
 	//initilize textures
-	SDL_Texture* tex = app->tex->Load("Assets/Textures/UI/York.png");
+	
 
 	std::string s = config.attribute("name").as_string();
 
-	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, LEFTWARDS, SDL_Rect{ 0,0,94,99 }, tex, attack, hp, precision, luck, speed, movement, s);
+	/*Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, int& hp, int precision, int luck, int speed, int movement , string name) {*/
+	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, DOWN, SDL_Rect{ 0,0,94,99 }, Uitex, attack, hp, precision, luck, speed, movement, s);
 
 	return true;
 }
@@ -237,7 +267,7 @@ bool Enemy::PostUpdate() {
 	ClickOnMe();
 	if (drawPath) {
 
-		myFrame->Render(1.0 / 60.0);
+		myFrame->Render(1.0 / 60.0, hp);
 		pathfinding->GenerateWalkeableArea(tilePos, movement + 1);
 		pathfinding->DrawBFSPath();
 

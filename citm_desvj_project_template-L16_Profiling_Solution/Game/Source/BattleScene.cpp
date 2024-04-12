@@ -43,6 +43,9 @@ bool BattleScene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool BattleScene::Start()
 {
+	lancasterUI = app->tex->Load(mynode.child("lancasterUI").attribute("path").as_string());
+	yorkUI = app->tex->Load(mynode.child("yorkUI").attribute("path").as_string());
+
 	if (!started)
 	{
 		spriteSheet = app->tex->Load(mynode.child("texture").attribute("path").as_string());
@@ -52,14 +55,39 @@ bool BattleScene::Start()
 		SDL_Rect btPos = { 100, 500, 120,20 };
 		SDL_Rect btPos2 = { 100, 700, 120,20 };
 
+		// like in the dialogue manager implement reading the texture paths  into a TextureDef
+		for (pugi::xml_node node = mynode.child("battleSprites").child("Sprite"); node != NULL; node = node.next_sibling("portrait")) {
+
+			TextureDef* texD = new TextureDef;
+			const char* path = node.attribute("path").as_string();
+			texD->texture = app->tex->Load(path);
+			texD->name = node.attribute("path").as_string();
+
+			texD->name.erase(0, 36);
+			texD->name.erase(texD->name.length() - 4, 4);
+
+
+			// insert TextureDefinition to the map diccionary
+			portraitTextures.insert(std::make_pair(texD->name, texD->texture));
+
+
+
+		}
+
+
 		// Read party members form config and instanciate them
 		for (pugi::xml_node Pnode = mynode.child("battleMaps").child("map").child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
 
 			Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 			p->config = Pnode;
+
+			string name = p->config.attribute("name").as_string();
+			// Here assign the correct texture
+
 			p->Awake();
 			party.Add(p);
 			p->myTexture = spriteSheet;
+			p->UiTex = lancasterUI;
 		}
 
 		// Read enemies from config and instantiate them
@@ -70,6 +98,7 @@ bool BattleScene::Start()
 			e->Awake();
 			goons.Add(e);
 			e->texture = spriteSheet;
+			e->Uitex = yorkUI;
 		}
 
 

@@ -191,9 +191,7 @@ bool DialogueManager::Update(float dt)
 	
 
 	
-	if (scrolling) {
-		ManageScrolling();
-	}
+	
 	
 	if (myState == CUTSCENE) {
 
@@ -216,6 +214,9 @@ bool DialogueManager::PostUpdate() {
 	DrawBackground();
 
 	DrawTextBox(dialogues[dialogueIndex]->myPos);
+	if (scrolling) {
+		ManageScrolling();
+	}
 
 	DrawPortrait();
 
@@ -354,7 +355,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2* app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
 			app->render->DrawRectangle(nameBoxL, black, true, true);
-			app->render->DrawText(owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+			app->render->DrawText(owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w  * app->win->GetScale()-5, (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
 		else {
 			dialogueBox = speechBoxRight;
@@ -366,7 +367,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
 			app->render->DrawRectangle(nameBoxR, black, true, true);
-			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * 6 * app->win->GetScale(), (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w  * app->win->GetScale() -5, (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {

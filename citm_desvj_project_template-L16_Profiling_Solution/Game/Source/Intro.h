@@ -20,7 +20,7 @@ public:
 	virtual ~Intro();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(pugi::xml_node config);
 
 	// Called before the first frame
 	bool Start();
@@ -41,6 +41,8 @@ public:
 private:
 	SDL_Texture* img;
 	SDL_Rect rect;
+
+	pugi::xml_node myNode;
 	
 	bool playintro = true;
 

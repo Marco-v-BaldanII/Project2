@@ -13,6 +13,7 @@
 #include "EntityManager.h"
 #include "GuiSlider.h"
 #include "GuiPanel.h"
+#include <map>
 #include "GuiToggle.h"
 
 struct SDL_Texture;
@@ -48,6 +49,8 @@ public:
 
 private:
 	SDL_Texture* spriteSheet;
+	SDL_Texture* yorkUI;
+	SDL_Texture* lancasterUI;
 	SDL_Rect rect;
 	uint music;
 	bool playMusic = true;
@@ -66,9 +69,12 @@ private:
 	List<Enemy*> goons;
 	
 	bool started = false;
+	std::map <std::string, SDL_Texture*> portraitTextures; // diccionary used to identify textures by a name
 
 public:
 	pugi::xml_node mynode;
+
+	
 
 };
 #endif // __BATTLESCENE_H__
