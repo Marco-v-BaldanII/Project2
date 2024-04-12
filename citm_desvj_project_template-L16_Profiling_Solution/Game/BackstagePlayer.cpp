@@ -19,45 +19,83 @@ bool BackStagePlayer::Start()
 
 		// Load animationss
 		walkSpeed = 0.1f;
+
 		//walk
 		walkUp.PushBack({ 8, 295, 82, 120 });
+
+		// walk up loop
+		walkUp.PushBack({ 112, 296, 76, 116 });
+		walkUp.PushBack({ 216, 294, 72, 118 });
+		walkUp.PushBack({ 314, 292, 70, 120 });
+		walkUp.PushBack({ 412, 294, 70, 118 });
+		walkUp.PushBack({ 512, 292, 72, 120 });
+		
+
 		//mas
 		walkUp.loop = true;
 		walkUp.speed = walkSpeed;
 
 		walkDown.PushBack({ 8, 434, 84, 122 });
+		/* walk down loop
+		walkDown.PushBack({ 112, 432, 74, 124 });
+		walkDown.PushBack({ 216, 430, 66, 126 });
+		walkDown.PushBack({ 316, 432, 72, 122 });
+		walkDown.PushBack({ 416, 434, 72, 122 });
+		walkDown.PushBack({ 518, 432, 66, 124 });
+		walkDown.PushBack({ 616, 434, 66, 122 });
+		*/
+
 		//mas
 		walkDown.loop = true;
 		walkDown.speed = walkSpeed;
 
 		walkLeft.PushBack({ 22, 154, 54, 122 });
+		/* walk left loop
+		walkLeft.PushBack({ 120, 150, 58, 126 });
+		walkLeft.PushBack({ 220, 148, 60, 128 });
+		walkLeft.PushBack({ 322, 156, 56, 120 });
+		walkLeft.PushBack({ 422, 154, 56, 122 });
+		walkLeft.PushBack({ 520, 152, 60, 124 });
+		walkLeft.PushBack({ 618, 158, 60, 120 });
+		walkLeft.PushBack({ 724, 156, 56, 120 });
+		*/
 		//mas
 		walkLeft.loop = true;
 		walkLeft.speed = walkSpeed;
 
-		walkRight.PushBack({ 22, 154, 54, 122 });
+		walkRight.PushBack({ 22, 14, 54, 122 });
+		/* walk rigth loop
+		walkRight.PushBack({ 116, 10, 58, 126 });
+		walkRight.PushBack({ 214, 8, 60, 128 });
+		walkRight.PushBack({ 316, 16, 56, 120 });
+		walkRight.PushBack({ 418, 14, 54, 122 });
+		walkRight.PushBack({ 514, 12, 60, 124 });
+		walkRight.PushBack({ 616, 18, 60, 120 });
+		walkRight.PushBack({ 714, 16, 56, 120 });
+		*/
+
 		//mas
 		walkRight.loop = true;
 		walkRight.speed = walkSpeed;
 
 
 		//idle
-		idleUp.PushBack({ 0, 0, 128, 128 });
+		idleUp.PushBack({ 8, 295, 82, 120 });
 		//mas
 		idleUp.loop = true;
 		idleUp.speed = walkSpeed;
 
-		idleDown.PushBack({ 0, 0, 128, 128 });
+		idleDown.PushBack({ 8, 434, 84, 122 });
 		//mas
 		idleDown.loop = true;
 		idleDown.speed = walkSpeed;
 
-		idleLeft.PushBack({ 0, 0, 128, 128 });
+		idleLeft.PushBack({ 22, 154, 54, 122 });
 		//mas
 		idleLeft.loop = true;
 		idleLeft.speed = walkSpeed;
 
-		idleRight.PushBack({ 0, 0, 128, 128 });
+		idleRight.PushBack({ 22, 14, 54, 122 });
 		//mas
 		idleRight.loop = true;
 		idleRight.speed = walkSpeed;
@@ -129,7 +167,6 @@ bool BackStagePlayer::Update(float dt)
 		else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			position.x -= velocity * dt;
-			flipHorizontal = SDL_FLIP_HORIZONTAL;
 			goingLeft = true;
 			goingUp = false;
 			goingDown = false;
