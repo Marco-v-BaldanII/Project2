@@ -11,6 +11,7 @@
 #include "EntityManager.h"
 #include "Pathfinding.h"
 #include "Map.h"
+#include "../frame.h"
 #include "Physics.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
@@ -49,7 +50,11 @@ bool Enemy::Awake() {
 bool Enemy::Start() {
 
 	//initilize textures
+	SDL_Texture* tex = app->tex->Load("Assets/Textures/UI/York.png");
 
+	std::string s = config.attribute("name").as_string();
+
+	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, LEFTWARDS, SDL_Rect{ 0,0,94,99 }, tex, attack, hp, precision, luck, speed, movement, s);
 
 	return true;
 }
@@ -223,6 +228,35 @@ bool Enemy::PostUpdate() {
 	}
 
 	app->render->DrawTexture(texture, position.x, position.y, &section);
+	ClickOnMe();
+	if (drawPath) {
+
+		myFrame->Render(1.0 / 60.0);
+
+
+
+	}
+	myFrame->Update();
 
 	return true;
+}
+
+void Enemy::ClickOnMe() {
+
+	clickBox.x = position.x; clickBox.y = position.y;
+
+	int mouseX, mouseY;
+
+	app->input->GetMousePosition(mouseX, mouseY);
+
+	//If the position of the mouse if inside the bounds of the box 
+	if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h) {
+
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+
+			drawPath = !drawPath;
+
+
+		}
+	}
 }

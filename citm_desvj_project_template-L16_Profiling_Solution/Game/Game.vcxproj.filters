@@ -17,7 +17,6 @@
     </ClCompile>
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
-    <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
@@ -78,6 +77,9 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="BackstagePlayer.cpp" />
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -117,7 +119,6 @@
     </ClInclude>
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\EntityManager.h" />
-    <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Physics.h" />
@@ -200,6 +201,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="BackstagePlayer.h" />
+    <ClInclude Include="Source\Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

@@ -26,9 +26,13 @@ public:
 
 	bool CleanUp();
 
+	void ClickOnMe();
+
 public:
 
 	bool isPicked = false;
+
+	bool drawPath = false;
 
 	pugi::xml_node config;
 
@@ -41,6 +45,8 @@ public:
 	bool newTarget = false;
 
 	SDL_Rect section = SDL_Rect{ 75, 6, 26, 27 };
+
+	SDL_Rect clickBox = { 0,0,32,32 };
 
 };
 
