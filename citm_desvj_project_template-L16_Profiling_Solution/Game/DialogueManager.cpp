@@ -34,10 +34,10 @@ bool DialogueManager::Awake(pugi::xml_node config)
 	bool ret = true;
 
 	// Load all the portrait textures
-	
+
 	myLanguage = ENGLISH;
 	myState = CUTSCENE;
-	
+
 	myConfig = config;
 
 	return ret;
@@ -63,7 +63,7 @@ bool DialogueManager::Start() {
 		// insert TextureDefinition to the map diccionary
 		portraitTextures.insert(std::make_pair(texD->name, texD->texture));
 
-	
+
 
 	}
 
@@ -74,6 +74,8 @@ bool DialogueManager::Start() {
 
 		string path = dialogueNode.attribute("background").as_string();
 		D->background = app->tex->Load(dialogueNode.attribute("background").as_string());
+		// add to backgrounds array
+		if (D->background != nullptr) backgrounds.PushBack(D->background);
 
 		if (p == 1) {
 			D->myPos = RIGHT;
@@ -86,7 +88,7 @@ bool DialogueManager::Start() {
 		if (D->owner != "Narrator") {
 			// use the keycode (owner name) to find the correct portrait
 			D->texture = portraitTextures[D->owner];
-		
+
 		}
 
 
@@ -127,7 +129,7 @@ bool DialogueManager::Start() {
 
 	// Load the scens info
 	for (pugi::xml_node sNode = myConfig.child("dialogues").child("english").child("Scene"); sNode != NULL; sNode = sNode.next_sibling("Scene")) {
-		
+
 		Scene* aScene = new Scene(sNode.attribute("num").as_int(), sNode.attribute("dialogues").as_int());
 		Scenes.PushBack(aScene);
 
@@ -177,8 +179,8 @@ bool DialogueManager::CleanUp()
 bool DialogueManager::Update(float dt)
 {
 	bool ret = true;
-	
-	
+
+
 	//currentPos = dialogues[dialogueIndex]->myPos;
 	currentPos = Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos;
 
@@ -187,12 +189,12 @@ bool DialogueManager::Update(float dt)
 
 	// This method checks for the input to advance to the next dialogue
 	AdvanceText();
-	
-	
 
-	
-	
-	
+
+
+
+
+
 	if (myState == CUTSCENE) {
 
 
@@ -202,12 +204,12 @@ bool DialogueManager::Update(float dt)
 			ChangeLanguage();
 		}
 
-		
+
 	}
 
 	return ret;
 }
- 
+
 bool DialogueManager::PostUpdate() {
 
 	// Draw stuff
@@ -228,12 +230,23 @@ void DialogueManager::DrawBackground() {
 
 	if (myState == CUTSCENE) {
 
-		if (Scenes[sceneIndex]->dialogues[dialogueIndex]->background != nullptr) { background = Scenes[sceneIndex]->dialogues[dialogueIndex]->background; }
+		//if (Scenes[sceneIndex]->dialogues[dialogueIndex]->background != nullptr) { background = Scenes[sceneIndex]->dialogues[dialogueIndex]->background; }
 
-		if (background != nullptr) {
-			SDL_Rect dsScreen = SDL_Rect{ 0,0,256 * 2,198 * 2 };
-			app->render->DrawTexture(background, 0, 0, &dsScreen);
+
+		SDL_Rect dsScreen = SDL_Rect{ 0,0,256 * 2,198 * 2 };
+		app->render->DrawTexture(backgrounds[backgroundIndex], 0, 0, &dsScreen);
+
+		SDL_Texture* b1 = Scenes[sceneIndex]->dialogues[dialogueIndex]->background;
+		SDL_Texture* b2 = backgrounds[backgroundIndex];
+
+		int h = backgrounds.Count();
+
+		// if the displayed background is not the current one
+		if (Scenes[sceneIndex]->dialogues[dialogueIndex]->background != nullptr && b1 != b2) {
+
+			backgroundIndex++;
 		}
+
 
 
 	}
@@ -243,20 +256,20 @@ void DialogueManager::DrawBackground() {
 void DialogueManager::ManageScrolling() {
 
 
-	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10, -dialogueBox.w , DIALOGUE_SIZE *2 };
-	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + DIALOGUE_SIZE*2, -dialogueBox.w , DIALOGUE_SIZE*2};
-	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 2 *2), -dialogueBox.w , DIALOGUE_SIZE *2};
-	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 3 *2), -dialogueBox.w , DIALOGUE_SIZE *2};
+	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10, -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + DIALOGUE_SIZE * 2, -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
 
 	if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos != MIDDLE) {
-		 r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 , -dialogueBox.w , DIALOGUE_SIZE *2};
-		 r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE*2), -dialogueBox.w , DIALOGUE_SIZE*2 };
-		 r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE *2*2), -dialogueBox.w , DIALOGUE_SIZE*2 };
-		 r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 3*2), -dialogueBox.w , DIALOGUE_SIZE*2};
+		r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 , -dialogueBox.w , DIALOGUE_SIZE * 2 };
+		r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
+		r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
+		r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
 	}
-	
-		
-	
+
+
+
 
 
 	//Must investigate more robotic type of interpolation such as STEP
@@ -277,7 +290,7 @@ void DialogueManager::ManageScrolling() {
 		r4.w = w4_1;
 	}
 
-	if (myState == NPCS ||  currentPos != MIDDLE) {
+	if (myState == NPCS || currentPos != MIDDLE) {
 		app->render->DrawRectangle(r1, whitey, true, true);
 		app->render->DrawRectangle(r2, whitey, true, true);
 		app->render->DrawRectangle(r3, whitey, true, true);
@@ -342,20 +355,20 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , (dialogueBox.w + 4) , (dialogueBox.h + 4) }, b2Color(0, 0, 0.5f, 1), true, true);
 			app->render->DrawRectangle(dialogueBox, royalBlue, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2 * app->win->GetScale(), true);
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true);
 
 		}
- 		else if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos == LEFT) {
+		else if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos == LEFT) {
 			dialogueBox = speechBox;
 
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2* app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
 			app->render->DrawRectangle(nameBoxL, black, true, true);
-			app->render->DrawText(owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w  * app->win->GetScale()-5, (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+			app->render->DrawText(owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * app->win->GetScale() - 5, (DIALOGUE_SIZE) * 2 * app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
 		else {
 			dialogueBox = speechBoxRight;
@@ -364,10 +377,10 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
 			app->render->DrawRectangle(nameBoxR, black, true, true);
-			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w  * app->win->GetScale() -5, (DIALOGUE_SIZE) *2 *app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * app->win->GetScale() - 5, (DIALOGUE_SIZE) * 2 * app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
@@ -409,10 +422,10 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
 			app->render->DrawRectangle(dialogueBox, whitey, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE *2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
+			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
 
 		}
-		
+
 	}
 
 
@@ -425,7 +438,7 @@ void DialogueManager::FinishScrolling() {
 	w4_1 = 0;
 }
 
-void DialogueManager::DrawPortrait(){
+void DialogueManager::DrawPortrait() {
 
 	// for the moment portrait size is assumed as 56x52 (whatever it ends up being it will have to be the same texture size for all)
 	int i = 0;
@@ -439,7 +452,7 @@ void DialogueManager::DrawPortrait(){
 			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
 		}
 		else if (Scenes[sceneIndex]->dialogues[i]->myPos == RIGHT) {
-			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 204*2, 200, &portraitBoxR, false);
+			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 204 * 2, 200, &portraitBoxR, false);
 		}
 	}
 }
@@ -457,13 +470,13 @@ void DialogueManager::AdvanceText() {
 			// If all the text has finished skip to next dialogue, else skip scrolling
 			if (HasScrollFinished()) {
 				if (myState == CUTSCENE) {
-					
-					
+
+
 					Next_Dialogue();
 
 				}
 				else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
-				
+
 				scrolling = true;
 				numLines = 0;
 				ResetScroll();
@@ -514,7 +527,7 @@ void DialogueManager::SetTextVelocity(TextVelocity velocity) {
 	else if (velocity == FAST) {
 		textVelocity = fastVelocity;
 	}
-	else if (velocity == NORMAL){
+	else if (velocity == NORMAL) {
 		textVelocity = normalVelocity;
 	}
 }
@@ -523,7 +536,7 @@ void DialogueManager::npcTalk(DynArray<Dialogue*>& npcDialogues) {
 
 	int size = npcDialogues.Count();
 
-	if (npcDialogueIndex < size -1) {
+	if (npcDialogueIndex < size - 1) {
 		myState = NPCS;
 		this->currentNPC_Dialogues = npcDialogues;
 		npcDialogueIndex++;
@@ -545,7 +558,7 @@ void DialogueManager::Next_Dialogue() {
 
 		skipScene = false;
 		dialogueIndex = 0;
- 		if (sceneIndex + 1 != 6) {
+		if (sceneIndex + 1 != 6) {
 			sceneIndex++;
 		}
 		else {
@@ -558,7 +571,45 @@ void DialogueManager::Next_Dialogue() {
 		}
 
 	}
+}
+
+bool DialogueManager::SaveState(pugi::xml_node node) {
+
+	pugi::xml_node Indexes = node.append_child("index");
+	Indexes.append_attribute("scene").set_value(sceneIndex);
+	Indexes.append_attribute("dialogue").set_value(dialogueIndex);
+	Indexes.append_attribute("background").set_value(backgroundIndex);
+
+	pugi::xml_node Mode = node.append_child("mode");
+	int s = -1;
+	if (myState == CUTSCENE) { s = 0; }
+	else { s = 1; }
+	Mode.append_attribute("value").set_value(s);
+
+	pugi::xml_node Language = node.append_child("language");
+	if (myLanguage == ENGLISH) {
+		Language.append_attribute("value").set_value("english");
+	}
+	else {
+		Language.append_attribute("value").set_value("shakesperean");
+	}
+	return true;
+}
+
+bool DialogueManager::LoadState(pugi::xml_node node) {
+
+	sceneIndex = node.child("index").attribute("scene").as_int();
+	dialogueIndex = node.child("index").attribute("dialogue").as_int();
+	backgroundIndex = node.child("index").attribute("background").as_int();
+
+	string language = node.child("language").attribute("value").as_string();
+	if (language == "english") { myLanguage = ENGLISH; }
+	else { myLanguage = SHAKESPEREAN; }
+
+	int mode = node.child("mode").attribute("value").as_int();
+	if (mode == 0) { myState = CUTSCENE; }
+	else { myState = NPCS; }
 
 
-
+	return true;
 }

@@ -130,9 +130,6 @@
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Source\p2List.h" />
     <ClInclude Include="Source\Fonts.h" />
-    <ClInclude Include="Source\Intro.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Source\LevelManagement.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -203,6 +200,9 @@
     <ClInclude Include="BackstagePlayer.h" />
     <ClInclude Include="Source\Player.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Intro.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

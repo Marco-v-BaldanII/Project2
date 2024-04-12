@@ -10,6 +10,7 @@
 #include "../App.h"
 #include "../Render.h"
 #include <string>
+#include "../Textures.h"
 #include "../Window.h"
 
 using namespace std;
@@ -184,6 +185,12 @@ public:
 
 		}
 		shown = false;
+
+	}
+
+	~Frame() {
+
+		app->tex->UnLoad(texture);
 
 	}
 

@@ -131,12 +131,17 @@ public:
 
 	void Next_Dialogue();
 
+	bool SaveState(pugi::xml_node node);
+
+	bool LoadState(pugi::xml_node node);
+
 public:
 	int numLines = 0;
 
 	DialogueStates myState = CUTSCENE;
 
-	SDL_Texture* background = nullptr;
+	DynArray<SDL_Texture*> backgrounds;
+	uint backgroundIndex = 0;
 
 	Language myLanguage;
 

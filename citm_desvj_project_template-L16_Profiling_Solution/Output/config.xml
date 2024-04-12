@@ -64,8 +64,8 @@
 	float speed;
 	float movement;-->
 				
-				<player  name="Prince Edward"  x="0" y="0" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"           />
-				<player  name="Henry Tudor" x="32" y ="32" unit_type="0" movement="10" />
+				<player  name="PrinceEdward"  x="0" y="0" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"           />
+				<player  name="HenryTudor" x="32" y ="32" unit_type="0" movement="10" />
 				<player  name=" Margaret of Anjou" x="0" y="32" unit_type="3"  movement="6"/>
 
 				<enemy name= "Duke of York" x="128" y="64" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
@@ -77,7 +77,7 @@
 
 		<battleSprites>
 			<Sprite path="Assets/Textures/BattleScreenSprites/PrinceEdward.png"/>
-			
+			<Sprite path="Assets/Textures/BattleScreenSprites/HenryTudor.png"/>
 			
 		</battleSprites>
 		

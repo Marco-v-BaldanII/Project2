@@ -73,13 +73,6 @@ bool Player::Start() {
 	attack = 20;
 
 
-
-	// Change to a sprite sheet
-	myBattleTexture = app->tex->Load("Assets/Textures/BattleScreenSprites/PrinceEdwardBow.png");
-
-
-
-
 	
 	std::string s = config.attribute("name").as_string();
 

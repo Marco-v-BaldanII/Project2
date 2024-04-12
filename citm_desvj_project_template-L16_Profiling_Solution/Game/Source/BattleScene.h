@@ -47,6 +47,10 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	bool SaveState(pugi::xml_node node);
+
+	bool LoadState(pugi::xml_node node);
+
 private:
 	SDL_Texture* spriteSheet;
 	SDL_Texture* yorkUI;
@@ -74,7 +78,7 @@ private:
 public:
 	pugi::xml_node mynode;
 
-	
+	List<pugi::xml_node*> nodes;
 
 };
 #endif // __BATTLESCENE_H__

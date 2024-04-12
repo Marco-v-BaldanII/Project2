@@ -109,7 +109,8 @@ bool LevelManagement::Update(float dt)
 {
 
 
-
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
 
 //	LOG("%s",currentScene->name.GetString());
@@ -379,5 +380,14 @@ bool LevelManagement::CleanUp()
 	{
 		currentScene = nullptr;
 	}
+	return true;
+}
+
+bool LevelManagement::SaveState(pugi::xml_node node) {
+
+	LOG("Saving");
+
+
+
 	return true;
 }
