@@ -5,11 +5,15 @@
 
 <portrait texturePath ="Assets/Textures/Portraits/Margaret.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Guard.png"/>
-<portrait texturePath ="Assets/Textures/Portraits/Henry VI.jpg"/>
+<portrait texturePath ="Assets/Textures/Portraits/Henry VI.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Edward of York.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/George of York.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Catesby.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Warwick.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/Henry Tudor.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/JasperTudor.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/Prince Edward.png"/>
+
 	
 <shakesperean>
 
