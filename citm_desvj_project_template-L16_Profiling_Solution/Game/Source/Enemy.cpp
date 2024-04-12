@@ -23,7 +23,7 @@ Enemy::~Enemy() {}
 
 bool Enemy::Awake() {
 
-	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	position = app->map->MapToWorld(config.attribute("x").as_int(), config.attribute("y").as_int());
 	name = config.attribute("name").as_string();
 	stepCounter = 0;
 	moveRange = 5;
@@ -291,7 +291,7 @@ void Enemy::ClickOnMe() {
 
 	int mouseX, mouseY;
 
-	app->input->GetMousePosition(mouseX, mouseY);
+	app->input->GetMouseWorldPosition(mouseX, mouseY);
 
 	//If the position of the mouse if inside the bounds of the box 
 	if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h) {

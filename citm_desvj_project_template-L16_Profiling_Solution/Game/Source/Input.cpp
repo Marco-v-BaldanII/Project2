@@ -155,8 +155,12 @@ void Input::GetMousePosition(int& x, int& y)
 
 void Input::GetMouseWorldPosition(int& x, int& y)
 {
-	x = mouseX + (app->render->camera.x * -1 / app->win->GetScale());
-	y = mouseY + (app->render->camera.y * -1 / app->win->GetScale());
+
+	SDL_GetMouseState(&mouseX, &mouseY);
+	mouseX -= app->render->camera.x;
+	mouseY -= app->render->camera.y;
+	mouseX /= 3; mouseY /= 3;
+	x = mouseX; y = mouseY;
 }
 
 void Input::GetMouseMotion(int& x, int& y)

@@ -25,7 +25,7 @@ Player::~Player() {
 bool Player::Awake() {
 
 	//Initialize Player parameters
-	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	position = app->map->MapToWorld( config.attribute("x").as_int(), config.attribute("y").as_int());
 	name = config.attribute("name").as_string();
 
 	int type = config.attribute("unit_type").as_int();
@@ -110,7 +110,7 @@ bool Player::PreUpdate()
 			iPoint p;
 			p.x = x;
 			p.y = y;
-			p = app->map->WorldToMap(p.x - app->render->camera.x, p.y - app->render->camera.y);
+			p = app->map->WorldToMap(x, y);
 			
 	
 			if (!InitPath(p)) {
@@ -125,7 +125,7 @@ bool Player::PreUpdate()
 			iPoint p;
 			p.x = x;
 			p.y = y;
-			p = app->map->WorldToMap(p.x - app->render->camera.x, p.y - app->render->camera.y);
+			p = app->map->WorldToMap(x,y);
 
 			if (app->entityManager->IsEnemyThere(p) != nullptr) {
 				oponent = app->entityManager->IsEnemyThere(p)->data->entity;
@@ -234,6 +234,17 @@ bool Player::PostUpdate()
 	}
 	myFrame->Update();
 
+	app->render->DrawRectangle(clickBox, b2Color(0, 0, 0, 1), false, true);
+
+	//-----Gets mouse correctly accoutning the scale and camera-----//
+	int mouseX, mouseY;
+	
+	app->input->GetMouseWorldPosition(mouseX, mouseY);
+
+
+	// Draw the cursor at the adjusted position
+	app->render->DrawCircle(mouseX, mouseY, 8, 1, 1, 1, 255, true);
+
 	return true;
 }
 
@@ -243,7 +254,8 @@ void Player::ClickOnMe() {
 
 		int mouseX, mouseY;
 
-		app->input->GetMousePosition(mouseX, mouseY);
+		app->input->GetMouseWorldPosition(mouseX, mouseY);
+
 
 		//If the position of the mouse if inside the bounds of the box 
 		if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h) {
@@ -263,7 +275,7 @@ void Player::ClickOnMe() {
 
 	
 	
-	//app->render->DrawRectangle(clickBox, b2Color(1,0,1,1),false, true);
+	
 
 }
 

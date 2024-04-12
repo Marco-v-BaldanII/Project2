@@ -461,7 +461,7 @@ void DialogueManager::AdvanceText() {
 
 	int mouseX, mouseY;
 
-	app->input->GetMousePosition(mouseX, mouseY);
+	app->input->GetMouseWorldPosition(mouseX, mouseY);
 
 	//If the position of the mouse if inside the bounds of the box 
 	if (mouseX > dialogueBox.x && mouseX < dialogueBox.x + dialogueBox.w && mouseY > dialogueBox.y && mouseY < dialogueBox.y + dialogueBox.h) {
