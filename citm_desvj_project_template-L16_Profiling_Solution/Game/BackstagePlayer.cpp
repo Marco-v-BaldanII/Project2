@@ -15,27 +15,27 @@ bool BackStagePlayer::Start()
 	// Set player texture
 	if (active)
 	{
-		playerTexture = app->tex->Load("Assets/Textures/BackstageNPCs/SideBowEdward.png");
+		playerTexture = app->tex->Load("Assets/Textures/BackstageNPCs/PersonajeWOTR resized.png");
 
 		// Load animationss
 		walkSpeed = 0.1f;
 		//walk
-		walkUp.PushBack({ 0, 0, 128, 128 });
+		walkUp.PushBack({ 8, 295, 82, 120 });
 		//mas
 		walkUp.loop = true;
 		walkUp.speed = walkSpeed;
 
-		walkDown.PushBack({ 0, 0, 128, 128 });
+		walkDown.PushBack({ 8, 434, 84, 122 });
 		//mas
 		walkDown.loop = true;
 		walkDown.speed = walkSpeed;
 
-		walkLeft.PushBack({ 0, 0, 128, 128 });
+		walkLeft.PushBack({ 22, 154, 54, 122 });
 		//mas
 		walkLeft.loop = true;
 		walkLeft.speed = walkSpeed;
 
-		walkRight.PushBack({ 0, 0, 128, 128 });
+		walkRight.PushBack({ 22, 154, 54, 122 });
 		//mas
 		walkRight.loop = true;
 		walkRight.speed = walkSpeed;
