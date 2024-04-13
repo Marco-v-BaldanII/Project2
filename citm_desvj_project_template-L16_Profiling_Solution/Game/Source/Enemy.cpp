@@ -34,7 +34,8 @@ bool Enemy::Awake() {
 	attack = 50;
 	hp = 100;
 	myBattleTexture = app->tex->Load("Assets/Textures/BattleScreenSprites/KnightBS.png");
-
+	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
+	
 	name = config.attribute("name").as_string();
 
 	int type = config.attribute("unit_type").as_int();
@@ -158,12 +159,15 @@ bool Enemy::PreUpdate() {
 	}
 	break;
 	}
+
+
 	return true;
 }
 
 bool Enemy::Update(float dt)
 {
 
+	app->render->DrawTexture(texture, position.x, position.y, &section);
 	switch (state)
 	{
 	case IDLE:
@@ -211,9 +215,10 @@ bool Enemy::Update(float dt)
 		battleTimer++;
 
 		if (battleTimer >= 1 && battleTimer < 300) {
-
-			app->render->DrawTexture(myBattleTexture, 100, 100, false, false, 255);
-			app->render->DrawTexture(target->myBattleTexture, 250, 100, false, true, 255);
+			SDL_Rect bg = {0,0,256*2,192*2};
+			app->render->DrawTexture(battleBg, app->render->camera.x/-3, app->render->camera.y/-3, &bg, false, 255);
+			app->render->DrawTexture(myBattleTexture, app->render->camera.x/-3 + 100, app->render->camera.y/-3+100, false, false, 255);
+			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x/-3 + 250, app->render->camera.y/-3 + 100, false, true, 255);
 		}
 
 		if (battleTimer == 298) {
@@ -228,7 +233,7 @@ bool Enemy::Update(float dt)
 		break;
 	}
 
-
+	
 	return true;
 }
 
@@ -275,7 +280,7 @@ bool Enemy::PostUpdate() {
 		break;
 	}
 
-	app->render->DrawTexture(texture, position.x, position.y, &section);
+
 	ClickOnMe();
 	if (drawPath) {
 

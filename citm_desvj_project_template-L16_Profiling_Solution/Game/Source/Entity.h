@@ -154,7 +154,7 @@ public:
 	Entity* entity;
 	Entity* target;
 	bool entityTurn = false;
-
+	SDL_Texture* battleBg = NULL;
 	SDL_Texture* myBattleTexture = NULL;
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...

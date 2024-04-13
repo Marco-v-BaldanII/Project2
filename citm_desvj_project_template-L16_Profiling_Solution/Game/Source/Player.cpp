@@ -72,7 +72,7 @@ bool Player::Start() {
 	hp = 100;
 	attack = 20;
 	attackRange = 1;
-
+	battleBg = app->tex->Load("Assets/Textures/BattleScreenSprites/BattleStage.png");
 	
 	std::string s = config.attribute("name").as_string();
 
@@ -170,7 +170,7 @@ bool Player::Update(float dt)
 		battleTimer++;
 
 		if (battleTimer >= 1 && battleTimer < 300) {
-
+			app->render->DrawTexture(battleBg, 0, 0, false, false, 255);
 			app->render->DrawTexture(myBattleTexture, 100, 100, false, false, 255);
 			app->render->DrawTexture(oponent->myBattleTexture, 250, 100, false, true, 255);
 		}

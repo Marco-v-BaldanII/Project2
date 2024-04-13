@@ -101,8 +101,8 @@
 				<player  name="HenryTudor" x="2" y ="39" unit_type="0" attack="5" hp="12" precision="95" luck="25" speed="30" movement="10"/>
 				<player  name=" Margaret of Anjou" x="4" y="42" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
 
-				<enemy name= "Richard of York" x="7" y="12" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
-				<enemy name= "Edward IV" x="72" y="26" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Richard of York" x="7" y="39" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
+			<!--	<enemy name= "Edward IV" x="72" y="26" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
 				<enemy name= "Earl of Warwick" x="79" y="72" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
 				<enemy name= "George of Clarence" x="43" y="50" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
 				
@@ -112,7 +112,7 @@
 				<enemy name= "Mage" x="78" y="36" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
 				<enemy name= "Mage" x="83" y="36" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
 				<enemy name= "Archer" x="37" y="18" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Knight" x="39" y="18" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Knight" x="39" y="18" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/> -->
 
 			</map>
 			
