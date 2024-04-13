@@ -32,11 +32,17 @@ public:
 		myPos = MIDDLE;
 	}
 
+	Dialogue(string owner, string text, string choiceA, string choiceB) {
+		this->owner = owner;
+		this->text = text;
+		myPos = MIDDLE;
+	}
+
 	SDL_Texture* background = nullptr;
 
 
-	Dialogue* leftChild;
-	Dialogue* rightChild;
+	string choiceA;
+	string choiceB;
 
 
 };
@@ -53,6 +59,7 @@ struct Node {
 
 };
 class Tree {
+public:
 
 	Node* GetNode(Dialogue* dialogue, int ID) {
 

@@ -42,7 +42,7 @@ enum DialogueStates {
 
 };
 class Dialogue;
-
+class Tree;
 
 struct Scene {
 public:
@@ -101,7 +101,7 @@ public:
 
 	void AdvanceText();
 
-	void npcTalk(DynArray<Dialogue*>& npcDialogues);
+	void npcTalk(Tree* dialogues);
 
 	void DrawBackground();
 

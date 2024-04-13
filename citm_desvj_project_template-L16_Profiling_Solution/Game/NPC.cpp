@@ -51,14 +51,14 @@ bool Npc::Update(float dt)
 	app->input->GetMousePosition(mouseX, mouseY);
 
 	//If the position of the mouse if inside the bounds of the box 
-	if (mouseX > body.x && mouseX < body.x + body.w && mouseY > body.y && mouseY < body.y + body.h) {
+	//if (mouseX > body.x && mouseX < body.x + body.w && mouseY > body.y && mouseY < body.y + body.h) {
 
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
-			
-			// Code for talking
-			app->dialogueManager->npcTalk(myDialogues);
-		}
-	}
+	//	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+	//		
+	//		// Code for talking
+	//		app->dialogueManager->npcTalk(myDialogues);
+	//	}
+	//}
 
 	if (dirTimer.ReadMSec() > waitTime*1000) {
 

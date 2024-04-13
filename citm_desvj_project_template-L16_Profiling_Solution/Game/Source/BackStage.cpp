@@ -46,13 +46,22 @@ bool BackStage::Start()
 
 			Npc* dude = (Npc*)app->entityManager->PlaceNPC(npcNode.attribute("name").as_string(), npcNode.attribute("x").as_int(), npcNode.attribute("y").as_int(), npcNode.attribute("wait").as_int());
 
+			Tree* t = new Tree();
+			Node* root = nullptr;
+
 			for (pugi::xml_node dialogueNode = npcNode.child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 				// Create all the dialogues for the npc
 				string text = dialogueNode.attribute("text").as_string();
-				Dialogue* di = new Dialogue(npcNode.attribute("name").as_string(), text);
+				Dialogue* di = new Dialogue(npcNode.attribute("name").as_string(), text, dialogueNode.attribute("choiceA").as_string(), dialogueNode.attribute("choiceB").as_string());
 
-				dude->myDialogues.PushBack(di);
+
+				root = t->Insert(root, di, dialogueNode.attribute("ID").as_int());
+
+
+				//dude->myDialogues.PushBack(di);
 			}
+
+			dude->dialogues = root;
 
 			npcsList.Add(dude);
 		}
@@ -123,7 +132,7 @@ bool BackStage::Update(float dt)
 			LOG("NEAR");
 			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 				//block movimiento de player
-				app->dialogueManager->npcTalk(pEntity->myDialogues);
+				//app->dialogueManager->npcTalk(pEntity->myDialogues);
 			}
 		}
 	}

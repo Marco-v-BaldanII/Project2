@@ -7,6 +7,7 @@
 #include "DialogueManager.h"
 #include "../DynArray.h"
 #include "../Timer.h"
+#include "Dialogue.h"
 
 struct SDL_Texture;
 
@@ -52,7 +53,7 @@ public:
 public:
 	string name;
 
-	DynArray<Dialogue*> myDialogues;
+	Node* dialogues;
 
 	iPoint position;
 	SDL_Rect body = SDL_Rect{ 0,0,50,70 };

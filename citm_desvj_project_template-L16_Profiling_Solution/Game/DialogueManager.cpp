@@ -37,7 +37,7 @@ bool DialogueManager::Awake(pugi::xml_node config)
 	// Load all the portrait textures
 
 	myLanguage = ENGLISH;
-	myState = CUTSCENE;
+	myState = NPCS;
 
 	myConfig = config;
 
@@ -476,7 +476,7 @@ void DialogueManager::AdvanceText() {
 					Next_Dialogue();
 
 				}
-				else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
+				else if (myState == NPCS)/* npcTalk(currentNPC_Dialogues);*/
 
 				scrolling = true;
 				numLines = 0;
@@ -492,7 +492,7 @@ void DialogueManager::AdvanceText() {
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		if (HasScrollFinished()) {
 			if (myState == CUTSCENE) Next_Dialogue();
-			else if (myState == NPCS) npcTalk(currentNPC_Dialogues);
+			else if (myState == NPCS) /*npcTalk(currentNPC_Dialogues);*/
 			scrolling = true;
 			numLines = 0;
 			ResetScroll();
@@ -533,9 +533,9 @@ void DialogueManager::SetTextVelocity(TextVelocity velocity) {
 	}
 }
 
-void DialogueManager::npcTalk(DynArray<Dialogue*>& npcDialogues) {
+void DialogueManager::npcTalk(Tree* dialogues) {
 
-	int size = npcDialogues.Count();
+	/*int size = npcDialogues.Count();
 
 	if (npcDialogueIndex < size - 1) {
 		myState = NPCS;
@@ -547,7 +547,7 @@ void DialogueManager::npcTalk(DynArray<Dialogue*>& npcDialogues) {
 		app->backstageplayer->talking = false;
 		npcDialogueIndex = -1;
 		currentNPC_Dialogues.Clear();
-	}
+	}*/
 }
 
 void DialogueManager::Next_Dialogue() {
