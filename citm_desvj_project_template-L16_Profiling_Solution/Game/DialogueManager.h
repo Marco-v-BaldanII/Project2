@@ -12,7 +12,7 @@
 #include "../Timer.h"
 #include "Source/Textures.h"
 #include "../GuiButton.h"
-
+#include "NPC.h"
 #include "../GuiSlider.h"
 #include "../GuiPanel.h"
 #include "../GuiToggle.h"
@@ -24,11 +24,7 @@ using namespace std;
 #define DIALOGUE_SIZE 7
 #define BOX_OFFSET 20
 
-enum Position {
-	LEFT,
-	RIGHT,
-	MIDDLE
-};
+enum Position;
 
 enum Language {
 	SHAKESPEREAN,
@@ -51,6 +47,7 @@ enum DialogueStates {
 class Dialogue;
 class Tree;
 struct Node;
+class Npc;
 
 struct Scene {
 public:
@@ -140,6 +137,8 @@ public:
 	float slowVelocity = 0.002;
 	float normalVelocity = 0.004;
 	float fastVelocity = 0.007;
+
+	Npc* currentNPC;
 
 	float textVelocity = normalVelocity;
 

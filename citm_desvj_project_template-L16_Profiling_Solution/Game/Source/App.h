@@ -6,7 +6,6 @@
 #include "PerfTimer.h"
 #include "Timer.h"
 #include "EntityManager.h"
-
 #include "PugiXml/src/pugixml.hpp"
 
 // L03: DONE 1: Add the EntityManager Module to App

@@ -1,10 +1,11 @@
+#pragma once
+#pragma once
 #ifndef __NPC_H__
 #define __NPC_H__
 
 #include "../Entity.h"
 #include "../Point.h"
 #include "SDL/include/SDL.h"
-#include "DialogueManager.h"
 #include "../DynArray.h"
 #include "../Timer.h"
 #include "Dialogue.h"
@@ -54,6 +55,7 @@ public:
 	string name;
 
 	Node* dialogues;
+	Node* currentDialogue;
 
 	iPoint position;
 	SDL_Rect body = SDL_Rect{ 0,0,50,70 };

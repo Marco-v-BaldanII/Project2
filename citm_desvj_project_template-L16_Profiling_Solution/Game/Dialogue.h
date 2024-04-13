@@ -1,3 +1,5 @@
+#pragma once
+#pragma once
 #ifndef __DIALOGUE_H__
 #define __DIALOGUE_H__
 
@@ -13,7 +15,11 @@
 
 using namespace std;
 
-
+enum Position {
+	LEFT,
+	RIGHT,
+	MIDDLE
+};
 
 class Dialogue {
 
@@ -36,13 +42,16 @@ public:
 		this->owner = owner;
 		this->text = text;
 		myPos = MIDDLE;
+
+		this->choiceA = choiceA;
+		this->choiceB = choiceB;
 	}
 
 	SDL_Texture* background = nullptr;
 
 
-	string choiceA;
-	string choiceB;
+	string choiceA ="";
+	string choiceB = "";
 
 
 };

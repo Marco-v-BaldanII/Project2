@@ -62,6 +62,7 @@ bool BackStage::Start()
 			}
 
 			dude->dialogues = root;
+			dude->currentDialogue = root;
 
 			npcsList.Add(dude);
 		}
@@ -132,7 +133,8 @@ bool BackStage::Update(float dt)
 			LOG("NEAR");
 			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 				//block movimiento de player
-				app->dialogueManager->npcTalk(pEntity->dialogues);
+				app->dialogueManager->npcTalk(pEntity->currentDialogue);
+				app->dialogueManager->currentNPC = pEntity;
 			}
 		}
 	}

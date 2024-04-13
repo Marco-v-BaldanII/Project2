@@ -16,6 +16,7 @@
 #include "BackstagePlayer.h"
 #include "../GuiManager.h"
 #include "Dialogue.h"
+#include "NPC.h"
 
 using namespace std;
 
@@ -210,6 +211,19 @@ bool DialogueManager::Update(float dt)
 			ChangeLanguage();
 		}
 
+
+	}
+	else {
+
+		if ( (currentNPC_Dialogues == NULL) || (currentNPC_Dialogues->leftChild == nullptr || currentNPC_Dialogues->rightChild == nullptr)) {
+
+			choiceA_button->state = GuiControlState::DISABLED;
+			choiceB_button->state = GuiControlState::DISABLED;
+		}
+		else {
+			choiceA_button->state = GuiControlState::NORMAL;
+			choiceB_button->state = GuiControlState::NORMAL;
+		}
 
 	}
 
@@ -558,8 +572,49 @@ void DialogueManager::SetTextVelocity(TextVelocity velocity) {
 
 void DialogueManager::npcTalk(Node* npcDialogues) {
 
+	// reset npc dialogues
+	if (npcDialogues == NULL) {
+		currentNPC->currentDialogue = currentNPC->dialogues;
+		currentNPC_Dialogues = currentNPC->currentDialogue;
+	}
 
-	this->currentNPC_Dialogues = npcDialogues;
+	if (currentNPC_Dialogues == nullptr) {
+		this->currentNPC_Dialogues = npcDialogues;
+
+		int choices = 0;
+		if (npcDialogues->dialogue->choiceA != "") { choices++; }
+		if (npcDialogues->dialogue->choiceB != "") { choices++; }
+
+		if (choices == 2) {
+
+			choiceA_button->text = npcDialogues->dialogue->choiceA.c_str();
+			choiceB_button->text = npcDialogues->dialogue->choiceB.c_str();
+			
+		}
+	}
+	else if (this->currentNPC_Dialogues == npcDialogues) {
+		int choices = 0;
+		if (npcDialogues->dialogue->choiceA != "") { choices++; }
+		if (npcDialogues->dialogue->choiceB != "") { choices++; }
+		if (choices == 0) {
+
+			if (currentNPC_Dialogues->ID == 1) {
+				currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
+				currentNPC->currentDialogue = currentNPC_Dialogues;
+			}
+			else if (currentNPC_Dialogues->ID == 2) {
+				currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
+				currentNPC->currentDialogue = currentNPC_Dialogues;
+			}
+
+		}
+
+
+	}
+	
+	// draw choices 
+
+	
 
 	/*int size = npcDialogues.Count();
 
@@ -650,14 +705,18 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 		{
 			LOG("Choice A");
 			if (currentNPC_Dialogues->leftChild != nullptr) {
-				currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
+				//currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
+				currentNPC->currentDialogue = currentNPC->dialogues->leftChild;
+				currentNPC_Dialogues = currentNPC->currentDialogue;
 			}
 		}
 		else if (control->id == 101)
 		{
 			LOG("Choice B");
 			if (currentNPC_Dialogues->rightChild != nullptr) {
-				currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
+				//currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
+				currentNPC->currentDialogue = currentNPC->dialogues->rightChild;
+				currentNPC_Dialogues = currentNPC->currentDialogue;
 			}
 		}
 	}
