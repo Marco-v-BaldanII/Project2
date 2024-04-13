@@ -12,6 +12,7 @@
 #include "Pathfinding.h"
 #include "Map.h"
 #include "../frame.h"
+#include "../TurnManager.h"
 #include "Physics.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
@@ -65,7 +66,7 @@ bool Enemy::Awake() {
 
 	counter = moveTime;
 	pathfinding = new PathFinding();
-
+	HasMoveAction = true;
 	
 	uchar* navigationMap = NULL;
 	app->entityManager->enemies.Add(this);
@@ -105,18 +106,12 @@ bool Enemy::PreUpdate() {
 		tilePos = pos;
 
 		
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
-		{
-			entityTurn = true;
-			HasMoveAction = true;
-			drawPath = false;
-			target = nullptr;
-		}
+
 	
 
 		if (entityTurn)
 		{
-
+			drawPath = false;
 			/*if (battleState == DEAD)
 				break;*/
 
@@ -140,11 +135,11 @@ bool Enemy::PreUpdate() {
 			}
 			else {
 
-				if (HasAttackAction && app->map->pathfinding->CreatePath(tilePos, target->tilePos) <= 6)
+				if (HasMoveAction && app->map->pathfinding->DistanceBetweenTiles(target->tilePos, tilePos) <= 1)
 				{
 					state = BATTLE;
 					
-					HasMoveAction = false;
+					
 				}
 				else if (HasMoveAction)
 				{
@@ -206,11 +201,24 @@ bool Enemy::Update(float dt)
 		if (MovePath()) {
 			newTarget = false;
 			target = nullptr;
-		
+			app->turnManager->noEnemyMoving = true;
 		}
 		break;
 	case BATTLE:
-	
+		battleTimer++;
+
+		if (battleTimer >= 1 && battleTimer < 300) {
+
+			app->render->DrawTexture(myBattleTexture, 100, 100, false, false, 255);
+			app->render->DrawTexture(target->myBattleTexture, 250, 100, false, true, 255);
+		}
+
+		if (battleTimer == 298) {
+			hp -= target->attack;
+			target->hp -= attack;
+			state = MOVE;
+		
+		}
 		break;
 	default:
 		break;
@@ -240,7 +248,7 @@ bool Enemy::PostUpdate() {
 	case MOVE:
 	{
 		//draw movement area
-		app->map->pathfinding->DrawBFSPath();
+		//app->map->pathfinding->DrawBFSPath();
 		//Search for new pos//Draw path
 		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 		if (path != nullptr && path->Count() > 0)

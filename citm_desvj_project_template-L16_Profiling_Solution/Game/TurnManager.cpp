@@ -7,6 +7,8 @@
 #include <string>
 #include "../Defs.h"
 #include "../Log.h"
+#include "../EntityManager.h"
+#include "../Entity.h"
 
 using namespace std;
 
@@ -73,13 +75,37 @@ bool TurnManager::Update(float dt)
 	if (availablePlayers <= 0) {
 		// enemy turn
 		LOG("All players have moved, initiating enemy turn");
-		// if enemy turn has finished
-		if (EnemyTurn() == true) {
+		// if enemy turn has finished and there is no enemy moving
+		if (noEnemyMoving)
+			for (int i = 0; i < app->entityManager->enemies.Count(); ++i)
+			{
+				enemyTurnFinished = true;
+				if (app->entityManager->enemies.At(i)->data->HasMoveAction == true)
+				{
+
+					app->entityManager->enemies.At(i)->data->entityTurn = true;
+					app->entityManager->enemies.At(i)->data->target = nullptr;
+					app->entityManager->enemies.At(i)->data->battleTimer = 0;
+					enemyTurnFinished = false;
+					noEnemyMoving = false;
+					break;
+				}
+			}
+
+
+		if (enemyTurnFinished) {
+
+			for (int i = 0; i < app->entityManager->enemies.Count(); ++i)
+			{
+				app->entityManager->enemies.At(i)->data->HasMoveAction = true;
+				
+			}
 
 			PlayerTurn();
-
+			
 		}
 	}
+
 
 
 
@@ -122,6 +148,12 @@ bool TurnManager::EnemyTurn() {
 	LOG("insert enemy turn");
 	currentTurn = ENEMY;
 	bool finished = true;
+
+
+
+
+
+
 
 	// Update enemies - comented for now
 

@@ -57,8 +57,9 @@ public:
 	//Check if any entity is in the tile
 	bool IsTileEmpty(const iPoint& pos) const;
 
-	
+	bool IsEnemyThereEmpty(const iPoint& pos) const;
 
+	int DistanceBetweenTiles(const iPoint& pos1, const iPoint& pos2) const;
 
 	void PropagateBFS();
 

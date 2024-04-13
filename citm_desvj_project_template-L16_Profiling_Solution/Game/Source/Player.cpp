@@ -71,7 +71,7 @@ bool Player::Start() {
 	app->entityManager->players.add(this);
 	hp = 100;
 	attack = 20;
-
+	attackRange = 1;
 
 	
 	std::string s = config.attribute("name").as_string();
@@ -127,7 +127,7 @@ bool Player::PreUpdate()
 			p.y = y;
 			p = app->map->WorldToMap(x,y);
 
-			if (app->entityManager->IsEnemyThere(p) != nullptr) {
+			if (app->entityManager->IsEnemyThere(p) != nullptr && app->map->pathfinding->DistanceBetweenTiles(app->entityManager->IsEnemyThere(p)->data->tilePos, tilePos) <= attackRange) {
 				oponent = app->entityManager->IsEnemyThere(p)->data->entity;
 				state = BATTLE;
 			}
@@ -165,10 +165,6 @@ bool Player::Update(float dt)
 
 		break;
 	case BATTLE:
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
-		{
-
-		}
 
 		battleTimer++;
 

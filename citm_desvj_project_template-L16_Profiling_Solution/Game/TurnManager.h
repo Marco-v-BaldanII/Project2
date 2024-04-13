@@ -50,17 +50,18 @@ public:
 	Turn currentTurn = PLAYER;
 
 	Player* currentPlayer = nullptr;
+	bool noEnemyMoving = true;
 private:
 
 	List<Player*> players;
 
 
 	List<Enemy*> enemies;
-	Enemy* currentenemy = nullptr;
+	Entity* currentenemy = nullptr;
 
 	uint availablePlayers = 3;
 
-
+	bool enemyTurnFinished;
 
 	uint enemyIndex = 0;
 	uint maxEnemies;

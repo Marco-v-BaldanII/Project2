@@ -473,6 +473,32 @@ bool PathFinding::IsTileEmpty(const iPoint& pos) const
 	return true;
 }
 
+int PathFinding::DistanceBetweenTiles(const iPoint& pos1, const iPoint& pos2) const
+{
+	int distance = abs(pos2.x - pos1.x) + abs(pos2.y - pos1.y);
+
+	
+
+	return  distance;
+}
+
+bool PathFinding::IsEnemyThereEmpty(const iPoint& pos) const
+{
+
+	//create function later to check the list of all entities
+	for (int i = 0; i < app->entityManager->enemies.Count(); i++)
+	{
+
+
+		if (pos == app->entityManager->enemies.At(i)->data->tilePos)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 void PathFinding::ClearPath()
 {
 	if (lastPath.Count() > 0)
@@ -561,7 +587,7 @@ void PathFinding::PropagateBFS()
 		p2ListItem<iPoint>* neightbour = neightbours.start;
 		while (neightbour != NULL)
 		{
-			if (visited.find(neightbour->data) == false && IsWalkable(neightbour->data))
+			if (visited.find(neightbour->data) == false && IsWalkable(neightbour->data) && IsEnemyThereEmpty(neightbour->data))
 			{
 				frontier.Push(neightbour->data);
 				visited.add(neightbour->data);
