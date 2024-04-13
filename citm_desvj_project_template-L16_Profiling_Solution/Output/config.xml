@@ -27,6 +27,7 @@
 
 		<npc name = "Guy2" x ="400" y="200" wait="2">
 			
+			<!--comment 0,0 71, 150-->
 			<texture path="Assets\Textures\BackstageNPCs\Soldado1.png"/>
 			
 			<dialogue text = "How are you ? "  choiceA ="Bad" choiceB="good"   ID="1"      />
@@ -40,6 +41,7 @@
 
 		<npc name = "Guy3" x ="160" y="200" wait="3">
 			
+			<!--comment 0,0 71, 150-->
 			<texture path="Assets\Textures\BackstageNPCs\Soldado2.png"/>
 			
 			<dialogue text = "The play is about to start" ID="1"          />
@@ -56,6 +58,7 @@
 
 		<npc name = "Guy1" x ="400" y="200" wait="500">
 			
+			<!--comment 0,0 70, 150-->
 			<texture path="Assets\Textures\BackstageNPCs\Soldado3.png"/>
 			
 			<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="1"          />
