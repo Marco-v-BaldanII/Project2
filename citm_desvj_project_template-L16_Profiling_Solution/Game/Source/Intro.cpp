@@ -26,6 +26,8 @@ bool Intro::Awake(pugi::xml_node config)
 {
 	LOG("Loading Intro Scene");
 	bool ret = true;
+	config = app->win->myNode.next_sibling("intro");
+
 	myNode = config;
 
 	return ret;
@@ -35,7 +37,7 @@ bool Intro::Awake(pugi::xml_node config)
 bool Intro::Start()
 {
 
-	intro = app->audio->LoadFx("Assets/audio/fx/intro.wav");
+ 	intro = app->audio->LoadFx("Assets/audio/fx/intro.wav");
 	app->audio->PlayFx(intro);
 	waitTime = 200;
 	music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);

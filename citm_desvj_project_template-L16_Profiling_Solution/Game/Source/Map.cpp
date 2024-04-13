@@ -4,9 +4,10 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Window.h"
 #include "Scene.h"
 #include "Optick/include/optick.h"
-
+#include "GuiManager.h"
 #include "Defs.h"
 #include "Log.h"
 #include "BattleScene.h"
@@ -34,7 +35,7 @@ bool Map::Awake(pugi::xml_node config)
 
 bool Map::Start() {
 
-    myNode = app->battleScene->mynode.next_sibling("map");
+    myNode = app->win->myNode.next_sibling("map");
 
     //Calls the functon to load the map, make sure that the filename is assigned
     SString mapPath = path;

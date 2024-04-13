@@ -37,6 +37,8 @@ public:
 	// The surface contained by the window
 	SDL_Surface* screenSurface;
 
+	pugi::xml_node myNode;
+
 private:
 	SString title;
 	uint width;

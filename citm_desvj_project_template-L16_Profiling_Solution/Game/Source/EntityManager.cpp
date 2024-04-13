@@ -105,7 +105,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Item();
 		break;
 	case EntityType::ENEMY:
-		entity = new Enemy();
+  		entity = new Enemy();
 		break;
 	default:
 		break;
