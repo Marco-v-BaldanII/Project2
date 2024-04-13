@@ -371,6 +371,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 		if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos == MIDDLE) {
 			dialogueBox = narratorBox;
 
+
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , (dialogueBox.w + 6) , (dialogueBox.h + 6) }, b2Color(0, 0, 10, 1), true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , (dialogueBox.w + 4) , (dialogueBox.h + 4) }, b2Color(0, 0, 0.5f, 1), true, true);
 			app->render->DrawRectangle(dialogueBox, royalBlue, true, true);
@@ -425,29 +426,12 @@ void DialogueManager::DrawTextBox(Position pos) {
 		app->render->DrawRectangle(skipRect, b2Color(1, 1, 0, 0.5f), true, true);
 	}
 	else if (currentNPC_Dialogues != nullptr) {
-		//if (currentNPC_Dialogues.Count() != 0) {
-
-		//	string txt = "fhfjf";
-
-		//	txt = currentNPC_Dialogues[npcDialogueIndex]->text;
-
-		//	const char* text = txt.c_str();
-		//	const char* owner = dialogues[dialogueIndex]->owner.c_str();
-		//	numLines = 0;
-
-		//	// For now i am drawing npc dialogue in the narrator box
-		//	dialogueBox = narratorBox;
-
-		//	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
-		//	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
-		//	app->render->DrawRectangle(dialogueBox, whitey, true, true);
-
-		//	app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
-
-		//}
+		
 
 		numLines = 0;
 		dialogueBox = narratorBox;
+		dialogueBox.x -= (app->render->camera.x/3);
+		dialogueBox.y -= (app->render->camera.y/3);
 		string txt = currentNPC_Dialogues->dialogue->text;
 
 		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
@@ -455,14 +439,6 @@ void DialogueManager::DrawTextBox(Position pos) {
 		app->render->DrawRectangle(dialogueBox, whitey, true, true);
 
 		app->render->DrawText(txt, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
-
-		// Choices
-		if (currentNPC_Dialogues->dialogue->choiceA != "0" && currentNPC_Dialogues->dialogue->choiceB != "0") {
-
-			
-
-		}
-
 
 	}
 
@@ -528,11 +504,17 @@ void DialogueManager::AdvanceText() {
 	}
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		if (HasScrollFinished()) {
-			if (myState == CUTSCENE) Next_Dialogue();
-			//else if (myState == NPCS) /*npcTalk(currentNPC_Dialogues);*/
-			scrolling = true;
-			numLines = 0;
-			ResetScroll();
+			if (myState == CUTSCENE) {
+				Next_Dialogue();
+				//else if (myState == NPCS) /*npcTalk(currentNPC_Dialogues);*/
+				scrolling = true;
+				numLines = 0;
+				ResetScroll();
+			}
+			else if (myState == NPCS && currentNPC_Dialogues != nullptr) {
+				
+				
+			}
 		}
 		else {
 			FinishScrolling();
@@ -572,46 +554,84 @@ void DialogueManager::SetTextVelocity(TextVelocity velocity) {
 
 void DialogueManager::npcTalk(Node* npcDialogues) {
 
-	// reset npc dialogues
-	if (npcDialogues == NULL) {
-		currentNPC->currentDialogue = currentNPC->dialogues;
-		currentNPC_Dialogues = currentNPC->currentDialogue;
-	}
+	if (HasScrollFinished() == true || currentNPC_Dialogues == NULL) {
 
-	if (currentNPC_Dialogues == nullptr) {
-		this->currentNPC_Dialogues = npcDialogues;
+		scrolling = true;
+		numLines = 0;
+		ResetScroll();
 
-		int choices = 0;
-		if (npcDialogues->dialogue->choiceA != "") { choices++; }
-		if (npcDialogues->dialogue->choiceB != "") { choices++; }
 
-		if (choices == 2) {
 
-			choiceA_button->text = npcDialogues->dialogue->choiceA.c_str();
-			choiceB_button->text = npcDialogues->dialogue->choiceB.c_str();
+		// reset npc dialogues
+		if (npcDialogues == NULL) {
+			currentNPC->currentDialogue = currentNPC->dialogues;
+			currentNPC_Dialogues = currentNPC->currentDialogue;
+		}
+
+		app->backstageplayer->talking = true;
+		// first dialogue
+		if (currentNPC_Dialogues == nullptr) {
+			this->currentNPC_Dialogues = npcDialogues;
+
+			int choices = 0;
+			if (npcDialogues->dialogue->choiceA != "") { choices++; }
+			if (npcDialogues->dialogue->choiceB != "") { choices++; }
+
+			if (choices == 2) {
+				// display choices
+				choiceA_button->text = npcDialogues->dialogue->choiceA.c_str();
+				choiceB_button->text = npcDialogues->dialogue->choiceB.c_str();
+
+			}
+		}
+		else if (this->currentNPC_Dialogues == npcDialogues)/*Advance to new dialogue , update the pointers*/ {
 			
+			/*if (choices == 0 && !(currentNPC->currentDialogue->leftChild == nullptr && currentNPC->currentDialogue->rightChild == nullptr)) {
+
+				if (currentNPC_Dialogues->leftChild != nullptr) {
+					currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
+					currentNPC->currentDialogue = currentNPC_Dialogues;
+				}
+				else if (currentNPC_Dialogues->rightChild != nullptr) {
+					currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
+					currentNPC->currentDialogue = currentNPC_Dialogues;
+				}
+
+			}*/
+			if ((currentNPC->currentDialogue->leftChild == nullptr && currentNPC->currentDialogue->rightChild == nullptr)) {
+				// finish dialoues
+				app->backstageplayer->talking = false;
+				currentNPC_Dialogues = nullptr;
+				currentNPC->currentDialogue = currentNPC->dialogues;
+
+				scrolling = false;
+				numLines = 0;
+				FinishScrolling();
+
+
+			}
+			else {
+				if (currentNPC_Dialogues->leftChild != nullptr) {
+					currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
+					currentNPC->currentDialogue = currentNPC_Dialogues;
+
+					int choices = 0;
+					if (currentNPC_Dialogues->dialogue->choiceA != "") { choices++; }
+					if (currentNPC_Dialogues->dialogue->choiceB != "") { choices++; }
+					if (choices == 2) {
+						choiceA_button->text = currentNPC_Dialogues->dialogue->choiceA.c_str();
+						choiceB_button->text = currentNPC_Dialogues->dialogue->choiceB.c_str();
+					}
+				}
+			}
+
+
+
 		}
 	}
-	else if (this->currentNPC_Dialogues == npcDialogues) {
-		int choices = 0;
-		if (npcDialogues->dialogue->choiceA != "") { choices++; }
-		if (npcDialogues->dialogue->choiceB != "") { choices++; }
-		if (choices == 0) {
-
-			if (currentNPC_Dialogues->ID == 1) {
-				currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
-				currentNPC->currentDialogue = currentNPC_Dialogues;
-			}
-			else if (currentNPC_Dialogues->ID == 2) {
-				currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
-				currentNPC->currentDialogue = currentNPC_Dialogues;
-			}
-
-		}
-
-
+	else {
+		FinishScrolling();
 	}
-	
 	// draw choices 
 
 	
@@ -706,7 +726,7 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 			LOG("Choice A");
 			if (currentNPC_Dialogues->leftChild != nullptr) {
 				//currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
-				currentNPC->currentDialogue = currentNPC->dialogues->leftChild;
+				currentNPC->currentDialogue = currentNPC->currentDialogue->leftChild;
 				currentNPC_Dialogues = currentNPC->currentDialogue;
 			}
 		}
@@ -715,7 +735,7 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 			LOG("Choice B");
 			if (currentNPC_Dialogues->rightChild != nullptr) {
 				//currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
-				currentNPC->currentDialogue = currentNPC->dialogues->rightChild;
+				currentNPC->currentDialogue = currentNPC->currentDialogue->rightChild;
 				currentNPC_Dialogues = currentNPC->currentDialogue;
 			}
 		}

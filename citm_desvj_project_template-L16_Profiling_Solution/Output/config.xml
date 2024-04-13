@@ -25,12 +25,35 @@
 
 	<entitymanager>
 
-		<npc name = "Guy2" x ="160" y="200" wait="3">
+		<npc name = "Guy2" x ="400" y="200" wait="2">
 			<dialogue text = "How are you ? "  choiceA ="Bad" choiceB="good"   ID="1"      />
 			<dialogue text = "Why are you upset?"   ID="1"       />
-			<dialogue text = "What makes you so happy ?"  ID="2"          />
 			<dialogue text = "maybe i can help" ID ="1"          />
+			         
+			<dialogue text = "What makes you so happy ?"  ID="2"          />
+			
 			<dialogue text = "is it your bday ?" ID="2"          />
+		</npc> 
+
+		<npc name = "Guy3" x ="160" y="200" wait="3">
+			<dialogue text = "The play is about to start" ID="1"          />
+			<dialogue text = "I'm so very excited" ID="1"          />
+			<dialogue text = "Though I seem to have forgotten what the play is about" ID="1"          />
+			<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="1"          />
+			<dialogue text = "Do you know what the play is about?" ID="1" choiceA ="Wars of the Roses" choiceB="Hamlet"         />
+			<dialogue text = "Yes that's right" ID="1"         />
+			<!-- second branch-->
+			<dialogue text = "Are you trolling me?" ID="2"         />
+			<dialogue text = "I will have my revenge" ID="2"         />
+			
+		</npc>
+
+		<npc name = "Guy1" x ="400" y="200" wait="500">
+			<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="1"          />
+			<dialogue text = "Let the show begin"  ID="1"          />
+			<!-- second branch-->
+			<dialogue text = "Take your time"  ID="2"          />
+
 		</npc>
 
 	</entitymanager>

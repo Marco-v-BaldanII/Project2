@@ -90,12 +90,14 @@ public:
 			return root;
 		}
 
-		// criteria to insert the nodes
-		else if (ID % 2 == 0) {
+		
+
+		// criteria to insert the nodes: if there is a choice the second branch is right, if it's linear keep going left
+		else if (ID % 2 == 0 && root->dialogue->choiceB != "") {
 			// you pass the root (first elem) and the cost & name of the new root you want to make
 			root->rightChild = Insert(root->rightChild, dialogue, ID);
 		}
-		else if (ID % 2 != 0) {
+		else  {
 			root->leftChild = Insert(root->leftChild, dialogue, ID);
 		}
 
