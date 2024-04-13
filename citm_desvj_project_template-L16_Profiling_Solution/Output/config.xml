@@ -25,11 +25,13 @@
 
 	<entitymanager>
 
+
 		
 
 		
 
 		<npc name = "Guy4" x ="200" y="300" wait="4">
+		    <texture path="Assets\Textures\BackstageNPCs\Soldado1.png"/>
 			<dialogue text = "I am the battle master, it is my job to ensure that the fighting scenes are properly portrayed" ID="10"          />
 			<dialogue text = "Archers, Knights, Cavelliers... there are many different types of units in the battlefield, it is important that each of them play there part correctly" ID="8"          />
 			<dialogue text = "Would you like to now more about any of the units?" choiceA ="Yes" choiceB="No" ID="7"          />
@@ -40,6 +42,24 @@
 			<dialogue text = "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="5"          />
 			<dialogue text =  "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="4"    />
 			<dialogue text = "Archers are dasterdly tricksters that can chip away at your units from a distance, they act as counters to your magic users but they are weak againts knights." ID="7"          />
+
+	
+
+		<npc name = "Guy3" x ="160" y="200" wait="3">
+			
+			<!--comment 0,0 71, 150-->
+			<texture path="Assets\Textures\BackstageNPCs\Soldado2.png"/>
+			
+			<dialogue text = "The play is about to start" ID="1"          />
+			<dialogue text = "I'm so very excited" ID="1"          />
+			<dialogue text = "Though I seem to have forgotten what the play is about" ID="1"          />
+			<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="1"          />
+			<dialogue text = "Do you know what the play is about?" ID="1" choiceA ="Wars of the Roses" choiceB="Hamlet"         />
+			<dialogue text = "Yes that's right" ID="1"         />
+			<!-- second branch-->
+			<dialogue text = "Are you trolling me?" ID="2"         />
+			<dialogue text = "I will have my revenge" ID="2"         />
+
 			
 			
 		
@@ -48,8 +68,10 @@
 		</npc>
 
 		<npc name = "PlayWritter" x ="400" y="200" wait="500">
+		<texture path="Assets\Textures\BackstageNPCs\Soldado3.png"/>
 			<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="470"          />
 			<dialogue text = "Let the show begin"  ID="469"          />
+
 			<!-- second branch-->
 			<dialogue text = "Take your time"  ID="500"          />
 
@@ -74,12 +96,22 @@
 	float speed;
 	float movement;-->
 				
-				<player  name="PrinceEdward"  x="0" y="0" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"           />
-				<player  name="HenryTudor" x="1" y ="1" unit_type="0" movement="10" />
-				<player  name=" Margaret of Anjou" x="0" y="1" unit_type="3"  movement="6"/>
+				<player  name="PrinceEdward"  x="6" y="39" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<player  name="HenryTudor" x="2" y ="39" unit_type="0" attack="5" hp="12" precision="95" luck="25" speed="30" movement="10"/>
+				<player  name=" Margaret of Anjou" x="4" y="42" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
 
-				<enemy name= "Duke of York" x="4" y="4" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Duke of York2" x="3" y="3" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Richard of York" x="7" y="12" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
+				<enemy name= "Edward IV" x="72" y="26" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Earl of Warwick" x="79" y="72" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
+				<enemy name= "George of Clarence" x="43" y="50" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				
+				<enemy name= "Knight" x="21" y="53" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Archer" x="48" y="76" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Mage" x="51" y="76" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Mage" x="78" y="36" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Mage" x="83" y="36" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Archer" x="37" y="18" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Knight" x="39" y="18" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
 
 			</map>
 			

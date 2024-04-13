@@ -166,6 +166,7 @@ bool Player::Update(float dt)
 		break;
 	case BATTLE:
 
+
 		battleTimer++;
 
 		if (battleTimer >= 1 && battleTimer < 300) {

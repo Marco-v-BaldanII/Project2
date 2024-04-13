@@ -98,7 +98,7 @@ bool TurnManager::Update(float dt)
 			for (int i = 0; i < app->entityManager->enemies.Count(); ++i)
 			{
 				app->entityManager->enemies.At(i)->data->HasMoveAction = true;
-				
+				app->entityManager->enemies.At(i)->data->HasAttackAction = true;
 			}
 
 			PlayerTurn();

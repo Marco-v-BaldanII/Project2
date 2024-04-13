@@ -50,7 +50,7 @@ public:
 	SDL_Rect clickBox = { 0,0,32,32 };
 	Entity* oponent;
 	bool movedThisTurn = false;
-
+	bool endTurn;
 };
 
 #endif // __PLAYER_H__
