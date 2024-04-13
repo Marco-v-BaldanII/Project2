@@ -133,6 +133,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="TurnManager.cpp" />
     <ClInclude Include="BackstagePlayer.h" />
+    <ClInclude Include="Dialogue.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="Interpolation.h" />

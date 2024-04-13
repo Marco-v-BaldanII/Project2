@@ -204,6 +204,9 @@
     <ClInclude Include="Source\Intro.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Dialogue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

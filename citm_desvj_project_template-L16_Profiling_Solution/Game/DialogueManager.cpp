@@ -14,6 +14,7 @@
 #include <string>
 #include <map>
 #include "BackstagePlayer.h"
+#include "Dialogue.h"
 
 using namespace std;
 

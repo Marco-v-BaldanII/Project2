@@ -41,27 +41,8 @@ enum DialogueStates {
 	NPCS
 
 };
+class Dialogue;
 
-struct Dialogue {
-
-public:
-	string owner;
-
-	string text;
-
-	Position myPos;
-
-	SDL_Texture* texture = nullptr;
-
-	Dialogue(string owner, string text) {
-		this->owner = owner;
-		this->text = text;
-		myPos = MIDDLE;
-	}
-	
-	SDL_Texture* background = nullptr;
-
-};
 
 struct Scene {
 public:

@@ -10,6 +10,9 @@
 #include "StartMenu.h"
 #include "EntityManager.h"
 #include "Window.h"
+#include "../Dialogue.h"
+
+class Dialogue;
 
 BackStage::BackStage(bool isActive) : Module(isActive)
 {
