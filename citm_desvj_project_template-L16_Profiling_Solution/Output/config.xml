@@ -26,6 +26,9 @@
 	<entitymanager>
 
 		<npc name = "Guy2" x ="400" y="200" wait="2">
+			
+			<texture path="Assets\Textures\BackstageNPCs\Soldado1.png"/>
+			
 			<dialogue text = "How are you ? "  choiceA ="Bad" choiceB="good"   ID="1"      />
 			<dialogue text = "Why are you upset?"   ID="1"       />
 			<dialogue text = "maybe i can help" ID ="1"          />
@@ -36,6 +39,9 @@
 		</npc> 
 
 		<npc name = "Guy3" x ="160" y="200" wait="3">
+			
+			<texture path="Assets\Textures\BackstageNPCs\Soldado2.png"/>
+			
 			<dialogue text = "The play is about to start" ID="1"          />
 			<dialogue text = "I'm so very excited" ID="1"          />
 			<dialogue text = "Though I seem to have forgotten what the play is about" ID="1"          />
@@ -49,6 +55,9 @@
 		</npc>
 
 		<npc name = "Guy1" x ="400" y="200" wait="500">
+			
+			<texture path="Assets\Textures\BackstageNPCs\Soldado3.png"/>
+			
 			<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="1"          />
 			<dialogue text = "Let the show begin"  ID="1"          />
 			<!-- second branch-->
