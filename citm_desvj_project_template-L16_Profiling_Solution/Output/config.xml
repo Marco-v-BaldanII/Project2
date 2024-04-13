@@ -92,6 +92,92 @@
 		<yorkUI path ="Assets/Textures/UI/York.png"/>
 		<lancasterUI path ="Assets/Textures/UI/Lancaster.png"/>
 
+
+		<animation name="Mage_wrigth">
+			<frame x="112" y="230" w="16" h="26" />
+			<frame x="112" y="262" w="16" h="26" />
+		</animation>
+		
+		<animation name="Mage_up">
+			<frame x="112" y="166" w="17" h="26" />
+			<frame x="112" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="Mage_down">
+			<frame x="112" y="6" w="17" h="26" />
+			<frame x="112" y="36" w="17" h="28" />
+			<frame x="112" y="68" w="17" h="28" />
+		</animation>
+
+		<animation name="Archer_wrigth">
+			<frame x="144" y="230" w="16" h="26" />
+			<frame x="144" y="262" w="16" h="26" />
+		</animation>
+
+		<animation name="Archer_up">
+			<frame x="144" y="166" w="17" h="26" />
+			<frame x="144" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="Archer_down">
+			<frame x="144" y="6" w="17" h="26" />
+			<frame x="144" y="36" w="17" h="28" />
+			<frame x="144" y="68" w="17" h="28" />
+		</animation>
+
+		<animation name="Knigth_wrigth">
+			<frame x="80" y="230" w="16" h="26" />
+			<frame x="80" y="262" w="16" h="26" />
+		</animation>
+
+		<animation name="Knigth_up">
+			<frame x="80" y="166" w="17" h="26" />
+			<frame x="80" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="Knigth_down">
+			<frame x="80" y="6" w="17" h="26" />
+			<frame x="80" y="36" w="17" h="28" />
+			<frame x="80" y="68" w="17" h="28" />
+		</animation>
+
+		
+		
+		<animation name="Richard3_wrigth">
+			<frame x="46" y="232" w="17" h="24" />
+			<frame x="46" y="264" w="17" h="24" />
+		</animation>
+
+		<animation name="Richard3_up">
+			<frame x="46" y="163" w="19" h="29" />
+			<frame x="46" y="195" w="19" h="29" />
+		</animation>
+
+		<animation name="Richard3_down">
+			<frame x="46" y="9" w="19" h="23" />
+			<frame x="46" y="39" w="19" h="25" />
+			<frame x="46" y="71" w="19" h="25" />
+		</animation>
+
+		<animation name="Richard3_wrigth">
+			<frame x="46" y="232" w="17" h="24" />
+			<frame x="46" y="264" w="17" h="24" />
+		</animation>
+
+		<animation name="Richard3_up">
+			<frame x="46" y="163" w="19" h="29" />
+			<frame x="46" y="195" w="19" h="29" />
+		</animation>
+
+		<animation name="Richard3_down">
+			<frame x="46" y="9" w="19" h="23" />
+			<frame x="46" y="39" w="19" h="25" />
+			<frame x="46" y="71" w="19" h="25" />
+		</animation>
+
+
+
+
 		<battleMaps>
 			<map name ="Northampton">
 				<!-- Paladin = 0, Archer = 1, Knight = 2, Armoured Knight = 3, Mage = 4, DarkMage = 5-->
