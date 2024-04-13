@@ -39,6 +39,8 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	void FinishBackStage();
+
 	//bool Load(pugi::xml_node& data);
 
 	//bool Save(pugi::xml_node& data) const;
@@ -49,6 +51,8 @@ public:
 	pugi::xml_node mynode;
 
 	List<Npc*> npcsList;
+
+	int backStageID = 0;
 
 private:
 	//buttons and variables

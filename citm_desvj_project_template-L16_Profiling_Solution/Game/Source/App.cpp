@@ -70,7 +70,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	mainMenu = new StartMenu(false);
 	battleScene = new BattleScene(false);
 	backStage = new BackStage(false);
-	entityManager = new EntityManager(false);
+	entityManager = new EntityManager(true);
 	backstageplayer = new BackStagePlayer(false);
 	guiManager = new GuiManager(true);
 	fade = new FadeToBlack(true);

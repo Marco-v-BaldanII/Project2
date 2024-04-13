@@ -380,7 +380,7 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 10)
 	{
 		app->entityManager->Enable();
-		//app->dialogueManager->Enable();
+		app->dialogueManager->Enable();
 		app->levelManager->LoadScene(GameScene::BACKSTAGE);
 		state = MenuState::OFF;
 

@@ -181,6 +181,7 @@ bool EntityManager::PostUpdate()
 	bool ret = true;
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
+	
 
 	for (item = entities.start; item != NULL && ret == true; item = item->next)
 	{

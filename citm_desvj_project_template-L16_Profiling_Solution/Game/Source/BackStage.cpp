@@ -11,6 +11,8 @@
 #include "EntityManager.h"
 #include "Window.h"
 #include "../Dialogue.h"
+#include "../TurnManager.h"
+#include "BattleScene.h"
 
 class Dialogue;
 
@@ -124,6 +126,19 @@ bool BackStage::Update(float dt)
 	ListItem<Npc*>* item;
 	Npc* pEntity = NULL;
 
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		app->render->camera.y -= 10;
+
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		app->render->camera.y += 10;
+
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		app->render->camera.x -= 10;
+
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		app->render->camera.x += 10;
+
+
 	for (item = npcsList.start; item != NULL; item = item->next)
 	{
 		pEntity = item->data;
@@ -131,7 +146,7 @@ bool BackStage::Update(float dt)
 		if (pEntity->active == false) continue;
 		if (app->backstageplayer->position.DistanceTo(pEntity->position) < 50) {
 			LOG("NEAR");
-			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
+			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN && app->dialogueManager->myState == NPCS) {
 				//block movimiento de player
 				app->dialogueManager->npcTalk(pEntity->currentDialogue);
 				app->dialogueManager->currentNPC = pEntity;
@@ -249,7 +264,7 @@ bool BackStage::PostUpdate()
 bool BackStage::CleanUp()
 {
 	app->map->CleanUp();
-	app->entityManager->CleanUp();
+	//app->entityManager->CleanUp();
 	app->backstageplayer->Disable();
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -347,6 +362,11 @@ bool BackStage::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
+}
+
+void BackStage::FinishBackStage() {
+	backStageID++;
+	
 }
 
 //bool BackStage::LoadState(pugi::xml_node& data)

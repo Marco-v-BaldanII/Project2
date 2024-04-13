@@ -51,6 +51,11 @@ public:
 
 	bool LoadState(pugi::xml_node node);
 
+	void Disable()
+	{
+		
+	}
+
 private:
 	SDL_Texture* spriteSheet;
 	SDL_Texture* yorkUI;

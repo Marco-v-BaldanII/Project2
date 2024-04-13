@@ -84,22 +84,19 @@ public:
 
 	Node* Insert(Node* root, Dialogue* dialogue, int ID) {
 
-		// Recursion will break when this finds an empty space to create the node, return it to insert
 		if (root == NULL) {
 			root = GetNode(dialogue, ID);
 			return root;
 		}
-
-		
-
-		// criteria to insert the nodes: if there is a choice the second branch is right, if it's linear keep going left
-		else if (ID % 2 == 0 && root->dialogue->choiceB != "") {
+		else if (ID > root->ID)/*Bigger IDs go right*/ {
 			// you pass the root (first elem) and the cost & name of the new root you want to make
 			root->rightChild = Insert(root->rightChild, dialogue, ID);
 		}
-		else  {
+		else if (ID <= root->ID)/*smaller/ equal IDs go left*/ {
 			root->leftChild = Insert(root->leftChild, dialogue, ID);
 		}
+
+		return root;
 
 		return root;
 	}

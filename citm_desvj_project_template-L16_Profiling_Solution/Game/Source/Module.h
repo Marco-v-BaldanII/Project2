@@ -83,7 +83,7 @@ public:
 		}
 	}
 
-	void Module::Disable()
+	virtual void Module::Disable()
 	{
 		if (active)
 		{

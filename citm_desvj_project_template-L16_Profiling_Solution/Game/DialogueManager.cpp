@@ -13,6 +13,7 @@
 #include "someColors.h"
 #include <string>
 #include <map>
+#include "../BackStage.h"
 #include "BackstagePlayer.h"
 #include "../GuiManager.h"
 #include "Dialogue.h"
@@ -197,7 +198,7 @@ bool DialogueManager::Update(float dt)
 	// This method checks for the input to advance to the next dialogue
 	AdvanceText();
 
-
+	
 
 
 
@@ -225,6 +226,21 @@ bool DialogueManager::Update(float dt)
 			choiceB_button->state = GuiControlState::NORMAL;
 		}
 
+	}
+	string t = "Let the show begin";
+	int i = 0;
+
+	if (currentNPC_Dialogues != nullptr) {
+		for (int j = 0; j < 3; ++j) {
+			LOG("dslfmlsfm");
+			if (app->backStage->backStageID == 0 && currentNPC_Dialogues->ID == 469 ) {
+				LOG("dojorjg");
+				myState = CUTSCENE;
+				app->backStage->FinishBackStage();
+				currentNPC_Dialogues = nullptr;
+			}
+
+		}
 	}
 
 	return ret;
@@ -438,7 +454,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
 		app->render->DrawRectangle(dialogueBox, whitey, true, true);
 
-		app->render->DrawText(txt, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
+		app->render->DrawText(txt, (dialogueBox.x + (app->render->camera.x / 3) +200), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
 
 	}
 
@@ -586,18 +602,6 @@ void DialogueManager::npcTalk(Node* npcDialogues) {
 		}
 		else if (this->currentNPC_Dialogues == npcDialogues)/*Advance to new dialogue , update the pointers*/ {
 			
-			/*if (choices == 0 && !(currentNPC->currentDialogue->leftChild == nullptr && currentNPC->currentDialogue->rightChild == nullptr)) {
-
-				if (currentNPC_Dialogues->leftChild != nullptr) {
-					currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
-					currentNPC->currentDialogue = currentNPC_Dialogues;
-				}
-				else if (currentNPC_Dialogues->rightChild != nullptr) {
-					currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
-					currentNPC->currentDialogue = currentNPC_Dialogues;
-				}
-
-			}*/
 			if ((currentNPC->currentDialogue->leftChild == nullptr && currentNPC->currentDialogue->rightChild == nullptr)) {
 				// finish dialoues
 				app->backstageplayer->talking = false;
@@ -665,13 +669,13 @@ void DialogueManager::Next_Dialogue() {
 		if (sceneIndex + 1 != 6) {
 			sceneIndex++;
 		}
-		else {
+		else  {
 			// the cutscene for act 1 has finished
 			myState = NPCS;
-			app->entityManager->Enable();
 			app->turnManager->Enable();
 			app->battleScene->Enable();
-			app->levelManager->LoadScene(GameScene::COMBAT);
+			app->backStage->Disable();
+			
 		}
 
 	}
@@ -739,6 +743,20 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 				currentNPC_Dialogues = currentNPC->currentDialogue;
 			}
 		}
+		int choices = 0;
+		if (currentNPC_Dialogues->dialogue->choiceA != "") { choices++; }
+		if (currentNPC_Dialogues->dialogue->choiceB != "") { choices++; }
+
+		if (choices == 2) {
+			// display choices
+			choiceA_button->text = currentNPC_Dialogues->dialogue->choiceA.c_str();
+			choiceB_button->text = currentNPC_Dialogues->dialogue->choiceB.c_str();
+
+		}
+		
+
+		
+		
 	}
 
 	return true;
