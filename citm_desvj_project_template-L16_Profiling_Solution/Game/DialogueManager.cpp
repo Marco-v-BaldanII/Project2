@@ -14,6 +14,7 @@
 #include <string>
 #include <map>
 #include "BackstagePlayer.h"
+#include "../GuiManager.h"
 #include "Dialogue.h"
 
 using namespace std;
@@ -155,6 +156,10 @@ bool DialogueManager::Start() {
 	//CHANGE
 	skipBttnTex = app->tex->Load("Assets/Textures/Skip_button.png");
 
+
+	choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox , this);
+	choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
+
 	return ret;
 }
 
@@ -185,7 +190,7 @@ bool DialogueManager::Update(float dt)
 	//currentPos = dialogues[dialogueIndex]->myPos;
 	currentPos = Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos;
 
-	// Change font color to black for speech dialogues
+
 	if (currentPos != MIDDLE) { TextColor = black; }
 
 	// This method checks for the input to advance to the next dialogue
@@ -405,27 +410,45 @@ void DialogueManager::DrawTextBox(Position pos) {
 
 		app->render->DrawRectangle(skipRect, b2Color(1, 1, 0, 0.5f), true, true);
 	}
-	else {
-		if (currentNPC_Dialogues.Count() != 0) {
+	else if (currentNPC_Dialogues != nullptr) {
+		//if (currentNPC_Dialogues.Count() != 0) {
 
-			string txt = "fhfjf";
+		//	string txt = "fhfjf";
 
-			txt = currentNPC_Dialogues[npcDialogueIndex]->text;
+		//	txt = currentNPC_Dialogues[npcDialogueIndex]->text;
 
-			const char* text = txt.c_str();
-			const char* owner = dialogues[dialogueIndex]->owner.c_str();
-			numLines = 0;
+		//	const char* text = txt.c_str();
+		//	const char* owner = dialogues[dialogueIndex]->owner.c_str();
+		//	numLines = 0;
 
-			// For now i am drawing npc dialogue in the narrator box
-			dialogueBox = narratorBox;
+		//	// For now i am drawing npc dialogue in the narrator box
+		//	dialogueBox = narratorBox;
 
-			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
-			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
-			app->render->DrawRectangle(dialogueBox, whitey, true, true);
+		//	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
+		//	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
+		//	app->render->DrawRectangle(dialogueBox, whitey, true, true);
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
+		//	app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
+
+		//}
+
+		numLines = 0;
+		dialogueBox = narratorBox;
+		string txt = currentNPC_Dialogues->dialogue->text;
+
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
+		app->render->DrawRectangle(dialogueBox, whitey, true, true);
+
+		app->render->DrawText(txt, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
+
+		// Choices
+		if (currentNPC_Dialogues->dialogue->choiceA != "0" && currentNPC_Dialogues->dialogue->choiceB != "0") {
+
+			
 
 		}
+
 
 	}
 
@@ -476,7 +499,7 @@ void DialogueManager::AdvanceText() {
 					Next_Dialogue();
 
 				}
-				else if (myState == NPCS)/* npcTalk(currentNPC_Dialogues);*/
+				//else if (myState == NPCS)/* npcTalk(currentNPC_Dialogues);*/
 
 				scrolling = true;
 				numLines = 0;
@@ -492,7 +515,7 @@ void DialogueManager::AdvanceText() {
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		if (HasScrollFinished()) {
 			if (myState == CUTSCENE) Next_Dialogue();
-			else if (myState == NPCS) /*npcTalk(currentNPC_Dialogues);*/
+			//else if (myState == NPCS) /*npcTalk(currentNPC_Dialogues);*/
 			scrolling = true;
 			numLines = 0;
 			ResetScroll();
@@ -533,7 +556,10 @@ void DialogueManager::SetTextVelocity(TextVelocity velocity) {
 	}
 }
 
-void DialogueManager::npcTalk(Tree* dialogues) {
+void DialogueManager::npcTalk(Node* npcDialogues) {
+
+
+	this->currentNPC_Dialogues = npcDialogues;
 
 	/*int size = npcDialogues.Count();
 
@@ -548,6 +574,8 @@ void DialogueManager::npcTalk(Tree* dialogues) {
 		npcDialogueIndex = -1;
 		currentNPC_Dialogues.Clear();
 	}*/
+
+
 }
 
 void DialogueManager::Next_Dialogue() {
@@ -611,6 +639,28 @@ bool DialogueManager::LoadState(pugi::xml_node node) {
 	if (mode == 0) { myState = CUTSCENE; }
 	else { myState = NPCS; }
 
+
+	return true;
+}
+
+bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
+	if (currentNPC_Dialogues != NULL) {
+
+		if (control->id == 100)
+		{
+			LOG("Choice A");
+			if (currentNPC_Dialogues->leftChild != nullptr) {
+				currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
+			}
+		}
+		else if (control->id == 101)
+		{
+			LOG("Choice B");
+			if (currentNPC_Dialogues->rightChild != nullptr) {
+				currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
+			}
+		}
+	}
 
 	return true;
 }

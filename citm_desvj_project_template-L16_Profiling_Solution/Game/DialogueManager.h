@@ -11,6 +11,13 @@
 #include <map>
 #include "../Timer.h"
 #include "Source/Textures.h"
+#include "../GuiButton.h"
+
+#include "../GuiSlider.h"
+#include "../GuiPanel.h"
+#include "../GuiToggle.h"
+#include "../GuiControl.h"
+#include "../GuiControlButton.h"
 
 using namespace std;
 
@@ -43,6 +50,7 @@ enum DialogueStates {
 };
 class Dialogue;
 class Tree;
+struct Node;
 
 struct Scene {
 public:
@@ -101,7 +109,7 @@ public:
 
 	void AdvanceText();
 
-	void npcTalk(Tree* dialogues);
+	void npcTalk(Node* npcDialogues);
 
 	void DrawBackground();
 
@@ -115,6 +123,8 @@ public:
 	bool SaveState(pugi::xml_node node);
 
 	bool LoadState(pugi::xml_node node);
+
+	bool OnGuiMouseClickEvent(GuiControl* control);
 
 public:
 	int numLines = 0;
@@ -172,8 +182,14 @@ private:
 
 	
 
-	DynArray<Dialogue*> currentNPC_Dialogues;
+	Node* currentNPC_Dialogues;
 	int npcDialogueIndex = -1;
+
+	GuiControlButton* choiceA_button;
+	GuiControlButton* choiceB_button;
+
+	SDL_Rect choiceABox = SDL_Rect{ 368*3, 224*3, 128*3,48*3 };
+	SDL_Rect choiceBBox = SDL_Rect{ 368*3, 294*3, 128*3,48*3 };
 
 	DynArray<Scene*> Scenes;
 

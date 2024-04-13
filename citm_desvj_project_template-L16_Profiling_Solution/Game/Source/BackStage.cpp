@@ -132,7 +132,7 @@ bool BackStage::Update(float dt)
 			LOG("NEAR");
 			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 				//block movimiento de player
-				//app->dialogueManager->npcTalk(pEntity->myDialogues);
+				app->dialogueManager->npcTalk(pEntity->dialogues);
 			}
 		}
 	}
