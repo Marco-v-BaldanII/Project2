@@ -25,7 +25,8 @@ enum States {
 	MOVE,
 	IDLE,
 	DEAD,
-	BATTLE
+	BATTLE,
+	DISABLED
 };
 
 class PhysBody;

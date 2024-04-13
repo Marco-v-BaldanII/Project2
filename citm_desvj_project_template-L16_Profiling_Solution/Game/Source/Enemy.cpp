@@ -67,7 +67,8 @@ bool Enemy::Awake() {
 	counter = moveTime;
 	pathfinding = new PathFinding();
 	HasMoveAction = true;
-	
+	HasAttackAction = true;
+
 	uchar* navigationMap = NULL;
 	app->entityManager->enemies.Add(this);
 	entity = this;
@@ -135,7 +136,7 @@ bool Enemy::PreUpdate() {
 			}
 			else {
 
-				if (HasMoveAction && app->map->pathfinding->DistanceBetweenTiles(target->tilePos, tilePos) <= 1)
+				if (HasMoveAction && app->map->pathfinding->DistanceBetweenTiles(target->tilePos, tilePos) <= 1 && HasAttackAction)
 				{
 					state = BATTLE;
 					
@@ -146,11 +147,7 @@ bool Enemy::PreUpdate() {
 					state = MOVE;
 					
 				}
-				else
-				{
-					// if moved and no range no attack action
-					HasAttackAction = false;
-				}
+			
 			}
 		}
 		//if no attack and no move action end turn
@@ -198,11 +195,17 @@ bool Enemy::Update(float dt)
 			}
 		}
 
-		if (MovePath()) {
-			newTarget = false;
-			target = nullptr;
-			app->turnManager->noEnemyMoving = true;
-		}
+		
+		 if (HasAttackAction && app->map->pathfinding->DistanceBetweenTiles(target->tilePos, tilePos) <= 1) {
+			state = BATTLE;
+		 } else if (MovePath()) 
+		 {
+			 newTarget = false;
+			 target = nullptr;
+			 app->turnManager->noEnemyMoving = true;
+
+		 }
+
 		break;
 	case BATTLE:
 		battleTimer++;
@@ -217,7 +220,8 @@ bool Enemy::Update(float dt)
 			hp -= target->attack;
 			target->hp -= attack;
 			state = MOVE;
-		
+			HasAttackAction = false;
+			HasMoveAction = false;
 		}
 		break;
 	default:
