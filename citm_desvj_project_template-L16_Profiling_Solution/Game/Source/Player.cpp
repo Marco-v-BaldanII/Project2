@@ -72,8 +72,9 @@ bool Player::Start() {
 	hp = 100;
 	attack = 20;
 	attackRange = 1;
-	battleBg = app->tex->Load("Assets/Textures/BattleScreenSprites/BattleStage.png");
-	
+
+	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
+
 	std::string s = config.attribute("name").as_string();
 
 	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, DOWN, SDL_Rect{ 0,0,94,99 }, UiTex, attack, hp, precision, luck, speed, movement, s);
@@ -146,7 +147,19 @@ bool Player::Update(float dt)
 	{
 	case IDLE:
 		//if click enemy and enemay is on attack range engage combat
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
+			int x, y;
+			app->input->GetMouseWorldPosition(x, y);
+			iPoint p;
+			p.x = x;
+			p.y = y;
+			p = app->map->WorldToMap(x, y);
 
+			if (app->entityManager->IsEnemyThere(p) != nullptr && app->map->pathfinding->DistanceBetweenTiles(app->entityManager->IsEnemyThere(p)->data->tilePos, tilePos) <= attackRange) {
+				oponent = app->entityManager->IsEnemyThere(p)->data->entity;
+				state = BATTLE;
+			}
+		}
 		break;
 	case MOVE:
 
@@ -170,9 +183,12 @@ bool Player::Update(float dt)
 		battleTimer++;
 
 		if (battleTimer >= 1 && battleTimer < 300) {
-			app->render->DrawTexture(battleBg, 0, 0, false, false, 255);
-			app->render->DrawTexture(myBattleTexture, 100, 100, false, false, 255);
-			app->render->DrawTexture(oponent->myBattleTexture, 250, 100, false, true, 255);
+			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
+			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
+			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
+			app->render->DrawTexture(oponent->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
+
+		
 		}
 
 		if (battleTimer == 298) {
