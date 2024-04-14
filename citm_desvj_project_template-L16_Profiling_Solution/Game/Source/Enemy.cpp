@@ -242,6 +242,7 @@ bool Enemy::Update(float dt)
 			HasAttackAction = false;
 			HasMoveAction = false;
 		}
+
 		break;
 	default:
 		break;
@@ -291,6 +292,24 @@ bool Enemy::PostUpdate() {
 		}
 	}
 	break;
+	case BATTLE:
+		battleTimer++;
+
+		if (battleTimer >= 1 && battleTimer < 300) {
+			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
+			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
+			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
+			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
+		}
+
+		if (battleTimer == 298) {
+			hp -= target->attack;
+			target->hp -= attack;
+			state = MOVE;
+			HasAttackAction = false;
+			HasMoveAction = false;
+		}
+		break;
 	default:
 		break;
 	}
@@ -313,6 +332,19 @@ bool Enemy::PostUpdate() {
 	}
 
 	myFrame->Update();
+	
+	if (hp <= 0) {
+
+		for (int i = 0; i < app->entityManager->enemies.Count(); ++i) {
+			if (app->entityManager->enemies.At(i)->data->entity == this){
+				app->entityManager->enemies.Del(app->entityManager->enemies.At(i));
+			}
+
+
+		}
+
+		app->entityManager->DestroyEntity(this);
+	}
 
 	return true;
 }

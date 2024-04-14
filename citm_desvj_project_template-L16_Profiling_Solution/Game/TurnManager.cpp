@@ -186,6 +186,7 @@ void TurnManager::PlayerTurn() {
 	ListItem<Player*>* p = players.start;
 	while (p != NULL) {
 		p->data->movedThisTurn = false;
+		p->data->battleTimer = 0;
 		p->data->state = IDLE;
 
 		p = p->next;
