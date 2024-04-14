@@ -48,6 +48,8 @@ bool BackStage::Start()
 
 			Npc* dude = (Npc*)app->entityManager->PlaceNPC(npcNode.attribute("name").as_string(), npcNode.attribute("x").as_int(), npcNode.attribute("y").as_int(), npcNode.attribute("wait").as_int());
 
+			dude->texture = app->tex->Load(npcNode.child("texture").attribute("path").as_string());
+
 			Tree* t = new Tree();
 			Node* root = nullptr;
 

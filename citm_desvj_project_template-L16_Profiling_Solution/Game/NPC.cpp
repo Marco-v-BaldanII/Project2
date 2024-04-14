@@ -42,8 +42,7 @@ bool Npc::Update(float dt)
 {
 	//LOG(name.c_str());
 
-	body.x = position.x;
-	body.y = position.y;
+
 
 
 	int mouseX, mouseY;
@@ -88,7 +87,10 @@ bool Npc::Update(float dt)
 
 bool Npc::PostUpdate()
 {
-	app->render->DrawRectangle(body, b2Color(1, 0, 0, 1), true, true);
+	if(myMovement == MOVEMENT::RIGHT) app->render->DrawTexture(texture, position.x, position.y, &body, false );
+	else {
+		app->render->DrawTexture(texture, position.x, position.y, &body, true);
+	}
 	
 	return true;
 }

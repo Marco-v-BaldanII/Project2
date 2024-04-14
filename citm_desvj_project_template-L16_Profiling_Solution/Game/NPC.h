@@ -58,13 +58,15 @@ public:
 	Node* currentDialogue;
 
 	iPoint position;
-	SDL_Rect body = SDL_Rect{ 0,0,50,70 };
+	SDL_Rect body = SDL_Rect{ 0,0,71,150 };
+
+	SDL_Texture* texture = nullptr;
 
 	
 	int waitTime = 0;
 
 	float speed = 0.2f;
-	SDL_Texture* texture = NULL;
+
 	pugi::xml_node config;
 	uint texW, texH;
 

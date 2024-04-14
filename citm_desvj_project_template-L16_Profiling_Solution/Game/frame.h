@@ -9,6 +9,7 @@
 #include "../GuiManager.h"
 #include "../App.h"
 #include "../Render.h"
+#include "../Render.h"
 #include <string>
 #include "../Textures.h"
 #include "../Window.h"
@@ -126,6 +127,9 @@ public:
 		//  we use linear interpolation from its given starting position to its target position
 		shown = true;
 
+		startingPos.x = ogPos.x + (app->render->camera.x / -3);
+		startingPos.y = ogPos.y + (app->render->camera.y / -3);
+
 				// if the frame has appeareance type FADE we interpolate its alpha
 		if (myAppearance != Appearance::FADE) {
 			startingPos.x += (t * dt) * (desiredPos.x - startingPos.x);
@@ -135,7 +139,7 @@ public:
 		}
 		else {
 			alpha += (t * dt) * (255 - alpha);
-			app->render->DrawTexture(texture, startingPos.x, startingPos.y, false, &size, alpha);
+			app->render->DrawTexture(texture, startingPos.x, startingPos.y, &size, false, alpha);
 		}
 		if (nextTimer.ReadMSec() > stayTime) {
 			finished = true;
@@ -147,24 +151,26 @@ public:
 		string added = "/";
 		string HPString = HpText + added + hp;
 
-		app->render->DrawText(HPString, (startingPos.x + 90) * 3, (startingPos.y + 73) * 3, 70, 50, false, SDL_Color{ 254, 254, 0, 255 });
-		app->render->DrawText(attack, (startingPos.x + 150) * 3, (startingPos.y + 73) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
 
-		app->render->DrawText(speed, (startingPos.x + 95) * 3, (startingPos.y + 100) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
-		app->render->DrawText(precision, (startingPos.x + 150) * 3, (startingPos.y + 100) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
 
-		app->render->DrawText(luck, (startingPos.x + 95) * 3, (startingPos.y + 127) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
-		app->render->DrawText(movement, (startingPos.x + 150) * 3, (startingPos.y + 127) * 3, 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		app->render->DrawText(HPString, (startingPos.x + 90+810) + (app->render->camera.x / 3), (startingPos.y + 73+200)  + (app->render->camera.y / 3), 70, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		app->render->DrawText(attack, (startingPos.x + 150+950)  + (app->render->camera.x / 3), (startingPos.y + 73+200)  + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+
+		app->render->DrawText(speed, (startingPos.x + 95+830)  + (app->render->camera.x / 3), (startingPos.y + 100+250) + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		app->render->DrawText(precision, (startingPos.x + 150+950)  + (app->render->camera.x / 3), (startingPos.y + 100+250) + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+
+		app->render->DrawText(luck, (startingPos.x + 95+830)  + (app->render->camera.x / 3), (startingPos.y + 127+300)  + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		app->render->DrawText(movement, (startingPos.x + 150+950)  + (app->render->camera.x / 3), (startingPos.y + 127+300)  + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
 
 		// render name
-		app->render->DrawText(name, (startingPos.x + 76) * 3, (startingPos.y + 35) * 3, 42*5, 12*5, false, SDL_Color{ 81, 51, 19, 255 });
+		app->render->DrawText(name, (startingPos.x + 150 + 700)  + (app->render->camera.x / 3 ), (startingPos.y + 135) + (app->render->camera.y / 3), 42*5, 12*5, false, SDL_Color{ 81, 51, 19, 255 });
 	}
 
 	void Update() {
 
 
 		if (!shown) {
-
+			alpha = 0;
 			startingPos = ogPos;
 			finished = false;
 			switch (myAppearance) {

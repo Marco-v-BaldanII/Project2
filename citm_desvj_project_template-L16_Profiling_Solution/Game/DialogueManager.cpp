@@ -267,7 +267,8 @@ void DialogueManager::DrawBackground() {
 	if (myState == CUTSCENE) {
 
 		//if (Scenes[sceneIndex]->dialogues[dialogueIndex]->background != nullptr) { background = Scenes[sceneIndex]->dialogues[dialogueIndex]->background; }
-
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
 
 		SDL_Rect dsScreen = SDL_Rect{ 0,0,256 * 2,198 * 2 };
 		app->render->DrawTexture(backgrounds[backgroundIndex], 0, 0, &dsScreen);
@@ -503,13 +504,13 @@ void DialogueManager::AdvanceText() {
 
 
 					Next_Dialogue();
+					scrolling = true;
+					numLines = 0;
+					ResetScroll();
 
 				}
 				//else if (myState == NPCS)/* npcTalk(currentNPC_Dialogues);*/
 
-				scrolling = true;
-				numLines = 0;
-				ResetScroll();
 			}
 			else {
 				FinishScrolling();
