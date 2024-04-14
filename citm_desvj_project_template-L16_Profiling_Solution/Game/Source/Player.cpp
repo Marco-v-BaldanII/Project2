@@ -78,6 +78,7 @@ bool Player::Start() {
 	std::string s = config.attribute("name").as_string();
 
 	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, UiTex, attack, hp, precision, luck, speed, movement, s);
+	currentAnim = &downAnim;
 
 	return true;
 }
@@ -104,6 +105,7 @@ bool Player::PreUpdate()
 	}
 	break;
 	case MOVE:
+		currentAnim->Update();
 		//Select tile to move to
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN && !Move && ExpandedBFS) {
 			int x, y;
@@ -203,10 +205,10 @@ bool Player::Update(float dt)
 	SDL_Rect randRect = SDL_Rect{ 8,0,32,32 };
 
 	if (movedThisTurn) {
-		app->render->DrawTexture(myTexture, position.x, position.y, &randRect, false, 100);
+		app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 100);
 	}
 	else {
-	app->render->DrawTexture(myTexture, position.x, position.y, &randRect, false, 255);
+		app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 255);
 	}
 	return true;
 }
@@ -246,8 +248,6 @@ bool Player::PostUpdate()
 	}
 	}
 	myFrame->Update();
-
-	app->render->DrawRectangle(clickBox, b2Color(0, 0, 0, 1), false, true);
 
 	//-----Gets mouse correctly accoutning the scale and camera-----//
 	int mouseX, mouseY;

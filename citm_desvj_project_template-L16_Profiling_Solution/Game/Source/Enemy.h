@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -49,6 +50,9 @@ public:
 	SDL_Rect section = SDL_Rect{ 75, 6, 26, 27 };
 
 	SDL_Rect clickBox = { 0,0,32,32 };
+
+	Animation* currentAnim = nullptr;
+	Animation idle;
 
 };
 

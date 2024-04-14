@@ -50,6 +50,7 @@ bool BattleScene::Start()
    		lancasterUI = app->tex->Load(mynode.child("lancasterUI").attribute("path").as_string());
 		yorkUI = app->tex->Load(mynode.child("yorkUI").attribute("path").as_string());
 
+		LoadAnimations();
 		
 			spriteSheet = app->tex->Load(mynode.child("texture").attribute("path").as_string());
 
@@ -93,6 +94,8 @@ bool BattleScene::Start()
 				p->myBattleTexture = portraitTextures[name];
 				p->UiTex = lancasterUI;
 				p->Start();
+				PassAnimations(p);
+
 			}
 
 			// Read enemies from config and instantiate them
@@ -105,6 +108,7 @@ bool BattleScene::Start()
 				e->texture = spriteSheet;
 				e->Uitex = yorkUI;
 				e->Start();
+				PassAnimations(e);
 			}
 
 
@@ -121,6 +125,8 @@ bool BattleScene::Start()
 
 			rect = { 0,0,64,90 };
 			started = true;
+
+			
 		
 	}
 	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
@@ -359,4 +365,168 @@ bool BattleScene::LoadState(pugi::xml_node node) {
 	int b = created;
 
 	return true;
+}
+
+void BattleScene::LoadAnimations() {
+
+
+	for (pugi::xml_node node = mynode.child("Mage").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				mageRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				mageRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				mageUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				mageUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				mageDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				mageDown.speed = 0.2f;
+			}
+		}
+	}
+
+	for (pugi::xml_node node = mynode.child("Archer").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				archerRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				archerRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				archerUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				archerUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				archerDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				archerDown.speed = 0.2f;
+			}
+		}
+	}
+
+	for (pugi::xml_node node = mynode.child("Knight").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				knightRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				knightRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				knightUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				knightUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				knightDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				knightDown.speed = 0.2f;
+			}
+		}
+	}
+
+	for (pugi::xml_node node = mynode.child("HenryTudor").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				henryTudorRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryTudorRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				henryTudorUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryTudorUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				henryTudorDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryTudorDown.speed = 0.2f;
+			}
+		}
+	}
+
+	for (pugi::xml_node node = mynode.child("DukeofYork").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				dukeYorkRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				dukeYorkRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				dukeYorkUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				dukeYorkUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				dukeYorkDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				dukeYorkDown.speed = 0.2f;
+			}
+		}
+	}
+
+	for (pugi::xml_node node = mynode.child("PrinceEdward").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				princeEdRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				princeEdRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				princeEdUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				princeEdUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				princeEdDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				princeEdDown.speed = 0.2f;
+			}
+		}
+	}
+}
+
+void BattleScene::PassAnimations(Entity* entity) {
+
+	if (entity->name == "Prince Edward") {
+		entity->upAnim = princeEdUp;
+		entity->downAnim = princeEdDown;
+		entity->upAnim = princeEdUp;
+
+	}
+	else if (entity->name == "Duke of York") {
+		entity->upAnim = dukeYorkUp;
+		entity->downAnim = dukeYorkDown;
+		entity->upAnim = dukeYorkUp;
+	}
+	else if (entity->name == "Henry Tudor") {
+		entity->upAnim = henryTudorUp;
+		entity->downAnim = henryTudorDown;
+		entity->upAnim = henryTudorRight;
+	}
+	else {
+
+		switch (entity->unitType) {
+		case(KNIGHT):
+			entity->upAnim = knightUp;
+			entity->downAnim = knightDown;
+			entity->upAnim = knightUp;
+			break;
+		case(ARCHER):
+			entity->upAnim = archerUp;
+			entity->downAnim = archerDown;
+			entity->upAnim = archerUp;
+			break;
+		case(MAGE):
+			entity->upAnim = mageUp;
+			entity->downAnim = mageDown;
+			entity->upAnim = mageUp;
+			break;
+		}
+	}
 }

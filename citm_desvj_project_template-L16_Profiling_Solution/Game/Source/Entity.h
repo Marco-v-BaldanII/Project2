@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "Pathfinding.h"
 #include "Render.h"
+#include "Animation.h"
 #include "Map.h"
 
 class Frame;
@@ -168,6 +169,11 @@ public:
 	float luck;
 	float speed;
 	float movement;
+
+	Animation* currentAnim;
+	Animation rightAnim;
+	Animation upAnim;
+	Animation downAnim;
 
 
 	float battleTimer;

@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -34,6 +35,8 @@ public:
 public:
 
 	Frame* frames;
+
+
 
 
 	//L02: DONE 2: Declare player parameters

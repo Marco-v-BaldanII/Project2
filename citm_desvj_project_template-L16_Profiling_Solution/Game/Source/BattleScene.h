@@ -56,6 +56,10 @@ public:
 		
 	}
 
+	void LoadAnimations();
+
+	void PassAnimations(Entity* entity);
+
 private:
 	SDL_Texture* spriteSheet;
 	SDL_Texture* yorkUI;
@@ -84,6 +88,31 @@ public:
 	pugi::xml_node mynode;
 
 	List<pugi::xml_node*> nodes;
+
+	// All unit animations
+	Animation mageRight;
+	Animation mageDown;
+	Animation mageUp;
+
+	Animation archerRight;
+	Animation archerDown;
+	Animation archerUp;
+
+	Animation knightRight;
+	Animation knightDown;
+	Animation knightUp;
+
+	Animation dukeYorkRight;
+	Animation dukeYorkDown;
+	Animation dukeYorkUp;
+
+	Animation princeEdRight;
+	Animation princeEdDown;
+	Animation princeEdUp;
+
+	Animation henryTudorRight;
+	Animation henryTudorDown;
+	Animation henryTudorUp;
 
 };
 #endif // __BATTLESCENE_H__

@@ -91,6 +91,9 @@ bool Enemy::Start() {
 	/*Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, int& hp, int precision, int luck, int speed, int movement , string name) {*/
 	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, Uitex, attack, hp, precision, luck, speed, movement, s);
 
+	currentAnim = &downAnim;
+	
+
 	return true;
 }
 
@@ -167,14 +170,15 @@ bool Enemy::PreUpdate() {
 bool Enemy::Update(float dt)
 {
 
-	app->render->DrawTexture(texture, position.x, position.y, &section);
+	app->render->DrawTexture(texture, position.x, position.y, &currentAnim->GetCurrentFrame());
 	switch (state)
 	{
 	case IDLE:
+		
 	
 		break;
 	case MOVE:
-		
+		currentAnim->Update();
 		if (!Move) {
 
 			//Set available movement tiles
@@ -215,10 +219,20 @@ bool Enemy::Update(float dt)
 		battleTimer++;
 
 		if (battleTimer >= 1 && battleTimer < 300) {
+			//Draw the combate
 			SDL_Rect bg = {0,0,256*2,192*2};
+
+			string myName = name.GetString(); string playerName = target->name.GetString();
+			string action = " has attacked ";
+			string sentence = playerName + action + myName;
+
+			
 			app->render->DrawTexture(battleBg, app->render->camera.x/-3, app->render->camera.y/-3, &bg, false, 255);
 			app->render->DrawTexture(myBattleTexture, app->render->camera.x/-3 + 100, app->render->camera.y/-3+100, false, false, 255);
 			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x/-3 + 250, app->render->camera.y/-3 + 100, false, true, 255);
+
+			app->render->DrawText(sentence, 32 *2* app->win->GetScale(), 32 *2* app->win->GetScale(), 192 * 2 * app->win->GetScale(), 20 * 2* app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+			
 		}
 
 		if (battleTimer == 298) {
@@ -244,6 +258,7 @@ bool Enemy::CleanUp()
 }
 
 bool Enemy::PostUpdate() {
+
 
 	//render current tile pos
 	
