@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Map.h"
+#include "BattleScene.h"
 #include "../TurnManager.h"
 #include <string>
 #include "../frame.h" /*dont include this in .h*/
@@ -245,6 +246,7 @@ bool Player::PostUpdate()
 		}
 
 		if (battleTimer == 298) {
+			if (!app->battleScene->godMode)
 			hp -= oponent->attack;
 			oponent->hp -= attack;
 			state = IDLE;

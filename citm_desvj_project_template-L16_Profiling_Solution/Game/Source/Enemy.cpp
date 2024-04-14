@@ -13,6 +13,7 @@
 #include "Map.h"
 #include "../frame.h"
 #include "../TurnManager.h"
+#include "BattleScene.h"
 #include "Physics.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
@@ -237,6 +238,7 @@ bool Enemy::Update(float dt)
 
 		if (battleTimer == 298) {
 			hp -= target->attack;
+			if (!app->battleScene->godMode)
 			target->hp -= attack;
 			state = MOVE;
 			HasAttackAction = false;

@@ -116,6 +116,8 @@ public:
 
 	Animation LancasterAnim;
 
+	bool godMode;
+
 };
 #endif // __BATTLESCENE_H__
 
