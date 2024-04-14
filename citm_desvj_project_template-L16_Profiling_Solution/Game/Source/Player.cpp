@@ -241,7 +241,7 @@ bool Player::PostUpdate()
 			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
 			app->render->DrawTexture(oponent->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
 
-
+			
 		}
 
 		if (battleTimer == 298) {

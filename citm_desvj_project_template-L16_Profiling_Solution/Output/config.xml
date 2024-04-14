@@ -42,6 +42,9 @@
 	     <texture path="Assets/Textures/Overworld/overworld sprites finales.png"/>
 		<yorkUI path ="Assets/Textures/UI/York.png"/>
 		<lancasterUI path ="Assets/Textures/UI/Lancaster.png"/>
+		<yorhHpBar path = "Assets/Textures/UI/YorkHpBar.png"/>
+		<lancasterHpBar path = "Assets/Textures/UI/LancasterHpBar.png"/>
+		<background path ="Assets/Textures/BattleStageOG.png"/>
 
     <Mage>
 
@@ -174,7 +177,7 @@
 	</HenryTudor>
 
 
-
+       
 
 		<battleMaps>
 			<map name ="Northampton">
@@ -183,7 +186,7 @@
 
 				<player  name="Prince Edward"  x="6" y="39" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
 				<player  name="Henry Tudor" x="2" y ="39" unit_type="0" attack="5" hp="12" precision="95" luck="25" speed="30" movement="10"/>
-				<player  name=" Margaret of Anjou" x="4" y="42" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
+				<player  name="Margaret of Anjou" x="4" y="42" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
 
 				<enemy name= "Duke of York" x="7" y="39" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10"/>
 			<!--	<enemy name= "Edward IV" x="72" y="26" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
@@ -205,11 +208,12 @@
 		</battleMaps>
 
 		<battleSprites>
-			<Sprite path="Assets/Textures/BattleScreenSprites/PrinceEdward.png"/>
-			<Sprite path="Assets/Textures/BattleScreenSprites/HenryTudor.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Prince Edward.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Henry Tudor.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Duke of York.png"/>
 			
 		</battleSprites>
-		
+	
 		
 	</battle_scene>
 

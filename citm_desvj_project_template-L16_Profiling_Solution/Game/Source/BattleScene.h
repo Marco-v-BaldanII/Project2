@@ -60,10 +60,18 @@ public:
 
 	void PassAnimations(Entity* entity);
 
+	bool DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA, float maxE, float maxA);
+
 private:
 	SDL_Texture* spriteSheet;
 	SDL_Texture* yorkUI;
 	SDL_Texture* lancasterUI;
+
+	SDL_Texture* yorkHp;
+	SDL_Texture* lancasterHp;
+
+	SDL_Texture* battleBackground;
+
 	SDL_Rect rect;
 	uint music;
 	bool playMusic = true;
@@ -115,6 +123,9 @@ public:
 	Animation henryTudorUp;
 
 	Animation LancasterAnim;
+
+	SDL_Rect yorkHPBar = SDL_Rect{ 240 * 2,167 * 2,75 * 2,8 * 2 };
+	SDL_Rect LancasterHPBar = SDL_Rect{ 2 * 2,167 * 2,75 * 2,8 * 2 };
 
 };
 #endif // __BATTLESCENE_H__

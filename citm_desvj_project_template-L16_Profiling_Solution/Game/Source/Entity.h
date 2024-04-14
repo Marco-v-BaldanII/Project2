@@ -178,6 +178,11 @@ public:
 
 	float battleTimer;
 
+	int currentHP;
+	int maxHp;
+
+	float lerpingHp;
+
 	bool renderable = true;
 };
 

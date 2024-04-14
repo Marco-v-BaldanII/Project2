@@ -11,7 +11,7 @@
 #include "LevelManagement.h"
 #include "../DialogueManager.h"
 #include "../TurnManager.h"
-//#include "Fonts.h"
+#include "../frame.h"
 #include "Defs.h"
 #include "Log.h"
 #include <stdio.h>
@@ -49,6 +49,10 @@ bool BattleScene::Start()
 	if (active) {
    		lancasterUI = app->tex->Load(mynode.child("lancasterUI").attribute("path").as_string());
 		yorkUI = app->tex->Load(mynode.child("yorkUI").attribute("path").as_string());
+		battleBackground = app->tex->Load(mynode.child("background").attribute("path").as_string());
+
+		yorkHp = app->tex->Load(mynode.child("yorhHpBar").attribute("path").as_string());
+		lancasterHp = app->tex->Load(mynode.child("lancasterHpBar").attribute("path").as_string());
 
 		LoadAnimations();
 		
@@ -103,11 +107,15 @@ bool BattleScene::Start()
 
 				Enemy* e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 				e->config = Enode;
+				string name = e->config.attribute("name").as_string();
+
 				e->Awake();
 				goons.Add(e);
 				e->texture = spriteSheet;
+				e->myBattleTexture = portraitTextures[name];
 				e->Uitex = yorkUI;
 				e->Start();
+				e->battleBg = battleBackground;
 				PassAnimations(e);
 			}
 
@@ -361,6 +369,7 @@ bool BattleScene::LoadState(pugi::xml_node node) {
 		e->Start();
 		goons.Add(e);
 		e->texture = spriteSheet;
+		e->battleBg = battleBackground;
 		
 		PassAnimations(e);
 
@@ -536,5 +545,41 @@ void BattleScene::PassAnimations(Entity* entity) {
 			entity->upAnim = mageUp;
 			break;
 		}
+	}
+}
+void Lerp2(float& value, float t, int destination) {
+	value += (t) * (destination - value);
+}
+
+bool BattleScene::DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA, float maxE, float maxA) {
+
+	
+
+	if (eHp_A < 0) { eHp_A = 0; }
+	if (aHpA < 0) { aHpA = 0; }
+
+	
+	yorkHPBar.w = eHp_B; LancasterHPBar.w = aHpB;
+
+	
+
+
+	app->render->DrawRectangle(SDL_Rect{ yorkHPBar.x - (app->render->camera.x / 3), yorkHPBar.y - (app->render->camera.y / 3), -yorkHPBar.w *3, yorkHPBar.h *3} , b2Color(1, 1, 1, 1), true, true);
+	app->render->DrawRectangle(SDL_Rect{ LancasterHPBar.x - (app->render->camera.x / 3), LancasterHPBar.y - (app->render->camera.y / 3), LancasterHPBar.w * 3, LancasterHPBar.h * 3 }, b2Color(1, 0, 0, 1), true, true);
+
+	SDL_Rect doubleRect = SDL_Rect{ 0,0, 172, 90 };
+	app->render->DrawTexture(yorkHp, 165 * 2 + (app->render->camera.x / -3), 134 * 2 + (app->render->camera.y / -3), &doubleRect, true);
+	app->render->DrawTexture(lancasterHp, 2 * 2 + (app->render->camera.x / -3), 134 * 2 + (app->render->camera.y / -3), &doubleRect, true);
+
+	if (eHp_B <= eHp_A && aHpA <= aHpA) {
+		return true;
+	}
+	else if (!((int) eHp_B <=(int) eHp_A)) {
+		Lerp2(eHp_B, 0.02f, eHp_A); 
+		return false;
+	}
+	else if (!((int)aHpB <= (int)aHpA)) {
+		Lerp2(aHpB, 0.02f, aHpA);
+		return false;
 	}
 }

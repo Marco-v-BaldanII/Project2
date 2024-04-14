@@ -54,6 +54,8 @@ public:
 	Entity* oponent;
 	bool movedThisTurn = false;
 	bool endTurn;
+
+	
 };
 
 #endif // __PLAYER_H__
