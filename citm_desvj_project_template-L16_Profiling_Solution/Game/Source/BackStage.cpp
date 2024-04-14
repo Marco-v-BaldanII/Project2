@@ -382,12 +382,14 @@ void BackStage::FinishBackStage() {
 	
 }
 
-//bool BackStage::LoadState(pugi::xml_node& data)
-//{
-//	return true;
-//}
-//
-//bool BackStage::SaveState(pugi::xml_node& data) const
-//{
-//	return true;
-//}
+bool BackStage::LoadState(pugi::xml_node node)
+{
+
+	return true;
+}
+
+bool BackStage::SaveState(pugi::xml_node node)
+{
+	
+	return true;
+}

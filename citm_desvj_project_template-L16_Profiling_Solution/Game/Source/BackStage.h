@@ -41,9 +41,9 @@ public:
 
 	void FinishBackStage();
 
-	//bool Load(pugi::xml_node& data);
+	bool SaveState(pugi::xml_node node);
 
-	//bool Save(pugi::xml_node& data) const;
+	bool LoadState(pugi::xml_node node);
 
 	iPoint uncheckableTiles[3];
 	bool hasBeenCreated;

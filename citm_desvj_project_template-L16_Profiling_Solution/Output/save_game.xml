@@ -9,12 +9,7 @@
 	<:anonymous />
 	<intro />
 	<start_menu />
-	<battle_scene>
-		<player name="Prince Edward" x="6" y="39" unit_type="1" attack="20" hp="100" precision="75" luck="25" speed="0.200000003" movement="8" />
-		<player name="Henry Tudor" x="2" y="40" unit_type="0" attack="20" hp="100" precision="95" luck="25" speed="0.200000003" movement="10" />
-		<player name=" Margaret of Anjou" x="4" y="41" unit_type="3" attack="20" hp="100" precision="70" luck="20" speed="0.200000003" movement="6" />
-		<enemy name="Duke of York" x="7" y="39" unit_type="0" attack="6" hp="-2" precision="70" luck="20" speed="25" movement="10" />
-	</battle_scene>
+	<battle_scene />
 	<backStage />
 	<turnmanager />
 	<fonts />
@@ -22,12 +17,12 @@
 	<:anonymous />
 	<dialoguemanager>
 		<index scene="0" dialogue="0" background="0" />
-		<mode value="1" />
+		<mode value="0" />
 		<language value="english" />
 	</dialoguemanager>
 	<guiManager />
 	<Fade />
 	<renderer>
-		<camera x="-80" y="-3320" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>

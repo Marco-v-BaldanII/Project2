@@ -568,25 +568,30 @@ bool BattleScene::DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA,
 	
 	yorkHPBar.w = eHp_B; LancasterHPBar.w = aHpB;
 
-	
+	float yorkWidth = (eHp_B / maxE) * 150;
+	float lancasterWidth = (aHpB / maxA) * 150;
+
+	// Update the width of the health bars
+	yorkHPBar.w = yorkWidth;
+	LancasterHPBar.w = lancasterWidth;
 
 
-	app->render->DrawRectangle(SDL_Rect{ yorkHPBar.x - (app->render->camera.x / 3), yorkHPBar.y - (app->render->camera.y / 3), -yorkHPBar.w *3, yorkHPBar.h *3} , b2Color(1, 1, 1, 1), true, true);
-	app->render->DrawRectangle(SDL_Rect{ LancasterHPBar.x - (app->render->camera.x / 3), LancasterHPBar.y - (app->render->camera.y / 3), LancasterHPBar.w * 3, LancasterHPBar.h * 3 }, b2Color(1, 0, 0, 1), true, true);
+	app->render->DrawRectangle(SDL_Rect{ yorkHPBar.x - (app->render->camera.x / 3), yorkHPBar.y - (app->render->camera.y / 3), -yorkHPBar.w , yorkHPBar.h *3} , b2Color(1, 1, 1, 1), true, true);
+	app->render->DrawRectangle(SDL_Rect{ LancasterHPBar.x - (app->render->camera.x / 3), LancasterHPBar.y - (app->render->camera.y / 3), LancasterHPBar.w , LancasterHPBar.h * 3 }, b2Color(1, 0, 0, 1), true, true);
 
 	SDL_Rect doubleRect = SDL_Rect{ 0,0, 172, 90 };
 	app->render->DrawTexture(yorkHp, 165 * 2 + (app->render->camera.x / -3), 134 * 2 + (app->render->camera.y / -3), &doubleRect, true);
 	app->render->DrawTexture(lancasterHp, 2 * 2 + (app->render->camera.x / -3), 134 * 2 + (app->render->camera.y / -3), &doubleRect, true);
 
-	if (eHp_B <= eHp_A && aHpA <= aHpA) {
+	if ((int)eHp_B <= (int)eHp_A && (int)aHpA <= (int)aHpA) {
 		return true;
 	}
 	else if (!((int) eHp_B <=(int) eHp_A)) {
-		Lerp2(eHp_B, 0.02f, eHp_A); 
+		Lerp2(eHp_B, 0.05f, eHp_A); 
 		return false;
 	}
 	else if (!((int)aHpB <= (int)aHpA)) {
-		Lerp2(aHpB, 0.02f, aHpA);
+		Lerp2(aHpB, 0.05f, aHpA);
 		return false;
 	}
 }

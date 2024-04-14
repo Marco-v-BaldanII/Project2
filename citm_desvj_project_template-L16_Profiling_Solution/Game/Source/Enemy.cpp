@@ -93,7 +93,8 @@ bool Enemy::Start() {
 	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, Uitex, attack, hp, precision, luck, speed, movement, s);
 
 	currentAnim = &downAnim;
-	
+	maxHp = hp;
+	lerpingHp = hp;
 
 	return true;
 }
@@ -221,30 +222,10 @@ bool Enemy::Update(float dt)
 
 		if (battleTimer >= 1 && battleTimer < 300) {
 			//Draw the combate
-			SDL_Rect bg = {0,0,256*2,192*2};
-
-			string myName = name.GetString(); string playerName = target->name.GetString();
-			string action = " has attacked ";
-			string sentence = playerName + action + myName;
-
-			
-			app->render->DrawTexture(battleBg, app->render->camera.x/-3, app->render->camera.y/-3, &bg, false, 255);
-			app->render->DrawTexture(myBattleTexture, app->render->camera.x/-3 + 100, app->render->camera.y/-3+100, false, false, 255);
-			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x/-3 + 250, app->render->camera.y/-3 + 100, false, true, 255);
-
-			app->render->DrawText(sentence, 32 *2* app->win->GetScale(), 32 *2* app->win->GetScale(), 192 * 2 * app->win->GetScale(), 20 * 2* app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 			
 		}
 
-		if (battleTimer == 298) {
-			hp -= target->attack;
-			if (!app->battleScene->godMode)
-			target->hp -= attack;
-			state = MOVE;
-			HasAttackAction = false;
-			HasMoveAction = false;
-		}
-
+		
 		break;
 	default:
 		break;
@@ -264,7 +245,10 @@ bool Enemy::PostUpdate() {
 
 
 	//render current tile pos
-	
+	if (app->turnManager->currentTurn == PLAYER) {
+		lerpingHp = hp;
+	}
+	bool finishedLerp = false;
 
 	//app->render->DrawRectangle(r, 255, 100, 255, 150, true);
 	switch (state)
@@ -297,14 +281,16 @@ bool Enemy::PostUpdate() {
 	case BATTLE:
 		battleTimer++;
 
-		if (battleTimer >= 1 && battleTimer < 300) {
+		if (!finishedLerp) {
 			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
 			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
 			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
 			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
+
+			finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - target->attack, target->lerpingHp, target->lerpingHp - attack, maxHp, target->maxHp);
 		}
 
-		if (battleTimer == 298) {
+		if ( finishedLerp) {
 			hp -= target->attack;
 			target->hp -= attack;
 			state = MOVE;

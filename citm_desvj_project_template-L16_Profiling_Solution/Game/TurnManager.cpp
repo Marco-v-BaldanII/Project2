@@ -75,6 +75,7 @@ bool TurnManager::Update(float dt)
 	if (availablePlayers <= 0) {
 		// enemy turn
 		LOG("All players have moved, initiating enemy turn");
+		currentTurn = ENEMY;
 		// if enemy turn has finished and there is no enemy moving
 		if (noEnemyMoving)
 			for (int i = 0; i < app->entityManager->enemies.Count(); ++i)
