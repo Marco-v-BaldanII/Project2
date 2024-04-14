@@ -42,12 +42,6 @@ bool EntityManager::Awake(pugi::xml_node config)
 		ret = item->data->Awake();
 	}
 
-	app->backStage->mynode = config;
-
-	// NPCs
-	
-
-
 
 	return ret;
 

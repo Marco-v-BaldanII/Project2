@@ -18,7 +18,7 @@ class Dialogue;
 
 BackStage::BackStage(bool isActive) : Module(isActive)
 {
-	name.Create("BackStage");
+	name.Create("backStage");
 	//toSave = false;
 	//saveConfigs = false;
 }
@@ -27,8 +27,10 @@ BackStage::~BackStage()
 {
 }
 
-bool BackStage::Awake(pugi::xml_node&)
+bool BackStage::Awake(pugi::xml_node config)
 {
+	mynode = config;
+
 	return true;
 }
 
@@ -37,7 +39,7 @@ bool BackStage::Start()
 	if (active)
 	{
 		music = app->audio->PlayMusic("assets/audio/music/Musica-overworld-_Big-Map_.wav", 0);
-		background = app->tex->Load("Assets/Textures/Backstageprops1.png");
+		background = app->tex->Load("Assets/Textures/Backstageprops2-export.png");
 		createplayer = true;
 		app->backstageplayer->Enable();
 		app->backstageplayer->position.x = 100;
@@ -112,6 +114,8 @@ bool BackStage::Start()
 		P_textSpeed->state = GuiControlState::DISABLED;
 		P_save->state = GuiControlState::DISABLED;
 		P_backtomenu->state = GuiControlState::DISABLED;
+
+		talkPrompt = app->tex->Load(mynode.child("talkBtn").attribute("path").as_string());
 	}
 
 	return true;
@@ -140,13 +144,17 @@ bool BackStage::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += 10;
 
-
+	near = false;
 	for (item = npcsList.start; item != NULL; item = item->next)
 	{
 		pEntity = item->data;
 
 		if (pEntity->active == false) continue;
-		if (app->backstageplayer->position.DistanceTo(pEntity->position) < 50) {
+		iPoint centerPos = app->backstageplayer->position;
+		centerPos.x += 64; centerPos.y += 64;
+		// Threshold distance from where to talk to the npcs
+		if (centerPos.DistanceTo(pEntity->centerPos) < 90) {
+			near = true;
 			LOG("NEAR");
 			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN && app->dialogueManager->myState == NPCS) {
 				//block movimiento de player
@@ -154,6 +162,7 @@ bool BackStage::Update(float dt)
 				app->dialogueManager->currentNPC = pEntity;
 			}
 		}
+		
 	}
 
 	// Activate Pause Menu
@@ -259,6 +268,8 @@ bool BackStage::PostUpdate()
 {
 	SDL_Rect r = { 0,0,720,384 };
 	app->render->DrawTexture(background, 0, 0, &r);
+	// if the player is near an npc draw the talking prompt
+	if(near){ app->render->DrawTexture(talkPrompt, app->backstageplayer->position.x - 76, app->backstageplayer->position.y ); }
 
 	return true;
 }

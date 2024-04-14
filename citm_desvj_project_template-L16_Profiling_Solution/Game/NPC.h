@@ -58,7 +58,8 @@ public:
 	Node* currentDialogue;
 
 	iPoint position;
-	SDL_Rect body = SDL_Rect{ 0,0,71,150 };
+	iPoint centerPos;
+	SDL_Rect body = SDL_Rect{ 0,0,108,190 };
 
 	SDL_Texture* texture = nullptr;
 

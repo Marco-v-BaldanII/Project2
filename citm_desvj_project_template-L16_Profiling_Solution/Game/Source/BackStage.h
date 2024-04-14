@@ -20,7 +20,7 @@ public:
 	virtual ~BackStage();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node&);
+	bool Awake(pugi::xml_node config);
 
 	// Called before the first frame
 	bool Start();
@@ -54,6 +54,8 @@ public:
 
 	int backStageID = 0;
 
+	bool near = false;
+
 private:
 	//buttons and variables
 	GuiControlButton* P_resume;
@@ -75,6 +77,7 @@ private:
 
 	SDL_Texture* img;
 	SDL_Texture* background;
+	SDL_Texture* talkPrompt;
 	SDL_Rect rect;
 	bool createplayer = false;
 	uint music;

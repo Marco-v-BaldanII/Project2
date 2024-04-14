@@ -77,7 +77,7 @@ bool Player::Start() {
 
 	std::string s = config.attribute("name").as_string();
 
-	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, DOWN, SDL_Rect{ 0,0,94,99 }, UiTex, attack, hp, precision, luck, speed, movement, s);
+	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, UiTex, attack, hp, precision, luck, speed, movement, s);
 
 	return true;
 }
