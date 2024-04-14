@@ -40,7 +40,7 @@ bool Intro::Start()
  	intro = app->audio->LoadFx("Assets/audio/fx/intro.wav");
 	app->audio->PlayFx(intro);
 	waitTime = 200;
-	music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);
+	music = app->audio->PlayMusic("assets/audio/music/Logo Screen.wav", 0.5f);
 	img = app->tex->Load(myNode.child("titleScreen").attribute("path").as_string());
 	rect = { 0, 0, 512, 384 };
 	return true;
