@@ -33,55 +33,6 @@
 
 		
 
-		
-
-		<npc name = "Guy4" x ="200" y="300" wait="4">
-		    <texture path="Assets\Textures\BackstageNPCs\Soldado1.png"/>
-			<dialogue text = "I am the battle master, it is my job to ensure that the fighting scenes are properly portrayed" ID="10"          />
-			<dialogue text = "Archers, Knights, Cavelliers... there are many different types of units in the battlefield, it is important that each of them play there part correctly" ID="8"          />
-			<dialogue text = "Would you like to now more about any of the units?" choiceA ="Yes" choiceB="No" ID="7"          />
-
-			<dialogue text = "Very well, be sure to play your part" ID="8"         />
-
-			<dialogue text = "Which unit do you want to know about" choiceA="Paladin" choiceB="Archer" ID="6"          />
-			<dialogue text = "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="5"          />
-			<dialogue text =  "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="4"    />
-			<dialogue text = "Archers are dasterdly tricksters that can chip away at your units from a distance, they act as counters to your magic users but they are weak againts knights." ID="7"          />
-		</npc>
-
-	
-
-		<npc name = "Guy3" x ="160" y="200" wait="3">
-			
-			<!--comment 0,0 71, 150-->
-			<texture path="Assets\Textures\BackstageNPCs\Soldado2.png"/>
-			
-			<dialogue text = "The play is about to start" ID="1"          />
-			<dialogue text = "I'm so very excited" ID="1"          />
-			<dialogue text = "Though I seem to have forgotten what the play is about" ID="1"          />
-			<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="1"          />
-			<dialogue text = "Do you know what the play is about?" ID="1" choiceA ="Wars of the Roses" choiceB="Hamlet"         />
-			<dialogue text = "Yes that's right" ID="1"         />
-			<!-- second branch-->
-			<dialogue text = "Are you trolling me?" ID="2"         />
-			<dialogue text = "I will have my revenge" ID="2"         />
-		</npc>
-			
-			
-		
-			<!-- coment -->
-
-	
-
-		<npc name = "PlayWritter" x ="400" y="200" wait="500">
-		<texture path="Assets\Textures\BackstageNPCs\Soldado3.png"/>
-			<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="470"          />
-			<dialogue text = "Let the show begin"  ID="469"          />
-
-			<!-- second branch-->
-			<dialogue text = "Take your time"  ID="500"          />
-
-		</npc>
 
 	</entitymanager>
 
@@ -273,5 +224,63 @@
 		
 		
 	</intro>
+
+	<backStage>
+	    <talkBtn path ="Assets/Textures/UI/Z_Key_Light.png"/>
+	
+		
+
+		<npc name = "Guy4" x ="300" y="150" wait="4">
+		    <texture path="Assets\Textures\BackstageNPCs\Soldado1_medium.png"/>
+			<dialogue text = "I am the battle master, it is my job to ensure that the fighting scenes are properly portrayed" ID="10"          />
+			<dialogue text = "Archers, Knights, Cavelliers... there are many different types of units in the battlefield, it is important that each of them play there part correctly" ID="8"          />
+			<dialogue text = "Would you like to now more about any of the units?" choiceA ="Yes" choiceB="No" ID="7"          />
+
+			<dialogue text = "Very well, be sure to play your part" ID="8"         />
+
+			<dialogue text = "Which unit do you want to know about" choiceA="Paladin" choiceB="Archer" ID="6"          />
+			<dialogue text = "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="5"          />
+			<dialogue text =  "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="4"    />
+			<dialogue text = "Archers are dasterdly tricksters that can chip away at your units from a distance, they act as counters to your magic users but they are weak againts knights." ID="7"          />
+		</npc>
+
+	
+
+		<npc name = "Guy3" x ="160" y="200" wait="3">
+			
+			<!--comment 0,0 71, 150-->
+			<texture path="Assets\Textures\BackstageNPCs\Soldado2_medium.png"/>
+			
+			<dialogue text = "The play is about to start" ID="10"          />
+			<dialogue text = "I'm so very excited" ID="9"          />
+			<dialogue text = "Though I seem to have forgotten what the play is about" ID="8"          />
+			<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="7"          />
+			<dialogue text = "Do you know what the play is about?" ID="5" choiceA ="Wars of the Roses" choiceB="Hamlet"         />
+			<dialogue text = "Yes that's right" ID="4"         />
+			<!-- second branch-->
+			<dialogue text = "Are you trolling me?" ID="7"         />
+			<dialogue text = "I will have my revenge" ID="6"         />
+		</npc>
+			
+			
+		
+			<!-- coment -->
+
+	
+
+		<npc name = "PlayWritter" x ="500" y="100" wait="500">
+		<texture path="Assets\Textures\BackstageNPCs\Soldado_medium.png"/>
+			<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="470"          />
+			<dialogue text = "Let the show begin"  ID="469"          />
+
+			<!-- second branch-->
+			<dialogue text = "Take your time"  ID="500"          />
+
+		</npc>
+
+
+
+
+	</backStage>
 	
 </config>

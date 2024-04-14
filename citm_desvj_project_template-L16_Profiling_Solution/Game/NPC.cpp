@@ -42,7 +42,8 @@ bool Npc::Update(float dt)
 {
 	//LOG(name.c_str());
 
-
+	centerPos = position;
+	centerPos.x += 54; centerPos.y += 95;
 
 
 	int mouseX, mouseY;
