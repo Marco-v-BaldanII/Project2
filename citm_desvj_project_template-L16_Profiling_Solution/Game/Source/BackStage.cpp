@@ -384,12 +384,33 @@ void BackStage::FinishBackStage() {
 
 bool BackStage::LoadState(pugi::xml_node node)
 {
+	for (ListItem<Npc*>* it = npcsList.start; it != nullptr; it = it->next) {
 
+		for (pugi::xml_node n = node.child("Npc"); n != nullptr; n = n.next_sibling("Npc")) {
+
+			if (n.attribute("name").as_string() == it->data->name) {
+
+				it->data->position.x = n.attribute("x").as_int();
+				it->data->position.y = n.attribute("y").as_int();
+			}
+
+		}
+	}
 	return true;
 }
 
 bool BackStage::SaveState(pugi::xml_node node)
 {
-	
+	for (ListItem<Npc*>* it = npcsList.start; it != nullptr; it = it->next) {
+
+		pugi::xml_node n = node.append_child("Npc");
+		n.append_attribute("x").set_value(it->data->position.x);
+		n.append_attribute("y").set_value(it->data->position.y);
+
+		n.append_attribute("name").set_value(it->data->name.c_str());
+
+	}
+
+
 	return true;
 }

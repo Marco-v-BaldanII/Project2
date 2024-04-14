@@ -10,14 +10,20 @@
 	<intro />
 	<start_menu />
 	<battle_scene />
-	<backStage />
+	<backStage>
+		<Npc x="268" y="150" name="Guy4" />
+		<Npc x="226" y="200" name="Guy3" />
+		<Npc x="500" y="100" name="PlayWritter" />
+	</backStage>
 	<turnmanager />
 	<fonts />
 	<entitymanager />
-	<:anonymous />
+	<:anonymous>
+		<Player x="30" y="120" />
+	</:anonymous>
 	<dialoguemanager>
 		<index scene="0" dialogue="0" background="0" />
-		<mode value="0" />
+		<mode value="1" />
 		<language value="english" />
 	</dialoguemanager>
 	<guiManager />

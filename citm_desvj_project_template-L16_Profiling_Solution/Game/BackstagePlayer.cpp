@@ -314,3 +314,20 @@ void BackStagePlayer::SetPlayerPosition(int x, int y)
 	position.y = y;
 }
 
+
+bool BackStagePlayer::SaveState(pugi::xml_node node) {
+
+	pugi::xml_node n = node.append_child("Player");
+	n.append_attribute("x").set_value(position.x);
+	n.append_attribute("y").set_value(position.y);
+
+	return true;
+}
+
+bool BackStagePlayer::LoadState(pugi::xml_node node) {
+
+	position.x = node.child("Player").attribute("x").as_int();
+	position.y = node.child("Player").attribute("y").as_int();
+
+	return true;
+}

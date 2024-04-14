@@ -39,6 +39,9 @@ public:
 		return canMove;
 	}
 
+	bool SaveState(pugi::xml_node node);
+
+	bool LoadState(pugi::xml_node node);
 
 
 	float32 velocity = 0.0f;

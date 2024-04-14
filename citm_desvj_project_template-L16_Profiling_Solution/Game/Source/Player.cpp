@@ -252,11 +252,12 @@ bool Player::PostUpdate()
 			finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - oponent->attack, oponent->lerpingHp, oponent->lerpingHp - attack, maxHp, oponent->maxHp);
 		}
 
-		if ((finishedLerp)) {
+		if ((finishedLerp) && battleTimer > 298) {
 			if (!app->battleScene->godMode)
 			hp -= oponent->attack;
 			oponent->hp -= attack;
 			state = IDLE;
+			battleTimer = 0;
 		}
 		break;
 	}

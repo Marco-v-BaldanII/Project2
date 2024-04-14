@@ -290,12 +290,13 @@ bool Enemy::PostUpdate() {
 			finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - target->attack, target->lerpingHp, target->lerpingHp - attack, maxHp, target->maxHp);
 		}
 
-		if ( finishedLerp) {
+		if ( finishedLerp && battleTimer > 298) {
 			hp -= target->attack;
 			target->hp -= attack;
 			state = MOVE;
 			HasAttackAction = false;
 			HasMoveAction = false;
+			battleTimer = 0;
 		}
 		break;
 	default:
