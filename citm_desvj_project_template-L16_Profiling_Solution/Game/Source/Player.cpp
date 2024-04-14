@@ -180,22 +180,6 @@ bool Player::Update(float dt)
 	case BATTLE:
 
 
-		battleTimer++;
-
-		if (battleTimer >= 1 && battleTimer < 300) {
-			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
-			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
-			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
-			app->render->DrawTexture(oponent->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
-
-		
-		}
-
-		if (battleTimer == 298) {
-			hp -= oponent->attack;
-			oponent->hp -= attack;
-			state = IDLE;
-		}
 
 		break;
 	}
@@ -243,7 +227,27 @@ bool Player::PostUpdate()
 			}
 		}
 		break;
+		
 	}
+	case BATTLE:
+
+		battleTimer++;
+
+		if (battleTimer >= 1 && battleTimer < 300) {
+			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
+			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
+			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
+			app->render->DrawTexture(oponent->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
+
+
+		}
+
+		if (battleTimer == 298) {
+			hp -= oponent->attack;
+			oponent->hp -= attack;
+			state = IDLE;
+		}
+		break;
 	}
 	myFrame->Update();
 
