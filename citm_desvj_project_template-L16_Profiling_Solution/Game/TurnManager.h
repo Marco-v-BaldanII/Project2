@@ -50,6 +50,7 @@ public:
 	Turn currentTurn = PLAYER;
 
 	Player* currentPlayer = nullptr;
+	uint availablePlayers = 3;
 	bool noEnemyMoving = true;
 private:
 
@@ -59,7 +60,7 @@ private:
 	List<Enemy*> enemies;
 	Entity* currentenemy = nullptr;
 
-	uint availablePlayers = 3;
+	
 
 	bool enemyTurnFinished;
 

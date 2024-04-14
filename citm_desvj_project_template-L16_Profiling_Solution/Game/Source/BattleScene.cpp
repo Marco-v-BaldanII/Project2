@@ -178,6 +178,8 @@ bool BattleScene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		app->render->camera.x += 10;
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		godMode = !godMode;
 
 	return true;
 }
@@ -307,7 +309,7 @@ bool BattleScene::SaveState(pugi::xml_node node) {
 
 bool BattleScene::LoadState(pugi::xml_node node) {
 
-
+	
 	Entity* pEntity = nullptr;
 	 //Destroy Players and enemies
 	for (ListItem<Player*>* pIt = party.start; pIt != nullptr; pIt = pIt->next) {
@@ -323,9 +325,9 @@ bool BattleScene::LoadState(pugi::xml_node node) {
 		app->entityManager->DestroyEntity(pEntity);
 
 	}
-
+	app->entityManager->enemies.Clear();
 	party.Clear(); goons.Clear();
-
+	app->turnManager->availablePlayers = 3;
 	/*for (ListItem<pugi::xml_node*>* nod = nodes.start; nod != nullptr; nod = nod->next) {
 
 		nod->data->parent().remove_child(nod->data->name());
@@ -369,8 +371,13 @@ bool BattleScene::LoadState(pugi::xml_node node) {
 		e->Start();
 		goons.Add(e);
 		e->texture = spriteSheet;
+
 		e->battleBg = battleBackground;
 		
+
+		app->turnManager->noEnemyMoving = true;
+		app->entityManager->enemies.Add(e);
+
 		PassAnimations(e);
 
 		created++;
