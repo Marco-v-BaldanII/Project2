@@ -63,6 +63,8 @@ bool BattleScene::Start()
 			SDL_Rect btPos = { 100, 500, 120,20 };
 			SDL_Rect btPos2 = { 100, 700, 120,20 };
 
+			app->render->camera.y = -3200;
+
 			// like in the dialogue manager implement reading the texture paths  into a TextureDef
 			for (pugi::xml_node node = mynode.child("battleSprites").child("Sprite"); node != NULL; node = node.next_sibling("Sprite")) {
 
