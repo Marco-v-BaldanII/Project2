@@ -13,7 +13,8 @@
 <portrait texturePath ="Assets/Textures/Portraits/Henry Tudor.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/JasperTudor.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Prince Edward.png"/>
-
+<portrait texturePath ="Assets/Textures/Portraits/Richard of York.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/Duke of York.png"/>
 	
 <shakesperean>
 

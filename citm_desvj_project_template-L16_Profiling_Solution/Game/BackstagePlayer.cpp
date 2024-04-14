@@ -255,19 +255,19 @@ bool BackStagePlayer::PostUpdate()
 	app->render->DrawTexture(playerTexture, destRect.x, destRect.y, &currentFrame, flips);
 
 	//camera follow player
-	//app->render->camera.x = (-position.x + SCREEN_WIDTH / 2);
-	////app->render->camera.y = (-position.y + SCREEN_HEIGHT / 2 * SCREEN_SIZE);
-	////
+	app->render->camera.x = (-position.x + SCREEN_WIDTH / 2);
+	//app->render->camera.y = (-position.y + SCREEN_HEIGHT / 2 * SCREEN_SIZE);
+	//
 
-	////camera boundaries in backStage
-	//if (app->render->camera.x > 0)
-	//{
-	//	app->render->camera.x = 0;
-	//}
-	//if (app->render->camera.y > 0)
-	//{
-	//	app->render->camera.y = 0;
-	//}
+	//camera boundaries in backStage
+	if (app->render->camera.x > 0)
+	{
+		app->render->camera.x = 0;
+	}
+	if (app->render->camera.y > 0)
+	{
+		app->render->camera.y = 0;
+	}
 	/*if (app->render->camera.x < 30000)
 	{
 		app->render->camera.x = 30000;

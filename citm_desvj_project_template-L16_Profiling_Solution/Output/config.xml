@@ -92,6 +92,92 @@
 		<yorkUI path ="Assets/Textures/UI/York.png"/>
 		<lancasterUI path ="Assets/Textures/UI/Lancaster.png"/>
 
+
+		<animation name="Mage_wrigth">
+			<frame x="112" y="230" w="16" h="26" />
+			<frame x="112" y="262" w="16" h="26" />
+		</animation>
+		
+		<animation name="Mage_up">
+			<frame x="112" y="166" w="17" h="26" />
+			<frame x="112" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="Mage_down">
+			<frame x="112" y="6" w="17" h="26" />
+			<frame x="112" y="36" w="17" h="28" />
+			<frame x="112" y="68" w="17" h="28" />
+		</animation>
+
+		<animation name="Archer_wrigth">
+			<frame x="144" y="230" w="16" h="26" />
+			<frame x="144" y="262" w="16" h="26" />
+		</animation>
+
+		<animation name="Archer_up">
+			<frame x="144" y="166" w="17" h="26" />
+			<frame x="144" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="Archer_down">
+			<frame x="144" y="6" w="17" h="26" />
+			<frame x="144" y="36" w="17" h="28" />
+			<frame x="144" y="68" w="17" h="28" />
+		</animation>
+
+		<animation name="Knigth_wrigth">
+			<frame x="80" y="230" w="16" h="26" />
+			<frame x="80" y="262" w="16" h="26" />
+		</animation>
+
+		<animation name="Knigth_up">
+			<frame x="80" y="166" w="17" h="26" />
+			<frame x="80" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="Knigth_down">
+			<frame x="80" y="6" w="17" h="26" />
+			<frame x="80" y="36" w="17" h="28" />
+			<frame x="80" y="68" w="17" h="28" />
+		</animation>
+
+		
+		
+		<animation name="Richard3_wrigth">
+			<frame x="46" y="232" w="17" h="24" />
+			<frame x="46" y="264" w="17" h="24" />
+		</animation>
+
+		<animation name="Richard3_up">
+			<frame x="46" y="163" w="19" h="29" />
+			<frame x="46" y="195" w="19" h="29" />
+		</animation>
+
+		<animation name="Richard3_down">
+			<frame x="46" y="9" w="19" h="23" />
+			<frame x="46" y="39" w="19" h="25" />
+			<frame x="46" y="71" w="19" h="25" />
+		</animation>
+
+		<animation name="Richard3_wrigth">
+			<frame x="46" y="232" w="17" h="24" />
+			<frame x="46" y="264" w="17" h="24" />
+		</animation>
+
+		<animation name="Richard3_up">
+			<frame x="46" y="163" w="19" h="29" />
+			<frame x="46" y="195" w="19" h="29" />
+		</animation>
+
+		<animation name="Richard3_down">
+			<frame x="46" y="9" w="19" h="23" />
+			<frame x="46" y="39" w="19" h="25" />
+			<frame x="46" y="71" w="19" h="25" />
+		</animation>
+
+
+
+
 		<battleMaps>
 			<map name ="Northampton">
 				<!-- Paladin = 0, Archer = 1, Knight = 2, Armoured Knight = 3, Mage = 4, DarkMage = 5-->
@@ -101,8 +187,8 @@
 				<player  name="HenryTudor" x="2" y ="39" unit_type="0" attack="5" hp="12" precision="95" luck="25" speed="30" movement="10"/>
 				<player  name=" Margaret of Anjou" x="4" y="42" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
 
-				<enemy name= "Richard of York" x="7" y="12" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
-				<enemy name= "Edward IV" x="72" y="26" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Richard of York" x="7" y="39" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
+			<!--	<enemy name= "Edward IV" x="72" y="26" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
 				<enemy name= "Earl of Warwick" x="79" y="72" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
 				<enemy name= "George of Clarence" x="43" y="50" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
 				
@@ -112,7 +198,7 @@
 				<enemy name= "Mage" x="78" y="36" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
 				<enemy name= "Mage" x="83" y="36" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
 				<enemy name= "Archer" x="37" y="18" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Knight" x="39" y="18" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Knight" x="39" y="18" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/> -->
 
 			</map>
 			
