@@ -223,8 +223,8 @@ bool BattleScene::SaveState(pugi::xml_node node) {
 		//<player  name="PrinceEdward"  x="0" y="0" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"           />
 		pugi::xml_node playerNode = node.append_child("player");
 		playerNode.append_attribute("name").set_value(pIt->data->name.GetString());
-		playerNode.append_attribute("x").set_value(pIt->data->position.x);
-		playerNode.append_attribute("y").set_value(pIt->data->position.y);
+		playerNode.append_attribute("x").set_value(pIt->data->position.x/32);
+		playerNode.append_attribute("y").set_value(pIt->data->position.y/32);
 
 		switch (pIt->data->unitType) {
 		case PALADIN:
@@ -260,8 +260,8 @@ bool BattleScene::SaveState(pugi::xml_node node) {
 		//<player  name="PrinceEdward"  x="0" y="0" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"           />
 		pugi::xml_node playerNode = node.append_child("enemy");
 		playerNode.append_attribute("name").set_value(pIt->data->name.GetString());
-		playerNode.append_attribute("x").set_value(pIt->data->position.x);
-		playerNode.append_attribute("y").set_value(pIt->data->position.y);
+		playerNode.append_attribute("x").set_value(pIt->data->position.x/32);
+		playerNode.append_attribute("y").set_value(pIt->data->position.y/32);
 
 		switch (pIt->data->unitType) {
 		case PALADIN:
@@ -336,11 +336,13 @@ bool BattleScene::LoadState(pugi::xml_node node) {
 		// Here assign the correct texture
 
 		p->Awake();
+		p->UiTex = lancasterUI;
 		p->Start();
 		party.Add(p);
 		p->myTexture = spriteSheet;
 		p->myBattleTexture = portraitTextures[name];
-		p->UiTex = lancasterUI;
+		
+		PassAnimations(p);
 
 		created++;
 
@@ -355,13 +357,16 @@ bool BattleScene::LoadState(pugi::xml_node node) {
 		
 		e->config = pNode;
 		e->Awake();
+		e->Uitex = yorkUI;
 		e->Start();
 		goons.Add(e);
 		e->texture = spriteSheet;
-		e->Uitex = yorkUI;
+		
+		PassAnimations(e);
 
 		created++;
 	}
+	app->turnManager->InitializeChessPieces(&party, &goons);
 	int b = created;
 
 	return true;
@@ -489,6 +494,8 @@ void BattleScene::LoadAnimations() {
 			}
 		}
 	}
+
+	LancasterAnim.PushBack(SDL_Rect{ 0,288,32,32 });
 }
 
 void BattleScene::PassAnimations(Entity* entity) {
@@ -510,6 +517,7 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->upAnim = henryTudorRight;
 	}
 	else {
+		entity->downAnim = LancasterAnim;
 
 		switch (entity->unitType) {
 		case(KNIGHT):

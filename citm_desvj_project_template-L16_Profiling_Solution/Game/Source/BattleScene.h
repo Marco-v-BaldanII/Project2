@@ -114,6 +114,8 @@ public:
 	Animation henryTudorDown;
 	Animation henryTudorUp;
 
+	Animation LancasterAnim;
+
 };
 #endif // __BATTLESCENE_H__
 
