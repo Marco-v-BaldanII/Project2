@@ -326,6 +326,8 @@ bool Enemy::PostUpdate() {
 		for (int i = 0; i < app->entityManager->enemies.Count(); ++i) {
 			if (app->entityManager->enemies.At(i)->data->entity == this){
 				app->entityManager->enemies.Del(app->entityManager->enemies.At(i));
+				app->turnManager->noEnemyMoving = true;
+				app->turnManager->noEnemyMoving = true;
 			}
 
 
