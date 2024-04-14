@@ -238,6 +238,16 @@ bool DialogueManager::Update(float dt)
 				myState = CUTSCENE;
 				app->backStage->FinishBackStage();
 				currentNPC_Dialogues = nullptr;
+				
+				
+				
+				for (ListItem<Npc*>* it = app->backStage->npcsList.start; it != nullptr; it=it->next) {
+
+					Entity* e = it->data;
+					app->entityManager->DestroyEntity(e);
+				}
+
+				app->backStage->npcsList.Clear();
 			}
 
 		}

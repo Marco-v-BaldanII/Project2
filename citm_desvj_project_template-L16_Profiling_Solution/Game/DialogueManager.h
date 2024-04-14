@@ -182,7 +182,7 @@ private:
 
 	
 
-	Node* currentNPC_Dialogues;
+	Node* currentNPC_Dialogues = NULL;
 	int npcDialogueIndex = -1;
 
 	GuiControlButton* choiceA_button;
