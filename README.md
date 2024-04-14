@@ -17,6 +17,37 @@ The main game pillars are:
 - Theatrical ambience
 - Epic emotional story
 
+## CONTROLS ##
+
+
+MENU
+
+- Navigation -> Mouse
+- Select -> Left Mouse Button
+
+BACKSTAGE
+
+- Movement -> WASD Keys
+- Enter dialogue and skip through -> Z key
+- Skip acts -> Hold down SPACE key
+- Pause menu -> ESCAPE key
+
+COMBAT SCENE
+
+- Move camera -> ARROW keys
+- Show minimap -> M key
+- Movement -> Left click on a player to select + Left Mouse Button on the tile you want to move to
+- Attack -> Left click on a player to select + Right Mouse Button on the enemy you want to attack
+
+
+## LICENSES ##
+
+This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking 
+with closed source software. Check our LICENSE* for further details.
+
+LICENSE*: https://github.com/Marco-v-BaldanII/Project2/blob/main/LICENSE
+
+{AdditionalLicenses}
 
 
 ## Developers
