@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="BackstagePlayer.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Source\BackStage.cpp" />
     <ClCompile Include="Source\BattleScene.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="Interpolation.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="someColors.h" />

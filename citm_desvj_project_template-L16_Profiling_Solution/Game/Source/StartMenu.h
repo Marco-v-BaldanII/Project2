@@ -13,6 +13,7 @@
 #include "GuiPanel.h"
 #include "GuiToggle.h"
 #include "GuiControl.h"
+#include "GuiPanel.h"
 #include "GuiControlButton.h"
 
 struct SDL_Texture;
@@ -91,6 +92,9 @@ public:
 	//Scenes
 	GuiControlButton* backstage;
 	GuiControlButton* combatstage;
+
+	GuiPanel* testPannel;
+
 
 	//Pause
 	GuiControlButton* resume;

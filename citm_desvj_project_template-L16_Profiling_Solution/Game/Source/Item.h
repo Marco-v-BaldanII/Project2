@@ -4,10 +4,20 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "../ItemManager.h"
 
 struct SDL_Texture;
 
-class Item : public Entity
+enum ItemState {
+
+	OVERWORLD,
+	INVENTORY,
+	EQUIPED
+
+};
+
+
+class Item 
 {
 public:
 
@@ -22,15 +32,31 @@ public:
 
 	bool CleanUp();
 
+	void InitModifiers();
+
+
 public:
 
 	bool isPicked = false;
 
+	ItemState myState;
+
+	iPoint mapPos;
+
+
 private:
 
-	SDL_Texture* texture;
+	SDL_Texture* texture = app->tex->Load("");
 	const char* texturePath;
 	uint texW, texH;
+
+	uint hpMod = 0;
+	uint atkMod = 0;
+	uint LckMod = 0;
+	uint PrecMod = 0;
+	uint EvsMod = 0;
+
+
 };
 
 #endif // __ITEM_H__

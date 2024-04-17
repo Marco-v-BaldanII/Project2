@@ -62,6 +62,9 @@ public:
 
 	bool DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA, float maxE, float maxA);
 
+	
+
+
 private:
 	SDL_Texture* spriteSheet;
 	SDL_Texture* yorkUI;

@@ -107,6 +107,8 @@ bool StartMenu::Start()
 		state = MenuState::START;
 	}
 
+	
+
 	return true;
 }
 
@@ -119,6 +121,8 @@ bool StartMenu::PreUpdate()
 // Called each loop iteration
 bool StartMenu::Update(float dt)
 {	
+
+
 	switch (state) {
 	case MenuState::OFF:
 		start->state = GuiControlState::DISABLED;

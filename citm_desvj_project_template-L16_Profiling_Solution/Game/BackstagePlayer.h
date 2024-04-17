@@ -54,7 +54,7 @@ public:
 
 	bool talking = false;
 
-private:
+public:
 	SDL_Texture* playerTexture = nullptr;
 	
 	Animation walkUp;

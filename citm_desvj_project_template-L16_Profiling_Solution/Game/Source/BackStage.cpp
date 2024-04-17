@@ -38,6 +38,7 @@ bool BackStage::Start()
 {
 	if (active)
 	{
+		randomText = app->tex->Load("Assets/Textures/UI/Sprite-0001.png");
 		music = app->audio->PlayMusic("assets/audio/music/Musica-overworld-_Big-Map_.wav", 0);
 		background = app->tex->Load("Assets/Textures/Backstageprops2-export.png");
 		createplayer = true;
@@ -118,6 +119,11 @@ bool BackStage::Start()
 		talkPrompt = app->tex->Load(mynode.child("talkBtn").attribute("path").as_string());
 	}
 
+	testPanel = new GuiPanel(true);
+	testPanel->position = iPoint(0, 0);
+	testPanel->bounds = SDL_Rect{ 82,120,200,200 };
+	testPanel->texture = randomText;
+
 	return true;
 }
 
@@ -128,6 +134,8 @@ bool BackStage::PreUpdate()
 
 bool BackStage::Update(float dt)
 {
+
+
 	//recorrer la lista de npc y ver si el player esta cerca de alguno mostar un cubo para, y si le da a la E mostrar el dialogo
 	ListItem<Npc*>* item;
 	Npc* pEntity = NULL;
@@ -267,9 +275,12 @@ bool BackStage::Update(float dt)
 bool BackStage::PostUpdate()
 {
 	SDL_Rect r = { 0,0,720,384 };
-	app->render->DrawTexture(background, 0, 0, &r);
+	//app->render->DrawTexture(background, 0, 0, &r);
 	// if the player is near an npc draw the talking prompt
 	if(near){ app->render->DrawTexture(talkPrompt, app->backstageplayer->position.x - 76, app->backstageplayer->position.y ); }
+
+	testPanel->Draw();
+	//app->render->DrawRectangle(testPanel->bounds, b2Color(1, 0, 0, 1), true, true);
 
 	return true;
 }

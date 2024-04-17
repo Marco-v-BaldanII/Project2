@@ -49,7 +49,9 @@ bool GuiPanel::Draw()
 
 	//draw background
 	if(texture != nullptr)
-		app->render->DrawTexture(texture, position.x / app->win->GetScale(), position.y / app->win->GetScale(), &bounds, 0, 0, 0, 0, 0.5f);
+		app->render->DrawTexture(texture, position.x / app->win->GetScale(), position.y / app->win->GetScale(), &bounds);
+
+
 	
 	DrawItems();
 

@@ -68,6 +68,8 @@ private:
 	GuiControlButton* P_save;
 	GuiControlButton* P_backtomenu;
 
+	GuiPanel* testPanel;
+
 	bool pausemenu;
 
 	const char* laguageText;
@@ -78,6 +80,9 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* background;
 	SDL_Texture* talkPrompt;
+
+	SDL_Texture* randomText = nullptr;
+
 	SDL_Rect rect;
 	bool createplayer = false;
 	uint music;
