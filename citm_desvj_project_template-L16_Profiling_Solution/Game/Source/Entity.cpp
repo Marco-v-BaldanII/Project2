@@ -48,7 +48,7 @@ bool Entity::MovePath()
 
 			//if enemy has moved more than he can 
 			//clear the path to stop the movement
-			if (movement <= stepCounter)
+			if (movement + myItem->GetMov() <= stepCounter)
 				app->map->pathfinding->ClearPath();
 
 
@@ -175,4 +175,5 @@ void Entity::InitializeStats(pugi::xml_node config) {
 	luck = config.attribute("luck").as_int();
 	speed = config.attribute("speed").as_int();
 
+	int u = 3;
 }

@@ -12,6 +12,7 @@
 #include "BattleScene.h"
 #include "../TurnManager.h"
 #include <string>
+#include "Item.h"
 #include "../frame.h" /*dont include this in .h*/
 
 Player::Player() : Entity(EntityType::PLAYER)
@@ -55,7 +56,7 @@ bool Player::Awake() {
 	}
 	InitializeStats(config);
 
-	
+	speed *= 100;
 
 
 	return true;
@@ -70,18 +71,20 @@ bool Player::Start() {
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 	state = IDLE;
 	app->entityManager->players.add(this);
-	hp = 100;
-	attack = 20;
+
+
 	attackRange = 1;
 
 	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
 
 	std::string s = config.attribute("name").as_string();
 
-	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, UiTex, attack, hp, precision, luck, speed, movement, s);
+	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, UiTex, attack, hp, precision, luck, speed, movement, s, this);
 	currentAnim = &downAnim;
 	maxHp = hp;
 	lerpingHp = hp;
+
+	myItem = new Item();
 
 	return true;
 }
@@ -147,6 +150,7 @@ bool Player::PreUpdate()
 
 bool Player::Update(float dt)
 {
+	iPoint mapPos = app->map->WorldToMap(position.x, position.y);
 
 	switch (state)
 	{
@@ -165,6 +169,27 @@ bool Player::Update(float dt)
 				state = BATTLE;
 			}
 		}
+
+
+		// Ability to pick up item
+
+		if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr)/* If the tile i'm on has an item */ {
+
+			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
+
+				if (myItem != nullptr) {
+					delete myItem;
+					myItem = nullptr;
+				}
+
+				myItem = app->map->myTiles[mapPos.x][mapPos.y]->myItem;
+
+				myItem->myUnit = this;
+				app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
+			}
+
+		}
+
 		break;
 	case MOVE:
 
@@ -173,7 +198,7 @@ bool Player::Update(float dt)
 
 
 
-			app->map->pathfinding->GenerateWalkeableArea(tilePos, movement);
+			app->map->pathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());
 
 			ExpandedBFS = true;
 		}
@@ -218,8 +243,8 @@ bool Player::PostUpdate()
 	{
 		//Draw path
 		app->map->pathfinding->DrawBFSPath();
-
-		myFrame->Render(1.0/60.0, hp);
+		// ! important, movement is the only item modifier that is added rather than multiplied
+		myFrame->Render(1.0/60.0, hp, attack * myItem->GetAtk(), speed * myItem->GetSpd(), precision * myItem->GetPrec(), luck * myItem->GetLck(), movement + myItem->GetMov());
 		
 
 		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
@@ -254,8 +279,8 @@ bool Player::PostUpdate()
 
 		if ((finishedLerp) && battleTimer > 298) {
 			if (!app->battleScene->godMode)
-			hp -= oponent->attack;
-			oponent->hp -= attack;
+				CalculateAttack();
+
 			state = IDLE;
 			battleTimer = 0;
 		}
@@ -327,5 +352,19 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	default:
 		break;
+	}
+}
+
+void Player::CalculateAttack() {
+
+	if (myItem == nullptr) {
+		hp -= oponent->attack;
+		oponent->hp -= attack;
+
+	}
+	else/*I have an item to apply modifiers*/ {
+
+		 hp = (hp + myItem->GetHp()) - oponent->attack;
+		 oponent->hp -= (attack * myItem->GetAtk());
 	}
 }

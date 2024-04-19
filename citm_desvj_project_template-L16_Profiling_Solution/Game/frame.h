@@ -13,6 +13,7 @@
 #include <string>
 #include "../Textures.h"
 #include "../Window.h"
+#include "../Item.h"
 
 using namespace std;
 
@@ -39,7 +40,7 @@ enum Appearance {
 class Frame {
 public:
 	// position where frame lands, time for interpolation, direction of interpolation, size of frame, time the frame is rendered, when does the frame start to get rendered
-	Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, float &hp, int precision, int luck, int speed, int movement , string name) {
+	Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, float &hp, int precision, int luck, int speed, int movement , string name, Player* player = nullptr) {
 		this->t = t;
 		desiredPos = pos;
 		myAppearance = appr;
@@ -61,7 +62,7 @@ public:
 		this->speed = to_string(speed);
 		this->name = name;
 
-		
+		this->player = player;
 
 		// Frames are initialized to have 5 appearance methods, unless they are type FADE, they need to be assignes a starting position outside the camera area
 		switch (myAppearance) {
@@ -115,6 +116,9 @@ public:
 	string luck;
 	string movement;
 	string name;
+	string itemName = "Equipment: ";
+
+	Player* player;
 
 	void lerp() {
 
@@ -123,7 +127,7 @@ public:
 	}
 
 
-	void Render(float dt, int currentHP) {
+	void Render(float dt, int currentHP, int currentAtk, int currentSpeed, int currentPrecision, int currentLuck, int currentMovement) {
 		//  we use linear interpolation from its given starting position to its target position
 		shown = true;
 
@@ -145,13 +149,22 @@ public:
 			finished = true;
 		}
 
+		// Item name
+		if (player != nullptr && player->myItem != nullptr && itemName == "Equipment: ") {
+			itemName += player->myItem->name;
+		}
+
 		// Render all the stats:
 		
 		string HpText = to_string(currentHP);
 		string added = "/";
 		string HPString = HpText + added + hp;
 
-
+		attack = to_string(currentAtk);
+		speed = to_string(currentSpeed);
+		precision = to_string(currentPrecision);
+		luck = to_string(currentLuck);
+		movement = to_string(currentMovement);
 
 		app->render->DrawText(HPString, (startingPos.x + 90+810) + (app->render->camera.x / 3), (startingPos.y + 73+200)  + (app->render->camera.y / 3), 70, 50, false, SDL_Color{ 254, 254, 0, 255 });
 		app->render->DrawText(attack, (startingPos.x + 150+950)  + (app->render->camera.x / 3), (startingPos.y + 73+200)  + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
@@ -164,6 +177,8 @@ public:
 
 		// render name
 		app->render->DrawText(name, (startingPos.x + 150 + 700)  + (app->render->camera.x / 3 ), (startingPos.y + 135) + (app->render->camera.y / 3), 42*5, 12*5, false, SDL_Color{ 81, 51, 19, 255 });
+
+		if(player != nullptr) app->render->DrawText(itemName, (startingPos.x + 120 + 700) + (app->render->camera.x / 3), (startingPos.y + 500) + (app->render->camera.y / 3), 10 * itemName.length(), 12 * 5, false, SDL_Color{ 254, 254, 0, 255 });
 	}
 
 	void Update() {

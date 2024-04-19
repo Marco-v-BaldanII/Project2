@@ -40,6 +40,34 @@ bool Item::Update(float dt)
 	return true;
 }
 
+bool Item::PostUpdate() {
+
+
+	if (myUnit == nullptr)/*If i am in the overworld*/ {
+		app->render->DrawTexture(texture, mapPos.x, mapPos.y);
+
+	}
+	
+	return true;
+}
+
+void Item::InitModifiers(int x, int y, float hpMod, float atkMod, float LckMod, float PrecMod, float EvsMod, float SpdMod, int movMod, string name, const char* textPath) {
+
+	if(hpMod != 0) this->hpMod = hpMod;
+	if(atkMod != 0) this->atkMod = atkMod;
+	if(LckMod != 0) this->LckMod = LckMod;
+	if(PrecMod != 0) this->PrecMod = PrecMod;
+	if(EvsMod != 0) this->EvsMod = EvsMod;
+	if(SpdMod != 0) this->spdMod = SpdMod;
+	if(movMod != 0) this->movMod = movMod;
+	this->name = name;
+	mapPos.x = x; mapPos.y = y;
+	mapPos =  app->map->MapToWorld(mapPos.x, mapPos.y);
+
+	texture = app->tex->Load(textPath);
+
+}
+
 bool Item::CleanUp()
 {
 	return true;

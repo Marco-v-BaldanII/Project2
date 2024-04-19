@@ -5,8 +5,10 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "../ItemManager.h"
+#include <string>
 
 struct SDL_Texture;
+using namespace std;
 
 enum ItemState {
 
@@ -30,10 +32,19 @@ public:
 
 	bool Update(float dt);
 
+	bool PostUpdate();
+
 	bool CleanUp();
 
-	void InitModifiers();
+	void InitModifiers(int x, int y, float hpMod,float atkMod,float LckMod,float PrecMod,float EvsMod, float spdMod, int movMod, string name, const char* textPath);
 
+	const float GetHp() { return hpMod; }
+	const float GetAtk() { return atkMod; }
+	const float GetLck() { return LckMod; }
+	const float GetPrec() { return PrecMod; }
+	const float GetEvs() { return EvsMod; }
+	const float GetSpd() { return spdMod; }
+	const float GetMov() { return movMod; }
 
 public:
 
@@ -43,19 +54,23 @@ public:
 
 	iPoint mapPos;
 
+	string name;
+
+	Player* myUnit = nullptr;
 
 private:
 
-	SDL_Texture* texture = app->tex->Load("");
+	SDL_Texture* texture = nullptr;
 	const char* texturePath;
 	uint texW, texH;
 
-	uint hpMod = 0;
-	uint atkMod = 0;
-	uint LckMod = 0;
-	uint PrecMod = 0;
-	uint EvsMod = 0;
-
+	float hpMod =  1;
+	float atkMod = 1;
+	float LckMod = 1;
+	float PrecMod = 1;
+	float EvsMod = 1;
+	float spdMod = 1;
+	float movMod = 0;
 
 };
 

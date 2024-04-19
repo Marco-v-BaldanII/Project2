@@ -24,7 +24,6 @@ class Fonts;
 class Scene;
 class EntityManager;
 class Map;
-//L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
 class DialogueManager;
@@ -32,6 +31,7 @@ class FadeToBlack;
 class LevelManagement;
 class TurnManager;
 class BackStagePlayer;
+class ItemManager;
  //Scenes
 class Intro;
 class StartMenu;
@@ -125,6 +125,7 @@ public:
 	FadeToBlack* fade;
 	LevelManagement* levelManager;
 	TurnManager* turnManager;
+	ItemManager* itemManager;
 
 	//scenes
 	Intro* intro;

@@ -96,6 +96,8 @@ bool Enemy::Start() {
 	maxHp = hp;
 	lerpingHp = hp;
 
+	myItem = new Item(); 
+
 	return true;
 }
 
@@ -307,7 +309,7 @@ bool Enemy::PostUpdate() {
 	ClickOnMe();
 	if (drawPath) {
 
-		myFrame->Render(1.0 / 60.0, hp);
+		myFrame->Render(1.0 / 60.0, hp, attack, speed, precision, luck, movement);
 		pathfinding->GenerateWalkeableArea(tilePos, movement + 1);
 		pathfinding->DrawBFSPath();
 

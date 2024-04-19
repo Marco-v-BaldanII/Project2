@@ -264,6 +264,7 @@ bool Map::Load(SString mapFileName)
             memset(mapLayer->tiles, 0, mapLayer->width * mapLayer->height);
 
             //Iterate over all the tiles and assign the values in the data array
+            // Assign Tiles
             int i = 0;
             for (pugi::xml_node tileNode = layerNode.child("data").child("tile"); tileNode != NULL; tileNode = tileNode.next_sibling("tile")) {
                 mapLayer->tiles[i] = tileNode.attribute("gid").as_uint();

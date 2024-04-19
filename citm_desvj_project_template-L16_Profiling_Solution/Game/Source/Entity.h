@@ -167,7 +167,7 @@ public:
 	float hp;
 	float precision;
 	float luck;
-	float speed;
+	int speed;
 	float movement;
 
 	Animation* currentAnim;
@@ -182,6 +182,8 @@ public:
 	int maxHp;
 
 	float lerpingHp;
+
+	Item* myItem = nullptr;
 
 	bool renderable = true;
 };

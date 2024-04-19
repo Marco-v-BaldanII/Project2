@@ -275,11 +275,11 @@ bool BackStage::Update(float dt)
 bool BackStage::PostUpdate()
 {
 	SDL_Rect r = { 0,0,720,384 };
-	//app->render->DrawTexture(background, 0, 0, &r);
+	app->render->DrawTexture(background, 0, 0, &r);
 	// if the player is near an npc draw the talking prompt
 	if(near){ app->render->DrawTexture(talkPrompt, app->backstageplayer->position.x - 76, app->backstageplayer->position.y ); }
 
-	testPanel->Draw();
+	//testPanel->Draw();
 	//app->render->DrawRectangle(testPanel->bounds, b2Color(1, 0, 0, 1), true, true);
 
 	return true;

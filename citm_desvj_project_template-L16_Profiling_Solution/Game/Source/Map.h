@@ -14,6 +14,7 @@
 #define MAX_TILE_AMOUNT 96
 
 class Entity;
+class Item;
 
 // L09: DONE 2: Define a property to store the MapType and Load it from the map
 enum MapOrientation
@@ -55,6 +56,11 @@ public:
     Entity* myEntity = nullptr;
 
     b2Color GetColor() {
+        if (myItem != nullptr) {
+
+            return b2Color(1,1,0,1); /*Yellow*/
+        }
+
         if (myEntity == nullptr) {
             return color;
         }
@@ -68,8 +74,8 @@ public:
 
     TileType type;
 
-
-
+    // ptr to item
+    Item* myItem;
 
 };
 

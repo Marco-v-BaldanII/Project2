@@ -7,6 +7,7 @@
 #include <string>
 #include "../p2List.h"
 #include "../Player.h"
+#include "../Item.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ enum ItemTypes {
 
 };
 
+class Item;
 
 class ItemManager : public Module
 {
@@ -25,7 +27,7 @@ public:
 	ItemManager(bool isActive);
 
 	// Destructor
-	virtual ~ItemManager();
+	
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -41,12 +43,13 @@ public:
 
 	// Additional methods
 
-	void AddItem();
+	Item* AddItem();
 	
+	pugi::xml_node config;
 
-public:
+private:
 
-
+	List<Item*> items;
 
 };
 

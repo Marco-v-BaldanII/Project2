@@ -27,7 +27,7 @@
 #include "StartMenu.h"
 #include "BattleScene.h"
 #include "BackStage.h"
-
+#include "../ItemManager.h"
 #include "SettingsPanel.h"
 #include "FadeToBlack.h"
 #include "LevelManagement.h"
@@ -72,6 +72,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	backStage = new BackStage(false);
 	entityManager = new EntityManager(true);
 	backstageplayer = new BackStagePlayer(false);
+	itemManager = new ItemManager(true);
 	guiManager = new GuiManager(true);
 	fade = new FadeToBlack(true);
 
@@ -102,6 +103,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(backstageplayer);
 	AddModule(dialogueManager);
 	AddModule(guiManager);
+	AddModule(itemManager);
 	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);
