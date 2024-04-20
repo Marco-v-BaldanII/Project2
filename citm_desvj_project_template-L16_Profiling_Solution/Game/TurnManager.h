@@ -47,12 +47,15 @@ public:
 
 	void PlayerTurn();
 
+	void CheckBattleEnding();
+
+
 	Turn currentTurn = PLAYER;
 
 	Player* currentPlayer = nullptr;
 	uint availablePlayers = 3;
 	bool noEnemyMoving = true;
-private:
+public:
 
 	List<Player*> players;
 

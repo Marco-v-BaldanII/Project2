@@ -62,7 +62,7 @@ public:
 
 	bool DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA, float maxE, float maxA);
 
-	
+	void KillUnit(bool isPlayer, Entity* entity);
 
 
 private:
@@ -89,13 +89,15 @@ private:
 	int attackPattern;
 	bool playerTurn = true;
 
-	List<Player*> party;
-	List<Enemy*> goons;
-	
+
 	bool started = false;
 	std::map <std::string, SDL_Texture*> portraitTextures; // diccionary used to identify textures by a name
 
 public:
+	List<Player*> party;
+	List<Enemy*> goons;
+
+
 	pugi::xml_node mynode;
 
 	List<pugi::xml_node*> nodes;

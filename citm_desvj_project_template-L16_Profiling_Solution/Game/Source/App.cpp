@@ -165,8 +165,10 @@ bool App::Awake()
 			}
 			else {
 				LOG("dialogueManager");
-				ret = item->data->Awake(dialogueFile);
-				item = item->next;
+				if (loadedDialogues == 0) {
+					ret = item->data->Awake(dialogueFile);
+					item = item->next;
+				}
 			}
 		}
 	}

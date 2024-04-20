@@ -7,6 +7,7 @@
 #include "Animation.h"
 
 struct SDL_Texture;
+class Dialogue;
 
 class Enemy : public Entity
 {

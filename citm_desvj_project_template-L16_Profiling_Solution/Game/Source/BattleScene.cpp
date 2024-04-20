@@ -47,15 +47,16 @@ bool BattleScene::Awake(pugi::xml_node config)
 bool BattleScene::Start()
 {
 	if (active) {
-   		lancasterUI = app->tex->Load(mynode.child("lancasterUI").attribute("path").as_string());
-		yorkUI = app->tex->Load(mynode.child("yorkUI").attribute("path").as_string());
-		battleBackground = app->tex->Load(mynode.child("background").attribute("path").as_string());
+		if (!started) {
+			lancasterUI = app->tex->Load(mynode.child("lancasterUI").attribute("path").as_string());
+			yorkUI = app->tex->Load(mynode.child("yorkUI").attribute("path").as_string());
+			battleBackground = app->tex->Load(mynode.child("background").attribute("path").as_string());
 
-		yorkHp = app->tex->Load(mynode.child("yorhHpBar").attribute("path").as_string());
-		lancasterHp = app->tex->Load(mynode.child("lancasterHpBar").attribute("path").as_string());
+			yorkHp = app->tex->Load(mynode.child("yorhHpBar").attribute("path").as_string());
+			lancasterHp = app->tex->Load(mynode.child("lancasterHpBar").attribute("path").as_string());
 
-		LoadAnimations();
-		
+			LoadAnimations();
+
 			spriteSheet = app->tex->Load(mynode.child("texture").attribute("path").as_string());
 
 			time_t t;
@@ -81,7 +82,7 @@ bool BattleScene::Start()
 				portraitTextures.insert(std::make_pair(texD->name, texD->texture));
 
 			}
-
+		}
 			
 
 
@@ -197,10 +198,29 @@ bool BattleScene::PostUpdate()
 // Called before quitting
 bool BattleScene::CleanUp()
 {
-	LOG("Freeing scene main menu ");
-	app->tex->UnLoad(spriteSheet);
+	LOG("Freeing Battlescene main menu ");
+	//app->tex->UnLoad(spriteSheet);
 	
-	app->guiManager->Main_Menu_Panel->Disable();
+	//app->guiManager->Main_Menu_Panel->Disable();
+
+	Entity* pEntity = nullptr;
+	//Destroy Players and enemies
+	for (ListItem<Player*>* pIt = party.start; pIt != nullptr; pIt = pIt->next) {
+
+		pEntity = pIt->data;
+		app->entityManager->DestroyEntity(pEntity);
+		LOG("Destroying players");
+
+	}
+	for (ListItem<Enemy*>* pIt = goons.start; pIt != nullptr; pIt = pIt->next) {
+
+		pEntity = pIt->data;
+		app->entityManager->DestroyEntity(pEntity);
+
+	}
+	app->entityManager->enemies.Clear();
+	party.Clear(); goons.Clear();
+
 	//app->audio->StopMusic();
 	return true;
 	
@@ -388,6 +408,69 @@ bool BattleScene::LoadState(pugi::xml_node node) {
 	int b = created;
 
 	return true;
+}
+
+void BattleScene::KillUnit(bool isPlayer, Entity* entity) {
+
+	if (isPlayer) {
+
+		app->entityManager->players.remove(entity);
+
+				List<Player*> party2;
+				for (ListItem<Player*>* pItem = party.start; pItem != NULL; pItem = pItem->next) {
+
+					if (pItem->data->hp > 0) {
+						party2.Add(pItem->data);
+					}
+
+				}
+				party.Clear();
+				party = party2;
+				app->turnManager->players.Clear();
+				app->turnManager->players = party;
+
+				/*party.Del(pEntity);
+				app->turnManager->players.Del(pEntity);*/
+				//app->entityManager->DestroyEntity(entity);
+			
+			
+		
+
+		//for (int i = 0; i < party.Count(); ++i) {
+		//	if (party.At(i)->data == entity) {
+
+		//		//app->turnManager->players.Del(party.At(i));
+		//		party.Del(party.At(i));
+		//		
+		//		app->entityManager->DestroyEntity(entity);
+
+		//		/*app->turnManager->noEnemyMoving = true;
+		//		app->turnManager->noEnemyMoving = true;*/
+		//	}
+
+
+		//}
+	}
+	else {
+
+		for (int i = 0; i < goons.Count(); ++i) {
+			if ((Entity*)goons.At(i) == entity) {
+
+				goons.Del(goons.At(i));
+				app->turnManager->enemies.Del(goons.At(i));
+				app->entityManager->DestroyEntity(entity);
+
+				/*app->turnManager->noEnemyMoving = true;
+				app->turnManager->noEnemyMoving = true;*/
+			}
+
+
+		}
+	}
+
+
+
+
 }
 
 void BattleScene::LoadAnimations() {

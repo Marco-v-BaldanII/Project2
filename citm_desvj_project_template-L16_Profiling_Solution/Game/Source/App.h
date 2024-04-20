@@ -174,6 +174,8 @@ private:
 	bool loadRequest = false;
 	bool saveRequest = false;
 
+	int loadedDialogues = 0;
+
 };
 
 extern App* app;

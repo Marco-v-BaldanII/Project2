@@ -197,6 +197,23 @@ public:
 		return false;
 	}
 
+	bool remove(const tdata& item)
+	{
+		p2ListItem<tdata>* currentItem = start;
+
+		while (currentItem != nullptr)
+		{
+			if (currentItem->data == item)
+			{
+				// Found the item, now remove it
+				del(currentItem);
+				return true; // Item removed successfully
+			}
+			currentItem = currentItem->next;
+		}
+
+		return false; // Item not found in the list
+	}
 
 	/**
 	* returns the first apperance of data as index (-1 if not found)

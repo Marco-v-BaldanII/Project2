@@ -7,7 +7,7 @@
 #include "Animation.h"
 
 struct SDL_Texture;
-
+class Dialogue;
 
 
 class Player : public Entity
@@ -56,7 +56,7 @@ public:
 	Entity* oponent;
 	bool movedThisTurn = false;
 	bool endTurn;
-
+	
 	
 };
 

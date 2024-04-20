@@ -11,6 +11,7 @@
 #include "Map.h"
 
 class Frame;
+class Dialogue;
 
 enum class EntityType
 {
@@ -186,6 +187,11 @@ public:
 	Item* myItem = nullptr;
 
 	bool renderable = true;
+
+	bool pendingToDelete = false;
+
+	bool lastWords = false;
+	Dialogue* deathQuote = nullptr;
 };
 
 #endif // __ENTITY_H__

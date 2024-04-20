@@ -156,17 +156,19 @@ bool EntityManager::PreUpdate()
 bool EntityManager::Update(float dt)
 {
 	bool ret = true;
-	ListItem<Entity*>* item;
-	Entity* pEntity = NULL;
+	if (app->dialogueManager->myState != SPONTANEOUS) {
+		
+		ListItem<Entity*>* item;
+		Entity* pEntity = NULL;
 
-	for (item = entities.start; item != NULL && ret == true; item = item->next)
-	{
-		pEntity = item->data;
+		for (item = entities.start; item != NULL && ret == true; item = item->next)
+		{
+			pEntity = item->data;
 
-		if (pEntity->active == false) continue;
-		ret = item->data->Update(dt);
+			if (pEntity->active == false) continue;
+			ret = item->data->Update(dt);
+		}
 	}
-
 
 	return ret;
 }
@@ -198,7 +200,7 @@ p2ListItem<Entity*>* EntityManager::GetNearestPlayer(Entity* player)
 	{
 		int closest = player->pathfinding->CreatePath(player->tilePos, uPlayer->data->tilePos);
 		ret = uPlayer;
-		while (uPlayer != nullptr)
+		while (uPlayer != nullptr && uPlayer->data->hp > 0)
 		{
 			int temp = player->pathfinding->CreatePath(player->tilePos, uPlayer->data->tilePos);
 

@@ -156,11 +156,11 @@ bool DialogueManager::Start() {
 	}
 
 	//CHANGE
-	skipBttnTex = app->tex->Load("Assets/Textures/Skip_button.png");
+	if (skipBttnTex == nullptr) skipBttnTex = app->tex->Load("Assets/Textures/Skip_button.png");
 
 
-	choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox , this);
-	choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
+	if(choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox , this);
+	if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
 
 	return ret;
 }
@@ -169,16 +169,18 @@ bool DialogueManager::Start() {
 bool DialogueManager::CleanUp()
 {
 	bool ret = true;
-	/*ListItem<Entity*>* item;
-	item = entities.end;
 
-	while (item != NULL && ret == true)
-	{
-		ret = item->data->CleanUp();
-		item = item->prev;
+	// Free memory
+	Scenes.Clear();
+
+	dialogues.Clear();
+	shakespeareDialogues.Clear();
+
+	// Unload the backgrounds from the previous act
+	for (int i = 0; i < backgrounds.Count(); ++i) {
+		app->tex->UnLoad(backgrounds[i]);
 	}
-
-	entities.Clear();*/
+	backgrounds.Clear(); backgroundIndex = 0;
 
 	return ret;
 }
@@ -203,7 +205,7 @@ bool DialogueManager::Update(float dt)
 
 
 
-	if (myState == CUTSCENE) {
+  	if (myState == CUTSCENE) {
 
 
 
@@ -211,7 +213,7 @@ bool DialogueManager::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
 			ChangeLanguage();
 		}
-
+		
 
 	}
 	else {
@@ -452,6 +454,42 @@ void DialogueManager::DrawTextBox(Position pos) {
 
 		app->render->DrawRectangle(skipRect, b2Color(1, 1, 0, 0.5f), true, true);
 	}
+	if (myState == SPONTANEOUS) {
+		/* Right now this is used for death quotes */
+		LOG("spontaneous");
+		if (spontaneousDialogue != nullptr) {
+
+			
+
+			numLines = 0;
+
+			dialogueBox = speechBox;
+			dialogueBox.x -= (app->render->camera.x / 3);
+			dialogueBox.y -= (app->render->camera.y / 3);
+			nameBoxL.x -= (app->render->camera.x / 3);
+			nameBoxL.y -= (app->render->camera.y / 3);
+
+			app->render->DrawRectangle(SDL_Rect{ app->render->camera.x / -3, app->render->camera.y / -3, 600,600 }, b2Color(52.0 / 255.0,  47.0 / 255.0, 77.0/255.0, 0.6f), true, true);
+
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+			app->render->DrawRectangle(nameBoxL, black, true, true);
+
+			app->render->DrawTexture(spontaneousDialogue->texture, 0 - (app->render->camera.x / 3) , dialogueBox.y +20 , &portraitBoxL, true,255, 1, 255, 150,150);
+
+			dialogueBox.x += (app->render->camera.x / 3);
+			dialogueBox.y += (app->render->camera.y / 3);
+			nameBoxL.x += (app->render->camera.x / 3);
+			nameBoxL.y += (app->render->camera.y / 3);
+
+			app->render->DrawText(spontaneousDialogue->text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+
+			
+			app->render->DrawText(spontaneousDialogue->owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * app->win->GetScale() - 5, (DIALOGUE_SIZE) * 2 * app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+		}
+
+	}
 	else if (currentNPC_Dialogues != nullptr) {
 		
 
@@ -519,6 +557,10 @@ void DialogueManager::AdvanceText() {
 					ResetScroll();
 
 				}
+				if (myState == SPONTANEOUS) {
+
+					myState = NPCS;
+				}
 				//else if (myState == NPCS)/* npcTalk(currentNPC_Dialogues);*/
 
 			}
@@ -537,6 +579,10 @@ void DialogueManager::AdvanceText() {
 				scrolling = true;
 				numLines = 0;
 				ResetScroll();
+			}
+			if (myState == SPONTANEOUS) {
+
+				myState = NPCS;
 			}
 			else if (myState == NPCS && currentNPC_Dialogues != nullptr) {
 				
@@ -692,6 +738,15 @@ void DialogueManager::Next_Dialogue() {
 	}
 }
 
+void DialogueManager::SpontaneousDialogue(Dialogue* _dialogue) {
+	if (myState != SPONTANEOUS) {
+		spontaneousDialogue = _dialogue;
+		myState = SPONTANEOUS;
+
+		spontaneousDialogue->texture = portraitTextures[spontaneousDialogue->owner];
+	}
+}
+
 bool DialogueManager::SaveState(pugi::xml_node node) {
 
 	pugi::xml_node Indexes = node.append_child("index");
@@ -771,4 +826,11 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 	}
 
 	return true;
+}
+
+void DialogueManager::NextAct() {
+
+	pugi::xml_parse_result res2 = dialogueFile2.load_file("dialogue2.xml");
+
+	myConfig = dialogueFile2;
 }

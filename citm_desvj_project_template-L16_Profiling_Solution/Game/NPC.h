@@ -11,6 +11,7 @@
 #include "Dialogue.h"
 
 struct SDL_Texture;
+struct Node;
 
 enum NPC_BEHAVIOUR {
 	

@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+
+
+<dialogues>
+
+<shakesperean>
+
+<dialogue text="Margaret: Now York, this little game of yours shall come to an end." owner="Margaret" position="1" background="Assets/Textures/Backgrounds/Northampton_Fields.png" />
+
+<dialogue text="Jaspe: You'll be judged harshly, the crime of treason against the king is serious." owner="Jaspe" position="2" />
+
+<dialogue text="Soldier: Cryst, the king !!!" owner="Soldier" position="2" />
+
+<dialogue text="Richard, who was unseen during the battle is discovered to be threatening the king at sword point" owner="Narrator" />
+
+<dialogue text="Richard: Quit it Margaret, surrender your weapons or the King bites the dust" owner="Richard" position="2" />
+
+<dialogue text="Henry VI: Help, mother, someone help me !!!" owner="Henry VI" position="2" />
+
+<dialogue text="Edward: Father noo !!!" owner="Edward" position="2" />
+
+<dialogue text="Margaret: Damm it, I forgot about the youngest one, that spawn of devil the carries the same name as his despicable father . . . Richard!!!" owner="Margaret" position="1" />
+
+<dialogue text="Warwick: Unbelievable, my lord, you're son is" owner="Warwick" position="2" />
+
+<dialogue text="Richard: A true man of the battle field. Puts us adults to shame doesn't he Warwick" owner="Richard" position="2" />
+
+<dialogue text="Warwick: Yes, very much so. He's given us the perfect chance" owner="Warwick" position="2" />
+
+<dialogue text="Margaret: You can't-" owner="Margaret" position="1" />
+
+<dialogue text="Richard: Hold it, one step closer and the king meets his end. His guts will nurture this desolate field" owner="Richard" position="2" />
+
+<dialogue text="Henry Tudor: You scum" owner="Henry Tudor" position="1" />
+
+<dialogue text="Edward: why Richard ?" owner="Edward" position="1" />
+
+<dialogue text="Richard of York: Well done, my son. So, king of fools what will it be, hand the crown or drown in the ground ?" owner="Richard of York" position="2" />
+
+<dialogue text="Henry: Nooo please you musn't, no more blood please. This crown it is my punishment, I must hold it until i perish, not long now I promise it won't take long. Please don't dirty your blade with blood such as mine !!!" owner="Henry" position="1" />
+
+<dialogue text="Warwick: Dammed fool !!!" owner="Warwick" position="2" />
+
+<dialogue text="Richard of York: It would tarnish my honor to take his life in such a state. Very well. I Richard of York am the one and true heir to the English crown, I will succeed you in line and be deemed as regent and protector of the holy kingdom here and now." owner="Richard of York" position="2" />
+
+<dialogue text="Henry: Yes quite, as you wish. York your family will rule this land." owner="Henry" position="1" />
+
+<dialogue text="Margaret: Impossible." owner="Margaret" position="1" />
+
+<dialogue text="Jasper: Brother why ?" owner="Jasper" position="2" />
+
+<dialogue text="George: He made it ! Isn't it great brother ?" owner="George" position="2" />
+
+<dialogue text="Edward York: It's kind of insulting, having the king plead mercy like this. We would've seemed animals to take his head in front of his son." owner="Edward York" position="2" />
+
+<dialogue text="George: You will become king my brother" owner="George" position="2" />
+
+<dialogue text="Edward York: That day is still a long way off, and if anything we should be thanking Richard right now." owner="Edward York" position="2" />	
+
+</shakesperean>
+
+	
+		
+		
+
+		
+
+
+		
+
+		
+		
+		
+		
+		
+
+		
+<english>
+
+	<Scene num="1" dialogues ="26"/>
+
+
+<dialogue text="Now York, this little game of yours shall come to an end." owner="Margaret" position="1"  background="Assets/Textures/Backgrounds/Northampton_Fields.png" />
+
+<dialogue text="You'll be judged harshly, the crime of treason against the king is serious." owner="Jaspe" position="2" />
+
+<dialogue text="Cryst, the king !!!" owner="Soldier" position="2" />
+
+<dialogue text="Richard, who was unseen during the battle is discovered to be threatening the king at sword point" owner="Narrator" />
+
+<dialogue text="Quit it Margaret, surrender your weapons or the King bites the dust" owner="Richard of York" position="2" />
+
+<dialogue text="Help, mother, someone help me !!!" owner="Henry VI" position="2" />
+
+<dialogue text="Father noo !!!" owner="Prince Edward" position="1" />
+
+<dialogue text="Damm it, I forgot about the youngest one, that spawn of devil the carries the same name as his despicable father . . . Richard!!!" owner="Margaret" position="1" />
+
+<dialogue text=" Unbelievable, my lord, you're son is" owner="Warwick" position="1" />
+
+<dialogue text="A true man of the battle field. Puts us adults to shame doesn't he Warwick" owner="Duke of York" position="1" />
+
+<dialogue text="Yes, very much so. He's given us the perfect chance" owner="Warwick" position="1" />
+
+<dialogue text="You can't-" owner="Margaret" position="1" />
+
+<dialogue text="Hold it, one step closer and the king meets his end. His guts will nurture this desolate field" owner="Richard of York" position="2" />
+
+<dialogue text="You scum" owner="Henry Tudor" position="1" />
+
+<dialogue text="Why Richard ?" owner="Prince Edward" position="1" />
+
+<dialogue text="Well done, my son. So, king of fools what will it be, hand the crown or drown in the ground ?" owner="Duke of York" position="1" />
+
+<dialogue text="Nooo please you musn't, no more blood please. This crown it is my punishment, I must hold it until i perish, not long now I promise it won't take long. Please don't dirty your blade with blood such as mine !!!" owner="Henry VI" position="2" />
+
+<dialogue text="Dammed fool !!!" owner="Warwick" position="1" />
+
+<dialogue text="It would tarnish my honor to take his life in such a state. Very well. I Richard of York am the one and true heir to the English crown, I will succeed you in line and be deemed as regent and protector of the holy kingdom here and now." owner="Duke of York" position="1" />
+
+<dialogue text="Yes quite, as you wish. York your family will rule this land." owner="Henry VI" position="2" />
+
+<dialogue text="Impossible." owner="Margaret" position="1" />
+
+<dialogue text="Brother why ?" owner="Jasper" position="1" />
+
+<dialogue text="He made it ! Isn't it great brother ?" owner="George of York" position="2" />
+
+<dialogue text="It's kind of insulting, having the king plead mercy like this. We would've seemed animals to take his head in front of his son." owner="Edward of York" position="2" />
+
+<dialogue text="You will become king my brother" owner="George of York" position="2" />
+
+<dialogue text="That day is still a long way off, and if anything we should be thanking Richard right now." owner="Edward of York" position="2" />	
+
+
+</english>		
+
+
+
+</dialogues>

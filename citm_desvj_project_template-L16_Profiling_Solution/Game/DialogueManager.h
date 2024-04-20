@@ -42,7 +42,8 @@ enum TextVelocity {
 enum DialogueStates {
 
 	CUTSCENE,
-	NPCS
+	NPCS,
+	SPONTANEOUS
 
 };
 class Dialogue;
@@ -64,6 +65,16 @@ public:
 	DynArray<Dialogue*> dialogues;
 	DynArray<Dialogue*> shakespeareDialogues;
 
+	~Scene() {
+		// Clear the dialogues array
+		for (unsigned int i = 0; i < dialogues.Count(); ++i) {
+			delete dialogues[i];
+		}
+
+		for (unsigned int i = 0; i < shakespeareDialogues.Count(); ++i) {
+			delete shakespeareDialogues[i];
+		}
+	}
 };
 
 
@@ -101,6 +112,8 @@ public:
 
 	void DrawTextBox(Position pos);
 
+	void DrawDialogue();
+
 	void DrawPortrait();
 
 	void ChangeLanguage();
@@ -124,6 +137,10 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	void SpontaneousDialogue(Dialogue* _dialogue);
+
+	void NextAct();
+
 public:
 	int numLines = 0;
 
@@ -146,6 +163,8 @@ public:
 private:
 
 	pugi::xml_node myConfig;
+
+	pugi::xml_document dialogueFile2;
 
 	DynArray<Dialogue*>* currentDialogues = nullptr;
 
@@ -185,8 +204,8 @@ private:
 	Node* currentNPC_Dialogues = NULL;
 	int npcDialogueIndex = -1;
 
-	GuiControlButton* choiceA_button;
-	GuiControlButton* choiceB_button;
+	GuiControlButton* choiceA_button = nullptr;
+	GuiControlButton* choiceB_button = nullptr;
 
 	SDL_Rect choiceABox = SDL_Rect{ 368*3, 224*3, 128*3,48*3 };
 	SDL_Rect choiceBBox = SDL_Rect{ 368*3, 294*3, 128*3,48*3 };
@@ -200,6 +219,8 @@ private:
 
 	SDL_Rect skipRect = SDL_Rect{ 90,300,0,48 };
 	SDL_Texture* skipBttnTex = nullptr;
+
+	Dialogue* spontaneousDialogue;
 
 };
 

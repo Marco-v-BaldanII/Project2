@@ -15,6 +15,7 @@
 #include "../TurnManager.h"
 #include "BattleScene.h"
 #include "Physics.h"
+#include "../Dialogue.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
@@ -97,6 +98,7 @@ bool Enemy::Start() {
 	lerpingHp = hp;
 
 	myItem = new Item(); 
+	deathQuote = new Dialogue(name.GetString(), config.child("dialogue").attribute("text").as_string());
 
 	return true;
 }
@@ -182,6 +184,7 @@ bool Enemy::Update(float dt)
 	
 		break;
 	case MOVE:
+		
 		currentAnim->Update();
 		if (!Move) {
 
@@ -326,6 +329,9 @@ bool Enemy::PostUpdate() {
 	
 	if (hp <= 0) {
 
+		if (!lastWords && deathQuote->text != "") app->dialogueManager->SpontaneousDialogue(deathQuote); /* Last word quote */
+		lastWords = true;
+
 		for (int i = 0; i < app->entityManager->enemies.Count(); ++i) {
 			if (app->entityManager->enemies.At(i)->data->entity == this){
 				app->entityManager->enemies.Del(app->entityManager->enemies.At(i));
@@ -337,6 +343,7 @@ bool Enemy::PostUpdate() {
 		}
 
 		app->entityManager->DestroyEntity(this);
+		//app->battleScene->KillUnit(false, this);
 	}
 
 	return true;

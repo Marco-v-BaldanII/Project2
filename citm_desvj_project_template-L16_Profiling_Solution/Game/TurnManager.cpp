@@ -9,6 +9,8 @@
 #include "../Log.h"
 #include "../EntityManager.h"
 #include "../Entity.h"
+#include"../BattleScene.h"
+#include "DialogueManager.h"
 
 using namespace std;
 
@@ -37,8 +39,11 @@ bool TurnManager::Awake(pugi::xml_node config)
 bool TurnManager::Start() {
 
 	bool ret = true;
-	
-	
+	availablePlayers = 3;
+	enemyTurnFinished = false;
+	noEnemyMoving = true;
+
+
 	return ret;
 }
 
@@ -93,7 +98,7 @@ bool TurnManager::Update(float dt)
 				}
 			}
 
-
+		CheckBattleEnding();
 		if (enemyTurnFinished) {
 
 			for (int i = 0; i < app->entityManager->enemies.Count(); ++i)
@@ -182,17 +187,92 @@ void TurnManager::PlayerTurn() {
 	LOG("Starting player turn");
 	currentTurn = PLAYER;
 
-	availablePlayers = players.Count();
 
-	ListItem<Player*>* p = players.start;
-	while (p != NULL) {
-		p->data->movedThisTurn = false;
-		p->data->battleTimer = 0;
-		p->data->state = IDLE;
+	availablePlayers = 0;
+
+	for (ListItem<Player*>* pItem = players.start; pItem != nullptr; pItem = pItem->next) {
+
+		if (pItem->data->hp > 0) {
+			availablePlayers++;
+		}
+
+	}
+
+	/*ListItem<Player*>* p = players.start;
+
+	Player* pEntity = p->data;
+	while (pEntity != nullptr) {
+		pEntity->movedThisTurn = false;
+		pEntity->battleTimer = 0;
+		pEntity->state = IDLE;
 
 		p = p->next;
+		pEntity = p->data;
+	}*/
+
+	for (ListItem<Player*>* pEntity = players.start; pEntity != nullptr; pEntity = pEntity->next) {
+
+		if (pEntity->data == nullptr || pEntity->data == NULL) {
+			LOG("uuuuy");
+		}
+
+		LOG("Reactivating %s", pEntity->data->name);
+	}
+	for (ListItem<Player*>* pEntity = players.start; pEntity != nullptr; pEntity = pEntity->next) {
+
+		pEntity->data->movedThisTurn = false;
+		pEntity->data->battleTimer = 0;
+		pEntity->data->state = IDLE;
+
+		LOG("Reactivating %s", pEntity->data->name);
 	}
 
 
+}
+
+void TurnManager::CheckBattleEnding() {
+
+	bool playerLoss = true;
+	bool enemyLoss = true;
+
+	ListItem<Player*>* p = players.start;
+	while (p != NULL) {
+		
+		if (p->data->hp > 0) {
+			playerLoss = false;
+		}
+
+		p = p->next;
+	}
+	ListItem<Enemy*>* e = enemies.start;
+	while (e != NULL) {
+
+		if (e->data->hp > 0) {
+			enemyLoss = false;
+		}
+
+		e = e->next;
+	}
+
+	/*if (enemies.Count() == 0) { 
+		enemyLoss = true; 
+	}*/
+
+	if (playerLoss || enemyLoss)/*Split into restart & next battle outcomes*/ {
+		// Restart the fight
+		app->battleScene->CleanUp();
+
+		app->dialogueManager->NextAct();
+		app->dialogueManager->Disable();
+		app->dialogueManager->CleanUp();
+
+		app->dialogueManager->Start();
+		app->dialogueManager->myState = CUTSCENE;
+		app->dialogueManager->Enable();
+
+		app->battleScene->Start();
+		Start();
+		// Instanciate retry buttons
+	}
 
 }

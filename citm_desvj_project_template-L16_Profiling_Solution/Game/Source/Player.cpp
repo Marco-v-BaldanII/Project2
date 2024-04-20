@@ -14,6 +14,7 @@
 #include <string>
 #include "Item.h"
 #include "../frame.h" /*dont include this in .h*/
+#include "../Dialogue.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -85,6 +86,9 @@ bool Player::Start() {
 	lerpingHp = hp;
 
 	myItem = new Item();
+
+
+	deathQuote = new Dialogue( name.GetString(), config.child("dialogue").attribute("text").as_string());
 
 	return true;
 }
@@ -216,87 +220,103 @@ bool Player::Update(float dt)
 
 	SDL_Rect randRect = SDL_Rect{ 8,0,32,32 };
 
-	if (movedThisTurn) {
-		app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 100);
+	if (hp > 0) {
+		if (movedThisTurn) {
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 100);
+		}
+		else {
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 255);
+		}
 	}
-	else {
-		app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 255);
+
+	if (hp <= 0 ) {
+		if(!lastWords) app->dialogueManager->SpontaneousDialogue(deathQuote); /* Last word quote */
+		lastWords = true;
+		if (pendingToDelete == false) {
+			//app->battleScene->KillUnit(true, this); ESTO crashea y da muchisimos problemas
+			pendingToDelete = true;
+			app->entityManager->players.remove(this); 
+			
+		}
 	}
+
 	return true;
 }
 
 bool Player::PostUpdate() 
 {
-	//draw movement area
-	if (app->turnManager->currentTurn == ENEMY) {
-		lerpingHp = hp;
-		
-	}
-	bool finishedLerp = false;
-	
-	switch (state)
-	{
-	case IDLE:
-		//render idle 
-		break;
-	case MOVE:
-	{
-		//Draw path
-		app->map->pathfinding->DrawBFSPath();
-		// ! important, movement is the only item modifier that is added rather than multiplied
-		myFrame->Render(1.0/60.0, hp, attack * myItem->GetAtk(), speed * myItem->GetSpd(), precision * myItem->GetPrec(), luck * myItem->GetLck(), movement + myItem->GetMov());
-		
+	if (hp > 0) {
 
-		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-		if (path != nullptr)
+		//draw movement area
+		if (app->turnManager->currentTurn == ENEMY) {
+			lerpingHp = hp;
+
+		}
+		bool finishedLerp = false;
+
+		switch (state)
 		{
-			SDL_Rect rect;
-			for (uint i = 0; i < path->Count(); ++i)
+		case IDLE:
+			//render idle 
+			break;
+		case MOVE:
+		{
+			//Draw path
+			app->map->pathfinding->DrawBFSPath();
+			// ! important, movement is the only item modifier that is added rather than multiplied
+			myFrame->Render(1.0 / 60.0, hp, attack * myItem->GetAtk(), speed * myItem->GetSpd(), precision * myItem->GetPrec(), luck * myItem->GetLck(), movement + myItem->GetMov());
+
+
+			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+			if (path != nullptr)
 			{
-				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-				rect.x = (pos.x);
-				rect.y = (pos.y);
-				rect.w = (app->map->GetTileWidth());
-				rect.h = (app->map->GetTileHeight());
-				app->render->DrawRectangle(rect, 255, 125, 0, 50);
+				SDL_Rect rect;
+				for (uint i = 0; i < path->Count(); ++i)
+				{
+					iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+					rect.x = (pos.x);
+					rect.y = (pos.y);
+					rect.w = (app->map->GetTileWidth());
+					rect.h = (app->map->GetTileHeight());
+					app->render->DrawRectangle(rect, 255, 125, 0, 50);
+				}
 			}
+			break;
+
 		}
-		break;
-		
+		case BATTLE:
+
+			battleTimer++;
+
+			if ((!finishedLerp)) {
+				SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
+				app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
+				app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
+				app->render->DrawTexture(oponent->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
+
+				finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - oponent->attack, oponent->lerpingHp, oponent->lerpingHp - attack, maxHp, oponent->maxHp);
+			}
+
+			if ((finishedLerp) && battleTimer > 298) {
+				if (!app->battleScene->godMode)
+					CalculateAttack();
+
+				state = IDLE;
+				battleTimer = 0;
+			}
+			break;
+		}
+		myFrame->Update();
+
+		//-----Gets mouse correctly accoutning the scale and camera-----//
+		int mouseX, mouseY;
+
+		app->input->GetMouseWorldPosition(mouseX, mouseY);
+
+
+		// Draw the cursor at the adjusted position
+		app->render->DrawCircle(mouseX, mouseY, 8, 1, 1, 1, 255, true);
 	}
-	case BATTLE:
-
-		battleTimer++;
-
-		if ((!finishedLerp)) {
-			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
-			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
-			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
-			app->render->DrawTexture(oponent->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
-
-			finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - oponent->attack, oponent->lerpingHp, oponent->lerpingHp - attack, maxHp, oponent->maxHp);
-		}
-
-		if ((finishedLerp) && battleTimer > 298) {
-			if (!app->battleScene->godMode)
-				CalculateAttack();
-
-			state = IDLE;
-			battleTimer = 0;
-		}
-		break;
-	}
-	myFrame->Update();
-
-	//-----Gets mouse correctly accoutning the scale and camera-----//
-	int mouseX, mouseY;
-	
-	app->input->GetMouseWorldPosition(mouseX, mouseY);
-
-
-	// Draw the cursor at the adjusted position
-	app->render->DrawCircle(mouseX, mouseY, 8, 1, 1, 1, 255, true);
-
 	return true;
 }
 
