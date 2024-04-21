@@ -187,7 +187,7 @@ extern DECLSPEC void SDLCALL Mix_FreeMusic(Mix_Music *music);
    The pointers remain valid until you call Mix_CloseAudio().
 */
 extern DECLSPEC int SDLCALL Mix_GetNumChunkDecoders(void);
-extern DECLSPEC const char * SDLCALL Mix_GetChunkDecoder(int index);
+extern DECLSPEC const char * SDLCALL Mix_GetChunkDecoder(int index); 
 extern DECLSPEC int SDLCALL Mix_GetNumMusicDecoders(void);
 extern DECLSPEC const char * SDLCALL Mix_GetMusicDecoder(int index);
 

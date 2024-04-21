@@ -11,7 +11,7 @@
 <portrait texturePath ="Assets/Textures/Portraits/Catesby.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Warwick.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Henry Tudor.png"/>
-<portrait texturePath ="Assets/Textures/Portraits/JasperTudor.png"/>
+<portrait texturePath ="Assets/Textures/Portraits/Jasper Tudor.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Prince Edward.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Richard of York.png"/>
 <portrait texturePath ="Assets/Textures/Portraits/Duke of York.png"/>
@@ -343,20 +343,20 @@
 	<Scene num="1" dialogues ="13"/>
 			
 <dialogue text="In the middle of the 15th century, England is in a dire political position. Henry VI is the eleventh Plantagenet monarch of the country. " background ="Assets/Textures/Backgrounds/England_Map.png"
-   owner="Narrator" />
+   owner="Narrator" voice ="Assets/Audio/lines/narrator001.ogg" />
 <dialogue text= "Crowned at 1 year old after his father and former king's passing. He was a feeble and meek monarch responsible for England's defeat and loss of territories to the French."
-		  
+		  voice ="Assets/Audio/lines/narrator002.ogg"
    owner="Narrator" />
-<dialogue text="England has just lost the 100-year-long war with France, but the peace will not last long."
+<dialogue text="England has just lost the 100-year-long war with France, but the peace will not last long." voice ="Assets/Audio/lines/narrator003.ogg"
    owner="Narrator" />
-<dialogue text ="Act 1 -  A covenant for a gentler world" owner ="Narrator"/>
+<dialogue text ="Act 1 -  A covenant for a gentler world" owner ="Narrator" voice ="Assets/Audio/lines/narrator004.ogg"/>
 
 	
-<dialogue text ="Scene 1 : Castle gardens" owner ="Narrator" background ="Assets/Textures/Backgrounds/Castle_Gardens.png"/>
+<dialogue text ="Scene 1 : Castle gardens" owner ="Narrator" background ="Assets/Textures/Backgrounds/Castle_Gardens.png" voice ="Assets/Audio/lines/null"  />
 	
-<dialogue text="Queen Margaret is looking for Prince Edward, she runs into a servant."
+<dialogue text="Queen Margaret is looking for Prince Edward, she runs into a servant." voice ="Assets/Audio/lines/null.ogg"
    owner="Narrator" />
-<dialogue text="Edward? Edward? Oh, that child of mine! Edward! The Duke of York and his sons have arrived! A prince should greet important guests himself."
+<dialogue text="Edward? Edward? Oh, that child of mine! Edward! The Duke of York and his sons have arrived! A prince should greet important guests himself." voice="Assets/Audio/lines/margaret001w.ogg"
    owner="Margaret"
    position="2" />
 <dialogue text="My Queen, if you're looking for the young Prince, I saw him earlier in the back garden playing with the young Earl of Richmond."
@@ -381,14 +381,14 @@
 
 	<Scene num="2" dialogues ="37"/>
 
-<dialogue text="Scene 2: Back garden" background ="Assets/Textures/Backgrounds/Castle_Gardens.png"
+<dialogue text="Scene 2: Back garden" background ="Assets/Textures/Backgrounds/Castle_Gardens.png" voice ="Assets/Audio/lines/narrator007.ogg"
    owner="Narrator" />
 
 	
 <dialogue text="Prince Edward and Henry Tudor are playing with wooden swords. They are interrupted by Margaret leading the Yorks. All the sons of York are introduced. "
-   owner="Narrator" />
+   owner="Narrator" voice ="Assets/Audio/lines/null08.ogg"/>
 <dialogue text="The youngest (Richard) heads off to play with Edward and Henry (they are friends). Meanwhile, the duke and his eldest son head off with Margaret as they say they have political business to discuss."
-   owner="Narrator"/>
+   owner="Narrator" voice ="Assets/Audio/lines/narrator009.ogg"/>
 	
 <dialogue text="Hyaah!"
    owner="Prince Edward"
@@ -418,7 +418,7 @@
    owner="Prince Edward"
    position="2" />
 <dialogue text="Margaret enters the scene with Richard, Duke of York, Edward, George, and Richard."
-   owner="Narrator" />
+   owner="Narrator" voice ="Assets/Audio/lines/narrator010.ogg"/>
 <dialogue text="There you are, boys! Honestly, you can't just disappear when we've got such important guests, Edward."
    owner="Margaret"
    position="2" />
@@ -459,7 +459,7 @@
    owner="Prince Edward"
    position="1" />
 <dialogue text="Prince Edward runs and hugs him."
-   owner="Narrator" />
+   owner="Narrator" voice ="Assets/Audio/lines/null11.ogg"/>
 <dialogue text="Edward, your manners!!!"
    owner="Margaret"
    position="2" />
@@ -496,7 +496,7 @@
 	<Scene num="3" dialogues ="17"/>
 
 <dialogue text="Scene 3 King's chambers"
-   owner="Narrator"  background="Assets/Textures/Backgrounds/King's_Chambers.png"/>	
+   owner="Narrator"  background="Assets/Textures/Backgrounds/King's_Chambers.png" voice ="Assets/Audio/lines/null12.ogg"/>	
 <dialogue text="My dear, Lord Richard was waiting for your greetings"
    owner="Margaret" position="2"  />
 <dialogue text="Ri-chard ?"
@@ -570,10 +570,10 @@
 
 	<Scene num="5" dialogues ="16"/>
 
-<dialogue text="Scene 5: Tower of London Outskirts" owner="Narrator"   background="Assets/Textures/Backgrounds/Castle_Outskirts.png"/>
+<dialogue text="Scene 5: Tower of London Outskirts" owner="Narrator"  voice ="Assets/Audio/lines/narrator013.ogg" background="Assets/Textures/Backgrounds/Castle_Outskirts.png"/>
 <dialogue position="1" text="Best be on our way, thank you Lady Margaret for your warm welcome, take good care of his majesty, let’s go boys!" owner="Duke of York"/>
 <dialogue position="2" text="Thanks to you, Lord Richard, for your continued services and devotion to my husband." owner="Margaret"/>
-<dialogue text="(the Yorks leave)" owner="Narrator"/>
+<dialogue text="(the Yorks leave)" owner="Narrator" voice ="Assets/Audio/lines/narrator045.ogg"/>
 <dialogue position="1" text="So father, how was the king?" owner="Richard of York"/>
 <dialogue position="2" text="An utter fool, deranged in a swamp of his own madness." owner="Duke of York"/>
 <dialogue position="1" text="Father?" owner="George of York"/>
@@ -593,16 +593,16 @@
 
 	<Scene num="6" dialogues ="24"/>
 
-<dialogue text ="Battle I - Northampton" owner="Narrator" background="Assets/Textures/Backgrounds/Northampton_Fields.png"/>
+<dialogue text ="Battle I - Northampton" owner="Narrator" background="Assets/Textures/Backgrounds/Northampton_Fields.png" voice ="Assets/Audio/lines/narrator015.ogg"/>
 
-<dialogue text ="York's army reunites with the Earl of Warwick, a powerful ally that  heavily augments the York's manpower by hearing the aid of mercenary bands." owner ="Narrator"/>
+<dialogue text ="York's army reunites with the Earl of Warwick, a powerful ally that  heavily augments the York's manpower by hiring the aid of mercenary bands." owner ="Narrator" voice ="Assets/Audio/lines/narrator016.ogg"/>
 <dialogue text="What starts as a bawbling uprising grows into a powerful force headed straight to London.  
- " owner="Narrator" />
- <dialogue text ="Queen Margaret hast been dubious of york's intent for a while, hence her attempts to exiliate that gent and taketh his lands, this however did prove futile" owner ="Narrator"/>
+ " owner="Narrator" voice ="Assets/Audio/lines/notExist.ogg" />
+ <dialogue text ="Queen Margaret hast been dubious of york's intent for a while, hence her attempts to exiliate him and take his lands, this however did prove futile" voice ="Assets/Audio/lines/narrator017.ogg" owner ="Narrator"/>
 <dialogue text =" With the imminent threat Margaret readies and army with the most loyal men to the Lancaster crown. She is determined to protect her husband and even more so her child, the crown prince Edward.
-" owner="Narrator"/>
+" owner="Narrator" voice ="Assets/Audio/lines/narrator018.ogg"/>
 
-<dialogue text ="The 2 armies meet in the field of Northampton, king Henry pledges for a diplomatic resolution but York denies, it seems that war is all but inevitable." owner ="Narrator"/>
+<dialogue text ="The 2 armies meet in the field of Northampton, king Henry pledges for a diplomatic resolution but York denies, it seems that war is all but inevitable." owner ="Narrator"  voice ="Assets/Audio/lines/narrator019.ogg"/>
 
 <dialogue owner="Margaret" position ="1" text =" Brave men of England, from the most empowered nobles to the most humble commoners we all stand here today as equals, the battlefield shows no mercy no matter your ancestry." />
 
@@ -610,7 +610,7 @@
 
 <dialogue text=" Long live the prince !!!" owner ="Soldiers" position ="2"/>
 
-<dialogue text ="Meanwhile in the prince's tent" owner ="Narrator"/>
+<dialogue text ="Meanwhile in the prince's tent" owner ="Narrator" voice ="Assets/Audio/lines/narrator020.ogg"/>
 
 <dialogue text="Alright, it's not as flashy as a sword, but this bow and arrows will lead my people to victory!" owner="Prince Edward" position ="1"/>
 <dialogue text="Bravo! Well said Edward, you're pulling that facade quite well, have you ever considered acting?" owner="Henry Tudor" position ="2"/>
@@ -618,7 +618,7 @@
 <dialogue text="Richard will go home today with your head if you let him." owner="Henry Tudor" position ="2"/>
 <dialogue text="No, he couldn't, not our Richard." owner="Prince Edward" position ="1"/>
 <dialogue text="They're filthy traitors Edward! Wake up!" owner="Henry Tudor" position ="2"/>
-<dialogue text="Henry clutches his fists with rage" owner="Narrator"/>
+<dialogue text="Henry clutches his fists with rage" owner="Narrator" voice ="Assets/Audio/lines/narrator020.ogg"/>
 <dialogue text="I'm sure Richard didn't want -" owner="Prince Edward" position ="1"/>
 <dialogue text="Even if he didn't, Richard loves his father, he'd follow him to the ends of the world. If this is York's wish. Then I assure you it is his to." owner="Henry Tudor" position ="2"/>
 <dialogue text="Maybe if I get to talk to him-" owner="Prince Edward" position ="1"/>

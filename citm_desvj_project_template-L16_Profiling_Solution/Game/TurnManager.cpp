@@ -266,9 +266,10 @@ void TurnManager::CheckBattleEnding() {
 		app->dialogueManager->Disable();
 		app->dialogueManager->CleanUp();
 
-		app->dialogueManager->Start();
-		app->dialogueManager->myState = CUTSCENE;
+		
+	
 		app->dialogueManager->Enable();
+		app->dialogueManager->myState = CUTSCENE;
 
 		app->battleScene->Start();
 		Start();

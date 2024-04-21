@@ -81,6 +81,8 @@ bool DialogueManager::Start() {
 		// add to backgrounds array
 		if (D->background != nullptr) backgrounds.PushBack(D->background);
 
+		D->voiceLine = app->audio->LoadFx(dialogueNode.attribute("voice").as_string());
+
 		if (p == 1) {
 			D->myPos = RIGHT;
 		}
@@ -132,7 +134,8 @@ bool DialogueManager::Start() {
 
 
 	// Load the scens info
-	for (pugi::xml_node sNode = myConfig.child("dialogues").child("english").child("Scene"); sNode != NULL; sNode = sNode.next_sibling("Scene")) {
+	sceneIndex = 0;
+ 	for (pugi::xml_node sNode = myConfig.child("dialogues").child("english").child("Scene"); sNode != NULL; sNode = sNode.next_sibling("Scene")) {
 
 		Scene* aScene = new Scene(sNode.attribute("num").as_int(), sNode.attribute("dialogues").as_int());
 		Scenes.PushBack(aScene);
@@ -141,6 +144,9 @@ bool DialogueManager::Start() {
 
 	// put dialogues in scenes
 	int prevAmount = 0;
+
+	int w = dialogues.Count();
+	int q = shakespeareDialogues.Count();
 
 	for (int i = 0; i < Scenes.Count(); ++i) {
 
@@ -232,7 +238,7 @@ bool DialogueManager::Update(float dt)
 	string t = "Let the show begin";
 	int i = 0;
 
-	if (currentNPC_Dialogues != nullptr) {
+ 	if (currentNPC_Dialogues != nullptr) {
 		for (int j = 0; j < 3; ++j) {
 			LOG("dslfmlsfm");
 			if (app->backStage->backStageID == 0 && currentNPC_Dialogues->ID == 469 ) {
@@ -241,7 +247,7 @@ bool DialogueManager::Update(float dt)
 				app->backStage->FinishBackStage();
 				currentNPC_Dialogues = nullptr;
 				
-				
+				app->audio->PlayFx( Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 				
 				for (ListItem<Npc*>* it = app->backStage->npcsList.start; it != nullptr; it=it->next) {
 
@@ -476,7 +482,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 			app->render->DrawRectangle(nameBoxL, black, true, true);
 
-			app->render->DrawTexture(spontaneousDialogue->texture, 0 - (app->render->camera.x / 3) , dialogueBox.y +20 , &portraitBoxL, true,255, 1, 255, 150,150);
+			app->render->DrawTexture(spontaneousDialogue->texture, 0 - (app->render->camera.x / 3) , dialogueBox.y +50 , &portraitBoxL, true,255, 1, 255, 150,150);
 
 			dialogueBox.x += (app->render->camera.x / 3);
 			dialogueBox.y += (app->render->camera.y / 3);
@@ -531,7 +537,7 @@ void DialogueManager::DrawPortrait() {
 			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
 		}
 		else if (Scenes[sceneIndex]->dialogues[i]->myPos == RIGHT) {
-			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 204 * 2, 200, &portraitBoxR, false);
+			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 180 * 2, 200, &portraitBoxR, false);
 		}
 	}
 }
@@ -716,15 +722,17 @@ void DialogueManager::npcTalk(Node* npcDialogues) {
 
 void DialogueManager::Next_Dialogue() {
 
-	dialogueIndex++;
+ 	dialogueIndex++;
 
 	// checks if the scene has finished
 	if (dialogueIndex + 1 == Scenes[sceneIndex]->numDialogues || skipScene) {
 
+
 		skipScene = false;
 		dialogueIndex = 0;
-		if (sceneIndex + 1 != 6) {
+		if (sceneIndex + 1 != Scenes.Count()) {
 			sceneIndex++;
+			if (app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999) app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 		}
 		else  {
 			// the cutscene for act 1 has finished
@@ -735,6 +743,11 @@ void DialogueManager::Next_Dialogue() {
 			
 		}
 
+	}
+	else {
+		// Play voice line
+		int h = Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine;
+		if(app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999) app->audio->PlayFx( Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 	}
 }
 

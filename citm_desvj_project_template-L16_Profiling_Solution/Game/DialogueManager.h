@@ -177,8 +177,8 @@ private:
 
 	SDL_Rect dialogueBox = SDL_Rect{ 0,00,0,0};
 	SDL_Rect narratorBox = SDL_Rect{ 45*2,100*2,160*2,60*2};
-	SDL_Rect speechBox = SDL_Rect{ narratorBox.x - 3 - BOX_OFFSET, narratorBox.y - 3 - BOX_OFFSET, narratorBox.w + 6, narratorBox.h -25 };
-	SDL_Rect speechBoxRight = SDL_Rect{ narratorBox.x - 3 + BOX_OFFSET, narratorBox.y - 3 - BOX_OFFSET, narratorBox.w + 6, narratorBox.h - 25 };
+	SDL_Rect speechBox = SDL_Rect{ narratorBox.x - 3 - BOX_OFFSET, narratorBox.y - 40 - BOX_OFFSET, narratorBox.w + 6, narratorBox.h -25 };
+	SDL_Rect speechBoxRight = SDL_Rect{ narratorBox.x - 3 + BOX_OFFSET, narratorBox.y - 40 - BOX_OFFSET, narratorBox.w + 6, narratorBox.h - 25 };
 
 	SDL_Rect nameBoxL = SDL_Rect{ speechBox.x, speechBox.y - 22,48*2,12*2 };
 	SDL_Rect nameBoxR = SDL_Rect{ speechBoxRight.x, speechBoxRight.y - 22,48*2,12*2};

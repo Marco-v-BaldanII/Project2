@@ -285,12 +285,12 @@ bool Enemy::PostUpdate() {
 	break;
 	case BATTLE:
 		battleTimer++;
-
+	
 		if (!finishedLerp) {
 			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
 			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
-			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
-			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
+			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
+			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
 
 			finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - target->attack, target->lerpingHp, target->lerpingHp - attack, maxHp, target->maxHp);
 		}

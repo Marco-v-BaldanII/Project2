@@ -53,6 +53,7 @@ public:
 	string choiceA ="";
 	string choiceB = "";
 
+	uint voiceLine = 9999;
 
 };
 
