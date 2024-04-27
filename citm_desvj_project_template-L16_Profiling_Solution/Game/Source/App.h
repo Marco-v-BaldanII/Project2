@@ -37,6 +37,7 @@ class Intro;
 class StartMenu;
 class BattleScene;
 class BackStage;
+class PauseMenu;
 
 class App
 {
@@ -126,6 +127,7 @@ public:
 	LevelManagement* levelManager;
 	TurnManager* turnManager;
 	ItemManager* itemManager;
+	PauseMenu* pauseMenu;
 
 	//scenes
 	Intro* intro;

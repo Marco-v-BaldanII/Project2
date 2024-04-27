@@ -223,7 +223,7 @@ bool StartMenu::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
-		state = MenuState::PAUSE;
+		//state = MenuState::PAUSE;
 	}
 
 	if (cerrar)

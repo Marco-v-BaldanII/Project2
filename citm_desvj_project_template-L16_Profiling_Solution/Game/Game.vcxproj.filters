@@ -83,6 +83,7 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="ItemManager.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Source\Item.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="PauseMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
