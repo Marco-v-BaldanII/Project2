@@ -96,9 +96,11 @@ bool StartMenu::Start()
 
 		backstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, " Backstage ", pos2, this);
 		combatstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, " Combatstage ", pos3, this);
+		backstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 69, " Backstage 2", pos4, this);
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
+		backstage2->state = GuiControlState::DISABLED;
 
 		resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, " Resume ", pos1, this);
 
@@ -140,6 +142,7 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
+		backstage2->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -159,6 +162,7 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
+		backstage2->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -178,6 +182,7 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
+		backstage2->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -197,6 +202,7 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::NORMAL;
 		combatstage->state = GuiControlState::NORMAL;
+		backstage2->state = GuiControlState::NORMAL;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -216,6 +222,7 @@ bool StartMenu::Update(float dt)
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
+		backstage2->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::NORMAL;
 		break;
@@ -422,6 +429,13 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 14 && app->dialogueManager->textVelocity == app->dialogueManager->fastVelocity)
 	{
 		app->dialogueManager->SetTextVelocity(TextVelocity::SLOW);
+	}
+	else if (control->id == 69)
+	{
+		app->entityManager->Enable();
+		app->dialogueManager->Enable();
+		app->levelManager->LoadScene(GameScene::BACKSTAGE2);
+		state = MenuState::OFF;
 	}
 
 	return true;

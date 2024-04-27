@@ -40,43 +40,46 @@ bool BackStage::Start()
 	{
 		randomText = app->tex->Load("Assets/Textures/UI/Sprite-0001.png");
 		music = app->audio->PlayMusic("assets/audio/music/Musica-overworld-_Big-Map_.wav", 0);
-		background = app->tex->Load("Assets/Textures/Backstageprops2-export.png");
-		createplayer = true;
 		app->backstageplayer->Enable();
-		app->backstageplayer->position.x = 100;
-		app->backstageplayer->position.y = 100;
 
-		//npc creation
-		for (pugi::xml_node npcNode = mynode.child("npc"); npcNode != NULL; npcNode = npcNode.next_sibling("npc")) {
+		if (backStageID == 1)
+		{
+			background = app->tex->Load("Assets/Textures/Backstageprops2-export.png");
 
-			Npc* dude = (Npc*)app->entityManager->PlaceNPC(npcNode.attribute("name").as_string(), npcNode.attribute("x").as_int(), npcNode.attribute("y").as_int(), npcNode.attribute("wait").as_int());
+			app->backstageplayer->position.x = 100;
+			app->backstageplayer->position.y = 100;
+			
+			for (pugi::xml_node npcNode = mynode.child("npc"); npcNode != NULL; npcNode = npcNode.next_sibling("npc")) {
 
-			dude->texture = app->tex->Load(npcNode.child("texture").attribute("path").as_string());
+				Npc* dude = (Npc*)app->entityManager->PlaceNPC(npcNode.attribute("name").as_string(), npcNode.attribute("x").as_int(), npcNode.attribute("y").as_int(), npcNode.attribute("wait").as_int());
 
-			Tree* t = new Tree();
-			Node* root = nullptr;
+				dude->texture = app->tex->Load(npcNode.child("texture").attribute("path").as_string());
 
-			for (pugi::xml_node dialogueNode = npcNode.child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
-				// Create all the dialogues for the npc
-				string text = dialogueNode.attribute("text").as_string();
-				Dialogue* di = new Dialogue(npcNode.attribute("name").as_string(), text, dialogueNode.attribute("choiceA").as_string(), dialogueNode.attribute("choiceB").as_string());
+				Tree* t = new Tree();
+				Node* root = nullptr;
+
+				for (pugi::xml_node dialogueNode = npcNode.child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
+					// Create all the dialogues for the npc
+					string text = dialogueNode.attribute("text").as_string();
+					Dialogue* di = new Dialogue(npcNode.attribute("name").as_string(), text, dialogueNode.attribute("choiceA").as_string(), dialogueNode.attribute("choiceB").as_string());
 
 
-				root = t->Insert(root, di, dialogueNode.attribute("ID").as_int());
+					root = t->Insert(root, di, dialogueNode.attribute("ID").as_int());
 
 
-				//dude->myDialogues.PushBack(di);
+					//dude->myDialogues.PushBack(di);
+				}
+
+				dude->dialogues = root;
+				dude->currentDialogue = root;
+
+				npcsList.Add(dude);
 			}
-
-			dude->dialogues = root;
-			dude->currentDialogue = root;
-
-			npcsList.Add(dude);
 		}
-
-		// Specify Window dimensions
-		windowW = 512 * 3;
-		windowH = 384 * 3;
+		else if (backStageID == 2)
+		{
+			background = app->tex->Load("Assets/Textures/test.png");
+		}
 
 		talkPrompt = app->tex->Load(mynode.child("talkBtn").attribute("path").as_string());
 	}

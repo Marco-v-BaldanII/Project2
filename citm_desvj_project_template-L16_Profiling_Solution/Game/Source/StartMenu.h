@@ -92,6 +92,7 @@ public:
 	//Scenes
 	GuiControlButton* backstage;
 	GuiControlButton* combatstage;
+	GuiControlButton* backstage2;
 
 	GuiPanel* testPannel;
 
