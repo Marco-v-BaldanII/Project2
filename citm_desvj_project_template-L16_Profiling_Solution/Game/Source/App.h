@@ -37,6 +37,7 @@ class Intro;
 class StartMenu;
 class BattleScene;
 class BackStage;
+class CastingScene;
 
 class App
 {
@@ -126,6 +127,7 @@ public:
 	LevelManagement* levelManager;
 	TurnManager* turnManager;
 	ItemManager* itemManager;
+	
 
 	//scenes
 	Intro* intro;
@@ -133,6 +135,7 @@ public:
 	BattleScene* battleScene;
 	BackStage* backStage;
 	BackStagePlayer* backstageplayer;
+	CastingScene* castingScene;
 
 	bool exitRequest = false;
 

@@ -83,6 +83,9 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="ItemManager.cpp" />
+    <ClCompile Include="CastingScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -212,6 +215,9 @@
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Source\Item.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CastingScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

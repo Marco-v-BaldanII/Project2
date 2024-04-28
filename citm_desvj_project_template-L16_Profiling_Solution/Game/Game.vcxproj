@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackstagePlayer.cpp" />
+    <ClCompile Include="CastingScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="NPC.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="TurnManager.cpp" />
     <ClInclude Include="BackstagePlayer.h" />
+    <ClInclude Include="CastingScene.h" />
     <ClInclude Include="Dialogue.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="frame.h" />
