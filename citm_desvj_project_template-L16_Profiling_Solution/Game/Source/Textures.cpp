@@ -6,6 +6,8 @@
 #include "Log.h"
 
 #include "SDL_image/include/SDL_image.h"
+#include <map>
+using namespace std;
 //#pragma comment(lib, "../Game/Source/External/SDL_image/libx86/SDL2_image.lib")
 
 Textures::Textures(bool isActive) : Module(isActive)
@@ -48,14 +50,22 @@ bool Textures::Start()
 bool Textures::CleanUp()
 {
 	LOG("Freeing textures and Image library");
-	ListItem<SDL_Texture*>* item;
 
-	for(item = textures.start; item != NULL; item = item->next)
-	{
-		SDL_DestroyTexture(item->data);
+	// Has been modified to work with a map dictionary
+	for (auto& pair : textureMap) {
+
+		SDL_DestroyTexture(pair.second);
+
 	}
 
-	textures.Clear();
+	textureMap.clear();
+
+	//for(item = textures.start; item != NULL; item = item->next)
+	//{
+	//	SDL_DestroyTexture(item->data);
+	//}
+
+	//textures.Clear();
 	IMG_Quit();
 	return true;
 }
@@ -63,26 +73,36 @@ bool Textures::CleanUp()
 // Load new texture from file path
 SDL_Texture* const Textures::Load(const char* path)
 {
-	SDL_Texture* texture = NULL;
-	SDL_Surface* surface = IMG_Load(path);
-
-	if(surface == NULL)
-	{
-		LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());
+	// Check if the texture exists
+	if (textureMap.find(path) != textureMap.end()) {
+		return textureMap[path];
 	}
-	else
-	{
-		texture = LoadSurface(surface);
-		SDL_FreeSurface(surface);
-	}
+	else {
 
-	return texture;
+		SDL_Texture* texture = NULL;
+		SDL_Surface* surface = IMG_Load(path);
+
+		if (surface == NULL)
+		{
+			LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());
+		}
+		else
+		{
+			texture = LoadSurface(surface, path);
+			SDL_FreeSurface(surface);
+
+			textureMap[path] = texture; /*Add texture to texture map to be available later*/
+
+		}
+
+		return texture;
+	}
 }
 
 // Unload texture
 bool Textures::UnLoad(SDL_Texture* texture)
 {
-	ListItem<SDL_Texture*>* item;
+	/*ListItem<SDL_Texture*>* item;
 
 	for(item = textures.start; item != NULL; item = item->next)
 	{
@@ -92,13 +112,22 @@ bool Textures::UnLoad(SDL_Texture* texture)
 			textures.Del(item);
 			return true;
 		}
+	}*/
+	for (auto& pair : textureMap) {
+
+		if (pair.second == texture) {
+			
+			textureMap.erase(pair.first);
+			SDL_DestroyTexture(texture);
+		}
+
 	}
 
 	return false;
 }
 
 // Translate a surface into a texture
-SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
+SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface, const char* path)
 {
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
 
@@ -108,10 +137,27 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 	}
 	else
 	{
-		textures.Add(texture);
+		//textures.Add(texture);
+		textureMap[path] = texture;
+		textureIndex++;
 	}
 
 	return texture;
+}
+
+// Returns the texture if it exists, if not nullptr
+SDL_Texture* Textures::GetTexture(const char* path) {
+
+	auto it = textureMap.find(path);
+
+	if (it != textureMap.end())/* the texture exists */ {
+		return textureMap[path];
+	}
+
+	else {
+		return nullptr;
+	}
+
 }
 
 // Retrieve size of a texture

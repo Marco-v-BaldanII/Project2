@@ -12,6 +12,7 @@
 #include "../DialogueManager.h"
 #include "../TurnManager.h"
 #include "../BackstagePlayer.h"
+#include "../CastingScene.h"
 #include "../PauseMenu.h"
 
 #include "Defs.h"
@@ -71,6 +72,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	mainMenu = new StartMenu(false);
 	battleScene = new BattleScene(false);
 	backStage = new BackStage(false);
+	castingScene = new CastingScene(false);
 	entityManager = new EntityManager(true);
 	backstageplayer = new BackStagePlayer(false);
 	itemManager = new ItemManager(true);
@@ -104,6 +106,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(backstageplayer);
 	AddModule(dialogueManager);
+	AddModule(castingScene);
 	AddModule(guiManager);
 	AddModule(itemManager);
 	AddModule(pauseMenu);

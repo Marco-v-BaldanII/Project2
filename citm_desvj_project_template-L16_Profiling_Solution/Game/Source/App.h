@@ -37,7 +37,9 @@ class Intro;
 class StartMenu;
 class BattleScene;
 class BackStage;
+class CastingScene;
 class PauseMenu;
+
 
 class App
 {
@@ -129,12 +131,14 @@ public:
 	ItemManager* itemManager;
 	PauseMenu* pauseMenu;
 
+
 	//scenes
 	Intro* intro;
 	StartMenu* mainMenu;
 	BattleScene* battleScene;
 	BackStage* backStage;
 	BackStagePlayer* backstageplayer;
+	CastingScene* castingScene;
 
 	bool exitRequest = false;
 

@@ -336,5 +336,21 @@
 
 
 	</backStage>
+
+	<castingScene>
+	
+	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets\Textures\Actors\DiegoDiavollo.png"/>
+	<actor name="Diego Diavollo2" dialogue="Buon giorno2" />
+	<actor name="Diego Diavollo3" dialogue="Buon giorno3" />
+
+	<role text="Henry VI ( Mage )"/>
+	<role text="Prince Edward ( Archer )"/>
+	<role text="Margaret of Anjou ( Armoured Knight )"/>
+	
+	</castingScene>
+
+
+
+
 	
 </config>

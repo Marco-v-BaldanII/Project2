@@ -4,6 +4,7 @@
 #include "Module.h"
 #include <string>
 #include "List.h"
+#include <map>
 
 struct SDL_Texture;
 struct SDL_Surface;
@@ -26,15 +27,19 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	SDL_Texture* GetTexture(const char* path);
+
 	// Load Texture
 	SDL_Texture* const Load(const char* path);
-	SDL_Texture* const LoadSurface(SDL_Surface* surface);
+	SDL_Texture* const LoadSurface(SDL_Surface* surface, const char* path);
 	bool UnLoad(SDL_Texture* texture);
 	void GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
 
-public:
+private:
 
-	List<SDL_Texture*> textures;
+	//List<SDL_Texture*> textures;
+	std::map <std::string, SDL_Texture*> textureMap;
+	uint textureIndex = 0;
 };
 
 
@@ -44,5 +49,11 @@ public:
 	std::string name;
 };
 
+struct ActorSprite {
+public:
+	TextureDef* actor;
+
+	TextureDef* role;
+};
 
 #endif // __TEXTURES_H__
