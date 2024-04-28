@@ -7,6 +7,8 @@
 #include <iostream>
 #include "App.h"
 #include "Audio.h"
+#include "BackStage.h"
+
 using namespace std;
 
 LevelManagement::LevelManagement(bool isActive) : Module(isActive)
@@ -149,6 +151,18 @@ bool LevelManagement::Update(float dt)
 			{
 				currentScene = (Module*)app->backStage;
 				LOG("Backstage");
+				app->backStage->backStageID = 1;
+			}
+		}
+		break;
+	case BACKSTAGE2:
+		if (currentScene != (Module*)app->backStage) {
+
+			if (app->fade->Fade(currentScene, (Module*)app->backStage, 60))
+			{
+				currentScene = (Module*)app->backStage;
+				LOG("Backstage2");
+				app->backStage->backStageID = 2;
 			}
 		}
 		break;

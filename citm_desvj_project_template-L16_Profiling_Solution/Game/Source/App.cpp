@@ -13,6 +13,7 @@
 #include "../TurnManager.h"
 #include "../BackstagePlayer.h"
 #include "../CastingScene.h"
+#include "../PauseMenu.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -75,6 +76,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager(true);
 	backstageplayer = new BackStagePlayer(false);
 	itemManager = new ItemManager(true);
+	pauseMenu = new PauseMenu(true);
 	guiManager = new GuiManager(true);
 	fade = new FadeToBlack(true);
 
@@ -107,6 +109,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(castingScene);
 	AddModule(guiManager);
 	AddModule(itemManager);
+	AddModule(pauseMenu);
 	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);
