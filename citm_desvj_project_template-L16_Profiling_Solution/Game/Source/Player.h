@@ -38,7 +38,7 @@ public:
 
 	Frame* frames;
 
-
+	PathFinding* personalPathfinding;
 
 
 	//L02: DONE 2: Declare player parameters

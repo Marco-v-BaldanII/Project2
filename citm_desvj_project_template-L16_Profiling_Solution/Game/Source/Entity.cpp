@@ -5,6 +5,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Player.h"
+#include "../TurnManager.h"
 #include "Map.h"
 
 #include "../frame.h"
@@ -32,7 +33,7 @@ bool Entity::MovePath()
 {
 	if (Move)
 	{
-
+		app->turnManager->isPlayerMoving = true;
 		if (app->map->pathfinding->GetLastPath()->Count() <= 0)
 		{
 			HasMoveAction = false;
@@ -67,6 +68,7 @@ bool Entity::MovePath()
 				stepCounter = 0;
 				state = IDLE;
 				HasMoveAction = false;
+				app->turnManager->isPlayerMoving = false;
 				return true;
 			}
 

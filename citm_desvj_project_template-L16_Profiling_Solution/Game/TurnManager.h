@@ -55,6 +55,7 @@ public:
 	Player* currentPlayer = nullptr;
 	uint availablePlayers = 3;
 	bool noEnemyMoving = true;
+	bool isPlayerMoving = false;
 public:
 
 	List<Player*> players;

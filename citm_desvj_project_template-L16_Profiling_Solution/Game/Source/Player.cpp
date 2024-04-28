@@ -90,6 +90,13 @@ bool Player::Start() {
 
 	deathQuote = new Dialogue( name.GetString(), config.child("dialogue").attribute("text").as_string());
 
+	personalPathfinding = new PathFinding();
+
+	uchar* navigationMap = NULL;
+	app->map->CreateNavigationMap(app->map->mapData.width, app->map->mapData.height, &navigationMap);
+	personalPathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, navigationMap);
+	RELEASE_ARRAY(navigationMap);
+
 	return true;
 }
 
@@ -209,7 +216,7 @@ bool Player::Update(float dt)
 
 		//move
 		MovePath();
-
+		
 		break;
 	case BATTLE:
 
@@ -262,13 +269,21 @@ bool Player::PostUpdate()
 		case MOVE:
 		{
 			//Draw path
-			app->map->pathfinding->DrawBFSPath();
+
+			personalPathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());
+
+			if (app->turnManager->currentPlayer == this) 
+			{
+				personalPathfinding->DrawBFSPath();
+				
+			}
+			
 			// ! important, movement is the only item modifier that is added rather than multiplied
 			myFrame->Render(1.0 / 60.0, hp, attack * myItem->GetAtk(), speed * myItem->GetSpd(), precision * myItem->GetPrec(), luck * myItem->GetLck(), movement + myItem->GetMov());
 
 
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-			if (path != nullptr)
+			if (path != nullptr && app->turnManager->currentPlayer == this)
 			{
 				SDL_Rect rect;
 				for (uint i = 0; i < path->Count(); ++i)
@@ -281,6 +296,7 @@ bool Player::PostUpdate()
 					app->render->DrawRectangle(rect, 255, 125, 0, 50);
 				}
 			}
+			personalPathfinding->ResetBFSPath();
 			break;
 
 		}
@@ -330,7 +346,7 @@ void Player::ClickOnMe() {
 
 
 		//If the position of the mouse if inside the bounds of the box 
-		if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h) {
+		if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h && app->turnManager->isPlayerMoving == false) {
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 				if (state == IDLE) {
