@@ -141,6 +141,8 @@ public:
 
 	void NextAct();
 
+	void WriteTheScript();
+
 public:
 	int numLines = 0;
 
@@ -160,6 +162,8 @@ public:
 
 	float textVelocity = normalVelocity;
 
+	std::map <std::string, ActorSprite*> actorPortraits;
+
 private:
 
 	pugi::xml_node myConfig;
@@ -171,6 +175,8 @@ private:
 	DynArray<Dialogue*> dialogues;
 	DynArray<Dialogue*> shakespeareDialogues;
 	std::map <std::string, SDL_Texture*> portraitTextures; // diccionary used to identify textures by a name
+
+	
 
 	uint dialogueSize = 0;
 	uint dialogueIndex = 0;

@@ -31,6 +31,7 @@ public:
 	Position myPos;
 
 	SDL_Texture* texture = nullptr;
+	ActorSprite* actorSprite = nullptr;
 
 	Dialogue(string owner, string text) {
 		this->owner = owner;

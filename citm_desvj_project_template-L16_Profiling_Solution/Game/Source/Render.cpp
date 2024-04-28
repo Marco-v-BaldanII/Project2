@@ -177,6 +177,15 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	return ret;
 }
 
+bool Render::DrawActor(ActorSprite* sprite, int x, int y, const SDL_Rect* section, bool flipped, int opacity, float speed, int R, int G, int B, double angle, int pivotX, int pivotY) const
+{
+	app->render->DrawTexture(sprite->actor->texture, x, y, section, flipped, opacity, speed, R, G, B, angle, pivotX, pivotY);
+
+	app->render->DrawTexture(sprite->role->texture, x, y, section, flipped, opacity, speed, R, G, B, angle, pivotX, pivotY);
+
+	return true;
+}
+
 bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;

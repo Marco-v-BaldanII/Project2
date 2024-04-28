@@ -8,6 +8,7 @@
 
 struct SDL_Texture;
 struct ActorSprite;
+struct TextureDef;
 using namespace std;
 
 struct Actor{
@@ -56,7 +57,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	
+	void AssignRole();
 
 private:
 	//buttons and variables
@@ -71,7 +72,7 @@ private:
 	//GuiControlButton* P_backtomenu;
 
 	//GuiPanel* testPanel;
-	SDL_Rect portraitBox = SDL_Rect{ 0,0,150,179 };
+	SDL_Rect portraitBox = SDL_Rect{ 0,0,96,118 };
 
 	pugi::xml_node config;
 
@@ -80,10 +81,15 @@ private:
 	
 	 DynArray<Actor*> actors;
 
-	 DynArray<string> roles;
+	 DynArray<TextureDef*> roles;
+	 DynArray<bool> assignedRoles;
 
 	 int roleIndex = 0;
 	 int actorIndex = 0;
+
+	 bool finishedCasting = false;
+
+	 ActorSprite* actorPortrait;
 
 };
 

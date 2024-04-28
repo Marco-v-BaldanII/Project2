@@ -47,6 +47,16 @@ struct TextureDef {
 public:
 	SDL_Texture* texture;
 	std::string name;
+
+	TextureDef(SDL_Texture* texture, std::string name) {
+		this->texture = texture;
+		this->name = name;
+	}
+
+	TextureDef() {
+		texture = nullptr;
+		name = "name";
+	}
 };
 
 struct ActorSprite {
@@ -54,6 +64,12 @@ public:
 	TextureDef* actor;
 
 	TextureDef* role;
+
+	ActorSprite(TextureDef* actor, TextureDef* role) {
+
+		this->actor = actor;
+		this->role = role;
+	}
 };
 
 #endif // __TEXTURES_H__

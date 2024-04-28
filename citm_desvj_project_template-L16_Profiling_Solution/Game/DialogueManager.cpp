@@ -48,14 +48,13 @@ bool DialogueManager::Awake(pugi::xml_node config)
 
 }
 
-bool DialogueManager::Start() {
-
+void DialogueManager::WriteTheScript() {
 	bool ret = true;
 
 
 	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("portrait"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("portrait")) {
 
-		TextureDef* texD = new TextureDef;
+		TextureDef* texD = new TextureDef();
 		const char* path = dialogueNode.attribute("texturePath").as_string();
 		texD->texture = app->tex->Load(path);
 		texD->name = dialogueNode.attribute("texturePath").as_string();
@@ -63,11 +62,8 @@ bool DialogueManager::Start() {
 		texD->name.erase(0, 26);
 		texD->name.erase(texD->name.length() - 4, 4);
 
-
 		// insert TextureDefinition to the map diccionary
 		portraitTextures.insert(std::make_pair(texD->name, texD->texture));
-
-
 
 	}
 
@@ -94,6 +90,8 @@ bool DialogueManager::Start() {
 		if (D->owner != "Narrator") {
 			// use the keycode (owner name) to find the correct portrait
 			D->texture = portraitTextures[D->owner];
+
+			D->actorSprite = actorPortraits[D->owner];
 
 		}
 
@@ -124,7 +122,7 @@ bool DialogueManager::Start() {
 		if (D->owner != "Narrator") {
 			// use the keycode (owner name) to find the correct portrait
 			D->texture = portraitTextures[D->owner];
-
+			D->actorSprite = actorPortraits[D->owner];
 		}
 		shakespeareDialogues.PushBack(D);
 		//dialogueSize++;
@@ -135,7 +133,7 @@ bool DialogueManager::Start() {
 
 	// Load the scens info
 	sceneIndex = 0;
- 	for (pugi::xml_node sNode = myConfig.child("dialogues").child("english").child("Scene"); sNode != NULL; sNode = sNode.next_sibling("Scene")) {
+	for (pugi::xml_node sNode = myConfig.child("dialogues").child("english").child("Scene"); sNode != NULL; sNode = sNode.next_sibling("Scene")) {
 
 		Scene* aScene = new Scene(sNode.attribute("num").as_int(), sNode.attribute("dialogues").as_int());
 		Scenes.PushBack(aScene);
@@ -165,8 +163,15 @@ bool DialogueManager::Start() {
 	if (skipBttnTex == nullptr) skipBttnTex = app->tex->Load("Assets/Textures/Skip_button.png");
 
 
-	if(choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox , this);
+	if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
 	if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
+}
+
+bool DialogueManager::Start() {
+
+	bool ret = true;
+
+	/* the contents of this have been moved to WriteTheScript */
 
 	return ret;
 }
@@ -241,7 +246,7 @@ bool DialogueManager::Update(float dt)
  	if (currentNPC_Dialogues != nullptr) {
 		for (int j = 0; j < 3; ++j) {
 			LOG("dslfmlsfm");
-			if (app->backStage->backStageID == 0 && currentNPC_Dialogues->ID == 469 ) {
+			if (app->backStage->backStageID == 1 && currentNPC_Dialogues->ID == 469 ) {
 				LOG("dojorjg");
 				myState = CUTSCENE;
 				app->backStage->FinishBackStage();
@@ -534,10 +539,12 @@ void DialogueManager::DrawPortrait() {
 	// Prints on screen the current and previous dialogue's portrait
 	for (i; i <= dialogueIndex; ++i) {
 		if (Scenes[sceneIndex]->dialogues[i]->myPos == LEFT) {
-			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
+			if(Scenes[sceneIndex]->dialogues[i]->texture != nullptr) app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
+			else if (Scenes[sceneIndex]->dialogues[i]->actorSprite != nullptr) { app->render->DrawActor(Scenes[sceneIndex]->dialogues[i]->actorSprite, 0, 200, &portraitBoxL, true); }
 		}
 		else if (Scenes[sceneIndex]->dialogues[i]->myPos == RIGHT) {
-			app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 180 * 2, 200, &portraitBoxR, false);
+			if (Scenes[sceneIndex]->dialogues[i]->texture != nullptr) app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 180 * 2, 200, &portraitBoxR, false);
+			else if (Scenes[sceneIndex]->dialogues[i]->actorSprite != nullptr) { app->render->DrawActor(Scenes[sceneIndex]->dialogues[i]->actorSprite, 180 * 2, 200, &portraitBoxR, false); }
 		}
 	}
 }

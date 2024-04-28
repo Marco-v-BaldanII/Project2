@@ -9,6 +9,8 @@
 #include "SDL/include/SDL.h"
 #include "SDL_ttf/include/SDL_ttf.h"
 
+struct ActorSprite;
+
 class Render : public Module
 {
 public:
@@ -37,6 +39,9 @@ public:
 
 	// Drawing
 	bool DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL , bool flipped = false, int opacity = 255, float speed = 1.0f, int R = 255, int G = 255, int B = 255, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const;
+
+	bool DrawActor(ActorSprite* sprite, int x, int y, const SDL_Rect* section = NULL, bool flipped = false, int opacity = 255, float speed = 1.0f, int R = 255, int G = 255, int B = 255, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const;
+
 	bool DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = true, bool useCamera = true) const;
 	bool DrawRectangle(const SDL_Rect& rect, b2Color col, bool filled, bool use_camera) const;
 	bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;

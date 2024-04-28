@@ -338,14 +338,19 @@
 	</backStage>
 
 	<castingScene>
-	
-	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets\Textures\Actors\DiegoDiavollo.png"/>
-	<actor name="Diego Diavollo2" dialogue="Buon giorno2" />
-	<actor name="Diego Diavollo3" dialogue="Buon giorno3" />
 
-	<role text="Henry VI ( Mage )"/>
-	<role text="Prince Edward ( Archer )"/>
-	<role text="Margaret of Anjou ( Armoured Knight )"/>
+	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets\Textures\Actors\DiegoDiavollo.png"/>
+	<actor name="Tessa Thompson" dialogue="Buon giorno2" path ="Assets\Textures\Actors\TessaThompson.png"/>
+	<actor name="Alicia Sol" dialogue="Buon giorno3" path ="Assets\Textures\Actors\AliciaSol.png"/>
+	<actor name="Mohan Boot" dialogue="Buon giorno3" path ="Assets\Textures\Actors\MohanBoot.png"/>
+	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets\Textures\Actors\EmmaDragonfly.png"/>
+
+	<role text="Henry VI"  path = "Assets\Textures\LancasterOutfits\HenryVIOutfit.png" />
+	<role text="Prince Edward"  path = "Assets\Textures\LancasterOutfits\Prince EdwardOutfit.png"/>
+	<role text="Margaret"  path = "Assets\Textures\LancasterOutfits\defaultOutfit.png"/>
+	<role text="Jasper Tudor"  path = "Assets\Textures\LancasterOutfits\Jasper TudorOutfit.png"/>
+	<role text="Henry Tudor"  path = "Assets\Textures\LancasterOutfits\HenryTudorOutfit.png"/>
+
 	
 	</castingScene>
 
