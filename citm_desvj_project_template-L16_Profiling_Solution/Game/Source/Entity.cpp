@@ -66,7 +66,9 @@ bool Entity::MovePath()
 				nextStep = true;
 				app->map->pathfinding->ResetBFSPath();
 				stepCounter = 0;
+				if (app->turnManager->currentPlayer == NULL)
 				state = IDLE;
+
 				HasMoveAction = false;
 				app->turnManager->isPlayerMoving = false;
 				return true;
@@ -81,32 +83,32 @@ bool Entity::MovePath()
 			if (direction->x >= 1)
 			{
 				direction->x = MOVE_SPEED;
-				//currentAnim = &walkSide;
+				currentAnim = &rightAnim;
 			}
 			else if (direction->x <= -1)
 			{
 				direction->x = -MOVE_SPEED;
-				//currentAnim = &walkSide;
+				currentAnim = &rightAnim;
 			}
 			else {
 				direction->x = 0;
-				//walkSide.Reset();
+				rightAnim.Reset();
 			}
 
 			if (direction->y >= 1)
 			{
 				direction->y = MOVE_SPEED;
-				//currentAnim = &walkDown;
+				currentAnim = &downAnim;
 			}
 			else if (direction->y <= -1)
 			{
 				direction->y = -MOVE_SPEED;
-				//currentAnim = &walkUp;
+				currentAnim = &upAnim;
 			}
 			else {
 				direction->y = 0;
-				//walkUp.Reset();
-				//walkDown.Reset();
+				upAnim.Reset();
+				downAnim.Reset();
 			}
 			// tiles
 			stepCounter++;

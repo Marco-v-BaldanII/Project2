@@ -223,6 +223,7 @@ void TurnManager::PlayerTurn() {
 		pEntity->data->movedThisTurn = false;
 		pEntity->data->battleTimer = 0;
 		pEntity->data->state = IDLE;
+		pEntity->data->HasMoveAction = true;
 
 		LOG("Reactivating %s", pEntity->data->name);
 	}

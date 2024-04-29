@@ -55,6 +55,8 @@ public:
 	Animation* currentAnim = nullptr;
 	Animation idle;
 
+	PathFinding* personalPathfinding;
+
 };
 
 #endif // __ENEMY_H__
