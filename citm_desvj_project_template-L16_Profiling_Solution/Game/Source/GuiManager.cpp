@@ -56,6 +56,8 @@ bool GuiManager::Start()
 		panel = panel->next;
 	}
 
+	//spotLight = new SpotLight(64, SDL_Color{242, })
+
 	return true;
 }
 
