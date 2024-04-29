@@ -7,6 +7,38 @@
 #include "GuiPanel.h"
 #include "List.h"
 
+
+//class SpotLight {
+//
+//public:
+//
+//	SpotLight(int radius, SDL_Color color, float speed) {
+//
+//		this->radius = radius;
+//		this->color = color;
+//		this->speed = speed;
+//
+//	}
+//
+//	int radius;
+//	SDL_Color color;
+//
+//	float speed;
+//
+//	iPoint Target;
+//	iPoint position;
+//
+//	bool visible = false;
+//
+//	void MoveToTarget() {
+//
+//		Lerp(position.x, speed, Target.x);
+//		Lerp(position.y, speed, Target.y);
+//	}
+//
+//
+//};
+
 class GuiManager : public Module
 {
 public:
@@ -73,6 +105,8 @@ public:
 	p2List<PanelID> panelsID;
 	PanelID lastPanel;
 	int currentPanel;
+
+	//SpotLight* spotLight = nullptr;
 };
 
 #endif // __GUIMANAGER_H__

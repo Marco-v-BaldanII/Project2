@@ -164,8 +164,8 @@ void Entity::AssocateEntity_Tile(iPoint position) {
 		currentTile->myEntity = nullptr; // Desacociate the entity from the tile
 	}
 
-	currentTile = app->map->myTiles[position.x][position.y]; // Associate the entity to the tile
-	currentTile->myEntity = this; // Associate the tile to the entity
+	//currentTile = app->map->myTiles[position.x][position.y]; // Associate the entity to the tile
+	//currentTile->myEntity = this; // Associate the tile to the entity
 
 
 }

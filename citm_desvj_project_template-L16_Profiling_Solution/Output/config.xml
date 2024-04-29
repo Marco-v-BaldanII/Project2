@@ -18,7 +18,7 @@
     <fullscreen_window value="false"/>
   </window>
   <map>
-		<lvl1  path="Assets/Maps/MapaNieve.tmx" />
+		<lvl1  path="Assets/Maps/Mapanieve3.tmx" />
 		<minimap path ="Assets/Textures/miniMap.png"/>
 		
 	</map>

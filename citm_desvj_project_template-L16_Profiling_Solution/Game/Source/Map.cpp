@@ -234,7 +234,12 @@ bool Map::Load(SString mapFileName)
             //Load Tileset image
             SString mapTex = path;
             mapTex += tilesetNode.child("image").attribute("source").as_string();
-            tileset->texture = app->tex->Load(mapTex.GetString());
+
+            string path = mapTex.GetString();
+            path.erase(0, 2);
+            string finalPath = "Assets" + path;
+
+            tileset->texture = app->tex->Load(finalPath.c_str());
 
             mapData.tilesets.Add(tileset);
 
@@ -281,7 +286,7 @@ bool Map::Load(SString mapFileName)
                 TileType type = SetTileType(mapLayer->tiles[i]);
 
 
-                mapLayer->myTiles[i % 96][j] = new Tile(b2Color(1, 1, 1, 1), type);
+                mapLayer->myTiles[i % MAX_TILE_AMOUNT][j] = new Tile(b2Color(1, 1, 1, 1), type);
 
 
 
@@ -302,11 +307,11 @@ bool Map::Load(SString mapFileName)
         mapData.layers.Add(mapLayer);
         
         // Save the values of the map layer matrix to a globally accesible matrix that othe modlues might consult
-        for (int i = 0; i < MAX_TILE_AMOUNT; ++i) {
-            for (int j = 0; j < MAX_TILE_AMOUNT; ++j) {
+       /* for (int i = 0; i < MAX_TILE_AMOUNT; ++i) {
+            for (int j = 0; j < 45; ++j) {
                 myTiles[i][j] = mapLayer->myTiles[i][j];
             }
-        }
+        }*/
 
 
     }

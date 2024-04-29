@@ -1,0 +1,80 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Mapanieve3.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "MapaNievefuturo(nova).tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 961.3333333333333,
+                "y": 930.6666666666667
+            }
+        },
+        "MapaNievefuturo(nova).tmx#tileset3": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Mapanieve3.tmx": {
+            "scale": 0.5808423913043478,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 864.2619883040937,
+                "y": 964.1169590643276
+            }
+        },
+        "Mapanieve3.tmx#tileset3": {
+            "scaleInDock": 1
+        },
+        "mapanieve 2.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 915.1515151515151,
+                "y": 269.69696969696975
+            }
+        },
+        "mapanieve 2.tmx#tileset3": {
+            "scaleInDock": 1
+        },
+        "mapanieve2.tmx": {
+            "scale": 0.556640625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 768.8982456140352,
+                "y": 529.9649122807017
+            }
+        },
+        "mapanieve2.tmx#tileset3": {
+            "scaleInDock": 1
+        },
+        "tileset3.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "last.externalTilesetPath": "C:/Users/Ivo/Documents/GitHub/Project2/citm_desvj_project_template-L16_Profiling_Solution/Output/Assets/Maps",
+    "last.imagePath": "C:/Users/Ivo/Documents/GitHub/Project2/citm_desvj_project_template-L16_Profiling_Solution/Output/Assets/Textures",
+    "map.height": 48,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 48,
+    "openFiles": [
+        "Mapanieve3.tmx"
+    ],
+    "project": "Mapanieve 2.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "Mapanieve3.tmx",
+        "MapaNievefuturo(nova).tmx",
+        "mapanieve2.tmx",
+        "mapanieve 2.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)"
+}
