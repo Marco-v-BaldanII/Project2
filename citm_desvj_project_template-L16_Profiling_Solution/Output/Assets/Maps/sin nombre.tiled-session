@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "MapaNieve.tmx",
+    "activeFile": "MapaNievefuturo(nova).tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
@@ -11,9 +11,23 @@
             "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2116,
-                "y": 1496
+                "x": 1664,
+                "y": 960
             }
+        },
+        "MapaNieve.tmx#tileset3": {
+            "scaleInDock": 1
+        },
+        "MapaNievefuturo(nova).tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1130.3030303030303,
+                "y": 842.4242424242425
+            }
+        },
+        "MapaNievefuturo(nova).tmx#tileset3": {
+            "scaleInDock": 1
         },
         "tileset3.tsx": {
             "scaleInDock": 1.5,
@@ -26,12 +40,14 @@
     "map.width": 45,
     "openFiles": [
         "MapaNieve.tmx",
-        "tileset3.tsx"
+        "tileset3.tsx",
+        "MapaNievefuturo(nova).tmx"
     ],
     "project": "sin nombre.tiled-project",
     "recentFiles": [
+        "MapaNieve.tmx",
         "tileset3.tsx",
-        "MapaNieve.tmx"
+        "MapaNievefuturo(nova).tmx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

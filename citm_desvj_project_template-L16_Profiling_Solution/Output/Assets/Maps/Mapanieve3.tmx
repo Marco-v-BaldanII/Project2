@@ -4,7 +4,7 @@
   <property name="Draw" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" name="tileset3" tilewidth="32" tileheight="32" tilecount="48" columns="8">
-  <image source="../../Documents/GitHub/Project2/citm_desvj_project_template-L16_Profiling_Solution/Output/Assets/Textures/tileset3.png" width="256" height="192"/>
+  <image source="../Textures/tileset3.png" width="256" height="192"/>
  </tileset>
  <layer id="1" name="Capa de patrones 1" width="54" height="46">
   <properties>
