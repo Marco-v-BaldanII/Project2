@@ -174,6 +174,9 @@ bool DialogueManager::Start() {
 	bool ret = true;
 
 	/* the contents of this have been moved to WriteTheScript */
+	if (scriptWritten) {
+		WriteTheScript();
+	}
 
 	return ret;
 }
