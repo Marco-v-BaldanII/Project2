@@ -165,6 +165,8 @@ void DialogueManager::WriteTheScript() {
 
 	if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
 	if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
+
+	scriptWritten = true;
 }
 
 bool DialogueManager::Start() {
@@ -201,86 +203,87 @@ bool DialogueManager::Update(float dt)
 {
 	bool ret = true;
 
+	if (scriptWritten) {
+		//currentPos = dialogues[dialogueIndex]->myPos;
+		currentPos = Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos;
 
-	//currentPos = dialogues[dialogueIndex]->myPos;
-	currentPos = Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos;
 
+		if (currentPos != MIDDLE) { TextColor = black; }
 
-	if (currentPos != MIDDLE) { TextColor = black; }
-
-	// This method checks for the input to advance to the next dialogue
-	AdvanceText();
-
-	
+		// This method checks for the input to advance to the next dialogue
+		AdvanceText();
 
 
 
 
-  	if (myState == CUTSCENE) {
+
+
+		if (myState == CUTSCENE) {
 
 
 
-		// Check to change dialogue language
-		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
-			ChangeLanguage();
-		}
-		
+			// Check to change dialogue language
+			if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+				ChangeLanguage();
+			}
 
-	}
-	else {
 
-		if ( (currentNPC_Dialogues == NULL) || (currentNPC_Dialogues->leftChild == nullptr || currentNPC_Dialogues->rightChild == nullptr)) {
-
-			choiceA_button->state = GuiControlState::DISABLED;
-			choiceB_button->state = GuiControlState::DISABLED;
 		}
 		else {
-			choiceA_button->state = GuiControlState::NORMAL;
-			choiceB_button->state = GuiControlState::NORMAL;
-		}
 
-	}
-	string t = "Let the show begin";
-	int i = 0;
+			if ((currentNPC_Dialogues == NULL) || (currentNPC_Dialogues->leftChild == nullptr || currentNPC_Dialogues->rightChild == nullptr)) {
 
- 	if (currentNPC_Dialogues != nullptr) {
-		for (int j = 0; j < 3; ++j) {
-			LOG("dslfmlsfm");
-			if (app->backStage->backStageID == 1 && currentNPC_Dialogues->ID == 469 ) {
-				LOG("dojorjg");
-				myState = CUTSCENE;
-				app->backStage->FinishBackStage();
-				currentNPC_Dialogues = nullptr;
-				
-				app->audio->PlayFx( Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
-				
-				for (ListItem<Npc*>* it = app->backStage->npcsList.start; it != nullptr; it=it->next) {
-
-					Entity* e = it->data;
-					app->entityManager->DestroyEntity(e);
-				}
-
-				app->backStage->npcsList.Clear();
+				choiceA_button->state = GuiControlState::DISABLED;
+				choiceB_button->state = GuiControlState::DISABLED;
+			}
+			else {
+				choiceA_button->state = GuiControlState::NORMAL;
+				choiceB_button->state = GuiControlState::NORMAL;
 			}
 
 		}
-	}
+		string t = "Let the show begin";
+		int i = 0;
 
+		if (currentNPC_Dialogues != nullptr) {
+			for (int j = 0; j < 3; ++j) {
+				LOG("dslfmlsfm");
+				if (app->backStage->backStageID == 1 && currentNPC_Dialogues->ID == 469) {
+					LOG("dojorjg");
+					myState = CUTSCENE;
+					app->backStage->FinishBackStage();
+					currentNPC_Dialogues = nullptr;
+
+					app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
+
+					for (ListItem<Npc*>* it = app->backStage->npcsList.start; it != nullptr; it = it->next) {
+
+						Entity* e = it->data;
+						app->entityManager->DestroyEntity(e);
+					}
+
+					app->backStage->npcsList.Clear();
+				}
+
+			}
+		}
+	}
 	return ret;
 }
 
 bool DialogueManager::PostUpdate() {
 
 	// Draw stuff
-	DrawBackground();
+	if (scriptWritten) {
+		DrawBackground();
 
-	DrawTextBox(dialogues[dialogueIndex]->myPos);
-	if (scrolling) {
-		ManageScrolling();
+		DrawTextBox(dialogues[dialogueIndex]->myPos);
+		if (scrolling) {
+			ManageScrolling();
+		}
+
+		DrawPortrait();
 	}
-
-	DrawPortrait();
-
 	return true;
 
 }
@@ -730,6 +733,8 @@ void DialogueManager::npcTalk(Node* npcDialogues) {
 void DialogueManager::Next_Dialogue() {
 
  	dialogueIndex++;
+
+	app->audio->StopFx(Scenes[sceneIndex]->dialogues[dialogueIndex - 1]->voiceLine);
 
 	// checks if the scene has finished
 	if (dialogueIndex + 1 == Scenes[sceneIndex]->numDialogues || skipScene) {

@@ -37,6 +37,8 @@ public:
 	int SetFxVolume(int volume);
 	int GetFxVolume();
 
+	void StopFx(int effect);
+
 private:
 
 	_Mix_Music* music;

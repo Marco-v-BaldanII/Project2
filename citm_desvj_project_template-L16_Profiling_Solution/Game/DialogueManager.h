@@ -228,6 +228,8 @@ private:
 
 	Dialogue* spontaneousDialogue;
 
+	bool scriptWritten = false;
+
 };
 
 #endif // __DIALOGUEMANAGER_H__

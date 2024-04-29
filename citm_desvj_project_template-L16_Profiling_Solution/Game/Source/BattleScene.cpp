@@ -604,18 +604,18 @@ void BattleScene::PassAnimations(Entity* entity) {
 	if (entity->name == "Prince Edward") {
 		entity->upAnim = princeEdUp;
 		entity->downAnim = princeEdDown;
-		entity->upAnim = princeEdUp;
+		entity->rightAnim = princeEdRight;
 
 	}
 	else if (entity->name == "Duke of York") {
 		entity->upAnim = dukeYorkUp;
 		entity->downAnim = dukeYorkDown;
-		entity->upAnim = dukeYorkUp;
+		entity->rightAnim = dukeYorkRight;
 	}
 	else if (entity->name == "Henry Tudor") {
 		entity->upAnim = henryTudorUp;
 		entity->downAnim = henryTudorDown;
-		entity->upAnim = henryTudorRight;
+		entity->rightAnim = henryTudorRight;
 	}
 	else {
 		entity->downAnim = LancasterAnim;
@@ -624,17 +624,17 @@ void BattleScene::PassAnimations(Entity* entity) {
 		case(KNIGHT):
 			entity->upAnim = knightUp;
 			entity->downAnim = knightDown;
-			entity->upAnim = knightUp;
+			entity->rightAnim = knightRight;
 			break;
 		case(ARCHER):
 			entity->upAnim = archerUp;
 			entity->downAnim = archerDown;
-			entity->upAnim = archerUp;
+			entity->rightAnim = archerRight;
 			break;
 		case(MAGE):
 			entity->upAnim = mageUp;
 			entity->downAnim = mageDown;
-			entity->upAnim = mageUp;
+			entity->rightAnim = archerRight;
 			break;
 		}
 	}
