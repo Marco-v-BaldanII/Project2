@@ -177,22 +177,22 @@ bool Player::Update(float dt)
 
 		// Ability to pick up item
 
-		if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr)/* If the tile i'm on has an item */ {
+		//if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr)/* If the tile i'm on has an item */ {
 
-			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
+		//	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
 
-				if (myItem != nullptr) {
-					delete myItem;
-					myItem = nullptr;
-				}
+		//		if (myItem != nullptr) {
+		//			delete myItem;
+		//			myItem = nullptr;
+		//		}
 
-				myItem = app->map->myTiles[mapPos.x][mapPos.y]->myItem;
+		//		myItem = app->map->myTiles[mapPos.x][mapPos.y]->myItem;
 
-				myItem->myUnit = this;
-				app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
-			}
+		//		myItem->myUnit = this;
+		//		app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
+		//	}
 
-		}
+		//}
 
 		break;
 	case MOVE:

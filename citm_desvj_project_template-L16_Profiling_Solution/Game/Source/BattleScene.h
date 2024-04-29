@@ -134,7 +134,7 @@ public:
 	SDL_Rect LancasterHPBar = SDL_Rect{ 2 * 2,167 * 2,75 * 2,8 * 2 };
 
 	bool godMode;
-
+	bool firstMap = false;
 
 };
 #endif // __BATTLESCENE_H__

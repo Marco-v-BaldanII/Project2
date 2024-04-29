@@ -11,7 +11,7 @@
 #include "PugiXml\src\pugixml.hpp"
 #include "Entity.h"
 
-#define MAX_TILE_AMOUNT 96
+#define MAX_TILE_AMOUNT 54
 
 class Entity;
 class Item;
@@ -162,7 +162,7 @@ struct MapLayer
     Properties properties;
 
     // matrix of tiles
-    Tile* myTiles[MAX_TILE_AMOUNT][MAX_TILE_AMOUNT] = { nullptr };
+    Tile* myTiles[MAX_TILE_AMOUNT][46] = { nullptr };
 
     // L06: DONE 6: Short function to get the gid value of x,y
     uint Get(int x, int y) const
