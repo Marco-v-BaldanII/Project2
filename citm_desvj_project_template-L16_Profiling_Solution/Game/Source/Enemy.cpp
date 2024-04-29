@@ -77,7 +77,7 @@ bool Enemy::Awake() {
 	entity = this;
 
 	app->map->CreateNavigationMap(app->map->mapData.width, app->map->mapData.height, &navigationMap);
-	pathfinding->SetNavigationMap((uint)app->map->GetTileWidth(), (uint)app->map->GetTileHeight(), navigationMap);
+	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, navigationMap);
 	RELEASE_ARRAY(navigationMap);
 
 	return true;

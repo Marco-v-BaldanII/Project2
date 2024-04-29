@@ -87,7 +87,7 @@ bool Player::Start() {
 
 	myItem = new Item();
 
-
+	HasMoveAction = true;
 	deathQuote = new Dialogue( name.GetString(), config.child("dialogue").attribute("text").as_string());
 
 	personalPathfinding = new PathFinding();
@@ -123,8 +123,15 @@ bool Player::PreUpdate()
 	break;
 	case MOVE:
 		currentAnim->Update();
+
+		//End turn for selected player
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && app->turnManager->currentPlayer == this) 
+		{
+			state = IDLE;
+		}
+
 		//Select tile to move to
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN && !Move && ExpandedBFS) {
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN && !Move && ExpandedBFS && HasMoveAction) {
 			int x, y;
 			app->input->GetMouseWorldPosition(x, y);
 			iPoint p;
@@ -270,10 +277,11 @@ bool Player::PostUpdate()
 		{
 			//Draw path
 
-			personalPathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());
+			
 
 			if (app->turnManager->currentPlayer == this) 
 			{
+				personalPathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());
 				personalPathfinding->DrawBFSPath();
 				
 			}
