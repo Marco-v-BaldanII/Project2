@@ -56,7 +56,7 @@ bool GuiManager::Start()
 		panel = panel->next;
 	}
 
-	//spotLight = new SpotLight(64, SDL_Color{242, })
+	spotLight = new SpotLight(64, SDL_Color{ 242,149,98,200 }, 0.02f);
 
 	return true;
 }
@@ -75,6 +75,11 @@ bool GuiManager::Update(float dt)
 		doLogic = false;
 	}
 
+	iPoint MousePose; app->input->GetMouseWorldPosition(MousePose.x, MousePose.y);
+
+	spotLight->Target = MousePose;
+
+	spotLight->MoveToTarget();
 	
 
 	return true;
@@ -115,6 +120,8 @@ bool GuiManager::PostUpdate() {
 		control->data->Update(0.16f);
 		control = control->next;
 	}
+
+	spotLight->Render();
 
 	return true;
 }

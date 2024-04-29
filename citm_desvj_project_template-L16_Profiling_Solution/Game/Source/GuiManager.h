@@ -8,36 +8,44 @@
 #include "List.h"
 
 
-//class SpotLight {
-//
-//public:
-//
-//	SpotLight(int radius, SDL_Color color, float speed) {
-//
-//		this->radius = radius;
-//		this->color = color;
-//		this->speed = speed;
-//
-//	}
-//
-//	int radius;
-//	SDL_Color color;
-//
-//	float speed;
-//
-//	iPoint Target;
-//	iPoint position;
-//
-//	bool visible = false;
-//
-//	void MoveToTarget() {
-//
-//		Lerp(position.x, speed, Target.x);
-//		Lerp(position.y, speed, Target.y);
-//	}
-//
-//
-//};
+
+class SpotLight {
+
+public:
+
+	SpotLight(int radius, SDL_Color color, float speed) {
+
+		this->radius = radius;
+		this->color = color;
+		this->speed = speed;
+
+	}
+
+	int radius;
+	SDL_Color color;
+
+	float speed;
+
+	iPoint Target;
+	iPoint position;
+
+	bool visible = false;
+
+	void Lerp3(int& value, float t, int destination) {
+		value += (t) * (destination - value);
+	}
+
+	void MoveToTarget() {
+
+		Lerp3(position.x, speed, Target.x);
+		Lerp3(position.y, speed, Target.y);
+	}
+	void Render() {
+
+		app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a, true);
+	}
+
+};
 
 class GuiManager : public Module
 {
@@ -106,7 +114,7 @@ public:
 	PanelID lastPanel;
 	int currentPanel;
 
-	//SpotLight* spotLight = nullptr;
+	SpotLight* spotLight = nullptr;
 };
 
 #endif // __GUIMANAGER_H__

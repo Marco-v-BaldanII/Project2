@@ -46,6 +46,8 @@ public:
 	bool DrawRectangle(const SDL_Rect& rect, b2Color col, bool filled, bool use_camera) const;
 	bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
+	bool FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const;
+
 	bool DrawText(const std::string& text, int posX, int posY, int w, int h, bool isDialogue = false, SDL_Color col = SDL_Color{ 255,255,255,255 });
 	bool DrawTextButton(const char* text, int posx, int posy, int w, int h, SDL_Color color = { 255,255,255,255 });
 

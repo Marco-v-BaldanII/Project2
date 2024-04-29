@@ -296,6 +296,44 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
+bool Render::FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
+{
+	bool ret = true;
+	uint scale = app->win->GetScale();
+
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+	int result = -1;
+
+	// Calculate circle position
+	int posX = x * scale;
+	int posY = y * scale;
+	if (use_camera)
+	{
+		posX += camera.x;
+		posY += camera.y;
+	}
+
+	// Draw filled circle
+	for (int dy = -radius; dy <= radius; dy++)
+	{
+		for (int dx = -radius; dx <= radius; dx++)
+		{
+			if (dx * dx + dy * dy <= radius * radius)
+			{
+				result = SDL_RenderDrawPoint(renderer, posX + dx, posY + dy);
+				if (result != 0)
+				{
+					LOG("Cannot draw point to screen. SDL_RenderDrawPoint error: %s", SDL_GetError());
+					ret = false;
+				}
+			}
+		}
+	}
+
+	return ret;
+}
 
 
 bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h, bool isDialogue, SDL_Color color) {
