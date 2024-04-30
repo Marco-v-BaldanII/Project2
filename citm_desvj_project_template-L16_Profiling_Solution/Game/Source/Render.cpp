@@ -401,6 +401,31 @@ bool Render::DrawTextButton(const char* text, int posx, int posy, int w, int h, 
 }
 
 
+void Render::DrawVignette(int centerX, int centerY, int radius, Uint8 maxAlpha)
+{
+	// Calculate the alpha value based on distance from the center
+	for (int y = centerY - radius; y <= centerY + radius; ++y)
+	{
+		for (int x = centerX - radius; x <= centerX + radius; ++x)
+		{
+			// Calculate distance from center (pythagoras)
+			int distanceSq = (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY);
+
+			// Calculate alpha based on distance (the bigger the distance the more alpha)
+			Uint8 alpha = (Uint8)(maxAlpha * (0 + ((double)(distanceSq) / (radius * radius))));
+
+			// Clamp alpha to ensure it's within valid range
+			alpha = Clamp(alpha, 0, maxAlpha);
+
+			// Set render color with the calculated alpha
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, alpha);
+
+			// Render a point at (x, y)
+			SDL_RenderDrawPoint(renderer, x, y);
+		}
+	}
+}
+
 // L14: TODO 6: Implement a method to load the state
 // for now load camera's x and y
 bool Render::LoadState(pugi::xml_node node) {

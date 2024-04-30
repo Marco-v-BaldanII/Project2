@@ -51,6 +51,8 @@ public:
 	bool DrawText(const std::string& text, int posX, int posY, int w, int h, bool isDialogue = false, SDL_Color col = SDL_Color{ 255,255,255,255 });
 	bool DrawTextButton(const char* text, int posx, int posy, int w, int h, SDL_Color color = { 255,255,255,255 });
 
+	void DrawVignette(int centerX, int centerY, int radius, Uint8 maxAlpha);
+
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 

@@ -57,6 +57,7 @@ bool GuiManager::Start()
 	}
 
 	spotLight = new SpotLight(64, SDL_Color{ 242,149,98,200 }, 0.02f);
+	spotLight->visible = false;
 
 	return true;
 }
@@ -122,6 +123,7 @@ bool GuiManager::PostUpdate() {
 	}
 
 	spotLight->Render();
+	app->render->DrawVignette(spotLight->position.x * 3, spotLight->position.y *3, 40, 210);
 
 	return true;
 }

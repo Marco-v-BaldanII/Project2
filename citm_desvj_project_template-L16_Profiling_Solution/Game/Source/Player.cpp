@@ -210,6 +210,9 @@ bool Player::Update(float dt)
 
 		break;
 	case MOVE:
+		//app->guiManager->spotLight->visible = true;
+
+		app->render->DrawVignette(position.x , position.y , 400, 255);
 
 		//Expand tiles to available
 		if (!ExpandedBFS) {

@@ -37,12 +37,25 @@ public:
 
 	void MoveToTarget() {
 
-		Lerp3(position.x, speed, Target.x);
-		Lerp3(position.y, speed, Target.y);
+		if (position.x == Target.x) {
+			int u = 9;
+		}
+		
+
+		Lerp3(position.x, 0.1f, Target.x);
+		Lerp3(position.y, 0.1f, Target.y);
 	}
 	void Render() {
+		if (visible == true) {
 
-		app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a, true);
+			app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a / 1.4f, true);
+			app->render->FillCircle(position.x, position.y, radius * 1.5f, color.r, color.g, color.b, color.a / 1.4f, true);
+
+			
+
+			//app->render->FillCircle(position.x, position.y, radius*2, color.r, color.g, color.b, color.a/1.5f, true);
+			//app->render->DrawCircle(Target.x, Target.y, 2, 255, 0, 0, 255, true);
+		}
 	}
 
 };
