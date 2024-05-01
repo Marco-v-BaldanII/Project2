@@ -41,9 +41,9 @@
 		<!-- Right now i'm putting the maps here but ideally they should be on the map -->
 		<!-- (1.05 = + 5%)  (0.9 = -10%) -->
 
-		<item name="Warcry Trumpet" movement ="2" speed="1.05" attack="0.9" x="10" y="39" textPath ="Assets/Textures/Items/Item1.png"/>
+		<item name="Warcry Trumpet" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/Item1.png"/>
 
-		<item name="Serendipity Headgeat" movement ="-2" luck="1.4" x="2" y="36" textPath ="Assets/Textures/Items/Item1.png"/>
+		<item name="Serendipity Headgeat" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/Item1.png"/>
 		
 	</itemmanager>
 
@@ -195,50 +195,56 @@
 				<!-- Paladin = 0, Archer = 1, Knight = 2, Armoured Knight = 3, Mage = 4, DarkMage = 5-->
 
 
-				<player  name="Prince Edward"  x="6" y="39" unit_type="1"  attack="80" hp="100" precision="75" luck="25" speed="20" movement="8">
+				<player  name="Prince Edward"  x="1" y="23" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
 
 					<dialogue text ="How could you . . . break our promise Richard ?"/>
 
 				</player>
-				<player  name="Henry Tudor" x="2" y ="39" unit_type="0" attack="50" hp="100" precision="95" luck="25" speed="30" movement="10">
+				<player  name="Henry Tudor" x="1" y ="24" unit_type="0" attack="5" hp="12" precision="95" luck="25" speed="30" movement="10">
 
 					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
 
 				</player>
 
-				<player  name="Margaret of Anjou" x="4" y="42" unit_type="3"  attack="60" hp="100" precision="70" luck="20" speed="25" movement="6">
+				<player  name="Margaret of Anjou" x="1" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6">
 
 					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
 					
 				</player>
 
-				<enemy name= "Duke of York" x="7" y="39" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
+							
+				<enemy name= "Duke of York" x="11" y="4" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
 
 					<dialogue text =" Dammn it! Lancasters , you'll live to regret this humiliation"/>
 
 				</enemy>
 				
-				<enemy name= "Edward of York" x="15" y="38" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8">
+				<enemy name= "Edward of York" x="40" y="13" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8">
 
 					<dialogue text ="I must not die here, father I'll support you from the back lines"/>
 
 				</enemy>
 				
-				<enemy name= "Archer" x="25" y="45" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Earl of Warwick" x="38" y="29" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6">
 				
+					<dialogue text ="Grrrr :("/>				
 				
-					<!--<enemy name= "Earl of Warwick" x="79" y="72" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6"/>
+				</enemy>
 
-				<enemy name= "George of Clarence" x="43" y="50" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "George of Clarence" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
 				
-				<enemy name= "Knight" x="21" y="53" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+					<dialogue text ="May my final arrow find its mark, even in death"/>				
 				
-				<enemy name= "Mage" x="51" y="76" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Mage" x="78" y="36" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Mage" x="83" y="36" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Archer" x="37" y="18" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Knight" x="39" y="18" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/> -->
+				</enemy>				
 
+				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Mage" x="24" y="32" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Mage" x="46" y="22" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Mage" x="43" y="18" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Archer" x="24" y="10" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>				
+				<enemy name= "Knight" x="23" y="9" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/> 
+				
 			</map>
 			
 			
@@ -336,5 +342,26 @@
 
 
 	</backStage>
+
+	<castingScene>
+
+	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets\Textures\Actors\DiegoDiavollo.png"/>
+	<actor name="Tessa Thompson" dialogue="Buon giorno2" path ="Assets\Textures\Actors\TessaThompson.png"/>
+	<actor name="Alicia Sol" dialogue="Buon giorno3" path ="Assets\Textures\Actors\AliciaSol.png"/>
+	<actor name="Mohan Boot" dialogue="Buon giorno3" path ="Assets\Textures\Actors\MohanBoot.png"/>
+	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets\Textures\Actors\EmmaDragonfly.png"/>
+
+	<role text="Henry VI"  path = "Assets\Textures\LancasterOutfits\HenryVIOutfit.png" />
+	<role text="Prince Edward"  path = "Assets\Textures\LancasterOutfits\Prince EdwardOutfit.png"/>
+	<role text="Margaret"  path = "Assets\Textures\LancasterOutfits\defaultOutfit.png"/>
+	<role text="Jasper Tudor"  path = "Assets\Textures\LancasterOutfits\Jasper TudorOutfit.png"/>
+	<role text="Henry Tudor"  path = "Assets\Textures\LancasterOutfits\HenryTudorOutfit.png"/>
+
+	
+	</castingScene>
+
+
+
+
 	
 </config>
