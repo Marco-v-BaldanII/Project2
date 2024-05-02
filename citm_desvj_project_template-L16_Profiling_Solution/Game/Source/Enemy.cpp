@@ -263,6 +263,10 @@ bool Enemy::PostUpdate() {
 		break;
 	case MOVE:
 	{
+		/*iPoint spotPos = iPoint(position.x + 16, position.y + 16);
+		app->render->DrawCircle(position.x + 16, position.y + 16, 2, 0, 0, 0, 255, true);
+		app->guiManager->spotLight->Target = spotPos;*/
+
 		//draw movement area
 		//app->map->pathfinding->DrawBFSPath();
 		//Search for new pos//Draw path
@@ -271,7 +275,7 @@ bool Enemy::PostUpdate() {
 		{
 			SDL_Rect rect;
 
-			for (uint i = 0; i < movement + 1 && i < path->Count(); ++i)
+			for (uint i = 0; i < movement + 1 && i < path->Count() && path->Count() < 6; ++i)
 			{
 				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 				rect.x = (pos.x);

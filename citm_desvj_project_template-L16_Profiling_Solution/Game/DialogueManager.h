@@ -230,6 +230,8 @@ private:
 
 	bool scriptWritten = false;
 
+	int DialogueChannel;
+
 };
 
 #endif // __DIALOGUEMANAGER_H__

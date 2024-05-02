@@ -11,6 +11,7 @@
 #include "../Entity.h"
 #include"../BattleScene.h"
 #include "DialogueManager.h"
+#include "../GuiManager.h"
 
 using namespace std;
 
@@ -75,6 +76,8 @@ bool TurnManager::Update(float dt)
 		currentPlayer->movedThisTurn = true;
 		availablePlayers--;
 		currentPlayer = nullptr; // CHANGE THIS TO A FIGHTING STATE
+		/*Turn off spotLight*/
+		app->guiManager->TurnOffSpotLight();
 	}
 	
 	if (availablePlayers <= 0) {

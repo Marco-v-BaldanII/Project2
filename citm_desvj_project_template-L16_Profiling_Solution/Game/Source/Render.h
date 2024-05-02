@@ -11,6 +11,12 @@
 
 struct ActorSprite;
 
+struct Circle {
+
+	iPoint position;
+	uint radius;
+};
+
 class Render : public Module
 {
 public:
@@ -38,15 +44,16 @@ public:
 	void ResetViewPort();
 
 	// Drawing
-	bool DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL , bool flipped = false, int opacity = 255, float speed = 1.0f, int R = 255, int G = 255, int B = 255, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const;
+	bool DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL , bool flipped = false, int opacity = 255, float speed = 1.0f, int R = 255, int G = 255, int B = 255, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX, SDL_BlendMode blendMode = SDL_BLENDMODE_BLEND) const;
 
 	bool DrawActor(ActorSprite* sprite, int x, int y, const SDL_Rect* section = NULL, bool flipped = false, int opacity = 255, float speed = 1.0f, int R = 255, int G = 255, int B = 255, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const;
 
 	bool DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = true, bool useCamera = true) const;
+	bool DrawRectMask(const SDL_Rect& rect,Circle mask, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = true, bool useCamera = true ) const;
 	bool DrawRectangle(const SDL_Rect& rect, b2Color col, bool filled, bool use_camera) const;
 	bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
-	bool FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const;
+	bool FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera, SDL_BlendMode blendMode = SDL_BLENDMODE_BLEND) const;
 
 	bool DrawText(const std::string& text, int posX, int posY, int w, int h, bool isDialogue = false, SDL_Color col = SDL_Color{ 255,255,255,255 });
 	bool DrawTextButton(const char* text, int posx, int posy, int w, int h, SDL_Color color = { 255,255,255,255 });
@@ -61,6 +68,8 @@ public:
 
 	//
 	bool SaveState(pugi::xml_node node);
+
+	void CameraCenterOn(int x, int y);
 
 public:
 

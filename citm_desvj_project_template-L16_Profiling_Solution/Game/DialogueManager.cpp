@@ -216,8 +216,23 @@ bool DialogueManager::Update(float dt)
 		// This method checks for the input to advance to the next dialogue
 		AdvanceText();
 
+		app->guiManager->spotLight->visible = true;
+		if (currentPos == MIDDLE) {
+			app->guiManager->spotLight->visible = false;
+		}
+		else {
+			app->guiManager->spotLight->visible = true;
+		}
 
 
+		if (currentPos == LEFT) {
+			app->guiManager->spotLight->Target.x = 100 - (portraitBoxL.w / 2);
+			app->guiManager->spotLight->Target.y = 120 + (portraitBoxL.h / 2);
+		}
+		if (currentPos == RIGHT) {
+			app->guiManager->spotLight->Target.x = 280 + (portraitBoxR.w / 2);
+			app->guiManager->spotLight->Target.y = 120 + (portraitBoxR.h / 2);
+		}
 
 
 
@@ -266,6 +281,7 @@ bool DialogueManager::Update(float dt)
 					}
 
 					app->backStage->npcsList.Clear();
+					
 				}
 
 			}
@@ -737,7 +753,7 @@ void DialogueManager::Next_Dialogue() {
 
  	dialogueIndex++;
 
-	app->audio->StopFx(Scenes[sceneIndex]->dialogues[dialogueIndex - 1]->voiceLine);
+	app->audio->StopFx(DialogueChannel);
 
 	// checks if the scene has finished
 	if (dialogueIndex + 1 == Scenes[sceneIndex]->numDialogues || skipScene) {
@@ -747,7 +763,7 @@ void DialogueManager::Next_Dialogue() {
 		dialogueIndex = 0;
 		if (sceneIndex + 1 != Scenes.Count()) {
 			sceneIndex++;
-			if (app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999) app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
+			if (app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999)DialogueChannel = app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 		}
 		else  {
 			// the cutscene for act 1 has finished
@@ -762,7 +778,7 @@ void DialogueManager::Next_Dialogue() {
 	else {
 		// Play voice line
 		int h = Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine;
-		if(app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999) app->audio->PlayFx( Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
+		if(app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999) DialogueChannel =  app->audio->PlayFx( Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 	}
 }
 

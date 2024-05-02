@@ -6,8 +6,15 @@
 #include "p2List.h"
 #include "GuiPanel.h"
 #include "List.h"
+#include "Textures.h"
+#include "Render.h"
 
+struct SDL_Texture;
 
+enum LightMode {
+	DIALOG,
+	BAT
+};
 
 class SpotLight {
 
@@ -18,7 +25,8 @@ public:
 		this->radius = radius;
 		this->color = color;
 		this->speed = speed;
-
+		texture = app->tex->Load("Assets/Textures/spotLight.png");
+		vigneteText = app->tex->Load("Assets/Textures/DarkVignete.png");
 	}
 
 	int radius;
@@ -26,8 +34,13 @@ public:
 
 	float speed;
 
+	LightMode mode = DIALOG;
+
 	iPoint Target;
 	iPoint position;
+	SDL_Texture* texture;
+	SDL_Texture* vigneteText;
+	SDL_Rect vigneteRect = SDL_Rect{ 0,0,1000,1000 };
 
 	bool visible = false;
 
@@ -48,9 +61,29 @@ public:
 	void Render() {
 		if (visible == true) {
 
-			app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a / 1.4f, true);
-			app->render->FillCircle(position.x, position.y, radius * 1.5f, color.r, color.g, color.b, color.a / 1.4f, true);
+			/*
+				app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a / 2.6f, true, SDL_BLENDMODE_ADD);
+				app->render->FillCircle(position.x, position.y, radius * 1.2f, color.r, color.g, color.b, color.a / 3.0f, true, SDL_BLENDMODE_ADD);
+				app->render->FillCircle(position.x, position.y, radius * 1.35f, color.r, color.g, color.b, color.a / 3.2f, true, SDL_BLENDMODE_ADD);
+				app->render->FillCircle(position.x, position.y, radius * 1.5f, color.r, color.g, color.b, color.a / 3.4f, true, SDL_BLENDMODE_ADD);*/
+			if (mode == BAT) {
+				app->render->DrawTexture(texture, position.x - 32, position.y - 32, (const SDL_Rect*)0, true, 210, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD);
+				SDL_Rect rect = SDL_Rect{ 0,0,1000,1000 };
 
+				app->render->DrawTexture(vigneteText, position.x - 500, position.y - 500, &rect, false, 190);
+			}
+			else {
+
+				SDL_Rect BigRect = SDL_Rect{ 0,0,196,196 };
+
+				app->render->DrawTexture(texture, position.x - 32, position.y - 32, &BigRect, true, 210, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD);
+				/*SDL_Rect rect = SDL_Rect{ 0,0,1000,1000 };
+
+				app->render->DrawTexture(vigneteText, position.x - 500, position.y - 500, &rect, false, 190);*/
+			}
+				/*Circle c; c = Circle { position, (uint)radius };
+				SDL_Rect rect = SDL_Rect{ 0,0,800,800 };
+				app->render->DrawRectMask(rect,c, 0,0,0,200, true, true);*/
 			
 
 			//app->render->FillCircle(position.x, position.y, radius*2, color.r, color.g, color.b, color.a/1.5f, true);
@@ -90,6 +123,9 @@ public:
 	void OpenPanel(PanelID panel_id);
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
+
+	void TurnOffSpotLight();
+	void TurnOnSpotLight();
 
 public:
 	//Gui textures Used

@@ -78,7 +78,7 @@ bool GuiManager::Update(float dt)
 
 	iPoint MousePose; app->input->GetMouseWorldPosition(MousePose.x, MousePose.y);
 
-	spotLight->Target = MousePose;
+	//spotLight->Target = MousePose;
 
 	spotLight->MoveToTarget();
 	
@@ -122,10 +122,24 @@ bool GuiManager::PostUpdate() {
 		control = control->next;
 	}
 
+	
 	spotLight->Render();
-	app->render->DrawVignette(spotLight->position.x * 3, spotLight->position.y *3, 40, 210);
+	//app->render->DrawVignette(spotLight->position.x * 3, spotLight->position.y *3, 40, 210);
 
 	return true;
+}
+
+void GuiManager::TurnOffSpotLight() {
+
+	if(spotLight->visible != false) spotLight->visible = false;
+	// play fx
+
+}
+void GuiManager::TurnOnSpotLight() {
+	if(spotLight->visible != true)spotLight->visible = true;
+	
+	// play fx
+
 }
 
 // L15: DONE1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls

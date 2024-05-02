@@ -48,6 +48,7 @@ bool BattleScene::Start()
 {
 	if (active) {
 		if (!started) {
+			app->guiManager->spotLight->mode = BAT;
 			lancasterUI = app->tex->Load(mynode.child("lancasterUI").attribute("path").as_string());
 			yorkUI = app->tex->Load(mynode.child("yorkUI").attribute("path").as_string());
 			battleBackground = app->tex->Load(mynode.child("background").attribute("path").as_string());

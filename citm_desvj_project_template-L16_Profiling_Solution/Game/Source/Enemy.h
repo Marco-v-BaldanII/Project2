@@ -57,6 +57,8 @@ public:
 
 	PathFinding* personalPathfinding;
 
+	bool centerCamera = false;
+
 };
 
 #endif // __ENEMY_H__

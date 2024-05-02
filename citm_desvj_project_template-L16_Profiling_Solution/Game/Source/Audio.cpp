@@ -162,19 +162,20 @@ unsigned int Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool Audio::PlayFx(unsigned int id, int repeat)
+int Audio::PlayFx(unsigned int id, int repeat)
 {
 	bool ret = false;
+	int i = -1;
 
 	if(!active)
-		return false;
+		return -1;
 
 	if(id > 0 && id <= fx.Count())
 	{
-		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		i = Mix_PlayChannel(2, fx[id - 1], repeat);
 	}
 
-	return ret;
+	return i;
 }
 
 void Audio::StopFx(int effect) {

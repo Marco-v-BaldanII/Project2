@@ -212,11 +212,7 @@
 					
 				</player>
 
-				<enemy name= "Duke of York" x="11" y="4" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
-
-					<dialogue text =" Dammn it! Lancasters , you'll live to regret this humiliation"/>
-
-				</enemy>
+				
 				
 				<enemy name= "Edward of York" x="40" y="13" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8">
 

@@ -13,6 +13,8 @@
 
 #define MAX_TILE_AMOUNT 54
 
+#define TILE_RESOLUTION 32
+
 class Entity;
 class Item;
 
@@ -238,6 +240,9 @@ public:
 
     int GetTileWidth();
     int GetTileHeight();
+
+    // Limits the camera, CHANGE for different maps
+    void CameraRestrictions();
 
 
 public: 

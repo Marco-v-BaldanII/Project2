@@ -212,7 +212,7 @@ bool Player::Update(float dt)
 	case MOVE:
 		//app->guiManager->spotLight->visible = true;
 
-		app->render->DrawVignette(position.x , position.y , 400, 255);
+		
 
 		//Expand tiles to available
 		if (!ExpandedBFS) {
@@ -278,10 +278,16 @@ bool Player::PostUpdate()
 			break;
 		case MOVE:
 		{
-			//Draw path
-
+			//Draw spotLight
+			iPoint spotPos = iPoint(position.x + 16, position.y + 16);
+			app->render->DrawCircle(position.x +16, position.y +16, 2, 0, 0, 0, 255, true);
 			
 
+			//app->render->CameraCenterOn(position.x -200, position.y -200);
+			app->guiManager->spotLight->Target = spotPos;
+			app->guiManager->TurnOnSpotLight();
+			
+			//Draw path
 			if (app->turnManager->currentPlayer == this) 
 			{
 				personalPathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());

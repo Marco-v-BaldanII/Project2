@@ -124,7 +124,7 @@ void Render::ResetViewPort()
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, bool flipped, int opacity, float speed, int R, int G, int B, double angle, int pivotX, int pivotY) const
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, bool flipped, int opacity, float speed, int R, int G, int B, double angle, int pivotX, int pivotY, SDL_BlendMode blendMode) const
 {
 	bool ret = true;
 	uint scale = app->win->GetScale();
@@ -135,6 +135,8 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 
 	SDL_SetTextureColorMod(texture, R, G, B);
 	SDL_SetTextureAlphaMod(texture, opacity);
+	SDL_SetTextureBlendMode(texture, blendMode); 
+
 
 	if (section != NULL)
 	{
@@ -212,6 +214,46 @@ bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint
 	}
 
 	return ret;
+}
+
+bool Render::DrawRectMask(const SDL_Rect& rect, Circle mask, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool useCamera) const {
+
+	bool ret = true;
+	uint scale = app->win->GetScale();
+
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+	SDL_Rect rec(rect);
+	if (useCamera)
+	{
+		rec.x = (int)(camera.x + rect.x * scale);
+		rec.y = (int)(camera.y + rect.y * scale);
+		rec.w *= scale;
+		rec.h *= scale;
+	}
+
+	// Apply color modulation to mask out the specified area
+
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0); // Set to transparent black (0 alpha) to mask out the area
+		//SDL_Rect maskedArea = *maskRect;
+		//maskedArea.x += rec.x; // Adjust masked area to match screen coordinates
+		//maskedArea.y += rec.y;
+		//SDL_RenderFillRect(renderer, &maskedArea);
+		FillCircle(mask.position.x, mask.position.y, mask.radius, 0, 0, 0, 0, true);
+		SDL_SetRenderDrawColor(renderer, r, g, b, a); // Reset color modulation
+	
+
+	int result = (filled) ? SDL_RenderFillRect(renderer, &rec) : SDL_RenderDrawRect(renderer, &rec);
+
+	if (result != 0)
+	{
+		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+
 }
 
 bool Render::DrawRectangle(const SDL_Rect& rect, b2Color col , bool filled, bool use_camera) const
@@ -296,12 +338,12 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
+bool Render::FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera, SDL_BlendMode blendMode) const
 {
 	bool ret = true;
 	uint scale = app->win->GetScale();
 
-	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawBlendMode(renderer, blendMode);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
 	int result = -1;
@@ -424,6 +466,39 @@ void Render::DrawVignette(int centerX, int centerY, int radius, Uint8 maxAlpha)
 	//		SDL_RenderDrawPoint(renderer, x, y);
 	//	}
 	//}
+}
+
+void Render::CameraCenterOn(int targetX, int targetY) {
+
+	//printf("%d X %d Y \n", &targetX, &targetY);
+	//// center the  pos on the target
+	int xOffset = 0;
+	int yOffset = 0;
+	int max = 5;
+
+
+	camera.x = (-targetX * 3) + (96*0);
+	camera.y = (-targetY * 3) + (96*0);
+
+	//if (app->render->camera.x > 0) {
+	//	app->render->camera.x = 0;
+
+	//}
+	//if (app->render->camera.y > 0) { app->render->camera.y = 0; }
+	//if (app->render->camera.x < -43 * TILE_RESOLUTION * 3) { app->render->camera.x = -43 * TILE_RESOLUTION * 3; }
+	//if (app->render->camera.y < -36 * TILE_RESOLUTION * 3) {
+	//	app->render->camera.y = -36 * TILE_RESOLUTION * 3;
+	//}
+
+	/*while (camera.x + 100 > 0 && max > 0) {
+		camera.x + 100;
+		max--;
+	}
+	max = 5;*/
+	/*while (camera.y + 100 < 0 && max > 0) {
+		camera.y += 100;
+		max--;
+	}*/
 }
 
 // L14: TODO 6: Implement a method to load the state

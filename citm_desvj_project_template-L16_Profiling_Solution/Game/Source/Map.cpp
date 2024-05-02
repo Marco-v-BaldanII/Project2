@@ -13,6 +13,7 @@
 #include "BattleScene.h"
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
+#include <algorithm>
 
 Map::Map(bool isActive) : Module(isActive), mapLoaded(false)
 {
@@ -68,6 +69,9 @@ bool Map::Update(float dt)
     ListItem<MapLayer*>* mapLayer; 
     mapLayer = mapData.layers.start;
 
+
+    CameraRestrictions();
+
     // L06: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
 
     // iterates the layers in the map
@@ -75,10 +79,23 @@ bool Map::Update(float dt)
         //Check if the property Draw exist get the value, if it's true draw the lawyer
         if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value) {
             //iterate all tiles in a layer
-            for (int i = 0; i < mapData.width; i++) {
-                for (int j = 0; j < mapData.height; j++) {
+
+            SDL_Rect const camera = app->render->camera;
+
+            iPoint cameraPos = iPoint(0, 0);
+            iPoint cameraSize = iPoint(mapLayer->data->width, mapLayer->data->height);
+
+            // Map drawing optimization to only draw portion visible by the camera
+        
+                cameraPos = WorldToMap(-camera.x / app->win->GetScale(), ((camera.y) * -1) / app->win->GetScale());
+                cameraSize = iPoint(16, 14);
+
+            for (int x = cameraPos.x; x < mapData.width; x++) {
+                for (int y = cameraPos.y; y < mapData.height; y++) {
+
+
                     //Get the gid from tile
-                    int gid = mapLayer->data->Get(i, j);
+                    int gid = mapLayer->data->Get(x, y);
 
                     //L08: DONE 3: Obtain the tile set using GetTilesetFromTileId
                     //Get the Rect from the tileSetTexture;
@@ -87,17 +104,17 @@ bool Map::Update(float dt)
                     //SDL_Rect tileRect = mapData.tilesets.start->data->GetRect(gid); // (!!) we are using always the first tileset in the list
 
                     //Get the screen coordinates from the tile coordinates
-                    iPoint mapCoord = MapToWorld(i, j);
+                    iPoint mapCoord = MapToWorld(x, y);
 
                     // L06: DONE 9: Complete the draw function
                     app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
 
-                    if (i == 50) {
+                    if (x == 50) {
                         //LOG("test");
                     }
 
                     if (showMinimap) {
-                        if (mapLayer->data->myTiles[i][j] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[i][j]->GetColor(), true, true);
+                        if (mapLayer->data->myTiles[x][y] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[x][y]->GetColor(), true, true);
                     }
 
                     // testing if the tile's associated color is drawn
@@ -124,6 +141,20 @@ bool Map::Update(float dt)
     }
 
     return ret;
+}
+
+
+void Map::CameraRestrictions() {
+    //Limit the camera
+    if (app->render->camera.x > 0) {
+        app->render->camera.x = 0;
+
+    }
+    if (app->render->camera.y > 0) { app->render->camera.y = 0; }
+    if (app->render->camera.x < -43 * TILE_RESOLUTION * 3) { app->render->camera.x = -43 * TILE_RESOLUTION * 3; }
+    if (app->render->camera.y < -36 * TILE_RESOLUTION * 3) {
+        app->render->camera.y = -36 * TILE_RESOLUTION * 3;
+    }
 }
 
 // L08: DONE 2: Implement function to the Tileset based on a tile id
