@@ -8,14 +8,17 @@
     ],
     "fileStates": {
         "Mapanieve3.tmx": {
-            "scale": 1,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 851,
-                "y": 552
+                "x": 762,
+                "y": 726
             }
         },
         "Mapanieve3.tmx#tileset3": {
+            "scaleInDock": 1
+        },
+        "Mapanieve3.tmx#tilesetinversa": {
             "scaleInDock": 1
         },
         "mapnuevo.tmx": {
@@ -45,9 +48,10 @@
         "Mapanieve3.tmx",
         "mapnuevo.tmx"
     ],
+    "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 128,
-        "width": 128
+        "height": 32,
+        "width": 32
     }
 }
