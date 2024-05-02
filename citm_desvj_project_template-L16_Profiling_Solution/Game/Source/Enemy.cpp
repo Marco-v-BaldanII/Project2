@@ -126,7 +126,17 @@ bool Enemy::PreUpdate() {
 			/*if (battleState == DEAD)
 				break;*/
 
-			if (target == nullptr)
+			int cnt = 0;
+			while (app->turnManager->players.At(cnt) != NULL) {
+				if (app->map->pathfinding->DistanceBetweenTiles(app->turnManager->players.At(cnt)->data->tilePos, tilePos) <= 20)
+				{
+					playerNear = true;
+				}
+
+				cnt++;
+			}
+
+			if (target == nullptr && playerNear == true)
 			{
 				
 				p2ListItem<Entity*>* p = app->entityManager->GetNearestPlayer(this);
@@ -144,7 +154,7 @@ bool Enemy::PreUpdate() {
 					p = p->next;
 				}
 			}
-			else {
+			else if (playerNear == true) {
 
 				if (HasMoveAction && app->map->pathfinding->DistanceBetweenTiles(target->tilePos, tilePos) <= 1 && HasAttackAction)
 				{
@@ -159,12 +169,27 @@ bool Enemy::PreUpdate() {
 				}
 			
 			}
+			if (playerNear == false)
+			{
+				newTarget = false;
+				target = nullptr;
+				app->turnManager->noEnemyMoving = true;
+				Move = false;
+				ExpandedBFS = false;
+				nextStep = true;
+				app->map->pathfinding->ResetBFSPath();
+				stepCounter = 0;
+				state = IDLE;
+				HasMoveAction = false;
+				app->turnManager->isPlayerMoving = false;
+				entityTurn = false;
+			}
 		}
 		//if no attack and no move action end turn
 		if (!HasAttackAction && !HasMoveAction) {
 			entityTurn = false;
 		}
-
+		
 	}
 	break;
 	}
@@ -187,6 +212,7 @@ bool Enemy::Update(float dt)
 		
 		currentAnim->Update();
 		if (!Move) {
+		
 
 			//Set available movement tiles
 			if (!newTarget)
@@ -208,18 +234,23 @@ bool Enemy::Update(float dt)
 				}
 
 			}
-		}
+			
+		} 
 
 		
-		 if (HasAttackAction && app->map->pathfinding->DistanceBetweenTiles(target->tilePos, tilePos) <= 1) {
-			state = BATTLE;
-		 } else if (MovePath()) 
-		 {
-			 newTarget = false;
-			 target = nullptr;
-			 app->turnManager->noEnemyMoving = true;
+			if (HasAttackAction && app->map->pathfinding->DistanceBetweenTiles(target->tilePos, tilePos) <= 1 ) {
 
-		 }
+				state = BATTLE;
+			}
+			else if (MovePath())
+			{
+				newTarget = false;
+				target = nullptr;
+				app->turnManager->noEnemyMoving = true;
+
+			}
+		
+		
 
 		break;
 	case BATTLE:
