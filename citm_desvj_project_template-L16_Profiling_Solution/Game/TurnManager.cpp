@@ -108,6 +108,7 @@ bool TurnManager::Update(float dt)
 			{
 				app->entityManager->enemies.At(i)->data->HasMoveAction = true;
 				app->entityManager->enemies.At(i)->data->HasAttackAction = true;
+				app->entityManager->enemies.At(i)->data->playerNear = false;
 			}
 
 			PlayerTurn();
@@ -262,7 +263,7 @@ void TurnManager::CheckBattleEnding() {
 		enemyLoss = true; 
 	}*/
 
-	if (playerLoss || enemyLoss)/*Split into restart & next battle outcomes*/ {
+	if (playerLoss || enemyLoss || MainQuest)/*Split into restart & next battle outcomes*/ {
 		// Restart the fight
 		app->battleScene->CleanUp();
 

@@ -139,6 +139,8 @@ public:
 	float counter = 0;
 	States state;
 
+	bool playerNear;
+
 	Frame* myFrame = nullptr;
 
 	bool HasAttackAction = false;

@@ -87,7 +87,7 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="PauseMenu.cpp" />
-
+    <ClCompile Include="QuestManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -221,9 +221,8 @@
     <ClInclude Include="CastingScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-
     <ClInclude Include="PauseMenu.h" />
-
+    <ClInclude Include="QuestManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

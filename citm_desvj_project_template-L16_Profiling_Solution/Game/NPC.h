@@ -9,6 +9,7 @@
 #include "../DynArray.h"
 #include "../Timer.h"
 #include "Dialogue.h"
+#include "QuestManager.h"
 
 struct SDL_Texture;
 struct Node;
@@ -74,6 +75,8 @@ public:
 
 	
 	MOVEMENT myMovement =  WAIT;
+
+	Quest* quest = nullptr;
 
 	Timer dirTimer;
 

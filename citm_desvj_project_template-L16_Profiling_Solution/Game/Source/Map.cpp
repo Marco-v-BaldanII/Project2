@@ -319,7 +319,7 @@ bool Map::Load(SString mapFileName)
 
                 mapLayer->myTiles[i % MAX_TILE_AMOUNT][j] = new Tile(b2Color(1, 1, 1, 1), type);
 
-
+                myTiles[i % MAX_TILE_AMOUNT][j] = mapLayer->myTiles[i % MAX_TILE_AMOUNT][j];
 
                 if (i != 0 && i % mapLayer->width == 0) {
                     j++;

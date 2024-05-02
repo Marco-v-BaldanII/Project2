@@ -17,6 +17,7 @@
 #include "GuiToggle.h"
 
 struct SDL_Texture;
+class Quest;
 
 class BattleScene : public Module
 {
@@ -97,6 +98,7 @@ public:
 	List<Player*> party;
 	List<Enemy*> goons;
 
+	List<Quest*> quests;
 
 	pugi::xml_node mynode;
 
@@ -135,6 +137,8 @@ public:
 
 	bool godMode;
 	bool firstMap = false;
+
+	bool MainQuest = false;
 
 };
 #endif // __BATTLESCENE_H__

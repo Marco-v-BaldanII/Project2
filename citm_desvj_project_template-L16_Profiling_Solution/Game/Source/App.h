@@ -32,6 +32,7 @@ class LevelManagement;
 class TurnManager;
 class BackStagePlayer;
 class ItemManager;
+class QuestManager;
  //Scenes
 class Intro;
 class StartMenu;
@@ -129,6 +130,7 @@ public:
 	LevelManagement* levelManager;
 	TurnManager* turnManager;
 	ItemManager* itemManager;
+	QuestManager* questManager;
 	PauseMenu* pauseMenu;
 
 
