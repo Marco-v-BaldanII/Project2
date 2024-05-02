@@ -11,9 +11,12 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 762,
-                "y": 726
+                "x": 894,
+                "y": 948
             }
+        },
+        "Mapanieve3.tmx#arbolagua": {
+            "scaleInDock": 1
         },
         "Mapanieve3.tmx#tileset3": {
             "scaleInDock": 1
