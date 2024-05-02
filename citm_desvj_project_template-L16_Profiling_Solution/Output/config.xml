@@ -41,6 +41,8 @@
 		<!-- Right now i'm putting the maps here but ideally they should be on the map -->
 		<!-- (1.05 = + 5%)  (0.9 = -10%) -->
 
+		<item name="Warcry Trumpet" movement ="2" speed="1.05" attack="0.9" x="2" y="24" textPath ="Assets/Textures/Items/Item1.png"/>
+
 		<item name="Warcry Trumpet" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/Item1.png"/>
 
 		<item name="Serendipity Headgeat" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/Item1.png"/>
@@ -194,6 +196,10 @@
 			<map name ="Northampton">
 				<!-- Paladin = 0, Archer = 1, Knight = 2, Armoured Knight = 3, Mage = 4, DarkMage = 5-->
 
+				<sideQuest type="2" objective="Bonus Objective: Don't let any of your units fall"/>
+				<!--type: 0 = defeat, 1 = fetchQuest , 2 = don't loose units-->
+				<mainQuest type="0" objective="Main Objective: Defeat the Duke of York" target ="Duke of York"/>
+
 
 				<player  name="Prince Edward"  x="1" y="23" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
 
@@ -230,7 +236,7 @@
 				
 				</enemy>
 
-				<enemy name= "George of Clarence" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
+				<enemy name= "George of York" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
 				
 					<dialogue text ="May my final arrow find its mark, even in death"/>				
 				
@@ -314,8 +320,12 @@
 			<dialogue text = "I'm so very excited" ID="9"          />
 			<dialogue text = "Though I seem to have forgotten what the play is about" ID="8"          />
 			<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="7"          />
-			<dialogue text = "Do you know what the play is about?" ID="5" choiceA ="Wars of the Roses" choiceB="Hamlet"         />
-			<dialogue text = "Yes that's right" ID="4"         />
+			<dialogue text = "Please defeat George of York in the next battle" ID="5" choiceA ="I accept" choiceB="I refuse" >
+
+				<sideQuest type="0" objective="Defeat George of York in the battle of Northampton"  target="George of York"/> <!--type: 0 = defeat, 1 = fetchQuest-->
+
+			</dialogue>
+			<dialogue text = "Watch out for his poisonous arrows" ID="4"         />
 			<!-- second branch-->
 			<dialogue text = "Are you trolling me?" ID="7"         />
 			<dialogue text = "I will have my revenge" ID="6"         />

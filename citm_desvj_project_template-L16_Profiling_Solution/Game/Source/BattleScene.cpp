@@ -84,6 +84,24 @@ bool BattleScene::Start()
 			}
 		}
 			
+		for (pugi::xml_node questNode = mynode.child("battleMaps").child("map").child("mainQuest"); questNode != NULL; questNode = questNode.next_sibling("mainQuest")) {
+
+			Quest* quest = nullptr;
+			int type = questNode.attribute("type").as_int();
+
+			switch (type) {
+
+			case 0:
+				quest = new DefeatQuest(questNode.attribute("objective").as_string(), questNode.attribute("target").as_string());
+				break;
+			case 1:
+				quest = new FetchQuest(questNode.attribute("objective").as_string(), questNode.attribute("target").as_string());
+				break;
+			}
+			quest->isMain = true;
+
+			app->questManager->quests.Add(quest);
+		}
 
 
 			// Read party members form config and instanciate them

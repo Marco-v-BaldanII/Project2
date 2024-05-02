@@ -32,7 +32,7 @@ bool ItemManager::Start() {
 			n.attribute("textPath").as_string());
 		
 		// assign item to the tile
-		/*app->map->myTiles[app->map->WorldToMap( item->mapPos.x, item->mapPos.y).x][app->map->WorldToMap(item->mapPos.x, item->mapPos.y).y]->myItem = item;*/
+		app->map->myTiles[app->map->WorldToMap( item->mapPos.x, item->mapPos.y).x][app->map->WorldToMap(item->mapPos.x, item->mapPos.y).y]->myItem = item;
 	}
 	
 

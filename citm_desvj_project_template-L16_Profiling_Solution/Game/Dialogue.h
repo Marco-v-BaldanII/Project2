@@ -14,6 +14,7 @@
 #include "DialogueManager.h"
 
 using namespace std;
+class Quest;
 
 enum Position {
 	LEFT,
@@ -50,6 +51,8 @@ public:
 
 	SDL_Texture* background = nullptr;
 
+	bool hasQuest = false;
+	Quest* sideQuest = nullptr;
 
 	string choiceA ="";
 	string choiceB = "";

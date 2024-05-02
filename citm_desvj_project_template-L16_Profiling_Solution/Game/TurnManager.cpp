@@ -260,7 +260,7 @@ void TurnManager::CheckBattleEnding() {
 		enemyLoss = true; 
 	}*/
 
-	if (playerLoss || enemyLoss)/*Split into restart & next battle outcomes*/ {
+	if (playerLoss || enemyLoss || MainQuest)/*Split into restart & next battle outcomes*/ {
 		// Restart the fight
 		app->battleScene->CleanUp();
 

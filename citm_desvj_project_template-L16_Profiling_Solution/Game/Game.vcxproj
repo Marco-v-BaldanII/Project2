@@ -101,6 +101,7 @@
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Source\BackStage.cpp" />
     <ClCompile Include="Source\BattleScene.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="QuestManager.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="someColors.h" />
     <ClInclude Include="Source\Animation.h" />

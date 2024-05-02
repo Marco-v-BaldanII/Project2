@@ -14,7 +14,7 @@
 #include "../BackstagePlayer.h"
 #include "../CastingScene.h"
 #include "../PauseMenu.h"
-
+#include "../QuestManager.h"
 #include "Defs.h"
 #include "Log.h"
 #include "Intro.h"
@@ -63,7 +63,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	dialogueManager = new DialogueManager(true); //editar despues//
 	turnManager = new TurnManager(false);
-
+	questManager = new QuestManager(true);
 	
 	levelManager = new LevelManagement(true);
 	fonts = new Fonts(true);
@@ -105,6 +105,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	
 	AddModule(entityManager);
 	AddModule(backstageplayer);
+	AddModule(questManager);
 	AddModule(dialogueManager);
 	AddModule(castingScene);
 	AddModule(guiManager);

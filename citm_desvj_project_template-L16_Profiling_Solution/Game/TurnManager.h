@@ -71,6 +71,8 @@ public:
 	uint enemyIndex = 0;
 	uint maxEnemies;
 
+	bool MainQuest = false;
+
 };
 
-#endif // __ENTITYMANAGER_H__
+#endif // __TURNMANAGER_H__

@@ -373,6 +373,9 @@ bool Enemy::PostUpdate() {
 
 		}
 
+	
+
+		app->questManager->CheckQuestCompletion(name.GetString());
 		app->entityManager->DestroyEntity(this);
 		//app->battleScene->KillUnit(false, this);
 	}

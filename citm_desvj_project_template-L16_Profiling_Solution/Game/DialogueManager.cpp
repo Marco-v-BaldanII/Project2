@@ -823,7 +823,14 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 		{
 			LOG("Choice A");
 			if (currentNPC_Dialogues->leftChild != nullptr) {
-				//currentNPC_Dialogues = currentNPC_Dialogues->leftChild;
+			
+				if (currentNPC_Dialogues->dialogue->hasQuest == true)/* Accept sidequest */ {
+
+					app->questManager->quests.Add(currentNPC_Dialogues->dialogue->sideQuest);
+
+				}
+
+
 				currentNPC->currentDialogue = currentNPC->currentDialogue->leftChild;
 				currentNPC_Dialogues = currentNPC->currentDialogue;
 			}
@@ -832,7 +839,7 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 		{
 			LOG("Choice B");
 			if (currentNPC_Dialogues->rightChild != nullptr) {
-				//currentNPC_Dialogues = currentNPC_Dialogues->rightChild;
+	
 				currentNPC->currentDialogue = currentNPC->currentDialogue->rightChild;
 				currentNPC_Dialogues = currentNPC->currentDialogue;
 			}

@@ -62,7 +62,27 @@ bool BackStage::Start()
 					// Create all the dialogues for the npc
 					string text = dialogueNode.attribute("text").as_string();
 					Dialogue* di = new Dialogue(npcNode.attribute("name").as_string(), text, dialogueNode.attribute("choiceA").as_string(), dialogueNode.attribute("choiceB").as_string());
+					
+					// Load possible sidequest
+					pugi::xml_node QuestNode = dialogueNode.child("sideQuest");
+					if (QuestNode != NULL) {
+						di->hasQuest = true;
+						Quest* sideQuest = nullptr;
+						int type = QuestNode.attribute("type").as_int();
 
+						switch (type) {
+
+						case 0:
+							sideQuest = new DefeatQuest(QuestNode.attribute("objective").as_string(), QuestNode.attribute("target").as_string());
+							break;
+						case 1:
+							sideQuest = new FetchQuest(QuestNode.attribute("objective").as_string(), QuestNode.attribute("target").as_string());
+							break;
+
+						}
+
+						di->sideQuest = sideQuest;
+					}
 
 					root = t->Insert(root, di, dialogueNode.attribute("ID").as_int());
 
