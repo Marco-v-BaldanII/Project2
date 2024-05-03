@@ -12,6 +12,7 @@
 
 class Frame;
 class Dialogue;
+class Collider;
 
 enum class EntityType
 {
@@ -114,12 +115,18 @@ public:
 
 	bool MovePath();
 
+	virtual void OnCollision(Collider* c1, Collider* c2) {};
+
 	bool InitPath(iPoint destiantion);
 
 	void AssocateEntity_Tile(iPoint position);
 
 
 	void InitializeStats(pugi::xml_node config);
+
+	double curvedTrajectory(double x, double amplitude, double frequency, double damping, double phase_shift) {
+		return amplitude * sin(frequency * x + phase_shift) * exp(-damping * x);
+	}
 
 
 public:

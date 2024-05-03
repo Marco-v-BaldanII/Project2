@@ -10,6 +10,7 @@
 #include "../Timer.h"
 #include "Dialogue.h"
 #include "QuestManager.h"
+#include "../Physics.h"
 
 struct SDL_Texture;
 struct Node;

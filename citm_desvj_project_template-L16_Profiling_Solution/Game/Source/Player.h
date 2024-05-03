@@ -31,9 +31,6 @@ public:
 
 	void CalculateAttack();
 
-	// L07 DONE 6: Define OnCollision function for the player. 
-	void OnCollision(PhysBody* physA, PhysBody* physB);
-
 public:
 
 	Frame* frames;

@@ -206,6 +206,7 @@ bool Enemy::Update(float dt)
 	{
 	case IDLE:
 		
+		Bposition = iPoint(0, 0);
 	
 		break;
 	case MOVE:
@@ -255,6 +256,16 @@ bool Enemy::Update(float dt)
 		break;
 	case BATTLE:
 		battleTimer++;
+
+		Bposition.x += velocity.x * (dt/100);
+		Bposition.y += velocity.y * (dt/100);
+
+		velocity.y += 10 * (dt / 100);
+		if (Bposition.y >= GROUND) {
+			Bposition.y = GROUND;
+			velocity.y *= -BOUNCE;
+		}
+
 
 		if (battleTimer >= 1 && battleTimer < 300) {
 			//Draw the combate
@@ -325,7 +336,11 @@ bool Enemy::PostUpdate() {
 			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
 			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
 			app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
-			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
+
+			//int x = curvedTrajectory()
+
+
+			app->render->DrawTexture(target->myBattleTexture, app->render->camera.x / -3 + Bposition.x, app->render->camera.y / -3 + Bposition.y, false, false, 255);
 
 			finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - target->attack, target->lerpingHp, target->lerpingHp - attack, maxHp, target->maxHp);
 		}

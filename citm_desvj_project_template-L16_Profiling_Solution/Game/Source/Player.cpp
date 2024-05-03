@@ -393,23 +393,7 @@ bool Player::CleanUp()
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
-	switch (physB->ctype)
-	{
-	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
-		break;
-	case ColliderType::ITEM:
-		LOG("Collision ITEM");
-		app->audio->PlayFx(pickCoinFxId);
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-	default:
-		break;
-	}
-}
+
 
 void Player::CalculateAttack() {
 

@@ -255,6 +255,9 @@
 			<Sprite path="Assets/Textures/BattleScreenSprites/Prince Edward.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Henry Tudor.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Duke of York.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Knight.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Archer.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Mage.png"/>
 			
 		</battleSprites>
 	

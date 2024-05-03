@@ -6,6 +6,9 @@
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 
+#define GROUND 200
+#define BOUNCE 1
+
 struct SDL_Texture;
 class Dialogue;
 
@@ -59,6 +62,11 @@ public:
 	PathFinding* personalPathfinding;
 
 	bool centerCamera = false;
+
+	iPoint Bposition = iPoint(100,100);
+
+	iPoint velocity = iPoint(12, 2);
+
 
 };
 
