@@ -33,6 +33,10 @@ public:
 
 	void ClickOnMe();
 
+	bool DealDMG();
+
+	void OnCollision(Collider* physA, Collider* physB) override;
+
 public:
 
 	bool isPicked = false;
@@ -50,7 +54,7 @@ public:
 
 	bool newTarget = false;
 
-	
+	bool finishedLerp = false;
 
 	SDL_Rect section = SDL_Rect{ 75, 6, 26, 27 };
 
@@ -62,10 +66,6 @@ public:
 	PathFinding* personalPathfinding;
 
 	bool centerCamera = false;
-
-	iPoint Bposition = iPoint(100,100);
-
-	iPoint velocity = iPoint(12, 2);
 
 
 };

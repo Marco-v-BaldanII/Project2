@@ -109,13 +109,12 @@ public:
 		}
 	}
 
-	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
+	virtual void OnCollision(Collider* physA, Collider* physB) {
 
 	};
 
 	bool MovePath();
 
-	virtual void OnCollision(Collider* c1, Collider* c2) {};
 
 	bool InitPath(iPoint destiantion);
 
@@ -201,6 +200,17 @@ public:
 
 	bool lastWords = false;
 	Dialogue* deathQuote = nullptr;
+
+	iPoint Bposition = iPoint(250 * 3, 100 * 3); /* starting pos of attack */
+
+	iPoint velocity = iPoint(-12, 3);
+
+	Collider* collider = nullptr;
+	bool BtlMoving = false;
+	bool reachedTarget = false;
+
+	int numberofAttacks = 1;
+
 };
 
 #endif // __ENTITY_H__

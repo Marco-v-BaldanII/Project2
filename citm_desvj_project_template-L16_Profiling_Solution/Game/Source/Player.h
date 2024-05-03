@@ -31,6 +31,8 @@ public:
 
 	void CalculateAttack();
 
+	void OnCollision(Collider* physA, Collider* physB) override;
+
 public:
 
 	Frame* frames;

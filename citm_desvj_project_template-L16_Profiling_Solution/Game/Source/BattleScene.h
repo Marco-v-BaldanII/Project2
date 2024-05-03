@@ -61,7 +61,7 @@ public:
 
 	void PassAnimations(Entity* entity);
 
-	bool DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA, float maxE, float maxA);
+	bool DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA, float maxE, float maxA, bool attack = false);
 
 	void KillUnit(bool isPlayer, Entity* entity);
 

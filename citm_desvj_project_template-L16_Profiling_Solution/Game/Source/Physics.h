@@ -29,8 +29,8 @@ enum Integrators {
 
 enum ColliderType {
 
-    y,
-    UNKOWN
+    PLAYER_C,
+    ENEMY_C
 };
 
 struct vec2 {

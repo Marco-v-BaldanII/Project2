@@ -96,6 +96,7 @@ bool Player::Start() {
 	app->map->CreateNavigationMap(app->map->mapData.width, app->map->mapData.height, &navigationMap);
 	personalPathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, navigationMap);
 	RELEASE_ARRAY(navigationMap);
+	collider = app->physics->AddCollider(SDL_Rect{ 0,0,80 * 3,80 * 3 }, ColliderType::PLAYER_C, this, ColliderShape::QUAD);
 
 	return true;
 }
@@ -162,7 +163,7 @@ bool Player::PreUpdate()
 		break;
 	}
 
-
+	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
 	return true;
 }
 
@@ -173,6 +174,8 @@ bool Player::Update(float dt)
 	switch (state)
 	{
 	case IDLE:
+		Bposition = iPoint(50 * 3, 80 * 3);
+
 		//if click enemy and enemay is on attack range engage combat
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
 			int x, y;
@@ -262,6 +265,7 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate() 
 {
+
 	if (hp > 0) {
 
 		//draw movement area
@@ -327,8 +331,14 @@ bool Player::PostUpdate()
 			if ((!finishedLerp)) {
 				SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
 				app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
-				app->render->DrawTexture(myBattleTexture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, false, false, 255);
-				app->render->DrawTexture(oponent->myBattleTexture, app->render->camera.x / -3 + 250, app->render->camera.y / -3 + 100, false, true, 255);
+				
+				//app->render->DrawTexture(myBattleTexture,  Bposition.x,  Bposition.y, false, true, 255);
+
+				//int x = curvedTrajectory()
+
+
+				app->render->DrawTexture(oponent->myBattleTexture, -app->render->camera.x / 3 + oponent->Bposition.x / 3 , -app->render->camera.y / 3 + oponent->Bposition.y / 3, false, true, 255);
+				app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, true, 255);
 
 				finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - oponent->attack, oponent->lerpingHp, oponent->lerpingHp - attack, maxHp, oponent->maxHp);
 			}
@@ -353,6 +363,10 @@ bool Player::PostUpdate()
 		// Draw the cursor at the adjusted position
 		app->render->DrawCircle(mouseX, mouseY, 8, 1, 1, 1, 255, true);
 	}
+	
+
+	if (app->battleScene->godMode) app->render->DrawRectangle(target->collider->data, b2Color(1, 1, 1, 1), false, false);
+
 	return true;
 }
 
@@ -407,4 +421,13 @@ void Player::CalculateAttack() {
 		 hp = (hp + myItem->GetHp()) - oponent->attack;
 		 oponent->hp -= (attack * myItem->GetAtk());
 	}
+}
+
+void Player::OnCollision(Collider* physA, Collider* physB)  {
+
+	if (physA->type != physB->type) {
+		LOG("something");
+	}
+
+
 }
