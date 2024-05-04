@@ -26,9 +26,12 @@
             "scale": 0.5808423913043478,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 864.2619883040937,
-                "y": 964.1169590643276
+                "x": 1527.092397660819,
+                "y": 938.2923976608188
             }
+        },
+        "Mapanieve3.tmx#TILESET4": {
+            "scaleInDock": 1
         },
         "Mapanieve3.tmx#tileset3": {
             "scaleInDock": 1
