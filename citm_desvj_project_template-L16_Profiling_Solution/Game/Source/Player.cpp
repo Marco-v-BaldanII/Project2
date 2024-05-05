@@ -335,7 +335,7 @@ bool Player::PostUpdate()
 		case BATTLE:
 
 
-			if (battleTimer == 1)/*Determine amount of attacks*/ {
+			if (battleTimer == 1 || battleTimer == 0)/*Determine amount of attacks*/ {
 
 				if (speed > oponent->speed-1) {
 
@@ -513,7 +513,8 @@ bool Player::DealDMG() {
 		state = MOVE;
 		HasAttackAction = false;
 		HasMoveAction = false;
-		battleTimer = 0;
+		reachedTarget = false;
+		battleTimer = 1;
 	}
 	else {
 		finishedLerp = app->battleScene->DrawHPBars( oponent->lerpingHp, oponent->hp - attack, lerpingHp, lerpingHp, oponent->maxHp, maxHp, true);
@@ -522,6 +523,7 @@ bool Player::DealDMG() {
 
 			oponent->hp -= attack;
 			oponent->lerpingHp = oponent->hp;
+			reachedTarget = false;
 			if (numberofAttacks == maxNumofATTACKS) opponentAttacking = true;
 
 			return true;
@@ -541,6 +543,14 @@ void Player::FigureStickMovement(float dt) {
 	if (Bposition.y >= GROUND) {
 		Bposition.y = GROUND;
 		velocity.y *= -BOUNCE;
+	}
+
+	if (numberofAttacks <= 0) {
+		state = MOVE;
+		HasAttackAction = false;
+		HasMoveAction = false;
+		reachedTarget = false;
+		battleTimer = 1;
 	}
 
 }

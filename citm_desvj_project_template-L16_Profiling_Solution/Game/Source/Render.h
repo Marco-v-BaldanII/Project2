@@ -17,6 +17,12 @@ struct Circle {
 	uint radius;
 };
 
+enum TextAlingment {
+
+	LEFT_ALIGN,
+	CENTER_ALIGN
+};
+
 class Render : public Module
 {
 public:
@@ -55,7 +61,7 @@ public:
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera, SDL_BlendMode blendMode = SDL_BLENDMODE_BLEND) const;
 
-	bool DrawText(const std::string& text, int posX, int posY, int w, int h, bool isDialogue = false, SDL_Color col = SDL_Color{ 255,255,255,255 });
+	bool DrawText(const std::string& text, int posX, int posY, int w, int h, bool isDialogue = false, SDL_Color col = SDL_Color{ 255,255,255,255 }, TextAlingment aligment = LEFT_ALIGN);
 	bool DrawTextButton(const char* text, int posx, int posy, int w, int h, SDL_Color color = { 255,255,255,255 });
 
 	void DrawVignette(int centerX, int centerY, int radius, Uint8 maxAlpha);
