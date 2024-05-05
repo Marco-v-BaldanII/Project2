@@ -689,6 +689,12 @@ bool BattleScene::DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA,
 		app->render->DrawTexture(yorkHp, 165 * 2 + (app->render->camera.x / -3), 134 * 2 + (app->render->camera.y / -3), &doubleRect, true);
 		app->render->DrawTexture(lancasterHp, 2 * 2 + (app->render->camera.x / -3), 134 * 2 + (app->render->camera.y / -3), &doubleRect, true);
 
+		string YorkcurHP = to_string((int(eHp_B)));
+		string LanccurHP = to_string((int(aHpB)));
+
+		app->render->DrawText(YorkcurHP,( 183 * 2 * 3 ), (147 * 2 * 3) , 20 * YorkcurHP.length(), 38,false, SDL_Color{49,90,53,255}, CENTER_ALIGN);
+		app->render->DrawText(LanccurHP, (69 * 2 * 3), (148 * 2 * 3), 20 * LanccurHP.length(), 38, false, SDL_Color{ 49,90,53,255 }, CENTER_ALIGN);
+
 	if (attack) {
 
 		if ((int)eHp_B <= (int)eHp_A && (int)aHpB <= (int)aHpA) {

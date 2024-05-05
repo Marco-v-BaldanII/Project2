@@ -378,7 +378,7 @@ bool Render::FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 }
 
 
-bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h, bool isDialogue, SDL_Color color) {
+bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h, bool isDialogue, SDL_Color color, TextAlingment aligment) {
 	
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -408,14 +408,26 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h,
 		
 	}
 
+
 	if(isDialogue) w = w / LINE_LENGTH * Clamp(numletters, 0,LINE_LENGTH);
 
 
 	int texW = 0;
 	int texH = 0;
 	int check = SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+	SDL_Rect dstrect;
+	switch (aligment) {
 
-	SDL_Rect dstrect = { posx, posy, w, h };
+	case ( LEFT_ALIGN):
+
+        dstrect = { posx, posy, w, h };
+		break;
+	case (CENTER_ALIGN):
+		int x_left_corner = posx - texW / 2;
+        dstrect = { x_left_corner, posy, w, h };
+		break;
+
+	}
 	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
 	SDL_DestroyTexture(texture);
