@@ -691,16 +691,17 @@ bool BattleScene::DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA,
 
 	if (attack) {
 
-		if ((int)eHp_B <= (int)eHp_A && (int)aHpA <= (int)aHpA) {
+		if ((int)eHp_B <= (int)eHp_A && (int)aHpB <= (int)aHpA) {
 			return true;
 		}
 		else if (!((int)eHp_B <= (int)eHp_A)) {
-			Lerp2(eHp_B, 0.009f, eHp_A);
+			Lerp2(eHp_B, 0.09f, eHp_A);
 			return false;
 		}
 		else if (!((int)aHpB <= (int)aHpA)) {
-			Lerp2(aHpB, 0.009f, aHpA);
+			Lerp2(aHpB, 0.09f, aHpA);
 			return false;
 		}
 	}
+	else { return false; }
 }

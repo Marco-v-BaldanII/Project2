@@ -37,6 +37,8 @@ public:
 
 	void OnCollision(Collider* physA, Collider* physB) override;
 
+	void FigureStickMovement(float dt);
+
 public:
 
 	bool isPicked = false;
@@ -67,6 +69,8 @@ public:
 
 	bool centerCamera = false;
 
+	bool opponentAttacking = false;
+	bool opponentReachTarget = false;
 
 };
 

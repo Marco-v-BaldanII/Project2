@@ -132,8 +132,8 @@ public:
 	Animation LancasterAnim;
 
 
-	SDL_Rect yorkHPBar = SDL_Rect{ 240 * 2,167 * 2,75 * 2,8 * 2 };
-	SDL_Rect LancasterHPBar = SDL_Rect{ 2 * 2,167 * 2,75 * 2,8 * 2 };
+	SDL_Rect yorkHPBar = SDL_Rect{ 240 * 2,167 * 2,75 * 2,2 * 2 };
+	SDL_Rect LancasterHPBar = SDL_Rect{ 2 * 2,167 * 2,75 * 2,2* 2};
 
 	bool godMode;
 	bool firstMap = false;

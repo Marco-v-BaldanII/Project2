@@ -210,7 +210,7 @@ bool Enemy::Update(float dt)
 	{
 	case IDLE:
 		
-		Bposition = iPoint(300*3, 80*3);
+		 if(!defending) Bposition = iPoint(300*3, 80*3);
 	
 		break;
 	case MOVE:
@@ -261,23 +261,12 @@ bool Enemy::Update(float dt)
 	case BATTLE:
 		
 		/* stick figure movement */
-		if (!reachedTarget) {
+		if (!reachedTarget && !opponentAttacking && !opponentReachTarget) {
 			battleTimer++;
 
-			Bposition.x += velocity.x * (dt / 100);
-			Bposition.y += velocity.y * (dt / 100);
-
-			velocity.y += 10 * (dt / 100);
-			if (Bposition.y >= GROUND) {
-				Bposition.y = GROUND;
-				velocity.y *= -BOUNCE;
-			}
+			FigureStickMovement(dt);
 		}
 
-		if (battleTimer >= 1 && battleTimer < 300) {
-			//Draw the combate
-			
-		}
 
 		
 		break;
@@ -300,7 +289,7 @@ bool Enemy::PostUpdate() {
 
 	//render current tile pos
 	if (app->turnManager->currentTurn == PLAYER) {
-		lerpingHp = hp;
+		
 	}
 	finishedLerp = false;
 
@@ -309,9 +298,11 @@ bool Enemy::PostUpdate() {
 	{
 	case IDLE:
 		//Nothing to do
+		
 		break;
 	case MOVE:
 	{
+		if (!defending) lerpingHp = hp;
 		/*iPoint spotPos = iPoint(position.x + 16, position.y + 16);
 		app->render->DrawCircle(position.x + 16, position.y + 16, 2, 0, 0, 0, 255, true);
 		app->guiManager->spotLight->Target = spotPos;*/
@@ -337,7 +328,7 @@ bool Enemy::PostUpdate() {
 	}
 	break;
 	case BATTLE:
-		battleTimer++;
+
 		if (battleTimer == 1)/*Determine amount of attacks*/ {
 
 			if (speed > target->speed) {
@@ -346,6 +337,7 @@ bool Enemy::PostUpdate() {
 				if (doubleChance <= speed) /*Double attack*/ {
 
 					numberofAttacks = 2;
+					maxNumofATTACKS = numberofAttacks;
 				}
 
 			}
@@ -366,6 +358,31 @@ bool Enemy::PostUpdate() {
 
 			if(app->battleScene->godMode) app->render->DrawRectangle(target->collider->data, b2Color(1, 1, 1, 1), false, false);
 
+
+			if (opponentAttacking) {
+				target->defending = true;
+				target->FigureStickMovement(16.0f);
+			}
+
+			if (opponentReachTarget) {
+
+				bool opLerp = false;
+
+				opLerp = app->battleScene->DrawHPBars(lerpingHp, hp - target->attack, target->lerpingHp, target->lerpingHp, maxHp, target->maxHp, true);
+
+				if (opLerp) /*hp bar lerping has finished*/ {
+
+					hp -= target->attack;
+
+					target->defending = false;
+					opponentAttacking = false;
+					opponentReachTarget = false;
+					target->Bposition = iPoint(300 * 3, 80 * 3);
+				}
+
+
+			}
+
 			
 				if (reachedTarget) {
 					if (DealDMG()) {
@@ -378,7 +395,7 @@ bool Enemy::PostUpdate() {
 					}
 				}
 				else {
-					app->battleScene->DrawHPBars(lerpingHp, lerpingHp - target->attack, target->lerpingHp, target->lerpingHp - attack, maxHp, target->maxHp, false);
+					app->battleScene->DrawHPBars(lerpingHp, hp , target->lerpingHp, target->lerpingHp , maxHp, target->maxHp, false);
 				}
 
 			
@@ -429,6 +446,7 @@ bool Enemy::PostUpdate() {
 		//app->battleScene->KillUnit(false, this);
 	}
 
+	if (target != nullptr) { target->collider->data.x = (-40) + target->Bposition.x; target->collider->data.y = (0) + target->Bposition.y; }
 	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
 	//app->render->DrawTexture(myBattleTexture,-app->render->camera.x/2 +  Bposition.x /3,-app->render->camera.y/3 +   Bposition.y/3, false, true, 255);
 	return true;
@@ -456,20 +474,24 @@ void Enemy::ClickOnMe() {
 
 bool Enemy::DealDMG() {
 
-	finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - target->attack, target->lerpingHp, target->lerpingHp - attack, maxHp, target->maxHp, true);
-
-	if (finishedLerp && battleTimer > 298 || numberofAttacks <= 0) {
-		hp -= target->attack;
-		target->hp -= attack;
-		if (numberofAttacks <= 0) {
-			state = MOVE;
-			HasAttackAction = false;
-			HasMoveAction = false;
-			battleTimer = 0;
-		}
-		return true;
+	if (numberofAttacks <= 0) {
+		state = MOVE;
+		HasAttackAction = false;
+		HasMoveAction = false;
+		battleTimer = 0;
 	}
+	else {
+		finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp, target->lerpingHp, target->hp - attack, maxHp, target->maxHp, true);
 
+		if (finishedLerp || numberofAttacks < 0) {
+
+			target->hp -= attack;
+			target->lerpingHp = target->hp;
+			if (numberofAttacks == maxNumofATTACKS) opponentAttacking = true;
+
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -479,8 +501,31 @@ void Enemy::OnCollision(Collider* physA, Collider* physB) {
 	if (physA->type != physB->type && state == BATTLE) {
 		LOG("something");
 
-		reachedTarget = true;
+
+		if (opponentAttacking) {
+
+			opponentReachTarget = true;
+			opponentAttacking = false;
+
+		}
+		else if (!opponentReachTarget) {
+
+			reachedTarget = true;
+		}
 	}
 	                                      
+
+}
+
+void Enemy::FigureStickMovement(float dt) {
+
+	Bposition.x += velocity.x * (dt / 100);
+	Bposition.y += velocity.y * (dt / 100);
+
+	velocity.y += 10 * (dt / 100);
+	if (Bposition.y >= GROUND) {
+		Bposition.y = GROUND;
+		velocity.y *= -BOUNCE;
+	}
 
 }

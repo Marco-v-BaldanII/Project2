@@ -33,6 +33,11 @@ public:
 
 	void OnCollision(Collider* physA, Collider* physB) override;
 
+	bool DealDMG();
+
+
+	void FigureStickMovement(float dt);
+
 public:
 
 	Frame* frames;
@@ -56,6 +61,10 @@ public:
 	bool movedThisTurn = false;
 	bool endTurn;
 	
+	bool finishedLerp = false;
+
+	bool opponentAttacking = false;
+	bool opponentReachTarget = false;
 	
 };
 

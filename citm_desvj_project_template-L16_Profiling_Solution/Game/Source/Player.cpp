@@ -15,6 +15,7 @@
 #include "Item.h"
 #include "../frame.h" /*dont include this in .h*/
 #include "../Dialogue.h"
+#include "../random.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -163,7 +164,7 @@ bool Player::PreUpdate()
 		break;
 	}
 
-	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
+	
 	return true;
 }
 
@@ -174,7 +175,7 @@ bool Player::Update(float dt)
 	switch (state)
 	{
 	case IDLE:
-		Bposition = iPoint(50 * 3, 80 * 3);
+		if(!defending) Bposition = iPoint(50 * 3, 80 * 3);
 
 		//if click enemy and enemay is on attack range engage combat
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
@@ -233,7 +234,12 @@ bool Player::Update(float dt)
 		break;
 	case BATTLE:
 
+		/* stick figure movement */
+		if (!reachedTarget && !opponentAttacking && ! opponentReachTarget) {
+			battleTimer++;
 
+			FigureStickMovement(dt);
+		}
 
 		break;
 	}
@@ -270,18 +276,20 @@ bool Player::PostUpdate()
 
 		//draw movement area
 		if (app->turnManager->currentTurn == ENEMY) {
-			lerpingHp = hp;
+			
 
 		}
-		bool finishedLerp = false;
+		finishedLerp = false;
 
 		switch (state)
 		{
 		case IDLE:
 			//render idle 
+			
 			break;
 		case MOVE:
 		{
+			if (!defending) lerpingHp = hp;
 			//Draw spotLight
 			iPoint spotPos = iPoint(position.x + 16, position.y + 16);
 			app->render->DrawCircle(position.x +16, position.y +16, 2, 0, 0, 0, 255, true);
@@ -326,9 +334,23 @@ bool Player::PostUpdate()
 		}
 		case BATTLE:
 
-			battleTimer++;
 
-			if ((!finishedLerp)) {
+			if (battleTimer == 1)/*Determine amount of attacks*/ {
+
+				if (speed > oponent->speed-1) {
+
+					int doubleChance = getRandomNumber(0, 100);
+					if (doubleChance <= 100) /*Double attack*/ {
+
+						numberofAttacks = 2;
+						maxNumofATTACKS = numberofAttacks;
+					}
+
+				}
+
+			}
+
+			
 				SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
 				app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
 				
@@ -340,16 +362,60 @@ bool Player::PostUpdate()
 				app->render->DrawTexture(oponent->myBattleTexture, -app->render->camera.x / 3 + oponent->Bposition.x / 3 , -app->render->camera.y / 3 + oponent->Bposition.y / 3, false, true, 255);
 				app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, true, 255);
 
-				finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp - oponent->attack, oponent->lerpingHp, oponent->lerpingHp - attack, maxHp, oponent->maxHp);
-			}
+			
+			
 
-			if ((finishedLerp) && battleTimer > 298) {
+			/*if ((finishedLerp) && battleTimer > 298) {
 				if (!app->battleScene->godMode)
 					CalculateAttack();
 
 				state = IDLE;
 				battleTimer = 0;
+			}*/
+
+				/* Enemy amnimation logic */
+
+				if (opponentAttacking) {
+					oponent->defending = true;
+					oponent->FigureStickMovement(16.0f);
+				}
+
+				if (opponentReachTarget) {
+
+					bool opLerp = false;
+					
+					opLerp = app->battleScene->DrawHPBars( oponent->lerpingHp, oponent->lerpingHp, lerpingHp, hp - oponent->attack, oponent->maxHp, maxHp, true);
+
+					if (opLerp) /*hp bar lerping has finished*/ {
+
+						hp -= oponent->attack;
+
+						oponent->defending = false;
+						opponentAttacking = false;
+						opponentReachTarget = false;
+						oponent->Bposition = iPoint(300 * 3, 80 * 3);
+					}
+
+
+				}
+
+			if (reachedTarget) {
+				if (DealDMG()) {
+					// ready for another attack ? , lerping hp must be = hp
+					numberofAttacks--;
+
+
+					lerpingHp = hp;
+					reachedTarget = false;
+					
+					Bposition = iPoint(50 * 3, 80 * 3);/* change to interpolate back to start */
+
+				}
 			}
+			else if (!opponentReachTarget) {
+				app->battleScene->DrawHPBars( oponent->hp, oponent->hp, hp, hp, oponent->maxHp, maxHp, false);
+			}
+
 			break;
 		}
 		myFrame->Update();
@@ -364,8 +430,10 @@ bool Player::PostUpdate()
 		app->render->DrawCircle(mouseX, mouseY, 8, 1, 1, 1, 255, true);
 	}
 	
+	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
+	if(oponent != nullptr){ oponent->collider->data.x = (-40) + oponent->Bposition.x; oponent->collider->data.y = (0) + oponent->Bposition.y; }
+	if (app->battleScene->godMode) app->render->DrawRectangle(oponent->collider->data, b2Color(1, 1, 1, 1), false, false);
 
-	if (app->battleScene->godMode) app->render->DrawRectangle(target->collider->data, b2Color(1, 1, 1, 1), false, false);
 
 	return true;
 }
@@ -395,10 +463,6 @@ void Player::ClickOnMe() {
 			}
 		}
 
-	
-	
-	
-
 }
 
 bool Player::CleanUp()
@@ -425,9 +489,58 @@ void Player::CalculateAttack() {
 
 void Player::OnCollision(Collider* physA, Collider* physB)  {
 
-	if (physA->type != physB->type) {
+	if (physA->type != physB->type && state == BATTLE) {
 		LOG("something");
+
+
+		if (opponentAttacking) {
+
+			opponentReachTarget = true;
+			opponentAttacking = false;
+
+		}
+		else if (!opponentReachTarget) {
+
+		    reachedTarget = true;
+		}
 	}
 
+}
+
+bool Player::DealDMG() {
+
+	if (numberofAttacks <= 0) {
+		state = MOVE;
+		HasAttackAction = false;
+		HasMoveAction = false;
+		battleTimer = 0;
+	}
+	else {
+		finishedLerp = app->battleScene->DrawHPBars( oponent->lerpingHp, oponent->hp - attack, lerpingHp, lerpingHp, oponent->maxHp, maxHp, true);
+
+		if (finishedLerp || numberofAttacks < 0) {
+
+			oponent->hp -= attack;
+			oponent->lerpingHp = oponent->hp;
+			if (numberofAttacks == maxNumofATTACKS) opponentAttacking = true;
+
+			return true;
+		}
+	}
+
+	return false;
+
+}
+
+void Player::FigureStickMovement(float dt) {
+
+	Bposition.x -= velocity.x * (dt / 100);
+	Bposition.y += velocity.y * (dt / 100);
+
+	velocity.y += 10 * (dt / 100);
+	if (Bposition.y >= GROUND) {
+		Bposition.y = GROUND;
+		velocity.y *= -BOUNCE;
+	}
 
 }

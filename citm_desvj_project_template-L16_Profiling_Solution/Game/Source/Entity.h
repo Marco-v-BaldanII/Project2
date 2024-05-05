@@ -128,6 +128,8 @@ public:
 	}
 
 
+	virtual void FigureStickMovement(float dt) {};
+
 public:
 
 	UnitType unitType;
@@ -185,7 +187,7 @@ public:
 	Animation downAnim;
 
 
-	float battleTimer;
+	float battleTimer = 0;
 
 	int currentHP;
 	int maxHp;
@@ -203,13 +205,16 @@ public:
 
 	iPoint Bposition = iPoint(250 * 3, 100 * 3); /* starting pos of attack */
 
-	iPoint velocity = iPoint(-12, 3);
+	iPoint velocity = iPoint(-24, 10);
 
 	Collider* collider = nullptr;
 	bool BtlMoving = false;
 	bool reachedTarget = false;
 
 	int numberofAttacks = 1;
+	int maxNumofATTACKS = 1;
+
+	bool defending = false; /* opponent is touching its attributes for it to defend its attack*/
 
 };
 
