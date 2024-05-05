@@ -46,10 +46,11 @@ public:
 	Item* AddItem();
 	
 	pugi::xml_node config;
+	List<Item*> items;
 
 private:
 
-	List<Item*> items;
+	
 
 };
 

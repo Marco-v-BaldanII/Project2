@@ -40,6 +40,7 @@ class BattleScene;
 class BackStage;
 class CastingScene;
 class PauseMenu;
+class Inventory;
 
 
 class App
@@ -132,6 +133,7 @@ public:
 	ItemManager* itemManager;
 	QuestManager* questManager;
 	PauseMenu* pauseMenu;
+	Inventory* inventory;
 
 
 	//scenes

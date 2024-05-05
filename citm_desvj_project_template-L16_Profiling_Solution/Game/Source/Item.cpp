@@ -51,7 +51,7 @@ bool Item::PostUpdate() {
 	return true;
 }
 
-void Item::InitModifiers(int x, int y, float hpMod, float atkMod, float LckMod, float PrecMod, float EvsMod, float SpdMod, int movMod, string name, const char* textPath) {
+void Item::InitModifiers(int x, int y, float hpMod, float atkMod, float LckMod, float PrecMod, float EvsMod, float SpdMod, int movMod, const char* name, const char* textPath) {
 
 	if(hpMod != 0) this->hpMod = hpMod;
 	if(atkMod != 0) this->atkMod = atkMod;

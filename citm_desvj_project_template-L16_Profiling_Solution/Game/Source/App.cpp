@@ -33,6 +33,7 @@
 #include "SettingsPanel.h"
 #include "FadeToBlack.h"
 #include "LevelManagement.h"
+#include "../Inventory.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -77,6 +78,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	backstageplayer = new BackStagePlayer(false);
 	itemManager = new ItemManager(true);
 	pauseMenu = new PauseMenu(true);
+	inventory = new Inventory(true);
 	guiManager = new GuiManager(true);
 	fade = new FadeToBlack(true);
 
@@ -111,6 +113,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(itemManager);
 	AddModule(pauseMenu);
+	AddModule(inventory);
 	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);

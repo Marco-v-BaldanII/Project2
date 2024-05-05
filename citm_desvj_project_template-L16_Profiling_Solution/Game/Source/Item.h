@@ -36,7 +36,7 @@ public:
 
 	bool CleanUp();
 
-	void InitModifiers(int x, int y, float hpMod,float atkMod,float LckMod,float PrecMod,float EvsMod, float spdMod, int movMod, string name, const char* textPath);
+	void InitModifiers(int x, int y, float hpMod,float atkMod,float LckMod,float PrecMod,float EvsMod, float spdMod, int movMod, const char* name, const char* textPath);
 
 	const float GetHp() { return hpMod; }
 	const float GetAtk() { return atkMod; }
@@ -54,7 +54,7 @@ public:
 
 	iPoint mapPos;
 
-	string name;
+	const char* name;
 
 	Player* myUnit = nullptr;
 

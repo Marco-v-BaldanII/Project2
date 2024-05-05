@@ -47,7 +47,6 @@ bool StartMenu::Start()
 		rect = { 0,0,512,384 };
 		lastMusicVolume = app->audio->GetMusicVolume();
 		lastFxVolume = app->audio->GetFxVolume();
-
 		windowW = 512 * 3;
 		windowH = 384 * 3;
 

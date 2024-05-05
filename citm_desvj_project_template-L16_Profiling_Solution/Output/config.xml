@@ -41,11 +41,11 @@
 		<!-- Right now i'm putting the maps here but ideally they should be on the map -->
 		<!-- (1.05 = + 5%)  (0.9 = -10%) -->
 
-		<item name="Warcry Trumpet" movement ="2" speed="1.05" attack="0.9" x="2" y="24" textPath ="Assets/Textures/Items/Item1.png"/>
+		<item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="2" y="24" textPath ="Assets/Textures/Items/Item1.png"/>
 
-		<item name="Warcry Trumpet" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/Item1.png"/>
+		<item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/Item1.png"/>
 
-		<item name="Serendipity Headgeat" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/Item1.png"/>
+		<item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/Item1.png"/>
 		
 	</itemmanager>
 
