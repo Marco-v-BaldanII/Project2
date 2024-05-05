@@ -43,9 +43,12 @@
             "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1144,
-                "y": 1140
+                "x": 1132,
+                "y": 1520
             }
+        },
+        "castillo.tmx#TILESET4": {
+            "scaleInDock": 1
         },
         "castillo.tmx#castillotiles": {
             "scaleInDock": 0.33
