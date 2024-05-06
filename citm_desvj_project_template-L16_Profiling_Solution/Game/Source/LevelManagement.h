@@ -20,6 +20,7 @@ enum GameScene {
 	BACKSTAGE = 4,
 	COMBAT = 5,
 	BACKSTAGE2 = 6,
+	CASTING = 7,
 	CREDITS = 20
 };
 

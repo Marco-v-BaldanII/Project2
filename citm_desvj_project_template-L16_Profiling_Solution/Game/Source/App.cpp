@@ -73,7 +73,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	mainMenu = new StartMenu(false);
 	battleScene = new BattleScene(false);
 	backStage = new BackStage(false);
-	castingScene = new CastingScene(true);
+	castingScene = new CastingScene(false);
 	entityManager = new EntityManager(true);
 	backstageplayer = new BackStagePlayer(false);
 	itemManager = new ItemManager(true);
