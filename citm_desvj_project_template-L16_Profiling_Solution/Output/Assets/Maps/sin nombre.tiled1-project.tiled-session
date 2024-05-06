@@ -8,11 +8,11 @@
     ],
     "fileStates": {
         "Mapanieve3.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
+            "scale": 0.33,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 798,
-                "y": 704
+                "x": 895.4545454545455,
+                "y": 737.878787878788
             }
         },
         "Mapanieve3.tmx#MapMetadata": {
@@ -28,8 +28,8 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1057.5757575757575,
-                "y": 1242.4242424242425
+                "x": 1996.9696969696968,
+                "y": 1466.6666666666667
             }
         },
         "castillo.tmx#MapMetadata": {
