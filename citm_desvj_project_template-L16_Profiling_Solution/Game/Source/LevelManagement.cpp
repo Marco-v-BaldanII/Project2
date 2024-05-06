@@ -166,6 +166,16 @@ bool LevelManagement::Update(float dt)
 			}
 		}
 		break;
+	case CASTING:
+		if (currentScene != (Module*)app->castingScene) {
+
+			if (app->fade->Fade(currentScene, (Module*)app->castingScene, 60))
+			{
+				currentScene = (Module*)app->castingScene;
+				LOG("Casting");
+			}
+		}
+		break;
 	/*case GAME_OVER:
 
 		if (currentScene != (Module*)app->gameOver) {

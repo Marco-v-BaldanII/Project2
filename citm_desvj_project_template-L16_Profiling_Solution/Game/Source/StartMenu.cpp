@@ -391,7 +391,7 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		app->entityManager->Enable();
 		app->dialogueManager->Enable();
-		app->levelManager->LoadScene(GameScene::BACKSTAGE);
+		app->levelManager->LoadScene(GameScene::CASTING);
 		state = MenuState::OFF;
 
 	}

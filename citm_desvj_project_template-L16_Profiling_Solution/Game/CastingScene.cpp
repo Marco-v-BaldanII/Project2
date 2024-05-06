@@ -9,6 +9,7 @@
 #include "../Defs.h"
 #include "../Log.h"
 #include "DialogueManager.h"
+#include "../LevelManagement.h"
 
 
 CastingScene::CastingScene(bool isActive) : Module(isActive)
@@ -32,29 +33,32 @@ bool CastingScene::Awake(pugi::xml_node config) {
 
 bool CastingScene::Start() {
 
+	// Load the portrait box
+	if (active)
+	{
+		// Load all the actors from the config
+		for (pugi::xml_node ActorNode = config.child("actor"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("actor")) {
 
-	// Load all the actors from the config
-	for (pugi::xml_node ActorNode = config.child("actor"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("actor")) {
+			Actor* actor = new Actor(ActorNode.attribute("name").as_string(), ActorNode.attribute("dialogue").as_string());
 
-		Actor* actor = new Actor(ActorNode.attribute("name").as_string(), ActorNode.attribute("dialogue").as_string());
+			actor->texture = app->tex->Load(ActorNode.attribute("path").as_string());
 
-		actor->texture = app->tex->Load(ActorNode.attribute("path").as_string());
+			actors.PushBack(actor);
+		}
 
-		actors.PushBack(actor);
+		for (pugi::xml_node ActorNode = config.child("role"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("role")) {
+
+			string role = ActorNode.attribute("text").as_string();
+			TextureDef* def = new TextureDef();
+			def->name = role;
+			def->texture = app->tex->Load(ActorNode.attribute("path").as_string());
+
+			roles.PushBack(def);
+			assignedRoles.PushBack(false); /* shares the same index as roles (tells you if a role is assigned ior not) */
+		}
+
+		background = app->tex->Load("Assets/Textures/BattleStageOG.png");
 	}
-
-	for (pugi::xml_node ActorNode = config.child("role"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("role")) {
-
-		string role = ActorNode.attribute("text").as_string();
-		TextureDef* def = new TextureDef();
-		def->name = role;
-		def->texture = app->tex->Load( ActorNode.attribute("path").as_string());
-
-		roles.PushBack(def);
-		assignedRoles.PushBack(false); /* shares the same index as roles (tells you if a role is assigned ior not) */
-	}
-
-	background = app->tex->Load("Assets/Textures/BattleStageOG.png");
 
 	return true;
 }
@@ -105,6 +109,7 @@ bool CastingScene::Update(float dt) {
 			app->dialogueManager->WriteTheScript();
 			
 			finishedCasting = true;
+			app->levelManager->LoadScene(GameScene::BACKSTAGE);
 			Disable();
 		}
 	}
