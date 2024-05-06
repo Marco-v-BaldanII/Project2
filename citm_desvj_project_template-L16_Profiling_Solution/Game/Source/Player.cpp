@@ -16,6 +16,7 @@
 #include "../frame.h" /*dont include this in .h*/
 #include "../Dialogue.h"
 #include "../random.h"
+#include "Timer.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -56,7 +57,7 @@ bool Player::Awake() {
 		break;
 
 	}
-	InitializeStats(config);
+	InitializeStats(config, false);
 
 	speed *= 100;
 
@@ -252,8 +253,6 @@ bool Player::Update(float dt)
 		break;
 	}
 
-	SDL_Rect randRect = SDL_Rect{ 8,0,32,32 };
-
 	if (hp > 0) {
 		if (movedThisTurn) {
 			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 100);
@@ -262,6 +261,10 @@ bool Player::Update(float dt)
 			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 255);
 		}
 	}
+
+	SDL_Rect randRect = SDL_Rect{ 8,0,32,32 };
+
+	
 
 	if (hp <= 0 ) {
 		if(!lastWords) app->dialogueManager->SpontaneousDialogue(deathQuote); /* Last word quote */
@@ -281,6 +284,9 @@ bool Player::PostUpdate()
 {
 
 	if (hp > 0) {
+
+
+	
 
 		//draw movement area
 		if (app->turnManager->currentTurn == ENEMY) {
@@ -358,72 +364,8 @@ bool Player::PostUpdate()
 
 			}
 
-			
-				SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
-				app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
+			DrawCombatScene();
 				
-				//app->render->DrawTexture(myBattleTexture,  Bposition.x,  Bposition.y, false, true, 255);
-
-				//int x = curvedTrajectory()
-
-
-				app->render->DrawTexture(oponent->myBattleTexture, -app->render->camera.x / 3 + oponent->Bposition.x / 3 , -app->render->camera.y / 3 + oponent->Bposition.y / 3, false, true, 255);
-				app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, true, 255);
-
-			
-			
-
-			/*if ((finishedLerp) && battleTimer > 298) {
-				if (!app->battleScene->godMode)
-					CalculateAttack();
-
-				state = IDLE;
-				battleTimer = 0;
-			}*/
-
-				/* Enemy amnimation logic */
-
-				if (opponentAttacking) {
-					oponent->defending = true;
-					oponent->FigureStickMovement(16.0f);
-				}
-
-				if (opponentReachTarget) {
-
-					bool opLerp = false;
-					
-					opLerp = app->battleScene->DrawHPBars( oponent->lerpingHp, oponent->lerpingHp, lerpingHp, hp - oponent->attack, oponent->maxHp, maxHp, true);
-
-					if (opLerp) /*hp bar lerping has finished*/ {
-
-						hp -= oponent->attack;
-
-						oponent->defending = false;
-						opponentAttacking = false;
-						opponentReachTarget = false;
-						oponent->Bposition = iPoint(300 * 3, 80 * 3);
-					}
-
-
-				}
-
-			if (reachedTarget) {
-				if (DealDMG()) {
-					// ready for another attack ? , lerping hp must be = hp
-					numberofAttacks--;
-
-
-					lerpingHp = hp;
-					reachedTarget = false;
-					
-					Bposition = iPoint(50 * 3, 80 * 3);/* change to interpolate back to start */
-
-				}
-			}
-			else if (!opponentReachTarget) {
-				app->battleScene->DrawHPBars( oponent->hp, oponent->hp, hp, hp, oponent->maxHp, maxHp, false);
-			}
-
 
 
 
@@ -471,6 +413,8 @@ bool Player::PostUpdate()
 
 	}
 	/* end the lvl up pannel */
+	
+
 	if (lvlUp) {
 		SDL_Rect rect = SDL_Rect{ 0,0,189 * 2, 39 * 2 };
 		app->render->DrawTexture(app->battleScene->lvlUpTexture, (app->render->camera.x / -3) + 33 * 3, (app->render->camera.y / -3) + 23 * 3, &rect);
@@ -478,7 +422,35 @@ bool Player::PostUpdate()
 			lvlUp = false;
 			lerpedExp = true;
 			oponent = nullptr;
+			lvlMods = LevelUp();
+			showLvlUp.Start();
 		}
+	}
+
+	if(lvlMods != iPoint(-1,-1) && showLvlUp.ReadSec() < 4){
+		// ! important, movement is the only item modifier that is added rather than multiplied
+		int spdMod = 0; int luckMod = 0; int atkMod = 0; int hpMod= 0;
+		switch (lvlMods.x) {
+		case 0:
+			spdMod = 5;
+			break;
+		case 1:
+			luckMod = 5;
+			break;
+		}
+		switch (lvlMods.y) {
+		case 0:
+			hpMod = 4;
+			break;
+		case 1:
+			atkMod = 2;
+			break;
+		}
+		myFrame->Render(1.0 / 60.0, hp - hpMod, attack* myItem->GetAtk() -atkMod, speed* myItem->GetSpd() - spdMod, precision* myItem->GetPrec(), luck* myItem->GetLck() - luckMod, movement + myItem->GetMov(), hpMod, atkMod, spdMod, 0 , luckMod);
+		if ((app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN )&& showLvlUp.ReadSec() > 1) {
+			lvlMods = iPoint(-1, -1);
+		}
+	
 	}
 	
 	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
@@ -585,6 +557,33 @@ bool Player::DealDMG() {
 
 }
 
+iPoint Player::LevelUp() {
+
+	int coin = getRandomNumber(0, 1);
+	int coin2 = getRandomNumber(0, 1);
+
+	switch (coin) {
+	case 0:
+		speed += 5;
+		break;
+	case 1:
+		luck += 5;
+		break;
+	}
+
+	switch (coin2) {
+	case 0:
+		hp += 4;
+		break;
+	case 1:
+		attack += 2;
+		break;
+	}
+
+	return iPoint(coin, coin2);
+
+}
+
 void Player::FigureStickMovement(float dt) {
 
 	Bposition.x -= velocity.x * (dt / 100);
@@ -603,5 +602,67 @@ void Player::FigureStickMovement(float dt) {
 		reachedTarget = false;
 		battleTimer = 1;
 	}
+
+}
+
+void Player::DrawCombatScene() {
+
+
+	SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
+	app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
+
+	//app->render->DrawTexture(myBattleTexture,  Bposition.x,  Bposition.y, false, true, 255);
+
+	//int x = curvedTrajectory()
+
+
+	app->render->DrawTexture(oponent->myBattleTexture, -app->render->camera.x / 3 + oponent->Bposition.x / 3, -app->render->camera.y / 3 + oponent->Bposition.y / 3, false, true, 255);
+	app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, true, 255);
+
+
+	/* Enemy amnimation logic */
+
+	if (opponentAttacking) {
+		oponent->defending = true;
+		oponent->FigureStickMovement(16.0f);
+	}
+
+	if (opponentReachTarget) {
+
+		bool opLerp = false;
+
+		opLerp = app->battleScene->DrawHPBars(oponent->lerpingHp, oponent->lerpingHp, lerpingHp, hp - oponent->attack, oponent->maxHp, maxHp, true);
+
+		if (opLerp) /*hp bar lerping has finished*/ {
+
+			hp -= oponent->attack;
+
+			oponent->defending = false;
+			opponentAttacking = false;
+			opponentReachTarget = false;
+			oponent->Bposition = iPoint(300 * 3, 80 * 3);
+		}
+
+
+	}
+
+	if (reachedTarget) {
+		if (DealDMG()) {
+			// ready for another attack ? , lerping hp must be = hp
+			numberofAttacks--;
+
+
+			lerpingHp = hp;
+			reachedTarget = false;
+
+			Bposition = iPoint(50 * 3, 80 * 3);/* change to interpolate back to start */
+
+		}
+	}
+	else if (!opponentReachTarget) {
+		app->battleScene->DrawHPBars(oponent->hp, oponent->hp, hp, hp, oponent->maxHp, maxHp, false);
+	}
+
+
 
 }

@@ -170,15 +170,26 @@ void Entity::AssocateEntity_Tile(iPoint position) {
 
 }
 
-void Entity::InitializeStats(pugi::xml_node config) {
+void Entity::InitializeStats(pugi::xml_node config, bool nerfed) {
 
-	attack = config.attribute("attack").as_int();
-	movement = config.attribute("movement").as_int();
-	hp = config.attribute("hp").as_int();
-	precision = config.attribute("precision").as_int();
-	luck = config.attribute("luck").as_int();
-	speed = config.attribute("speed").as_int();
-	rewardEXP = config.attribute("exp").as_int();
+
+	bool generic = true; float nerf = 0.5f;
+	if (nerfed) {
+		if (name != "Knight" && name != "Archer" && name != "name") {
+			generic = false; nerf = 0.75f;
+		}
+	}
+	else {
+		nerf = 1;
+	}
+
+	attack =(int)   config.attribute("attack").as_int() * nerf;
+	movement = (int)config.attribute("movement").as_int() * nerf;
+	hp = (int)config.attribute("hp").as_int() * nerf;
+	precision = (int)config.attribute("precision").as_int() * nerf;
+	luck = (int)config.attribute("luck").as_int() * nerf ;
+	speed = (int)config.attribute("speed").as_int() * nerf;
+	rewardEXP = (int)config.attribute("exp").as_int();
 
 	int u = 3;
 }

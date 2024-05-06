@@ -121,7 +121,7 @@ public:
 	void AssocateEntity_Tile(iPoint position);
 
 
-	void InitializeStats(pugi::xml_node config);
+	void InitializeStats(pugi::xml_node config, bool nerfed);
 
 	double curvedTrajectory(double x, double amplitude, double frequency, double damping, double phase_shift) {
 		return amplitude * sin(frequency * x + phase_shift) * exp(-damping * x);

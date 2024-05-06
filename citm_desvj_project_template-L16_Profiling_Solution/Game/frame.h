@@ -127,7 +127,7 @@ public:
 	}
 
 
-	void Render(float dt, int currentHP, int currentAtk, int currentSpeed, int currentPrecision, int currentLuck, int currentMovement) {
+	void Render(float dt, int currentHP, int currentAtk, int currentSpeed, int currentPrecision, int currentLuck, int currentMovement, int hpMod = 0, int atkMod = 0, int spdMod = 0, int precMod = 0, int luckMod =0) {
 		//  we use linear interpolation from its given starting position to its target position
 		shown = true;
 
@@ -170,12 +170,25 @@ public:
 		movement = to_string(currentMovement);
 
 		app->render->DrawText(HPString, (startingPos.x + 90+810) + (app->render->camera.x / 3), (startingPos.y + 73+200)  + (app->render->camera.y / 3), 70, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		string s = "+ "; s += to_string(hpMod);
+		if(hpMod != 0)app->render->DrawText(s, (startingPos.x + 90 + 810) + (app->render->camera.x / 3) + 30, (startingPos.y + 73 + 200) + (app->render->camera.y / 3) - 30, 70, 50, false, SDL_Color{254, 254, 254, 255}, CENTER_ALIGN);
+
 		app->render->DrawText(attack, (startingPos.x + 150+950)  + (app->render->camera.x / 3), (startingPos.y + 73+200)  + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		s = "+ "; s += to_string(atkMod);
+		if(atkMod != 0)app->render->DrawText(s, (startingPos.x + 150 + 950) + (app->render->camera.x / 3) + 30, (startingPos.y + 73 + 200) + (app->render->camera.y / 3) - 30, 70, 50, false, SDL_Color{ 254, 254, 254, 255 }, CENTER_ALIGN);
+
 
 		app->render->DrawText(speed, (startingPos.x + 95+830)  + (app->render->camera.x / 3), (startingPos.y + 100+250) + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		s = "+ "; s += to_string(spdMod);
+		if(spdMod != 0)app->render->DrawText(s, (startingPos.x + 95 + 830) + (app->render->camera.x / 3) + 30, (startingPos.y + 100 + 250) + (app->render->camera.y / 3) - 30, 70, 50, false, SDL_Color{ 254, 254, 254, 255 }, CENTER_ALIGN);
+
 		app->render->DrawText(precision, (startingPos.x + 150+950)  + (app->render->camera.x / 3), (startingPos.y + 100+250) + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
 
+
 		app->render->DrawText(luck, (startingPos.x + 95+830)  + (app->render->camera.x / 3), (startingPos.y + 127+300)  + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
+		s = "+ "; s += to_string(luckMod);
+		if (luckMod != 0)app->render->DrawText(s, (startingPos.x + 95 + 830) + (app->render->camera.x / 3) + 30, (startingPos.y + 100 + 250) + (app->render->camera.y / 3) - 30, 70, 50, false, SDL_Color{ 254, 254, 254, 255 }, CENTER_ALIGN);
+
 		app->render->DrawText(movement, (startingPos.x + 150+950)  + (app->render->camera.x / 3), (startingPos.y + 127+300)  + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
 
 		// render name

@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Animation.h"
+#include "Timer.h"
 
 struct SDL_Texture;
 class Dialogue;
@@ -37,6 +38,10 @@ public:
 
 
 	void FigureStickMovement(float dt);
+
+	iPoint LevelUp();
+
+	void DrawCombatScene();
 
 public:
 
@@ -71,6 +76,10 @@ public:
 
 	float lerpingEXP;
 	
+
+	Timer showLvlUp;
+	iPoint lvlMods = iPoint(-1, -1);
+
 };
 
 #endif // __PLAYER_H__

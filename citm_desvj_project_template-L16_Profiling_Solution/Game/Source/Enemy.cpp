@@ -64,7 +64,7 @@ bool Enemy::Awake() {
 		break;
 
 	}
-	InitializeStats(config);
+	InitializeStats(config, true);
 
 
 	counter = moveTime;
