@@ -399,6 +399,8 @@ bool Enemy::PostUpdate() {
 					app->battleScene->DrawHPBars(lerpingHp, hp , target->lerpingHp, target->lerpingHp , maxHp, target->maxHp, false);
 				}
 
+
+
 			
 		
 		break;
@@ -426,6 +428,12 @@ bool Enemy::PostUpdate() {
 	myFrame->Update();
 	
 	if (hp <= 0) {
+
+		if (!giveExp) {
+			target->lerpedExp = false;
+			target->oponent = this;
+			giveExp = true;
+		}
 
 		if (!lastWords && deathQuote->text != "") app->dialogueManager->SpontaneousDialogue(deathQuote); /* Last word quote */
 		lastWords = true;

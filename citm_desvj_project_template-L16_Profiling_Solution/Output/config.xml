@@ -244,47 +244,50 @@
 				<player  name="Prince Edward"  x="1" y="23" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
 
 					<dialogue text ="How could you . . . break our promise Richard ?"/>
+					<lvlUp text = "I will continueo to apply myself for my kingdom"/>
 
 				</player>
-				<player  name="Henry Tudor" x="1" y ="24" unit_type="0" attack="5" hp="12" precision="95" luck="25" speed="30" movement="10">
+				<player  name="Henry Tudor" x="1" y ="24" unit_type="0" attack="50" hp="12" precision="95" luck="25" speed="30" movement="10">
 
 					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
+					<lvlUp text = "This strength will help me protect what I love"/>
 
 				</player>
 
-				<player  name="Margaret of Anjou" x="1" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6">
+				<player  name="Margaret of Anjou" x="1" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" >
 
 					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
+					<lvlUp text = "Margaret of Anjuo feasts upon you feeble Yorks"/>
 					
 				</player>
 
 				
 				
-				<enemy name= "Edward of York" x="40" y="13" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8">
+				<enemy name= "Edward of York" x="40" y="13" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp ="40">
 
 					<dialogue text ="I must not die here, father I'll support you from the back lines"/>
 
 				</enemy>
 				
-				<enemy name= "Earl of Warwick" x="38" y="29" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6">
+				<enemy name= "Earl of Warwick" x="38" y="29" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" exp = "40">
 				
 					<dialogue text ="Grrrr :("/>				
 				
 				</enemy>
 
-				<enemy name= "George of York" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
+				<enemy name= "George of York" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp ="40">
 				
 					<dialogue text ="May my final arrow find its mark, even in death"/>				
 				
 				</enemy>				
 
-				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Mage" x="24" y="32" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Mage" x="46" y="22" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Mage" x="43" y="18" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Archer" x="24" y="10" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>				
-				<enemy name= "Knight" x="23" y="9" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/> 
+				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="100" />
+				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
+				<enemy name= "Mage" x="24" y="32" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
+				<enemy name= "Mage" x="46" y="22" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
+				<enemy name= "Mage" x="43" y="18" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="20"/>
+				<enemy name= "Archer" x="24" y="10" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="20"/>				
+				<enemy name= "Knight" x="23" y="9" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="100"/> 
 
 			</map>
 			

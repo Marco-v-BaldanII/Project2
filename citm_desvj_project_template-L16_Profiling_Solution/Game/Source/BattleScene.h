@@ -63,6 +63,8 @@ public:
 
 	bool DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA, float maxE, float maxA, bool attack = false);
 
+	bool DrawExpBar( float& xpB, float xpA);
+
 	void KillUnit(bool isPlayer, Entity* entity);
 
 
@@ -135,10 +137,15 @@ public:
 	SDL_Rect yorkHPBar = SDL_Rect{ 240 * 2,167 * 2,75 * 2,2 * 2 };
 	SDL_Rect LancasterHPBar = SDL_Rect{ 2 * 2,167 * 2,75 * 2,2* 2};
 
+	SDL_Rect expBar = SDL_Rect{ 206,250,100 * 2, 25 * 2 };
+
 	bool godMode;
 	bool firstMap = false;
 
 	bool MainQuest = false;
+
+	SDL_Texture* expTexture;
+	SDL_Texture* lvlUpTexture = nullptr;
 
 };
 #endif // __BATTLESCENE_H__

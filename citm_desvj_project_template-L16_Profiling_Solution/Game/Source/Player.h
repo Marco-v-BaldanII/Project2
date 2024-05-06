@@ -57,7 +57,7 @@ public:
 	int pickCoinFxId;
 
 	SDL_Rect clickBox = { 0,0,32,32 };
-	Entity* oponent;
+
 	bool movedThisTurn = false;
 	bool endTurn;
 	
@@ -65,6 +65,11 @@ public:
 
 	bool opponentAttacking = false;
 	bool opponentReachTarget = false;
+
+	bool receivedEXP = false;
+
+
+	float lerpingEXP;
 	
 };
 

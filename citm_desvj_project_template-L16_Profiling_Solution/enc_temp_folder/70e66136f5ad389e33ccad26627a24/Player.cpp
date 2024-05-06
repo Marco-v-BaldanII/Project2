@@ -474,7 +474,7 @@ bool Player::PostUpdate()
 	if (lvlUp) {
 		SDL_Rect rect = SDL_Rect{ 0,0,189 * 2, 39 * 2 };
 		app->render->DrawTexture(app->battleScene->lvlUpTexture, (app->render->camera.x / -3) + 33 * 3, (app->render->camera.y / -3) + 23 * 3, &rect);
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 			lvlUp = false;
 			lerpedExp = true;
 			oponent = nullptr;

@@ -156,7 +156,8 @@ bool BattleScene::Start()
 			rect = { 0,0,64,90 };
 			started = true;
 
-			
+			expTexture = app->tex->Load("Assets/Textures/UI/expBar-export.png");
+			lvlUpTexture = app->tex->Load("Assets/Textures/UI/LevelUpText.png");
 		
 	}
 	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
@@ -344,6 +345,8 @@ bool BattleScene::SaveState(pugi::xml_node node) {
 
 		nodes.Add(&playerNode);
 	}
+
+
 
 	return true;
 }
@@ -710,4 +713,23 @@ bool BattleScene::DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA,
 		}
 	}
 	else { return false; }
+}
+
+bool BattleScene::DrawExpBar(float& xpB, float xpA) {
+
+
+	if ((int)xpB+1 >= (int)xpA) {
+		return true;
+	}
+
+	Lerp2(xpB, 0.03f, xpA);
+
+	expBar.w = 2 * xpB;
+
+	app->render->DrawRectangle(SDL_Rect{ expBar.x - (app->render->camera.x / 3), expBar.y - (app->render->camera.y / 3) +2, expBar.w/2  , expBar.h   }, b2Color(1, 1, 1, 1), true, true);
+	app->render->DrawTexture(expTexture, expBar.x - (app->render->camera.x / 3), expBar.y - (app->render->camera.y / 3));
+
+	return false;
+
+
 }

@@ -202,6 +202,7 @@ public:
 
 	bool lastWords = false;
 	Dialogue* deathQuote = nullptr;
+	Dialogue* lvlUpQuote = nullptr;
 
 	iPoint Bposition = iPoint(250 * 3, 100 * 3); /* starting pos of attack */
 
@@ -215,6 +216,16 @@ public:
 	int maxNumofATTACKS = 1;
 
 	bool defending = false; /* opponent is touching its attributes for it to defend its attack*/
+
+	uint level = 1;
+
+	int experiencePoints = 0;
+	int rewardEXP = 20;
+
+	bool lerpedExp = true;
+	bool lvlUp = false;
+
+	Entity* oponent;
 
 };
 

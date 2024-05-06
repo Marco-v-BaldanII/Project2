@@ -72,6 +72,8 @@ public:
 	bool opponentAttacking = false;
 	bool opponentReachTarget = false;
 
+	bool giveExp = false;
+
 };
 
 #endif // __ENEMY_H__

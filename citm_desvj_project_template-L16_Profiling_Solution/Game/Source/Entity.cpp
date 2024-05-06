@@ -178,6 +178,7 @@ void Entity::InitializeStats(pugi::xml_node config) {
 	precision = config.attribute("precision").as_int();
 	luck = config.attribute("luck").as_int();
 	speed = config.attribute("speed").as_int();
+	rewardEXP = config.attribute("exp").as_int();
 
 	int u = 3;
 }

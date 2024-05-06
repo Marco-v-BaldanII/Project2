@@ -151,7 +151,10 @@ public:
 
 		// Item name
 		if (player != nullptr && player->myItem != nullptr && itemName == "Equipment: ") {
-			itemName += player->myItem->name;
+			if (player->myItem->name != nullptr) {
+				string itName = player->myItem->name;
+				itemName += itName;
+			}
 		}
 
 		// Render all the stats:
