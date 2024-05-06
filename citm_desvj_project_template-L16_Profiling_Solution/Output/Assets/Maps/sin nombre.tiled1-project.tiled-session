@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Mapanieve3.tmx",
+    "activeFile": "castillo.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
@@ -11,18 +11,35 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 894,
-                "y": 948
+                "x": 798,
+                "y": 704
             }
         },
-        "Mapanieve3.tmx#arbolagua": {
+        "Mapanieve3.tmx#MapMetadata": {
+            "scaleInDock": 1
+        },
+        "Mapanieve3.tmx#TILESET4": {
             "scaleInDock": 1
         },
         "Mapanieve3.tmx#tileset3": {
             "scaleInDock": 1
         },
-        "Mapanieve3.tmx#tilesetinversa": {
+        "castillo.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1057.5757575757575,
+                "y": 1242.4242424242425
+            }
+        },
+        "castillo.tmx#MapMetadata": {
             "scaleInDock": 1
+        },
+        "castillo.tmx#TILESET4": {
+            "scaleInDock": 1
+        },
+        "castillo.tmx#castillotiles": {
+            "scaleInDock": 0.75
         },
         "mapnuevo.tmx": {
             "scale": 0.75,
@@ -43,12 +60,15 @@
     "map.width": 180,
     "openFiles": [
         "tileset2.tsx",
+        "castillo.tmx",
         "Mapanieve3.tmx"
     ],
     "project": "sin nombre.tiled1-project.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "tileset2.tsx",
         "Mapanieve3.tmx",
+        "castillo.tmx",
         "mapnuevo.tmx"
     ],
     "tileset.embedInMap": true,
