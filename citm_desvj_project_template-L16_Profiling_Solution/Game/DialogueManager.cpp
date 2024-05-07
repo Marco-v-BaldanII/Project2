@@ -52,7 +52,6 @@ void DialogueManager::WriteTheScript() {
 	bool ret = true;
 
 
-
 	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("portrait"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("portrait")) {
 
 		TextureDef* texD = new TextureDef();
@@ -68,11 +67,9 @@ void DialogueManager::WriteTheScript() {
 
 	}
 
-
 	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("english").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 
 		Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
-
 		int p = dialogueNode.attribute("position").as_int();
 
 		string path = dialogueNode.attribute("background").as_string();
@@ -169,7 +166,6 @@ void DialogueManager::WriteTheScript() {
 	if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
 	if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
 
-
 	scriptWritten = true;
 }
 
@@ -178,7 +174,10 @@ bool DialogueManager::Start() {
 	bool ret = true;
 
 	/* the contents of this have been moved to WriteTheScript */
-	
+	if (scriptWritten) {
+		WriteTheScript();
+	}
+
 	return ret;
 }
 
@@ -188,10 +187,10 @@ bool DialogueManager::CleanUp()
 	bool ret = true;
 
 	// Free memory
-	Scenes.Destroy();
+	Scenes.Clear();
 
-	dialogues.Destroy();
-	shakespeareDialogues.Destroy();
+	dialogues.Clear();
+	shakespeareDialogues.Clear();
 
 	// Unload the backgrounds from the previous act
 	for (int i = 0; i < backgrounds.Count(); ++i) {
@@ -282,7 +281,7 @@ bool DialogueManager::Update(float dt)
 					}
 
 					app->backStage->npcsList.Clear();
-					
+
 				}
 
 			}
@@ -493,7 +492,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 		LOG("spontaneous");
 		if (spontaneousDialogue != nullptr) {
 
-			
+
 
 			numLines = 0;
 
@@ -503,14 +502,14 @@ void DialogueManager::DrawTextBox(Position pos) {
 			nameBoxL.x -= (app->render->camera.x / 3);
 			nameBoxL.y -= (app->render->camera.y / 3);
 
-			app->render->DrawRectangle(SDL_Rect{ app->render->camera.x / -3, app->render->camera.y / -3, 600,600 }, b2Color(52.0 / 255.0,  47.0 / 255.0, 77.0/255.0, 0.6f), true, true);
+			app->render->DrawRectangle(SDL_Rect{ app->render->camera.x / -3, app->render->camera.y / -3, 600,600 }, b2Color(52.0 / 255.0, 47.0 / 255.0, 77.0 / 255.0, 0.6f), true, true);
 
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 			app->render->DrawRectangle(nameBoxL, black, true, true);
 
-			app->render->DrawTexture(spontaneousDialogue->texture, 0 - (app->render->camera.x / 3) , dialogueBox.y +50 , &portraitBoxL, true,255, 1, 255, 150,150);
+			app->render->DrawTexture(spontaneousDialogue->texture, 0 - (app->render->camera.x / 3), dialogueBox.y + 50, &portraitBoxL, true, 255, 1, 255, 150, 150);
 
 			dialogueBox.x += (app->render->camera.x / 3);
 			dialogueBox.y += (app->render->camera.y / 3);
@@ -519,25 +518,25 @@ void DialogueManager::DrawTextBox(Position pos) {
 
 			app->render->DrawText(spontaneousDialogue->text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
-			
+
 			app->render->DrawText(spontaneousDialogue->owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * app->win->GetScale() - 5, (DIALOGUE_SIZE) * 2 * app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
 
 	}
 	else if (currentNPC_Dialogues != nullptr) {
-		
+
 
 		numLines = 0;
 		dialogueBox = narratorBox;
-		dialogueBox.x -= (app->render->camera.x/3);
-		dialogueBox.y -= (app->render->camera.y/3);
+		dialogueBox.x -= (app->render->camera.x / 3);
+		dialogueBox.y -= (app->render->camera.y / 3);
 		string txt = currentNPC_Dialogues->dialogue->text;
 
 		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
 		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
 		app->render->DrawRectangle(dialogueBox, whitey, true, true);
 
-		app->render->DrawText(txt, (dialogueBox.x + (app->render->camera.x / 3) +200), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
+		app->render->DrawText(txt, (dialogueBox.x + (app->render->camera.x / 3) + 200), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
 
 	}
 
@@ -562,7 +561,7 @@ void DialogueManager::DrawPortrait() {
 	// Prints on screen the current and previous dialogue's portrait
 	for (i; i <= dialogueIndex; ++i) {
 		if (Scenes[sceneIndex]->dialogues[i]->myPos == LEFT) {
-			if(Scenes[sceneIndex]->dialogues[i]->texture != nullptr) app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
+			if (Scenes[sceneIndex]->dialogues[i]->texture != nullptr) app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
 			else if (Scenes[sceneIndex]->dialogues[i]->actorSprite != nullptr) { app->render->DrawActor(Scenes[sceneIndex]->dialogues[i]->actorSprite, 0, 200, &portraitBoxL, true); }
 		}
 		else if (Scenes[sceneIndex]->dialogues[i]->myPos == RIGHT) {
@@ -621,8 +620,8 @@ void DialogueManager::AdvanceText() {
 				myState = NPCS;
 			}
 			else if (myState == NPCS && currentNPC_Dialogues != nullptr) {
-				
-				
+
+
 			}
 		}
 		else {
@@ -694,7 +693,7 @@ void DialogueManager::npcTalk(Node* npcDialogues) {
 			}
 		}
 		else if (this->currentNPC_Dialogues == npcDialogues)/*Advance to new dialogue , update the pointers*/ {
-			
+
 			if ((currentNPC->currentDialogue->leftChild == nullptr && currentNPC->currentDialogue->rightChild == nullptr)) {
 				// finish dialoues
 				app->backstageplayer->talking = false;
@@ -731,7 +730,7 @@ void DialogueManager::npcTalk(Node* npcDialogues) {
 	}
 	// draw choices 
 
-	
+
 
 	/*int size = npcDialogues.Count();
 
@@ -752,7 +751,7 @@ void DialogueManager::npcTalk(Node* npcDialogues) {
 
 void DialogueManager::Next_Dialogue() {
 
- 	dialogueIndex++;
+	dialogueIndex++;
 
 	app->audio->StopFx(DialogueChannel);
 
@@ -766,20 +765,20 @@ void DialogueManager::Next_Dialogue() {
 			sceneIndex++;
 			if (app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999)DialogueChannel = app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 		}
-		else  {
+		else {
 			// the cutscene for act 1 has finished
 			myState = NPCS;
 			app->turnManager->Enable();
 			app->battleScene->Enable();
 			app->backStage->Disable();
-			
+
 		}
 
 	}
 	else {
 		// Play voice line
 		int h = Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine;
-		if(app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999) DialogueChannel =  app->audio->PlayFx( Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
+		if (app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999) DialogueChannel = app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 	}
 }
 
@@ -840,11 +839,10 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 		{
 			LOG("Choice A");
 			if (currentNPC_Dialogues->leftChild != nullptr) {
-			
+
 				if (currentNPC_Dialogues->dialogue->hasQuest == true)/* Accept sidequest */ {
 
 					app->questManager->quests.Add(currentNPC_Dialogues->dialogue->sideQuest);
-					currentNPC->questInfo = NO_QUEST;
 
 				}
 
@@ -857,7 +855,7 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 		{
 			LOG("Choice B");
 			if (currentNPC_Dialogues->rightChild != nullptr) {
-	
+
 				currentNPC->currentDialogue = currentNPC->currentDialogue->rightChild;
 				currentNPC_Dialogues = currentNPC->currentDialogue;
 			}
@@ -872,10 +870,10 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 			choiceB_button->text = currentNPC_Dialogues->dialogue->choiceB.c_str();
 
 		}
-		
 
-		
-		
+
+
+
 	}
 
 	return true;
@@ -886,6 +884,4 @@ void DialogueManager::NextAct() {
 	pugi::xml_parse_result res2 = dialogueFile2.load_file("dialogue2.xml");
 
 	myConfig = dialogueFile2;
-	scriptWritten = false;
-	WriteTheScript();
 }
