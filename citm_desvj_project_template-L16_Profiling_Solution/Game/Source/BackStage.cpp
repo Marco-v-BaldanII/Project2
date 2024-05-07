@@ -43,7 +43,8 @@ bool BackStage::Start()
 		app->backstageplayer->Enable();
 
 		
-
+		if (basckStageNumber == 1)
+		{
 			for (pugi::xml_node ny = config.child("ID"); ny != NULL; ny = ny.next_sibling("ID")) {
 
 				if (ny.attribute("value").as_int() == backStageID) {
@@ -110,11 +111,11 @@ bool BackStage::Start()
 
 				npcsList.Add(dude);
 			}
-		
-		/*else if (backStageID == 2)
+		}
+		else if (basckStageNumber == 2)
 		{
 			background = app->tex->Load("Assets/Textures/FirstBackstage-export.png");
-		}*/
+		}
 
 		talkPrompt = app->tex->Load(mynode.child("talkBtn").attribute("path").as_string());
 	}

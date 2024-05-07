@@ -110,7 +110,7 @@ bool CastingScene::Update(float dt) {
 			
 			finishedCasting = true;
 			app->levelManager->LoadScene(GameScene::BACKSTAGE);
-			Disable();
+			//Disable();
 		}
 	}
 

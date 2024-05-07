@@ -151,7 +151,7 @@ bool LevelManagement::Update(float dt)
 			{
 				currentScene = (Module*)app->backStage;
 				LOG("Backstage");
-				app->backStage->backStageID = 1;
+				app->backStage->basckStageNumber = 1;
 			}
 		}
 		break;
@@ -162,7 +162,7 @@ bool LevelManagement::Update(float dt)
 			{
 				currentScene = (Module*)app->backStage;
 				LOG("Backstage2");
-				app->backStage->backStageID = 2;
+				app->backStage->basckStageNumber = 2;
 			}
 		}
 		break;

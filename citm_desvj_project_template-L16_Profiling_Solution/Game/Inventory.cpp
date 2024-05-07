@@ -14,8 +14,8 @@ bool Inventory::Start()
 {
 	InventoryItems = app->itemManager->items;
 	// Calculate button dimensions based on window size
-	const int buttonWidth = 150; 
-	const int buttonHeight = 50;
+	const int buttonWidth = 200; 
+	const int buttonHeight = 70;
 
 	int buttonId = 70;
 	int row = 0;

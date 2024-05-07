@@ -54,6 +54,7 @@ public:
 	List<Npc*> npcsList;
 
 	int backStageID = 0;
+	int basckStageNumber = 1;
 
 	bool near = false;
 
