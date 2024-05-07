@@ -266,7 +266,7 @@ bool DialogueManager::Update(float dt)
 		if (currentNPC_Dialogues != nullptr) {
 			for (int j = 0; j < 3; ++j) {
 				LOG("dslfmlsfm");
-				if (app->backStage->backStageID == 1 && currentNPC_Dialogues->ID == 469) {
+				if (app->backStage->backStageID == 0 && currentNPC_Dialogues->ID == 469) {
 					LOG("dojorjg");
 					myState = CUTSCENE;
 					app->backStage->FinishBackStage();
