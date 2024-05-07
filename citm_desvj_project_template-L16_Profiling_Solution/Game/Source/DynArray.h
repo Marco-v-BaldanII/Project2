@@ -88,6 +88,15 @@ public:
 		numElements = 0; // Reset the number of elements
 	}
 
+	void Destroy() {
+		for (unsigned int i = 0; i < numElements; ++i)
+		{
+			VALUE* dt = &data[i];
+			delete dt; // Delete each pointer
+		}
+		numElements = 0; // Reset the number of elements
+	}
+
 	bool Insert(const VALUE& element, unsigned int position)
 	{
 		if(position > numElements)

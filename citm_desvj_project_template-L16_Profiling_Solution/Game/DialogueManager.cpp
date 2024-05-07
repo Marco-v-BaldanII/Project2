@@ -52,6 +52,7 @@ void DialogueManager::WriteTheScript() {
 	bool ret = true;
 
 
+
 	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("portrait"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("portrait")) {
 
 		TextureDef* texD = new TextureDef();
@@ -67,9 +68,11 @@ void DialogueManager::WriteTheScript() {
 
 	}
 
+
 	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("english").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 
 		Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
+
 		int p = dialogueNode.attribute("position").as_int();
 
 		string path = dialogueNode.attribute("background").as_string();
@@ -166,6 +169,7 @@ void DialogueManager::WriteTheScript() {
 	if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
 	if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
 
+
 	scriptWritten = true;
 }
 
@@ -174,10 +178,7 @@ bool DialogueManager::Start() {
 	bool ret = true;
 
 	/* the contents of this have been moved to WriteTheScript */
-	if (scriptWritten) {
-		WriteTheScript();
-	}
-
+	
 	return ret;
 }
 
@@ -187,10 +188,10 @@ bool DialogueManager::CleanUp()
 	bool ret = true;
 
 	// Free memory
-	Scenes.Clear();
+	Scenes.Destroy();
 
-	dialogues.Clear();
-	shakespeareDialogues.Clear();
+	dialogues.Destroy();
+	shakespeareDialogues.Destroy();
 
 	// Unload the backgrounds from the previous act
 	for (int i = 0; i < backgrounds.Count(); ++i) {
@@ -885,4 +886,6 @@ void DialogueManager::NextAct() {
 	pugi::xml_parse_result res2 = dialogueFile2.load_file("dialogue2.xml");
 
 	myConfig = dialogueFile2;
+	scriptWritten = false;
+	WriteTheScript();
 }
