@@ -101,7 +101,7 @@ bool TurnManager::Update(float dt)
 				}
 			}
 
-		CheckBattleEnding();
+		
 		if (enemyTurnFinished) {
 
 			for (int i = 0; i < app->entityManager->enemies.Count(); ++i)
@@ -115,7 +115,7 @@ bool TurnManager::Update(float dt)
 			
 		}
 	}
-
+	CheckBattleEnding();
 
 
 

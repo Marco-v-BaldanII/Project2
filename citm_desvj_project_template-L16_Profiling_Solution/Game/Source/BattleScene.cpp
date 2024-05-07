@@ -618,6 +618,46 @@ void BattleScene::LoadAnimations() {
 		}
 	}
 
+	for (pugi::xml_node node = mynode.child("Warwick").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				warwickRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				warwickRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				warwickUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				warwickUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				warwickDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				warwickDown.speed = 0.2f;
+			}
+		}
+	}
+
+	for (pugi::xml_node node = mynode.child("EdwardVI").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				edwardRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				edwardRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				edwardUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				edwardUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				edwardDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				edwardDown.speed = 0.2f;
+			}
+		}
+	}
+
 	LancasterAnim.PushBack(SDL_Rect{ 0,288,32,32 });
 }
 
@@ -638,6 +678,20 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->upAnim = henryTudorUp;
 		entity->downAnim = henryTudorDown;
 		entity->rightAnim = henryTudorRight;
+	}
+	else if (entity->name == "Earl of Warwick") {
+
+		entity->upAnim = warwickUp;
+		entity->rightAnim = warwickRight;
+		entity->downAnim = warwickDown;
+
+	}
+	else if (entity->name == "Edward of York") {
+
+		entity->upAnim = edwardUp;
+		entity->rightAnim = edwardRight;
+		entity->downAnim = edwardDown;
+
 	}
 	else {
 		entity->downAnim = LancasterAnim;

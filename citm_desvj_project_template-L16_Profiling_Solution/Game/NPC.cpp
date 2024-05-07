@@ -35,12 +35,16 @@ bool Npc::Start() {
 
 	dirTimer.Start();
 
+	
+
 	return true;
 }
 
 bool Npc::Update(float dt)
 {
 	//LOG(name.c_str());
+
+	if(exclamationTex == nullptr)exclamationTex = app->tex->Load("Assets/Textures/UI/QuestMark1.png");
 
 	centerPos = position;
 	centerPos.x += 54; centerPos.y += 95;
@@ -93,6 +97,14 @@ bool Npc::PostUpdate()
 		app->render->DrawTexture(texture, position.x, position.y, &body, true);
 	}
 	
+
+	if (questInfo == QUEST_TO_GIVE) {
+		SDL_Rect r = SDL_Rect{ 0,0,64,64 };
+
+		app->render->DrawTexture(exclamationTex, position.x + 20, position.y - 60, &r);
+
+	}
+
 	return true;
 }
 

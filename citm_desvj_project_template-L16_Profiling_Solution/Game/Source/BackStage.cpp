@@ -67,6 +67,7 @@ bool BackStage::Start()
 					pugi::xml_node QuestNode = dialogueNode.child("sideQuest");
 					if (QuestNode != NULL) {
 						di->hasQuest = true;
+						dude->questInfo = QUEST_TO_GIVE;
 						Quest* sideQuest = nullptr;
 						int type = QuestNode.attribute("type").as_int();
 

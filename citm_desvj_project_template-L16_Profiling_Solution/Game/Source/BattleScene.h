@@ -131,6 +131,14 @@ public:
 	Animation henryTudorDown;
 	Animation henryTudorUp;
 
+	Animation warwickRight;
+	Animation warwickDown;
+	Animation warwickUp;
+
+	Animation edwardRight;
+	Animation edwardDown;
+	Animation edwardUp;
+
 	Animation LancasterAnim;
 
 

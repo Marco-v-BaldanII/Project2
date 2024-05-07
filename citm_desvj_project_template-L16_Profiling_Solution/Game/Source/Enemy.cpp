@@ -407,8 +407,6 @@ bool Enemy::PostUpdate() {
 	}
 
 
-	app->render->DrawRectangle(collider->data, b2Color(1, 1, 1, 1), false, false);
-
 	ClickOnMe();
 	if (drawPath) {
 

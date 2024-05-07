@@ -279,7 +279,13 @@
 				
 					<dialogue text ="May my final arrow find its mark, even in death"/>				
 				
-				</enemy>				
+				</enemy>
+
+				<enemy name= "Duke of York" x="11" y="4" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
+
+					<dialogue text =" Dammn it! Lancasters , you'll live to regret this humiliation"/>
+
+				</enemy>
 
 				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="100" />
 				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
@@ -301,7 +307,8 @@
 			<Sprite path="Assets/Textures/BattleScreenSprites/Knight.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Archer.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Mage.png"/>
-			
+			<Sprite path="Assets/Textures/BattleScreenSprites/Earl of Warwick.png"/>
+
 		</battleSprites>
 	
 		
@@ -396,13 +403,13 @@
 
 	<castingScene>
 
-	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets\Textures\Actors\DiegoDiavollo.png"/>
-	<actor name="Tessa Thompson" dialogue="Buon giorno2" path ="Assets\Textures\Actors\TessaThompson.png"/>
+	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets\Textures\Actors\Diego.png"/>
+	<actor name="Tessa Thompson" dialogue="Buon giorno2" path ="Assets\Textures\Actors\tessa.png"/>
 	<actor name="Alicia Sol" dialogue="Buon giorno3" path ="Assets\Textures\Actors\AliciaSol.png"/>
 	<actor name="Mohan Boot" dialogue="Buon giorno3" path ="Assets\Textures\Actors\MohanBoot.png"/>
 	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets\Textures\Actors\EmmaDragonfly.png"/>
 
-	<role text="Henry VI"  path = "Assets\Textures\LancasterOutfits\HenryVIOutfit.png" />
+	<role text="Henry VI"  path = "Assets\Textures\LancasterOutfits\HenryTudorOutfit.png" />
 	<role text="Prince Edward"  path = "Assets\Textures\LancasterOutfits\Prince EdwardOutfit.png"/>
 	<role text="Margaret"  path = "Assets\Textures\LancasterOutfits\defaultOutfit.png"/>
 	<role text="Jasper Tudor"  path = "Assets\Textures\LancasterOutfits\Jasper TudorOutfit.png"/>

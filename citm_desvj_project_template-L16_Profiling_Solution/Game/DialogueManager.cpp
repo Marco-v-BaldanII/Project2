@@ -843,6 +843,7 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 				if (currentNPC_Dialogues->dialogue->hasQuest == true)/* Accept sidequest */ {
 
 					app->questManager->quests.Add(currentNPC_Dialogues->dialogue->sideQuest);
+					currentNPC->questInfo = NO_QUEST;
 
 				}
 

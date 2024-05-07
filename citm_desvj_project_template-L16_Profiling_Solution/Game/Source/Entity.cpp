@@ -184,7 +184,7 @@ void Entity::InitializeStats(pugi::xml_node config, bool nerfed) {
 	}
 
 	attack =(int)   config.attribute("attack").as_int() * nerf;
-	movement = (int)config.attribute("movement").as_int() * nerf;
+	movement = (int)config.attribute("movement").as_int();
 	hp = (int)config.attribute("hp").as_int() * nerf;
 	precision = (int)config.attribute("precision").as_int() * nerf;
 	luck = (int)config.attribute("luck").as_int() * nerf ;

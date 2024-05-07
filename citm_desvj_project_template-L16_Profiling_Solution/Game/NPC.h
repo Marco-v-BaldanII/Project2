@@ -21,6 +21,12 @@ enum NPC_BEHAVIOUR {
 	WALK
 };
 
+enum QuestStatus {
+
+	NO_QUEST,
+	QUEST_TO_GIVE
+
+};
 
 
 class Npc : public Entity
@@ -74,12 +80,15 @@ public:
 	pugi::xml_node config;
 	uint texW, texH;
 
+	QuestStatus questInfo = NO_QUEST;
 	
 	MOVEMENT myMovement =  WAIT;
 
 	Quest* quest = nullptr;
 
 	Timer dirTimer;
+
+	SDL_Texture* exclamationTex = nullptr;
 
 };
 

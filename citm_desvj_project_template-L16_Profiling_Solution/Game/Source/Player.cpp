@@ -348,6 +348,7 @@ bool Player::PostUpdate()
 		}
 		case BATTLE:
 
+			app->guiManager->TurnOffSpotLight();
 
 			if (battleTimer == 1 || battleTimer == 0)/*Determine amount of attacks*/ {
 
@@ -424,6 +425,7 @@ bool Player::PostUpdate()
 			oponent = nullptr;
 			lvlMods = LevelUp();
 			showLvlUp.Start();
+			app->dialogueManager->SpontaneousDialogue(lvlUpQuote);
 		}
 	}
 
@@ -607,62 +609,62 @@ void Player::FigureStickMovement(float dt) {
 
 void Player::DrawCombatScene() {
 
+	if (oponent != nullptr) {
+		SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
+		app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
 
-	SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
-	app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
+		//app->render->DrawTexture(myBattleTexture,  Bposition.x,  Bposition.y, false, true, 255);
 
-	//app->render->DrawTexture(myBattleTexture,  Bposition.x,  Bposition.y, false, true, 255);
-
-	//int x = curvedTrajectory()
-
-
-	app->render->DrawTexture(oponent->myBattleTexture, -app->render->camera.x / 3 + oponent->Bposition.x / 3, -app->render->camera.y / 3 + oponent->Bposition.y / 3, false, true, 255);
-	app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, true, 255);
+		//int x = curvedTrajectory()
 
 
-	/* Enemy amnimation logic */
+		app->render->DrawTexture(oponent->myBattleTexture, -app->render->camera.x / 3 + oponent->Bposition.x / 3, -app->render->camera.y / 3 + oponent->Bposition.y / 3, false, true, 255);
+		app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, true, 255);
 
-	if (opponentAttacking) {
-		oponent->defending = true;
-		oponent->FigureStickMovement(16.0f);
-	}
 
-	if (opponentReachTarget) {
+		/* Enemy amnimation logic */
 
-		bool opLerp = false;
-
-		opLerp = app->battleScene->DrawHPBars(oponent->lerpingHp, oponent->lerpingHp, lerpingHp, hp - oponent->attack, oponent->maxHp, maxHp, true);
-
-		if (opLerp) /*hp bar lerping has finished*/ {
-
-			hp -= oponent->attack;
-
-			oponent->defending = false;
-			opponentAttacking = false;
-			opponentReachTarget = false;
-			oponent->Bposition = iPoint(300 * 3, 80 * 3);
+		if (opponentAttacking) {
+			oponent->defending = true;
+			oponent->FigureStickMovement(16.0f);
 		}
 
+		if (opponentReachTarget) {
 
-	}
+			bool opLerp = false;
 
-	if (reachedTarget) {
-		if (DealDMG()) {
-			// ready for another attack ? , lerping hp must be = hp
-			numberofAttacks--;
+			opLerp = app->battleScene->DrawHPBars(oponent->lerpingHp, oponent->lerpingHp, lerpingHp, hp - oponent->attack, oponent->maxHp, maxHp, true);
 
+			if (opLerp) /*hp bar lerping has finished*/ {
 
-			lerpingHp = hp;
-			reachedTarget = false;
+				hp -= oponent->attack;
 
-			Bposition = iPoint(50 * 3, 80 * 3);/* change to interpolate back to start */
+				oponent->defending = false;
+				opponentAttacking = false;
+				opponentReachTarget = false;
+				oponent->Bposition = iPoint(300 * 3, 80 * 3);
+			}
+
 
 		}
-	}
-	else if (!opponentReachTarget) {
-		app->battleScene->DrawHPBars(oponent->hp, oponent->hp, hp, hp, oponent->maxHp, maxHp, false);
-	}
+
+		if (reachedTarget) {
+			if (DealDMG()) {
+				// ready for another attack ? , lerping hp must be = hp
+				numberofAttacks--;
 
 
+				lerpingHp = hp;
+				reachedTarget = false;
+
+				Bposition = iPoint(50 * 3, 80 * 3);/* change to interpolate back to start */
+
+			}
+		}
+		else if (!opponentReachTarget) {
+			app->battleScene->DrawHPBars(oponent->hp, oponent->hp, hp, hp, oponent->maxHp, maxHp, false);
+		}
+
+	}
 
 }
