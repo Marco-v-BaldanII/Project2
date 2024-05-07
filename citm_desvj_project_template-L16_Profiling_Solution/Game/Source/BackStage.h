@@ -48,6 +48,7 @@ public:
 	iPoint uncheckableTiles[3];
 	bool hasBeenCreated;
 
+	pugi::xml_node config;
 	pugi::xml_node mynode;
 
 	List<Npc*> npcsList;

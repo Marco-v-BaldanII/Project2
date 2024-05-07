@@ -29,7 +29,7 @@ BackStage::~BackStage()
 
 bool BackStage::Awake(pugi::xml_node config)
 {
-	mynode = config;
+	this->config = config;
 
 	return true;
 }
@@ -42,16 +42,30 @@ bool BackStage::Start()
 		music = app->audio->PlayMusic("assets/audio/music/Musica-overworld-_Big-Map_.wav", 0);
 		app->backstageplayer->Enable();
 
-		if (backStageID == 1)
-		{
-			background = app->tex->Load("Assets/Textures/Backstageprops2-export.png");
+		
+
+			for (pugi::xml_node ny = config.child("ID"); ny != NULL; ny = ny.next_sibling("ID")) {
+
+				if (ny.attribute("value").as_int() == backStageID) {
+					mynode = ny;
+					break;
+				}
+
+			}
+
+			background = app->tex->Load(mynode.child("background").attribute("path").as_string());
 
 			app->backstageplayer->position.x = 100;
 			app->backstageplayer->position.y = 100;
 			
 			for (pugi::xml_node npcNode = mynode.child("npc"); npcNode != NULL; npcNode = npcNode.next_sibling("npc")) {
 
+
+				SDL_Rect body;
+				body = SDL_Rect{ npcNode.attribute("Bx").as_int(), npcNode.attribute("By").as_int(),npcNode.attribute("Bw").as_int(),npcNode.attribute("Bh").as_int() };
+
 				Npc* dude = (Npc*)app->entityManager->PlaceNPC(npcNode.attribute("name").as_string(), npcNode.attribute("x").as_int(), npcNode.attribute("y").as_int(), npcNode.attribute("wait").as_int());
+				dude->body = body;
 
 				dude->texture = app->tex->Load(npcNode.child("texture").attribute("path").as_string());
 
@@ -96,11 +110,11 @@ bool BackStage::Start()
 
 				npcsList.Add(dude);
 			}
-		}
-		else if (backStageID == 2)
+		
+		/*else if (backStageID == 2)
 		{
-			background = app->tex->Load("Assets/Textures/test.png");
-		}
+			background = app->tex->Load("Assets/Textures/FirstBackstage-export.png");
+		}*/
 
 		talkPrompt = app->tex->Load(mynode.child("talkBtn").attribute("path").as_string());
 	}
@@ -112,6 +126,8 @@ bool BackStage::Start()
 
 	return true;
 }
+
+
 
 bool BackStage::PreUpdate()
 {	

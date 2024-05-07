@@ -12,6 +12,7 @@
 #include "../Log.h"
 #include "QuestManager.h"
 #include "TurnManager.h"
+#include "../GuiManager.h"
 
 
 using namespace std;
@@ -102,6 +103,7 @@ void QuestManager::CheckQuestCompletion(string target) {
 			completedQuest = it->data->GetObjective();
 			if (it->data->isMain == true)/* If it is a main quest end the lvl*/ {
 				app->turnManager->MainQuest = true;
+				app->guiManager->spotLight->mode = DIALOG;
 			}
 			delete it->data;
 			quests.Del(it);

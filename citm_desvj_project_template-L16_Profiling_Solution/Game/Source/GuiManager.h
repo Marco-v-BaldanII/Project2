@@ -74,9 +74,9 @@ public:
 			}
 			else {
 
-				SDL_Rect BigRect = SDL_Rect{ 0,0,196,196 };
+				/*SDL_Rect BigRect = SDL_Rect{ 0,0,196,196 };
 
-				app->render->DrawTexture(texture, position.x - 32, position.y - 32, &BigRect, true, 210, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD);
+				app->render->DrawTexture(texture, position.x - 32, position.y - 32, &BigRect, true, 210, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD);*/
 				/*SDL_Rect rect = SDL_Rect{ 0,0,1000,1000 };
 
 				app->render->DrawTexture(vigneteText, position.x - 500, position.y - 500, &rect, false, 190);*/
