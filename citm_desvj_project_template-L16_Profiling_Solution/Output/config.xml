@@ -391,9 +391,17 @@
 
 	<intro>
 		<titleScreen path ="Assets/Textures/Logo screen.png"/>
-		
-		
+		<part1 path="Assets/Textures/loog/part1.png">
+		<part2 path="Assets/Textures/loog/part2.png">
 	</intro>
+
+	<lose>
+		<titleScreen path ="Assets/Textures/Losing Screen.png"/>
+	</lose>
+
+	<win>
+		<titleScreen path ="Assets/Textures/Winning screen.png"/>
+	</win>
 
 	<backStage>
 	    <talkBtn path ="Assets/Textures/UI/Z_Key_Light.png"/>

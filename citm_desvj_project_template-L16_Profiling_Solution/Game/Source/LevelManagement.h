@@ -21,6 +21,8 @@ enum GameScene {
 	COMBAT = 5,
 	BACKSTAGE2 = 6,
 	CASTING = 7,
+	WIN = 8,
+	LOSE = 9,
 	CREDITS = 20
 };
 

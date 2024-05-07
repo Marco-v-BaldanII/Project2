@@ -34,6 +34,8 @@
 #include "FadeToBlack.h"
 #include "LevelManagement.h"
 #include "../Inventory.h"
+#include "Victory.h"
+#include "Lose.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -70,6 +72,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	fonts = new Fonts(true);
 	//scenes
 	intro = new Intro(false);
+	victory = new Victory(false);
+	lose = new Lose(false);
 	mainMenu = new StartMenu(false);
 	battleScene = new BattleScene(false);
 	backStage = new BackStage(false);
@@ -97,6 +101,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	//AddModule(scene);
 	AddModule(intro);
+	AddModule(victory);
+	AddModule(lose);
 	AddModule(mainMenu);
 	AddModule(battleScene);
 	AddModule(backStage);

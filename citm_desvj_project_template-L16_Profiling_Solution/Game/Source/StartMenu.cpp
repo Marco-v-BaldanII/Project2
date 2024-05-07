@@ -12,6 +12,8 @@
 #include "BattleScene.h"
 #include "BackStage.h"
 #include "../TurnManager.h"
+#include "Victory.h"
+#include "Lose.h"
 //#include "Fonts.h"
 #include "Defs.h"
 #include "Log.h"
@@ -96,10 +98,14 @@ bool StartMenu::Start()
 		backstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, " Backstage ", pos2, this);
 		combatstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, " Combatstage ", pos3, this);
 		backstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 69, " Backstage 2", pos4, this);
+		win = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 40, " Win ", pos5, this);
+		lose = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 41, " Lose ", pos6, this);
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
 		backstage2->state = GuiControlState::DISABLED;
+		win->state = GuiControlState::DISABLED;
+		lose->state = GuiControlState::DISABLED;
 
 		resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, " Resume ", pos1, this);
 
@@ -123,7 +129,6 @@ bool StartMenu::PreUpdate()
 bool StartMenu::Update(float dt)
 {	
 
-
 	switch (state) {
 	case MenuState::OFF:
 		start->state = GuiControlState::DISABLED;
@@ -142,6 +147,8 @@ bool StartMenu::Update(float dt)
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
 		backstage2->state = GuiControlState::DISABLED;
+		win->state = GuiControlState::DISABLED;
+		lose->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -162,6 +169,8 @@ bool StartMenu::Update(float dt)
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
 		backstage2->state = GuiControlState::DISABLED;
+		win->state = GuiControlState::DISABLED;
+		lose->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -182,6 +191,8 @@ bool StartMenu::Update(float dt)
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
 		backstage2->state = GuiControlState::DISABLED;
+		win->state = GuiControlState::DISABLED;
+		lose->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -202,6 +213,8 @@ bool StartMenu::Update(float dt)
 		backstage->state = GuiControlState::NORMAL;
 		combatstage->state = GuiControlState::NORMAL;
 		backstage2->state = GuiControlState::NORMAL;
+		win->state = GuiControlState::NORMAL;
+		lose->state = GuiControlState::NORMAL;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -222,6 +235,8 @@ bool StartMenu::Update(float dt)
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
 		backstage2->state = GuiControlState::DISABLED;
+		win->state = GuiControlState::DISABLED;
+		lose->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::NORMAL;
 		break;
@@ -428,6 +443,16 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 14 && app->dialogueManager->textVelocity == app->dialogueManager->fastVelocity)
 	{
 		app->dialogueManager->SetTextVelocity(TextVelocity::SLOW);
+	}
+	else if (control->id == 40)
+	{
+		app->levelManager->LoadScene(GameScene::WIN);
+		state = MenuState::OFF;
+	}
+	else if (control->id == 41)
+	{
+		app->levelManager->LoadScene(GameScene::LOSE);
+		state = MenuState::OFF;
 	}
 	else if (control->id == 69)
 	{

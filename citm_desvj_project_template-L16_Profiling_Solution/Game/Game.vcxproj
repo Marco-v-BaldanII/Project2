@@ -119,6 +119,7 @@
     <ClCompile Include="Source\Intro.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\LevelManagement.cpp" />
+    <ClCompile Include="Source\Lose.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Source\StartMenu.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\Victory.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="TurnManager.cpp" />
     <ClInclude Include="BackstagePlayer.h" />
@@ -168,6 +170,7 @@
     <ClInclude Include="Source\Intro.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\LevelManagement.h" />
+    <ClInclude Include="Source\Lose.h" />
     <ClInclude Include="Source\MainMenuPanel.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\p2List.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="Source\StartMenu.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Victory.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />

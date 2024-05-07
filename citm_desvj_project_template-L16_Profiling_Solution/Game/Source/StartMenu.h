@@ -93,6 +93,8 @@ public:
 	GuiControlButton* backstage;
 	GuiControlButton* combatstage;
 	GuiControlButton* backstage2;
+	GuiControlButton* win;
+	GuiControlButton* lose;
 
 	GuiPanel* testPannel;
 

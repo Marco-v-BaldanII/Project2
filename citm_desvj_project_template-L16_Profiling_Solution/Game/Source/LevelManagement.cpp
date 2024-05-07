@@ -176,6 +176,26 @@ bool LevelManagement::Update(float dt)
 			}
 		}
 		break;
+	case WIN:
+		if (currentScene != (Module*)app->victory) {
+
+			if (app->fade->Fade(currentScene, (Module*)app->victory, 60))
+			{
+				currentScene = (Module*)app->victory;
+				LOG("Win");
+			}
+		}
+		break;
+	case LOSE:
+		if (currentScene != (Module*)app->lose) {
+
+			if (app->fade->Fade(currentScene, (Module*)app->lose, 60))
+			{
+				currentScene = (Module*)app->lose;
+				LOG("Lose");
+			}
+		}
+		break;
 	/*case GAME_OVER:
 
 		if (currentScene != (Module*)app->gameOver) {

@@ -44,6 +44,10 @@ bool GuiManager::Start()
 	tex_inventory_tabs = app->tex->Load(myNode.child("tex_inventory_tabs").attribute("path").as_string());
 	tex_inventory_Items = app->tex->Load(myNode.child("tex_inventory_Items").attribute("path").as_string());
 
+	normalButton = app->tex->Load("Assets/Textures/UI/marco1.png");
+	focusedButton = app->tex->Load("Assets/Textures/UI/marco2.png");
+	pressedButton = app->tex->Load("Assets/Textures/UI/marco3.png");
+
 	//Button effect
 	buttonHoverFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
 	buttonClickFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");

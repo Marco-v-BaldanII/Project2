@@ -52,15 +52,18 @@ bool GuiControlButton::Update(float dt)
 			break;
 		case GuiControlState::NORMAL:
 			app->render->DrawRectangle(bounds, 0, 0, 200, 255, true, false);
+			//app->render->DrawTexture(app->guiManager->normalButton, bounds.x, bounds.y);
 			break;
 		case GuiControlState::FOCUSED:
 			app->render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);
 			//Draw rectangle at the left  and right side of the button
 			app->render->DrawRectangle({ bounds.x - 15, bounds.y, 5, bounds.h }, 0, 0, 0, 255, true, false);
 			app->render->DrawRectangle({ bounds.x + bounds.w + 10, bounds.y, 5, bounds.h }, 0, 0, 0, 255, true, false);
+			//app->render->DrawTexture(app->guiManager->focusedButton, bounds.x, bounds.y);
 			break;
 		case GuiControlState::PRESSED:
 			app->render->DrawRectangle(bounds, 255, 0, 0, 255, true, false);
+			//app->render->DrawTexture(app->, bounds.x, bounds.y);
 			break;
 		}
 

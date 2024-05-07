@@ -138,6 +138,10 @@ public:
 	SDL_Texture* tex_inventory_tabs = nullptr;
 	SDL_Texture* tex_inventory_Items = nullptr;
 
+	SDL_Texture* normalButton = nullptr;
+	SDL_Texture* focusedButton = nullptr;
+	SDL_Texture* pressedButton = nullptr;
+
 	pugi::xml_node myNode;
 
 	uint buttonClickFx = 0;

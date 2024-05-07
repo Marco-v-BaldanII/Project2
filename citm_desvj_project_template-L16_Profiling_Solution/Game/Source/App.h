@@ -33,6 +33,8 @@ class TurnManager;
 class BackStagePlayer;
 class ItemManager;
 class QuestManager;
+class Victory;
+class Lose;
  //Scenes
 class Intro;
 class StartMenu;
@@ -143,6 +145,8 @@ public:
 	BackStage* backStage;
 	BackStagePlayer* backstageplayer;
 	CastingScene* castingScene;
+	Victory* victory;
+	Lose* lose;
 
 	bool exitRequest = false;
 

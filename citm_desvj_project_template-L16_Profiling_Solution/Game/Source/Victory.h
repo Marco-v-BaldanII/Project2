@@ -1,5 +1,5 @@
-#ifndef __INTRO_H__
-#define __INTRO_H__
+#ifndef __VICTORY_H__
+#define __VICTORY_H__
 
 #include "Module.h"
 //#include "p2List.h"
@@ -10,14 +10,14 @@
 struct SDL_Texture;
 class EnemyDummy;
 
-class Intro : public Module
+class Victory : public Module
 {
 public:
 
-	Intro(bool isActive);
+	Victory(bool isActive);
 
 	// Destructor
-	virtual ~Intro();
+	virtual ~Victory();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -37,19 +37,10 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	float EaseInElastic(float t, float b, float c, float d);
-
-	uint intro;
+	uint victory;
 private:
-	SDL_Texture* part1;
-	SDL_Texture* part2;
+	SDL_Texture* img;
 	SDL_Rect rect;
-	SDL_Rect rect2;
-
-	float initLogo1PosX;
-	float initLogo2PosX;
-	float Logo1PosX;
-	float Logo2PosX;
 
 	pugi::xml_node myNode;
 	
@@ -63,4 +54,4 @@ private:
 	float counter = 0;
 };
 
-#endif // __INTRO_H__
+#endif // __VICTORY_H__
