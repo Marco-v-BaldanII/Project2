@@ -228,7 +228,26 @@
 			<frame x="304" y="71" w="17" h="26" />
 		</animation>
 	</EdwardVI>
-		
+
+		<Margaret>
+
+			<!--mujer de azul -->
+			<animation name="wrigth">
+				<frame x="336" y="232" w="17" h="24" />
+				<frame x="336" y="264" w="16" h="24" />
+			</animation>
+
+			<animation name="up">
+				<frame x="336" y="166" w="17" h="26" />
+				<frame x="336" y="197" w="17" h="24" />
+			</animation>
+
+			<animation name="down">
+				<frame x="336" y="8" w="21" h="24" />
+				<frame x="336" y="38" w="21" h="26" />
+				<frame x="336" y="70" w="21" h="26" />
+			</animation>
+		</Margaret>
 
        
 
