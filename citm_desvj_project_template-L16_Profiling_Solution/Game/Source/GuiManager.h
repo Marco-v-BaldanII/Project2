@@ -93,6 +93,13 @@ public:
 
 };
 
+enum VIEW {
+
+	WORLD,
+	SCREEN
+
+};
+
 class GuiManager : public Module
 {
 public:
@@ -109,6 +116,7 @@ public:
 	bool Start();
 
 	 // Called each loop iteration
+	bool PreUpdate();
 	bool Update(float dt);
 	bool UpdateAll(float dt, bool logic); 
 	bool PostUpdate();
@@ -116,9 +124,9 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 });
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{255,255,255,255});
 
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds = { 0,0,0,0 });
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{ 255,255,255,255 });
 
 	void OnPause(bool paused);
 

@@ -411,10 +411,10 @@ bool Enemy::PostUpdate() {
 	ClickOnMe();
 	if (drawPath) {
 
-		myFrame->Render(1.0 / 60.0, hp, attack, speed, precision, luck, movement);
+		
 		pathfinding->GenerateWalkeableArea(tilePos, movement + 1);
 		pathfinding->DrawBFSPath();
-
+		myFrame->Render(1.0 / 60.0, hp, attack, speed, precision, luck, movement);
 
 	}
 	else 	
@@ -474,6 +474,7 @@ void Enemy::ClickOnMe() {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 
 			drawPath = !drawPath; 
+			app->map->drawGrid = ! app->map->drawGrid;
 		
 
 		}

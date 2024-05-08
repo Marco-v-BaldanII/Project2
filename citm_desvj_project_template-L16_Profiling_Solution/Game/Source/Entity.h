@@ -76,6 +76,11 @@ public:
 		return true;
 	}
 
+	virtual bool SuperPostUpdate() {
+
+		return true;
+	}
+
 
 	virtual bool CleanUp()
 	{

@@ -188,8 +188,14 @@ bool Render::DrawActor(ActorSprite* sprite, int x, int y, const SDL_Rect* sectio
 	return true;
 }
 
-bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
+bool Render::DrawRectangle(const SDL_Rect& rect, int r, int g, int b, Uint8 a, bool filled, bool use_camera) const
 {
+
+
+	if (r < 0) { r = 0; }
+	if (b < 0) { b = 0; }
+	if (g < 0) { g = 0; }
+
 	bool ret = true;
 	uint scale = app->win->GetScale();
 
@@ -256,12 +262,12 @@ bool Render::DrawRectMask(const SDL_Rect& rect, Circle mask, Uint8 r, Uint8 g, U
 
 }
 
-bool Render::DrawRectangle(const SDL_Rect& rect, b2Color col , bool filled, bool use_camera) const
+bool Render::DrawRectangle(const SDL_Rect& rect, b2Color col , bool filled, bool use_camera, SDL_BlendMode blendMode) const
 {
 	bool ret = true;
 	uint scale = app->win->GetScale();
 
-	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawBlendMode(renderer, blendMode);
 	SDL_SetRenderDrawColor(renderer, col.r*255, col.g*255, col.b*255, col.a*255);
 
 	SDL_Rect rec(rect);

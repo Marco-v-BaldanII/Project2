@@ -128,20 +128,24 @@ bool Player::Start() {
 	collider = app->physics->AddCollider(SDL_Rect{ 0,0,80 * 3,80 * 3 }, ColliderType::PLAYER_C, this, ColliderShape::QUAD);
 
 
-	if (atkButton == nullptr) atkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, atkBtnId, " choiceA ", SDL_Rect{0,0,28,14}, app->battleScene);
-	if (waitButton == nullptr) waitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, waitBtnId, " choiceB ", SDL_Rect{ 0,0,28,14 }, app->battleScene);
+	if (atkButton == nullptr) atkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, atkBtnId, " Attack ", SDL_Rect{ 0,0,28  ,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{70,51,29,255});
+	if (waitButton == nullptr) waitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, waitBtnId, " Wait ", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
+	if (talkButton == nullptr) talkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, talkBtnId, " Wait ", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
 
-	atkButton->state = GuiControlState::NORMAL; waitButton->state = GuiControlState::NORMAL;
+	atkButton->state = GuiControlState::DISABLED; waitButton->state = GuiControlState::DISABLED; talkButton->state = GuiControlState::DISABLED;
 
 	return true;
 }
 
 bool Player::PreUpdate() 
 {
+
+	atkButton->bounds.x = position.x - 30; atkButton->bounds.y = position.y - 40;
+	waitButton->bounds.x = position.x + 30; waitButton->bounds.y = position.y - 40;
+	talkButton->bounds.x = position.x ; talkButton->bounds.y = position.y - 70;
+
 	// if the player hasn't moved this turn it can be clicked on
-	if (!movedThisTurn) {
-		ClickOnMe(); 
-	}
+	
 
 	switch (state)
 	{
@@ -153,65 +157,88 @@ bool Player::PreUpdate()
 		pos = app->map->WorldToMap(pos.x, pos.y);
 		tilePos = pos;
 
-
+		atkButton->state = GuiControlState::DISABLED;
+		waitButton->state = GuiControlState::DISABLED;
+		talkButton->state = GuiControlState::DISABLED;
 		ExpandedBFS = false;
 	}
 	break;
 	case MOVE:
 		currentAnim->Update();
 
-		//End turn for selected player
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && app->turnManager->currentPlayer == this && app->turnManager->isPlayerMoving == false) 
-		{
-			state = IDLE;
-		}
+		if(atkButton->state == GuiControlState::DISABLED)atkButton->state = GuiControlState::NORMAL;
+		if(waitButton->state == GuiControlState::DISABLED) waitButton->state = GuiControlState::NORMAL;
+		if (talkButton->state == GuiControlState::DISABLED) talkButton->state = GuiControlState::NORMAL;
 
 		//Select tile to move to
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN && !Move && ExpandedBFS && HasMoveAction) {
-			int x, y;
-			app->input->GetMouseWorldPosition(x, y);
-			iPoint p;
-			p.x = x;
-			p.y = y;
-			p = app->map->WorldToMap(x, y);
+
+		if (waitButton->state != GuiControlState::FOCUSED && waitButton->state != GuiControlState::PRESSED && waitButton->state != GuiControlState::SELECTED
+			&& atkButton->state != GuiControlState::FOCUSED && atkButton->state != GuiControlState::PRESSED && atkButton->state != GuiControlState::SELECTED
+			&& talkButton->state != GuiControlState::FOCUSED && talkButton->state != GuiControlState::PRESSED && talkButton->state != GuiControlState::SELECTED
 			
-			if (app->map->pathfinding->IsTileEmpty(p) && app->map->pathfinding->DistanceBetweenTiles(p,tilePos) < movement) {
-				if (!InitPath(p)) {
-					ExpandedBFS = false;
-					app->map->pathfinding->ResetBFSPath();
-					state = IDLE;
+			) {
+
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN && !Move && ExpandedBFS && HasMoveAction) {
+				app->map->drawGrid = false;
+				int x, y;
+				app->input->GetMouseWorldPosition(x, y);
+				iPoint p;
+				p.x = x;
+				p.y = y;
+				p = app->map->WorldToMap(x, y);
+
+				if (app->map->pathfinding->IsTileEmpty(p) && app->map->pathfinding->DistanceBetweenTiles(p, tilePos) < movement) {
+					if (!InitPath(p)) {
+						ExpandedBFS = false;
+						app->map->pathfinding->ResetBFSPath();
+						state = IDLE;
+					}
+				}
+			}
+			else if (!Move && app->turnManager->currentPlayer == this && !HasMoveAction) {
+
+				
+				if (atkButton->state == GuiControlState::DISABLED) atkButton->state = GuiControlState::NORMAL;
+				if (waitButton->state == GuiControlState::DISABLED) waitButton->state = GuiControlState::NORMAL;
+				if (talkButton->state == GuiControlState::DISABLED) talkButton->state = GuiControlState::NORMAL;
+
+				int x, y;
+				app->input->GetMouseWorldPosition(x, y);
+
+				// Attack code
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN) {
+					app->map->drawGrid = false;
+					iPoint p;
+					p.x = x;
+					p.y = y;
+					p = app->map->WorldToMap(x, y);
+
+					if (app->entityManager->IsEnemyThere(p) != nullptr && app->map->pathfinding->DistanceBetweenTiles(app->entityManager->IsEnemyThere(p)->data->tilePos, tilePos) <= attackRange) {
+						oponent = app->entityManager->IsEnemyThere(p)->data->entity;
+						oponent->target = this;
+						state = BATTLE;
+						atckedClicked = false;
+					}
+				}
+			}
+
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
+				app->map->drawGrid = false;
+				int x, y;
+				app->input->GetMouseWorldPosition(x, y);
+				iPoint p;
+				p.x = x;
+				p.y = y;
+				p = app->map->WorldToMap(x, y);
+
+				if (app->map->pathfinding->IsLeverThere(p) && app->map->pathfinding->DistanceBetweenTiles(p, tilePos) == 1)
+				{
+
+					app->map->pathfinding->ActivateLever(p);
 				}
 			}
 		}
-		else if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
-			int x, y;
-			app->input->GetMouseWorldPosition(x, y);
-			iPoint p;
-			p.x = x;
-			p.y = y;
-			p = app->map->WorldToMap(x,y);
-
-			if (app->entityManager->IsEnemyThere(p) != nullptr && app->map->pathfinding->DistanceBetweenTiles(app->entityManager->IsEnemyThere(p)->data->tilePos, tilePos) <= attackRange) {
-				oponent = app->entityManager->IsEnemyThere(p)->data->entity;
-				oponent->target = this;
-				state = BATTLE;
-			}
-		}
-
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
-			int x, y;
-			app->input->GetMouseWorldPosition(x, y);
-			iPoint p;
-			p.x = x;
-			p.y = y;
-			p = app->map->WorldToMap(x, y);
-
-			if (app->map->pathfinding->IsLeverThere(p) && app->map->pathfinding->DistanceBetweenTiles(p, tilePos) == 1)
-			{
-
-				app->map->pathfinding->ActivateLever(p);
-			}
-		}
+		
 
 		break;
 	}
@@ -230,7 +257,9 @@ bool Player::Update(float dt)
 		if(!defending) Bposition = iPoint(50 * 3, 80 * 3);
 
 		//if click enemy and enemay is on attack range engage combat
+	
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
+			// lo de el ataque
 			int x, y;
 			app->input->GetMouseWorldPosition(x, y);
 			iPoint p;
@@ -338,7 +367,9 @@ bool Player::PostUpdate()
 
 	if (hp > 0) {
 
-
+		if (!movedThisTurn) {
+			ClickOnMe();
+		}
 	
 
 		//draw movement area
@@ -507,17 +538,36 @@ bool Player::PostUpdate()
 		}
 	
 	}
+
+	if (atckedClicked && HasMoveAction) {
+		app->map->DrawAdjacents(tilePos);
+	}
 	
 	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
 	if(oponent != nullptr){ oponent->collider->data.x = (-40) + oponent->Bposition.x; oponent->collider->data.y = (0) + oponent->Bposition.y; }
 	if (app->battleScene->godMode) app->render->DrawRectangle(oponent->collider->data, b2Color(1, 1, 1, 1), false, false);
 
 
+	
+
+	return true;
+}
+
+bool Player::SuperPostUpdate() {
+
+	// I have put this here specificaly so that it reads the input from the buttons before this
+
+	
+		myFrame->Render(1.0 / 60.0, hp, attack, speed, precision, luck, movement);
+
+	
+
 	return true;
 }
 
 void Player::ClickOnMe() {
 
+	if (HasMoveAction) {
 		clickBox.x = position.x; clickBox.y = position.y;
 
 		int mouseX, mouseY;
@@ -528,18 +578,23 @@ void Player::ClickOnMe() {
 		//If the position of the mouse if inside the bounds of the box 
 		if (mouseX > clickBox.x && mouseX < clickBox.x + clickBox.w && mouseY > clickBox.y && mouseY < clickBox.y + clickBox.h && app->turnManager->isPlayerMoving == false) {
 
+			
+
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 				if (state == IDLE) {
+					app->map->drawGrid = true;
 					app->turnManager->SelectPlayer(this);
 					state = MOVE;
 				}
-				else if (app->entityManager->IsEnemyThere(app->map->WorldToMap(mouseX - app->render->camera.x, mouseY - app->render->camera.y)) == nullptr)  {
+				else if (app->entityManager->IsEnemyThere(app->map->WorldToMap(mouseX - app->render->camera.x, mouseY - app->render->camera.y)) == nullptr) {
+					app->map->drawGrid = false;
 					state = IDLE;
 					app->turnManager->DeSelectPlayer();
 				}
 
 			}
 		}
+	}
 
 }
 
@@ -725,7 +780,28 @@ void Player::DrawCombatScene() {
 bool Player::OnGuiMouseClickEvent(GuiControl* control)  {
 
 	LOG("my button has been pressed");
+	if (control->id == atkBtnId) {
+		// state attacking
+		// find adjacent tiles and draw them in red
+		// if you click on a tile with an enemy perform the attacking code
+		 iPoint y = tilePos;
+		 atckedClicked = true;
+
+	}
 
 
+	if (control->id == waitBtnId && app->turnManager->currentPlayer == this && app->turnManager->isPlayerMoving == false) {
+		state = IDLE;
+		HasMoveAction = false;
+		atckedClicked = false;
+	}
+
+	if (control->id == talkBtnId) {
+		// state attacking
+		// find adjacent tiles and draw them in red
+		// if you click on a tile with an enemy perform the attacking code
+		LOG("talk");
+
+	}
 	return true;
 }

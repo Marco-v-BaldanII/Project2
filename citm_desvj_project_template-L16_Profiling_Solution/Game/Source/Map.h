@@ -30,7 +30,8 @@ enum MapOrientation
 enum TileType {
     SNOW,
     WOODS,
-    WATER
+    WATER,
+    TARGET
 };
 
 struct Tile {
@@ -248,6 +249,8 @@ public:
     // Limits the camera, CHANGE for different maps
     void CameraRestrictions();
 
+    void DrawAdjacents(iPoint tilePos);
+
 
 public: 
     SString name;
@@ -263,6 +266,9 @@ public:
     Tile* myTiles[MAX_TILE_AMOUNT][MAX_TILE_AMOUNT] = { nullptr };
 
     MapData mapData;
+
+    bool drawGrid = false;
+
 private:
     // L05: DONE 1: Declare a variable data of the struct MapData
   

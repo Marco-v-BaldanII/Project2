@@ -124,7 +124,7 @@ bool BattleScene::Start()
 
 				// make each unit have their own unique control ID
 				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 200);
-				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 200);
+				p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 200);
 
 				p->Start();
 				PassAnimations(p);
