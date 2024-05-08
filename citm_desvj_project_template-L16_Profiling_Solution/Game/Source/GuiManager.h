@@ -60,7 +60,7 @@ public:
 	}
 	void Render() {
 		if (visible == true) {
-
+			app->map->drawGrid = true;
 			/*
 				app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a / 2.6f, true, SDL_BLENDMODE_ADD);
 				app->render->FillCircle(position.x, position.y, radius * 1.2f, color.r, color.g, color.b, color.a / 3.0f, true, SDL_BLENDMODE_ADD);
@@ -89,7 +89,17 @@ public:
 			//app->render->FillCircle(position.x, position.y, radius*2, color.r, color.g, color.b, color.a/1.5f, true);
 			//app->render->DrawCircle(Target.x, Target.y, 2, 255, 0, 0, 255, true);
 		}
+		else {
+			app->map->drawGrid = false;
+		}
 	}
+
+};
+
+enum VIEW {
+
+	WORLD,
+	SCREEN
 
 };
 
@@ -109,6 +119,7 @@ public:
 	bool Start();
 
 	 // Called each loop iteration
+	bool PreUpdate();
 	bool Update(float dt);
 	bool UpdateAll(float dt, bool logic); 
 	bool PostUpdate();
@@ -116,9 +127,9 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 });
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{255,255,255,255});
 
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds = { 0,0,0,0 });
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{ 255,255,255,255 });
 
 	void OnPause(bool paused);
 

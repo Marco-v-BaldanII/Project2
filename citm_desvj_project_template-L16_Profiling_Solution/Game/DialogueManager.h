@@ -139,6 +139,8 @@ public:
 
 	void SpontaneousDialogue(Dialogue* _dialogue);
 
+	void SpontaneousDialogue(Conversation* _conversation);
+
 	void NextAct();
 
 	void WriteTheScript();
@@ -227,6 +229,9 @@ private:
 	SDL_Texture* skipBttnTex = nullptr;
 
 	Dialogue* spontaneousDialogue;
+
+	Conversation* spontaneousConversation;
+	int conversationIndex = 0;
 
 	bool scriptWritten = false;
 

@@ -108,6 +108,15 @@ public:
 
 };
 
+class Conversation {
+
+public:
+	List<Dialogue*> dialogues;
+	string name1 = "";
+	string name2 = "";
+
+};
+
 //void PrintSkill(Node* root, int points) {
 //
 //	cout << root->name << " Unlocked " << points << " points spent\n";

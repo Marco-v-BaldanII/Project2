@@ -141,6 +141,9 @@ void TurnManager::SelectPlayer(Player* player) {
 void TurnManager::DeSelectPlayer() {
 
 	if (currentPlayer != nullptr) {
+
+		currentPlayer->state = IDLE;
+
 		currentPlayer = nullptr;
 	}
 

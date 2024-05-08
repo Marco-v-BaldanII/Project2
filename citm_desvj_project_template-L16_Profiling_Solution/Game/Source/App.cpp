@@ -418,6 +418,17 @@ bool App::PostUpdate()
 		ret = item->data->PostUpdate();
 	}
 
+	for (item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		pModule = item->data;
+
+		if (pModule->active == false) {
+			continue;
+		}
+
+		ret = item->data->SuperPostUpdate();
+	}
+
 	return ret;
 }
 

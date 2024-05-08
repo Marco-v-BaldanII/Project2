@@ -9,9 +9,10 @@
 #include "GuiControlButton.h"
 #include "GuiControl.h"
 
+
 struct SDL_Texture;
 class Dialogue;
-
+class Conversation;
 
 class Player : public Entity
 {
@@ -27,6 +28,7 @@ public:
 	bool PreUpdate() override;
 	bool PostUpdate() override;
 	bool Update(float dt);
+	bool SuperPostUpdate() override;
 
 	bool CleanUp();
 
@@ -77,6 +79,7 @@ public:
 
 	bool receivedEXP = false;
 
+	bool atckedClicked = false;
 
 	float lerpingEXP;
 	
@@ -86,9 +89,13 @@ public:
 
 	GuiControlButton* atkButton = nullptr;
 	GuiControlButton* waitButton = nullptr;
+	GuiControlButton* talkButton = nullptr;
 
 	int atkBtnId = -1;
 	int waitBtnId = -1;
+	int talkBtnId = -1;
+
+	List<Conversation*> conversations;
 };
 
 #endif // __PLAYER_H__

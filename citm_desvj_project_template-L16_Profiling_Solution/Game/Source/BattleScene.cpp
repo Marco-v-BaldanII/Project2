@@ -125,7 +125,7 @@ bool BattleScene::Start()
 
 				// make each unit have their own unique control ID
 				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 200);
-				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 200);
+				p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 200);
 
 				p->Start();
 				PassAnimations(p);
@@ -219,6 +219,26 @@ bool BattleScene::Update(float dt)
 bool BattleScene::PostUpdate()
 {
 	bool ret = true;
+
+	if (talking && talker1 != nullptr && talker2 != nullptr) {
+
+		ListItem<Conversation*>* cIt = talker1->conversations.start;
+		while (cIt != NULL) {
+			string s1 = cIt->data->name2; string s2 = talker2->name.GetString();
+
+			if (s1 == s2) {
+				break;
+				// found the correct conversation
+			}
+
+			cIt = cIt->next;
+		}
+
+		if (cIt != NULL) app->dialogueManager->SpontaneousDialogue(cIt->data);
+
+		talker1 = nullptr;
+		talker2 = nullptr;
+	}
 	
 	return ret;
 }

@@ -418,6 +418,7 @@ bool DialogueManager::HasScrollFinished() {
 void DialogueManager::DrawTextBox(Position pos) {
 
 
+
 	if (myState == CUTSCENE) {
 		string txt = "fhfjf";
 		if (myLanguage == ENGLISH) {
@@ -511,6 +512,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 
 			app->render->DrawTexture(spontaneousDialogue->texture, 0 - (app->render->camera.x / 3), dialogueBox.y + 50, &portraitBoxL, true, 255, 1, 255, 150, 150);
 
+
 			dialogueBox.x += (app->render->camera.x / 3);
 			dialogueBox.y += (app->render->camera.y / 3);
 			nameBoxL.x += (app->render->camera.x / 3);
@@ -520,6 +522,36 @@ void DialogueManager::DrawTextBox(Position pos) {
 
 
 			app->render->DrawText(spontaneousDialogue->owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * app->win->GetScale() - 5, (DIALOGUE_SIZE) * 2 * app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+		}
+		if (spontaneousConversation != nullptr) {
+
+			numLines = 0;
+
+			dialogueBox = speechBox;
+			dialogueBox.x -= (app->render->camera.x / 3);
+			dialogueBox.y -= (app->render->camera.y / 3);
+			nameBoxL.x -= (app->render->camera.x / 3);
+			nameBoxL.y -= (app->render->camera.y / 3);
+
+			app->render->DrawRectangle(SDL_Rect{ app->render->camera.x / -3, app->render->camera.y / -3, 600,600 }, b2Color(52.0 / 255.0, 47.0 / 255.0, 77.0 / 255.0, 0.6f), true, true);
+
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+			app->render->DrawRectangle(nameBoxL, black, true, true);
+
+			//app->render->DrawActor(spontaneousConversation->dialogues[conversationIndex]->actorSprite, 0 - (app->render->camera.x / 3), dialogueBox.y + 50, &portraitBoxL, true, 255, 1, 255, 150, 150);
+
+			dialogueBox.x += (app->render->camera.x / 3);
+			dialogueBox.y += (app->render->camera.y / 3);
+			nameBoxL.x += (app->render->camera.x / 3);
+			nameBoxL.y += (app->render->camera.y / 3);
+
+			app->render->DrawText(spontaneousConversation->dialogues[conversationIndex]->text, (dialogueBox.x + 8)* app->win->GetScale(), (dialogueBox.y + 3)* app->win->GetScale(), (dialogueBox.w - 3)* app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+
+
+			app->render->DrawText(spontaneousConversation->dialogues[conversationIndex]->owner, (nameBoxL.x + 3)* app->win->GetScale(), (nameBoxL.y + 3)* app->win->GetScale(), nameBoxL.w* app->win->GetScale() - 5, (DIALOGUE_SIZE) * 2 * app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
+
 		}
 
 	}
@@ -594,7 +626,12 @@ void DialogueManager::AdvanceText() {
 				}
 				if (myState == SPONTANEOUS) {
 
-					myState = NPCS;
+					if(spontaneousDialogue != nullptr)/*Death quote*/ myState = NPCS;
+
+
+					else /*Battle conversation*/ {
+						conversationIndex++;
+					}
 				}
 				//else if (myState == NPCS)/* npcTalk(currentNPC_Dialogues);*/
 
@@ -617,7 +654,19 @@ void DialogueManager::AdvanceText() {
 			}
 			if (myState == SPONTANEOUS) {
 
-				myState = NPCS;
+				if (spontaneousDialogue != nullptr)/*Death quote*/ myState = NPCS;
+
+
+				else /*Battle conversation*/ {
+					conversationIndex++;
+					if (conversationIndex >= spontaneousConversation->dialogues.Count()) {
+						conversationIndex = 0;
+						spontaneousConversation = nullptr;
+						myState = NPCS;
+						app->battleScene->talking = false;
+					}
+
+				}
 			}
 			else if (myState == NPCS && currentNPC_Dialogues != nullptr) {
 
@@ -789,6 +838,23 @@ void DialogueManager::SpontaneousDialogue(Dialogue* _dialogue) {
 
 		spontaneousDialogue->texture = portraitTextures[spontaneousDialogue->owner];
 	}
+}
+
+void DialogueManager::SpontaneousDialogue(Conversation* _conversation) {
+	if (myState != SPONTANEOUS) {
+		spontaneousConversation = _conversation;
+		myState = SPONTANEOUS;
+
+
+		for (int i = 0; i < spontaneousConversation->dialogues.Count(); ++i) {
+
+			spontaneousConversation->dialogues[i]->actorSprite = actorPortraits[spontaneousConversation->dialogues[i]->owner];
+
+		}
+
+		//spontaneousDialogue->texture = portraitTextures[_conversation->name2];
+	}
+
 }
 
 bool DialogueManager::SaveState(pugi::xml_node node) {

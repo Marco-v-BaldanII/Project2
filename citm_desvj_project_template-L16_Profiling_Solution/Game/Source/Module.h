@@ -49,6 +49,10 @@ public:
 		return true;
 	}
 
+	virtual bool SuperPostUpdate() {
+		return true;
+	}
+
 	// Called before quitting
 	virtual bool CleanUp()
 	{
