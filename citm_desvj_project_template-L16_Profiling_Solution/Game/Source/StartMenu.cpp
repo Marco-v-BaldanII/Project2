@@ -44,6 +44,8 @@ bool StartMenu::Start()
 	if (active)
 	{
 		img = app->tex->Load("Assets/Textures/WOTR-MainScreen.png");
+		title = app->tex->Load("Assets/Textures/Title.png");
+		titleRect = { 0,0,256,192 };
 		music = app->audio->PlayMusic("assets/audio/music/title-screen-music.wav", 0.5f);
 		//app->dialogueManager->Enable();
 		rect = { 0,0,512,384 };
@@ -318,6 +320,7 @@ bool StartMenu::PostUpdate()
 {
 	bool ret = true;
 	app->render->DrawTexture(img, 0, 0, &rect);
+	app->render->DrawTexture(title, windowW/14, 20, &titleRect);
 	return ret;
 }
 

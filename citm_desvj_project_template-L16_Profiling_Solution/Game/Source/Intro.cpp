@@ -40,11 +40,12 @@ bool Intro::Start()
  	intro = app->audio->LoadFx("Assets/audio/fx/intro.wav");
 	app->audio->PlayFx(intro);
 	waitTime = 300;
+	EasingwaitTime = 40;
 	music = app->audio->PlayMusic("assets/audio/music/Logo Screen.wav", 0.5f);
 	part1 = app->tex->Load("Assets/Textures/loog/part1.png");
 	part2 = app->tex->Load("Assets/Textures/loog/part2.png");
-	rect = { 0, 0, 512/2, 384 };
-	rect2 = { 0, 0, 512 / 2, 384 };
+	rect = { 0, 0, 66 * 2, 120 * 2 };
+	//rect2 = { 0, 0, 512 / 2 - 50, 384 - 50 };
 	initLogo1PosX = -400;
 	initLogo2PosX = 512 + 400;
 	Logo1PosX = 0;
@@ -69,20 +70,25 @@ bool Intro::Update(float dt)
 	else
 	{
 		waitTime -= 1;
+		EasingwaitTime -= 1;
 	}
 
-	if (initLogo1PosX < 0)
+	float progress = 1.0f - (float)EasingwaitTime / 100;
+
+	if (initLogo1PosX < 126)
 	{
-		initLogo1PosX = EaseInElastic(200 - (float)waitTime / 4, -200, 512 / 2, 200);
+		// Animate initLogo1PosX from -400 to 126 using EaseInElastic
+		initLogo1PosX = EaseInElastic(progress, -400, 126 + 400, 1);
 	}
 	else
 	{
-		initLogo1PosX = 0;
+		initLogo1PosX = 126;
 	}
 
 	if (initLogo2PosX > 512 / 2)
 	{
-		initLogo2PosX = EaseInElastic(200 - (float)waitTime / 4, 512 / 2 + 200, -512 / 2, 200);
+		// Animate initLogo2PosX from 512 + 400 to 512 / 2 using EaseInElastic
+		initLogo2PosX = EaseInElastic(progress, 512 + 400, 512 / 2 - (512 + 400), 1);
 	}
 	else
 	{
@@ -99,8 +105,8 @@ bool Intro::Update(float dt)
 bool Intro::PostUpdate()
 {
 	//app->render->DrawRectangle(rect, {255,255,255,255}, true, false);
-	app->render->DrawTexture(part2, (int)initLogo1PosX, 0, &rect); //funca
-	app->render->DrawTexture(part1, (int)initLogo2PosX, 0, &rect); //no funca
+	app->render->DrawTexture(part2, (int)initLogo1PosX, 70, &rect); 
+	app->render->DrawTexture(part1, (int)initLogo2PosX, 70, &rect); 
 
 	return true;
 }

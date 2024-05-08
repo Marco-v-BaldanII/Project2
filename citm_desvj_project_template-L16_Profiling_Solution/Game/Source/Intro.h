@@ -56,6 +56,7 @@ private:
 	bool playintro = true;
 
 	int waitTime;
+	int EasingwaitTime;
 
 	int logoXpos;
 	uint music;

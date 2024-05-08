@@ -57,7 +57,9 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	SDL_Texture* img;
+	SDL_Texture* title;
 	SDL_Rect rect;
+	SDL_Rect titleRect;
 	uint music;
 	bool playMusic = true;
 	bool goConfig = false;
