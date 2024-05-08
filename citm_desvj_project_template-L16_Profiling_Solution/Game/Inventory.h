@@ -23,7 +23,9 @@
 #include "DialogueManager.h"
 #include "BackstagePlayer.h"
 #include "ItemManager.h"
+#include "../BattleScene.h"
 using namespace std;
+#include <list>
 
 class Inventory : public Module
 {
@@ -38,17 +40,31 @@ public:
 	bool CleanUp();
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-private:
-	
 	bool isVisible = false;
 	List<Item*> InventoryItems;
+	List<Player*> players;
 
 	int windowW = 1536;
 	int windowH = 1152;
 
-	List<GuiControlButton*> ItemButtons;
-	GuiControlButton* I_InventoryButton;
 	GuiControlButton* I_Use;
 	GuiControlButton* I_Drop;
 	GuiControlButton* I_Equip;
+	GuiControlButton* I_Close;
+
+	void UseItem(Player* player, Item* item);
+	void DropItem(Item* item);
+	void EquipItem(Player* player, Item* item);
+
+	int selectedItem = 0;
+	int selectedPlayer = 0;
+
+	SDL_Texture* inventoryUI = nullptr;
+	SDL_Rect inventoryRect;
+
+	SDL_Rect itemRect;
+	SDL_Rect playerRect;
+private:
+	
+	
 };

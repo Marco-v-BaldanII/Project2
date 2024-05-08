@@ -58,7 +58,7 @@ public:
 	float speed = 0.2f;
 	SDL_Texture* myTexture = nullptr;
 	SDL_Texture* UiTex = nullptr;
-	
+	const char* realname;
 	pugi::xml_node config;
 	uint texW, texH;
 	int stepCounter = 0;

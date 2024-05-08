@@ -58,9 +58,11 @@ public:
 
 	Player* myUnit = nullptr;
 
+	SDL_Texture* texture = nullptr;
+
 private:
 
-	SDL_Texture* texture = nullptr;
+	
 	const char* texturePath;
 	uint texW, texH;
 

@@ -13,6 +13,7 @@
 #include "../Dialogue.h"
 #include "../TurnManager.h"
 #include "BattleScene.h"
+#include "../Inventory.h"
 
 class Dialogue;
 
@@ -141,16 +142,16 @@ bool BackStage::Update(float dt)
 	ListItem<Npc*>* item;
 	Npc* pEntity = NULL;
 
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && !app->inventory->isVisible)
 		app->render->camera.y -= 10;
 
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && !app->inventory->isVisible)
 		app->render->camera.y += 10;
 
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && !app->inventory->isVisible)
 		app->render->camera.x -= 10;
 
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && !app->inventory->isVisible)
 		app->render->camera.x += 10;
 
 	near = false;
