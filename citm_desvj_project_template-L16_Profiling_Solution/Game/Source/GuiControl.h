@@ -9,7 +9,7 @@
 #include "Point.h"
 #include "SString.h"
 #include "Point.h"
-
+#include "Entity.h"
 
 #include "SDL/include/SDL.h"
 
@@ -99,7 +99,12 @@ public:
 	}
 	void NotifyObserver()
 	{
-		observer->OnGuiMouseClickEvent(this);
+		if (observer != nullptr) {
+			observer->OnGuiMouseClickEvent(this);
+		}
+		else if (entityObserver != nullptr) {
+			entityObserver->OnGuiMouseClickEvent(this);
+		}
 	}
 
 	void CenterText(SDL_Rect parent)
@@ -132,6 +137,10 @@ public:
 	SDL_Rect section;       // Texture atlas base section
 
 	Module* observer;       // Observer GuiManager Module (it should probably be an array/list)
+
+
+	Entity* entityObserver;
+
 	GuiPanel* parent;		//Panel where the element is located
 	uint soundfx;
 
