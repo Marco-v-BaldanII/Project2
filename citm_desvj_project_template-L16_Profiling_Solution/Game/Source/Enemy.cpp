@@ -206,7 +206,8 @@ bool Enemy::PreUpdate() {
 bool Enemy::Update(float dt)
 {
 
-	app->render->DrawTexture(texture, position.x, position.y, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(texture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 255,1.0f,255,255,255);
+	app->render->DrawTexture(texture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 60, 1.0f, 50, 50, 255, 0,0,0,SDL_BLENDMODE_ADD);
 	switch (state)
 	{
 	case IDLE:

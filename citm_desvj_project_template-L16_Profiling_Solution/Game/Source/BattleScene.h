@@ -15,6 +15,7 @@
 #include "GuiPanel.h"
 #include <map>
 #include "GuiToggle.h"
+#include "../random.h"
 
 struct SDL_Texture;
 class Quest;
@@ -95,6 +96,10 @@ private:
 
 	bool started = false;
 	std::map <std::string, SDL_Texture*> portraitTextures; // diccionary used to identify textures by a name
+
+
+	UniqueRandomNumberGenerator uniqueNumber;
+
 
 public:
 	List<Player*> party;

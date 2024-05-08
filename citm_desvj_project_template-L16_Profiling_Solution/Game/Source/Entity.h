@@ -92,6 +92,8 @@ public:
 		return true;
 	}
 
+	inline virtual bool OnGuiMouseClickEvent(GuiControl* control) { return true; }
+
 	void Entity::Enable()
 	{
 		if (!active)

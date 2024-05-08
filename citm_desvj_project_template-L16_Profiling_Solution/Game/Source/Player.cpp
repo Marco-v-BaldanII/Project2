@@ -127,6 +127,12 @@ bool Player::Start() {
 	RELEASE_ARRAY(navigationMap);
 	collider = app->physics->AddCollider(SDL_Rect{ 0,0,80 * 3,80 * 3 }, ColliderType::PLAYER_C, this, ColliderShape::QUAD);
 
+
+	if (atkButton == nullptr) atkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, atkBtnId, " choiceA ", SDL_Rect{0,0,28,14}, app->battleScene);
+	if (waitButton == nullptr) waitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, waitBtnId, " choiceB ", SDL_Rect{ 0,0,28,14 }, app->battleScene);
+
+	atkButton->state = GuiControlState::NORMAL; waitButton->state = GuiControlState::NORMAL;
+
 	return true;
 }
 
@@ -298,10 +304,14 @@ bool Player::Update(float dt)
 
 	if (hp > 0) {
 		if (movedThisTurn) {
-			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 100);
+			
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 120);
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 60, 1, 255, 0, 0, 0, 0, SDL_BLENDMODE_ADD);
 		}
 		else {
+			
 			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 255);
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 60, 1, 255, 0, 0, 0, 0, SDL_BLENDMODE_ADD);
 		}
 	}
 
@@ -710,4 +720,12 @@ void Player::DrawCombatScene() {
 
 	}
 
+}
+
+bool Player::OnGuiMouseClickEvent(GuiControl* control)  {
+
+	LOG("my button has been pressed");
+
+
+	return true;
 }

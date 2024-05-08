@@ -171,6 +171,31 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	return guiControl;
 }
 
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds) {
+
+	GuiControl* guiControl = nullptr;
+
+	//Call the constructor according to the GuiControlType
+	switch (type)
+	{
+	case GuiControlType::BUTTON:
+		guiControl = new GuiControlButton(id, bounds, text);
+		break;
+		/*case GuiControlType::SLIDER:
+			guiControl = new GuiSlider(id, bounds, text);
+			break;*/
+	}
+
+	//Set the observer
+	guiControl->entityObserver = observer;
+
+	// Created GuiControls are add it to the list of controls
+	guiControlsList.Add(guiControl);
+
+	return guiControl;
+
+}
+
 bool GuiManager::CleanUp()
 {
 	ListItem<GuiControl*>* control = guiControlsList.start;

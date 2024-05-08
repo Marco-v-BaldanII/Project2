@@ -6,6 +6,8 @@
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 #include "Timer.h"
+#include "GuiControlButton.h"
+#include "GuiControl.h"
 
 struct SDL_Texture;
 class Dialogue;
@@ -33,6 +35,8 @@ public:
 	void CalculateAttack();
 
 	void OnCollision(Collider* physA, Collider* physB) override;
+
+	bool OnGuiMouseClickEvent(GuiControl* control) override;
 
 	bool DealDMG();
 
@@ -80,6 +84,11 @@ public:
 	Timer showLvlUp;
 	iPoint lvlMods = iPoint(-1, -1);
 
+	GuiControlButton* atkButton = nullptr;
+	GuiControlButton* waitButton = nullptr;
+
+	int atkBtnId = -1;
+	int waitBtnId = -1;
 };
 
 #endif // __PLAYER_H__

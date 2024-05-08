@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "../random.h"
 
 BattleScene::BattleScene(bool isActive) : Module(isActive)
 {
@@ -106,6 +107,7 @@ bool BattleScene::Start()
 
 
 			// Read party members form config and instanciate them
+		int nPlayers = 0;
 			for (pugi::xml_node Pnode = mynode.child("battleMaps").child("map").child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
 
 				Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
@@ -119,9 +121,14 @@ bool BattleScene::Start()
 				p->myTexture = spriteSheet;
 				p->myBattleTexture = portraitTextures[name];
 				p->UiTex = lancasterUI;
+
+				// make each unit have their own unique control ID
+				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 200);
+				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 200);
+
 				p->Start();
 				PassAnimations(p);
-
+				
 			}
 
 			// Read enemies from config and instantiate them
