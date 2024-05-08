@@ -443,6 +443,31 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     return ret;
 }
 
+void Map::DrawAdjacents(iPoint tilePos) {
+
+ 
+        iPoint mapCoord = MapToWorld(tilePos.x -1, tilePos.y);
+        if (mapCoord.x > 0) {
+            app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+        }
+         mapCoord = MapToWorld(tilePos.x +1, tilePos.y);
+        if (mapCoord.x > 0) /* Change the limit*/ {
+            app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+        }
+         mapCoord = MapToWorld(tilePos.x , tilePos.y -1);
+        if (mapCoord.y > 0) {
+            app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+        }
+         mapCoord = MapToWorld(tilePos.x, tilePos.y + 1);
+        if (mapCoord.y > 0)/* also change*/ {
+            app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+        }
+   
+
+
+
+}
+
 // L08: DONE 7: Implement a method to get the value of a custom property
 Properties::Property* Properties::GetProperty(const char* name)
 {

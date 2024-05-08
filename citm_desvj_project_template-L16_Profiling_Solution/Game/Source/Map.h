@@ -30,7 +30,8 @@ enum MapOrientation
 enum TileType {
     SNOW,
     WOODS,
-    WATER
+    WATER,
+    TARGET
 };
 
 struct Tile {
@@ -247,6 +248,8 @@ public:
 
     // Limits the camera, CHANGE for different maps
     void CameraRestrictions();
+
+    void DrawAdjacents(iPoint tilePos);
 
 
 public: 

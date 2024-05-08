@@ -147,7 +147,7 @@ void GuiManager::TurnOnSpotLight() {
 }
 
 // L15: DONE1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds, VIEW viewMode )
 {
 	GuiControl* guiControl = nullptr;
 
@@ -155,7 +155,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = new GuiControlButton(id, bounds, text);
+		guiControl = new GuiControlButton(id, bounds, text, viewMode);
 		break;
 	/*case GuiControlType::SLIDER:
 		guiControl = new GuiSlider(id, bounds, text);
@@ -171,7 +171,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	return guiControl;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds) {
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds, VIEW viewMode ) {
 
 	GuiControl* guiControl = nullptr;
 
@@ -179,7 +179,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = new GuiControlButton(id, bounds, text);
+		guiControl = new GuiControlButton(id, bounds, text, viewMode);
 		break;
 		/*case GuiControlType::SLIDER:
 			guiControl = new GuiSlider(id, bounds, text);

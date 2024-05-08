@@ -6,12 +6,14 @@
 #include "Point.h"
 #include "SString.h"
 
+enum VIEW;
+
 class GuiControlButton : public GuiControl
 {
 
 public:
 
-	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text);
+	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text, VIEW viewMode);
 	
 	virtual ~GuiControlButton();
 
@@ -22,6 +24,8 @@ private:
 
 	int mouseX, mouseY;
 	unsigned int click;
+
+	VIEW viewMode;
 
 	bool canClick = true;
 	bool drawBasic = false;

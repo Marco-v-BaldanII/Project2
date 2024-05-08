@@ -128,10 +128,10 @@ bool Player::Start() {
 	collider = app->physics->AddCollider(SDL_Rect{ 0,0,80 * 3,80 * 3 }, ColliderType::PLAYER_C, this, ColliderShape::QUAD);
 
 
-	if (atkButton == nullptr) atkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, atkBtnId, " choiceA ", SDL_Rect{0,0,28,14}, app->battleScene);
-	if (waitButton == nullptr) waitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, waitBtnId, " choiceB ", SDL_Rect{ 0,0,28,14 }, app->battleScene);
+	if (atkButton == nullptr) atkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, atkBtnId, " Attack ", SDL_Rect{ 0,0,28  ,14   }, this, SDL_Rect{ 0,0,0,0 }, WORLD);
+	if (waitButton == nullptr) waitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, waitBtnId, " Wait ", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD);
 
-	atkButton->state = GuiControlState::NORMAL; waitButton->state = GuiControlState::NORMAL;
+	atkButton->state = GuiControlState::DISABLED; waitButton->state = GuiControlState::DISABLED;
 
 	return true;
 }
@@ -183,9 +183,18 @@ bool Player::PreUpdate()
 				}
 			}
 		}
-		else if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
+		else if ( !Move && app->turnManager->currentPlayer == this && !HasMoveAction) {
+
+			
+			if (atkButton->state == GuiControlState::DISABLED) atkButton->state = GuiControlState::NORMAL;
+			if (waitButton->state == GuiControlState::DISABLED) waitButton->state = GuiControlState::NORMAL;
+
 			int x, y;
 			app->input->GetMouseWorldPosition(x, y);
+
+			atkButton->bounds.x = position.x-30; atkButton->bounds.y = position.y - 40;
+			waitButton->bounds.x = position.x + 30; waitButton->bounds.y = position.y - 40;
+
 			iPoint p;
 			p.x = x;
 			p.y = y;
@@ -230,7 +239,9 @@ bool Player::Update(float dt)
 		if(!defending) Bposition = iPoint(50 * 3, 80 * 3);
 
 		//if click enemy and enemay is on attack range engage combat
+	
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
+			// lo de el ataque
 			int x, y;
 			app->input->GetMouseWorldPosition(x, y);
 			iPoint p;
@@ -507,6 +518,10 @@ bool Player::PostUpdate()
 		}
 	
 	}
+
+	if (atckedClicked) {
+		app->map->DrawAdjacents(tilePos);
+	}
 	
 	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
 	if(oponent != nullptr){ oponent->collider->data.x = (-40) + oponent->Bposition.x; oponent->collider->data.y = (0) + oponent->Bposition.y; }
@@ -725,7 +740,14 @@ void Player::DrawCombatScene() {
 bool Player::OnGuiMouseClickEvent(GuiControl* control)  {
 
 	LOG("my button has been pressed");
+	if (control->id = atkBtnId) {
+		// state attacking
+		// find adjacent tiles and draw them in red
+		// if you click on a tile with an enemy perform the attacking code
+		 iPoint y = tilePos;
+		 atckedClicked = true;
 
+	}
 
 	return true;
 }

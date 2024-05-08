@@ -77,6 +77,7 @@ public:
 
 	bool receivedEXP = false;
 
+	bool atckedClicked = false;
 
 	float lerpingEXP;
 	
