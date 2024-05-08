@@ -160,6 +160,10 @@ public:
 	SDL_Texture* expTexture;
 	SDL_Texture* lvlUpTexture = nullptr;
 
+	bool talking = false;
+	Player* talker1;
+	Player* talker2;
+
 };
 #endif // __BATTLESCENE_H__
 

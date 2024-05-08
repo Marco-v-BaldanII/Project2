@@ -249,6 +249,17 @@
 
 					<dialogue text ="How could you . . . break our promise Richard ?"/>
 
+					<conversation owner ="Margaret of Anjou">
+						<dialogue  owner ="Margaret of Anjou" text="Be on the look out Edward, In the tide of battle you can't afford to loose focus"/>
+						<dialogue  owner ="Prince Edward" text="Of course mother, this... this is what I trained for. Yet I didn't think the circumastances would be like this"/>
+						<dialogue  owner ="Prince Edward" text="Fighting againts our friends, our family"/>
+
+						<dialogue  owner ="Margaret of Anjou" text="Tis a price to pay Edward, for the privileges of the dominant class. No king has ruled without having to dirty their blade with their bretheren"/>
+						<dialogue  owner ="Margaret of Anjou" text="If you must weep, I shall not punish you for it. But do so after the fight , concentrate on staying alive !"/>
+						
+					</conversation>
+					
+
 				</player>
 				<player  name="Henry Tudor" x="1" y ="24" unit_type="0" attack="50" hp="12" precision="95" luck="25" speed="30" movement="10">
 

@@ -9,9 +9,10 @@
 #include "GuiControlButton.h"
 #include "GuiControl.h"
 
+
 struct SDL_Texture;
 class Dialogue;
-
+class Conversation;
 
 class Player : public Entity
 {
@@ -93,6 +94,8 @@ public:
 	int atkBtnId = -1;
 	int waitBtnId = -1;
 	int talkBtnId = -1;
+
+	List<Conversation*> conversations;
 };
 
 #endif // __PLAYER_H__

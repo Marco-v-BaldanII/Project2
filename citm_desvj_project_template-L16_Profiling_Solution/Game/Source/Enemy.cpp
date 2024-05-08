@@ -474,7 +474,7 @@ void Enemy::ClickOnMe() {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 
 			drawPath = !drawPath; 
-			app->map->drawGrid = ! app->map->drawGrid;
+			
 		
 
 		}

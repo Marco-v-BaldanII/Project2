@@ -130,9 +130,25 @@ bool Player::Start() {
 
 	if (atkButton == nullptr) atkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, atkBtnId, " Attack ", SDL_Rect{ 0,0,28  ,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{70,51,29,255});
 	if (waitButton == nullptr) waitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, waitBtnId, " Wait ", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
-	if (talkButton == nullptr) talkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, talkBtnId, " Wait ", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
+	if (talkButton == nullptr) talkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, talkBtnId, " Talk ", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
 
 	atkButton->state = GuiControlState::DISABLED; waitButton->state = GuiControlState::DISABLED; talkButton->state = GuiControlState::DISABLED;
+
+	for (pugi::xml_node no = config.child("conversation"); no != NULL; no = no.next_sibling("conversation")) {
+
+		Conversation* conv = new Conversation();
+		conv->name1 = this->name.GetString();
+		conv->name2 = no.attribute("owner").as_string();
+
+
+
+		for (pugi::xml_node dN = no.child("dialogue"); dN != NULL; dN = dN.next_sibling("dialogue")) {
+
+			Dialogue* di = new Dialogue(dN.attribute("owner").as_string(), dN.attribute("text").as_string());
+			conv->dialogues.Add(di);
+		}
+		conversations.Add(conv);
+	}
 
 	return true;
 }
@@ -567,7 +583,12 @@ bool Player::SuperPostUpdate() {
 
 void Player::ClickOnMe() {
 
+	
+
 	if (HasMoveAction) {
+
+		
+
 		clickBox.x = position.x; clickBox.y = position.y;
 
 		int mouseX, mouseY;
@@ -581,13 +602,22 @@ void Player::ClickOnMe() {
 			
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+
+				app->turnManager->DeSelectPlayer();
+
+				if (app->battleScene->talking == true) {
+					if (app->battleScene->talker1 != nullptr && app->battleScene->talker1 != this) {
+						app->battleScene->talker2 = this;
+					}
+				}
+
 				if (state == IDLE) {
-					app->map->drawGrid = true;
+					
 					app->turnManager->SelectPlayer(this);
 					state = MOVE;
 				}
 				else if (app->entityManager->IsEnemyThere(app->map->WorldToMap(mouseX - app->render->camera.x, mouseY - app->render->camera.y)) == nullptr) {
-					app->map->drawGrid = false;
+					
 					state = IDLE;
 					app->turnManager->DeSelectPlayer();
 				}
@@ -595,6 +625,7 @@ void Player::ClickOnMe() {
 			}
 		}
 	}
+	
 
 }
 
@@ -801,6 +832,9 @@ bool Player::OnGuiMouseClickEvent(GuiControl* control)  {
 		// find adjacent tiles and draw them in red
 		// if you click on a tile with an enemy perform the attacking code
 		LOG("talk");
+		app->battleScene->talking = true;
+		app->battleScene->talker1 = this;
+		
 
 	}
 	return true;

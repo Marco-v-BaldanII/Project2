@@ -90,6 +90,7 @@ public:
 	iPoint ogPos;
 	Timer nextTimer;
 
+
 	Timer startTimer;
 	float startValue;
 
@@ -130,6 +131,8 @@ public:
 	void Render(float dt, int currentHP, int currentAtk, int currentSpeed, int currentPrecision, int currentLuck, int currentMovement, int hpMod = 0, int atkMod = 0, int spdMod = 0, int precMod = 0, int luckMod =0) {
 		//  we use linear interpolation from its given starting position to its target position
 		shown = true;
+		
+		
 
 		startingPos.x = ogPos.x + (app->render->camera.x / -3);
 		startingPos.y = ogPos.y + (app->render->camera.y / -3);
@@ -201,6 +204,7 @@ public:
 
 
 		if (!shown) {
+			
 			alpha = 0;
 			startingPos = ogPos;
 			finished = false;
@@ -222,6 +226,9 @@ public:
 
 		}
 		shown = false;
+		
+
+
 
 	}
 

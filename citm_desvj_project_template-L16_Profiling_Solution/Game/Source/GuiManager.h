@@ -60,7 +60,7 @@ public:
 	}
 	void Render() {
 		if (visible == true) {
-
+			app->map->drawGrid = true;
 			/*
 				app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a / 2.6f, true, SDL_BLENDMODE_ADD);
 				app->render->FillCircle(position.x, position.y, radius * 1.2f, color.r, color.g, color.b, color.a / 3.0f, true, SDL_BLENDMODE_ADD);
@@ -88,6 +88,9 @@ public:
 
 			//app->render->FillCircle(position.x, position.y, radius*2, color.r, color.g, color.b, color.a/1.5f, true);
 			//app->render->DrawCircle(Target.x, Target.y, 2, 255, 0, 0, 255, true);
+		}
+		else {
+			app->map->drawGrid = false;
 		}
 	}
 
