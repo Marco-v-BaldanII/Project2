@@ -117,6 +117,12 @@ bool Map::Update(float dt)
                         if (mapLayer->data->myTiles[x][y] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[x][y]->GetColor(), true, true);
                     }
 
+                    if (drawGrid) {
+
+                        app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight },b2Color(0,0,0,0.8f) , false, true);
+
+                    }
+
                     // testing if the tile's associated color is drawn
                    /* if (mapLayer->data->myTiles[0][0] != nullptr) {
                         

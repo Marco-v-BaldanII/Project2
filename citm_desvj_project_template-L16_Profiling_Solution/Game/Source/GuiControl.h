@@ -66,6 +66,11 @@ public:
 		return true;
 	}
 
+
+	virtual bool PreUpdate() {
+		return true;
+	}
+
 	virtual bool Draw(Render* render)
 	{
 		return true;

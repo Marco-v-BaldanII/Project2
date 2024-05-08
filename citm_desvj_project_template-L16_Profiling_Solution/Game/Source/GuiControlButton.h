@@ -13,12 +13,17 @@ class GuiControlButton : public GuiControl
 
 public:
 
-	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text, VIEW viewMode);
+	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text, VIEW viewMode, SDL_Color color, SDL_Color textColor);
 	
 	virtual ~GuiControlButton();
 
 	// Called each loop iteration
 	bool Update(float dt);
+
+	bool PreUpdate();
+
+	SDL_Color color;
+	SDL_Color textColor;
 
 private:
 

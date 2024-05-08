@@ -27,6 +27,7 @@ public:
 	bool PreUpdate() override;
 	bool PostUpdate() override;
 	bool Update(float dt);
+	bool SuperPostUpdate() override;
 
 	bool CleanUp();
 
@@ -87,9 +88,11 @@ public:
 
 	GuiControlButton* atkButton = nullptr;
 	GuiControlButton* waitButton = nullptr;
+	GuiControlButton* talkButton = nullptr;
 
 	int atkBtnId = -1;
 	int waitBtnId = -1;
+	int talkBtnId = -1;
 };
 
 #endif // __PLAYER_H__

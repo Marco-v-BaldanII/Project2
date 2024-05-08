@@ -28,6 +28,8 @@ public:
 	// Called every frame
 	bool Update(float dt);
 	bool PostUpdate() override;
+
+	bool SuperPostUpdate() override;
 	// Called before quitting
 	bool CleanUp();
 

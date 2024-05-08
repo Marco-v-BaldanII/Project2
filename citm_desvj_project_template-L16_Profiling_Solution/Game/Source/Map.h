@@ -266,6 +266,9 @@ public:
     Tile* myTiles[MAX_TILE_AMOUNT][MAX_TILE_AMOUNT] = { nullptr };
 
     MapData mapData;
+
+    bool drawGrid = false;
+
 private:
     // L05: DONE 1: Declare a variable data of the struct MapData
   

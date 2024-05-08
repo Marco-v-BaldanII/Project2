@@ -192,6 +192,26 @@ bool EntityManager::PostUpdate()
 	return ret;
 }
 
+bool EntityManager::SuperPostUpdate() {
+
+	bool ret = true;
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+
+	for (item = entities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+
+		if (pEntity->active == false) continue;
+		ret = item->data->SuperPostUpdate();
+	}
+
+
+	return ret;
+
+}
+
 p2ListItem<Entity*>* EntityManager::GetNearestPlayer(Entity* player)
 {
 	p2ListItem<Entity*>* ret = nullptr;

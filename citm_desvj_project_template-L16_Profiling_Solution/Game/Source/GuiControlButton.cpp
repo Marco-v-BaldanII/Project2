@@ -4,11 +4,13 @@
 #include "Audio.h"
 #include "GuiManager.h"
 
-GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text, VIEW viewMode): GuiControl(GuiControlType::BUTTON, id)
+GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text, VIEW viewMode, SDL_Color color, SDL_Color textColor): GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
 	this->viewMode = viewMode;
+	this->color = color;
+	this->textColor = textColor;
 
 	canClick = true;
 	drawBasic = false;
@@ -18,6 +20,8 @@ GuiControlButton::~GuiControlButton()
 {
 
 }
+
+bool GuiControlButton::PreUpdate() { return true; }
 
 bool GuiControlButton::Update(float dt)
 {
@@ -49,6 +53,13 @@ bool GuiControlButton::Update(float dt)
 		}
 		else if (viewMode == WORLD) {
 
+
+			SDL_Rect bounds2 = bounds;
+			bounds2.h += 2; bounds2.x -= 1;
+			bounds2.w += 2; bounds2.y -= 1;
+			app->render->DrawRectangle(bounds2, textColor.r, textColor.g, textColor.b, textColor.a, true, true);
+
+
 			SDL_Rect bounds3 = bounds;
 			bounds3.x = (int)(app->render->camera.x + bounds.x * 3);
 			bounds3.y = (int)(app->render->camera.y + bounds.y * 3);
@@ -59,7 +70,9 @@ bool GuiControlButton::Update(float dt)
 			 bounds3.w *= 3;
 			bounds3.h *= 3;
 			bounds3.x += */
-			app->render->DrawRectangle(bounds3, b2Color(1, 0, 0, 1), true, false);
+			
+
+			app->render->DrawRectangle(bounds, textColor.r, textColor.g, textColor.b, textColor.a, false, true);
 
 			if (mouseX > bounds3.x && mouseX < bounds3.x + bounds3.w && mouseY > bounds3.y && mouseY < bounds3.y + bounds3.h) {
 
@@ -81,44 +94,50 @@ bool GuiControlButton::Update(float dt)
 
 		}
 
+
 		//L15: DONE 4: Draw the button according the GuiControl State
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			app->render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
+			app->render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
 			break;
 		case GuiControlState::NORMAL:
-			if(viewMode == VIEW::SCREEN) app->render->DrawRectangle(bounds, 0, 0, 200, 255, true, false);
-			else { app->render->DrawRectangle(bounds, 0, 0, 200, 255, true, true); }
+			if(viewMode == VIEW::SCREEN) app->render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
+			else { app->render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, true); }
 			//app->render->DrawTexture(app->guiManager->normalButton, bounds.x, bounds.y);
 			break;
 		case GuiControlState::FOCUSED:
 			if (viewMode == VIEW::SCREEN) {
-				app->render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);
+				app->render->DrawRectangle(bounds, color.r - 50, color.g - 50, color.b - 50, color.a, true, false);
 				//Draw rectangle at the left  and right side of the button
-				app->render->DrawRectangle({ bounds.x - 15, bounds.y, 5, bounds.h }, 0, 0, 0, 255, true, false);
-				app->render->DrawRectangle({ bounds.x + bounds.w + 10, bounds.y, 5, bounds.h }, 0, 0, 0, 255, true, false);
+				app->render->DrawRectangle({ bounds.x - 15, bounds.y, 5, bounds.h }, color.r - 50, color.g - 50, color.b - 50, color.a, true, false);
+				app->render->DrawRectangle({ bounds.x + bounds.w + 10, bounds.y, 5, bounds.h }, color.r - 50, color.g - 50, color.b - 50, color.a, true, false);
 			}
 			else if (viewMode == VIEW::WORLD) {
-				app->render->DrawRectangle(bounds, 0, 0, 20, 255, true, true);
+				app->render->DrawRectangle(bounds, color.r - 50, color.g - 50, color.b - 50, color.a, true, true);
 				//Draw rectangle at the left  and right side of the button
-				app->render->DrawRectangle({ bounds.x - 15, bounds.y, 5, bounds.h }, 0, 0, 0, 255, true, true);
-				app->render->DrawRectangle({ bounds.x + bounds.w + 10, bounds.y, 5, bounds.h }, 0, 0, 0, 255, true, true);
+				app->render->DrawRectangle({ bounds.x - 15, bounds.y, 5, bounds.h }, color.r - 50, color.g - 50, color.b - 50, color.a, true, true);
+				app->render->DrawRectangle({ bounds.x + bounds.w + 10, bounds.y, 5, bounds.h }, color.r -30, color.g -30, color.b -30, color.a, true, true);
 
 			}
 			//app->render->DrawTexture(app->guiManager->focusedButton, bounds.x, bounds.y);
 			break;
 		case GuiControlState::PRESSED:
-			app->render->DrawRectangle(bounds, 255, 0, 0, 255, true, false);
+			app->render->DrawRectangle(bounds, color.r+ 50, color.g+ 50, color.b+ 50, color.a, true, false);
 			//app->render->DrawTexture(app->, bounds.x, bounds.y);
 			break;
 		}
 
-		if (viewMode == VIEW::SCREEN)app->render->DrawTextButton(text, bounds.x, bounds.y, bounds.w, bounds.h, { 255,255,255,255});
+		if (viewMode == VIEW::SCREEN) { app->render->DrawTextButton(text, bounds.x, bounds.y, bounds.w, bounds.h, textColor); }
 
 		else {
+			/*app->render->DrawRectangle(bounds, textColor.r, textColor.g, textColor.b, textColor.a, false, true);
+			SDL_Rect bounds2 = bounds;
+			bounds2.h += 1; bounds2.x -= 1;
+			bounds2.w += 1; bounds2.y -= 1;
+			app->render->DrawRectangle(bounds2, textColor.r, textColor.g, textColor.b, textColor.a, false, true);*/
 		
-			app->render->DrawText(text,  (app->render->camera.x + bounds.x * 3), (app->render->camera.y + bounds.y * 3), bounds.w*3, bounds.h*3, false);
+			app->render->DrawText(text,  (app->render->camera.x + bounds.x * 3), (app->render->camera.y + bounds.y * 3), bounds.w*3, bounds.h*3, false, textColor);
 		}
 
 	}
