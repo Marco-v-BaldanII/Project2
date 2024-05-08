@@ -17,6 +17,8 @@
 
 class Entity;
 class Item;
+class Door;
+class Lever;
 
 // L09: DONE 2: Define a property to store the MapType and Load it from the map
 enum MapOrientation
@@ -78,6 +80,8 @@ public:
 
     // ptr to item
     Item* myItem;
+    Door* myDoor;
+    Lever* myLever;
 
 };
 

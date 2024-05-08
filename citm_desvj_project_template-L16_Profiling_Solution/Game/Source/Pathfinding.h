@@ -7,6 +7,7 @@
 #include "DynArray.h"
 #include "List.h"
 #include "p2List.h"
+
 #include "Queue.h"
 
 
@@ -58,6 +59,10 @@ public:
 	bool IsTileEmpty(const iPoint& pos) const;
 
 	bool IsEnemyThereEmpty(const iPoint& pos) const;
+
+	bool IsLeverThere(const iPoint& pos) const;
+
+	void ActivateLever(const iPoint& pos) const;
 
 	int DistanceBetweenTiles(const iPoint& pos1, const iPoint& pos2) const;
 

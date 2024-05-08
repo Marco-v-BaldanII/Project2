@@ -75,8 +75,33 @@ bool Player::Start() {
 	state = IDLE;
 	app->entityManager->players.add(this);
 
+	switch (unitType) {
+	case 0:
+		//unitType = PALADIN;
+		attackRange = 1;
+		break;
+	case 1:
+		//	unitType = ARCHER;
+		attackRange = 2;
+		break;
+	case 2:
+		//	unitType = KNIGHT;
+		attackRange = 1;
+		break;
+	case 3:
+		//unitType = ARMOURED_KNIGHT;
+		attackRange = 1;
+		break;
+	case 4:
+		//unitType = MAGE;
+		attackRange = 2;
+		break;
+	case 5:
+		//unitType = DARK_MAGE;
+		attackRange = 2;
+		break;
+	}
 
-	attackRange = 1;
 
 	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
 
@@ -130,7 +155,7 @@ bool Player::PreUpdate()
 		currentAnim->Update();
 
 		//End turn for selected player
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && app->turnManager->currentPlayer == this) 
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && app->turnManager->currentPlayer == this && app->turnManager->isPlayerMoving == false) 
 		{
 			state = IDLE;
 		}
@@ -144,11 +169,12 @@ bool Player::PreUpdate()
 			p.y = y;
 			p = app->map->WorldToMap(x, y);
 			
-	
-			if (!InitPath(p)) {
-				ExpandedBFS = false;
-				app->map->pathfinding->ResetBFSPath();
-				state = IDLE;
+			if (app->map->pathfinding->IsTileEmpty(p) && app->map->pathfinding->DistanceBetweenTiles(p,tilePos) < movement) {
+				if (!InitPath(p)) {
+					ExpandedBFS = false;
+					app->map->pathfinding->ResetBFSPath();
+					state = IDLE;
+				}
 			}
 		}
 		else if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
@@ -165,6 +191,22 @@ bool Player::PreUpdate()
 				state = BATTLE;
 			}
 		}
+
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_DOWN && !Move && app->turnManager->currentPlayer == this) {
+			int x, y;
+			app->input->GetMouseWorldPosition(x, y);
+			iPoint p;
+			p.x = x;
+			p.y = y;
+			p = app->map->WorldToMap(x, y);
+
+			if (app->map->pathfinding->IsLeverThere(p) && app->map->pathfinding->DistanceBetweenTiles(p, tilePos) == 1)
+			{
+
+				app->map->pathfinding->ActivateLever(p);
+			}
+		}
+
 		break;
 	}
 
@@ -195,6 +237,7 @@ bool Player::Update(float dt)
 				state = BATTLE;
 			}
 		}
+
 
 
 		// Ability to pick up item

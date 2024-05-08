@@ -10,6 +10,7 @@
 #include "../Defs.h"
 #include "../Map.h"
 #include "../Log.h"
+#include "Door.h"
 
 
 using namespace std;
@@ -33,7 +34,24 @@ bool ItemManager::Start() {
 		// assign item to the tile
 		app->map->myTiles[app->map->WorldToMap( item->mapPos.x, item->mapPos.y).x][app->map->WorldToMap(item->mapPos.x, item->mapPos.y).y]->myItem = item;
 	}
-	
+
+	for (pugi::xml_node n = config.child("door"); n != NULL; n = n.next_sibling("door")) {
+
+		Door* door = AddDoor();
+		door->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(),n.attribute("num").as_int(),
+			n.attribute("textPath").as_string());
+		// assign item to the tile
+		app->map->myTiles[app->map->WorldToMap(door->mapPos.x, door->mapPos.y).x][app->map->WorldToMap(door->mapPos.x, door->mapPos.y).y]->myDoor = door;
+	}
+	for (pugi::xml_node n = config.child("lever"); n != NULL; n = n.next_sibling("lever")) {
+
+		Lever* lever = AddLever();
+		lever->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(), n.attribute("num").as_int(),
+			n.attribute("textPath").as_string());
+		// assign item to the tile
+		app->map->myTiles[app->map->WorldToMap(lever->mapPos.x, lever->mapPos.y).x][app->map->WorldToMap(lever->mapPos.x, lever->mapPos.y).y]->myLever = lever;
+	}
+
 
 	return true;
 
@@ -53,6 +71,24 @@ Item* ItemManager::AddItem() {
 
 	items.Add(item);
 	return item;
+
+}
+
+Door* ItemManager::AddDoor() {
+
+	Door* door = new Door();
+
+	doors.Add(door);
+	return door;
+
+}
+
+Lever* ItemManager::AddLever() {
+
+	Lever* lever = new Lever();
+
+	levers.Add(lever);
+	return lever;
 
 }
 
@@ -79,6 +115,20 @@ bool ItemManager::Update(float dt) {
 
 	}
 
+	for (ListItem<Door*>* it = doors.start; it != nullptr; it = it->next) {
+
+		Door* _door = it->data;
+		_door->Update(dt);
+
+	}
+
+	for (ListItem<Lever*>* it = levers.start; it != nullptr; it = it->next) {
+
+		Lever* _lever = it->data;
+		_lever->Update(dt);
+
+	}
+
 	return true;
 }
 
@@ -93,7 +143,19 @@ bool ItemManager::PostUpdate() {
 
 	}
 
+	for (ListItem<Door*>* it = doors.start; it != nullptr; it = it->next) {
 
+		Door* _door = it->data;
+		_door->PostUpdate();
+
+	}
+
+	for (ListItem<Lever*>* it = levers.start; it != nullptr; it = it->next) {
+
+		Lever* _lever = it->data;
+		_lever->PostUpdate();
+
+	}
 	return true;
 }
 

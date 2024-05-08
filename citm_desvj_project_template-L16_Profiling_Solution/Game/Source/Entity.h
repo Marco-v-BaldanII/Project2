@@ -21,6 +21,7 @@ enum class EntityType
 	ENEMY,
 	NPC,
 	BACKSTAGEPLAYER,
+	DOOR,
 	UNKNOWN
 };
 

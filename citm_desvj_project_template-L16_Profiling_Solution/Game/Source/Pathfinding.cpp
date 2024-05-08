@@ -1,7 +1,7 @@
 #include "App.h"
 #include "Map.h"
 #include "PathFinding.h"
-
+#include "../ItemManager.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -468,11 +468,51 @@ bool PathFinding::IsTileEmpty(const iPoint& pos) const
 		{
 			return false;
 		}
-	}
 
+	}
+	for (int i = 0; i < app->itemManager->doors.Count(); i++)
+	{
+
+
+		if (pos == app->itemManager->doors.At(i)->data->tilePos && app->itemManager->doors.At(i)->data->isOpen == false)
+		{
+			return false;
+		}
+
+	}
 	return true;
 }
 
+bool PathFinding::IsLeverThere(const iPoint& pos) const
+{
+	for (int i = 0; i < app->itemManager->levers.Count(); i++)
+	{
+		if (pos == app->itemManager->levers.At(i)->data->tilePos && app->itemManager->levers.At(i)->data->isPressed == false)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void PathFinding::ActivateLever(const iPoint& pos) const
+{
+	for (int i = 0; i < app->itemManager->levers.Count(); i++)
+	{
+		if (pos == app->itemManager->levers.At(i)->data->tilePos && app->itemManager->levers.At(i)->data->isPressed == false)
+		{
+			app->itemManager->levers.At(i)->data->isPressed = true;
+			for (int i = 0; i < app->itemManager->doors.Count(); i++)
+			{
+				if (app->itemManager->doors.At(i)->data->num == app->itemManager->levers.At(i)->data->num) 
+				{
+					app->itemManager->doors.At(i)->data->isOpen = true;
+				}
+
+			}
+		}
+	}
+}
 int PathFinding::DistanceBetweenTiles(const iPoint& pos1, const iPoint& pos2) const
 {
 	int distance = abs(pos2.x - pos1.x) + abs(pos2.y - pos1.y);

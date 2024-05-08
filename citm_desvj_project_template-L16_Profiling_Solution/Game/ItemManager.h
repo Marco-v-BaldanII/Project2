@@ -8,6 +8,8 @@
 #include "../p2List.h"
 #include "../Player.h"
 #include "../Item.h"
+#include "Door.h"
+#include "Lever.h"
 
 using namespace std;
 
@@ -44,9 +46,15 @@ public:
 	// Additional methods
 
 	Item* AddItem();
+
+	Door* AddDoor();
+
+	Lever* AddLever();
 	
 	pugi::xml_node config;
 	List<Item*> items;
+	List<Door*> doors;
+	List<Lever*> levers;
 
 private:
 

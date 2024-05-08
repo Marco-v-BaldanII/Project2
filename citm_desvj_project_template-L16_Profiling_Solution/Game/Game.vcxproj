@@ -21,7 +21,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -98,8 +98,10 @@
     <ClCompile Include="BackstagePlayer.cpp" />
     <ClCompile Include="CastingScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="ItemManager.cpp" />
+    <ClCompile Include="Lever.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="QuestManager.cpp" />
@@ -143,10 +145,12 @@
     <ClInclude Include="CastingScene.h" />
     <ClInclude Include="Dialogue.h" />
     <ClInclude Include="DialogueManager.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="Interpolation.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="Lever.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="QuestManager.h" />

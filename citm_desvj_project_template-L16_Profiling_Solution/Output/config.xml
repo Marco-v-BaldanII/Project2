@@ -46,6 +46,10 @@
 		<item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png"/>
 
 		<item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"/>
+
+		<door num ="1" x ="3" y="20" textPath="Assets/Textures/Items/veil.png"/>
+
+		<lever num ="1" x ="3" y="25" textPath="Assets/Textures/Items/cat.png"/>
 		
 	</itemmanager>
 

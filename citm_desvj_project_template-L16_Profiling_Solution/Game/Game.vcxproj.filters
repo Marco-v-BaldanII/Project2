@@ -95,6 +95,12 @@
     <ClCompile Include="Source\Victory.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Lever.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -236,6 +242,12 @@
     </ClInclude>
     <ClInclude Include="Source\Victory.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Lever.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

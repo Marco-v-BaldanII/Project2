@@ -3,6 +3,7 @@
 #include "Item.h"
 #include "../NPC.h"
 #include "../Enemy.h"
+#include "../Door.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
