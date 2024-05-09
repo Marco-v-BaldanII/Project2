@@ -10,6 +10,7 @@
 #include "Render.h"
 
 struct SDL_Texture;
+class Easing;
 
 enum LightMode {
 	DIALOG,
@@ -140,6 +141,8 @@ public:
 	void TurnOffSpotLight();
 	void TurnOnSpotLight();
 
+	void OpenCloseCurtains();
+
 public:
 	//Gui textures Used
 	SDL_Texture* UItexture = nullptr;
@@ -181,6 +184,21 @@ public:
 	int currentPanel;
 
 	SpotLight* spotLight = nullptr;
+
+	SDL_Texture* Curtain;
+	SDL_Rect leftCurtain = SDL_Rect{ 0,0,281,384};
+	SDL_Rect rightCurtain = SDL_Rect{ 284,0,296,384};
+
+	Easing* easing = nullptr;
+	Easing* easingR = nullptr;
+
+	bool curtains = false;
+	bool bPause = false;
+	bool bPauseR = false;
+
+	Timer curtainTimer;
+	bool curtainclosed = false;
+
 };
 
 #endif // __GUIMANAGER_H__

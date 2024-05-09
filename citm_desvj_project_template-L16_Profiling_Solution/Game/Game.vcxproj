@@ -99,6 +99,7 @@
     <ClCompile Include="CastingScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Easing.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Lever.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Dialogue.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Door.h" />
+    <ClInclude Include="Easing.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="Interpolation.h" />
     <ClInclude Include="Inventory.h" />

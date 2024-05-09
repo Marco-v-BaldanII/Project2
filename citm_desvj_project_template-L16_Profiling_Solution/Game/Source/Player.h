@@ -96,6 +96,8 @@ public:
 	int talkBtnId = -1;
 
 	List<Conversation*> conversations;
+
+
 };
 
 #endif // __PLAYER_H__

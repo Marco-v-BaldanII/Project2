@@ -18,6 +18,7 @@
 #include "../random.h"
 #include "Timer.h"
 #include "../Inventory.h"
+#include "Timer.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -328,18 +329,27 @@ bool Player::Update(float dt)
 		break;
 	case BATTLE:
 
-		/* stick figure movement */
-		if (!reachedTarget && !opponentAttacking && ! opponentReachTarget) {
-			battleTimer++;
-
-			FigureStickMovement(dt);
+		if (curtains == false) {
+			app->guiManager->OpenCloseCurtains();
+			curtains = true;
+			curtainTimer.Start();
 		}
 
-		if (oponent != nullptr &&  oponent->hp <= 0 && lerpedExp) {
-			LOG("earn experience");
-			lerpedExp = false;
-		}
+		if (curtainTimer.ReadSec() > 1) {
 
+
+			/* stick figure movement */
+			if (!reachedTarget && !opponentAttacking && !opponentReachTarget) {
+				battleTimer++;
+
+				FigureStickMovement(dt);
+			}
+
+			if (oponent != nullptr && oponent->hp <= 0 && lerpedExp) {
+				LOG("earn experience");
+				lerpedExp = false;
+			}
+		}
 		break;
 	}
 
@@ -444,31 +454,40 @@ bool Player::PostUpdate()
 		}
 		case BATTLE:
 
-			app->guiManager->TurnOffSpotLight();
+			atkButton->state = GuiControlState::DISABLED;
+			waitButton->state = GuiControlState::DISABLED;
+			talkButton->state = GuiControlState::DISABLED;
 
-			if (battleTimer == 1 || battleTimer == 0)/*Determine amount of attacks*/ {
 
-				if (speed > oponent->speed-1) {
+			if (curtainTimer.ReadSec() > 1) {
 
-					int doubleChance = getRandomNumber(0, 100);
-					if (doubleChance <= speed) /*Double attack*/ {
 
-						numberofAttacks = 2;
-						maxNumofATTACKS = numberofAttacks;
+				app->guiManager->TurnOffSpotLight();
+
+				if (battleTimer == 1 || battleTimer == 0)/*Determine amount of attacks*/ {
+
+					if (speed > oponent->speed - 1) {
+
+						int doubleChance = getRandomNumber(0, 100);
+						if (doubleChance <= speed) /*Double attack*/ {
+
+							numberofAttacks = 2;
+							maxNumofATTACKS = numberofAttacks;
+						}
+
 					}
 
 				}
 
-			}
-
-			DrawCombatScene();
 				
 
 
 
-			
 
-
+			}
+			if (curtainTimer.ReadMSec() > 800) {
+				DrawCombatScene();
+			}
 			break;
 		}
 		myFrame->Update();

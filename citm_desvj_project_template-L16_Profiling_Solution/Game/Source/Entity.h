@@ -9,6 +9,7 @@
 #include "Render.h"
 #include "Animation.h"
 #include "Map.h"
+#include "Timer.h"
 
 class Frame;
 class Dialogue;
@@ -34,6 +35,7 @@ enum States {
 };
 
 class PhysBody;
+class Timer;
 
 enum UnitType {
 
@@ -235,6 +237,9 @@ public:
 
 	Entity* oponent;
 	bool opponentAttacking = false;
+
+	Timer curtainTimer;
+	bool curtains = false;
 
 };
 

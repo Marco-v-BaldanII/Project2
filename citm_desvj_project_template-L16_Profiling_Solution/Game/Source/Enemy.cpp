@@ -261,15 +261,24 @@ bool Enemy::Update(float dt)
 
 		break;
 	case BATTLE:
-		
-		/* stick figure movement */
-		if (!reachedTarget && !opponentAttacking && !opponentReachTarget) {
-			battleTimer++;
 
-			FigureStickMovement(dt);
+		if (curtains == false) {
+			app->guiManager->OpenCloseCurtains();
+			curtains = true;
+			curtainTimer.Start();
 		}
 
+		if (curtainTimer.ReadSec() > 1) {
 
+
+			/* stick figure movement */
+			if (!reachedTarget && !opponentAttacking && !opponentReachTarget) {
+				battleTimer++;
+
+				FigureStickMovement(dt);
+			}
+
+		}
 		
 		break;
 	default:
@@ -331,78 +340,89 @@ bool Enemy::PostUpdate() {
 	break;
 	case BATTLE:
 
-		if (battleTimer == 1)/*Determine amount of attacks*/ {
 
-			if (speed > target->speed) {
+		if (curtainTimer.ReadSec() > 1) {
 
-				int doubleChance = getRandomNumber(0, 100);
-				if (doubleChance <= speed) /*Double attack*/ {
+			if (battleTimer == 1)/*Determine amount of attacks*/ {
 
-					numberofAttacks = 2;
-					maxNumofATTACKS = numberofAttacks;
+				if (speed > target->speed) {
+
+					int doubleChance = getRandomNumber(0, 100);
+					if (doubleChance <= speed) /*Double attack*/ {
+
+						numberofAttacks = 2;
+						maxNumofATTACKS = numberofAttacks;
+					}
+
 				}
+
 
 			}
 
+
+
+
+				if (app->battleScene->godMode) app->render->DrawRectangle(target->collider->data, b2Color(1, 1, 1, 1), false, false);
+
+
+				if (opponentAttacking) {
+					target->defending = true;
+					target->FigureStickMovement(16.0f);
+				}
+
+				if (opponentReachTarget) {
+
+					bool opLerp = false;
+
+					opLerp = app->battleScene->DrawHPBars(lerpingHp, hp - target->attack, target->lerpingHp, target->lerpingHp, maxHp, target->maxHp, true);
+
+					if (opLerp) /*hp bar lerping has finished*/ {
+
+						hp -= target->attack;
+
+						target->defending = false;
+						opponentAttacking = false;
+						opponentReachTarget = false;
+						target->Bposition = iPoint(300 * 3, 80 * 3);
+					}
+
+
+				}
+
+
+				
+
+
+			
+
 		}
 
-	
-		
+		if (curtainTimer.ReadMSec() > 800) {
+
 			SDL_Rect bg = { 0,0,256 * 2,192 * 2 };
 			app->render->DrawTexture(battleBg, app->render->camera.x / -3, app->render->camera.y / -3, &bg, false, 255);
 			//app->render->DrawTexture(myBattleTexture,  Bposition.x,  Bposition.y, false, true, 255);
 
 			//int x = curvedTrajectory()
-
-
-			app->render->DrawTexture(target->myBattleTexture, -app->render->camera.x / 3 + target->Bposition.x / 3, -app->render->camera.y / 3 + target->Bposition.y/3, false, false, 255);
+			app->render->DrawTexture(target->myBattleTexture, -app->render->camera.x / 3 + target->Bposition.x / 3, -app->render->camera.y / 3 + target->Bposition.y / 3, false, false, 255);
 			app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, true, 255);
 
-			if(app->battleScene->godMode) app->render->DrawRectangle(target->collider->data, b2Color(1, 1, 1, 1), false, false);
 
+			if (reachedTarget) {
+				if (DealDMG()) {
+					// ready for another attack ? , lerping hp must be = hp
+					numberofAttacks--;
+					lerpingHp = hp;
+					reachedTarget = false;
+					Bposition = iPoint(300 * 3, 80 * 3);
 
-			if (opponentAttacking) {
-				target->defending = true;
-				target->FigureStickMovement(16.0f);
+				}
+			}
+			else {
+				app->battleScene->DrawHPBars(lerpingHp, hp, target->lerpingHp, target->lerpingHp, maxHp, target->maxHp, false);
 			}
 
-			if (opponentReachTarget) {
-
-				bool opLerp = false;
-
-				opLerp = app->battleScene->DrawHPBars(lerpingHp, hp - target->attack, target->lerpingHp, target->lerpingHp, maxHp, target->maxHp, true);
-
-				if (opLerp) /*hp bar lerping has finished*/ {
-
-					hp -= target->attack;
-
-					target->defending = false;
-					opponentAttacking = false;
-					opponentReachTarget = false;
-					target->Bposition = iPoint(300 * 3, 80 * 3);
-				}
-
-
-			}
-
-			
-				if (reachedTarget) {
-					if (DealDMG()) {
-						// ready for another attack ? , lerping hp must be = hp
-						numberofAttacks--;
-						lerpingHp = hp;
-						reachedTarget = false;
-						Bposition = iPoint(300 * 3, 80 * 3);
-
-					}
-				}
-				else {
-					app->battleScene->DrawHPBars(lerpingHp, hp , target->lerpingHp, target->lerpingHp , maxHp, target->maxHp, false);
-				}
-
-
-
-			
+		}
 		
 		break;
 	}

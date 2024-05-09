@@ -5,7 +5,7 @@
 #include "GuiControlButton.h"
 #include "GuiSlider.h"
 #include "GuiPanel.h"
-
+#include "../Easing.h"
 //#include "GuiControlButton.h"
 #include "Audio.h"
 
@@ -29,11 +29,15 @@ bool GuiManager::Start()
 	//Pause_Panel = new PausePanel(false);
 	//MORE PANELS TOO ADD
 
+	easing = new Easing(1.2f);
+	easingR = new Easing(1.2f);
+
 	panels.add(Main_Menu_Panel);
 	//panels.add(Options_Panel);
 	//panels.add(Pause_Panel);
 
 	//LOAD TEXTURES
+	Curtain = app->tex->Load("Assets/Textures/UI/curtains.png");
 	string s = myNode.child("UItexture").attribute("path").as_string();
 	UItexture = app->tex->Load(myNode.child("UItexture").attribute("path").as_string());
 	UItexture2 = app->tex->Load(myNode.child("UItexture2").attribute("path").as_string());
@@ -130,7 +134,125 @@ bool GuiManager::PostUpdate() {
 
 	
 	spotLight->Render();
-	//app->render->DrawVignette(spotLight->position.x * 3, spotLight->position.y *3, 40, 210);
+    
+
+	// Animation not finished? 
+	if (!easing->GetFinished())
+	{
+		int a, b;
+		EasingType easingT;
+
+		if (bPause) {
+			a = -230; b = -20;
+			easingT = EasingType::EASE_IN_BACK;
+		}
+		else {
+			a = -20;
+			b = -230;
+			easingT = EasingType::EASE_IN_BACK;
+		}
+		
+
+		// TODO 1: Implement easings on pause menu
+		// Calculate interpolated position (tracktime, easinganimaion),
+		// and print to screen (DrawRectangle)
+		double t = easing->TrackTime(22);
+		double easedX = easing->EasingAnimation(a, b, t, easingT);
+
+		SDL_Rect pauseBox = { easedX, 0, 300, 400 };
+		app->render->DrawTexture(Curtain, easedX + (app->render->camera.x /-3), 0 + (app->render->camera.y / -3), &leftCurtain);
+		
+	}
+	else if (bPause)
+	{
+		// Draw black background
+		SDL_Rect screenRect = SDL_Rect{ 0 + (app->render->camera.x / -3),0 + (app->render->camera.y / -3),256 * 2, 198 * 2};
+		app->render->DrawRectangle(screenRect, b2Color(0, 0, 0, 1), true, true);
+		// static pause menu (animation finished, menu open)
+		SDL_Rect pauseBox = { -20 , 0 , 300, 400 };
+
+		app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &leftCurtain);
+
+		if (!curtainclosed) {
+			curtainclosed = true;
+			curtainTimer.Start();
+		}
+		
+		if (curtainTimer.ReadMSec() > 100 && curtainclosed) {
+			curtainclosed = false;
+
+			bPause = !bPause;
+			easing->SetFinished(false);
+			easingR->SetFinished(false);
+
+		}
+
+		/*app->render->DrawRectangle(pauseBox, 0, 255, 0, 255, false);
+		app->render->DrawRectangle(pauseBox, 0, 255, 0, 64, true);*/
+	}
+	else {
+		SDL_Rect pauseBox = { -230 , 0 , 300, 400 };
+
+		app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &leftCurtain);
+
+
+	}
+
+	          
+
+
+
+
+
+
+	// Animation not finished? 
+	if (!easingR->GetFinished())
+	{
+		int a, b;
+		EasingType easingT;
+
+		if (bPause) {
+			a = 460; b = 250;
+			easingT = EasingType::EASE_IN_BACK;
+		}
+		else {
+			a = 250;
+			b = 460;
+			easingT = EasingType::EASE_IN_BACK;
+		}
+
+
+		// TODO 1: Implement easings on pause menu
+		// Calculate interpolated position (tracktime, easinganimaion),
+		// and print to screen (DrawRectangle)
+		double t = easingR->TrackTime(22);
+		double easedX = easingR->EasingAnimation(a, b, t, easingT);
+
+		SDL_Rect pauseBox = { easedX, 0, 300, 400 };
+		app->render->DrawTexture(Curtain, easedX + (app->render->camera.x / -3), 0 + (app->render->camera.y / -3), &rightCurtain);
+
+	}
+	else if (bPause)  
+	{
+		// static pause menu (animation finished, menu open)
+		SDL_Rect pauseBox = { 250 , 0 , 300, 400 };
+
+		app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &rightCurtain);
+
+		/*app->render->DrawRectangle(pauseBox, 0, 255, 0, 255, false);
+		app->render->DrawRectangle(pauseBox, 0, 255, 0, 64, true);*/
+	}
+	else {
+		SDL_Rect pauseBox = { 460 , 0 , 300, 400 };
+
+		app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &rightCurtain);
+
+	}
+	
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		OpenCloseCurtains();
+	}
 
 	return true;
 }
@@ -278,4 +400,12 @@ bool GuiManager::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
+}
+
+void GuiManager::OpenCloseCurtains() {
+	
+		bPause = !bPause;
+		easing->SetFinished(false);
+		easingR->SetFinished(false);
+	
 }
