@@ -38,6 +38,7 @@ public:
 	bool CleanUp();
 
 	float EaseInElastic(float t, float b, float c, float d);
+	float EaseInQuad(float t, float b, float c, float d);
 
 	uint intro;
 private:

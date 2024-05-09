@@ -149,3 +149,9 @@ float Intro::EaseInElastic(float t, float b, float c, float d)
 	t -= 1;
 	return -(a * pow(2, 10 * t) * sin((t * d - s) * (2 * M_PI) / p)) + b;
 }
+
+float Intro::EaseInQuad(float t, float b, float c, float d)
+{
+	t /= d;
+	return c * t * t + b;
+}

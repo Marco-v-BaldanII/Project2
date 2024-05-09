@@ -18,8 +18,12 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../random.h"
+
 #include <algorithm>
 #include <iostream>
+
+#include "../Inventory.h"
+
 
 BattleScene::BattleScene(bool isActive) : Module(isActive)
 {
@@ -182,7 +186,7 @@ bool BattleScene::PreUpdate()
 // Called each loop iteration
 bool BattleScene::Update(float dt)
 {
-	if (!firstMap) app->render->camera.y = 0; firstMap = true;
+	if (!firstMap) app->render->camera.y = 100; firstMap = true;
 	//attackPattern = rand() % 2;
 	//
 	//app->render->DrawText("Player Hp:" + to_string(playerHp), 100, 100, 1000, 100, false);
@@ -199,16 +203,16 @@ bool BattleScene::Update(float dt)
 	//	playerTurn = true;
 	//}
 
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && !app->inventory->isVisible)
 		app->render->camera.y -= 10;
 
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && !app->inventory->isVisible)
 		app->render->camera.y += 10;
 
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && !app->inventory->isVisible)
 		app->render->camera.x -= 10;
 
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && !app->inventory->isVisible)
 		app->render->camera.x += 10;
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 		godMode = !godMode;

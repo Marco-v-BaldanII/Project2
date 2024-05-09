@@ -17,6 +17,7 @@
 #include "../Dialogue.h"
 #include "../random.h"
 #include "Timer.h"
+#include "../Inventory.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -32,7 +33,7 @@ bool Player::Awake() {
 	//Initialize Player parameters
 	position = app->map->MapToWorld( config.attribute("x").as_int(), config.attribute("y").as_int());
 	name = config.attribute("name").as_string();
-
+	realname = config.attribute("name").as_string();
 	int type = config.attribute("unit_type").as_int();
 
 	switch (type) {
@@ -295,16 +296,11 @@ bool Player::Update(float dt)
 
 		if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr)/* If the tile i'm on has an item */ {
 
-			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
-
-				if (myItem != nullptr) {
-					delete myItem;
-					myItem = nullptr;
-				}
+			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 
 				myItem = app->map->myTiles[mapPos.x][mapPos.y]->myItem;
 
-				myItem->myUnit = this;
+				app->inventory->InventoryItems.Add(myItem);
 				app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
 			}
 
