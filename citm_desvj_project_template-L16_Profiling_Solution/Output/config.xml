@@ -233,8 +233,28 @@
 		</animation>
 	</EdwardVI>
 		
+	<Margaret>
 
-       
+		<!--mujer de azul -->
+		<animation name="wrigth">
+			<frame x="336" y="232" w="17" h="24" />
+			<frame x="336" y="264" w="16" h="24" />
+		</animation>
+
+		<animation name="up">
+			<frame x="336" y="166" w="17" h="26" />
+			<frame x="336" y="197" w="17" h="24" />
+		</animation>
+
+		<animation name="down">
+			<frame x="336" y="8" w="21" h="24" />
+			<frame x="336" y="38" w="21" h="26" />
+			<frame x="336" y="70" w="21" h="26" />
+		</animation>
+	</Margaret>
+
+
+
 
 		<battleMaps>
 			<map name ="Northampton">
@@ -249,13 +269,25 @@
 
 					<dialogue text ="How could you . . . break our promise Richard ?"/>
 
-					<conversation owner ="Margaret of Anjou">
-						<dialogue  owner ="Margaret of Anjou" text="Be on the look out Edward, In the tide of battle you can't afford to loose focus"/>
+					<conversation owner ="Margaret">
+						<dialogue  owner ="Margaret" text="Be on the look out Edward, In the tide of battle you can't afford to loose focus"/>
 						<dialogue  owner ="Prince Edward" text="Of course mother, this... this is what I trained for. Yet I didn't think the circumastances would be like this"/>
 						<dialogue  owner ="Prince Edward" text="Fighting againts our friends, our family"/>
 
-						<dialogue  owner ="Margaret of Anjou" text="Tis a price to pay Edward, for the privileges of the dominant class. No king has ruled without having to dirty their blade with their bretheren"/>
-						<dialogue  owner ="Margaret of Anjou" text="If you must weep, I shall not punish you for it. But do so after the fight , concentrate on staying alive !"/>
+						<dialogue  owner ="Margaret" text="Tis a price to pay Edward, for the privileges of the dominant class. No king has ruled without having to dirty their blade with their bretheren"/>
+						<dialogue  owner ="Margaret" text="If you must weep, I shall not punish you for it. But do so after the fight , concentrate on staying alive !"/>
+						
+					</conversation>
+
+					<conversation owner ="Henry Tudor">
+
+						<dialogue  owner ="Prince Edward" text="Henry !, how are you holding up?"/>
+						<dialogue  owner ="Henry Tudor" text="Your highness! it is no time to be worrying about others"/>
+						<dialogue  owner ="Prince Edward" text="A king who doesn't lead his subjects into the fight is no king at all"/>
+						<dialogue  owner ="Henry Tudor" text="uuf, you sounded exactly like him"/>
+						<dialogue owner ="Henry Tudor" text="Very well, let's give'em hell your majesty"/>
+						<dialogue  owner ="Prince Edward" text="I've got your back"/>
+						<dialogue  owner ="Henry Tudor" text="So do I !"/>
 						
 					</conversation>
 					
@@ -265,45 +297,87 @@
 
 					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
 
+					<conversation owner ="Prince Edward">
+
+						<dialogue  owner ="Prince Edward" text="Henry !, how are you holding up?"/>
+						<dialogue  owner ="Henry Tudor" text="Your highness! it is no time to be worrying about others"/>
+						<dialogue  owner ="Prince Edward" text="A king who doesn't lead his subjects into the fight is no king at all"/>
+						<dialogue  owner ="Henry Tudor" text="uuf, you sounded exactly like him"/>
+						<dialogue owner ="Henry Tudor" text="Very well, let's give'em hell your majesty"/>
+						<dialogue  owner ="Prince Edward" text="I've got your back"/>
+						<dialogue  owner ="Henry Tudor" text="So do I !"/>
+
+					</conversation>
+
+					<conversation owner ="Margaret">
+
+						<dialogue  owner ="Margaret" text="Henry, I'm glad to have a trusted ally of Lancaster like you standing beside my Edward"/>
+						<dialogue  owner ="Henry Tudor" text="You honour me my Queen. The prince is, such a gentle sword, I cannot but feat for him in a place like this"/>
+						<dialogue  owner ="Margaret" text="I knew this day would come yet, againts my wishes, he ended up bonding very closely with the York boy"/>
+						<dialogue  owner ="Henry Tudor" text="Yes, I did too. And yet , now that it has come to this. I know i must not waver with my blade"/>
+						<dialogue  owner ="Margaret" text="Just like your uncle, you're a smart boy. I swear, your loyalty will be rewarded"/>
+
+					</conversation>
+
 				</player>
 
-				<player  name="Margaret of Anjou" x="1" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6">
+				<player  name="Margaret" x="1" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6">
 
 					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
 
+					<conversation owner ="Prince Edward">
+						<dialogue  owner ="Margaret" text="Be on the look out Edward, In the tide of battle you can't afford to loose focus"/>
+						<dialogue  owner ="Prince Edward" text="Of course mother, this... this is what I trained for. Yet I didn't think the circumastances would be like this"/>
+						<dialogue  owner ="Prince Edward" text="Fighting againts our friends, our family"/>
+
+						<dialogue  owner ="Margaret" text="Tis a price to pay Edward, for the privileges of the dominant class. No king has ruled without having to dirty their blade with their bretheren"/>
+						<dialogue  owner ="Margaret" text="If you must weep, I shall not punish you for it. But do so after the fight , concentrate on staying alive !"/>
+
+					</conversation>
+
+					<conversation owner ="Henry Tudor">
+
+						<dialogue  owner ="Margaret" text="Henry, I'm glad to have a trusted ally of Lancaster like you standing beside my Edward"/>
+						<dialogue  owner ="Henry Tudor" text="You honour me my Queen. The prince is, such a gentle sword, I cannot but feat for him in a place like this"/>
+						<dialogue  owner ="Margaret" text="I knew this day would come yet, againts my wishes, he ended up bonding very closely with the York boy"/>
+						<dialogue  owner ="Henry Tudor" text="Yes, I did too. And yet , now that it has come to this. I know i must not waver with my blade"/>
+						<dialogue  owner ="Margaret" text="Just like your uncle, you're a smart boy. I swear, your loyalty will be rewarded"/>
+
+					</conversation>
+
 				</player>
 
-				<enemy name= "Duke of York" x="11" y="4" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
+				<enemy name= "Duke of York" x="11" y="4" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10" exp="40">
 
 					<dialogue text =" Dammn it! Lancasters , you'll live to regret this humiliation"/>
 
 				</enemy>
 
-				<enemy name= "Edward of York" x="40" y="13" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8">
+				<enemy name= "Edward of York" x="40" y="13" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="40">
 
 					<dialogue text ="I must not die here, father I'll support you from the back lines"/>
 
 				</enemy>
 
-				<enemy name= "Earl of Warwick" x="38" y="29" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6">
+				<enemy name= "Earl of Warwick" x="38" y="29" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" exp="40">
 
 					<dialogue text ="Grrrr :("/>
 
 				</enemy>
 
-				<enemy name= "George of Clarence" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
+				<enemy name= "George of Clarence" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="40">
 
 					<dialogue text ="May my final arrow find its mark, even in death"/>
 
 				</enemy>
 
-				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="10" movement="8"/>
-				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Mage" x="24" y="32" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Mage" x="46" y="22" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Mage" x="43" y="18" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Archer" x="24" y="10" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"/>
-				<enemy name= "Knight" x="23" y="9" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"/>
+				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="10" movement="8" exp="20"/>
+				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
+				<enemy name= "Mage" x="24" y="32" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
+				<enemy name= "Mage" x="46" y="22" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
+				<enemy name= "Mage" x="43" y="18" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
+				<enemy name= "Archer" x="24" y="10" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
+				<enemy name= "Knight" x="23" y="9" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
 
 
 
@@ -317,7 +391,7 @@
 
 				</player>
 
-				<player  name="Margaret of Anjou" x="60" y="26" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" >
+				<player  name="Margaret" x="60" y="26" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" >
 
 					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
 					<lvlUp text = "Margaret of Anjuo feasts upon you feeble Yorks"/>
@@ -371,7 +445,7 @@
 
 				</enemy>
 
-				<enemy name= "George of York" x="35" y="15" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp ="40">
+				<enemy name= "Archer" x="35" y="15" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp ="40">
 
 					<dialogue text ="May my final arrow find its mark, even in death"/>
 
@@ -404,6 +478,8 @@
 			<Sprite path="Assets/Textures/BattleScreenSprites/Archer.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Mage.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Earl of Warwick.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Margaret.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Catesby.png"/>
 
 		</battleSprites>
 	

@@ -125,6 +125,11 @@ public:
 	}
 };
 
+template<typename T>
+const T& clamp(const T& value, const T& minValue, const T& maxValue) {
+	return std::min(std::max(value, minValue), maxValue);
+}
+
 typedef Point<int> iPoint;
 typedef Point<float> fPoint;
 

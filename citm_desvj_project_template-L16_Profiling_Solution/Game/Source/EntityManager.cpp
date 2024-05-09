@@ -157,7 +157,6 @@ bool EntityManager::PreUpdate()
 bool EntityManager::Update(float dt)
 {
 	bool ret = true;
-	if (app->dialogueManager->myState != SPONTANEOUS) {
 		
 		ListItem<Entity*>* item;
 		Entity* pEntity = NULL;
@@ -169,7 +168,7 @@ bool EntityManager::Update(float dt)
 			if (pEntity->active == false) continue;
 			ret = item->data->Update(dt);
 		}
-	}
+	
 
 	return ret;
 }

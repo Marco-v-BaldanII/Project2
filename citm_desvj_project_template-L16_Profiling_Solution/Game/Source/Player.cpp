@@ -211,7 +211,7 @@ bool Player::PreUpdate()
 					}
 				}
 			}
-			else if (!Move && app->turnManager->currentPlayer == this && !HasMoveAction) {
+			if (!Move && app->turnManager->currentPlayer == this ) {
 
 				
 				if (atkButton->state == GuiControlState::DISABLED) atkButton->state = GuiControlState::NORMAL;
@@ -222,7 +222,7 @@ bool Player::PreUpdate()
 				app->input->GetMouseWorldPosition(x, y);
 
 				// Attack code
-				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN) {
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN && atckedClicked) {
 					app->map->drawGrid = false;
 					iPoint p;
 					p.x = x;
@@ -555,7 +555,7 @@ bool Player::PostUpdate()
 	
 	}
 
-	if (atckedClicked && HasMoveAction) {
+	if (atckedClicked ) {
 		app->map->DrawAdjacents(tilePos);
 	}
 	
@@ -585,7 +585,7 @@ void Player::ClickOnMe() {
 
 	
 
-	if (HasMoveAction) {
+	if (!movedThisTurn) {
 
 		
 
@@ -758,7 +758,7 @@ void Player::DrawCombatScene() {
 
 
 		app->render->DrawTexture(oponent->myBattleTexture, -app->render->camera.x / 3 + oponent->Bposition.x / 3, -app->render->camera.y / 3 + oponent->Bposition.y / 3, false, true, 255);
-		app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, true, 255);
+		app->render->DrawTexture(myBattleTexture, -app->render->camera.x / 3 + Bposition.x / 3, -app->render->camera.y / 3 + Bposition.y / 3, false, false, 255);
 
 
 		/* Enemy amnimation logic */
@@ -817,6 +817,7 @@ bool Player::OnGuiMouseClickEvent(GuiControl* control)  {
 		// if you click on a tile with an enemy perform the attacking code
 		 iPoint y = tilePos;
 		 atckedClicked = true;
+		 numberofAttacks = 1;
 
 	}
 

@@ -324,7 +324,7 @@ bool Enemy::PostUpdate() {
 				rect.y = (pos.y);
 				rect.w = (app->map->GetTileWidth());
 				rect.h = (app->map->GetTileHeight());
-				app->render->DrawRectangle(rect, 255, 125, 125, 150);
+				if(!defending) app->render->DrawRectangle(rect, 255, 125, 125, 150);
 			}
 		}
 	}
@@ -431,6 +431,7 @@ bool Enemy::PostUpdate() {
 		if (!giveExp) {
 			target->lerpedExp = false;
 			target->oponent = this;
+			target->opponentAttacking = false;
 			giveExp = true;
 		}
 
@@ -488,6 +489,7 @@ bool Enemy::DealDMG() {
 		HasAttackAction = false;
 		HasMoveAction = false;
 		battleTimer = 0;
+		
 	}
 	else {
 		finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp, target->lerpingHp, target->hp - attack, maxHp, target->maxHp, true);

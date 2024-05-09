@@ -75,12 +75,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	victory = new Victory(false);
 	lose = new Lose(false);
 	mainMenu = new StartMenu(false);
+	itemManager = new ItemManager(true);
 	battleScene = new BattleScene(false);
+
 	backStage = new BackStage(false);
 	castingScene = new CastingScene(false);
 	entityManager = new EntityManager(true);
 	backstageplayer = new BackStagePlayer(false);
-	itemManager = new ItemManager(true);
+	
 	pauseMenu = new PauseMenu(true);
 	inventory = new Inventory(true);
 	guiManager = new GuiManager(true);
@@ -104,6 +106,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(victory);
 	AddModule(lose);
 	AddModule(mainMenu);
+	AddModule(itemManager);
 	AddModule(battleScene);
 	AddModule(backStage);
 
@@ -117,7 +120,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(dialogueManager);
 	AddModule(castingScene);
 	AddModule(guiManager);
-	AddModule(itemManager);
+	
 	AddModule(pauseMenu);
 	AddModule(inventory);
 	AddModule(fade);

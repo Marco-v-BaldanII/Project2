@@ -144,6 +144,10 @@ public:
 	Animation edwardDown;
 	Animation edwardUp;
 
+	Animation margaretRight;
+	Animation margaretDown;
+	Animation margaretUp;
+
 	Animation LancasterAnim;
 
 

@@ -74,7 +74,7 @@ public:
 	
 	bool finishedLerp = false;
 
-	bool opponentAttacking = false;
+
 	bool opponentReachTarget = false;
 
 	bool receivedEXP = false;

@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../random.h"
+#include <algorithm>
+#include <iostream>
 
 BattleScene::BattleScene(bool isActive) : Module(isActive)
 {
@@ -123,8 +125,8 @@ bool BattleScene::Start()
 				p->UiTex = lancasterUI;
 
 				// make each unit have their own unique control ID
-				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 200);
-				p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 200);
+				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+				p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
 
 				p->Start();
 				PassAnimations(p);
@@ -685,6 +687,26 @@ void BattleScene::LoadAnimations() {
 		}
 	}
 
+	for (pugi::xml_node node = mynode.child("Margaret").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				margaretRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				margaretRight.speed = 0.2f;
+			}
+			else if (s == "up") {
+				margaretUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				margaretUp.speed = 0.2f;
+			}
+			else if (s == "down") {
+				margaretDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				margaretDown.speed = 0.2f;
+			}
+		}
+	}
+
 	LancasterAnim.PushBack(SDL_Rect{ 0,288,32,32 });
 }
 
@@ -719,6 +741,11 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->rightAnim = edwardRight;
 		entity->downAnim = edwardDown;
 
+	}
+	else if (entity->name == "Margaret") {
+		entity->upAnim = margaretUp;
+		entity->rightAnim = margaretRight;
+		entity->downAnim = margaretDown;
 	}
 	else {
 		entity->downAnim = LancasterAnim;
@@ -773,8 +800,9 @@ bool BattleScene::DrawHPBars(float& eHp_B, float eHp_A, float& aHpB, float aHpA,
 		app->render->DrawTexture(yorkHp, 165 * 2 + (app->render->camera.x / -3), 134 * 2 + (app->render->camera.y / -3), &doubleRect, true);
 		app->render->DrawTexture(lancasterHp, 2 * 2 + (app->render->camera.x / -3), 134 * 2 + (app->render->camera.y / -3), &doubleRect, true);
 
-		string YorkcurHP = to_string((int(eHp_B)));
-		string LanccurHP = to_string((int(aHpB)));
+		
+		string YorkcurHP = to_string((int(clamp((int)eHp_B, 0, 100))));
+		string LanccurHP = to_string((int(clamp((int)aHpB, 0, 100))));
 
 		app->render->DrawText(YorkcurHP,( 183 * 2 * 3 ), (147 * 2 * 3) , 20 * YorkcurHP.length(), 38,false, SDL_Color{49,90,53,255}, CENTER_ALIGN);
 		app->render->DrawText(LanccurHP, (69 * 2 * 3), (148 * 2 * 3), 20 * LanccurHP.length(), 38, false, SDL_Color{ 49,90,53,255 }, CENTER_ALIGN);

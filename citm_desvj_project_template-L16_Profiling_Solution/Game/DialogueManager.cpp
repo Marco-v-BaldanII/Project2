@@ -540,7 +540,7 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 			app->render->DrawRectangle(nameBoxL, black, true, true);
 
-			//app->render->DrawActor(spontaneousConversation->dialogues[conversationIndex]->actorSprite, 0 - (app->render->camera.x / 3), dialogueBox.y + 50, &portraitBoxL, true, 255, 1, 255, 150, 150);
+			app->render->DrawActor(spontaneousConversation->dialogues[conversationIndex]->actorSprite, 0 - (app->render->camera.x / 3), dialogueBox.y + 50, &portraitBoxL, true, 255, 1, 255, 150, 150);
 
 			dialogueBox.x += (app->render->camera.x / 3);
 			dialogueBox.y += (app->render->camera.y / 3);

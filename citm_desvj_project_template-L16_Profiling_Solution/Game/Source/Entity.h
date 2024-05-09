@@ -234,6 +234,7 @@ public:
 	bool lvlUp = false;
 
 	Entity* oponent;
+	bool opponentAttacking = false;
 
 };
 
