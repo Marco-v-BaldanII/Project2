@@ -19,6 +19,7 @@
 #include "Timer.h"
 #include "../Inventory.h"
 #include "Timer.h"
+#include "Pathfinding.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -109,7 +110,7 @@ bool Player::Start() {
 
 	std::string s = config.attribute("name").as_string();
 
-	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, UiTex, attack, hp, precision, luck, speed, movement, s, this);
+	myFrame = new Frame(iPoint(480 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, UiTex, attack, hp, precision, luck, speed, movement, s, this);
 	currentAnim = &downAnim;
 	maxHp = hp;
 	lerpingHp = hp;
@@ -479,11 +480,6 @@ bool Player::PostUpdate()
 
 				}
 
-				
-
-
-
-
 			}
 			if (curtainTimer.ReadMSec() > 800) {
 				DrawCombatScene();
@@ -571,7 +567,7 @@ bool Player::PostUpdate()
 	}
 
 	if (atckedClicked ) {
-		app->map->DrawAdjacents(tilePos);
+		app->map->DrawAdjacents(tilePos, attackRange);
 	}
 	
 	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
@@ -686,6 +682,7 @@ void Player::OnCollision(Collider* physA, Collider* physB)  {
 
 }
 
+/* when lerping hp finishes the number the turn siwtches to the opponent or the attack finishes*/
 bool Player::DealDMG() {
 
 	if (numberofAttacks <= 0) {
@@ -703,7 +700,12 @@ bool Player::DealDMG() {
 			oponent->hp -= attack;
 			oponent->lerpingHp = oponent->hp;
 			reachedTarget = false;
-			if (numberofAttacks == maxNumofATTACKS) opponentAttacking = true;
+
+			// measures if the target is in attacking range, tewk to enable toe double attack of the player
+			int dist = app->map->DistanceBetweenTiles(tilePos, oponent->tilePos);
+
+			if (numberofAttacks == maxNumofATTACKS && dist <= oponent->attackRange) opponentAttacking = true;
+			
 
 			return true;
 		}

@@ -249,7 +249,9 @@ public:
     // Limits the camera, CHANGE for different maps
     void CameraRestrictions();
 
-    void DrawAdjacents(iPoint tilePos);
+    void DrawAdjacents(iPoint tilePos, int range);
+
+    int DistanceBetweenTiles(iPoint t1, iPoint t2);
 
 
 public: 

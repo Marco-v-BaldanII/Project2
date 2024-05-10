@@ -93,8 +93,8 @@ bool Enemy::Start() {
 	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
 
 	/*Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, int& hp, int precision, int luck, int speed, int movement , string name) {*/
-	myFrame = new Frame(iPoint(512 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, Uitex, attack, hp, precision, luck, speed, movement, s);
-
+	
+	myFrame = new Frame(iPoint(480 + (-94 * 2), 20), 4.0f, FADE, SDL_Rect{ 0,0,94,99 }, Uitex, attack, hp, precision, luck, speed, movement, s);
 	currentAnim = &downAnim;
 	maxHp = hp;
 	lerpingHp = hp;

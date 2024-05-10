@@ -449,7 +449,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     return ret;
 }
 
-void Map::DrawAdjacents(iPoint tilePos) {
+void Map::DrawAdjacents(iPoint tilePos, int range) {
 
  
         iPoint mapCoord = MapToWorld(tilePos.x -1, tilePos.y);
@@ -468,10 +468,58 @@ void Map::DrawAdjacents(iPoint tilePos) {
         if (mapCoord.y > 0)/* also change*/ {
             app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
         }
+        if (range == 2) {
+
+            if (mapCoord.x > 1) {
+                mapCoord = MapToWorld(tilePos.x - 2, tilePos.y);
+                app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+            }
+            mapCoord = MapToWorld(tilePos.x + 2, tilePos.y);
+            if (mapCoord.x > 1) /* Change the limit*/ {
+                app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+            }
+            mapCoord = MapToWorld(tilePos.x, tilePos.y - 2);
+            if (mapCoord.y > 1) {
+                app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+            }
+            mapCoord = MapToWorld(tilePos.x, tilePos.y + 2);
+            if (mapCoord.y > 1)/* also change*/ {
+                app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+            }
+
+
+
+            mapCoord = MapToWorld(tilePos.x-1, tilePos.y - 1);
+            if (mapCoord.y > 0 && mapCoord.x > 0) {
+                app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+            }
+            mapCoord = MapToWorld(tilePos.x +1, tilePos.y + 1);
+            if (mapCoord.y > 0 && mapCoord.x > 0)/* change */ {
+                app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+            }
+
+            mapCoord = MapToWorld(tilePos.x + 1, tilePos.y - 1);
+            if (mapCoord.y > 0 && mapCoord.x > 0) /* change x */ {
+                app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+            }
+
+            mapCoord = MapToWorld(tilePos.x -1, tilePos.y + 1);
+            if (mapCoord.y > 0 && mapCoord.x > 0) /* change y */ {
+                app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, b2Color(1, 0, 0, 0.5f), true, true);
+            }
+
+        }
    
 
 
 
+}
+
+int Map::DistanceBetweenTiles(iPoint t1, iPoint t2) {
+
+    int distance = abs(t2.x - t1.x) + abs(t2.y - t1.y);
+
+    return distance;
 }
 
 // L08: DONE 7: Implement a method to get the value of a custom property
