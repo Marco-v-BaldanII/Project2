@@ -84,6 +84,8 @@ public:
 
 	SDL_Texture* missText = nullptr;
 
+	bool misses[2];
+
 };
 
 #endif // __ENEMY_H__
