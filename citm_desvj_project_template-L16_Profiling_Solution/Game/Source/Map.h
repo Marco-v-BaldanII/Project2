@@ -169,6 +169,7 @@ struct MapLayer
     Properties properties;
 
     // matrix of tiles
+
     Tile* myTiles[MAX_TILE_AMOUNT][46] = { nullptr };
 
     // L06: DONE 6: Short function to get the gid value of x,y
@@ -264,13 +265,14 @@ public:
 
     SDL_Texture* miniMapTex = nullptr;
 
-
+    int maxTileAmount = 54;
     Tile* myTiles[MAX_TILE_AMOUNT][MAX_TILE_AMOUNT] = { nullptr };
 
     MapData mapData;
 
     bool drawGrid = false;
 
+    int level = 0;
 private:
     // L05: DONE 1: Declare a variable data of the struct MapData
   

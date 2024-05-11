@@ -41,7 +41,11 @@ bool Map::Start() {
     //Calls the functon to load the map, make sure that the filename is assigned
     SString mapPath = path;
     // CHANGE poner el en config
+    if (level == 0)
     mapPath = myNode.child("lvl1").attribute("path").as_string();
+    else if (level == 1)
+    mapPath = myNode.child("lvl2").attribute("path").as_string();
+
     Load(mapPath);
 
     miniMapTex = app->tex->Load(myNode.child("minimap").attribute("path").as_string());
