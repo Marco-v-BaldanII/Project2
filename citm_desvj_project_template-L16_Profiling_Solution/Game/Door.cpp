@@ -47,7 +47,6 @@ bool Door::PostUpdate() {
 	if (isOpen == false)
 	app->render->DrawTexture(texture, mapPos.x, mapPos.y);
 
-	
 
 	return true;
 }
@@ -60,6 +59,7 @@ void Door::InitModifiers(int x, int y, int num, const char* textPath) {
 	mapPos = app->map->MapToWorld(mapPos.x, mapPos.y);
 
 	texture = app->tex->Load(textPath);
+	
 
 	iPoint pos;
 	pos.x = mapPos.x;

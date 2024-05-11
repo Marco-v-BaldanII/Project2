@@ -47,9 +47,9 @@
 
 		<item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"/>
 
-		<door num ="1" x ="3" y="20" textPath="Assets/Textures/Items/veil.png"/>
+		<door num ="1" x ="3" y="20" textPath="Assets/Textures/Items/puerta1.png"/>
 
-		<lever num ="1" x ="3" y="25" textPath="Assets/Textures/Items/cat.png"/>
+		<lever num ="1" x ="3" y="25" textPath="Assets/Textures/Items/Palanca1.png"/>
 		
 	</itemmanager>
 
