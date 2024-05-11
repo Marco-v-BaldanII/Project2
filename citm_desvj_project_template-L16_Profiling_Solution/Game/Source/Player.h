@@ -77,6 +77,7 @@ public:
 	
 	bool finishedLerp = false;
 
+	uint pickItemFx;
 
 	bool opponentReachTarget = false;
 

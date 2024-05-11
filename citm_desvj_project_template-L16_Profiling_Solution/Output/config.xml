@@ -19,6 +19,7 @@
   </window>
   <map>
 		<lvl1  path="Assets/Maps/Mapanieve3.tmx" />
+		<lvl2  path="Assets/Maps/castillopek.tmx" />
 		<minimap path ="Assets/Textures/miniMap.png"/>
 		
 	</map>
@@ -61,8 +62,15 @@
 		<lancasterUI path ="Assets/Textures/UI/Lancaster.png"/>
 		<yorhHpBar path = "Assets/Textures/UI/YorkHpBar.png"/>
 		<lancasterHpBar path = "Assets/Textures/UI/LancasterHpBar.png"/>
-		<background path ="Assets/Textures/BattleStageOG.png"/>
-
+		<background path ="Assets/Textures/Battle scene editted.png"/>
+		<soundeffect name="archersound" path="Assets/Audio/Fx/ArcherFX.ogg"/>
+		<soundeffect name="knigthsound" path="Assets/Audio/Fx/KnigthAtackFX.ogg"/>
+		<soundeffect name="magesound" path="Assets/Audio/Fx/MageAtackFX.ogg"/>
+		<soundeffect name="lancersound" path="Assets/Audio/Fx/LancerAtackFX.ogg"/>
+		<soundeffect name="defendsound" path="Assets/Audio/Fx/DefenseFX.ogg"/>
+		<soundeffect name="healsound" path="Assets/Audio/Fx/HealFX.ogg"/>
+		
+		
     <Mage>
 
 
@@ -659,7 +667,11 @@
 	</castingScene>
 
 
-
+	<questmanager>
+		<soundeffect name="completesquestsound" path="Assets/Audio/Fx/CompletedQuestFX.ogg"/>
+		<soundeffect name="newquestsound" path="Assets/Audio/Fx/NewQuestFX.ogg"/>
+		
+	</questmanager>
 
 	
 </config>

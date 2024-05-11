@@ -62,6 +62,7 @@ bool StartMenu::Start()
 		SDL_Rect pos6 = { windowW / 2 - 140, windowH / 2 + 210, 200,60 };
 		SDL_Rect pos7 = { windowW / 2 - 140, windowH / 2 + 280, 200,60 };
 		SDL_Rect pos8 = { windowW / 2 - 140, windowH / 2 + 350, 200,60 };
+		SDL_Rect pos9 = { windowW / 2 - 140, windowH / 2 + 440, 200,60 };
 
 		start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, " Start ", pos1, this);
 		load = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Load ", pos2, this);
@@ -102,12 +103,14 @@ bool StartMenu::Start()
 		backstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 69, " Backstage 2", pos4, this);
 		win = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 40, " Win ", pos5, this);
 		lose = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 41, " Lose ", pos6, this);
+		combatstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 420, " //combatstage2 ", pos9, this);
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
 		backstage2->state = GuiControlState::DISABLED;
 		win->state = GuiControlState::DISABLED;
 		lose->state = GuiControlState::DISABLED;
+		combatstage2->state = GuiControlState::DISABLED;
 
 		resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, " Resume ", pos1, this);
 
@@ -151,6 +154,7 @@ bool StartMenu::Update(float dt)
 		backstage2->state = GuiControlState::DISABLED;
 		win->state = GuiControlState::DISABLED;
 		lose->state = GuiControlState::DISABLED;
+		combatstage2->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -173,6 +177,7 @@ bool StartMenu::Update(float dt)
 		backstage2->state = GuiControlState::DISABLED;
 		win->state = GuiControlState::DISABLED;
 		lose->state = GuiControlState::DISABLED;
+		combatstage2->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -195,6 +200,7 @@ bool StartMenu::Update(float dt)
 		backstage2->state = GuiControlState::DISABLED;
 		win->state = GuiControlState::DISABLED;
 		lose->state = GuiControlState::DISABLED;
+		combatstage2->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -217,6 +223,7 @@ bool StartMenu::Update(float dt)
 		backstage2->state = GuiControlState::NORMAL;
 		win->state = GuiControlState::NORMAL;
 		lose->state = GuiControlState::NORMAL;
+		combatstage2->state = GuiControlState::NORMAL;
 
 		resume->state = GuiControlState::DISABLED;
 		break;
@@ -239,6 +246,7 @@ bool StartMenu::Update(float dt)
 		backstage2->state = GuiControlState::DISABLED;
 		win->state = GuiControlState::DISABLED;
 		lose->state = GuiControlState::DISABLED;
+		combatstage2->state = GuiControlState::DISABLED;
 
 		resume->state = GuiControlState::NORMAL;
 		break;
@@ -462,6 +470,18 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 		app->entityManager->Enable();
 		app->dialogueManager->Enable();
 		app->levelManager->LoadScene(GameScene::BACKSTAGE2);
+		state = MenuState::OFF;
+	}
+	else if (control->id == 420)
+	{
+		//app->levelManager->LoadScene(GameScene::BACKSTAGE2);
+		app->map->Disable();
+		app->map->CleanUp();
+		app->map->mapData.layers.Clear();
+		app->map->level = 1;
+		app->map->Enable();
+		
+		app->levelManager->LoadScene(GameScene::COMBAT);
 		state = MenuState::OFF;
 	}
 

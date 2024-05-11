@@ -57,7 +57,7 @@ bool CastingScene::Start() {
 			assignedRoles.PushBack(false); /* shares the same index as roles (tells you if a role is assigned ior not) */
 		}
 
-		background = app->tex->Load("Assets/Textures/BattleStageOG.png");
+		background = app->tex->Load("Assets/Textures/Battle scene editted.png");
 	}
 
 	return true;
