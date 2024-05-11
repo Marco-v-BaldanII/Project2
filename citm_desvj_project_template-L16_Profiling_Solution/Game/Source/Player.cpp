@@ -313,7 +313,9 @@ bool Player::Update(float dt)
 				
 
 				app->inventory->InventoryItems.Add(app->map->myTiles[mapPos.x][mapPos.y]->myItem);
-				app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
+				
+				app->questManager->CheckQuestCompletion(app->map->myTiles[mapPos.x][mapPos.y]->myItem->name);
+					app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
 			}
 
 		}

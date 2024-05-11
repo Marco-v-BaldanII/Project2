@@ -174,7 +174,7 @@ bool DialogueManager::Start() {
 
 	bool ret = true;
 
-	/* the contents of this have been moved to WriteTheScript */
+	/* the contents of this have been moved to WriteThe Script */
 	if (scriptWritten) {
 		WriteTheScript();
 		choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
@@ -403,6 +403,10 @@ void DialogueManager::ResetScroll() {
 
 bool DialogueManager::HasScrollFinished() {
 
+	if (numLines == 0) {
+		return true;
+	}
+
 	if (numLines == 1 && w1_1 == 0) {
 		return true;
 	}
@@ -590,20 +594,22 @@ void DialogueManager::FinishScrolling() {
 void DialogueManager::DrawPortrait() {
 
 	// for the moment portrait size is assumed as 56x52 (whatever it ends up being it will have to be the same texture size for all)
-	int i = 0;
-	if (dialogueIndex > 0) {
-		i = dialogueIndex - 1;
-	}
-
-	// Prints on screen the current and previous dialogue's portrait
-	for (i; i <= dialogueIndex; ++i) {
-		if (Scenes[sceneIndex]->dialogues[i]->myPos == LEFT) {
-			if (Scenes[sceneIndex]->dialogues[i]->texture != nullptr) app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
-			else if (Scenes[sceneIndex]->dialogues[i]->actorSprite != nullptr) { app->render->DrawActor(Scenes[sceneIndex]->dialogues[i]->actorSprite, 0, 200, &portraitBoxL, true); }
+	if (myState != NPCS) {
+		int i = 0;
+		if (dialogueIndex > 0) {
+			i = dialogueIndex - 1;
 		}
-		else if (Scenes[sceneIndex]->dialogues[i]->myPos == RIGHT) {
-			if (Scenes[sceneIndex]->dialogues[i]->texture != nullptr) app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 180 * 2, 200, &portraitBoxR, false);
-			else if (Scenes[sceneIndex]->dialogues[i]->actorSprite != nullptr) { app->render->DrawActor(Scenes[sceneIndex]->dialogues[i]->actorSprite, 180 * 2, 200, &portraitBoxR, false); }
+
+		// Prints on screen the current and previous dialogue's portrait
+		for (i; i <= dialogueIndex; ++i) {
+			if (Scenes[sceneIndex]->dialogues[i]->myPos == LEFT) {
+				if (Scenes[sceneIndex]->dialogues[i]->texture != nullptr) app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 0, 200, &portraitBoxL, true);
+				else if (Scenes[sceneIndex]->dialogues[i]->actorSprite != nullptr) { app->render->DrawActor(Scenes[sceneIndex]->dialogues[i]->actorSprite, 0, 200, &portraitBoxL, true); }
+			}
+			else if (Scenes[sceneIndex]->dialogues[i]->myPos == RIGHT) {
+				if (Scenes[sceneIndex]->dialogues[i]->texture != nullptr) app->render->DrawTexture(Scenes[sceneIndex]->dialogues[i]->texture, 180 * 2, 200, &portraitBoxR, false);
+				else if (Scenes[sceneIndex]->dialogues[i]->actorSprite != nullptr) { app->render->DrawActor(Scenes[sceneIndex]->dialogues[i]->actorSprite, 180 * 2, 200, &portraitBoxR, false); }
+			}
 		}
 	}
 }
@@ -675,7 +681,7 @@ void DialogueManager::AdvanceText() {
 			}
 			else if (myState == NPCS && currentNPC_Dialogues != nullptr) {
 
-
+				
 			}
 		}
 		else {
@@ -772,6 +778,11 @@ void DialogueManager::npcTalk(Node* npcDialogues) {
 						choiceA_button->text = currentNPC_Dialogues->dialogue->choiceA.c_str();
 						choiceB_button->text = currentNPC_Dialogues->dialogue->choiceB.c_str();
 					}
+				}
+				else {
+					currentNPC = nullptr;
+					currentNPC_Dialogues = nullptr;
+					app->backstageplayer->talking = false;
 				}
 			}
 
@@ -913,9 +924,10 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 			LOG("Choice A");
 			if (currentNPC_Dialogues->leftChild != nullptr) {
 
-				if (currentNPC_Dialogues->dialogue->hasQuest == true)/* Accept sidequest */ {
+				if (currentNPC_Dialogues->dialogue->hasQuest == true && currentNPC->questInfo != NO_QUEST)/* Accept sidequest */ {
 
 					app->questManager->quests.Add(currentNPC_Dialogues->dialogue->sideQuest);
+					currentNPC->questInfo = NO_QUEST;
 
 				}
 
@@ -934,9 +946,10 @@ bool DialogueManager::OnGuiMouseClickEvent(GuiControl* control) {
 			}
 		}
 		int choices = 0;
-		if (currentNPC_Dialogues->dialogue->choiceA != "") { choices++; }
-		if (currentNPC_Dialogues->dialogue->choiceB != "") { choices++; }
-
+		if (currentNPC_Dialogues != nullptr) {
+			if (currentNPC_Dialogues->dialogue->choiceA != "") { choices++; }
+			if (currentNPC_Dialogues->dialogue->choiceB != "") { choices++; }
+		}
 		if (choices == 2) {
 			// display choices
 			choiceA_button->text = currentNPC_Dialogues->dialogue->choiceA.c_str();

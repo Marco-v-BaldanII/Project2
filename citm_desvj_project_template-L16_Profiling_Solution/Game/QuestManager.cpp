@@ -27,6 +27,7 @@ bool QuestManager::Start() {
 
 	// Call start for all items
 	completedQuest = "";
+	menuTexture = app->tex->Load("Assets/Textures/UI/QuestMenu.png");
 
 	return true;
 
@@ -35,6 +36,7 @@ bool QuestManager::Start() {
 bool QuestManager::Awake(pugi::xml_node config) {
 
 	this->config = config;
+	
 
 	return true;
 
@@ -45,7 +47,7 @@ bool QuestManager::Awake(pugi::xml_node config) {
 bool QuestManager::PreUpdate() {
 
 
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
 		showQuests = !showQuests;
 	}
 
@@ -71,10 +73,12 @@ bool QuestManager::PostUpdate() {
 
 	if (showQuests) {
 
+		app->render->DrawTexture(menuTexture, 20 + (app->render->camera.x / -3), 0 + (app->render->camera.y / -3));
 		int i = 0;
 		for (ListItem<Quest*>* it = quests.start; it != NULL; it = it->next) {
 
-			app->render->DrawText(it->data->GetObjective(), 30, 30 + (i * 100), 20 * it->data->GetObjective().length(), 75, true);
+			
+			app->render->DrawText(it->data->GetObjective(), 140, 60 + (i * 100), 12 * it->data->GetObjective().length(), 40, false, SDL_Color{0,0,0,255});
 
 			i++;
 		}
@@ -84,7 +88,7 @@ bool QuestManager::PostUpdate() {
 	// Show the quest completed
 	if (completedQuest != "" && showTimer.ReadSec() < 4) {
 		string s = "Quest completed: "; s += completedQuest;
-		app->render->DrawText(s, 200, 200, 20 * s.length(), 75, true, SDL_Color{ 255, 54, 0 ,255 });
+		app->render->DrawText(s, 200, 200, 30 * s.length(), 75, true, SDL_Color{ 255, 54, 0 ,255 });
 	}
 	else if ((completedQuest != "" && showTimer.ReadSec() > 4)){
 		completedQuest = "";

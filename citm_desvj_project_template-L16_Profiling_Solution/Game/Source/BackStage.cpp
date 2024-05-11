@@ -164,6 +164,7 @@ bool BackStage::Update(float dt)
 				//block movimiento de player
 				app->dialogueManager->npcTalk(pEntity->currentDialogue);
 				app->dialogueManager->currentNPC = pEntity;
+				break; /* sino el dialogue manager se buggea al tratar de hablar con dos npcs a la vez*/
 			}
 		}
 		

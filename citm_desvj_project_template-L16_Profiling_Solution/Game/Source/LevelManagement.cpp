@@ -165,6 +165,7 @@ bool LevelManagement::Update(float dt)
 				currentScene = (Module*)app->backStage;
 				LOG("Backstage2");
 				app->backStage->backStageID = 1;
+				app->render->camera.x = 0; app->render->camera.y = 0;
 			}
 		}
 		break;

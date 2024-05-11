@@ -543,6 +543,22 @@
 			<dialogue text = "Archers are dasterdly tricksters that can chip away at your units from a distance, they act as counters to your magic users but they are weak againts knights." ID="7"          />
 		</npc>
 
+			<npc name = "Guy5" x ="200" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
+				<texture path="Assets\Textures\BackstageNPCs\Soldado1_medium.png"/>
+				<dialogue text = "Please find the Warcry trumpet" ID="5" choiceA ="I accept" choiceB="I refuse" >
+
+					<sideQuest type="1" objective="Find the Warcry trumpet"  target="Warcry Trumpet"/>
+					<!--type: 0 = defeat, 1 = fetchQuest-->
+				</dialogue>
+
+				<dialogue text = "Very well, be sure to play your part" ID="3"         />
+
+				<dialogue text = "Which unit do you want to know about"  ID="6"          />
+				
+			</npc>
+			
+			
+
 	
 
 		<npc name = "Guy3" x ="160" y="200" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
@@ -594,6 +610,27 @@
 				<!-- second branch-->
 				<dialogue text = "Take your time"  ID="500"          />
 
+			</npc>
+
+			<npc name = "Maria Reina" x ="160" y="200" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
+
+				<!--comment 0,0 71, 150-->
+				<texture path="Assets\Textures\BackstageNPCs\Soldado2_medium.png"/>
+
+				<dialogue text = "The play is about to start" ID="10"          />
+				<dialogue text = "I'm so very excited" ID="9"          />
+				<dialogue text = "Though I seem to have forgotten what the play is about" ID="8"          />
+				<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="7"          />
+				<dialogue text = "Please defeat George of York in the next battle" ID="5" choiceA ="I accept" choiceB="I refuse" >
+
+					<sideQuest type="0" objective="Defeat George of York in the battle of Northampton"  target="George of York"/>
+					<!--type: 0 = defeat, 1 = fetchQuest-->
+
+				</dialogue>
+				<dialogue text = "Watch out for his poisonous arrows" ID="4"         />
+				<!-- second branch-->
+				<dialogue text = "Are you trolling me?" ID="7"         />
+				<dialogue text = "I will have my revenge" ID="6"         />
 			</npc>
 
 

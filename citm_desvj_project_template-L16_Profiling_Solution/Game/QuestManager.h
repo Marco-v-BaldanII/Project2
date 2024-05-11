@@ -53,6 +53,7 @@ public:
 	}
 
 	const bool CheckCondition(string target) override {
+		if (ItemName == target) { return true; }
 		return false;
 	}
 
@@ -120,6 +121,8 @@ public:
 
 	Timer showTimer;
 	string completedQuest;
+
+	SDL_Texture* menuTexture = nullptr;
 
 };
 
