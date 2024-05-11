@@ -52,6 +52,10 @@ public:
 	// Drawing
 	bool DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL , bool flipped = false, int opacity = 255, float speed = 1.0f, int R = 255, int G = 255, int B = 255, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX, SDL_BlendMode blendMode = SDL_BLENDMODE_BLEND) const;
 
+	bool DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, int actualWidth, int opacity, float speed, int R, int G, int B, double angle, int pivotX, int pivotY, SDL_BlendMode blendMode) const;
+
+	bool DrawRectangle(const SDL_Rect& rect, int r, int g, int b, Uint8 a, bool filled, bool use_camera, float rotationAngle);
+
 	bool DrawActor(ActorSprite* sprite, int x, int y, const SDL_Rect* section = NULL, bool flipped = false, int opacity = 255, float speed = 1.0f, int R = 255, int G = 255, int B = 255, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const;
 
 	bool DrawRectangle(const SDL_Rect& rect, int r, int g, int b, Uint8 a = 255, bool filled = true, bool useCamera = true) const;

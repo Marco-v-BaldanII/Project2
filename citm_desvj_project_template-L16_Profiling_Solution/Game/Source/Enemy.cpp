@@ -17,6 +17,7 @@
 #include "Physics.h"
 #include "../Dialogue.h"
 #include "../random.h"
+#include "../Easing.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
@@ -46,21 +47,27 @@ bool Enemy::Awake() {
 
 	case 0:
 		unitType = PALADIN;
+		attackRange = 1;
 		break;
 	case 1:
 		unitType = ARCHER;
+		attackRange = 2;
 		break;
 	case 2:
 		unitType = KNIGHT;
+		attackRange = 1;
 		break;
 	case 3:
 		unitType = ARMOURED_KNIGHT;
+		attackRange = 1;
 		break;
 	case 4:
 		unitType = MAGE;
+		attackRange = 2;
 		break;
 	case 5:
 		unitType = DARK_MAGE;
+		attackRange = 2;
 		break;
 
 	}
@@ -89,8 +96,9 @@ bool Enemy::Start() {
 	
 
 	std::string s = config.attribute("name").as_string();
-
+	easing = new Easing(1.2f);
 	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
+	missText = app->tex->Load("Assets/Textures/UI/MissSign.png");
 
 	/*Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, int& hp, int precision, int luck, int speed, int movement , string name) {*/
 	
@@ -309,6 +317,7 @@ bool Enemy::PostUpdate() {
 	{
 	case IDLE:
 		//Nothing to do
+		bool misses[2] = { false,false };
 		
 		break;
 	case MOVE:
@@ -353,9 +362,19 @@ bool Enemy::PostUpdate() {
 						numberofAttacks = 2;
 						maxNumofATTACKS = numberofAttacks;
 					}
-
+					
 				}
+				for (int i = 0; i < numberofAttacks; ++i) {
 
+					/* Determine evasion */
+					int evasion = getRandomNumber(0, 100);
+					if (evasion <= precision) {
+						// the attack hits
+					}
+					else {
+						misses[i] = true;
+					}
+				}
 
 			}
 
@@ -365,7 +384,7 @@ bool Enemy::PostUpdate() {
 				if (app->battleScene->godMode) app->render->DrawRectangle(target->collider->data, b2Color(1, 1, 1, 1), false, false);
 
 
-				if (opponentAttacking) {
+				if (opponentAttacking && !missed) {
 					target->defending = true;
 					target->FigureStickMovement(16.0f);
 				}
@@ -431,11 +450,11 @@ bool Enemy::PostUpdate() {
 	ClickOnMe();
 	if (drawPath) {
 
-		
-		pathfinding->GenerateWalkeableArea(tilePos, movement + 1);
-		pathfinding->DrawBFSPath();
-		myFrame->Render(1.0 / 60.0, hp, attack, speed, precision, luck, movement);
-
+		if (!app->battleScene->inBattle) {
+			pathfinding->GenerateWalkeableArea(tilePos, movement + 1);
+			pathfinding->DrawBFSPath();
+			myFrame->Render(1.0 / 60.0, hp, attack, speed, precision, luck, movement);
+		}
 	}
 	else 	
 	{
@@ -477,6 +496,9 @@ bool Enemy::PostUpdate() {
 
 	if (target != nullptr) { target->collider->data.x = (-40) + target->Bposition.x; target->collider->data.y = (0) + target->Bposition.y; }
 	collider->data.x = (-40) + Bposition.x; collider->data.y = (0) + Bposition.y;
+
+	HandleMiss();
+
 	//app->render->DrawTexture(myBattleTexture,-app->render->camera.x/2 +  Bposition.x /3,-app->render->camera.y/3 +   Bposition.y/3, false, true, 255);
 	return true;
 }
@@ -504,26 +526,104 @@ void Enemy::ClickOnMe() {
 
 bool Enemy::DealDMG() {
 
-	if (numberofAttacks <= 0) {
+	if (numberofAttacks <= 0 && !missed) {
 		state = MOVE;
 		HasAttackAction = false;
 		HasMoveAction = false;
 		battleTimer = 0;
 		
 	}
-	else {
-		finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp, target->lerpingHp, target->hp - attack, maxHp, target->maxHp, true);
+	else if (!missed) {
+		if (misses[numberofAttacks - 1] == false) {
+			finishedLerp = app->battleScene->DrawHPBars(lerpingHp, lerpingHp, target->lerpingHp, target->hp - attack, maxHp, target->maxHp, true);
 
-		if (finishedLerp || numberofAttacks < 0) {
+			if (finishedLerp || numberofAttacks < 0) {
 
-			target->hp -= attack;
-			target->lerpingHp = target->hp;
-			if (numberofAttacks == maxNumofATTACKS) opponentAttacking = true;
+				target->hp -= attack;
+				target->lerpingHp = target->hp;
+				if (numberofAttacks == maxNumofATTACKS) opponentAttacking = true;
 
-			return true;
+				return true;
+			}
+		}
+		else if (missed == false) {
+
+			reachedTarget = false;
+			missed = true;
+			missTimer.Start();
+			bPause = !bPause;
+			easing->SetFinished(false);
+
+			
+			if (numberofAttacks == maxNumofATTACKS ) {
+
+
+				opponentAttacking = true;
+				Bposition = iPoint(300 * 3, 80 * 3);
+			}
+
 		}
 	}
 	return false;
+}
+
+void Enemy::HandleMiss() {
+
+	// Animation not finished? 
+	if (!easing->GetFinished())
+	{
+		int a, b;
+		EasingType easingT;
+
+		if (bPause) {
+			a = -300; b = -50;
+			easingT = EasingType::EASE_IN_BACK;
+		}
+		else {
+			a = -50;
+			b = -300;
+			easingT = EasingType::EASE_IN_BACK;
+		}
+
+
+		// TODO 1: Implement easings on pause menu
+		// Calculate interpolated position (tracktime, easinganimaion),
+		// and print to screen (DrawRectangle)
+		double t = easing->TrackTime(26);
+		double easedX = easing->EasingAnimation(a, b, t, easingT);
+
+		SDL_Rect pauseBox = { easedX, 0, 300, 400 };
+		missBox.y = easedX;
+		/*app->render->DrawTexture(Curtain, easedX + (app->render->camera.x / -3), 0 + (app->render->camera.y / -3), &rightCurtain);*/
+
+	}
+	else if (bPause)
+	{
+		// static pause menu (animation finished, menu open)
+		SDL_Rect pauseBox = { 250 , 0 , 300, 400 };
+
+		missBox.y = -50;
+
+		if (missed && missTimer.ReadMSec() >= 600 && missBoxDown == false) {
+			missBoxDown = true;
+			bPause = !bPause;
+			easing->SetFinished(false);
+		}
+		/*app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &rightCurtain);*/
+
+		/*app->render->DrawRectangle(pauseBox, 0, 255, 0, 255, false);
+		app->render->DrawRectangle(pauseBox, 0, 255, 0, 64, true);*/
+	}
+	else {
+		SDL_Rect pauseBox = { 460 , 0 , 300, 400 };
+		missBox.y = -300;
+		missBoxDown = false;
+		missed = false;
+
+		/*app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &rightCurtain);*/
+
+	}
+	app->render->DrawTexture(missText, (-app->render->camera.x / 3) + missBox.x, (-app->render->camera.y / 3) + missBox.y);
 }
 
 

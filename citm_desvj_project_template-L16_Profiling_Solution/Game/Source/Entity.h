@@ -36,6 +36,7 @@ enum States {
 
 class PhysBody;
 class Timer;
+class Easing;
 
 enum UnitType {
 
@@ -224,6 +225,16 @@ public:
 
 	int numberofAttacks = 1;
 	int maxNumofATTACKS = 1;
+	bool misses[2] = { false,false };
+	bool missed = false;
+	Timer missTimer;
+	bool missBoxDown = false;
+
+
+	Easing* easing = nullptr;
+	bool bPause = false;
+
+	iPoint missBox = iPoint(300, -300);
 
 	bool defending = false; /* opponent is touching its attributes for it to defend its attack*/
 
@@ -240,6 +251,8 @@ public:
 
 	Timer curtainTimer;
 	bool curtains = false;
+
+	float TypeMultiplier(UnitType rivalType);
 
 };
 

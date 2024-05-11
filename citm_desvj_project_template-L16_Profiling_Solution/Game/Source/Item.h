@@ -23,6 +23,8 @@ class Item
 {
 public:
 
+	Item(Item* it);
+
 	Item();
 	virtual ~Item();
 
@@ -60,11 +62,15 @@ public:
 
 	SDL_Texture* texture = nullptr;
 
+	bool overworld = true;
+
 private:
 
 	
 	const char* texturePath;
 	uint texW, texH;
+
+	
 
 	float hpMod =  1;
 	float atkMod = 1;

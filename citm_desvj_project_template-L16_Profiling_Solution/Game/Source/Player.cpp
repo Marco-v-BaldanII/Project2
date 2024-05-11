@@ -20,6 +20,7 @@
 #include "../Inventory.h"
 #include "Timer.h"
 #include "Pathfinding.h"
+#include "../Easing.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -37,6 +38,7 @@ bool Player::Awake() {
 	name = config.attribute("name").as_string();
 	realname = config.attribute("name").as_string();
 	int type = config.attribute("unit_type").as_int();
+	easing = new Easing(1.2f);
 
 	switch (type) {
 
@@ -107,6 +109,7 @@ bool Player::Start() {
 
 
 	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
+	missText = app->tex->Load("Assets/Textures/UI/MissSign.png");
 
 	std::string s = config.attribute("name").as_string();
 
@@ -274,6 +277,8 @@ bool Player::Update(float dt)
 	{
 	case IDLE:
 		if(!defending) Bposition = iPoint(50 * 3, 80 * 3);
+		
+
 
 		//if click enemy and enemay is on attack range engage combat
 	
@@ -300,9 +305,14 @@ bool Player::Update(float dt)
 
 			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 
-				myItem = app->map->myTiles[mapPos.x][mapPos.y]->myItem;
 
-				app->inventory->InventoryItems.Add(myItem);
+				
+
+				app->map->myTiles[mapPos.x][mapPos.y]->myItem->overworld = false;
+
+				
+
+				app->inventory->InventoryItems.Add(app->map->myTiles[mapPos.x][mapPos.y]->myItem);
 				app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
 			}
 
@@ -329,6 +339,8 @@ bool Player::Update(float dt)
 		
 		break;
 	case BATTLE:
+		app->battleScene->inBattle = true;
+
 
 		if (curtains == false) {
 			app->guiManager->OpenCloseCurtains();
@@ -406,6 +418,8 @@ bool Player::PostUpdate()
 		{
 		case IDLE:
 			//render idle 
+			missed = false;
+			bool misses[2] = { false,false };
 			
 			break;
 		case MOVE:
@@ -469,7 +483,7 @@ bool Player::PostUpdate()
 
 					if (speed > oponent->speed - 1) {
 
-						int doubleChance = getRandomNumber(0, 100);
+						int doubleChance = getRandomNumber(0, speed);
 						if (doubleChance <= speed) /*Double attack*/ {
 
 							numberofAttacks = 2;
@@ -477,7 +491,17 @@ bool Player::PostUpdate()
 						}
 
 					}
+					for (int i = 0; i < numberofAttacks; ++i) {
 
+						/* Determine evasion */
+						int evasion = getRandomNumber(0, 100);
+						if (evasion <= precision) {
+							// the attach hits
+						}
+						else {
+							misses[i] = true;
+						}
+					}
 				}
 
 			}
@@ -574,10 +598,78 @@ bool Player::PostUpdate()
 	if(oponent != nullptr){ oponent->collider->data.x = (-40) + oponent->Bposition.x; oponent->collider->data.y = (0) + oponent->Bposition.y; }
 	if (app->battleScene->godMode) app->render->DrawRectangle(oponent->collider->data, b2Color(1, 1, 1, 1), false, false);
 
-
+	HandleMiss();
 	
 
 	return true;
+}
+
+void Player::HandleMiss() {
+
+
+
+
+		// Animation not finished? 
+		if (!easing->GetFinished())
+		{
+			int a, b;
+			EasingType easingT;
+
+			if (bPause) {
+				a = -300; b = -50;
+				easingT = EasingType::EASE_IN_BACK;
+			}
+			else {
+				a = -50;
+				b = -300;
+				easingT = EasingType::EASE_IN_BACK;
+			}
+
+
+			// TODO 1: Implement easings on pause menu
+			// Calculate interpolated position (tracktime, easinganimaion),
+			// and print to screen (DrawRectangle)
+			double t = easing->TrackTime(26);
+			double easedX = easing->EasingAnimation(a, b, t, easingT);
+
+			SDL_Rect pauseBox = { easedX, 0, 300, 400 };
+			missBox.y = easedX;
+			/*app->render->DrawTexture(Curtain, easedX + (app->render->camera.x / -3), 0 + (app->render->camera.y / -3), &rightCurtain);*/
+
+		}
+		else if (bPause)
+		{
+			// static pause menu (animation finished, menu open)
+			SDL_Rect pauseBox = { 250 , 0 , 300, 400 };
+
+			missBox.y = -50;
+
+			if (missed && missTimer.ReadMSec() >= 600 && missBoxDown == false) {
+				missBoxDown = true;
+				bPause = !bPause;
+				easing->SetFinished(false);
+			}
+			/*app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &rightCurtain);*/
+
+			/*app->render->DrawRectangle(pauseBox, 0, 255, 0, 255, false);
+			app->render->DrawRectangle(pauseBox, 0, 255, 0, 64, true);*/
+		}
+		else {
+			SDL_Rect pauseBox = { 460 , 0 , 300, 400 };
+			missBox.y = -300;
+			missBoxDown = false;
+			missed = false;
+			
+			/*app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &rightCurtain);*/
+
+		}
+
+	
+
+		app->render->DrawTexture(missText, (-app->render->camera.x / 3) + missBox.x, (-app->render->camera.y / 3) + missBox.y);
+
+	
+
 }
 
 bool Player::SuperPostUpdate() {
@@ -587,7 +679,7 @@ bool Player::SuperPostUpdate() {
 	
 		myFrame->Render(1.0 / 60.0, hp, attack, speed, precision, luck, movement);
 
-	
+		
 
 	return true;
 }
@@ -685,31 +777,73 @@ void Player::OnCollision(Collider* physA, Collider* physB)  {
 /* when lerping hp finishes the number the turn siwtches to the opponent or the attack finishes*/
 bool Player::DealDMG() {
 
-	if (numberofAttacks <= 0) {
+	if (numberofAttacks <= 0 && !missed)/*finished attacks*/ {
 		state = MOVE;
+		app->battleScene->inBattle = false;
 		HasAttackAction = false;
 		HasMoveAction = false;
 		reachedTarget = false;
 		battleTimer = 1;
 	}
-	else {
-		finishedLerp = app->battleScene->DrawHPBars( oponent->lerpingHp, oponent->hp - attack, lerpingHp, lerpingHp, oponent->maxHp, maxHp, true);
+	else if (!missed) {
+		if (misses[numberofAttacks - 1] == false) {
+			finishedLerp = app->battleScene->DrawHPBars(oponent->lerpingHp, oponent->hp - (int)(attack * TypeMultiplier(oponent->unitType)), lerpingHp, lerpingHp, oponent->maxHp, maxHp, true);
+		
+			if (finishedLerp || numberofAttacks < 0)/* enters when lerp has finished or no more attacks*/ {
 
-		if (finishedLerp || numberofAttacks < 0) {
 
-			oponent->hp -= attack;
-			oponent->lerpingHp = oponent->hp;
-			reachedTarget = false;
 
-			// measures if the target is in attacking range, tewk to enable toe double attack of the player
-			int dist = app->map->DistanceBetweenTiles(tilePos, oponent->tilePos);
+				oponent->hp -= (int) (attack * TypeMultiplier(oponent->unitType) );
+				oponent->lerpingHp = oponent->hp;
+				reachedTarget = false;
 
-			if (numberofAttacks == maxNumofATTACKS && dist <= oponent->attackRange) opponentAttacking = true;
-			
+				// measures if the target is in attacking range, tewk to enable toe double attack of the player
+				int dist = app->map->DistanceBetweenTiles(tilePos, oponent->tilePos);
 
-			return true;
+				if (numberofAttacks == maxNumofATTACKS && dist <= oponent->attackRange) opponentAttacking = true;
+				else if (numberofAttacks == maxNumofATTACKS && dist > oponent->attackRange) {
+
+					oponent->defending = false;
+					opponentAttacking = false;
+					opponentReachTarget = false;
+					Bposition = iPoint(50 * 3, 80 * 3);
+					reachedTarget = false;
+					
+				}
+				return true;
+			}
+		
 		}
+			else if (missed== false)/*the attack dosn't hit*/ {
+
+				reachedTarget = false;
+				missed = true;
+				missTimer.Start();
+				bPause = !bPause;
+				easing->SetFinished(false);
+
+				// measures if the target is in attacking range, tewk to enable toe double attack of the player
+				int dist = app->map->DistanceBetweenTiles(tilePos, oponent->tilePos);
+
+				if (numberofAttacks == maxNumofATTACKS && dist <= oponent->attackRange) opponentAttacking = true;
+				else if (numberofAttacks == maxNumofATTACKS && dist > oponent->attackRange) {
+
+					
+					oponent->defending = false;
+					opponentAttacking = false;
+					opponentReachTarget = false;
+					Bposition = iPoint(50 * 3, 80 * 3);
+					reachedTarget = false;
+					
+				}
+				return true;
+
+			}
+		
+		
+		
 	}
+	
 
 	return false;
 
@@ -753,8 +887,9 @@ void Player::FigureStickMovement(float dt) {
 		velocity.y *= -BOUNCE;
 	}
 
-	if (numberofAttacks <= 0 && lerpedExp == true) {
+	if (numberofAttacks <= 0 && lerpedExp == true && !missed) {
 		state = MOVE;
+		app->battleScene->inBattle = false;
 		HasAttackAction = false;
 		HasMoveAction = false;
 		reachedTarget = false;
@@ -780,7 +915,7 @@ void Player::DrawCombatScene() {
 
 		/* Enemy amnimation logic */
 
-		if (opponentAttacking) {
+		if (opponentAttacking && !missed) {
 			oponent->defending = true;
 			oponent->FigureStickMovement(16.0f);
 		}
@@ -789,11 +924,11 @@ void Player::DrawCombatScene() {
 
 			bool opLerp = false;
 
-			opLerp = app->battleScene->DrawHPBars(oponent->lerpingHp, oponent->lerpingHp, lerpingHp, hp - oponent->attack, oponent->maxHp, maxHp, true);
+			opLerp = app->battleScene->DrawHPBars(oponent->lerpingHp, oponent->lerpingHp, lerpingHp, hp - oponent->attack * TypeMultiplier(oponent->unitType), oponent->maxHp, maxHp, true);
 
 			if (opLerp) /*hp bar lerping has finished*/ {
 
-				hp -= oponent->attack;
+				hp -= (oponent->attack * TypeMultiplier(oponent->unitType));
 
 				oponent->defending = false;
 				opponentAttacking = false;
