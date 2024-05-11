@@ -50,12 +50,6 @@
     <ClCompile Include="Source\GuiControlButton.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MainMenuPanel.cpp">
-      <Filter>Panels</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SettingsPanel.cpp">
-      <Filter>Panels</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BattleScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -183,12 +177,6 @@
     <ClInclude Include="Source\GuiButton.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MainMenuPanel.h">
-      <Filter>Panels</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SettingsPanel.h">
-      <Filter>Panels</Filter>
-    </ClInclude>
     <ClInclude Include="someColors.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -271,9 +259,6 @@
     </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{c9a4f4b3-5e48-4da3-94d3-499e54534171}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Panels">
-      <UniqueIdentifier>{0a9a0d9e-983d-4931-be44-61a5d076646e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Entities">
       <UniqueIdentifier>{f083c7d3-6d91-4dd7-b681-4f70955d90c6}</UniqueIdentifier>

@@ -1,7 +1,6 @@
 #include "GuiManager.h"
 #include "App.h"
 #include "Textures.h"
-#include "MainMenuPanel.h"
 #include "GuiControlButton.h"
 #include "GuiSlider.h"
 #include "GuiPanel.h"
@@ -24,17 +23,8 @@ bool GuiManager::Awake(pugi::xml_node config) {
 
 bool GuiManager::Start()
 {
-	Main_Menu_Panel = new MainMenuPanel(false);
-	//Options_Panel = new OptionsPanel(false);
-	//Pause_Panel = new PausePanel(false);
-	//MORE PANELS TOO ADD
-
 	easing = new Easing(1.2f);
 	easingR = new Easing(1.2f);
-
-	panels.add(Main_Menu_Panel);
-	//panels.add(Options_Panel);
-	//panels.add(Pause_Panel);
 
 	//LOAD TEXTURES
 	Curtain = app->tex->Load("Assets/Textures/UI/curtains.png");
@@ -56,14 +46,6 @@ bool GuiManager::Start()
 	buttonHoverFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
 	buttonClickFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
 
-	p2ListItem<GuiPanel*>* panel = panels.start;
-
-	while (panel != nullptr)
-	{
-		panel->data->Start();
-		panel = panel->next;
-	}
-
 	spotLight = new SpotLight(64, SDL_Color{ 242,149,98,200 }, 0.02f);
 	spotLight->visible = false;
 
@@ -77,8 +59,6 @@ bool GuiManager::Update(float dt)
 
 	accumulatedTime += dt;
 	if (accumulatedTime >= updateMsCycle) doLogic = true;
-
-	UpdateAll(dt, doLogic);
 
 	if (doLogic == true)
 	{
@@ -96,33 +76,7 @@ bool GuiManager::Update(float dt)
 	return true;
 }
 
-bool GuiManager::UpdateAll(float dt, bool doLogic) {
-
-	p2ListItem<GuiPanel*>* panel = panels.start;
-
-	while (panel != nullptr)
-	{
-		if (panel->data->Active)
-			panel->data->Update(dt, doLogic);
-
-		panel = panel->next;
-	}
-
-	return true;
-
-}
-
 bool GuiManager::PostUpdate() {
-
-	p2ListItem<GuiPanel*>* panel = panels.start;
-
-	while (panel != nullptr)
-	{
-		if (panel->data->Active)
-			panel->data->Draw();
-
-		panel = panel->next;
-	}
 
 	ListItem<GuiControl*>* control = guiControlsList.start;
 
@@ -197,13 +151,6 @@ bool GuiManager::PostUpdate() {
 
 
 	}
-
-	          
-
-
-
-
-
 
 	// Animation not finished? 
 	if (!easingR->GetFinished())
@@ -329,75 +276,13 @@ bool GuiManager::CleanUp()
 		RELEASE(control);
 	}
 
-	//clen panels
-	p2ListItem<GuiPanel*>* panel = panels.start;
-
-	while (panel != nullptr)
-	{
-		panel->data->CleanUp();
-		panel = panel->next;
-	}
-
-	panels.clear();
-
 	return true;
 
 	return false;
 }
 
-
-//CUANDO ESTEMOS EN EN OVERWORLD O EN EL BATTLE SCREEN
-//void GuiManager::OnPause(bool paused)
-//{
-//	if (app->gamePaused)
-//	{
-//		Pause_Panel->Enable();
-//		app->entities->Pause = true;
-//		app->physics->Pause = true;
-//	}
-//	else
-//	{
-//		pn_pause->Disable();
-//		app->entities->Pause = false;
-//		app->physics->Pause = false;
-//	}
-//}
-
-void GuiManager::OpenPanel(PanelID panel_id)
-{
-	p2ListItem<GuiPanel*>* panel = panels.start;
-
-	while (panel != nullptr)
-	{
-
-		if (panel->data->Active == true)
-		{
-			panel->data->Disable();
-			lastPanel = panel->data->id;
-		}
-
-		if (panel->data->id == panel_id)
-		{
-			panel->data->Enable();
-			currentPanel = panel->data->id;
-		}
-		panel = panel->next;
-	}
-}
-
 bool GuiManager::OnGuiMouseClickEvent(GuiControl* control)
 {
-
-	p2ListItem<GuiPanel*>* panel = panels.start;
-
-	while (panel != nullptr)
-	{
-		if (control->parent == panel->data && panel->data->Active)
-		{
-			panel->data->OnGuiMouseClickEvent(control);
-		}
-		panel = panel->next;
-	}
 
 	return true;
 }
