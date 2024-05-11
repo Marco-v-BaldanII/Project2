@@ -281,9 +281,9 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	case GuiControlType::BUTTON:
 		guiControl = new GuiControlButton(id, bounds, text, viewMode, color, textColor);
 		break;
-	case GuiControlType::SLIDER:
-		guiControl = new GuiSlider(id, bounds, sliderBounds);
-		break;
+	/*case GuiControlType::SLIDER:
+		guiControl = new GuiSlider(id, bounds, text);
+		break;*/
 	}
 
 	//Set the observer
@@ -293,6 +293,31 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	guiControlsList.Add(guiControl);
 
 	return guiControl;
+}
+
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds, VIEW viewMode, SDL_Color color, SDL_Color textColor) {
+
+	GuiControl* guiControl = nullptr;
+
+	//Call the constructor according to the GuiControlType
+	switch (type)
+	{
+	case GuiControlType::BUTTON:
+		guiControl = new GuiControlButton(id, bounds, text, viewMode, color, textColor);
+		break;
+		/*case GuiControlType::SLIDER:
+			guiControl = new GuiSlider(id, bounds, text);
+			break;*/
+	}
+
+	//Set the observer
+	guiControl->entityObserver = observer;
+
+	// Created GuiControls are add it to the list of controls
+	guiControlsList.Add(guiControl);
+
+	return guiControl;
+
 }
 
 bool GuiManager::CleanUp()
@@ -318,6 +343,46 @@ bool GuiManager::CleanUp()
 	return true;
 
 	return false;
+}
+
+
+//CUANDO ESTEMOS EN EN OVERWORLD O EN EL BATTLE SCREEN
+//void GuiManager::OnPause(bool paused)
+//{
+//	if (app->gamePaused)
+//	{
+//		Pause_Panel->Enable();
+//		app->entities->Pause = true;
+//		app->physics->Pause = true;
+//	}
+//	else
+//	{
+//		pn_pause->Disable();
+//		app->entities->Pause = false;
+//		app->physics->Pause = false;
+//	}
+//}
+
+void GuiManager::OpenPanel(PanelID panel_id)
+{
+	p2ListItem<GuiPanel*>* panel = panels.start;
+
+	while (panel != nullptr)
+	{
+
+		if (panel->data->Active == true)
+		{
+			panel->data->Disable();
+			lastPanel = panel->data->id;
+		}
+
+		if (panel->data->id == panel_id)
+		{
+			panel->data->Enable();
+			currentPanel = panel->data->id;
+		}
+		panel = panel->next;
+	}
 }
 
 bool GuiManager::OnGuiMouseClickEvent(GuiControl* control)
