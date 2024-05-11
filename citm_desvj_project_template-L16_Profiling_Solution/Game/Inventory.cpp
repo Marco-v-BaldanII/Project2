@@ -27,6 +27,8 @@ bool Inventory::Start()
 	I_Equip->state = GuiControlState::DISABLED;
 	I_Close->state = GuiControlState::DISABLED;
 
+	changeitemfx = app->audio->LoadFx("Assets/Audio/Fx/EquipItemFX.ogg");
+
 	isVisible = false;
 
 	return true;
@@ -75,6 +77,7 @@ bool Inventory::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 			{
 				selectedItem--;
+				app->audio->PlayFx(changeitemfx);
 
 				if (selectedItem < 0)
 				{
@@ -84,6 +87,7 @@ bool Inventory::Update(float dt)
 			else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 			{
 				selectedItem++;
+				app->audio->PlayFx(changeitemfx);
 
 				if (selectedItem >= InventoryItems.Count())
 				{
@@ -96,6 +100,7 @@ bool Inventory::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 			{
 				selectedPlayer++;
+				app->audio->PlayFx(changeitemfx);
 
 				if (selectedPlayer >= players.Count())
 				{
@@ -105,6 +110,7 @@ bool Inventory::Update(float dt)
 			else if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 			{
 				selectedPlayer--;
+				app->audio->PlayFx(changeitemfx);
 
 				if (selectedPlayer < 0)
 				{

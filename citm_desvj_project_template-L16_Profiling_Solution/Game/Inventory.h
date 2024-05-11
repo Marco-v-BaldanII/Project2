@@ -64,6 +64,8 @@ public:
 
 	SDL_Rect itemRect;
 	SDL_Rect playerRect;
+
+	uint changeitemfx = 0;
 private:
 	
 	

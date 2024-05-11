@@ -107,6 +107,7 @@ bool Player::Start() {
 		break;
 	}
 
+	pickItemFx = app->audio->LoadFx("Assets/Audio/Fx/PickUPItemFX.ogg");
 
 	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
 	missText = app->tex->Load("Assets/Textures/UI/MissSign.png");
@@ -306,7 +307,7 @@ bool Player::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 
 
-				
+				app->audio->PlayFx(pickItemFx);
 
 				app->map->myTiles[mapPos.x][mapPos.y]->myItem->overworld = false;
 
