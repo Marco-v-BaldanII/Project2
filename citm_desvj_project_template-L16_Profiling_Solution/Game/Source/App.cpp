@@ -19,7 +19,6 @@
 #include "Log.h"
 #include "Intro.h"
 #include "StartMenu.h"
-#include "SettingsPanel.h"
 
 #include <iostream>
 #include <sstream>
@@ -30,7 +29,6 @@
 #include "BattleScene.h"
 #include "BackStage.h"
 #include "../ItemManager.h"
-#include "SettingsPanel.h"
 #include "FadeToBlack.h"
 #include "LevelManagement.h"
 #include "../Inventory.h"

@@ -139,7 +139,7 @@ bool Enemy::PreUpdate() {
 
 			int cnt = 0;
 			while (app->turnManager->players.At(cnt) != NULL) {
-				if (app->map->pathfinding->DistanceBetweenTiles(app->turnManager->players.At(cnt)->data->tilePos, tilePos) <= 20)
+				if (app->map->pathfinding->DistanceBetweenTiles(app->turnManager->players.At(cnt)->data->tilePos, tilePos) <= 15)
 				{
 					playerNear = true;
 				}

@@ -122,7 +122,6 @@ public:
 	 // Called each loop iteration
 	bool PreUpdate();
 	bool Update(float dt);
-	bool UpdateAll(float dt, bool logic); 
 	bool PostUpdate();
 	// Called before quitting
 	bool CleanUp();
@@ -131,10 +130,6 @@ public:
 	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{255,255,255,255});
 
 	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{ 255,255,255,255 });
-
-	void OnPause(bool paused);
-
-	void OpenPanel(PanelID panel_id);
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
@@ -169,19 +164,10 @@ public:
 
 	List<GuiControl*> guiControlsList;
 	SDL_Texture* texture;
-	p2List<GuiPanel*> panels;
 
 	float accumulatedTime = 0.0f;
 	float updateMsCycle = 0.0f;
 	bool doLogic = false;
-
-	GuiPanel *Main_Menu_Panel = nullptr;
-	GuiPanel *Settings_Panel = nullptr;
-	GuiPanel *Pause_Panel = nullptr;
-
-	p2List<PanelID> panelsID;
-	PanelID lastPanel;
-	int currentPanel;
 
 	SpotLight* spotLight = nullptr;
 
