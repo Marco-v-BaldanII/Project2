@@ -317,7 +317,7 @@ bool Enemy::PostUpdate() {
 	{
 	case IDLE:
 		//Nothing to do
-		bool misses[2] = { false,false };
+		misses[0] = false; misses[1] = false;
 		
 		break;
 	case MOVE:
