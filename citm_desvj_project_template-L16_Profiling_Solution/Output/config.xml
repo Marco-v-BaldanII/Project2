@@ -19,6 +19,7 @@
   </window>
   <map>
 		<lvl1  path="Assets/Maps/Mapanieve3.tmx" />
+		<lvl2  path="Assets/Maps/castillopek.tmx" />
 		<minimap path ="Assets/Textures/miniMap.png"/>
 		
 	</map>
