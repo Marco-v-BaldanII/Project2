@@ -12,6 +12,8 @@
 #include"../BattleScene.h"
 #include "DialogueManager.h"
 #include "../GuiManager.h"
+#include "../LevelManagement.h"
+#include "../BackStage.h"
 
 using namespace std;
 
@@ -242,46 +244,56 @@ void TurnManager::CheckBattleEnding() {
 
 	bool playerLoss = true;
 	bool enemyLoss = true;
+	if (players.Count() != 0) {
 
-	ListItem<Player*>* p = players.start;
-	while (p != NULL) {
-		
-		if (p->data->hp > 0) {
-			playerLoss = false;
+		ListItem<Player*>* p = players.start;
+		while (p != NULL) {
+
+			if (p->data->hp > 0) {
+				playerLoss = false;
+			}
+
+			p = p->next;
+		}
+		ListItem<Enemy*>* e = enemies.start;
+		while (e != NULL) {
+
+			if (e->data->hp > 0) {
+				enemyLoss = false;
+			}
+
+			e = e->next;
 		}
 
-		p = p->next;
-	}
-	ListItem<Enemy*>* e = enemies.start;
-	while (e != NULL) {
+		/*if (enemies.Count() == 0) {
+			enemyLoss = true;
+		}*/
 
-		if (e->data->hp > 0) {
-			enemyLoss = false;
+		if (playerLoss || enemyLoss || MainQuest)/*Split into restart & next battle outcomes*/ {
+			// Restart the fight
+			app->battleScene->CleanUp();
+
+			app->dialogueManager->NextAct();
+			app->dialogueManager->Disable();
+			app->dialogueManager->CleanUp();
+
+
+
+			app->dialogueManager->Enable();
+			app->dialogueManager->myState = NPCS;
+
+			app->battleScene->Start();
+			Start();
+
+			app->entityManager->Enable();
+			app->dialogueManager->Enable();
+
+			app->levelManager->LoadScene(GameScene::BACKSTAGE2);
+
+
+			playerLoss = false; enemyLoss = false;
+			MainQuest = false;
+			// Instanciate retry buttons
 		}
-
-		e = e->next;
 	}
-
-	/*if (enemies.Count() == 0) { 
-		enemyLoss = true; 
-	}*/
-
-	if (playerLoss || enemyLoss || MainQuest)/*Split into restart & next battle outcomes*/ {
-		// Restart the fight
-		app->battleScene->CleanUp();
-
-		app->dialogueManager->NextAct();
-		app->dialogueManager->Disable();
-		app->dialogueManager->CleanUp();
-
-		
-	
-		app->dialogueManager->Enable();
-		app->dialogueManager->myState = CUTSCENE;
-
-		app->battleScene->Start();
-		Start();
-		// Instanciate retry buttons
-	}
-
 }

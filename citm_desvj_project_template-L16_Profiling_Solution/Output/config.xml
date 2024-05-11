@@ -586,6 +586,15 @@
 		<ID value ="1">
 
 			<background path ="Assets/Textures/FirstBackstage-export.png"/>
+			<npc name = "PlayWritter" x ="500" y="100" wait="500" Bx ="0" By ="0" Bw="114" Bh ="223">
+				<texture path="Assets\Textures\BackstageNPCs\Soldado_medium.png"/>
+				<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="470"          />
+				<dialogue text = "Let the show begin"  ID="469"          />
+
+				<!-- second branch-->
+				<dialogue text = "Take your time"  ID="500"          />
+
+			</npc>
 
 
 		</ID>

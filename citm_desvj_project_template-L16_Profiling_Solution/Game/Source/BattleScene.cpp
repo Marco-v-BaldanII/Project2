@@ -217,6 +217,19 @@ bool BattleScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 		godMode = !godMode;
 
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+
+		for (ListItem<Player*>* p = app->turnManager->players.start; p != NULL; p = p->next) {
+
+			if (p->data->name == "Duke of York") {
+				p->data->hp = 0;
+			}
+
+		}
+
+
+	}
+
 	return true;
 }
 

@@ -8,6 +8,7 @@
 #include "App.h"
 #include "Audio.h"
 #include "BackStage.h"
+#include "../TurnManager.h"
 
 using namespace std;
 
@@ -140,6 +141,7 @@ bool LevelManagement::Update(float dt)
 			if (app->fade->Fade(currentScene, (Module*)app->battleScene, 60))
 			{
 				currentScene = (Module*)app->battleScene;
+				app->turnManager->Enable();
 				LOG("BattleScene");
 			}
 		}
@@ -151,7 +153,7 @@ bool LevelManagement::Update(float dt)
 			{
 				currentScene = (Module*)app->backStage;
 				LOG("Backstage");
-				app->backStage->basckStageNumber = 1;
+				app->backStage->backStageID = 0;
 			}
 		}
 		break;
@@ -162,7 +164,7 @@ bool LevelManagement::Update(float dt)
 			{
 				currentScene = (Module*)app->backStage;
 				LOG("Backstage2");
-				app->backStage->basckStageNumber = 2;
+				app->backStage->backStageID = 1;
 			}
 		}
 		break;
