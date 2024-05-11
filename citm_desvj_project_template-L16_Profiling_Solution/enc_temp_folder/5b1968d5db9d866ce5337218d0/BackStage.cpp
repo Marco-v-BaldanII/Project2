@@ -44,7 +44,8 @@ bool BackStage::Start()
 		app->backstageplayer->Enable();
 
 		
-		
+		if (basckStageNumber == 1)
+		{
 			for (pugi::xml_node ny = config.child("ID"); ny != NULL; ny = ny.next_sibling("ID")) {
 
 				if (ny.attribute("value").as_int() == backStageID) {
