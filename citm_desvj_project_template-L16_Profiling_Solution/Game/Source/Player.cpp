@@ -419,7 +419,8 @@ bool Player::PostUpdate()
 		case IDLE:
 			//render idle 
 			missed = false;
-			bool misses[2] = { false,false };
+			misses[0] = false;
+			misses[1] = false;
 			
 			break;
 		case MOVE:

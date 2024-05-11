@@ -102,6 +102,7 @@ public:
 
 	SDL_Texture* missText;
 
+	bool misses[2];
 };
 
 #endif // __PLAYER_H__
