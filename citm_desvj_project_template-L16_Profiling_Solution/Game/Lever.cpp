@@ -46,8 +46,8 @@ bool Lever::PostUpdate() {
 
 	if (isPressed == false)
 	app->render->DrawTexture(texture, mapPos.x, mapPos.y);
-	
-
+	else
+		app->render->DrawTexture(texture2, mapPos.x, mapPos.y);
 
 	return true;
 }
@@ -61,6 +61,7 @@ void Lever::InitModifiers(int x, int y, int num, const char* textPath) {
 	mapPos = app->map->MapToWorld(mapPos.x, mapPos.y);
 
 	texture = app->tex->Load(textPath);
+	texture2 = app->tex->Load("Assets/Textures/Items/Palanca2.png");
 
 	iPoint pos;
 	pos.x = mapPos.x;

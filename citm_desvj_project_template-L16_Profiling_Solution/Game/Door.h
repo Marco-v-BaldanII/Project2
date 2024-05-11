@@ -45,6 +45,7 @@ public:
 private:
 
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* texture2 = nullptr;
 	const char* texturePath;
 	uint texW, texH;
 

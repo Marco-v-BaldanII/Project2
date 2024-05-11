@@ -480,6 +480,16 @@ bool PathFinding::IsTileEmpty(const iPoint& pos) const
 		}
 
 	}
+	for (int i = 0; i < app->itemManager->levers.Count(); i++)
+	{
+
+
+		if (pos == app->itemManager->levers.At(i)->data->tilePos )
+		{
+			return false;
+		}
+
+	}
 	return true;
 }
 
