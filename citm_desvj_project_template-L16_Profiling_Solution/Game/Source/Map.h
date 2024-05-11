@@ -276,7 +276,7 @@ private:
   
     bool mapLoaded;
     MapLayer* navigationLayer;
-    int blockedGid = 49; //!!!! make sure that you assign blockedGid according to your map
+    int blockedGid = 14; //!!!! make sure that you assign blockedGid according to your map
 
     pugi::xml_node myNode;
 
