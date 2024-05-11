@@ -222,6 +222,54 @@ bool Render::DrawRectangle(const SDL_Rect& rect, int r, int g, int b, Uint8 a, b
 	return ret;
 }
 
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, int actualWidth, int opacity, float speed, int R, int G, int B, double angle, int pivotX, int pivotY, SDL_BlendMode blendMode) const
+{
+	bool ret = true;
+	uint scale = app->win->GetScale();
+
+	SDL_Rect rect;
+	rect.x = (int)(camera.x * speed) + x * scale;
+	rect.y = (int)(camera.y * speed) + y * scale;
+
+	SDL_SetTextureColorMod(texture, R, G, B);
+	SDL_SetTextureAlphaMod(texture, opacity);
+	SDL_SetTextureBlendMode(texture, blendMode);
+
+	int textureWidth, textureHeight;
+	if (section != nullptr) {
+		textureWidth = section->w;
+		textureHeight = section->h;
+	}
+	else {
+		SDL_QueryTexture(texture, nullptr, nullptr, &textureWidth, &textureHeight);
+	}
+
+	// Calculate the scale factor for the width
+	float scaleWidth = (float)actualWidth / textureWidth;
+
+	// Set the rectangle's dimensions
+	rect.w = (int)(textureWidth * scaleWidth * scale);
+	rect.h = textureHeight * scale;
+
+	// Set the pivot point
+	SDL_Point* p = nullptr;
+	SDL_Point pivot;
+	if (pivotX != INT_MAX && pivotY != INT_MAX) {
+		pivot.x = pivotX;
+		pivot.y = pivotY;
+		p = &pivot;
+	}
+
+	// Render the texture
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
 bool Render::DrawRectMask(const SDL_Rect& rect, Circle mask, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool useCamera) const {
 
 	bool ret = true;

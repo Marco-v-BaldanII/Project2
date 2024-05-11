@@ -168,3 +168,16 @@ bool ItemManager::CleanUp() {
 
 }
 
+void ItemManager::DestroyItem(Item* item) {
+
+	ListItem<Item*>* it;
+
+	for (it = items.start; it != NULL; it = it->next)
+	{
+		if (it->data == item) 
+		{ 
+			
+			items.Del(it); 
+		}
+	}
+}

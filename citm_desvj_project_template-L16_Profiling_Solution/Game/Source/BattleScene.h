@@ -168,6 +168,8 @@ public:
 	Player* talker1;
 	Player* talker2;
 
+	bool inBattle = false;
+
 };
 #endif // __BATTLESCENE_H__
 

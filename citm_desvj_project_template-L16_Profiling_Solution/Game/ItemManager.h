@@ -43,6 +43,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void DestroyItem(Item* item);
+
 	// Additional methods
 
 	Item* AddItem();

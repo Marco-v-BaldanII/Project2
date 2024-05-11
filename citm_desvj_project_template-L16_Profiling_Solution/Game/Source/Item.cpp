@@ -14,7 +14,37 @@ Item::Item()
 	//name.Create("item");
 }
 
-Item::~Item() {}
+Item::Item(Item* it) {
+
+	isPicked = true;
+
+	this->myState = it->myState;
+	this->mapPos =  it->mapPos;
+	this->name =    it->name;
+	this->myUnit =  it->myUnit;
+	this->texture = it->texture;
+
+	this->texturePath = it->texturePath;
+
+	hpMod =   it->hpMod;
+	atkMod =  it->atkMod;
+	LckMod =  it->LckMod;
+	PrecMod = it->PrecMod;
+	EvsMod =  it->EvsMod;
+	spdMod =  it->spdMod;
+	movMod =  it->movMod;
+
+	texW = it->texW;
+	texH = it->texH;
+
+}
+
+Item::~Item() {
+
+	delete name;
+	app->tex->UnLoad(texture);
+
+}
 
 bool Item::Awake() {
 
@@ -43,7 +73,7 @@ bool Item::Update(float dt)
 bool Item::PostUpdate() {
 
 
-	if (myUnit == nullptr)/*If i am in the overworld*/ {
+	if (overworld)/*If i am in the overworld*/ {
 		app->render->DrawTexture(texture, mapPos.x, mapPos.y);
 
 	}

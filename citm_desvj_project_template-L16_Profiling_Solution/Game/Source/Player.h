@@ -13,6 +13,7 @@
 struct SDL_Texture;
 class Dialogue;
 class Conversation;
+class Easing;
 
 class Player : public Entity
 {
@@ -46,6 +47,8 @@ public:
 	void FigureStickMovement(float dt);
 
 	iPoint LevelUp();
+
+	void HandleMiss();
 
 	void DrawCombatScene();
 
@@ -97,6 +100,7 @@ public:
 
 	List<Conversation*> conversations;
 
+	SDL_Texture* missText;
 
 };
 

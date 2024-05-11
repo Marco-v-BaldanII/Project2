@@ -35,11 +35,19 @@ public:
 
 	bool DealDMG();
 
+	void HandleMiss();
+
 	void OnCollision(Collider* physA, Collider* physB) override;
 
 	void FigureStickMovement(float dt);
 
 public:
+
+
+	Easing* easing = nullptr;
+	bool bPause = false;
+
+	iPoint missBox = iPoint(300, -300);
 
 	bool isPicked = false;
 
@@ -73,6 +81,8 @@ public:
 	bool opponentReachTarget = false;
 
 	bool giveExp = false;
+
+	SDL_Texture* missText = nullptr;
 
 };
 

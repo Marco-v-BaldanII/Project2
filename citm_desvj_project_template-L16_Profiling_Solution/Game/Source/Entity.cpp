@@ -193,3 +193,19 @@ void Entity::InitializeStats(pugi::xml_node config, bool nerfed) {
 
 	int u = 3;
 }
+
+float Entity::TypeMultiplier(UnitType rivalType) {
+
+	if (unitType == MAGE) {
+		if (rivalType == KNIGHT) { return 1.5f; }
+	}
+	else if (unitType == ARCHER) {
+		if (rivalType == MAGE) { return 1.5f; }
+	}
+	else if (unitType == KNIGHT) {
+		if (rivalType == ARCHER) { return 1.5f; }
+	}
+
+		return 1.0f;
+	
+}
