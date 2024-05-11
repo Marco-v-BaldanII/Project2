@@ -164,6 +164,7 @@ void DialogueManager::WriteTheScript() {
 
 
 	if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
+
 	if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
 
 	scriptWritten = true;
@@ -176,6 +177,10 @@ bool DialogueManager::Start() {
 	/* the contents of this have been moved to WriteTheScript */
 	if (scriptWritten) {
 		WriteTheScript();
+		choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
+
+		choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
+
 	}
 
 	return ret;
@@ -266,10 +271,10 @@ bool DialogueManager::Update(float dt)
 		if (currentNPC_Dialogues != nullptr) {
 			for (int j = 0; j < 3; ++j) {
 				LOG("dslfmlsfm");
-				if (app->backStage->backStageID == 0 && currentNPC_Dialogues->ID == 469) {
+				if (currentNPC_Dialogues != nullptr && app->backStage->backStageID == 0 && currentNPC_Dialogues->ID == 469) {
 					LOG("dojorjg");
 					myState = CUTSCENE;
-					app->backStage->FinishBackStage();
+					
 					currentNPC_Dialogues = nullptr;
 
 					app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
@@ -817,9 +822,11 @@ void DialogueManager::Next_Dialogue() {
 		else {
 			// the cutscene for act 1 has finished
 			myState = NPCS;
-			app->turnManager->Enable();
-			app->battleScene->Enable();
-			app->backStage->Disable();
+			
+			/*app->battleScene->Enable();
+			app->backStage->Disable();*/
+			app->levelManager->LoadScene(GameScene::COMBAT);
+			app->backstageplayer->talking = false;
 
 		}
 

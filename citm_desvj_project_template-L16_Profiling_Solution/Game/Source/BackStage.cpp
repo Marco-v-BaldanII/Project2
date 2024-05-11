@@ -118,12 +118,7 @@ bool BackStage::Start()
 		}
 
 		talkPrompt = app->tex->Load(mynode.child("talkBtn").attribute("path").as_string());
-	}
 
-	testPanel = new GuiPanel(true);
-	testPanel->position = iPoint(0, 0);
-	testPanel->bounds = SDL_Rect{ 82,120,200,200 };
-	testPanel->texture = randomText;
 
 	return true;
 }
