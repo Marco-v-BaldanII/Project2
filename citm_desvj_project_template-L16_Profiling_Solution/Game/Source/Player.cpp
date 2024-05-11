@@ -108,7 +108,7 @@ bool Player::Start() {
 	}
 
 
-	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
+	battleBg = app->tex->Load("Assets/Textures/Battle scene editted.png");
 	missText = app->tex->Load("Assets/Textures/UI/MissSign.png");
 
 	std::string s = config.attribute("name").as_string();

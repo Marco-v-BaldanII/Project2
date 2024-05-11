@@ -97,7 +97,7 @@ bool Enemy::Start() {
 
 	std::string s = config.attribute("name").as_string();
 	easing = new Easing(1.2f);
-	battleBg = app->tex->Load("Assets/Textures/BattleStageOG.png");
+	battleBg = app->tex->Load("Assets/Textures/Battle scene editted.png");
 	missText = app->tex->Load("Assets/Textures/UI/MissSign.png");
 
 	/*Frame(iPoint pos, float t, Appearance appr, SDL_Rect size, SDL_Texture* texture, int attack, int& hp, int precision, int luck, int speed, int movement , string name) {*/
