@@ -44,9 +44,9 @@
 
 		<map value ="0">
 
-		     <item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="2" y="24" textPath ="Assets/Textures/Items/Warcry trumpet.png"/>
+		     <item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="32" y="37" textPath ="Assets/Textures/Items/Warcry trumpet.png"/>
 		     
-		     <item name="Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png"/>
+		     <item name="Might Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png"/>
 		     
 		     <item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"/>
 		</map>
@@ -58,20 +58,20 @@
 
 		<item name="Ironclad Armor" type="C" speed ="0.8" hp ="1.2" x="30" y="6" textPath ="Assets/Textures/Items/armor.png"/>
 
-		<item name="Might Medallion" type="C" atack ="1.85" precision="0.6" x="30" y="28" textPath ="Assets/Textures/Items/medalion.png"/>		
+		<item name="Veil of Vanishing" type="C" atack ="1.85" precision="0.6" x="30" y="26" textPath ="Assets/Textures/Items/veil.png"/>		
 
 
 		     <door num ="1" x ="22" y="22" textPath="Assets/Textures/Items/puerta1.png"/>
 		     
 		     <lever num ="1" x ="49" y="27" textPath="Assets/Textures/Items/Palanca1.png"/>
 		     
-		     <door num ="1" x ="48" y="17" textPath="Assets/Textures/Items/puerta2.png"/>
+		     <door num ="2" x ="48" y="17" textPath="Assets/Textures/Items/puerta2.png"/>
 		     
-		     <lever num ="1" x ="32" y="23" textPath="Assets/Textures/Items/Palanca2.png"/>	
+		     <lever num ="2" x ="32" y="23" textPath="Assets/Textures/Items/palanca21.png"/>	
 		     
-		     <door num ="1" x ="29" y="11" textPath="Assets/Textures/Items/puerta3.png"/>
+		     <door num ="3" x ="29" y="11" textPath="Assets/Textures/Items/puerta3.png"/>
 		     
-		     <lever num ="1" x ="51" y="9" textPath="Assets/Textures/Items/Palanca3.1.png"/>
+		     <lever num ="3" x ="51" y="9" textPath="Assets/Textures/Items/palanca31.png"/>
 
 		</map>
 
@@ -325,7 +325,7 @@
 
 
 
-				<player  name="Prince Edward"  x="3" y="23" unit_type="1"  attack="5" hp="1" precision="75" luck="25" speed="20" movement="8">
+				<player  name="Prince Edward"  x="3" y="23" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
 
 
 					<dialogue text ="How could you . . . break our promise Richard ?"/>

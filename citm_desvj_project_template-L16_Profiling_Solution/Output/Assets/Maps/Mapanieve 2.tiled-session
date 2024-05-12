@@ -23,11 +23,11 @@
             "scaleInEditor": 1
         },
         "Mapanieve3.tmx": {
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 671.5,
-                "y": 581.5
+                "x": 1142,
+                "y": 1303
             }
         },
         "Mapanieve3.tmx#MapMetadata": {
@@ -40,11 +40,11 @@
             "scaleInDock": 1
         },
         "castillo.tmx": {
-            "scale": 0.5,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 738,
-                "y": 735
+                "x": 672.7272727272727,
+                "y": 737.8787878787879
             }
         },
         "castillo.tmx#HouseTileset-OG": {
