@@ -265,6 +265,9 @@ bool BattleScene::Update(float dt)
 			if (p->data->name == "Duke of York") {
 				p->data->hp = 0;
 			}
+			else if (p->data->name == "Richard III") {
+				p->data->hp = 0;
+			}
 
 		}
 
@@ -783,6 +786,25 @@ void BattleScene::LoadAnimations() {
 			}
 		}
 	}
+	for (pugi::xml_node node = mynode.child("Richard3").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				Richard3Right.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				Richard3Right.speed = 0.1f;
+			}
+			else if (s == "up") {
+				Richard3Up.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				Richard3Up.speed = 0.1f;
+			}
+			else if (s == "down") {
+				Richard3Down.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				Richard3Down.speed = 0.1f;
+			}
+		}
+	}
 	
 }
 
@@ -832,6 +854,15 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->upAnim = lancasterUp;
 		entity->rightAnim = lancasterRight;
 		entity->downAnim = lancasterDown;
+		entity->hitFx = mageFx;
+
+
+	}
+	else if (entity->name == "Richard III") {
+
+		entity->upAnim = Richard3Up;
+		entity->rightAnim = Richard3Right;
+		entity->downAnim = Richard3Down;
 		entity->hitFx = mageFx;
 
 

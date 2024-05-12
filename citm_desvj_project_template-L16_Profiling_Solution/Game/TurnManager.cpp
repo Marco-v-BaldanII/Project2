@@ -286,30 +286,47 @@ void TurnManager::CheckBattleEnding() {
 
 		if (enemyLoss || MainQuest)/*Split into restart & next battle outcomes*/ {
 			// Restart the fight
-			app->battleScene->CleanUp();
-			app->entityManager->Disable();
+			if (app->map->level == 0) {
+				app->battleScene->CleanUp();
+				app->entityManager->Disable();
 
-			app->dialogueManager->NextAct();
-			app->dialogueManager->Disable();
-			app->dialogueManager->CleanUp();
-
-
-
-			app->dialogueManager->Enable();
-			app->dialogueManager->myState = NPCS;
-			app->entityManager->Enable();
-
-			app->battleScene->Start();
-			Start();
-
-			app->entityManager->Enable();
-			app->dialogueManager->Enable();
-
-			app->levelManager->LoadScene(GameScene::BACKSTAGE2);
+				app->dialogueManager->NextAct();
+				app->dialogueManager->Disable();
+				app->dialogueManager->CleanUp();
 
 
-			playerLoss = false; enemyLoss = false;
-			MainQuest = false;
+
+				app->dialogueManager->Enable();
+				app->dialogueManager->myState = NPCS;
+				app->entityManager->Enable();
+
+				app->battleScene->Start();
+				Start();
+
+				app->entityManager->Enable();
+				app->dialogueManager->Enable();
+
+				app->levelManager->LoadScene(GameScene::BACKSTAGE2);
+
+
+				playerLoss = false; enemyLoss = false;
+				MainQuest = false;
+			}
+			else {
+				app->battleScene->CleanUp();
+				app->entityManager->Disable();
+
+				app->entityManager->Enable();
+			
+
+				app->levelManager->LoadScene(GameScene::WIN);
+
+
+				playerLoss = false; enemyLoss = false;
+				MainQuest = false;
+
+
+			}
 			// Instanciate retry buttons
 		}
 	}
