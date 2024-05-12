@@ -683,9 +683,9 @@
 
 	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets/Textures/Actors/Diego.png"/>
 	<actor name="Tessa Thompson" dialogue="Buon giorno2" path ="Assets/Textures/Actors/tessa.png"/>
-	<actor name="Alicia Sol" dialogue="Buon giorno3" path ="Assets/Textures/Actors/AliciaSol.png"/>
-	<actor name="Mohan Boot" dialogue="Buon giorno3" path ="Assets/Textures/Actors/MohanBoot.png"/>
-	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets/Textures/Actors/EmmaDragonfly.png"/>
+	<actor name="Alicia Sol" dialogue="Buon giorno3" path ="Assets/Textures/Actors/awela(1).png"/>
+	<actor name="Mohan Boot" dialogue="Buon giorno3" path ="Assets/Textures/Actors/rasheed (1).png"/>
+	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets/Textures/Actors/ginny (1).png"/>
 
 	<role text="Henry VI"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png" />
 	<role text="Prince Edward"  path = "Assets/Textures/LancasterOutfits/Prince EdwardOutfit.png"/>
