@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "castillo.tmx",
+    "activeFile": "Mapanieve3.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
@@ -23,11 +23,11 @@
             "scaleInEditor": 1
         },
         "Mapanieve3.tmx": {
-            "scale": 0.5,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 932,
-                "y": 735
+                "x": 671.5,
+                "y": 581.5
             }
         },
         "Mapanieve3.tmx#MapMetadata": {
@@ -40,11 +40,11 @@
             "scaleInDock": 1
         },
         "castillo.tmx": {
-            "scale": 0.33,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 736.3636363636363,
-                "y": 660.6060606060607
+                "x": 738,
+                "y": 735
             }
         },
         "castillo.tmx#HouseTileset-OG": {
@@ -97,8 +97,8 @@
     "project": "Mapanieve 2.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "Mapanieve3.tmx",
         "castillo.tmx",
+        "Mapanieve3.tmx",
         "MapaNievefuturo(nova).tmx",
         "mapanieve2.tmx",
         "mapanieve 2.tmx"
