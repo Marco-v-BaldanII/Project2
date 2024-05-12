@@ -91,8 +91,29 @@ bool BattleScene::Start()
 
 			}
 		}
-			
-		for (pugi::xml_node questNode = mynode.child("battleMaps").child("map").child("mainQuest"); questNode != NULL; questNode = questNode.next_sibling("mainQuest")) {
+
+		// The following entities are loaded depending on the current map
+
+		pugi::xml_node mapNode;
+		// Find the current map node
+		if (app->map->level == 0) {
+			for (mapNode = mynode.child("battleMaps").child("map"); mapNode != NULL; mapNode = mapNode.next_sibling("map")) {
+				string s = mapNode.attribute("name").as_string();
+				if (s == "Northampton") {
+					break;
+				}
+			}
+		}
+		else if (app->map->level == 1) {
+			for (mapNode = mynode.child("battleMaps").child("map"); mapNode != NULL; mapNode = mapNode.next_sibling("map")) {
+				string s = mapNode.attribute("name").as_string();
+				if (s == "Castle") {
+					break;
+				}
+			}
+		}
+
+		for (pugi::xml_node questNode = mapNode.child("mainQuest"); questNode != NULL; questNode = questNode.next_sibling("mainQuest")) {
 
 			Quest* quest = nullptr;
 			int type = questNode.attribute("type").as_int();
@@ -112,67 +133,70 @@ bool BattleScene::Start()
 		}
 
 
-			// Read party members form config and instanciate them
+		// Read party members form config and instanciate them
 		int nPlayers = 0;
-			for (pugi::xml_node Pnode = mynode.child("battleMaps").child("map").child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
+		for (pugi::xml_node Pnode = mapNode.child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
 
-				Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-				p->config = Pnode;
+			Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+			p->config = Pnode;
 
-				string name = p->config.attribute("name").as_string();
-				// Here assign the correct texture
+			string name = p->config.attribute("name").as_string();
+			// Here assign the correct texture
 
-				p->Awake();
-				party.Add(p);
-				p->myTexture = spriteSheet;
-				p->myBattleTexture = portraitTextures[name];
-				p->UiTex = lancasterUI;
+			p->Awake();
+			party.Add(p);
+			p->myTexture = spriteSheet;
+			p->myBattleTexture = portraitTextures[name];
+			p->UiTex = lancasterUI;
 
-				// make each unit have their own unique control ID
-				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 300);
-				p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+			// make each unit have their own unique control ID
+			p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+			p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
 
-				p->Start();
-				PassAnimations(p);
-				
-			}
+			p->Start();
+			PassAnimations(p);
 
-			// Read enemies from config and instantiate them
-			for (pugi::xml_node Enode = mynode.child("battleMaps").child("map").child("enemy"); Enode != NULL; Enode = Enode.next_sibling("enemy")) {
+		}
 
-				Enemy* e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-				e->config = Enode;
-				string name = e->config.attribute("name").as_string();
+		// Read enemies from config and instantiate them
+		for (pugi::xml_node Enode = mapNode.child("enemy"); Enode != NULL; Enode = Enode.next_sibling("enemy")) {
 
-				e->Awake();
-				goons.Add(e);
-				e->texture = spriteSheet;
-				e->myBattleTexture = portraitTextures[name];
-				e->Uitex = yorkUI;
-				e->Start();
-				e->battleBg = battleBackground;
-				PassAnimations(e);
-			}
+			Enemy* e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+			e->config = Enode;
+			string name = e->config.attribute("name").as_string();
 
-
+			e->Awake();
+			goons.Add(e);
+			e->texture = spriteSheet;
+			e->myBattleTexture = portraitTextures[name];
+			e->Uitex = yorkUI;
+			e->Start();
+			e->battleBg = battleBackground;
+			PassAnimations(e);
+		}
 
 
-			// pass the players to be monitoured by the turnManager
-			app->turnManager->InitializeChessPieces(&party, &goons);
 
-			//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
-			//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
-			//img = app->tex->Load("Assets/Textures/portrait1.png");
-			music = app->audio->PlayMusic("assets/audio/music/Battle-screen-music.wav", 0.5f);
-			//app->dialogueManager->Enable();
 
-			rect = { 0,0,64,90 };
-			started = true;
+		// pass the players to be monitoured by the turnManager
+		app->turnManager->InitializeChessPieces(&party, &goons);
 
-			expTexture = app->tex->Load("Assets/Textures/UI/expBar-export.png");
-			lvlUpTexture = app->tex->Load("Assets/Textures/UI/LevelUpText.png");
-		
+		//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
+		//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
+		//img = app->tex->Load("Assets/Textures/portrait1.png");
+		music = app->audio->PlayMusic("assets/audio/music/Battle-screen-music.wav", 0.5f);
+		//app->dialogueManager->Enable();
+
+		rect = { 0,0,64,90 };
+		started = true;
+
+		expTexture = app->tex->Load("Assets/Textures/UI/expBar-export.png");
+		lvlUpTexture = app->tex->Load("Assets/Textures/UI/LevelUpText.png");
+
 	}
+
+	
+	
 	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
 	return true;
 }
@@ -219,7 +243,7 @@ bool BattleScene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
 
-		for (ListItem<Player*>* p = app->turnManager->players.start; p != NULL; p = p->next) {
+		for (ListItem<Enemy*>* p = app->turnManager->enemies.start; p != NULL; p = p->next) {
 
 			if (p->data->name == "Duke of York") {
 				p->data->hp = 0;
@@ -551,15 +575,15 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				mageRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				mageRight.speed = 0.2f;
+				mageRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				mageUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				mageUp.speed = 0.2f;
+				mageUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				mageDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				mageDown.speed = 0.2f;
+				mageDown.speed = 0.1f;
 			}
 		}
 	}
@@ -571,15 +595,15 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				archerRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				archerRight.speed = 0.2f;
+				archerRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				archerUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				archerUp.speed = 0.2f;
+				archerUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				archerDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				archerDown.speed = 0.2f;
+				archerDown.speed = 0.1f;
 			}
 		}
 	}
@@ -591,15 +615,15 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				knightRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				knightRight.speed = 0.2f;
+				knightRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				knightUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				knightUp.speed = 0.2f;
+				knightUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				knightDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				knightDown.speed = 0.2f;
+				knightDown.speed = 0.1f;
 			}
 		}
 	}
@@ -611,15 +635,15 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				henryTudorRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				henryTudorRight.speed = 0.2f;
+				henryTudorRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				henryTudorUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				henryTudorUp.speed = 0.2f;
+				henryTudorUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				henryTudorDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				henryTudorDown.speed = 0.2f;
+				henryTudorDown.speed = 0.1f;
 			}
 		}
 	}
@@ -631,15 +655,15 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				dukeYorkRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				dukeYorkRight.speed = 0.2f;
+				dukeYorkRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				dukeYorkUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				dukeYorkUp.speed = 0.2f;
+				dukeYorkUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				dukeYorkDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				dukeYorkDown.speed = 0.2f;
+				dukeYorkDown.speed = 0.1f;
 			}
 		}
 	}
@@ -651,15 +675,15 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				princeEdRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				princeEdRight.speed = 0.2f;
+				princeEdRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				princeEdUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				princeEdUp.speed = 0.2f;
+				princeEdUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				princeEdDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				princeEdDown.speed = 0.2f;
+				princeEdDown.speed = 0.1f;
 			}
 		}
 	}
@@ -671,15 +695,15 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				warwickRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				warwickRight.speed = 0.2f;
+				warwickRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				warwickUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				warwickUp.speed = 0.2f;
+				warwickUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				warwickDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				warwickDown.speed = 0.2f;
+				warwickDown.speed = 0.1f;
 			}
 		}
 	}
@@ -691,15 +715,15 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				edwardRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				edwardRight.speed = 0.2f;
+				edwardRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				edwardUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				edwardUp.speed = 0.2f;
+				edwardUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				edwardDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				edwardDown.speed = 0.2f;
+				edwardDown.speed = 0.1f;
 			}
 		}
 	}
@@ -711,20 +735,38 @@ void BattleScene::LoadAnimations() {
 
 			if (s == "wrigth") {
 				margaretRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				margaretRight.speed = 0.2f;
+				margaretRight.speed = 0.1f;
 			}
 			else if (s == "up") {
 				margaretUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				margaretUp.speed = 0.2f;
+				margaretUp.speed = 0.1f;
 			}
 			else if (s == "down") {
 				margaretDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
-				margaretDown.speed = 0.2f;
+				margaretDown.speed = 0.1f;
 			}
 		}
 	}
+	for (pugi::xml_node node = mynode.child("Lancastrian").child("animation"); node != NULL; node = node.next_sibling("animation")) {
 
-	LancasterAnim.PushBack(SDL_Rect{ 0,288,32,32 });
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				lancasterRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				lancasterRight.speed = 0.1f;
+			}
+			else if (s == "up") {
+				lancasterUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				lancasterUp.speed = 0.1f;
+			}
+			else if (s == "down") {
+				lancasterDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				lancasterDown.speed = 0.1f;
+			}
+		}
+	}
+	
 }
 
 void BattleScene::PassAnimations(Entity* entity) {
@@ -764,8 +806,16 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->rightAnim = margaretRight;
 		entity->downAnim = margaretDown;
 	}
+	else if (entity->name == "Henry VI" || entity->name == "Jasper Tudor") {
+
+		entity->upAnim = lancasterUp;
+		entity->rightAnim = lancasterRight;
+		entity->downAnim = lancasterDown;
+
+
+	}
 	else {
-		entity->downAnim = LancasterAnim;
+
 
 		switch (entity->unitType) {
 		case(KNIGHT):

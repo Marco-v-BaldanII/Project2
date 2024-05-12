@@ -148,7 +148,9 @@ public:
 	Animation margaretDown;
 	Animation margaretUp;
 
-	Animation LancasterAnim;
+	Animation lancasterRight;
+	Animation lancasterDown;
+	Animation lancasterUp;
 
 
 	SDL_Rect yorkHPBar = SDL_Rect{ 255 * 2,167 * 2,75 * 2,2 * 2 };

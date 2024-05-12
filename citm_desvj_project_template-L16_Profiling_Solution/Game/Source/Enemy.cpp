@@ -467,7 +467,7 @@ bool Enemy::PostUpdate() {
 	
 	if (hp <= 0) {
 
-		if (!giveExp) {
+		if (!giveExp && target != nullptr) {
 			target->lerpedExp = false;
 			target->oponent = this;
 			target->opponentAttacking = false;

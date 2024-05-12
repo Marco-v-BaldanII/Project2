@@ -269,31 +269,61 @@ bool DialogueManager::Update(float dt)
 		int i = 0;
 
 		if (currentNPC_Dialogues != nullptr) {
-			for (int j = 0; j < 3; ++j) {
-				LOG("dslfmlsfm");
-				if (currentNPC_Dialogues != nullptr && app->backStage->backStageID == 0 && currentNPC_Dialogues->ID == 469) {
-					LOG("dojorjg");
-					myState = CUTSCENE;
-					
-					currentNPC_Dialogues = nullptr;
 
-					app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 
-					for (ListItem<Npc*>* it = app->backStage->npcsList.start; it != nullptr; it = it->next) {
+			if (currentNPC_Dialogues != nullptr && app->backStage->backStageID == 0 && currentNPC_Dialogues->ID == 469) {
 
-						Entity* e = it->data;
-						app->entityManager->DestroyEntity(e);
-					}
+				myState = CUTSCENE;
 
-					app->backStage->npcsList.Clear();
+				currentNPC_Dialogues = nullptr;
 
+				app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
+
+				for (ListItem<Npc*>* it = app->backStage->npcsList.start; it != nullptr; it = it->next) {
+
+					Entity* e = it->data;
+					app->entityManager->DestroyEntity(e);
 				}
 
+				app->backStage->npcsList.Clear();
+
 			}
+			else if (currentNPC_Dialogues != nullptr && app->backStage->backStageID == 1 && currentNPC_Dialogues->ID == 469) {
+
+				myState = CUTSCENE;
+
+				currentNPC_Dialogues = nullptr;
+
+				app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
+
+				for (ListItem<Npc*>* it = app->backStage->npcsList.start; it != nullptr; it = it->next) {
+
+					Entity* e = it->data;
+					app->entityManager->DestroyEntity(e);
+				}
+
+				app->backStage->npcsList.Clear();
+				app->entityManager->Disable();
+				app->entityManager->Enable();
+
+				app->map->Disable();
+				app->map->CleanUp();
+				app->map->mapData.layers.Clear();
+				app->map->level = 1;
+				app->map->Enable();
+				app->battleScene->Start();
+
+				app->levelManager->LoadScene(GameScene::COMBAT);
+				
+
+			}
+
+
 		}
 	}
 	return ret;
 }
+
 
 bool DialogueManager::PostUpdate() {
 

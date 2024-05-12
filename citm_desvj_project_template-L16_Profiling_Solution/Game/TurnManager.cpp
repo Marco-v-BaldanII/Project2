@@ -42,7 +42,7 @@ bool TurnManager::Awake(pugi::xml_node config)
 bool TurnManager::Start() {
 
 	bool ret = true;
-	availablePlayers = 3;
+
 	enemyTurnFinished = false;
 	noEnemyMoving = true;
 
@@ -74,14 +74,14 @@ bool TurnManager::Update(float dt)
 	// my selected player has moved
 	if (currentPlayer != nullptr && currentPlayer->state == IDLE) {
 
-		
+
 		currentPlayer->movedThisTurn = true;
 		availablePlayers--;
 		currentPlayer = nullptr; // CHANGE THIS TO A FIGHTING STATE
 		/*Turn off spotLight*/
 		app->guiManager->TurnOffSpotLight();
 	}
-	
+
 	if (availablePlayers <= 0) {
 		// enemy turn
 		LOG("All players have moved, initiating enemy turn");
@@ -103,7 +103,7 @@ bool TurnManager::Update(float dt)
 				}
 			}
 
-		
+
 		if (enemyTurnFinished) {
 
 			for (int i = 0; i < app->entityManager->enemies.Count(); ++i)
@@ -114,7 +114,7 @@ bool TurnManager::Update(float dt)
 			}
 
 			PlayerTurn();
-			
+
 		}
 	}
 	CheckBattleEnding();
@@ -126,7 +126,7 @@ bool TurnManager::Update(float dt)
 bool TurnManager::PostUpdate()
 {
 	bool ret = true;
-	
+
 
 	return ret;
 }
@@ -152,10 +152,19 @@ void TurnManager::DeSelectPlayer() {
 }
 
 void TurnManager::InitializeChessPieces(List<Player*>* players, List<Enemy*>* enemies) {
-	
+
 	this->players = *players;
 	this->enemies = *enemies;
 	maxEnemies = enemies->Count();
+	availablePlayers = 0;
+
+	for (ListItem<Player*>* pIt = players->start; pIt != NULL; pIt = pIt->next) {
+
+		if (pIt->data->hp > 0) {
+			availablePlayers++;
+		}
+	}
+
 }
 
 bool TurnManager::EnemyTurn() {
@@ -272,6 +281,7 @@ void TurnManager::CheckBattleEnding() {
 		if (playerLoss || enemyLoss || MainQuest)/*Split into restart & next battle outcomes*/ {
 			// Restart the fight
 			app->battleScene->CleanUp();
+			app->entityManager->Disable();
 
 			app->dialogueManager->NextAct();
 			app->dialogueManager->Disable();
@@ -281,6 +291,7 @@ void TurnManager::CheckBattleEnding() {
 
 			app->dialogueManager->Enable();
 			app->dialogueManager->myState = NPCS;
+			app->entityManager->Enable();
 
 			app->battleScene->Start();
 			Start();

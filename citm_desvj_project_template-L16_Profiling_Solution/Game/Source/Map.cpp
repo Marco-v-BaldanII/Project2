@@ -186,31 +186,37 @@ TileSet* Map::GetTilesetFromTileId(int gid) const
 // Called before quitting
 bool Map::CleanUp()
 {
-    //LOG("Unloading map");
+    LOG("Unloading map");
 
-    ////Clean up pathfing class
-    //pathfinding->CleanUp();
+    // Destroy entities
 
-    //// L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
-    //ListItem<TileSet*>* tileset;
-    //tileset = mapData.tilesets.start;
-    //
-    //while (tileset != NULL) {
-    //    RELEASE(tileset->data);
-    //    tileset = tileset->next;
-    //}
+    //app->entityManager->Disable();
 
-    //mapData.tilesets.Clear();
 
-    //// L06: DONE 2: clean up all layer data
-    //ListItem<MapLayer*>* layerItem;
-    //layerItem = mapData.layers.start;
+    ListItem<TileSet*>* item;
+    item = mapData.tilesets.start;
 
-    //while (layerItem != NULL) {
-    //    RELEASE(layerItem->data->tiles);
-    //    RELEASE(layerItem->data);
-    //    layerItem = layerItem->next;
-    //}
+    //chickens = false;
+
+    while (item != NULL)
+    {
+        RELEASE(item->data);
+        item = item->next;
+    }
+    mapData.tilesets.Clear();
+
+    // Remove all layers
+    ListItem<MapLayer*>* layerItem;
+    layerItem = mapData.layers.start;
+
+    while (layerItem != NULL)
+    {
+        
+        RELEASE(layerItem->data);
+        layerItem = layerItem->next;
+    }
+
+
 
     return true;
 }

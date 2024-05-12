@@ -188,7 +188,7 @@ bool BackStage::PostUpdate()
 
 bool BackStage::CleanUp()
 {
-	app->map->CleanUp();
+
 	//app->entityManager->CleanUp();
 	app->backstageplayer->Disable();
 	app->render->camera.x = 0;
