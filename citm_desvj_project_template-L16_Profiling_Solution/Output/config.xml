@@ -413,35 +413,35 @@
 			</map>
 
 			<map name ="Castle">
-				<player  name="Henry VI"  x="52" y="15" unit_type="1"  attack="9" hp="12" precision="75" luck="20" speed="20" movement="8">
+				<player  name="Henry VI"  x="7" y="38" unit_type="1"  attack="9" hp="12" precision="75" luck="20" speed="20" movement="8">
 
 					<dialogue text ="-"/>
 					<lvlUp text = "-"/>
 
 				</player>
 
-				<player  name="Margaret" x="53" y="15" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" >
+				<player  name="Margaret" x="8" y="38" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" >
 
 					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
 					<lvlUp text = "Margaret of Anjuo feasts upon you feeble Yorks"/>
 
 				</player>
 
-				<player  name="Prince Edward"  x="51" y="15" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
+				<player  name="Prince Edward"  x="9" y="38" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
 
 					<dialogue text ="How could you . . . break our promise Richard ?"/>
 					<lvlUp text = "I will continueo to apply myself for my kingdom"/>
 
 				</player>
 
-				<player  name="Henry Tudor" x="6" y ="44" unit_type="0" attack="50" hp="12" precision="95" luck="25" speed="30" movement="10">
+				<player  name="Henry Tudor" x="10" y ="38" unit_type="0" attack="50" hp="12" precision="95" luck="25" speed="30" movement="10">
 
 					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
 					<lvlUp text = "This strength will help me protect what I love"/>
 
 				</player>
 
-				<player  name="Jasper Tudor" x="7" y ="44" unit_type="0" attack="50" hp="12" precision="95" luck="25" speed="30" movement="10">
+				<player  name="Jasper Tudor" x="6" y ="38" unit_type="0" attack="50" hp="12" precision="95" luck="25" speed="30" movement="10">
 
 					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
 					<lvlUp text = "This strength will help me protect what I love"/>
@@ -450,48 +450,48 @@
 
 
 
-				<enemy name= "Duke of York" x="47" y="22" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
+				<enemy name= "Duke of York" x="27" y="26" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
 
 					<dialogue text =" Dammn it! Lancasters , you'll live to regret this humiliation"/>
 
 				</enemy>
 
-				<enemy name= "Earl of Warwick" x="51" y="37" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" exp = "40">
+				<enemy name= "Earl of Warwick" x="49" y="13" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6" exp = "40">
 
 					<dialogue text ="Grrrr :("/>
 
 				</enemy>
 
-				<enemy name= "Edward of York" x="32" y="41" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp ="40">
+				<enemy name= "Edward of York" x="7" y="7" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp ="40">
 
 					<dialogue text ="I must not die here, father I'll support you from the back lines"/>
 
 				</enemy>
 
-				<enemy name= "Richard III" x="6" y="8" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
+				<enemy name= "Richard III" x="10" y="7" unit_type="0"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="10">
 
 					<dialogue text ="-"/>
 
 				</enemy>
 
-				<enemy name= "George of Clarence" x="6" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp ="40">
+				<enemy name= "George of Clarence" x="8" y="28" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp ="40">
 
 					<dialogue text ="May my final arrow find its mark, even in death"/>
 
 				</enemy>
 
-				<enemy name= "William Catesby" x="28" y="11" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp ="40">
+				<enemy name= "William Catesby" x="29" y="12" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp ="40">
 
 					<dialogue text ="-"/>
 
 				</enemy>
 
-				<enemy name= "Knight" x="5" y="37" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="100" />
-				<enemy name= "Archer" x="8" y="37" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
-				<enemy name= "Mage" x="26" y="24" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
-				<enemy name= "Mage" x="26" y="26" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
-				<enemy name= "Mage" x="21" y="13" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="20"/>
-				<enemy name= "Archer" x="22" y="13" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="20"/>
+				<enemy name= "Knight" x="8" y="34" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="100" />
+				<enemy name= "Archer" x="9" y="34" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
+				<enemy name= "Mage" x="18" y="26" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
+				<enemy name= "Mage" x="48" y="26" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="100"/>
+				<enemy name= "Mage" x="38" y="12" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="20"/>
+				<enemy name= "Archer" x="22" y="12" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="20"/>
 
 			</map>			
 			
