@@ -100,7 +100,7 @@ bool GuiControlButton::Update(float dt)
 			if(viewMode == VIEW::SCREEN) app->render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
 			else { app->render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, true); }
 			
-			app->render->DrawTexture(app->guiManager->normalButton,0, 0);
+			//app->render->DrawTexture(app->guiManager->normalButton,0, 0);
 			break;
 		case GuiControlState::FOCUSED:
 			if (viewMode == VIEW::SCREEN) {
