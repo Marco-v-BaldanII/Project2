@@ -124,17 +124,17 @@ bool CastingScene::PostUpdate() {
 	app->render->DrawTexture(background, 0,0, &screen);
 
 	// role
-	app->render->DrawText(roles[roleIndex]->name, 128 * 3, 48 * 3, 370 * 3, 20 * 3, true);
+	//app->render->DrawText(roles[roleIndex]->name, 200 * 3, 100 * 3, 370 * 3, 20 * 3, true);
 
 	// actor
 
 	app->render->DrawText(actors[actorIndex % actors.Count()]->name, 16 * 3, 192 * 3, 370 * 3, 20 * 3, true);
 
 	if (assignedRoles[roleIndex % roles.Count()] == false) {
-		app->render->DrawText(roles[roleIndex]->name, 128 * 3, 48 * 3, 370 * 3, 20 * 3, true);
+		app->render->DrawText(roles[roleIndex]->name, 200 * 3, 100 * 3, 570 * 3, 20 * 3, true);
 	}
 	else {
-		app->render->DrawText(roles[roleIndex]->name, 128 * 3, 48 * 3, 370 * 3, 20 * 3, true, SDL_Color {255,0,0,255});
+		app->render->DrawText(roles[roleIndex]->name, 200 * 3, 100 * 3, 570 * 3, 20 * 3, true, SDL_Color {255,0,0,255});
 	}
 	app->render->DrawTexture(actors[actorIndex]->texture, 32 , 224 , &portraitBox);
 
