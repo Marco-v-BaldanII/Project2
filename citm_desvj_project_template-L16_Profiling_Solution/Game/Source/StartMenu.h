@@ -110,7 +110,16 @@ public:
 	MenuState state = MenuState::START;
 
 private:
-	
+
+	SDL_Rect pos1;
+	SDL_Rect pos2;
+	SDL_Rect pos3;
+	SDL_Rect pos4;
+	SDL_Rect pos5;
+	SDL_Rect pos6;
+	SDL_Rect pos7;
+	SDL_Rect pos8;
+	SDL_Rect pos9;	
 
 };
 #endif // __STARTMENU_H__
