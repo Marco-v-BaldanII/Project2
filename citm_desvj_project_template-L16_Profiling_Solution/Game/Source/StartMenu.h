@@ -86,8 +86,8 @@ public:
 	GuiControlButton* back;
 	GuiControlButton* FullScreen;
 	GuiControlButton* VSync;
-	GuiControlButton* Music;
-	GuiControlButton* FX;
+	GuiSlider* Music;
+	GuiSlider* FX;
 	GuiControlButton* laguage;
 	GuiControlButton* textSpeed;
 

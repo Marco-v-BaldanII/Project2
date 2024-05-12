@@ -228,9 +228,9 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	case GuiControlType::BUTTON:
 		guiControl = new GuiControlButton(id, bounds, text, viewMode, color, textColor);
 		break;
-	/*case GuiControlType::SLIDER:
-		guiControl = new GuiSlider(id, bounds, text);
-		break;*/
+	case GuiControlType::SLIDER:
+		guiControl = new GuiSlider(id, bounds, sliderBounds);
+		break;
 	}
 
 	//Set the observer

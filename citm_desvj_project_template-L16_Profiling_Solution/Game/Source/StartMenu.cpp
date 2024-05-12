@@ -77,8 +77,8 @@ bool StartMenu::Start()
 		back = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, " Back ", pos1, this);
 		FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, " FullScreen ", pos2, this);
 		VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, " VSync ", pos3, this);
-		Music = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, " Music ", pos4, this);
-		FX = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, " FX ", pos5, this);
+		Music = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, " Music ", pos4, this, { 10,10,10,10 });
+		FX = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 9, " FX ", pos5, this, { 10,10,10,10 });
 		if (app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
 		{
 			laguageText = " Laguage : Shakesperean";
