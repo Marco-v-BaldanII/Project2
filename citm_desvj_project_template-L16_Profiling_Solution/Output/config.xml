@@ -132,21 +132,26 @@
     </Knight>
 		
 		<!--comment red crowned guy-->
-		<animation name="Richard3_wrigth">
-			<frame x="46" y="232" w="17" h="24" />
-			<frame x="46" y="264" w="17" h="24" />
-		</animation>
+		<Richard3>
+			
+		
+		  <animation name="wrigth">
+		  	<frame x="46" y="232" w="17" h="24" />
+		  	<frame x="46" y="264" w="17" h="24" />
+		  </animation>
+		  
+		  <animation name="up">
+		  	<frame x="46" y="163" w="19" h="29" />
+		  	<frame x="46" y="195" w="19" h="29" />
+		  </animation>
+		  
+		  <animation name="down">
+		  	<frame x="46" y="9" w="19" h="23" />
+		  	<frame x="46" y="39" w="19" h="25" />
+		  	<frame x="46" y="71" w="19" h="25" />
+		  </animation>
 
-		<animation name="Richard3_up">
-			<frame x="46" y="163" w="19" h="29" />
-			<frame x="46" y="195" w="19" h="29" />
-		</animation>
-
-		<animation name="Richard3_down">
-			<frame x="46" y="9" w="19" h="23" />
-			<frame x="46" y="39" w="19" h="25" />
-			<frame x="46" y="71" w="19" h="25" />
-		</animation>
+		</Richard3>
 
 	<DukeofYork>
 		<animation name="wrigth">
@@ -691,9 +696,9 @@
 	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets/Textures/Actors/ginny (1).png"/>
 
 	<role text="Henry VI"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png" />
-	<role text="Prince Edward"  path = "Assets/Textures/LancasterOutfits/Prince EdwardOutfit.png"/>
-	<role text="Margaret"  path = "Assets/Textures/LancasterOutfits/defaultOutfit.png"/>
-	<role text="Jasper Tudor"  path = "Assets/Textures/LancasterOutfits/Jasper TudorOutfit.png"/>
+	<role text="Prince Edward"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
+	<role text="Margaret"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
+	<role text="Jasper Tudor"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
 	<role text="Henry Tudor"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
 
 	

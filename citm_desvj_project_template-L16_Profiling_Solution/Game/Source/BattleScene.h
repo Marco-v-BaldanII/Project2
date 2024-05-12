@@ -152,6 +152,10 @@ public:
 	Animation margaretDown;
 	Animation margaretUp;
 
+	Animation Richard3Right;
+	Animation Richard3Down;
+	Animation Richard3Up;
+
 	Animation lancasterRight;
 	Animation lancasterDown;
 	Animation lancasterUp;

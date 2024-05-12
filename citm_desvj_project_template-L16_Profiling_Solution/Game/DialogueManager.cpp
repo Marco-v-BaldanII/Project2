@@ -857,6 +857,7 @@ void DialogueManager::Next_Dialogue() {
 		skipScene = false;
 		dialogueIndex = 0;
 		if (sceneIndex + 1 != Scenes.Count()) {
+			app->guiManager->OpenCloseCurtains();
 			sceneIndex++;
 			if (app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999)DialogueChannel = app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 		}
