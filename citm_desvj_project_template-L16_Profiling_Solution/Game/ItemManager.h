@@ -52,6 +52,8 @@ public:
 	Door* AddDoor();
 
 	Lever* AddLever();
+
+	pugi::xml_node myNode;
 	
 	pugi::xml_node config;
 	List<Item*> items;
@@ -59,7 +61,7 @@ public:
 	List<Lever*> levers;
 
 private:
-
+	bool Active = false;
 	
 
 };

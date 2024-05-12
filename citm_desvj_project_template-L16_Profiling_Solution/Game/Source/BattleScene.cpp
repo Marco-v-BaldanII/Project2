@@ -107,7 +107,7 @@ bool BattleScene::Start()
 
 		}
 
-
+		app->itemManager->Enable();
 
 		// The following entities are loaded depending on the current map
 

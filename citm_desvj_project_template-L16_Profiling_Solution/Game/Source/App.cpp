@@ -73,7 +73,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	victory = new Victory(false);
 	lose = new Lose(false);
 	mainMenu = new StartMenu(false);
-	itemManager = new ItemManager(true);
+	itemManager = new ItemManager(false);
 	battleScene = new BattleScene(false);
 
 	backStage = new BackStage(false);

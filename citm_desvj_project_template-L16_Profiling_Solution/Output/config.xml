@@ -42,16 +42,17 @@
 		<!-- Right now i'm putting the maps here but ideally they should be on the map -->
 		<!-- (1.05 = + 5%)  (0.9 = -10%) -->
 
-		<map value ="1">
+		<map value ="0">
 
-		<item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="32" y="37" textPath ="Assets/Textures/Items/Warcry trumpet.png"/>
-
-		<item name="Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png"/>
-
-		<item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"/>
+		     <item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="2" y="24" textPath ="Assets/Textures/Items/Warcry trumpet.png"/>
+		     
+		     <item name="Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png"/>
+		     
+		     <item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"/>
 		</map>
 
-		<map value ="2">
+		<map value ="1">
+
 		
 		<item name="Optic Amplifier" type="C" precision ="1.2" speed="0.8" x="49" y="11" textPath ="Assets/Textures/Items/amplifier.png"/>
 
@@ -59,17 +60,18 @@
 
 		<item name="Might Medallion" type="C" atack ="1.85" precision="0.6" x="30" y="28" textPath ="Assets/Textures/Items/medalion.png"/>		
 
-		<door num ="1" x ="22" y="22" textPath="Assets/Textures/Items/puerta1.png"/>
 
-		<lever num ="1" x ="49" y="27" textPath="Assets/Textures/Items/Palanca1.png"/>
-		
-		<door num ="1" x ="48" y="17" textPath="Assets/Textures/Items/puerta2.png"/>
-
-		<lever num ="1" x ="32" y="23" textPath="Assets/Textures/Items/Palanca2.png"/>	
-
-		<door num ="1" x ="29" y="11" textPath="Assets/Textures/Items/puerta3.png"/>
-
-		<lever num ="1" x ="51" y="9" textPath="Assets/Textures/Items/Palanca3.1.png"/>
+		     <door num ="1" x ="22" y="22" textPath="Assets/Textures/Items/puerta1.png"/>
+		     
+		     <lever num ="1" x ="49" y="27" textPath="Assets/Textures/Items/Palanca1.png"/>
+		     
+		     <door num ="1" x ="48" y="17" textPath="Assets/Textures/Items/puerta2.png"/>
+		     
+		     <lever num ="1" x ="32" y="23" textPath="Assets/Textures/Items/Palanca2.png"/>	
+		     
+		     <door num ="1" x ="29" y="11" textPath="Assets/Textures/Items/puerta3.png"/>
+		     
+		     <lever num ="1" x ="51" y="9" textPath="Assets/Textures/Items/Palanca3.1.png"/>
 
 		</map>
 

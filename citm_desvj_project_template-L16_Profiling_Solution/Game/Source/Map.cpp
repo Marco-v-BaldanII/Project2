@@ -14,6 +14,7 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 #include <algorithm>
+#include "../ItemManager.h"
 
 Map::Map(bool isActive) : Module(isActive), mapLoaded(false)
 {
@@ -46,6 +47,7 @@ bool Map::Start() {
     else if (level == 1)
     mapPath = myNode.child("lvl2").attribute("path").as_string();
 
+
     Load(mapPath);
 
     miniMapTex = app->tex->Load(myNode.child("minimap").attribute("path").as_string());
@@ -64,6 +66,7 @@ bool Map::Start() {
 
 bool Map::Update(float dt)
 {
+
     OPTICK_EVENT("Map::Update");
     bool ret = true;
 
@@ -191,7 +194,7 @@ bool Map::CleanUp()
     // Destroy entities
 
     //app->entityManager->Disable();
-
+    app->itemManager->Disable();
 
     ListItem<TileSet*>* item;
     item = mapData.tilesets.start;
@@ -225,6 +228,7 @@ bool Map::CleanUp()
 bool Map::Load(SString mapFileName)
 {
     bool ret = true;
+
 
     // L05: DONE 3: Implement LoadMap to load the map properties
     // retrieve the paremeters of the <map> node and save it into map data
