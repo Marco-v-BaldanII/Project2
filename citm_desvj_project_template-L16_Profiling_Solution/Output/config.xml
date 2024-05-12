@@ -430,11 +430,7 @@
 
 				</enemy>
 
-				<enemy name= "Archer" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="40">
-
-					<dialogue text ="May my final arrow find its mark, even in death"/>
-
-				</enemy>
+				<enemy name= "Archer" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="40"/>
 
 
 				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="20"/>

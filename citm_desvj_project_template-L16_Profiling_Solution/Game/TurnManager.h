@@ -53,7 +53,7 @@ public:
 	Turn currentTurn = PLAYER;
 
 	Player* currentPlayer = nullptr;
-	uint availablePlayers = 3;
+	int availablePlayers = 3;
 	bool noEnemyMoving = true;
 	bool isPlayerMoving = false;
 public:

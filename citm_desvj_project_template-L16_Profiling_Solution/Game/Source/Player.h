@@ -104,6 +104,8 @@ public:
 	SDL_Texture* missText;
 
 	bool misses[2];
+
+	bool hasWaited = false;
 };
 
 #endif // __PLAYER_H__

@@ -71,6 +71,8 @@ bool TurnManager::Update(float dt)
 {
 	bool ret = true;
 
+	availablePlayers = clamp(availablePlayers, 0,(int) players.Count());
+
 	// my selected player has moved
 	if (currentPlayer != nullptr && currentPlayer->state == IDLE) {
 
@@ -202,17 +204,21 @@ bool TurnManager::EnemyTurn() {
 }
 void TurnManager::PlayerTurn() {
 	LOG("Starting player turn");
-	currentTurn = PLAYER;
+
+	if (currentTurn != PLAYER) {
+		currentTurn = PLAYER;
 
 
-	availablePlayers = 0;
+		availablePlayers = 0;
 
-	for (ListItem<Player*>* pItem = players.start; pItem != nullptr; pItem = pItem->next) {
+		for (ListItem<Player*>* pItem = players.start; pItem != nullptr; pItem = pItem->next) {
 
-		if (pItem->data->hp > 0) {
-			availablePlayers++;
+			if (pItem->data->hp > 0) {
+				availablePlayers++;
+				pItem->data->hasWaited = false;
+			}
+
 		}
-
 	}
 
 	/*ListItem<Player*>* p = players.start;

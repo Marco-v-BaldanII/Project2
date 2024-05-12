@@ -162,7 +162,6 @@ bool Player::Start() {
 
 bool Player::PreUpdate() 
 {
-
 	atkButton->bounds.x = position.x - 30; atkButton->bounds.y = position.y - 40;
 	waitButton->bounds.x = position.x + 30; waitButton->bounds.y = position.y - 40;
 	talkButton->bounds.x = position.x ; talkButton->bounds.y = position.y - 70;
@@ -241,7 +240,7 @@ bool Player::PreUpdate()
 						oponent->target = this;
 						state = BATTLE;
 						atckedClicked = false;
-						app->turnManager->availablePlayers--;
+						
 					}
 				}
 			}
@@ -372,7 +371,10 @@ bool Player::Update(float dt)
 
 	if (hp > 0) {
 		if (movedThisTurn) {
-			
+			if (!hasWaited) {
+				app->turnManager->availablePlayers--;
+				hasWaited = true;
+			}
 			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 120);
 			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 60, 1, 255, 0, 0, 0, 0, SDL_BLENDMODE_ADD);
 		}
@@ -388,12 +390,22 @@ bool Player::Update(float dt)
 	
 
 	if (hp <= 0 ) {
-		if(!lastWords) app->dialogueManager->SpontaneousDialogue(deathQuote); /* Last word quote */
+		if (!lastWords) {
+			app->dialogueManager->SpontaneousDialogue(deathQuote);
+			 /* Last word quote */
+			
+		}
 		lastWords = true;
 		if (pendingToDelete == false) {
+			app->turnManager->availablePlayers--;
 			//app->battleScene->KillUnit(true, this); ESTO crashea y da muchisimos problemas
 			pendingToDelete = true;
-			app->entityManager->players.remove(this); 
+			app->entityManager->players.remove(this);
+			for (ListItem<Player*>* p = app->turnManager->players.start; p != NULL; p = p->next) {
+				if (p->data == this) {
+					app->turnManager->players.Del(p);
+				}
+			}
 			
 		}
 	}
@@ -899,7 +911,7 @@ void Player::FigureStickMovement(float dt) {
 
 		app->battleScene->inBattle = false;
 		HasAttackAction = false;
-		HasMoveAction = false;
+		HasMoveAction = true;
 		reachedTarget = false;
 		battleTimer = 0;
 	}
@@ -978,13 +990,13 @@ bool Player::OnGuiMouseClickEvent(GuiControl* control)  {
 		 iPoint y = tilePos;
 		 atckedClicked = true;
 		 numberofAttacks = 1;
+		 HasMoveAction = true;
 
 	}
 
 
-	if (control->id == waitBtnId && app->turnManager->currentPlayer == this && app->turnManager->isPlayerMoving == false) {
+	if (control->id == waitBtnId && app->turnManager->currentPlayer == this /*&& app->turnManager->isPlayerMoving == false*/) {
 		state = IDLE;
-		app->turnManager->availablePlayers--;
 		HasMoveAction = false;
 		atckedClicked = false;
 	}
