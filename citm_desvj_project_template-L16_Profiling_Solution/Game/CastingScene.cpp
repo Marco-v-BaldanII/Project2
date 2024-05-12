@@ -40,8 +40,8 @@ bool CastingScene::Start() {
 		for (pugi::xml_node ActorNode = config.child("actor"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("actor")) {
 
 			Actor* actor = new Actor(ActorNode.attribute("name").as_string(), ActorNode.attribute("dialogue").as_string());
-
-			actor->texture = app->tex->Load(ActorNode.attribute("path").as_string());
+			string t = ActorNode.attribute("path").as_string();
+			actor->texture = app->tex->Load(t.c_str());
 
 			actors.PushBack(actor);
 		}

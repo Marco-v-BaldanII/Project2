@@ -158,6 +158,7 @@ bool BackStage::Update(float dt)
 		centerPos.x += 64; centerPos.y += 64;
 		// Threshold distance from where to talk to the npcs
 		if (centerPos.DistanceTo(pEntity->centerPos) < 90) {
+			if(talkPrompt == NULL) talkPrompt = app->tex->Load("Assets/Textures/UI/Z_Key_Light.png");
 			near = true;
 			LOG("NEAR");
 			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN && app->dialogueManager->myState == NPCS) {

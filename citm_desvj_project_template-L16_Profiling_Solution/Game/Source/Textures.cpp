@@ -191,7 +191,7 @@ SDL_Texture* const Textures::Load(const char* path)
 
     // Store texture in map
     textureMap[path] = texture;
-    return texture;
+     return texture;
 }
 
 bool Textures::UnLoad(SDL_Texture* texture)

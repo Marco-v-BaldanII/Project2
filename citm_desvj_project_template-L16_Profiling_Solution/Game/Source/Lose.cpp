@@ -89,7 +89,7 @@ bool Lose::Update(float dt)
 bool Lose::PostUpdate()
 {
 
-	app->render->DrawTexture(img, 0, 0, &rect);
+	app->render->DrawTexture(img, 0 + (app->render->camera.x / -3), 0 + (app->render->camera.y / -3), &rect);
 
 	return true;
 }

@@ -90,7 +90,24 @@ bool BattleScene::Start()
 				portraitTextures.insert(std::make_pair(texD->name, texD->texture));
 
 			}
+
+			for (pugi::xml_node FxNode = mynode.child("soundeffect"); FxNode != NULL; FxNode = FxNode.next_sibling("soundeffect")) {
+
+				string t = FxNode.attribute("name").as_string();
+				if (t == "archerSound") { archerFx = app->audio->LoadFx(FxNode.attribute("path").as_string()); }
+				if (t == "knigthsound") {
+					knightFx = app->audio->LoadFx(FxNode.attribute("path").as_string());
+				}
+				if (t == "magesound") { mageFx = app->audio->LoadFx(FxNode.attribute("path").as_string()); }
+				if (t == "lancersound") {
+					LancerFx = app->audio->LoadFx(FxNode.attribute("path").as_string()); 
+				}
+
+			}
+
 		}
+
+
 
 		// The following entities are loaded depending on the current map
 
@@ -775,42 +792,47 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->upAnim = princeEdUp;
 		entity->downAnim = princeEdDown;
 		entity->rightAnim = princeEdRight;
-
+		entity->hitFx = archerFx;
 	}
 	else if (entity->name == "Duke of York") {
 		entity->upAnim = dukeYorkUp;
 		entity->downAnim = dukeYorkDown;
 		entity->rightAnim = dukeYorkRight;
+		entity->hitFx = LancerFx;
 	}
 	else if (entity->name == "Henry Tudor") {
 		entity->upAnim = henryTudorUp;
 		entity->downAnim = henryTudorDown;
 		entity->rightAnim = henryTudorRight;
+		entity->hitFx = LancerFx;
 	}
 	else if (entity->name == "Earl of Warwick") {
 
 		entity->upAnim = warwickUp;
 		entity->rightAnim = warwickRight;
 		entity->downAnim = warwickDown;
-
+		entity->hitFx = knightFx;
 	}
 	else if (entity->name == "Edward of York") {
 
 		entity->upAnim = edwardUp;
 		entity->rightAnim = edwardRight;
 		entity->downAnim = edwardDown;
+		entity->hitFx = LancerFx;
 
 	}
 	else if (entity->name == "Margaret") {
 		entity->upAnim = margaretUp;
 		entity->rightAnim = margaretRight;
 		entity->downAnim = margaretDown;
+		entity->hitFx = knightFx;
 	}
 	else if (entity->name == "Henry VI" || entity->name == "Jasper Tudor") {
 
 		entity->upAnim = lancasterUp;
 		entity->rightAnim = lancasterRight;
 		entity->downAnim = lancasterDown;
+		entity->hitFx = mageFx;
 
 
 	}
@@ -822,16 +844,19 @@ void BattleScene::PassAnimations(Entity* entity) {
 			entity->upAnim = knightUp;
 			entity->downAnim = knightDown;
 			entity->rightAnim = knightRight;
+			entity->hitFx = knightFx;
 			break;
 		case(ARCHER):
 			entity->upAnim = archerUp;
 			entity->downAnim = archerDown;
 			entity->rightAnim = archerRight;
+			entity->hitFx = archerFx;
 			break;
 		case(MAGE):
 			entity->upAnim = mageUp;
 			entity->downAnim = mageDown;
 			entity->rightAnim = archerRight;
+			entity->hitFx = mageFx;
 			break;
 		}
 	}

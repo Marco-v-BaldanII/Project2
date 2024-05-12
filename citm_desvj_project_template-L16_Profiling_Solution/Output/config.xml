@@ -63,6 +63,8 @@
 		<yorhHpBar path = "Assets/Textures/UI/YorkHpBar.png"/>
 		<lancasterHpBar path = "Assets/Textures/UI/LancasterHpBar.png"/>
 		<background path ="Assets/Textures/Battle scene editted.png"/>
+		
+		
 		<soundeffect name="archersound" path="Assets/Audio/Fx/ArcherFX.ogg"/>
 		<soundeffect name="knigthsound" path="Assets/Audio/Fx/KnigthAtackFX.ogg"/>
 		<soundeffect name="magesound" path="Assets/Audio/Fx/MageAtackFX.ogg"/>
@@ -294,7 +296,7 @@
 				<mainQuest type="0" objective="Main Objective: Defeat the Duke of York" target ="Duke of York"/>
 
 
-				<player  name="Prince Edward"  x="1" y="23" unit_type="1"  attack="5" hp="12" precision="75" luck="25" speed="20" movement="8">
+				<player  name="Prince Edward"  x="3" y="23" unit_type="1"  attack="5" hp="1" precision="75" luck="25" speed="20" movement="8">
 
 					<dialogue text ="How could you . . . break our promise Richard ?"/>
 
@@ -322,7 +324,7 @@
 					
 
 				</player>
-				<player  name="Henry Tudor" x="1" y ="24" unit_type="0" attack="10" hp="12" precision="80" luck="25" speed="30" movement="10">
+				<player  name="Henry Tudor" x="3" y ="24" unit_type="0" attack="10" hp="1" precision="80" luck="25" speed="30" movement="10">
 
 					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
 
@@ -350,7 +352,7 @@
 
 				</player>
 
-				<player  name="Margaret" x="1" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="25" movement="6">
+				<player  name="Margaret" x="2" y="25" unit_type="3"  attack="6" hp="1" precision="70" luck="20" speed="25" movement="6">
 
 					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
 
@@ -400,7 +402,7 @@
 
 				</enemy>
 
-				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="10" movement="8" exp="20"/>
+				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="1500" precision="75" luck="25" speed="10" movement="8" exp="20"/>
 				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
 				<enemy name= "Mage" x="24" y="32" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
 				<enemy name= "Mage" x="46" y="22" unit_type="4"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"  exp="20"/>
@@ -558,7 +560,7 @@
 			<talkBtn path ="Assets/Textures/UI/Z_Key_Light.png"/>
 
 		<npc name = "Guy4" x ="300" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
-		    <texture path="Assets\Textures\BackstageNPCs\Soldado1_medium.png"/>
+		    <texture path="Assets/Textures/BackstageNPCs/Soldado1_medium.png"/>
 			<dialogue text = "I am the battle master, it is my job to ensure that the fighting scenes are properly portrayed" ID="10"          />
 			<dialogue text = "Archers, Knights, Cavelliers... there are many different types of units in the battlefield, it is important that each of them play their part correctly" ID="8"          />
 			<dialogue text = "Would you like to now more about any of the units?" choiceA ="Yes" choiceB="No" ID="7"          />
@@ -572,7 +574,7 @@
 		</npc>
 
 			<npc name = "Guy5" x ="200" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
-				<texture path="Assets\Textures\BackstageNPCs\Soldado1_medium.png"/>
+				<texture path="Assets/Textures/BackstageNPCs/Soldado1_medium.png"/>
 				<dialogue text = "Please find the Warcry trumpet" ID="5" choiceA ="I accept" choiceB="I refuse" >
 
 					<sideQuest type="1" objective="Find the Warcry trumpet"  target="Warcry Trumpet"/>
@@ -592,7 +594,7 @@
 		<npc name = "Guy3" x ="160" y="200" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
 			
 			<!--comment 0,0 71, 150-->
-			<texture path="Assets\Textures\BackstageNPCs\Soldado2_medium.png"/>
+			<texture path="Assets/Textures/BackstageNPCs/Soldado2_medium.png"/>
 			
 			<dialogue text = "The play is about to start" ID="10"          />
 			<dialogue text = "I'm so very excited" ID="9"          />
@@ -616,7 +618,7 @@
 	
 
 		<npc name = "PlayWritter" x ="500" y="100" wait="500" Bx ="0" By ="0" Bw="114" Bh ="223">
-		<texture path="Assets\Textures\BackstageNPCs\Soldado_medium.png"/>
+		<texture path="Assets/Textures/BackstageNPCs/Soldado_medium.png"/>
 			<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="470"          />
 			<dialogue text = "Let the show begin"  ID="469"          />
 
@@ -631,7 +633,7 @@
 
 			<background path ="Assets/Textures/FirstBackstage-export.png"/>
 			<npc name = "PlayWritter" x ="500" y="100" wait="500" Bx ="0" By ="0" Bw="114" Bh ="223">
-				<texture path="Assets\Textures\BackstageNPCs\Soldado_medium.png"/>
+				<texture path="Assets/Textures/BackstageNPCs/Soldado_medium.png"/>
 				<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="470"          />
 				<dialogue text = "Let the show begin"  ID="469"          />
 
@@ -643,7 +645,7 @@
 			<npc name = "Maria Reina" x ="160" y="200" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
 
 				<!--comment 0,0 71, 150-->
-				<texture path="Assets\Textures\BackstageNPCs\Soldado2_medium.png"/>
+				<texture path="Assets/Textures/BackstageNPCs/Soldado2_medium.png"/>
 
 				<dialogue text = "The play is about to start" ID="10"          />
 				<dialogue text = "I'm so very excited" ID="9"          />
@@ -671,17 +673,17 @@
 
 	<castingScene>
 
-	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets\Textures\Actors\Diego.png"/>
-	<actor name="Tessa Thompson" dialogue="Buon giorno2" path ="Assets\Textures\Actors\tessa.png"/>
-	<actor name="Alicia Sol" dialogue="Buon giorno3" path ="Assets\Textures\Actors\AliciaSol.png"/>
-	<actor name="Mohan Boot" dialogue="Buon giorno3" path ="Assets\Textures\Actors\MohanBoot.png"/>
-	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets\Textures\Actors\EmmaDragonfly.png"/>
+	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets/Textures/Actors/Diego.png"/>
+	<actor name="Tessa Thompson" dialogue="Buon giorno2" path ="Assets/Textures/Actors/tessa.png"/>
+	<actor name="Alicia Sol" dialogue="Buon giorno3" path ="Assets/Textures/Actors/AliciaSol.png"/>
+	<actor name="Mohan Boot" dialogue="Buon giorno3" path ="Assets/Textures/Actors/MohanBoot.png"/>
+	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets/Textures/Actors/EmmaDragonfly.png"/>
 
-	<role text="Henry VI"  path = "Assets\Textures\LancasterOutfits\HenryTudorOutfit.png" />
-	<role text="Prince Edward"  path = "Assets\Textures\LancasterOutfits\Prince EdwardOutfit.png"/>
-	<role text="Margaret"  path = "Assets\Textures\LancasterOutfits\defaultOutfit.png"/>
-	<role text="Jasper Tudor"  path = "Assets\Textures\LancasterOutfits\Jasper TudorOutfit.png"/>
-	<role text="Henry Tudor"  path = "Assets\Textures\LancasterOutfits\HenryTudorOutfit.png"/>
+	<role text="Henry VI"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png" />
+	<role text="Prince Edward"  path = "Assets/Textures/LancasterOutfits/Prince EdwardOutfit.png"/>
+	<role text="Margaret"  path = "Assets/Textures/LancasterOutfits/defaultOutfit.png"/>
+	<role text="Jasper Tudor"  path = "Assets/Textures/LancasterOutfits/Jasper TudorOutfit.png"/>
+	<role text="Henry Tudor"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
 
 	
 	</castingScene>
