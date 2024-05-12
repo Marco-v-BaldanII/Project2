@@ -446,6 +446,7 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 420)
 	{
 		//app->levelManager->LoadScene(GameScene::BACKSTAGE2);
+		app->map->blockedGid = 187;
 		app->map->Disable();
 		app->map->CleanUp();
 		app->map->mapData.layers.Clear();

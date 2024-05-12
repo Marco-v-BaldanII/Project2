@@ -272,13 +272,15 @@ public:
 
     bool drawGrid = false;
 
+    int blockedGid = 14;
+
     int level = 0;
 private:
     // L05: DONE 1: Declare a variable data of the struct MapData
   
     bool mapLoaded;
     MapLayer* navigationLayer;
-    int blockedGid = 14; //!!!! make sure that you assign blockedGid according to your map
+    //!!!! make sure that you assign blockedGid according to your map
 
     pugi::xml_node myNode;
 
