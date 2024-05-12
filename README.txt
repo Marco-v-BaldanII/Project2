@@ -49,14 +49,26 @@ BACKSTAGE
 - Enter dialogue and skip through -> Z key
 - Skip acts -> Hold down SPACE key
 - Pause menu -> ESCAPE key
+- Change role -> Left and Right Arrow keys
+- Assign Role -> Enter Key
 
 COMBAT SCENE
 
 - Move camera -> ARROW keys
 - Show minimap -> M key
 - Movement -> Left click on a player to select + Left Mouse Button on the tile you want to move to
-- Attack -> Left click on a player to select + Right Mouse Button on the enemy you want to attack
+- Attack -> Attack Button + Click on adjacent Enemy
+- Activate Lever -> Right Click
+- Talk -> Talk Button + Click on Ally
+- Automatically Kill Boss -> R key
+- End Player's Turn -> Wait Button
+- Open Quests -> Q Key
 
+INVENTORY
+
+- Open Inventory -> I key
+- Navigate Inventory -> Left and Right Arrow keys
+- Switch Character -> Up and Down Arrow keys
 
 ## LICENSES ##
 
@@ -995,197 +1007,4 @@ LICENSE*: https://github.com/Marco-v-BaldanII/Project2/blob/main/LICENSE
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .
-
-
-
-
-
-
-
