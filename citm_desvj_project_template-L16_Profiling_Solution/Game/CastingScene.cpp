@@ -57,6 +57,10 @@ bool CastingScene::Start() {
 			assignedRoles.PushBack(false); /* shares the same index as roles (tells you if a role is assigned ior not) */
 		}
 
+		//Load FX
+		//selectButton = app->audio->LoadFx("Assets/Audio/Fx/selectButton.wav");
+		//enterButton = app->audio->LoadFx("Assets/Audio/Fx/enterButton.wav");
+
 		background = app->tex->Load("Assets/Textures/Battle scene editted.png");
 	}
 
@@ -74,7 +78,7 @@ bool CastingScene::PreUpdate() {
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
-
+		
 		roleIndex--;
 		if (roleIndex < 0) {
 			roleIndex = roles.Count() - 1;
