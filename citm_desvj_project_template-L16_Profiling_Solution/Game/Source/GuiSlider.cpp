@@ -9,7 +9,7 @@ GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Rect Thumb) : GuiControl(Gu
 	this->bounds = bounds;
 	this->text = text;
 	this->thumbBounds = Thumb;
-	this->thumbBounds.x = bounds.x + bounds.w - 20;
+	this->thumbBounds.x = bounds.x + bounds.w - 40;
 	this->thumbBounds.y = bounds.y - Thumb.h / 5 + 11;
 	texture = app->guiManager->UItexture;
 	canClick = true;
@@ -55,8 +55,8 @@ bool GuiSlider::Update(float dt)
 				if (mouseX < bounds.x || thumbBounds.x < bounds.x)
 					thumbBounds.x = bounds.x;
 
-				if (mouseX > (bounds.x + bounds.w) || thumbBounds.x + 10 > (bounds.x + bounds.w))
-					thumbBounds.x = (bounds.x + bounds.w) - 10;
+				if (mouseX > (bounds.x + bounds.w) || thumbBounds.x + 40 > (bounds.x + bounds.w))
+					thumbBounds.x = (bounds.x + bounds.w) - 40;
 
 				
 				value = UpdateValue(mouseX);
@@ -79,78 +79,49 @@ bool GuiSlider::Update(float dt)
 
 bool GuiSlider::Draw(Render* render)
 {
-	//this text render could go to the state machine if necesary
+	//this text render could go to the state machine if necessary
 	float screenScale = 1 / (float)app->win->GetScale();
 	render->DrawTexture(textTex, textPosition.x * screenScale, textPosition.y * screenScale, &textRect, 0, 0, 0, 0, screenScale);
+
+	SDL_Rect Normalbluergb = { 0, 0, 200, 155 };
+	SDL_Rect Focusedbluergb = { 0, 0, 255, 155 };
+	SDL_Rect Pressedbluergb = { 255, 0, 0, 155 };
+	SDL_Rect Disabledbluergb = { 0, 0, 200, 0 };
+
+	SDL_Rect NormalLightbluergb = { 0, 0, 100, 255 };
+	SDL_Rect FocusedLightbluergb = { 0, 0, 155, 255 };
+	SDL_Rect PressedLightbluergb = { 255, 0, 0, 255 };
+	SDL_Rect DisabledLightbluergb = { 0, 0, 100, 0 };
 
  	switch (state)
 	{
 
 	case GuiControlState::DISABLED:
 	{
-		
-			render->DrawRectangle(bounds, 125, 200, 0, 0);
-			render->DrawRectangle(thumbBounds, 125, 200, 0, 0);
-		
-
-		if (texture != NULL)
-		{
-			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
-			render->DrawTexture(texture, thumbBounds.x * screenScale, thumbBounds.y * screenScale, &thumbRect, 0, 0, 0, 0, screenScale);
-		}
-
+		render->DrawRectangle(bounds, Disabledbluergb.x, Disabledbluergb.y, Disabledbluergb.w, Disabledbluergb.h);
+		render->DrawRectangle(thumbBounds, DisabledLightbluergb.x, DisabledLightbluergb.y, DisabledLightbluergb.w, DisabledLightbluergb.h);
 	} break;
 
 	case GuiControlState::NORMAL:
 	{
-		
-			render->DrawRectangle(bounds, 125, 125, 0, 125, true, false);
-			render->DrawRectangle(thumbBounds, 0, 200, 0, 255,true, false);
-		
-		if (texture != NULL)
-		{
-			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
-			render->DrawTexture(texture, thumbBounds.x * screenScale, thumbBounds.y * screenScale, &thumbRect, 0, 0, 0, 0, screenScale);
-		}
+		render->DrawRectangle(bounds, Normalbluergb.x, Normalbluergb.y, Normalbluergb.w, Normalbluergb.h, true, false);
+		render->DrawRectangle(thumbBounds, NormalLightbluergb.x, NormalLightbluergb.y, NormalLightbluergb.w, NormalLightbluergb.h, true, false);
 	} break;
 	case GuiControlState::FOCUSED:
 	{
-		
-			render->DrawRectangle(bounds, 255, 255, 255, 160,true,false);
-			render->DrawRectangle(thumbBounds, 0, 255, 255, 255,true, false);
-		
-		if (texture != NULL)
-		{
-			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
-			render->DrawTexture(texture, thumbBounds.x * screenScale, thumbBounds.y * screenScale, &thumbRect, 0, 0, 0, 0, screenScale);
-		}
+		render->DrawRectangle(bounds, Focusedbluergb.x, Focusedbluergb.y, Focusedbluergb.w, Focusedbluergb.h, true, false);
+		render->DrawRectangle(thumbBounds, FocusedLightbluergb.x, FocusedLightbluergb.y, FocusedLightbluergb.w, FocusedLightbluergb.h, true, false);
 	} break;
 	case GuiControlState::PRESSED:
 	{
-
-		
-		render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-		render->DrawRectangle(thumbBounds, 0, 255, 255, 255, true, false);
-		
-		if (texture != NULL)
-		{
-			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
-			render->DrawTexture(texture, thumbBounds.x * screenScale, thumbBounds.y * screenScale, &thumbRect, 0, 0, 0, 0, screenScale);
-		}
-
+		render->DrawRectangle(bounds, Pressedbluergb.x, Pressedbluergb.y, Pressedbluergb.w, Pressedbluergb.h, true, false);
+		render->DrawRectangle(thumbBounds, PressedLightbluergb.x, PressedLightbluergb.y, PressedLightbluergb.w, PressedLightbluergb.h, true, false);
 	} break;
 
 	case GuiControlState::SELECTED:
-	{
-		
-			render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
-			render->DrawRectangle(thumbBounds, 0, 255, 255, 255, true , false);
-		
-		if (texture != NULL)
-		{
-			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
-			render->DrawTexture(texture, thumbBounds.x * screenScale, thumbBounds.y * screenScale, &thumbRect, 0, 0, 0, 0, screenScale);
-		}
+	{	
+		render->DrawRectangle(bounds, Focusedbluergb.x, Focusedbluergb.y, Focusedbluergb.w, Focusedbluergb.h, true, false);
+		render->DrawRectangle(thumbBounds, FocusedLightbluergb.x, FocusedLightbluergb.y, FocusedLightbluergb.w, FocusedLightbluergb.h, true, false);
 	}break;
 
 	default:
