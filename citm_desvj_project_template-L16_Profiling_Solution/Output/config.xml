@@ -48,9 +48,17 @@
 
 		<item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"/>
 
-		<door num ="1" x ="3" y="20" textPath="Assets/Textures/Items/puerta1.png"/>
+		<door num ="1" x ="22" y="22" textPath="Assets/Textures/Items/puerta1.png"/>
 
-		<lever num ="1" x ="3" y="25" textPath="Assets/Textures/Items/Palanca1.png"/>
+		<lever num ="1" x ="31" y="21" textPath="Assets/Textures/Items/Palanca1.png"/>
+		
+		<door num ="1" x ="48" y="17" textPath="Assets/Textures/Items/puerta2.png"/>
+
+		<lever num ="1" x ="49" y="19" textPath="Assets/Textures/Items/Palanca2.png"/>	
+
+		<door num ="1" x ="29" y="11" textPath="Assets/Textures/Items/puerta3.png"/>
+
+		<lever num ="1" x ="46" y="9" textPath="Assets/Textures/Items/Palanca3.1.png"/>		
 		
 	</itemmanager>
 

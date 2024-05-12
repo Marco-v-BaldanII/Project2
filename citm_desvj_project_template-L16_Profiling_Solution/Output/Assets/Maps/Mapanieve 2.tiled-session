@@ -40,11 +40,11 @@
             "scaleInDock": 1
         },
         "castillo.tmx": {
-            "scale": 0.75,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 789.3333333333333,
-                "y": 542.6666666666667
+                "x": 874,
+                "y": 736
             }
         },
         "castillo.tmx#HouseTileset-OG": {
@@ -54,7 +54,7 @@
             "scaleInDock": 1
         },
         "castillo.tmx#TILESET4": {
-            "scaleInDock": 1
+            "scaleInDock": 0.75
         },
         "castillo.tmx#castillotiles": {
             "scaleInDock": 1
