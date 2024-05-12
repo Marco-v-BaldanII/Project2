@@ -513,14 +513,13 @@ void PathFinding::ActivateLever(const iPoint& pos) const
 		if (pos == app->itemManager->levers.At(i)->data->tilePos && app->itemManager->levers.At(i)->data->isPressed == false)
 		{
 			app->itemManager->levers.At(i)->data->isPressed = true;
-			for (int i = 0; i < app->itemManager->doors.Count(); i++)
-			{
+			
 				if (app->itemManager->doors.At(i)->data->num == app->itemManager->levers.At(i)->data->num) 
 				{
 					app->itemManager->doors.At(i)->data->isOpen = true;
 				}
 
-			}
+			
 		}
 	}
 }
