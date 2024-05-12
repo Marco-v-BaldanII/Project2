@@ -66,11 +66,6 @@ bool GuiControlButton::Update(float dt)
 			bounds3.w *= 3;
 			bounds3.h *= 3;
 
-		/*	SDL_Rect bounds3 = bounds;
-			 bounds3.w *= 3;
-			bounds3.h *= 3;
-			bounds3.x += */
-			
 
 			app->render->DrawRectangle(bounds, textColor.r, textColor.g, textColor.b, textColor.a, false, true);
 

@@ -39,14 +39,11 @@ bool GuiSlider::Update(float dt)
 		int mouseX, mouseY;
 		float screenScale = 1 / (float)app->win->GetScale();
 
-		app->input->GetMousePosition(mouseX, mouseY);
+		SDL_GetMouseState(&mouseX, &mouseY);
+		
 
-		if (((mouseX > bounds.x) && (mouseX < (bounds.x + bounds.w * screenScale)) &&
-			(mouseY > bounds.y) && (mouseY < (bounds.y + bounds.h * screenScale))) ||
-
-			(mouseX > thumbBounds.x) && (mouseX < (thumbBounds.x + thumbBounds.w)) &&
-			(mouseY > thumbBounds.y) && (mouseY < (thumbBounds.y + thumbBounds.h)))
-		{
+		if ((mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h)|| 
+			(mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h)) {
 			state = GuiControlState::FOCUSED;
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
@@ -75,6 +72,8 @@ bool GuiSlider::Update(float dt)
 		}else state = GuiControlState::NORMAL;
 	}
 
+	Draw(app->render);
+
 	return false;
 }
 
@@ -84,16 +83,15 @@ bool GuiSlider::Draw(Render* render)
 	float screenScale = 1 / (float)app->win->GetScale();
 	render->DrawTexture(textTex, textPosition.x * screenScale, textPosition.y * screenScale, &textRect, 0, 0, 0, 0, screenScale);
 
-	switch (state)
+ 	switch (state)
 	{
 
 	case GuiControlState::DISABLED:
 	{
-		if (app->guiManager->Debug)
-		{
+		
 			render->DrawRectangle(bounds, 125, 200, 0, 0);
 			render->DrawRectangle(thumbBounds, 125, 200, 0, 0);
-		}
+		
 
 		if (texture != NULL)
 		{
@@ -105,11 +103,10 @@ bool GuiSlider::Draw(Render* render)
 
 	case GuiControlState::NORMAL:
 	{
-		if (app->guiManager->Debug)
-		{
-			render->DrawRectangle(bounds, 125, 125, 0, 125);
-			render->DrawRectangle(thumbBounds, 0, 200, 0, 255);
-		}
+		
+			render->DrawRectangle(bounds, 125, 125, 0, 125, true, false);
+			render->DrawRectangle(thumbBounds, 0, 200, 0, 255,true, false);
+		
 		if (texture != NULL)
 		{
 			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
@@ -118,11 +115,10 @@ bool GuiSlider::Draw(Render* render)
 	} break;
 	case GuiControlState::FOCUSED:
 	{
-		if (app->guiManager->Debug)
-		{
-			render->DrawRectangle(bounds, 255, 255, 255, 160);
-			render->DrawRectangle(thumbBounds, 0, 255, 255, 255);
-		}
+		
+			render->DrawRectangle(bounds, 255, 255, 255, 160,true,false);
+			render->DrawRectangle(thumbBounds, 0, 255, 255, 255,true, false);
+		
 		if (texture != NULL)
 		{
 			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
@@ -132,11 +128,10 @@ bool GuiSlider::Draw(Render* render)
 	case GuiControlState::PRESSED:
 	{
 
-		if (app->guiManager->Debug)
-		{
-			render->DrawRectangle(bounds, 255, 255, 255, 255);
-			render->DrawRectangle(thumbBounds, 0, 255, 255, 255);
-		}
+		
+		render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
+		render->DrawRectangle(thumbBounds, 0, 255, 255, 255, true, false);
+		
 		if (texture != NULL)
 		{
 			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
@@ -147,11 +142,10 @@ bool GuiSlider::Draw(Render* render)
 
 	case GuiControlState::SELECTED:
 	{
-		if (app->guiManager->Debug)
-		{
-			render->DrawRectangle(bounds, 0, 255, 0, 255);
-			render->DrawRectangle(thumbBounds, 0, 255, 255, 255);
-		}
+		
+			render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+			render->DrawRectangle(thumbBounds, 0, 255, 255, 255, true , false);
+		
 		if (texture != NULL)
 		{
 			render->DrawTexture(texture, bounds.x * screenScale, bounds.y * screenScale, &backgroundRect, 0, 0, 0, 0, screenScale);
