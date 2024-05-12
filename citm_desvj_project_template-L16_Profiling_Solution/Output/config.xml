@@ -44,7 +44,7 @@
 
 		<map value ="0">
 
-		     <item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="32" y="37" textPath ="Assets/Textures/Items/Warcry trumpet.png"/>
+		     <item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="3" y="18" textPath ="Assets/Textures/Items/Warcry trumpet.png"/>
 		     
 		     <item name="Might Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png"/>
 		     
@@ -67,7 +67,7 @@
 		     
 		     <door num ="2" x ="48" y="17" textPath="Assets/Textures/Items/puerta2.png"/>
 		     
-		     <lever num ="2" x ="32" y="23" textPath="Assets/Textures/Items/palanca21.png"/>	
+		     <lever num ="2" x ="4" y="37" textPath="Assets/Textures/Items/palanca21.png"/>	
 		     
 		     <door num ="3" x ="29" y="11" textPath="Assets/Textures/Items/puerta3.png"/>
 		     

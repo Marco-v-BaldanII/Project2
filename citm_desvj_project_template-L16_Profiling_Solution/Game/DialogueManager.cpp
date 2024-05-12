@@ -306,6 +306,7 @@ bool DialogueManager::Update(float dt)
 				app->entityManager->Disable();
 				app->entityManager->Enable();
 
+				app->map->blockedGid = 187;
 				app->map->Disable();
 				app->map->CleanUp();
 				app->map->mapData.layers.Clear();
