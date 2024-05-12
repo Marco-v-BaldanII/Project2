@@ -43,12 +43,12 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 568,
-                "y": 491.99999999999994
+                "x": 789.3333333333333,
+                "y": 542.6666666666667
             }
         },
         "castillo.tmx#HouseTileset-OG": {
-            "scaleInDock": 1
+            "scaleInDock": 1.5
         },
         "castillo.tmx#MapMetadata": {
             "scaleInDock": 1
@@ -57,7 +57,7 @@
             "scaleInDock": 1
         },
         "castillo.tmx#castillotiles": {
-            "scaleInDock": 0.75
+            "scaleInDock": 1
         },
         "mapanieve 2.tmx": {
             "scale": 0.33,

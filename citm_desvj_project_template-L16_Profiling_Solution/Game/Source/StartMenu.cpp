@@ -54,15 +54,15 @@ bool StartMenu::Start()
 		windowW = 512 * 3;
 		windowH = 384 * 3;
 
-		SDL_Rect pos1 = { windowW / 2 - 140, windowH / 2 - 140, 200,60 };
-		SDL_Rect pos2 = { windowW / 2 - 140, windowH / 2 - 70, 200,60 };
-		SDL_Rect pos3 = { windowW / 2 - 140, windowH / 2, 200,60 };
-		SDL_Rect pos4 = { windowW / 2 - 140, windowH / 2 + 70, 200,60 };
-		SDL_Rect pos5 = { windowW / 2 - 140, windowH / 2 + 140, 200,60 };
-		SDL_Rect pos6 = { windowW / 2 - 140, windowH / 2 + 210, 200,60 };
-		SDL_Rect pos7 = { windowW / 2 - 140, windowH / 2 + 280, 200,60 };
-		SDL_Rect pos8 = { windowW / 2 - 140, windowH / 2 + 350, 200,60 };
-		SDL_Rect pos9 = { windowW / 2 - 140, windowH / 2 + 440, 200,60 };
+		pos1 = { (int)windowW / 2 - 140, (int)windowH / 2 - 140, 200,60 };
+		pos2 = { (int)windowW / 2 - 140, (int)windowH / 2 - 70, 200,60 };
+		pos3 = { (int)windowW / 2 - 140, (int)windowH / 2, 200,60 };
+		pos4 = { (int)windowW / 2 - 140, (int)windowH / 2 + 70, 200,60 };
+		pos5 = { (int)windowW / 2 - 140, (int)windowH / 2 + 140, 200,60 };
+		pos6 = { (int)windowW / 2 - 140, (int)windowH / 2 + 210, 200,60 };
+		pos7 = { (int)windowW / 2 - 140, (int)windowH / 2 + 280, 200,60 };
+		pos8 = { (int)windowW / 2 - 140, (int)windowH / 2 + 350, 200,60 };
+		pos9 = { (int)windowW / 2 - 140, (int)windowH / 2 + 440, 200,60 };
 
 		start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, " Start ", pos1, this);
 		load = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Load ", pos2, this);
@@ -77,10 +77,19 @@ bool StartMenu::Start()
 		back = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, " Back ", pos1, this);
 		FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, " FullScreen ", pos2, this);
 		VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, " VSync ", pos3, this);
-		Music = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, " Music ", pos4, this, { 10,10,40,40 });
-		FX = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 9, " FX ", pos5, this, { 10,10,40,40 });
-		FX->state = GuiControlState::NORMAL;
+		Music = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, " Music ", pos4, this, { 0,0,40,60 });
+		FX = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 9, " FX ", pos5, this, { 0,0,40,60 });
+		
 		Music->state = GuiControlState::NORMAL;
+		FX->state = GuiControlState::NORMAL;
+
+		Music->minValue = 0;
+		Music->maxValue = 128;
+		Music->value = 128;
+
+		FX->minValue = 0;
+		FX->maxValue = 128;
+		FX->value = 128;
 
 		if (app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
 		{
@@ -122,8 +131,6 @@ bool StartMenu::Start()
 		state = MenuState::START;
 	}
 
-	
-
 	return true;
 }
 
@@ -136,7 +143,6 @@ bool StartMenu::PreUpdate()
 // Called each loop iteration
 bool StartMenu::Update(float dt)
 {	
-
 	switch (state) {
 	case MenuState::OFF:
 		start->state = GuiControlState::DISABLED;
@@ -305,23 +311,8 @@ bool StartMenu::Update(float dt)
 		VSync->text = " VSync : Off ";
 	}
 
-	if (musicOn)
-	{
-		Music->text = " Music : On ";
-	}
-	else if (!musicOn)
-	{
-		Music->text = " Music : Off ";
-	}
-
-	if (fxOn)
-	{
-		FX->text = " FX : On ";
-	}
-	else if (!fxOn)
-	{
-		FX->text = " FX : Off ";
-	}
+	app->audio->SetFxVolume(FX->value);
+	app->audio->SetMusicVolume(Music->value);
 
 	return true;
 }
@@ -331,7 +322,10 @@ bool StartMenu::PostUpdate()
 {
 	bool ret = true;
 	app->render->DrawTexture(img, 0, 0, &rect);
-	app->render->DrawTexture(title, windowW/14, 20, &titleRect);
+	app->render->DrawTexture(title, 120, 20, &titleRect);
+
+	if (Music->state == GuiControlState::NORMAL) app->render->DrawText("FX", pos5.x, pos5.y + 10, pos5.w, pos5.h);
+	if (Music->state == GuiControlState::NORMAL) app->render->DrawText("Music", pos4.x, pos4.y + 10, pos4.w, pos4.h);
 	return ret;
 }
 
@@ -389,32 +383,6 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 		//funcion para desactivar vsync
 		vsyncOn = false;
 		SDL_GL_SetSwapInterval(0);
-	}
-	else if (control->id == 8 && !musicOn)
-	{
-		//activar musica
-		musicOn = true;
-		app->audio->SetMusicVolume(lastMusicVolume);
-	}
-	else if (control->id == 8 && musicOn)
-	{
-		//desactivar musica
-		musicOn = false;
-		lastMusicVolume = app->audio->GetMusicVolume();
-		app->audio->SetMusicVolume(0.0f);
-	}
-	else if (control->id == 9 && !fxOn)
-	{
-		//activar fx
-		fxOn = true;
-		app->audio->SetFxVolume(lastFxVolume);
-	}
-	else if (control->id == 9 && fxOn)
-	{
-		//desactivar fx
-		fxOn = false;
-		lastFxVolume = app->audio->GetFxVolume();
-		app->audio->SetFxVolume(0.0f);
 	}
 	else if (control->id == 10)
 	{

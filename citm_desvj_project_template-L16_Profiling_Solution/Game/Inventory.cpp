@@ -19,9 +19,9 @@ bool Inventory::Start()
 	itemRect = { 0,0,100,100 };
 	playerRect = { 0,0,120,100 };
 	
-	I_Drop = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 71, "DROP", {650,1000,150,100}, this);
-	I_Equip = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 72, "EQUIP", {850,1000,150,100}, this);
-	I_Close = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 73, "CLOSE", { 1050,1000,150,100 }, this);
+	I_Drop = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 71, "DROP", {490,930,150,100}, this);
+	I_Equip = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 72, "EQUIP", {690,930,150,100}, this);
+	I_Close = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 73, "CLOSE", { 890,930,150,100 }, this);
 
 	I_Drop->state = GuiControlState::DISABLED;
 	I_Equip->state = GuiControlState::DISABLED;
