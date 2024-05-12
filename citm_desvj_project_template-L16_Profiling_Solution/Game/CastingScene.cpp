@@ -121,19 +121,20 @@ bool CastingScene::PostUpdate() {
 
 	SDL_Rect screen = SDL_Rect{ 0,0,256*2,198*2 };
 	app->render->DrawTexture(background, 0,0, &screen);
-
+	app->render->DrawRectangle(SDL_Rect{ 270,140,950,300 }, 0, 0, 0, 255, true, false);
+	app->render->DrawText("With <- & -> keys select a role", 100 * 3, 50 * 3, 470 * 3, 20 * 3, true);
+	app->render->DrawText("Press Enter to assign a role", 100 * 3, 70 * 3, 470 * 3, 20 * 3, true);
 	// role
 	//app->render->DrawText(roles[roleIndex]->name, 200 * 3, 100 * 3, 370 * 3, 20 * 3, true);
 
 	// actor
-	app->render->DrawRectangle(SDL_Rect{ 270,280,950,100 }, 0, 0, 0, 255, true, false);
-	app->render->DrawText(actors[actorIndex % actors.Count()]->name, 100 * 3, 100 * 3, 570 * 3, 20 * 3, true);
+	app->render->DrawText(actors[actorIndex % actors.Count()]->name, 100 * 3, 100 * 3, 470 * 3, 20 * 3, true);
 
 	if (assignedRoles[roleIndex % roles.Count()] == false) {
-		app->render->DrawText(roles[roleIndex]->name, 270 * 3, 100 * 3, 570 * 3, 20 * 3, true);
+		app->render->DrawText(roles[roleIndex]->name, 270 * 3, 100 * 3, 470 * 3, 20 * 3, true);
 	}
 	else {
-		app->render->DrawText(roles[roleIndex]->name, 270 * 3, 100 * 3, 570 * 3, 20 * 3, true, SDL_Color {255,0,0,255});
+		app->render->DrawText(roles[roleIndex]->name, 270 * 3, 100 * 3, 470 * 3, 20 * 3, true, SDL_Color {255,0,0,255});
 	}
 	app->render->DrawTexture(actors[actorIndex]->texture, 32 , 224 , &portraitBox);
 

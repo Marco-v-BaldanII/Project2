@@ -77,8 +77,8 @@ bool StartMenu::Start()
 		back = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, " Back ", pos1, this);
 		FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, " FullScreen ", pos2, this);
 		VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, " VSync ", pos3, this);
-		Music = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, " Music ", pos4, this, { 10,10,40,60 });
-		FX = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 9, " FX ", pos5, this, { 10,10,40, 60 });
+		Music = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 8, " Music ", pos4, this, { 0,0,40,60 });
+		FX = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 9, " FX ", pos5, this, { 0,0,40,60 });
 		
 		Music->state = GuiControlState::NORMAL;
 		FX->state = GuiControlState::NORMAL;
@@ -322,7 +322,7 @@ bool StartMenu::PostUpdate()
 {
 	bool ret = true;
 	app->render->DrawTexture(img, 0, 0, &rect);
-	app->render->DrawTexture(title, windowW/14, 20, &titleRect);
+	app->render->DrawTexture(title, 120, 20, &titleRect);
 
 	if (Music->state == GuiControlState::NORMAL) app->render->DrawText("FX", pos5.x, pos5.y + 10, pos5.w, pos5.h);
 	if (Music->state == GuiControlState::NORMAL) app->render->DrawText("Music", pos4.x, pos4.y + 10, pos4.w, pos4.h);

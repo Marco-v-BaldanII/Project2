@@ -15,28 +15,40 @@ bool PauseMenu::Start()
 	uint windowW = 512 * 3;
 	uint windowH = 384 * 3;
 	
-	SDL_Rect pos1 = { windowW / 2 - 140, windowH / 2 - 140, 200,60 };
-	SDL_Rect pos2 = { windowW / 2 - 140, windowH / 2 - 70, 200,60 };
-	SDL_Rect pos3 = { windowW / 2 - 140, windowH / 2, 200,60 };
-	SDL_Rect pos4 = { windowW / 2 - 140, windowH / 2 + 70, 200,60 };
-	SDL_Rect pos5 = { windowW / 2 - 140, windowH / 2 + 140, 200,60 };
-	SDL_Rect pos6 = { windowW / 2 - 140, windowH / 2 + 210, 200,60 };
-	SDL_Rect pos7 = { windowW / 2 - 140, windowH / 2 + 280, 200,60 };
-	SDL_Rect pos8 = { windowW / 2 - 140, windowH / 2 + 350, 200,60 };
-	SDL_Rect pos9 = { windowW / 2 - 140, windowH / 2 + 420, 200,60 };
+	pos1 = { (int)windowW / 2 - 140, (int)windowH / 2 - 140, 200,60 };
+	pos2 = { (int)windowW / 2 - 140, (int)windowH / 2 - 70, 200,60 };
+	pos3 = { (int)windowW / 2 - 140, (int)windowH / 2, 200,60 };
+	pos4 = { (int)windowW / 2 - 140, (int)windowH / 2 + 70, 200,60 };
+	pos5 = { (int)windowW / 2 - 140, (int)windowH / 2 + 140, 200,60 };
+	pos6 = { (int)windowW / 2 - 140, (int)windowH / 2 + 210, 200,60 };
+	pos7 = { (int)windowW / 2 - 140, (int)windowH / 2 + 280, 200,60 };
+	pos8 = { (int)windowW / 2 - 140, (int)windowH / 2 + 350, 200,60 };
+	pos9 = { (int)windowW / 2 - 140, (int)windowH / 2 + 420, 200,60 };
 
 	P_resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, " Resume ", pos1, this);
 	P_FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, " FullScreen ", pos2, this);
 	P_VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, " VSync ", pos3, this);
-	P_Music = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, " Music ", pos4, this);
-	P_FX = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, " FX ", pos5, this);
+	P_Music = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 16, " Music ", pos4, this, { 0,0,40,60 });
+	P_FX = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 17, " FX ", pos5, this, { 0,0,40,60 });
+
+	P_Music->state = GuiControlState::NORMAL;
+	P_FX->state = GuiControlState::NORMAL;
+
+	P_Music->minValue = 0;
+	P_Music->maxValue = 128;
+	P_Music->value = 128;
+
+	P_FX->minValue = 0;
+	P_FX->maxValue = 128;
+	P_FX->value = 128;
+
 	if (app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
 	{
-		laguageText = " Laguage : Shakesperean";
+		laguageText = " Language : Shakesperean";
 	}
 	else if (app->dialogueManager->myLanguage == Language::ENGLISH)
 	{
-		laguageText = " Laguage : English";
+		laguageText = " Language : English";
 	}
 	P_laguage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 18, laguageText, pos6, this);
 	P_textSpeed = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 19, " Text Speed : Normal ", pos7, this);
@@ -103,11 +115,11 @@ bool PauseMenu::Update(float dt)
 
 	if (app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
 	{
-		P_laguage->text = " Laguage : Shakesperean ";
+		P_laguage->text = " Language : Shakesperean ";
 	}
 	else if (app->dialogueManager->myLanguage == Language::ENGLISH)
 	{
-		P_laguage->text = " Laguage : English ";
+		P_laguage->text = " Language : English ";
 	}
 
 	if (app->dialogueManager->textVelocity == app->dialogueManager->slowVelocity)
@@ -141,30 +153,17 @@ bool PauseMenu::Update(float dt)
 		P_VSync->text = " VSync : Off ";
 	}
 
-	if (app->mainMenu->musicOn)
-	{
-		P_Music->text = " Music : On ";
-	}
-	else if (!app->mainMenu->musicOn)
-	{
-		P_Music->text = " Music : Off ";
-	}
-
-	if (app->mainMenu->fxOn)
-	{
-		P_FX->text = " FX : On ";
-	}
-	else if (!app->mainMenu->fxOn)
-	{
-		P_FX->text = " FX : Off ";
-	}
+	app->audio->SetFxVolume(P_FX->value);
+	app->audio->SetMusicVolume(P_Music->value);
 
 	return true;
 }
 
 bool PauseMenu::PostUpdate()
 {
-	
+	if (P_Music->state == GuiControlState::NORMAL) app->render->DrawText("FX", pos5.x, pos5.y + 10, pos5.w, pos5.h);
+	if (P_Music->state == GuiControlState::NORMAL) app->render->DrawText("Music", pos4.x, pos4.y + 10, pos4.w, pos4.h);
+
 	return true;
 }
 
@@ -201,32 +200,6 @@ bool PauseMenu::OnGuiMouseClickEvent(GuiControl* control)
 		//funcion para desactivar vsync
 		app->mainMenu->vsyncOn = false;
 		SDL_GL_SetSwapInterval(0);
-	}
-	else if (control->id == 16 && !app->mainMenu->musicOn)
-	{
-		//activar musica
-		app->mainMenu->musicOn = true;
-		app->audio->SetMusicVolume(app->mainMenu->lastMusicVolume);
-	}
-	else if (control->id == 16 && app->mainMenu->musicOn)
-	{
-		//desactivar musica
-		app->mainMenu->musicOn = false;
-		app->mainMenu->lastMusicVolume = app->audio->GetMusicVolume();
-		app->audio->SetMusicVolume(0.0f);
-	}
-	else if (control->id == 17 && !app->mainMenu->fxOn)
-	{
-		//activar fx
-		app->mainMenu->fxOn = true;
-		app->audio->SetFxVolume(app->mainMenu->lastFxVolume);
-	}
-	else if (control->id == 17 && app->mainMenu->fxOn)
-	{
-		//desactivar fx
-		app->mainMenu->fxOn = false;
-		app->mainMenu->lastFxVolume = app->audio->GetFxVolume();
-		app->audio->SetFxVolume(0.0f);
 	}
 	else if (control->id == 18 && app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
 	{
