@@ -353,7 +353,7 @@
 
 				</player>
 
-				<player  name="Henry Tudor" x="1" y ="24" unit_type="0" attack="5" hp="12" precision="90" luck="25" speed="30" movement="10">
+				<player  name="Henry Tudor" x="3" y ="24" unit_type="0" attack="5" hp="12" precision="90" luck="25" speed="30" movement="10">
 
 
 					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
@@ -383,7 +383,7 @@
 				</player>
 
 
-				<player  name="Margaret" x="1" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="15" movement="6">
+				<player  name="Margaret" x="3" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="15" movement="6">
 
 
 					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
