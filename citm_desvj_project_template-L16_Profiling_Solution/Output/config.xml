@@ -426,7 +426,7 @@
 
 				<enemy name= "Earl of Warwick" x="38" y="29" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="15" movement="6" exp="40">
 
-					<dialogue text ="My lord , I must retreat to fight another day"/>
+					<dialogue text ="Grrrr :("/>
 
 				</enemy>
 
@@ -596,15 +596,16 @@
 
 		<npc name = "Guy4" x ="300" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
 		    <texture path="Assets/Textures/BackstageNPCs/Soldado1_medium.png"/>
-			<dialogue text = "Please find my amulet" ID="5" choiceA ="I accept" choiceB="I refuse" >
+			<dialogue text = "I am the battle master, it is my job to ensure that the fighting scenes are properly portrayed" ID="10"          />
+			<dialogue text = "Archers, Knights, Cavelliers... there are many different types of units in the battlefield, it is important that each of them play their part correctly" ID="8"          />
+			<dialogue text = "Would you like to now more about any of the units?" choiceA ="Yes" choiceB="No" ID="7"          />
 
-				<sideQuest type="1" objective="Find the Warcry trumpet"  target="Might Medalion"/>
-				<!--type: 0 = defeat, 1 = fetchQuest-->
-			</dialogue>
+			<dialogue text = "Very well, be sure to play your part" ID="8"         />
 
-			<dialogue text = "Very well, be sure to play your part" ID="3"         />
-
-			<dialogue text = "goodbye"  ID="6"          />
+			<dialogue text = "Which unit do you want to know about" choiceA="Paladin" choiceB="Archer" ID="6"          />
+			<dialogue text = "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="5"          />
+			<dialogue text =  "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="4"    />
+			<dialogue text = "Archers are dasterdly tricksters that can chip away at your units from a distance, they act as counters to your magic users but they are weak againts knights." ID="7"          />
 		</npc>
 
 			<npc name = "Guy5" x ="200" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
@@ -617,7 +618,7 @@
 
 				<dialogue text = "Very well, be sure to play your part" ID="3"         />
 
-				<dialogue text = "goodbye"  ID="6"          />
+				<dialogue text = "Which unit do you want to know about"  ID="6"          />
 				
 			</npc>
 			
