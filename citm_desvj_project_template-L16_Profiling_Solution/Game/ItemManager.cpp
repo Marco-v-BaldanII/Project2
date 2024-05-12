@@ -18,40 +18,56 @@ using namespace std;
 ItemManager::ItemManager(bool isActive) : Module(isActive)
 {
 	name.Create("itemmanager");
+	active = isActive;
 
 }
 
 bool ItemManager::Start() {
 
 	// Call start for all items
+	if (active) {
 
-	for (pugi::xml_node n = config.child("item"); n != NULL; n = n.next_sibling("item")) {
+		for (pugi::xml_node mN = config.child("map"); mN != NULL; mN = mN.next_sibling("map")) {
 
-		Item* item = AddItem();
-		item->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(), n.attribute("hp").as_float(), n.attribute("attack").as_float(), n.attribute("luck").as_float(),
-			n.attribute("precision").as_float(), n.attribute("evasion").as_float(), n.attribute("speed").as_float(), n.attribute("movement").as_int(), (const char*)n.attribute("name").as_string(),
-			n.attribute("textPath").as_string());
-		// assign item to the tile
-		app->map->myTiles[app->map->WorldToMap( item->mapPos.x, item->mapPos.y).x][app->map->WorldToMap(item->mapPos.x, item->mapPos.y).y]->myItem = item;
+
+			int n = mN.attribute("value").as_int();
+ 			if (n == app->map->level) {
+				config = mN;
+				break;
+			}
+
+
+		}
+
+
+
+		for (pugi::xml_node n = config.child("item"); n != NULL; n = n.next_sibling("item")) {
+
+			Item* item = AddItem();
+			item->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(), n.attribute("hp").as_float(), n.attribute("attack").as_float(), n.attribute("luck").as_float(),
+				n.attribute("precision").as_float(), n.attribute("evasion").as_float(), n.attribute("speed").as_float(), n.attribute("movement").as_int(), (const char*)n.attribute("name").as_string(),
+				n.attribute("textPath").as_string());
+			// assign item to the tile
+			app->map->myTiles[app->map->WorldToMap(item->mapPos.x, item->mapPos.y).x][app->map->WorldToMap(item->mapPos.x, item->mapPos.y).y]->myItem = item;
+		}
+
+		for (pugi::xml_node n = config.child("door"); n != NULL; n = n.next_sibling("door")) {
+
+			Door* door = AddDoor();
+			door->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(), n.attribute("num").as_int(),
+				n.attribute("textPath").as_string());
+			// assign item to the tile
+			app->map->myTiles[app->map->WorldToMap(door->mapPos.x, door->mapPos.y).x][app->map->WorldToMap(door->mapPos.x, door->mapPos.y).y]->myDoor = door;
+		}
+		for (pugi::xml_node n = config.child("lever"); n != NULL; n = n.next_sibling("lever")) {
+
+			Lever* lever = AddLever();
+			lever->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(), n.attribute("num").as_int(),
+				n.attribute("textPath").as_string());
+			// assign item to the tile
+			app->map->myTiles[app->map->WorldToMap(lever->mapPos.x, lever->mapPos.y).x][app->map->WorldToMap(lever->mapPos.x, lever->mapPos.y).y]->myLever = lever;
+		}
 	}
-
-	for (pugi::xml_node n = config.child("door"); n != NULL; n = n.next_sibling("door")) {
-
-		Door* door = AddDoor();
-		door->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(),n.attribute("num").as_int(),
-			n.attribute("textPath").as_string());
-		// assign item to the tile
-		app->map->myTiles[app->map->WorldToMap(door->mapPos.x, door->mapPos.y).x][app->map->WorldToMap(door->mapPos.x, door->mapPos.y).y]->myDoor = door;
-	}
-	for (pugi::xml_node n = config.child("lever"); n != NULL; n = n.next_sibling("lever")) {
-
-		Lever* lever = AddLever();
-		lever->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(), n.attribute("num").as_int(),
-			n.attribute("textPath").as_string());
-		// assign item to the tile
-		app->map->myTiles[app->map->WorldToMap(lever->mapPos.x, lever->mapPos.y).x][app->map->WorldToMap(lever->mapPos.x, lever->mapPos.y).y]->myLever = lever;
-	}
-
 
 	return true;
 
@@ -60,6 +76,9 @@ bool ItemManager::Start() {
 bool ItemManager::Awake(pugi::xml_node config) {
 
 	this->config = config;
+	myNode = config;
+
+	
 
 	return true;
 
@@ -163,6 +182,7 @@ bool ItemManager::PostUpdate() {
 bool ItemManager::CleanUp() {
 
 	// Delet all items
+	items.Clear();
 
 	return true;
 
