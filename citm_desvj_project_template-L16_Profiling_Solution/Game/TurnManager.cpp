@@ -76,7 +76,6 @@ bool TurnManager::Update(float dt)
 
 
 		currentPlayer->movedThisTurn = true;
-		availablePlayers--;
 		currentPlayer = nullptr; // CHANGE THIS TO A FIGHTING STATE
 		/*Turn off spotLight*/
 		app->guiManager->TurnOffSpotLight();
@@ -278,7 +277,14 @@ void TurnManager::CheckBattleEnding() {
 			enemyLoss = true;
 		}*/
 
-		if (playerLoss || enemyLoss || MainQuest)/*Split into restart & next battle outcomes*/ {
+		if (playerLoss) {
+
+			app->levelManager->LoadScene(LOSE);
+			
+			app->battleScene->Disable();
+		}
+
+		if (enemyLoss || MainQuest)/*Split into restart & next battle outcomes*/ {
 			// Restart the fight
 			app->battleScene->CleanUp();
 			app->entityManager->Disable();

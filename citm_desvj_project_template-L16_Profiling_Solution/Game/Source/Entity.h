@@ -253,6 +253,7 @@ public:
 	bool curtains = false;
 
 	float TypeMultiplier(UnitType rivalType);
+	uint hitFx;
 
 };
 

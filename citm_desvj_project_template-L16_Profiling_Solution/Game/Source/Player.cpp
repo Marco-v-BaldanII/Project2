@@ -241,6 +241,7 @@ bool Player::PreUpdate()
 						oponent->target = this;
 						state = BATTLE;
 						atckedClicked = false;
+						app->turnManager->availablePlayers--;
 					}
 				}
 			}
@@ -767,10 +768,11 @@ void Player::OnCollision(Collider* physA, Collider* physB)  {
 
 			opponentReachTarget = true;
 			opponentAttacking = false;
+			if (oponent != nullptr && oponent->state == BATTLE )app->audio->PlayFx(oponent->hitFx);
 
 		}
 		else if (!opponentReachTarget) {
-
+			if(state == BATTLE ) app->audio->PlayFx(hitFx);
 		    reachedTarget = true;
 		}
 	}
@@ -782,6 +784,7 @@ bool Player::DealDMG() {
 
 	if (numberofAttacks <= 0 && !missed)/*finished attacks*/ {
 		state = MOVE;
+		
 		app->battleScene->inBattle = false;
 		HasAttackAction = false;
 		HasMoveAction = false;
@@ -892,11 +895,13 @@ void Player::FigureStickMovement(float dt) {
 
 	if (numberofAttacks <= 0 && lerpedExp == true && !missed) {
 		state = MOVE;
+	
+
 		app->battleScene->inBattle = false;
 		HasAttackAction = false;
 		HasMoveAction = false;
 		reachedTarget = false;
-		battleTimer = 1;
+		battleTimer = 0;
 	}
 
 }
@@ -979,6 +984,7 @@ bool Player::OnGuiMouseClickEvent(GuiControl* control)  {
 
 	if (control->id == waitBtnId && app->turnManager->currentPlayer == this && app->turnManager->isPlayerMoving == false) {
 		state = IDLE;
+		app->turnManager->availablePlayers--;
 		HasMoveAction = false;
 		atckedClicked = false;
 	}

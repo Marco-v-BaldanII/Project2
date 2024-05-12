@@ -219,12 +219,14 @@ bool Enemy::Update(float dt)
 	switch (state)
 	{
 	case IDLE:
-		
+		curtains = false;
+		reachedTarget = false;
 		 if(!defending) Bposition = iPoint(300*3, 80*3);
 	
 		break;
 	case MOVE:
-		
+		curtains = false;
+		reachedTarget = false;
 		currentAnim->Update();
 		if (!Move) {
 		
@@ -281,7 +283,7 @@ bool Enemy::Update(float dt)
 
 			/* stick figure movement */
 			if (!reachedTarget && !opponentAttacking && !opponentReachTarget) {
-				battleTimer++;
+				
 
 				FigureStickMovement(dt);
 			}
@@ -351,9 +353,10 @@ bool Enemy::PostUpdate() {
 
 
 		if (curtainTimer.ReadSec() > 1) {
+			battleTimer++;
 
-			if (battleTimer == 1)/*Determine amount of attacks*/ {
-
+			if (battleTimer == 1 )/*Determine amount of attacks*/ {
+				numberofAttacks = 1;
 				if (speed > target->speed) {
 
 					int doubleChance = getRandomNumber(0, 100);
@@ -557,7 +560,7 @@ bool Enemy::DealDMG() {
 			
 			if (numberofAttacks == maxNumofATTACKS ) {
 
-
+				numberofAttacks--;
 				opponentAttacking = true;
 				Bposition = iPoint(300 * 3, 80 * 3);
 			}

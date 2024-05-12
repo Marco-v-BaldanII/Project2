@@ -466,6 +466,7 @@ bool PathFinding::IsTileEmpty(const iPoint& pos) const
 		
 		if (pos == app->entityManager->entities.At(i)->data->tilePos)
 		{
+			if (app->entityManager->entities.At(i)->data->hp > 0)
 			return false;
 		}
 

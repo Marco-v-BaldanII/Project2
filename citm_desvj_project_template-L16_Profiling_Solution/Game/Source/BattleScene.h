@@ -100,6 +100,10 @@ private:
 
 	UniqueRandomNumberGenerator uniqueNumber;
 
+	uint archerFx;
+	uint knightFx;
+	uint mageFx;
+	uint LancerFx;
 
 public:
 	List<Player*> party;
