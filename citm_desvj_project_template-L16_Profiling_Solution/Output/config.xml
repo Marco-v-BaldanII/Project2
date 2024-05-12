@@ -635,9 +635,9 @@
 			<dialogue text = "I'm so very excited" ID="9"          />
 			<dialogue text = "Though I seem to have forgotten what the play is about" ID="8"          />
 			<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="7"          />
-			<dialogue text = "Please defeat George of York in the next battle" ID="5" choiceA ="I accept" choiceB="I refuse" >
+			<dialogue text = "Please defeat Earl of Warwick in the next battle" ID="5" choiceA ="I accept" choiceB="I refuse" >
 
-				<sideQuest type="0" objective="Defeat George of York in the battle of Northampton"  target="George of York"/> <!--type: 0 = defeat, 1 = fetchQuest-->
+				<sideQuest type="0" objective="Defeat Earl of Warwick in the battle of Northampton"  target="Earl of Warwick"/> <!--type: 0 = defeat, 1 = fetchQuest-->
 
 			</dialogue>
 			<dialogue text = "Watch out for his poisonous arrows" ID="4"         />
