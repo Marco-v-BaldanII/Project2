@@ -62,7 +62,7 @@ bool StartMenu::Start()
 		pos6 = { (int)windowW / 2 - 140, (int)windowH / 2 + 210, 200,60 };
 		pos7 = { (int)windowW / 2 - 140, (int)windowH / 2 + 280, 200,60 };
 		pos8 = { (int)windowW / 2 - 140, (int)windowH / 2 + 350, 200,60 };
-		pos9 = { (int)windowW / 2 - 140, (int)windowH / 2 + 440, 200,60 };
+		pos9 = { (int)windowW / 2 - 140, (int)windowH / 2 + 280, 200,60 };
 
 		start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, " Start ", pos1, this);
 		load = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Load ", pos2, this);
@@ -115,7 +115,7 @@ bool StartMenu::Start()
 		backstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 69, " Backstage 2", pos4, this);
 		win = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 40, " Win ", pos5, this);
 		lose = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 41, " Lose ", pos6, this);
-		combatstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 420, " //combatstage2 ", pos9, this);
+		combatstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 420, " combatstage2 ", pos9, this);
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
