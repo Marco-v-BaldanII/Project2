@@ -423,6 +423,9 @@
 			</map>
 
 			<map name ="Castle">
+
+			<mainQuest type="0" objective="Main Objective: Defeat Richard III" target ="Richard III"/>
+
 				<player  name="Henry VI"  x="7" y="38" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8">
 
 					<dialogue text ="-"/>
