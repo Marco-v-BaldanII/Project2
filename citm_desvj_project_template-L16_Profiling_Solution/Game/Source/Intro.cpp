@@ -104,7 +104,7 @@ bool Intro::Update(float dt)
 // Called each loop iteration
 bool Intro::PostUpdate()
 {
-	//app->render->DrawRectangle(rect, {255,255,255,255}, true, false);
+	app->render->DrawRectangle(SDL_Rect{0,0,500,500}, {0,0,0,255}, true, false);
 	app->render->DrawTexture(part2, (int)initLogo1PosX, 70, &rect); 
 	app->render->DrawTexture(part1, (int)initLogo2PosX, 70, &rect); 
 
