@@ -67,7 +67,7 @@
 		     
 		     <door num ="2" x ="48" y="17" textPath="Assets/Textures/Items/puerta2.png"/>
 		     
-		     <lever num ="2" x ="32" y="23" textPath="Assets/Textures/Items/palanca21.png"/>	
+		     <lever num ="2" x ="4" y="37" textPath="Assets/Textures/Items/palanca21.png"/>	
 		     
 		     <door num ="3" x ="29" y="11" textPath="Assets/Textures/Items/puerta3.png"/>
 		     
