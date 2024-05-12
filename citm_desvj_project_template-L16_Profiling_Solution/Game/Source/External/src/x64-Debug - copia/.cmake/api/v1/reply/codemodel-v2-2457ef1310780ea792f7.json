@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-24fc4b7ed5015d82afc2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "PhysicsFS",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "physfs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-physfs-Debug-fdb724cbb3b901ced18d.json",
+					"name" : "physfs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "physfs-static::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-physfs-static-Debug-613aa5c4f01eb7d2480d.json",
+					"name" : "physfs-static",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_physfs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_physfs-Debug-0dbba870dc19ede86399.json",
+					"name" : "test_physfs",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/marco/Downloads/physfs-main/physfs-main/out/build/x64-Debug",
+		"source" : "C:/Users/marco/Downloads/physfs-main/physfs-main"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
