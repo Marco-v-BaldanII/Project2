@@ -153,8 +153,8 @@ bool PauseMenu::Update(float dt)
 		P_VSync->text = " VSync : Off ";
 	}
 
-	app->audio->SetFxVolume(P_FX->value);
-	app->audio->SetMusicVolume(P_Music->value);
+	if (app->levelManager->gameScene != GameScene::START) app->audio->SetFxVolume(P_FX->value);
+	if (app->levelManager->gameScene != GameScene::START) app->audio->SetMusicVolume(P_Music->value);
 
 	return true;
 }

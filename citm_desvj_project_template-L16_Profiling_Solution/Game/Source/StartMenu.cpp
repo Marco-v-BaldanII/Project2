@@ -311,8 +311,8 @@ bool StartMenu::Update(float dt)
 		VSync->text = " VSync : Off ";
 	}
 
-	app->audio->SetFxVolume(FX->value);
-	app->audio->SetMusicVolume(Music->value);
+	if (active) app->audio->SetFxVolume(FX->value);
+	if (active) app->audio->SetMusicVolume(Music->value);
 
 	return true;
 }
