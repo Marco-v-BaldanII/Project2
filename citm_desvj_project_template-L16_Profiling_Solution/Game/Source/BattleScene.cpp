@@ -227,7 +227,9 @@ bool BattleScene::PreUpdate()
 // Called each loop iteration
 bool BattleScene::Update(float dt)
 {
-	if (!firstMap) app->render->camera.y = 100; firstMap = true;
+	
+	if (!firstMap) app->render->camera.y = -1900; 
+	firstMap = true;
 	//attackPattern = rand() % 2;
 	//
 	//app->render->DrawText("Player Hp:" + to_string(playerHp), 100, 100, 1000, 100, false);

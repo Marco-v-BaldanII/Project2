@@ -291,7 +291,7 @@ bool DialogueManager::Update(float dt)
 			else if (currentNPC_Dialogues != nullptr && app->backStage->backStageID == 1 && currentNPC_Dialogues->ID == 469) {
 
 				myState = CUTSCENE;
-
+				app->render->camera.y = -1900;
 				currentNPC_Dialogues = nullptr;
 
 				app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
