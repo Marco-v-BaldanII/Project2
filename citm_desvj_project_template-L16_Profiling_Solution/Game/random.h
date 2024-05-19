@@ -26,9 +26,15 @@ public:
     int generateUniqueNumber(int min, int max) {
         std::uniform_int_distribution<int> distribution(min, max);
         int number;
+        int i = 0;
 
         do {
             number = distribution(gen);
+            i++;
+
+            if (i > 500) { reset(); }
+
+
         } while (generatedNumbers.find(number) != generatedNumbers.end());
 
         generatedNumbers.insert(number);

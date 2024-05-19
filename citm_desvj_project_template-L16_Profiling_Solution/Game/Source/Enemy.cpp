@@ -477,11 +477,14 @@ bool Enemy::PostUpdate() {
 	
 	if (hp < 1)/*less than 1*/ {
 		
-		if (!giveExp && target != nullptr) {
-			target->lerpedExp = false;
-			target->oponent = this;
-			target->opponentAttacking = false;
-			giveExp = true;
+		if (!giveExp) {
+			app->questManager->CheckQuestCompletion(name.GetString());
+			if (target != nullptr) {
+				target->lerpedExp = false;
+				target->oponent = this;
+				target->opponentAttacking = false;
+				giveExp = true;
+			}
 		}
 
 		if (!lastWords && deathQuote->text != "") app->dialogueManager->SpontaneousDialogue(deathQuote); /* Last word quote */
@@ -499,7 +502,7 @@ bool Enemy::PostUpdate() {
 
 	
 
-		app->questManager->CheckQuestCompletion(name.GetString());
+		
 		app->entityManager->DestroyEntity(this);
 		//app->battleScene->KillUnit(false, this);
 	}

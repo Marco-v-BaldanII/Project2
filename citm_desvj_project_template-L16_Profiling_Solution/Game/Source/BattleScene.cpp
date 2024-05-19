@@ -55,6 +55,8 @@ bool BattleScene::Start()
 {
 	if (active) {
 		if (!started) {
+			
+
 			app->guiManager->spotLight->mode = BAT;
 			lancasterUI = app->tex->Load(mynode.child("lancasterUI").attribute("path").as_string());
 			yorkUI = app->tex->Load(mynode.child("yorkUI").attribute("path").as_string());
@@ -108,6 +110,9 @@ bool BattleScene::Start()
 		}
 
 		app->itemManager->Enable();
+		List<Player*> l;
+		party = l;
+		List<Enemy*> le; goons = le;
 
 		// The following entities are loaded depending on the current map
 

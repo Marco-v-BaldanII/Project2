@@ -104,17 +104,21 @@ bool Lose::Update(float dt)
 
 	if (waitTime == 0)
 	{
-		app->levelManager->LoadScene(GameScene::START);
-		app->entityManager->enemies.Clear();
-		app->entityManager->Enable();
-		app->battleScene->party.Clear();
-		app->battleScene->Start();
-		
-
-		Disable();
+		ReStart();
 	}
 	
 	return true;
+}
+
+void Lose::ReStart() {
+	app->levelManager->LoadScene(GameScene::START);
+	app->entityManager->entities.Clear();
+	List<Entity*> lE; app->entityManager->entities = lE;
+	app->entityManager->enemies = lE;
+
+	app->battleScene->Start();
+	Disable();
+
 }
 
 // Called each loop iteration

@@ -321,8 +321,8 @@ bool StartMenu::Update(float dt)
 bool StartMenu::PostUpdate()
 {
 	bool ret = true;
-	app->render->DrawTexture(img, 0, 0, &rect);
-	app->render->DrawTexture(title, 120, 20, &titleRect);
+	app->render->DrawTexture(img, 0 + (app->render->camera.x /-3), 0 + (app->render->camera.y / -3), &rect);
+	app->render->DrawTexture(title, 120 + (app->render->camera.x / -3), 20 + (app->render->camera.y / -3), &titleRect);
 
 	if (Music->state == GuiControlState::NORMAL) app->render->DrawText("FX", pos5.x, pos5.y + 10, pos5.w, pos5.h);
 	if (Music->state == GuiControlState::NORMAL) app->render->DrawText("Music", pos4.x, pos4.y + 10, pos4.w, pos4.h);

@@ -232,7 +232,7 @@ private:
 
 	Conversation* spontaneousConversation;
 	int conversationIndex = 0;
-
+	public:
 	bool scriptWritten = false;
 
 	int DialogueChannel;
