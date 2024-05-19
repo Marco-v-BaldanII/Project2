@@ -212,7 +212,7 @@ bool BattleScene::Start()
 
 	}
 
-	
+	//6
 	
 	//app->guiManager->OpenPanel(PanelID::P_START_MENU);  //IMPORTANT
 	return true;
@@ -301,11 +301,17 @@ bool BattleScene::PostUpdate()
 		talker1 = nullptr;
 		talker2 = nullptr;
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+		for (ListItem<Player*>* pIt = party.start; pIt != NULL; pIt = pIt->next) {
+			pIt->data->hp = 0;
+		}
+	}
 	
 	return ret;
 }
 
-// Called before quitting
+// Called before quitting00
 bool BattleScene::CleanUp()
 {
 	LOG("Freeing Battlescene main menu ");
@@ -315,7 +321,7 @@ bool BattleScene::CleanUp()
 
 	Entity* pEntity = nullptr;
 	//Destroy Players and enemies
-	for (ListItem<Player*>* pIt = party.start; pIt != nullptr; pIt = pIt->next) {
+	/*for (ListItem<Player*>* pIt = party.start; pIt != nullptr; pIt = pIt->next) {
 
 		pEntity = pIt->data;
 		app->entityManager->DestroyEntity(pEntity);
@@ -327,7 +333,7 @@ bool BattleScene::CleanUp()
 		pEntity = pIt->data;
 		app->entityManager->DestroyEntity(pEntity);
 
-	}
+	}*/
 	app->entityManager->enemies.Clear();
 	party.Clear(); goons.Clear();
 

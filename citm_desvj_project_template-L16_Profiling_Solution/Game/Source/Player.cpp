@@ -914,7 +914,6 @@ void Player::FigureStickMovement(float dt) {
 	if (numberofAttacks <= 0 && lerpedExp == true && !missed) {
 		state = IDLE;
 		movedThisTurn = true;
-
 		app->battleScene->inBattle = false;
 		numberofAttacks = 1;
 		missed = false;

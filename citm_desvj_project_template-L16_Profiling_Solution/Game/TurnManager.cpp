@@ -56,6 +56,9 @@ bool TurnManager::CleanUp()
 	bool ret = true;
 	// clear everything
 
+	players.Clear();
+	enemies.Clear();
+
 	return ret;
 }
 

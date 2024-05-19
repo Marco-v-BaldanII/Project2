@@ -6,7 +6,8 @@
 #include "Window.h"
 #include "Lose.h"
 #include "LevelManagement.h"
-
+#include "BattleScene.h"
+#include "../TurnManager.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -44,6 +45,30 @@ bool Lose::Start()
 		//music = app->audio->PlayMusic("assets/audio/music/Logo Screen.wav", 0.5f);
 		img = app->tex->Load(myNode.child("titleScreen").attribute("path").as_string());
 		rect = { 0, 0, 512, 384 };
+
+		//app->entityManager->CleanUp(); app->entityManager->enemies.Clear();
+		//app->entityManager->Enable();
+
+		//app->levelManager->LoadScene(GameScene::COMBAT);
+		//
+		//app->battleScene->Start();
+
+		/*app->entityManager->Enable();
+		app->turnManager->CleanUp();
+
+		app->battleScene->party.Clear(); app->battleScene->goons.Clear();*/
+		
+	
+
+		/*app->map->blockedGid = 187;
+		app->map->Disable();
+		app->map->CleanUp();
+		app->map->mapData.layers.Clear();
+		app->map->level = 1;
+		app->map->Enable();
+
+		app->levelManager->LoadScene(GameScene::COMBAT);*/
+
 	}
  	
 	return true;
@@ -77,9 +102,16 @@ bool Lose::Update(float dt)
 		waitTime--;
 	}
 
-	if (waitTime < 0)
+	if (waitTime == 0)
 	{
 		app->levelManager->LoadScene(GameScene::START);
+		app->entityManager->enemies.Clear();
+		app->entityManager->Enable();
+		app->battleScene->party.Clear();
+		app->battleScene->Start();
+		
+
+		Disable();
 	}
 	
 	return true;
