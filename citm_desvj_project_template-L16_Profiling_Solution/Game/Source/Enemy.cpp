@@ -155,6 +155,7 @@ bool Enemy::PreUpdate() {
 				{
 					if (p->data->state == DEAD)
 					{
+						if (target != nullptr) target->onStage = false;
 						target = nullptr;
 					}
 					else {
@@ -183,6 +184,7 @@ bool Enemy::PreUpdate() {
 			if (playerNear == false)
 			{
 				newTarget = false;
+				if (target != nullptr) target->onStage = false;
 				target = nullptr;
 				app->turnManager->noEnemyMoving = true;
 				Move = false;
@@ -262,6 +264,7 @@ bool Enemy::Update(float dt)
 			else if (MovePath())
 			{
 				newTarget = false;
+				if (target != nullptr) target->onStage = false;
 				target = nullptr;
 				app->turnManager->noEnemyMoving = true;
 
@@ -276,6 +279,10 @@ bool Enemy::Update(float dt)
 			app->guiManager->OpenCloseCurtains();
 			curtains = true;
 			curtainTimer.Start();
+		}
+
+		if (target != nullptr) {
+			target->onStage == true;
 		}
 
 		if (curtainTimer.ReadSec() > 1) {
@@ -468,8 +475,8 @@ bool Enemy::PostUpdate() {
 
 	myFrame->Update();
 	
-	if (hp <= 0) {
-
+	if (hp < 1)/*less than 1*/ {
+		
 		if (!giveExp && target != nullptr) {
 			target->lerpedExp = false;
 			target->oponent = this;

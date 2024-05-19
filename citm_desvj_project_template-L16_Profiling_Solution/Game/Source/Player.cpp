@@ -397,6 +397,10 @@ bool Player::Update(float dt)
 		}
 		lastWords = true;
 		if (pendingToDelete == false) {
+			if (app->turnManager->currentPlayer != nullptr && app->turnManager->currentPlayer == this) {
+				app->turnManager->DeSelectPlayer();
+			}
+
 			app->turnManager->availablePlayers--;
 			//app->battleScene->KillUnit(true, this); ESTO crashea y da muchisimos problemas
 			pendingToDelete = true;
@@ -436,11 +440,13 @@ bool Player::PostUpdate()
 			//render idle 
 			missed = false;
 			misses[0] = false; misses[1] = false;
+			if (!defending) Bposition = iPoint(50 * 3, 80 * 3);
 			
 			break;
 		case MOVE:
 		{
-			if (!defending) lerpingHp = hp; lerpingEXP = experiencePoints;
+			
+			if (!defending) lerpingHp = hp; lerpingEXP = experiencePoints; Bposition = iPoint(50 * 3, 80 * 3);
 			//Draw spotLight
 			iPoint spotPos = iPoint(position.x + 16, position.y + 16);
 			app->render->DrawCircle(position.x +16, position.y +16, 2, 0, 0, 0, 255, true);
@@ -795,8 +801,8 @@ void Player::OnCollision(Collider* physA, Collider* physB)  {
 bool Player::DealDMG() {
 
 	if (numberofAttacks <= 0 && !missed)/*finished attacks*/ {
-		state = MOVE;
-		
+		state = IDLE;
+		movedThisTurn = true;
 		app->battleScene->inBattle = false;
 		HasAttackAction = false;
 		HasMoveAction = false;
@@ -906,12 +912,14 @@ void Player::FigureStickMovement(float dt) {
 	}
 
 	if (numberofAttacks <= 0 && lerpedExp == true && !missed) {
-		state = MOVE;
-	
+		state = IDLE;
+		movedThisTurn = true;
 
 		app->battleScene->inBattle = false;
+		numberofAttacks = 1;
+		missed = false;
 		HasAttackAction = false;
-		HasMoveAction = true;
+		HasMoveAction = false;
 		reachedTarget = false;
 		battleTimer = 0;
 	}

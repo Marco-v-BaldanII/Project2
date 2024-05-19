@@ -255,6 +255,8 @@ public:
 	float TypeMultiplier(UnitType rivalType);
 	uint hitFx;
 
+	bool onStage = false; /*If the entity is in a battleScene*/
+
 };
 
 #endif // __ENTITY_H__
