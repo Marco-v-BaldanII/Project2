@@ -302,14 +302,14 @@ bool Player::Update(float dt)
 
 		// Ability to pick up item
 
-		if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr)/* If the tile i'm on has an item */ {
+		if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr && state == IDLE)/* If the tile i'm on has an item */ {
 
 			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 
 
 				app->audio->PlayFx(pickItemFx);
 
-				app->map->myTiles[mapPos.x][mapPos.y]->myItem->overworld = false;
+				 app->map->myTiles[mapPos.x][mapPos.y]->myItem->overworld = false;
 
 				
 
