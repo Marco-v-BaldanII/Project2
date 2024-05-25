@@ -365,6 +365,12 @@ void BattleScene::StartSnowStorm() {
 	}
 }
 
+void BattleScene::StartRossing() {
+
+	//Particle* roseParticle = new Particle("Assets/roseP.png", fPoint(0,400), fPoint(3,-5), 4.0f, )
+
+}
+
 bool BattleScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	if (control->id == 1 && playerTurn == true) {

@@ -72,6 +72,8 @@ public:
 
 	void StartSnowStorm();
 
+	void StartRossing();
+
 
 private:
 	SDL_Texture* spriteSheet;
@@ -114,6 +116,7 @@ private:
 
 public:
 	ParticleEffect* snowSystem = nullptr;
+	ParticleEffect* roseSystemRight = nullptr;
 
 	List<Player*> party;
 	List<Enemy*> goons;
