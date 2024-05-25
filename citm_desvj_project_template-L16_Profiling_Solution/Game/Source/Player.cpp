@@ -73,6 +73,13 @@ bool Player::Awake() {
 bool Player::Start() {
 	//config.attribute("texturePath").as_string()
 	
+	walkingParticle = new Particle("Assets/snowP.png", fPoint(0, 0), fPoint(0, -0.5f), fPoint(0, 0), 0.5f, SDL_Rect{ 0,0,8,8 });
+
+	walkingEffect = new ParticleEffect(walkingParticle, 10, 0.05f, true,false, SDL_Rect{0,0,8,0});
+
+	app->particleSystem->AddParticleEffect(walkingEffect);
+	walkingEffect->active = false;
+
 	moveTime = 32;
 	counter = moveTime;
 	//initialize audio effect
@@ -168,6 +175,7 @@ bool Player::PreUpdate()
 
 	// if the player hasn't moved this turn it can be clicked on
 	
+	walkingEffect->spawnBox.x = position.x; walkingEffect->spawnBox.y = position.y +15;
 
 	switch (state)
 	{
@@ -183,11 +191,12 @@ bool Player::PreUpdate()
 		waitButton->state = GuiControlState::DISABLED;
 		talkButton->state = GuiControlState::DISABLED;
 		ExpandedBFS = false;
+		walkingEffect->active = false;
 	}
 	break;
 	case MOVE:
 		currentAnim->Update();
-
+		walkingEffect->active = true;
 		if(atkButton->state == GuiControlState::DISABLED)atkButton->state = GuiControlState::NORMAL;
 		if(waitButton->state == GuiControlState::DISABLED) waitButton->state = GuiControlState::NORMAL;
 		if (talkButton->state == GuiControlState::DISABLED) talkButton->state = GuiControlState::NORMAL;
@@ -342,6 +351,7 @@ bool Player::Update(float dt)
 		
 		break;
 	case BATTLE:
+		walkingEffect->active = false;
 		app->battleScene->inBattle = true;
 
 

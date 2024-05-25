@@ -14,6 +14,8 @@ struct SDL_Texture;
 class Dialogue;
 class Conversation;
 class Easing;
+class Particle;
+class ParticleEffect;
 
 class Player : public Entity
 {
@@ -106,6 +108,9 @@ public:
 	bool misses[2];
 
 	bool hasWaited = false;
+
+	ParticleEffect* walkingEffect;
+	Particle* walkingParticle;
 };
 
 #endif // __PLAYER_H__

@@ -12,7 +12,6 @@
 
 #define MOVE_SPEED 2
 
-
 bool Entity::InitPath(iPoint destiantion)
 {
 	bool ret = true;

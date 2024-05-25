@@ -361,7 +361,7 @@ bool BattleScene::CleanUp()
 void BattleScene::StartSnowStorm() {
 
 	// Initialize particle system
-	if (snowSystem == nullptr && app->dialogueManager->myState != CUTSCENE) {
+	/*if (snowSystem == nullptr && app->dialogueManager->myState != CUTSCENE) {
 		const char* too = "Assets/snowP.png";
 		
 		snowParticle = new Particle(too, fPoint(0, 0), fPoint(0, 2), fPoint(0,0), 3.0f, SDL_Rect{ 0,0,8,8 }, 1.0f, 2.5f, 100, 255);
@@ -369,12 +369,12 @@ void BattleScene::StartSnowStorm() {
 		snowSystem = new ParticleEffect(snowParticle, 40, 0.1f,true,false, SDL_Rect{ 0,0, 512 , 0 });
 
 		app->particleSystem->AddParticleEffect(snowSystem);
-	}
+	}*/
 }
 
 void BattleScene::StartRossing() {
 
-	if (roseSystemLeft == nullptr) {
+	/*if (roseSystemLeft == nullptr) {
 		Animation anim;	Animation anim2; 	Animation anim3;
 		anim.PushBack(SDL_Rect{ 0,0,32,32 }); anim.PushBack(SDL_Rect{ 32,0,32,32 }); anim.PushBack(SDL_Rect{ 64,0,32,32 });
 		anim.PushBack(SDL_Rect{ 96,0,32,32 }); anim.PushBack(SDL_Rect{ 128,0,32,32 }); anim.speed = 0.4f; anim.loop = true;
@@ -391,12 +391,12 @@ void BattleScene::StartRossing() {
 
 		Particle* roseParticle = new Particle(tex1, fPoint(20, 400), fPoint(1, -4), fPoint(0, 0.045f), 4.0f, SDL_Rect{ 0,0,32,32 }, 1, 1, 255, 255, fPoint(-2, 8), animations);
 
-		roseSystemRight = new ParticleEffect(roseParticle, 30, 0.03f, false, false, SDL_Rect{ 0,0,10,0 }, true);
+		roseSystemRight = new ParticleEffect(roseParticle, 30, 0.015f, false, false, SDL_Rect{ 0,0,10,0 }, true);
 
 
 		Particle* roseParticle2 = new Particle(tex1, fPoint(492, 400), fPoint(-1, -4), fPoint(0, 0.045f), 4.0f, SDL_Rect{ 0,0,32,32 }, 1, 1, 255, 255, fPoint(-8, 2), animations);
 
-		roseSystemLeft = new ParticleEffect(roseParticle2, 30, 0.03f, false, true, SDL_Rect{ 0,0,10,0 }, true);
+		roseSystemLeft = new ParticleEffect(roseParticle2, 30, 0.015f, false, true, SDL_Rect{ 0,0,10,0 }, true);
 
 
 		app->particleSystem->AddParticleEffect(roseSystemRight);
@@ -405,7 +405,7 @@ void BattleScene::StartRossing() {
 	else {
 		roseSystemRight->Restart();
 		roseSystemLeft->Restart();
-	}
+	}*/
 }
 
 bool BattleScene::OnGuiMouseClickEvent(GuiControl* control)
