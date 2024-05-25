@@ -109,6 +109,8 @@ bool BattleScene::Start()
 
 		}
 
+		
+
 		app->itemManager->Enable();
 		List<Player*> l;
 		party = l;
@@ -339,12 +341,28 @@ bool BattleScene::CleanUp()
 		app->entityManager->DestroyEntity(pEntity);
 
 	}*/
+	app->particleSystem->RemoveParticleEffect(snowSystem);
+	snowSystem = nullptr;
+
 	app->entityManager->enemies.Clear();
 	party.Clear(); goons.Clear();
 
 	//app->audio->StopMusic();
 	return true;
 	
+}
+
+void BattleScene::StartSnowStorm() {
+
+	// Initialize particle system
+	if (snowSystem == nullptr && app->dialogueManager->myState != CUTSCENE) {
+		const char* too = "Assets/snowP.png";
+		snowParticle = new Particle(too, fPoint(0, 0), fPoint(0, 2), 3.0f, SDL_Rect{ 0,0,8,8 }, 1.0f, 2.5f, 100, 255);
+
+		snowSystem = new ParticleEffect(snowParticle, 40, 0.1f, SDL_Rect{ 0,0, 512 , 0 });
+
+		app->particleSystem->AddParticleEffect(snowSystem);
+	}
 }
 
 bool BattleScene::OnGuiMouseClickEvent(GuiControl* control)

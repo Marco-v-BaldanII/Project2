@@ -16,6 +16,8 @@
 #include <map>
 #include "GuiToggle.h"
 #include "../random.h"
+#include "../Particle.h"
+#include "../ParticleSystem.h"
 
 struct SDL_Texture;
 class Quest;
@@ -68,6 +70,8 @@ public:
 
 	void KillUnit(bool isPlayer, Entity* entity);
 
+	void StartSnowStorm();
+
 
 private:
 	SDL_Texture* spriteSheet;
@@ -105,7 +109,12 @@ private:
 	uint mageFx;
 	uint LancerFx;
 
+	Particle* snowParticle;
+	
+
 public:
+	ParticleEffect* snowSystem = nullptr;
+
 	List<Player*> party;
 	List<Enemy*> goons;
 

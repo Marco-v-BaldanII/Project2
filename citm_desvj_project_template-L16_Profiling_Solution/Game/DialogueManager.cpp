@@ -866,6 +866,10 @@ void DialogueManager::Next_Dialogue() {
 			// the cutscene for act 1 has finished
 			myState = NPCS;
 			
+			if (app->battleScene->snowSystem == nullptr) {
+				app->battleScene->StartSnowStorm();
+			}
+
 			/*app->battleScene->Enable();
 			app->backStage->Disable();*/
 			app->levelManager->LoadScene(GameScene::COMBAT);

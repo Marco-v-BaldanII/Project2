@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33627.172
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33423.256
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{2AF9969B-F202-497B-AF30-7BEF9CE8005E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB472429-93DC-4401-97E1-EDB7CE27E941}"
-EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupProject", "SetupProject\SetupProject.wixproj", "{7D285FC3-3E0B-450C-8F08-3551AC4864F9}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WarOfRosesInstaller", "WarOfRosesInstaller\WarOfRosesInstaller.vdproj", "{A08D78E1-EA30-4783-BE75-1CE29E06D717}"
 EndProject
@@ -21,10 +19,6 @@ Global
 		{2AF9969B-F202-497B-AF30-7BEF9CE8005E}.Debug|Win32.Build.0 = Debug|Win32
 		{2AF9969B-F202-497B-AF30-7BEF9CE8005E}.Release|Win32.ActiveCfg = Release|Win32
 		{2AF9969B-F202-497B-AF30-7BEF9CE8005E}.Release|Win32.Build.0 = Release|Win32
-		{7D285FC3-3E0B-450C-8F08-3551AC4864F9}.Debug|Win32.ActiveCfg = Debug|x86
-		{7D285FC3-3E0B-450C-8F08-3551AC4864F9}.Debug|Win32.Build.0 = Debug|x86
-		{7D285FC3-3E0B-450C-8F08-3551AC4864F9}.Release|Win32.ActiveCfg = Release|x86
-		{7D285FC3-3E0B-450C-8F08-3551AC4864F9}.Release|Win32.Build.0 = Release|x86
 		{A08D78E1-EA30-4783-BE75-1CE29E06D717}.Debug|Win32.ActiveCfg = Debug
 		{A08D78E1-EA30-4783-BE75-1CE29E06D717}.Release|Win32.ActiveCfg = Release
 	EndGlobalSection

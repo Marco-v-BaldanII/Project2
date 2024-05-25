@@ -33,6 +33,7 @@ class TurnManager;
 class BackStagePlayer;
 class ItemManager;
 class QuestManager;
+class ParticleSystem;
 class Victory;
 class Lose;
  //Scenes
@@ -136,6 +137,7 @@ public:
 	QuestManager* questManager;
 	PauseMenu* pauseMenu;
 	Inventory* inventory;
+	ParticleSystem* particleSystem;
 
 
 	//scenes

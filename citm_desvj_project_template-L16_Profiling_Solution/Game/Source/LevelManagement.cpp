@@ -9,6 +9,7 @@
 #include "Audio.h"
 #include "BackStage.h"
 #include "../TurnManager.h"
+#include "BattleScene.h"
 
 using namespace std;
 
@@ -142,6 +143,7 @@ bool LevelManagement::Update(float dt)
 			{
 				currentScene = (Module*)app->battleScene;
 				app->turnManager->Enable();
+  				app->battleScene->StartSnowStorm();
 				LOG("BattleScene");
 			}
 		}

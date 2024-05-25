@@ -50,7 +50,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Build\$(Configuration)</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Obj\</IntDir>
-    <ExecutablePath>$(SolutionDir)\Wix;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
     <ExcludePath>$(ExcludePath)</ExcludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -107,6 +107,7 @@
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Lever.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Source\BackStage.cpp" />
@@ -155,6 +156,8 @@
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Lever.h" />
     <ClInclude Include="NPC.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="QuestManager.h" />
     <ClInclude Include="random.h" />

@@ -23,7 +23,7 @@
 #include <iostream>
 #include <sstream>
 #include "Pathfinding.h"
-
+#include "../ParticleSystem.h"
 #include "Intro.h"
 #include "StartMenu.h"
 #include "BattleScene.h"
@@ -83,6 +83,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	
 	pauseMenu = new PauseMenu(true);
 	inventory = new Inventory(true);
+	particleSystem = new ParticleSystem(true);
 	guiManager = new GuiManager(true);
 	fade = new FadeToBlack(true);
 
@@ -117,6 +118,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(questManager);
 	AddModule(dialogueManager);
 	AddModule(castingScene);
+	AddModule(particleSystem);
 	AddModule(guiManager);
 	
 	AddModule(pauseMenu);
