@@ -1,0 +1,734 @@
+<!-- Config file for the game -->
+<!-- L01: DONE 1: Create configuration file-->
+<config>
+  <app>
+    <title>War of Roses</title>
+    <maxFrameDuration value="16"/>
+  </app>
+
+  <renderer>
+    <vsync value="false"/>
+  </renderer>
+
+  <window>
+    <resolution width="512" height="384" scale="3"/>
+    <fullscreen value="false"/>
+    <borderless value="false"/>
+    <resizable value="false"/>
+    <fullscreen_window value="false"/>
+  </window>
+  <map>
+		<lvl1  path="Assets/Maps/Mapanieve3.tmx" />
+		<lvl2  path="Assets/Maps/castillo.tmx" />
+		<minimap path ="Assets/Textures/miniMap.png"/>
+		
+	</map>
+
+  <scene>
+   
+    
+  </scene>
+
+	<entitymanager>
+
+
+		
+
+
+	</entitymanager>
+
+	<itemmanager>
+		
+		<!-- Right now i'm putting the maps here but ideally they should be on the map -->
+		<!-- (1.05 = + 5%)  (0.9 = -10%) -->
+
+		<map value ="0">
+
+		     <item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="3" y="18" textPath ="Assets/Textures/Items/Warcry trumpet.png"/>
+		     
+		     <item name="Might Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png"/>
+		     
+		     <item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"/>
+		</map>
+
+		<map value ="1">
+
+		
+		<item name="Optic Amplifier" type="C" precision ="1.2" speed="0.8" x="49" y="11" textPath ="Assets/Textures/Items/amplifier.png"/>
+
+		<item name="Ironclad Armor" type="C" speed ="0.8" hp ="1.2" x="30" y="6" textPath ="Assets/Textures/Items/armor.png"/>
+
+		<item name="Veil of Vanishing" type="C" atack ="1.85" precision="0.6" x="30" y="26" textPath ="Assets/Textures/Items/veil.png"/>		
+
+
+		     <door num ="1" x ="22" y="22" textPath="Assets/Textures/Items/puerta1.png"/>
+		     
+		     <lever num ="1" x ="49" y="27" textPath="Assets/Textures/Items/Palanca1.png"/>
+		     
+		     <door num ="2" x ="48" y="17" textPath="Assets/Textures/Items/puerta2.png"/>
+		     
+		     <lever num ="2" x ="4" y="37" textPath="Assets/Textures/Items/palanca21.png"/>	
+		     
+		     <door num ="3" x ="29" y="11" textPath="Assets/Textures/Items/puerta3.png"/>
+		     
+		     <lever num ="3" x ="51" y="9" textPath="Assets/Textures/Items/palanca31.png"/>
+
+		</map>
+
+	</itemmanager>
+
+
+	<battle_scene>
+	
+	     <texture path="Assets/Textures/Overworld/overworld sprites finales.png"/>
+		<yorkUI path ="Assets/Textures/UI/York.png"/>
+		<lancasterUI path ="Assets/Textures/UI/Lancaster.png"/>
+		<yorhHpBar path = "Assets/Textures/UI/YorkHpBar.png"/>
+		<lancasterHpBar path = "Assets/Textures/UI/LancasterHpBar.png"/>
+		<background path ="Assets/Textures/Battle scene editted.png"/>
+		
+		
+		<soundeffect name="archersound" path="Assets/Audio/Fx/ArcherFX.ogg"/>
+		<soundeffect name="knigthsound" path="Assets/Audio/Fx/KnigthAtackFX.ogg"/>
+		<soundeffect name="magesound" path="Assets/Audio/Fx/MageAtackFX.ogg"/>
+		<soundeffect name="lancersound" path="Assets/Audio/Fx/LancerAtackFX.ogg"/>
+		<soundeffect name="defendsound" path="Assets/Audio/Fx/DefenseFX.ogg"/>
+		<soundeffect name="healsound" path="Assets/Audio/Fx/HealFX.ogg"/>
+		
+		
+    <Mage>
+
+
+		<animation name="wrigth">
+			<frame x="112" y="230" w="16" h="26" />
+			<frame x="112" y="262" w="16" h="26" />
+		</animation>
+		
+		<animation name="up">
+			<frame x="112" y="166" w="17" h="26" />
+			<frame x="112" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="down">
+			<frame x="112" y="6" w="17" h="26" />
+			<frame x="112" y="36" w="17" h="28" />
+			<frame x="112" y="68" w="17" h="28" />
+		</animation>
+
+    </Mage>
+	<Archer>
+
+		<animation name="wrigth">
+			<frame x="144" y="230" w="16" h="26" />
+			<frame x="144" y="262" w="16" h="26" />
+		</animation>
+
+		<animation name="up">
+			<frame x="144" y="166" w="17" h="26" />
+			<frame x="144" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="down">
+			<frame x="144" y="6" w="17" h="26" />
+			<frame x="144" y="36" w="17" h="28" />
+			<frame x="144" y="68" w="17" h="28" />
+		</animation>
+    </Archer>
+	<Knight>
+
+		<animation name="wrigth">
+			<frame x="80" y="230" w="16" h="26" />
+			<frame x="80" y="262" w="16" h="26" />
+		</animation>
+
+		<animation name="up">
+			<frame x="80" y="166" w="17" h="26" />
+			<frame x="80" y="196" w="17" h="28" />
+		</animation>
+
+		<animation name="down">
+			<frame x="80" y="6" w="17" h="26" />
+			<frame x="80" y="36" w="17" h="28" />
+			<frame x="80" y="68" w="17" h="28" />
+		</animation>
+
+    </Knight>
+		
+		<!--comment red crowned guy-->
+		<Richard3>
+			
+		
+		  <animation name="wrigth">
+		  	<frame x="46" y="232" w="17" h="24" />
+		  	<frame x="46" y="264" w="17" h="24" />
+		  </animation>
+		  
+		  <animation name="up">
+		  	<frame x="46" y="163" w="19" h="29" />
+		  	<frame x="46" y="195" w="19" h="29" />
+		  </animation>
+		  
+		  <animation name="down">
+		  	<frame x="46" y="9" w="19" h="23" />
+		  	<frame x="46" y="39" w="19" h="25" />
+		  	<frame x="46" y="71" w="19" h="25" />
+		  </animation>
+
+		</Richard3>
+
+	<DukeofYork>
+		<animation name="wrigth">
+			<frame x="13" y="232" w="20" h="24" />
+			<frame x="13" y="264" w="20" h="24" />
+		</animation>
+
+		<animation name="up">
+			<frame x="13" y="166" w="19" h="26" />
+			<frame x="13" y="197" w="19" h="27" />
+		</animation>
+
+		<animation name="down">
+			<frame x="13" y="9" w="21" h="23" />
+			<frame x="13" y="39" w="19" h="25" />
+			<frame x="13" y="71" w="19" h="25" />
+		</animation>
+	</DukeofYork>
+	<PrinceEdward>
+		<!--comment papa noel navaja-->
+		<animation name="wrigth">
+			<frame x="176" y="235" w="15" h="21" />
+			<frame x="176" y="267" w="15" h="21" />
+		</animation>
+
+		<animation name="up">
+			<frame x="176" y="172" w="17" h="20" />
+			<frame x="176" y="202" w="17" h="22" />
+		</animation>
+
+		<animation name="down">
+			<frame x="176" y="10" w="17" h="22" />
+			<frame x="176" y="39" w="17" h="25" />
+			<frame x="176" y="71" w="17" h="25" />
+		</animation>
+	</PrinceEdward>
+	<HenryTudor>
+
+		<!--comment da vinchi viejo -->
+		<animation name="wrigth">
+			<frame x="206" y="231" w="19" h="25" />
+			<frame x="206" y="263" w="19" h="25" />
+		</animation>
+
+		<animation name="up">
+			<frame x="207" y="169" w="17" h="23" />
+			<frame x="207" y="198" w="17" h="26" />
+		</animation>
+
+		<animation name="down">
+			<frame x="205" y="8" w="21" h="24" />
+			<frame x="206" y="38" w="19" h="26" />
+			<frame x="206" y="71" w="19" h="26" />
+		</animation>
+	</HenryTudor>
+
+		<Warwick>
+
+		<!--Chino barça -->
+		<animation name="wrigth">
+			<frame x="240" y="232" w="17" h="24" />
+			<frame x="240" y="265" w="17" h="23" />
+		</animation>
+
+		<animation name="up">
+			<frame x="240" y="168" w="17" h="24" />
+			<frame x="240" y="199" w="17" h="25" />
+		</animation>
+
+		<animation name="down">
+			<frame x="240" y="8" w="19" h="24" />
+			<frame x="240" y="37" w="19" h="27" />
+			<frame x="240" y="69" w="19" h="27" />
+		</animation>
+	</Warwick>
+		
+		<EdwardVI>
+
+		<!--Rubio Joven -->
+		<animation name="wrigth">
+			<frame x="304" y="232" w="16" h="24" />
+			<frame x="304" y="264" w="16" h="24" />
+		</animation>
+
+		<animation name="up">
+			<frame x="304" y="169" w="17" h="23" />
+			<frame x="304" y="200" w="17" h="24" />
+		</animation>
+
+		<animation name="down">
+			<frame x="304" y="9" w="17" h="23" />
+			<frame x="304" y="38" w="17" h="26" />
+			<frame x="304" y="71" w="17" h="26" />
+		</animation>
+	</EdwardVI>
+		
+	<Margaret>
+
+		<!--mujer de azul -->
+		<animation name="wrigth">
+			<frame x="336" y="232" w="17" h="24" />
+			<frame x="336" y="264" w="16" h="24" />
+		</animation>
+
+		<animation name="up">
+			<frame x="336" y="166" w="17" h="26" />
+			<frame x="336" y="197" w="17" h="24" />
+		</animation>
+
+		<animation name="down">
+			<frame x="336" y="8" w="21" h="24" />
+			<frame x="336" y="38" w="21" h="26" />
+			<frame x="336" y="70" w="21" h="26" />
+		</animation>
+	</Margaret>
+
+		<Lancastrian>
+
+			<animation name="wrigth">
+				<frame x="368" y="232" w="17" h="24" />
+				<frame x="368" y="264" w="16" h="24" />
+			</animation>
+
+			<animation name="up">
+				<frame x="368" y="166" w="17" h="26" />
+				<frame x="368" y="197" w="17" h="24" />
+			</animation>
+
+			<animation name="down">
+				<frame x="368" y="8" w="21" h="24" />
+				<frame x="368" y="38" w="21" h="26" />
+				<frame x="368" y="70" w="21" h="26" />
+			</animation>
+			
+			
+		</Lancastrian>
+
+
+
+
+		<battleMaps>
+			<map name ="Northampton">
+				<!-- Paladin = 0, Archer = 1, Knight = 2, Armoured Knight = 3, Mage = 4, DarkMage = 5-->
+
+				<sideQuest type="2" objective="Bonus Objective: Don't let any of your units fall"/>
+				<!--type: 0 = defeat, 1 = fetchQuest , 2 = don't loose units-->
+				<mainQuest type="0" objective="Main Objective: Defeat the Duke of York" target ="Duke of York"/>
+
+
+
+				<player  name="Prince Edward"  x="3" y="23" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8">
+
+
+					<dialogue text ="How could you . . . break our promise Richard ?"/>
+
+					<conversation owner ="Margaret">
+						<dialogue  owner ="Margaret" text="Be on the look out Edward, In the tide of battle you can't afford to loose focus"/>
+						<dialogue  owner ="Prince Edward" text="Of course mother, this... this is what I trained for. Yet I didn't think the circumastances would be like this"/>
+						<dialogue  owner ="Prince Edward" text="Fighting againts our friends, our family"/>
+
+						<dialogue  owner ="Margaret" text="Tis a price to pay Edward, for the privileges of the dominant class. No king has ruled without having to dirty their blade with their bretheren"/>
+						<dialogue  owner ="Margaret" text="If you must weep, I shall not punish you for it. But do so after the fight , concentrate on staying alive !"/>
+						
+					</conversation>
+
+					<conversation owner ="Henry Tudor">
+
+						<dialogue  owner ="Prince Edward" text="Henry !, how are you holding up?"/>
+						<dialogue  owner ="Henry Tudor" text="Your highness! it is no time to be worrying about others"/>
+						<dialogue  owner ="Prince Edward" text="A king who doesn't lead his subjects into the fight is no king at all"/>
+						<dialogue  owner ="Henry Tudor" text="uuf, you sounded exactly like him"/>
+						<dialogue owner ="Henry Tudor" text="Very well, let's give'em hell your majesty"/>
+						<dialogue  owner ="Prince Edward" text="I've got your back"/>
+						<dialogue  owner ="Henry Tudor" text="So do I !"/>
+						
+					</conversation>
+					
+
+				</player>
+
+				<player  name="Henry Tudor" x="3" y ="24" unit_type="0" attack="5" hp="12" precision="90" luck="25" speed="30" movement="10">
+
+
+					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
+
+					<conversation owner ="Prince Edward">
+
+						<dialogue  owner ="Prince Edward" text="Henry !, how are you holding up?"/>
+						<dialogue  owner ="Henry Tudor" text="Your highness! it is no time to be worrying about others"/>
+						<dialogue  owner ="Prince Edward" text="A king who doesn't lead his subjects into the fight is no king at all"/>
+						<dialogue  owner ="Henry Tudor" text="uuf, you sounded exactly like him"/>
+						<dialogue owner ="Henry Tudor" text="Very well, let's give'em hell your majesty"/>
+						<dialogue  owner ="Prince Edward" text="I've got your back"/>
+						<dialogue  owner ="Henry Tudor" text="So do I !"/>
+
+					</conversation>
+
+					<conversation owner ="Margaret">
+
+						<dialogue  owner ="Margaret" text="Henry, I'm glad to have a trusted ally of Lancaster like you standing beside my Edward"/>
+						<dialogue  owner ="Henry Tudor" text="You honour me my Queen. The prince is, such a gentle sword, I cannot but feat for him in a place like this"/>
+						<dialogue  owner ="Margaret" text="I knew this day would come yet, againts my wishes, he ended up bonding very closely with the York boy"/>
+						<dialogue  owner ="Henry Tudor" text="Yes, I did too. And yet , now that it has come to this. I know i must not waver with my blade"/>
+						<dialogue  owner ="Margaret" text="Just like your uncle, you're a smart boy. I swear, your loyalty will be rewarded"/>
+
+					</conversation>
+
+				</player>
+
+
+				<player  name="Margaret" x="3" y="25" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="15" movement="6">
+
+
+					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
+
+					<conversation owner ="Prince Edward">
+						<dialogue  owner ="Margaret" text="Be on the look out Edward, In the tide of battle you can't afford to loose focus"/>
+						<dialogue  owner ="Prince Edward" text="Of course mother, this... this is what I trained for. Yet I didn't think the circumastances would be like this"/>
+						<dialogue  owner ="Prince Edward" text="Fighting againts our friends, our family"/>
+
+						<dialogue  owner ="Margaret" text="Tis a price to pay Edward, for the privileges of the dominant class. No king has ruled without having to dirty their blade with their bretheren"/>
+						<dialogue  owner ="Margaret" text="If you must weep, I shall not punish you for it. But do so after the fight , concentrate on staying alive !"/>
+
+					</conversation>
+
+					<conversation owner ="Henry Tudor">
+
+						<dialogue  owner ="Margaret" text="Henry, I'm glad to have a trusted ally of Lancaster like you standing beside my Edward"/>
+						<dialogue  owner ="Henry Tudor" text="You honour me my Queen. The prince is, such a gentle sword, I cannot but feat for him in a place like this"/>
+						<dialogue  owner ="Margaret" text="I knew this day would come yet, againts my wishes, he ended up bonding very closely with the York boy"/>
+						<dialogue  owner ="Henry Tudor" text="Yes, I did too. And yet , now that it has come to this. I know i must not waver with my blade"/>
+						<dialogue  owner ="Margaret" text="Just like your uncle, you're a smart boy. I swear, your loyalty will be rewarded"/>
+
+					</conversation>
+
+				</player>
+
+				<enemy name= "Duke of York" x="11" y="4" unit_type="0"  attack="5" hp="12" precision="90" luck="25" speed="30" movement="10" exp="140">
+
+					<dialogue text =" Dammn it! Lancasters , you'll live to regret this humiliation"/>
+
+				</enemy>
+
+				<enemy name= "Edward of York" x="40" y="13" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="140">
+
+					<dialogue text ="I must not die here, father I'll support you from the back lines"/>
+
+				</enemy>
+
+				<enemy name= "Earl of Warwick" x="38" y="29" unit_type="3"  attack="6" hp="18" precision="70" luck="20" speed="15" movement="6" exp="140">
+
+					<dialogue text ="Grrrr :("/>
+
+				</enemy>
+
+				<enemy name= "Archer" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="140"/>
+
+
+				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="100"/>
+				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="70" luck="25" speed="20" movement="8"  exp="60"/>
+				<enemy name= "Mage" x="24" y="32" unit_type="4"  attack="9" hp="12" precision="75" luck="20" speed="20" movement="8"  exp="60"/>
+				<enemy name= "Mage" x="46" y="22" unit_type="4"  attack="9" hp="12" precision="75" luck="20" speed="20" movement="8"  exp="60"/>
+				<enemy name= "Mage" x="43" y="18" unit_type="4"  attack="9" hp="12" precision="75" luck="20" speed="20" movement="8"  exp="60"/>
+				<enemy name= "Archer" x="24" y="10" unit_type="1"  attack="8" hp="12" precision="70" luck="25" speed="20" movement="8"  exp="60"/>
+				<enemy name= "Knight" x="23" y="9" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="60"/>
+
+
+				<!-- Paladin = 0, Archer = 1, Knight = 2, Armoured Knight = 3, Mage = 4, DarkMage = 5-->
+
+			</map>
+
+			<map name ="Castle">
+
+			<mainQuest type="0" objective="Main Objective: Defeat Richard III" target ="Richard III"/>
+
+				<player  name="Henry VI"  x="7" y="38" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8">
+
+					<dialogue text ="-"/>
+					<lvlUp text = "-"/>
+
+				</player>
+
+				<player  name="Margaret" x="8" y="38" unit_type="3"  attack="8" hp="25" precision="70" luck="20" speed="15" movement="6" >
+
+					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
+					<lvlUp text = "Margaret of Anjuo feasts upon you feeble Yorks"/>
+
+				</player>
+
+				<player  name="Prince Edward"  x="9" y="38" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8">
+
+					<dialogue text ="How could you . . . break our promise Richard ?"/>
+					<lvlUp text = "I will continueo to apply myself for my kingdom"/>
+
+				</player>
+
+				<player  name="Henry Tudor" x="10" y ="38" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
+
+					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
+					<lvlUp text = "This strength will help me protect what I love"/>
+
+				</player>
+
+				<player  name="Jasper Tudor" x="6" y ="38" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
+
+					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
+					<lvlUp text = "This strength will help me protect what I love"/>
+
+				</player>
+
+
+
+				<enemy name= "Duke of York" x="27" y="26" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
+
+					<dialogue text =" Dammn it! Lancasters , you'll live to regret this humiliation"/>
+
+				</enemy>
+
+				<enemy name= "Earl of Warwick" x="49" y="13" unit_type="3"  attack="8" hp="25" precision="70" luck="20" speed="15" movement="6" exp = "40">
+
+					<dialogue text ="Grrrr :("/>
+
+				</enemy>
+
+				<enemy name= "Edward of York" x="7" y="7" unit_type="2"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
+
+					<dialogue text ="I must not die here, father I'll support you from the back lines"/>
+
+				</enemy>
+
+				<enemy name= "Richard III" x="10" y="7" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
+
+					<dialogue text ="-"/>
+
+				</enemy>
+
+				<enemy name= "George of Clarence" x="8" y="28" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
+
+					<dialogue text ="May my final arrow find its mark, even in death"/>
+
+				</enemy>
+
+				<enemy name= "William Catesby" x="29" y="12" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
+
+					<dialogue text ="-"/>
+
+				</enemy>
+
+				<enemy name= "Knight" x="8" y="34" unit_type="2"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp="100" />
+				<enemy name= "Archer" x="9" y="34" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp="100"/>
+				<enemy name= "Mage" x="18" y="26" unit_type="4"  attack="11" hp="16" precision="75" luck="30" speed="20" movement="8" exp="100"/>
+				<enemy name= "Mage" x="48" y="26" unit_type="4"  attack="11" hp="16" precision="75" luck="30" speed="20" movement="8" exp="100"/>
+				<enemy name= "Mage" x="38" y="12" unit_type="4"  attack="11" hp="16" precision="75" luck="30" speed="20" movement="8" exp="20"/>
+				<enemy name= "Archer" x="22" y="12" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp="20"/>
+
+			</map>			
+			
+			
+		</battleMaps>
+
+		<battleSprites>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Prince Edward.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Henry Tudor.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Duke of York.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Knight.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Archer.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Mage.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Earl of Warwick.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Margaret.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Catesby.png"/>
+
+		</battleSprites>
+	
+		
+	</battle_scene>
+
+	<guiManager>
+
+
+		<UItexture path ="Assets/Textures/test.png"/>
+		<UItexture2 path ="Assets/Textures/UI2.png"/>
+		<tex_smallPanel path="Assets/Textures/smallPanel.png"/>
+		<tex_mediumPanel path ="Assets/Textures/mediumPanel.png"/>
+		<tex_bigPanel path ="Assets/Textures/bigPanel.png"/>
+		<tex_inventory path ="Assets/Textures/inventory.png"/>
+		<tex_inventory_tabs path ="Assets/Textures/inventory_tabs.png"/>
+		<tex_inventory_Items path ="Assets/Textures/inventory_Items.png"/>
+		
+		
+		
+	</guiManager>
+
+
+	
+
+	<intro>
+		<titleScreen path ="Assets/Textures/Logo screen.png"/>
+		<part1 path="Assets/Textures/loog/part1.png"/>
+		<part2 path="Assets/Textures/loog/part2.png"/>
+	</intro>
+
+	<lose>
+		<titleScreen path ="Assets/Textures/Losing Screen.png"/>
+	</lose>
+
+	<win>
+		<titleScreen path ="Assets/Textures/Winning screen.png"/>
+	</win>
+
+	<backStage>
+	    <talkBtn path ="Assets/Textures/UI/Z_Key_Light.png"/>
+
+		<ID value ="0">
+
+
+			<background path ="Assets/Textures/Backstageprops2-export.png"/>
+
+			<talkBtn path ="Assets/Textures/UI/Z_Key_Light.png"/>
+
+		<npc name = "Guy4" x ="300" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
+		    <texture path="Assets/Textures/BackstageNPCs/Soldado1_medium.png"/>
+			<dialogue text = "I am the battle master, it is my job to ensure that the fighting scenes are properly portrayed" ID="10"          />
+			<dialogue text = "Archers, Knights, Cavelliers... there are many different types of units in the battlefield, it is important that each of them play their part correctly" ID="8"          />
+			<dialogue text = "Would you like to now more about any of the units?" choiceA ="Yes" choiceB="No" ID="7"          />
+
+			<dialogue text = "Very well, be sure to play your part" ID="8"         />
+
+			<dialogue text = "Which unit do you want to know about" choiceA="Paladin" choiceB="Archer" ID="6"          />
+			<dialogue text = "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="5"          />
+			<dialogue text =  "Paladins are the most versatile class. They have enhanced movement thanks to their trusty steeds. They aren't expceptionally strong againts any class but they aren't exceptionally weak to any either." ID="4"    />
+			<dialogue text = "Archers are dasterdly tricksters that can chip away at your units from a distance, they act as counters to your magic users but they are weak againts knights." ID="7"          />
+		</npc>
+
+			<npc name = "Guy5" x ="200" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
+				<texture path="Assets/Textures/BackstageNPCs/Soldado1_medium.png"/>
+				<dialogue text = "Please find the Warcry trumpet" ID="5" choiceA ="I accept" choiceB="I refuse" >
+
+					<sideQuest type="1" objective="Find the Warcry trumpet"  target="Warcry Trumpet"/>
+					<!--type: 0 = defeat, 1 = fetchQuest-->
+				</dialogue>
+
+				<dialogue text = "Very well, be sure to play your part" ID="3"         />
+
+				<dialogue text = "Which unit do you want to know about"  ID="6"          />
+				
+			</npc>
+			
+			
+
+	
+
+		<npc name = "Guy3" x ="160" y="200" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
+			
+			<!--comment 0,0 71, 150-->
+			<texture path="Assets/Textures/BackstageNPCs/Soldado2_medium.png"/>
+			
+			<dialogue text = "The play is about to start" ID="10"          />
+			<dialogue text = "I'm so very excited" ID="9"          />
+			<dialogue text = "Though I seem to have forgotten what the play is about" ID="8"          />
+			<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="7"          />
+			<dialogue text = "Please defeat Earl of Warwick in the next battle" ID="5" choiceA ="I accept" choiceB="I refuse" >
+
+				<sideQuest type="0" objective="Defeat Earl of Warwick in the battle of Northampton"  target="Earl of Warwick"/> <!--type: 0 = defeat, 1 = fetchQuest-->
+
+			</dialogue>
+			<dialogue text = "Watch out for his poisonous arrows" ID="4"         />
+			<!-- second branch-->
+			<dialogue text = "Are you trolling me?" ID="7"         />
+			<dialogue text = "I will have my revenge" ID="6"         />
+		</npc>
+			
+			
+		
+			<!-- coment -->
+
+	
+
+		<npc name = "PlayWritter" x ="500" y="100" wait="500" Bx ="0" By ="0" Bw="114" Bh ="223">
+		<texture path="Assets/Textures/BackstageNPCs/Soldado_medium.png"/>
+			<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="470"          />
+			<dialogue text = "Let the show begin"  ID="469"          />
+
+			<!-- second branch-->
+			<dialogue text = "Take your time"  ID="500"          />
+
+		</npc>
+
+		</ID>
+
+		<ID value ="1">
+
+			<background path ="Assets/Textures/FirstBackstage-export.png"/>
+			<npc name = "PlayWritter" x ="500" y="100" wait="500" Bx ="0" By ="0" Bw="114" Bh ="223">
+				<texture path="Assets/Textures/BackstageNPCs/Soldado_medium.png"/>
+				<dialogue text = "Are you ready to start the play?"  choiceA="Aye" choiceB="gosh no" ID="470"          />
+				<dialogue text = "Let the show begin"  ID="469"          />
+
+				<!-- second branch-->
+				<dialogue text = "Take your time"  ID="500"          />
+
+			</npc>
+
+			<npc name = "Maria Reina" x ="160" y="200" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
+
+				<!--comment 0,0 71, 150-->
+				<texture path="Assets/Textures/BackstageNPCs/Soldado2_medium.png"/>
+
+				<dialogue text = "The play is about to start" ID="10"          />
+				<dialogue text = "I'm so very excited" ID="9"          />
+				<dialogue text = "Though I seem to have forgotten what the play is about" ID="8"          />
+				<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="7"          />
+				<dialogue text = "Please defeat George of York in the next battle" ID="5" choiceA ="I accept" choiceB="I refuse" >
+
+					<sideQuest type="0" objective="Defeat George of York in the battle of Northampton"  target="George of York"/>
+					<!--type: 0 = defeat, 1 = fetchQuest-->
+
+				</dialogue>
+				<dialogue text = "Watch out for his poisonous arrows" ID="4"         />
+				<!-- second branch-->
+				<dialogue text = "Are you trolling me?" ID="7"         />
+				<dialogue text = "I will have my revenge" ID="6"         />
+			</npc>
+
+
+		</ID>
+
+
+
+
+	</backStage>
+
+	<castingScene>
+
+	<actor name="Diego Diavollo" dialogue="Buon giorno" path ="Assets/Textures/Actors/Diego.png"/>
+	<actor name="Tessa Thompson" dialogue="Buon giorno2" path ="Assets/Textures/Actors/tessa.png"/>
+	<actor name="Alicia Sol" dialogue="Buon giorno3" path ="Assets/Textures/Actors/awela(1).png"/>
+	<actor name="Mohan Boot" dialogue="Buon giorno3" path ="Assets/Textures/Actors/rasheed (1).png"/>
+	<actor name="EmmaDragonfly" dialogue="Buon giorno3" path ="Assets/Textures/Actors/ginny (1).png"/>
+
+	<role text="Henry VI"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png" />
+	<role text="Prince Edward"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
+	<role text="Margaret"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
+	<role text="Jasper Tudor"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
+	<role text="Henry Tudor"  path = "Assets/Textures/LancasterOutfits/HenryTudorOutfit.png"/>
+
+	
+	</castingScene>
+
+
+	<questmanager>
+		<soundeffect name="completesquestsound" path="Assets/Audio/Fx/CompletedQuestFX.ogg"/>
+		<soundeffect name="newquestsound" path="Assets/Audio/Fx/NewQuestFX.ogg"/>
+		
+	</questmanager>
+
+	
+</config>

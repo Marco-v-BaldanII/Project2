@@ -1,0 +1,853 @@
+<?xml version="1.0"?>
+
+
+<dialogues>
+
+<shakesperean>
+
+<Scene num="1" dialogues ="26"/>
+
+
+<Scene num="1" dialogues ="27"/>
+
+
+<dialogue text="Anon York, this dram game of yours shalt cometh to an endeth" owner="Margaret" position="1"  background="Assets/Textures/Backgrounds/Northampton_Fields.png" voice="Assets/Audio/lines/margaret001.ogg" />
+
+<dialogue text="Thee'll beest judged harshly, the crime of treason against the king is serious" owner="Jasper Tudor" position="2" />
+
+<dialogue text="Cryst, the king !!!" owner="Soldier" position="2" />
+
+<dialogue text="Richard, who is't wast unseen during the battleth is discovered to beest threatening the king at sword pointeth" owner="Narrator" />
+
+<dialogue text="Did quit t Margaret, surrender thy weapons or the king bites the dusteth" owner="Richard of York" position="2" />
+
+<dialogue text="Holp, mother, someone holp me !!!" owner="Henry VI" position="2" />
+
+<dialogue text="Father noo !!!" owner="Prince Edward" position="1" />
+
+<dialogue text="Damm t, i forgot about the youngest one, yond spawn of Flibbertigibbet that carries the same nameth as his despicable fath'r  .  Richard!!!" owner="Margaret" position="1" />
+
+<dialogue text=" Unbelievable, mine own lord, thou art son is" owner="Warwick" position="1" />
+
+<dialogue text="A true sir of the hurlyburly field.  Puts us adults to shame doesn't that gent Warwick ?" owner="Duke of York" position="1" />
+
+<dialogue text="Aye, very much so.  That gent's given us the perfect chance" owner="Warwick" position="1" />
+
+<dialogue text="Thou can't-" owner="Margaret" position="1" />
+
+<dialogue text="Holdeth t, one stepeth closer and the king meets his endeth.  His guts shall nurture this blasted field" owner="Richard of York" position="2" />
+
+<dialogue text="Thee scum" owner="Henry Tudor" position="1" />
+
+<dialogue text="Wherefore richard ?" owner="Prince Edward" position="1" />
+
+<dialogue text="Well done, mine own son.  So, king of daws what shall t beest, handeth the coronet 'r drowneth in the did grind ?" owner="Duke of York" position="1" />
+
+<dialogue text="Nooo prithee thee musn't, nay more blood prithee.  This coronet is mine own punishment, I might not but holdeth it until I perish, not longeth anon I gage t wonneth't taketh longeth. I beg filthy not thy blade with blood such as mineth !!!" owner="Henry VI" position="2" />
+
+<dialogue text="Blinking idiot !!!" owner="Warwick" position="1" />
+
+<dialogue text="T wouldst tarnish mine own honor to taketh his life in such a state.  Very well.  I Richard of York am the one and true heir to the english coronet, I shall succeedeth thee in line and beest deemed as Regent and protectethor of the Holy Kingdom here and anon" owner="Duke of York" position="1" />
+
+<dialogue text="Aye quite, as thee wisheth.  York thy family shall ruleth this landeth" owner="Henry VI" position="2" />
+
+<dialogue text="Impossible." owner="Margaret" position="1" />
+
+<dialogue text="Brother wherefore ?" owner="Jasper Tudor" position="1" />
+
+<dialogue text="Father madeth it ! isn't t most wondrous brother ?" owner="George of York" position="2" />
+
+<dialogue text="Tis kind of insulting, having the king pleadeth mercy liketh this.  We wouldst've hath seemed animals to taketh his headeth in front of his son" owner="Edward of York" position="2" />
+
+<dialogue text="Thee shall becometh king mine own dear brother" owner="George of York" position="2" />
+
+<dialogue text="Yond day is still a longeth way off, and if 't be true aught we shouldst beest thanking Richard even but now" owner="Edward of York" position="2" />	
+
+<dialogue text="That day is still a long way off, and if anything we should be thanking Richard right now." owner="Edward of York" position="2" />	
+
+<!-- New Scene-->
+
+<Scene num="2" dialogues ="33"/>
+
+<dialogue text="Act 2: The boar's honor" owner="Narrator"  background ="Assets/Textures/Backgrounds/King's_Chambers.png" />	
+
+
+<dialogue text=" The battleth at the fields of Northampton between the two Plantagent houses did start in Lancaster's favor.  Despite his majesty being absent from the conflict, his jointress's words were able to rally up the soldiers " owner="Narrator" />
+
+
+	<dialogue text="York's enshielf ace were the reinforcements did provide by the Earl of Warwick, but these did prove unable to breaketh through the foe's right flank. 
+" owner="Narrator" />
+
+	<dialogue text ="As York wast forced into a pincheth in the alleyways of Northampton, a enshielf trumpcard revealed itself in the tenacity of York's very owneth son" owner ="narrator"/>
+
+<dialogue text="The merely 12 year fusty Richard of York, hadst did manage to slither into the King's tent and anon did hold that gent hostage to York's mercy" owner="Narrator" />
+
+<dialogue text="King Henry's life wast spared, and his crowned wast coequal did maintain with the condition of bequeathing his inheritance to the Duke of York.  Stripping his only son, Prince Henry of Westminster of his reigal title" owner="Narrator" />
+
+<dialogue text="Though the King wast perfectly contempt with this outcome and didst not bethink much of it, the Queen certainly wasn't " owner="Narrator" />
+
+
+<dialogue text="Scene 1: Palace of London" owner="Narrator" />
+
+<dialogue text="What were thee bethinking Henry, letting yourself receiveth did capture by a brat.  Thee didn't coequal putteth up a square didst thee? Hath followed that gent, right? Thee didst as the traitor's issue toldeth thee? Thy gullibility rivals yond of a gudgeon, What kind of king art thee!?" owner="Margaret" position="1" />
+
+<dialogue text="A kind King, Margaret.  If 't be true i surrendered then. There'd beest nay m're needeth to square, we couldst all wend home and playeth together. Richard wast at each moment better than me at physical games" owner="Henry VI" position="2" />
+
+<dialogue text="I can't taketh thee anymore Henry! I.  I can't standeth thy tush tush, I can barely standeth the bethought of thee!!!" owner="Margaret" position="1" />
+
+<dialogue text="I'm not thy mother henry, i'm thy jointress!!!, thy jointress!!!" owner="Margaret" position="1" />
+
+<dialogue text="For the lasteth 15 years! -the Queen of this landeth! a landeth i never did love, a foreign landeth, I wast not born in!" owner="Margaret" position="1" />
+
+<dialogue text="Did marry off, to a foreign landeth and foreign sir to endeth a war i never did partake in!" owner="Margaret" position="1" />
+
+<dialogue text="A sir i never did love!" owner="Margaret" position="1" />
+
+<dialogue text="For the lasteth 12 years, the mother of thy issue thy only heir !" owner="Margaret" position="1" />
+
+<dialogue text="Heareth me well Henry, I careth not for this landeth, I careth not for t's people and I careth not for its idiotic, meak and pathetic exsufflicate shell and lousy colours of a King!" owner="Margaret" position="1" />
+
+<dialogue text="If 't be true thee can't taketh the coronet backeth, I'll doth t myself !" owner="Margaret" position="1" />
+
+<dialogue text="So thee doth remember mine own nameth" owner="Margaret" position="1" />
+
+<dialogue text="I shall square" owner="Henry VI" position="2" />
+
+<dialogue text="What's this?" owner="Margaret" position="1" />
+
+<dialogue text="All mine own life, other has't been taking decisions for me. A king is meanteth to beest the landeth's supreme authority but i wast at each moment afraid" owner="Henry VI" position="2" />
+
+<dialogue text="I'm did confuse, I knoweth not what's right ot wrong anymore, I wanteth to wend backeth to mine own mother. I'm so afeard Margaret" owner="Henry VI" position="2" />
+
+<dialogue text="And yet  . . . Edward is not here" owner="Henry VI" position="2" />
+
+<dialogue text="That gent's brave, that gent wouldst beest crying for thee if 't be true that gent wast liketh me" owner="Henry VI" position="2" />
+
+<dialogue text="I bethink Edward shall beest a valorous king" owner="Henry VI" position="2" />
+
+<dialogue text="Thee alas deranged blinking idiot, what valorous is declaring yond anon ?!" owner="Margaret" position="1" />
+
+<dialogue text="I'm sorry prithee forgive me!" owner="Henry VI" position="2" />
+
+<dialogue text="(sigh) at which hour thee putteth out knave backeth on the throne Henry" owner="Margaret" position="1" />
+
+<dialogue text="I gage to teachest yond wprm of York what happeneth at which hour thee mess with mine own family. Sadly yond enwheels thee too Henry" owner="Margaret" position="1" />
+
+<dialogue text="Margaret!!! thee loveth me?" owner="Henry VI" position="2" />
+
+<dialogue text="Break thee off thee crazy daw!" owner="Margaret" position="1" />
+
+<dialogue text="Shut up you crazy fool!" owner="Margaret" position="1" />
+
+<!-- Another Scene -->
+<Scene num="2" dialogues ="53"/>
+
+<dialogue text="Scene 2 - Raby Castle" owner ="Narrator" background ="Assets/Textures/Backgrounds/NevilleDiner.png"  />
+
+<dialogue text ="The duke of York is celebrating his victory with his sons in the hospitality of his most Warwick, his most trusted compannion"/>
+	
+<dialogue text="Please a toast to his majesty, Richard the Third!!! The name of a true king!" position="2"  owner="Warwick"/>
+
+<dialogue text="Yes, to Richard the III" position="1" owner ="Richard of York" />
+
+<dialogue text="To Richard the III" position="1" owner ="George of York"/>
+
+<dialogue text="Cheers for king Richard" position="1" owner ="Edward of York" />
+
+<dialogue owner ="Duke of York" text="Nonsense, I wouldn't have come that far without the aid of my wonderful boys, you especially Richard. And of course, my debt for you grows ever larger my good friend Warwick." position="2" />
+
+<dialogue owner ="Duke of York" text="When I finally step into the throne you will all be rewarded handsomely." position="2" />
+
+<dialogue text="William Catesby, a member of the parliament, closely affiliated with house Neville enters the room anxiously" owner= "Narrator"/>
+
+<dialogue owner ="Catesby" text="My lords there is a-" position="1" />
+
+<dialogue owner="Warwick" text="Catesby, we are in the middle of a private celebration in honor of his majesty. Which you should address properly by the way." position="2" />
+
+<dialogue owner="Warwick" text="The times are changing Catesby, I advise you to be in the good side of our next rulers, house York" position="2" />
+
+<dialogue owner ="Catesby" text="I'm sorry your majesty but. . . the townsfolk are gathered around the Neville estate waiting for a public statement" position="1" />
+
+<dialogue owner ="Duke of York" text="Ah awaiting a public statement from their next monarch is only natural, you shouldn't act so concerned my friend. . . Catesby was it?" position="2" />
+
+<dialogue owner ="Edward of York" text="This is great, you should go and greet your followers father" position="2" />
+
+<dialogue owner ="Catesby" text="No your highness it's , it's King Henry" position="1" />
+
+<dialogue owner="Warwick" text="What did you say Catesby?" position="2" />
+
+<dialogue text="You will not refer to him as King any longer." position="2" owner ="George of York" />
+
+<dialogue owner ="Catesby" text="Yes, it's just that K- lord Henry has released a royal manifesto. It's all over the parliament and most nobles are already making their bets for the upcoming battle." position="1" />
+
+<dialogue text="The. . . next  battle?" position="1"  owner ="Richard of York"/>
+
+<dialogue owner="Warwick" text="grrr that miserable fool. Catesby fetch me that manifesto" position="2" />
+
+<dialogue owner ="Catesby" text="Here it is my lord" position="1" />
+
+<dialogue owner ="Duke of York" text="Let's see. . ." position="2" />
+
+<dialogue  owner ="Duke of York" text="Let's see '' People of England, I am Henry the sixth the King of this land and father to your crown prince. " position="2" />
+
+<dialogue owner ="Duke of York" text= "The house of Lancaster has long carried on the role entrusted to us by god, to govern this holy land through hardship and strife and rebuild it time and time again from the embers of ash." position ="2"/>
+
+<dialogue owner ="Duke of York" text="Together with my wife Queen Margaret, our house represents the bond with France and the ending of a century long conflict. However every house , much like roses, has their thorns.
+" position="2" />
+
+<dialogue owner ="Duke of York" text="The house of York are not but blood thirsty usurpers that aim to put an end to our long fought for peace to bring chaos and ruin to England once more.
+" position="2" />
+
+<dialogue owner ="Duke of York" text="Buckingham, Suffolk, Beafolk, Courtenay, Stanley, Clifford and any other noble houses that are tasked with the protection of England's citizens." position="2" />
+
+
+<dialogue owner ="Duke of York" text ="Heed your King's call and lend us your strength to put an end to this vile revolt by York and Neville." position ="2" />
+	
+<dialogue owner ="Duke of York" text="To maintain the unity and peace of this holy land the Red rose shall be preserved.
+With Lancastrian strength we prevail!
+" position="2" />
+
+<dialogue owner="Warwick" text="Curse him! That spineless" position="1" />
+
+<dialogue owner ="Duke of York" text="Jajajaja" position="2" />
+
+<dialogue owner="Warwick" text="Your highness?" position="1" />
+
+<dialogue owner ="Duke of York" text="Quite the stunt Margaret's putting right. Of course, she's a whole different beast compared to her pitiful husband" position="2" />
+
+
+	<dialogue text="My lord, Margaret is gathering forces in the North" position="2" owner="Catesby" />
+
+	<dialogue text="York rips the piece of paper in half" position="1" owner="Narrator" />
+
+	<dialogue text="I was born into the 'second branch of the Plantagenet family' watched that scumbag, Henry V take the credit for my father's victory against the French." position="1" owner="Duke of York" />
+
+	<dialogue text="All for his son, to make a mock out of our moral struggle, surrender our lands in exchange of woman to bed" position="1" owner="Duke of York" />
+
+	<dialogue text="Thousands of families who will remain to wait for sons who will never come home" position="1" owner="Duke of York" />
+
+	<dialogue text="Are we expected to swallow any semblance of pride to kiss the feet of a foreign Queen ?" position="1" owner="Duke of York" />
+
+	<dialogue text="My lord" position="2" owner="Warwick" />
+
+	<dialogue text="Mark my words and mark them well Warwick" position="1" owner="Duke of York" />
+
+	<dialogue text="A man who doesn't shoulder the responsibility of his actions has no honor" position="1" owner="Duke of York" />
+
+	<dialogue text="and a man with no honor, is no man, merely even half a man" position="1" owner="Duke of York" />
+
+	<dialogue text="I would sooner lose my head than follow in my cousin's footsteps." position="1" owner="Duke of York" />
+
+	<dialogue text="This war I wage, I will see through to the end. I won't back down, for I'm no coward." position="1" owner="Duke of York" />
+
+	<dialogue text="No, my lord . I always knew. You're England's true king. You're my true king." position="2" owner="Warwick" />
+
+	<dialogue text="Father, should we fortify our position in London castle." position="2" owner="George of York" />
+
+	<dialogue text="And allow that Lancaster scum to lay waste to our territories ? No, if Margaret is railing up forces in the North, then we'll meet her there." position="1" owner="Duke of York" />
+
+	<dialogue text="You hear that Edward, you must remember my word well, for you my eldest are the one who will succeed me. A man is only with as much as he is willing to sacrifice." position="1" owner="Duke of York" />
+
+	<dialogue text="Yes father, your words I should honor in the upcoming fight." position="2" owner="Edward of York" />
+
+	<dialogue text="A man's worth. . . if sacrifice gifts of honor , what's the price for taking for oneself ?" position="1" owner="Richard of York" />
+
+		<dialogue text="A man's worth. . . if sacrifice gifts of honor , what's the price for taking for oneself ?" position="1" owner="Richard of York" />
+
+
+<!-- New SCENE here -->
+
+<Scene num="3" dialogues ="30"/>
+
+<dialogue text ="Scene 3 - City of Pontefract - West Yorkshire (Lancaster Camp)" owner ="narrator" background ="Assets/Textures/Backgrounds/Pontefract.png"/>
+
+	<dialogue text="It's unusual to see his majesty at the forefront of an offensive is it not?" position="2" owner="Archer" />
+
+<dialogue text="Don't let yourself be fooled, it's the Queen the one who's always taking every shot, no different right now. She probably gave him a good smacking for surrendering the crown to York." position="1" owner="Knight" />
+
+<dialogue text="Yes well, king henry sure has garnered quite a reputation, quite a difference when compared to his father the French conqueror" position="2" owner="Archer" />
+
+<dialogue text="His balls must've fallen off from the shame. Cowering in his tent while his 12 year old boy and his spouse fight a war for him, the yellow-bellied fool" position="1" owner="Knight" />
+
+<dialogue text="Oi, careful now. You could be hanged for that" position="2" owner="Archer" />
+
+<dialogue text="I swore an oath, I'd give my life for Lancaster. The king's not my favorite is all, kind hearted soul but unfit as any of us to rule." position="1" owner="Knight" />
+
+<dialogue text="I believe in the prince tho. Got me all inspired, being able to fight by his side." position="1" owner="Knight" />
+
+<dialogue text="Hope" position="1" owner="Knight" />
+
+<dialogue text="What's that" position="2" owner="Archer" />
+
+<dialogue text="Prince Edward, is hope . At least that's the way I like to thin of it you know" position="1" owner="Knight" />
+
+<dialogue text="Oh, valiant soldiers would you give me your names so that I may offer a prayer before the fight" position="1" owner="Henry VI" />
+
+<dialogue text="The 2 Knights look puzzled at one another for the fragile and effeminate well-dressed man that appeared before them" position="2" owner="Narrator" />
+
+<dialogue text="Cheers lad, but prayers never saved a man's life, too much devotion will mess with your head. Just look at the king." position="1" owner="Knight" />
+
+<dialogue text="Perhaps you may not see the use of praying , people always seem to have more pressing matters. There was a time were I prayed as thankyou, gratitude but now I seem only to pray for forgiveness." position="1" owner="Henry VI" />
+
+<dialogue text="Get back to your church lad, York won't dare lay a finger on the clerics." position="1" owner="Knight" />
+
+<dialogue text="As much as I'd prefer it, I did take an oath. When I was 1 yea rold, that I'd shoulder the fate of this land." position="1" owner="Henry VI" />
+
+<dialogue text="Th- the fate of this land" position="2" owner="Archer" />
+
+<dialogue text="At just one year old. . ." position="1" owner="Knight" />
+
+<dialogue text="Your highness there you are, you're horse has been prepared" position="1" owner="Jasper Tudor" />
+
+<dialogue text="As the knights realize that they've been mocking king henry right in front of him,  terror courses through their veins." position="2" owner="Narrator" />
+
+<dialogue text="Your majesty!" position="1" owner="Knight" />
+
+<dialogue text="We apologize!" position="1" owner="Archer" />
+
+<dialogue text="I don't deserve you're apologies, tell me good men have you ever killed another man?" position="1" owner="Henry VI" />
+
+<dialogue text="No sir!" position="2" owner="Archer" />
+
+<dialogue text="Yes, got about, 3 french corpses on my soldier, and 2 york soldiers." position="2" owner="Knight" />
+
+<dialogue text="That's good. Merely 5 prayers a day will suffice." position="1" owner="Henry VI" />
+
+<dialogue text="I struggle to find the time, for the 12000 prayers I must daily perform." position="1" owner="Henry VI" />
+
+<dialogue text="Your grace, our scouts have located Yorks hiding in the fortress of Sandal Castle, we must meet with lady Margaret to prepare the offensive." position="1" owner="Jasper Tudor" />
+
+<dialogue text="Your grace, our scouts have located Yorks hiding in the fortress of Sandal Castle, we must meet with lady Margaret to prepare the offensive." position="1" owner="Jasper Tudor" />
+
+<!--  new SCENE -->
+
+<Scene num="4" dialogues ="23"/>
+
+<dialogue text ="Scene 4: Sandal Castle - York Stronghold
+" owner ="Narrator"  background ="Assets/Textures/Backgrounds/SandalCastle.png" />
+
+<dialogue text="Father, I've been meaning to ask of you" owner="Richard of York" position="1" />
+
+<dialogue text="not now Richard, I must make sure my sword is properly sharpened, a man who goes into battle unprepared is a dead man." owner="Duke of York" position="2" />
+
+<dialogue text="About that, is this battle really necessary ?" owner="Richard of York" position="1" />
+
+<dialogue text="Is it necessary? Have you no pride, no honor, no shame?" owner="Duke of York" position="2" />
+
+<dialogue text="I. . ." owner="Richard of York" position="1" />
+
+<dialogue text="Do you expect me to sit idly waiting Margaret's punishment" owner="Duke of York" position="2" />
+
+<dialogue text="I just don't want Edward and Henry to get hurt" owner="Richard of York" position="1" />
+
+<dialogue text="What about me, or your brothers? What about the thousands of York men who lost their lives at Northampton Richard?" owner="Duke of York" position="2" />
+
+<dialogue text="If you've got so little pride that you'd show weak mercy for our foes then you are undeserving of being called-" owner="Duke of York" position="2" />
+
+<dialogue text="York stops himself as he spots the fear in the eyes of his son, he attempts to recompose himself." owner="Narrator" />
+
+<dialogue text="I'm sorry, I shouldn't have said that. I made a promise to you after all. And a man that breaks his promises has no honor." owner="Duke of York" position="2" />
+
+<dialogue text="I know that I'm being childish but. . ." owner="Richard of York" position="1" />
+
+<dialogue text="I was weak, I should've killed Henry back then. . . but I was afraid of dirtying my hands with the blood of a king, the blood of a cousin." owner="Duke of York" position="2" />
+
+<dialogue text="Hundreds of lives will be lost today because I was afraid. . . I shall see that I don't make the same mistake again." owner="Duke of York" position="2" />
+
+<dialogue text="I promise the young prince and earl will be kept safe" owner="Duke of York" position="2" />
+
+<dialogue text="Father let me join you in the front lines" owner="Richard of York" position="1" />
+
+<dialogue text="No, I will lead a charge and end Henry's life." owner="Duke of York" position="2" />
+
+<dialogue text="You and George are to stay here and hold the castle." owner="Duke of York" position="2" />
+
+<dialogue text="Why don't we wait at the castle, we've got the high ground, and fortified walls, it's an impenetrable fortress." owner="Richard of York" position="1" />
+
+<dialogue text="Because a war of attrition would weigh heavily on the morale of our men, we've dragged on this conflict long enough. These poor lads deserve to go back to their homes." owner="Duke of York" position="2" />
+
+<dialogue text="What's more, only a coward hides behind walls." owner="Duke of York" position="2" />
+
+<dialogue text="What's more, only a coward hides behind walls." owner="Duke of York" position="2" />
+
+<!-- new Scene -->
+
+<Scene num="5" dialogues ="20"/>
+
+<dialogue text ="Scene 5 - Ponterfract - King's Tent"  owner="Narrator" background ="Assets/Textures/Backgrounds/WakefieldMap2.png"/>
+
+<dialogue text="Meanwhile back in Ponterfract, the Lancaster generals discuss their move." owner="Narrator" />
+
+<dialogue text="York had made the astute move to fortify their army in Sandal Castle. A castle from the Norman reign,  with an excellent strategic placement." owner="Narrator" />
+
+<dialogue text="As was custom from the reigns of William the Conqueror, Sandal Castle stood on top of a hill, which gave clear excellent visibility and commanding views over the surrounding landscape, making surprise attacks near impossible" owner="Narrator" />
+
+
+<dialogue text="Sandal Castle. . . It's an architectural prowess, from the days of William the Conqueror." owner="Jasper Tudor" position="1"  />
+
+<dialogue text="I read about that in a book, how the Norman lords oversaw their people from incredible fortresses built on hills." owner="Prince Edward" position="1" />
+
+<dialogue text="Rebellions were easy to deal with, archers would rain down a sea of arrows before no men could even hope to reach the exterior wall." owner="Henry Tudor" position="1" />
+
+<dialogue text="Which is exactly why a siege is a suicide." owner="Margaret" position="2" />
+
+<dialogue text="Brother, any idea on how to proceed." owner="Jasper Tudor" position="1" />
+
+<dialogue text="arrows of faith pierce impurities of the heart" owner="Henry VI" position="2" />
+
+<dialogue text="Seriously Pembroke don't waste your time on him" owner="Margaret" position="2" />
+
+<dialogue text="Edward, you're a smart boy aren't you ?" owner="Margaret" position="2" />
+
+<dialogue text="I apply myself diligently mother!" owner="Prince Edward" position="1" />
+
+<dialogue text="We'll use the very same strategy William the conqueror used to defeat the Anglo-Saxons." owner="Margaret" position="2" />
+
+<dialogue text="Your Majesty, reports say that York is on the move!" owner="Soldier" position="2" />
+
+<dialogue text="Preposterous, is this a bait? Why would he willingly step out of such a perfect defense" owner="Margaret" position="2" />
+
+<dialogue text="Margaret, this is our chance" owner="Jasper Tudor" position="1" />
+
+<dialogue text="We shouldn't meet in a front-to-front clash." owner="Margaret" position="2" />
+
+<dialogue text="Henry, Edward and I will take 8,000 men to hold off York's attack." owner="Margaret" position="2" />
+
+<dialogue text="Pembroke! Make yourself worthy of being called a Lancaster, take your nephew with 10,000 men. Your orders are to take Sandal Castle." owner="Margaret" position="2" />
+
+<dialogue text="Pembroke! Make yourself worthy of being called a Lancaster, take your nephew with 10,000 men. Your orders are to take Sandal Castle." owner="Margaret" position="2" />
+
+</shakesperean>
+
+	
+		
+		
+
+		
+
+
+		
+
+		
+		
+		
+		
+		
+
+		
+<english>
+
+	<Scene num="1" dialogues ="27"/>
+
+
+<dialogue text="Now York, this little game of yours shall come to an end." owner="Margaret" position="1"  background="Assets/Textures/Backgrounds/Northampton_Fields.png" voice="Assets/Audio/lines/margaret001.ogg" />
+
+<dialogue text="You'll be judged harshly, the crime of treason against the king is serious." owner="Jasper Tudor" position="2" />
+
+<dialogue text="Cryst, the king !!!" owner="Soldier" position="2" />
+
+<dialogue text="Richard, who was unseen during the battle is discovered to be threatening the king at sword point" owner="Narrator" />
+
+<dialogue text="Quit it Margaret, surrender your weapons or the King bites the dust" owner="Richard of York" position="2" />
+
+<dialogue text="Help, mother, someone help me !!!" owner="Henry VI" position="2" />
+
+<dialogue text="Father noo !!!" owner="Prince Edward" position="1" />
+
+<dialogue text="Damm it, I forgot about the youngest one, that spawn of devil the carries the same name as his despicable father . . . Richard!!!" owner="Margaret" position="1" />
+
+<dialogue text=" Unbelievable, my lord, you're son is" owner="Warwick" position="1" />
+
+<dialogue text="A true man of the battle field. Puts us adults to shame doesn't he Warwick" owner="Duke of York" position="1" />
+
+<dialogue text="Yes, very much so. He's given us the perfect chance" owner="Warwick" position="1" />
+
+<dialogue text="You can't-" owner="Margaret" position="1" />
+
+<dialogue text="Hold it, one step closer and the king meets his end. His guts will nurture this desolate field" owner="Richard of York" position="2" />
+
+<dialogue text="You scum" owner="Henry Tudor" position="1" />
+
+<dialogue text="Why Richard ?" owner="Prince Edward" position="1" />
+
+<dialogue text="Well done, my son. So, king of fools what will it be, hand the crown or drown in the ground ?" owner="Duke of York" position="1" />
+
+<dialogue text="Nooo please you musn't, no more blood please. This crown it is my punishment, I must hold it until i perish, not long now I promise it won't take long. Please don't dirty your blade with blood such as mine !!!" owner="Henry VI" position="2" />
+
+<dialogue text="Dammed fool !!!" owner="Warwick" position="1" />
+
+<dialogue text="It would tarnish my honor to take his life in such a state. Very well. I Richard of York am the one and true heir to the English crown, I will succeed you in line and be deemed as regent and protector of the holy kingdom here and now." owner="Duke of York" position="1" />
+
+<dialogue text="Yes quite, as you wish. York your family will rule this land." owner="Henry VI" position="2" />
+
+<dialogue text="Impossible." owner="Margaret" position="1" />
+
+<dialogue text="Brother why ?" owner="Jasper Tudor" position="1" />
+
+<dialogue text="He made it ! Isn't it great brother ?" owner="George of York" position="2" />
+
+<dialogue text="It's kind of insulting, having the king plead mercy like this. We would've seemed animals to take his head in front of his son." owner="Edward of York" position="2" />
+
+<dialogue text="You will become king my brother" owner="George of York" position="2" />
+
+<dialogue text="That day is still a long way off, and if anything we should be thanking Richard right now." owner="Edward of York" position="2" />	
+
+<dialogue text="That day is still a long way off, and if anything we should be thanking Richard right now." owner="Edward of York" position="2" />	
+
+<!-- New Scene-->
+
+<Scene num="2" dialogues ="33"/>
+
+<dialogue text="Act 2: The boar's honor" owner="Narrator"  background ="Assets/Textures/Backgrounds/King's_Chambers.png" />	
+
+
+<dialogue text=" The battle at the fields of Northampton between the two Plantagent houses started in Lancaster's favor. Despite his majesty being absent from the conflict, his wife's words were able to rally up the soldiers. " owner="Narrator" />
+
+
+	<dialogue text="York's hidden ace were the reinforcements provided by the Earl of Warwick, but these proved unable to break through the enemy's right flank. 
+" owner="Narrator" />
+
+	<dialogue text ="As York was forced into a pinch in the alleyways of Northampton, a hidden trumpcard revealed itself in the tenacity of York's very own son." owner ="narrator"/>
+
+<dialogue text="The merely 12 year old Richard of York, had managed to slither into the king's tent and now held him hostage to York's mercy." owner="Narrator" />
+
+<dialogue text="King Henry's life was spared, and his crowned was even maintained with the condition of bequeathing his inheritance to the Duke of York. Stripping his only son, prince Henry of his reigal title." owner="Narrator" />
+
+<dialogue text="Though the king was perfectly contempt with this outcome and did not think much of it, the queen certainly wasn't. " owner="Narrator" />
+
+
+<dialogue text="Scene 1: Palace of London" owner="Narrator" />
+
+<dialogue text="What were you thinking Henry, letting yourself get captured by a brat. You didn't even put up a fight did you? Followed him, right? You did as the traitor's child told you? Your gullibility rivals that of a fish, what kind of king are you!" owner="Margaret" position="1" />
+
+<dialogue text="A kind king, Margaret. If I surrendered then. . . there'd be no more need to fight, we could all go home and play together. Richard was always better than me at physical games." owner="Henry VI" position="2" />
+
+<dialogue text="I can't take you anymore Henry! I . . . I can't stand your nonsense, I can barely stand the thought of you!!!" owner="Margaret" position="1" />
+
+<dialogue text="I'm not your mother Henry, I'm your wife!!!, your wife!!!." owner="Margaret" position="1" />
+
+<dialogue text="For the last 15 years! -The Queen of this land! A land I never loved, a foreign land, I was not born in!" owner="Margaret" position="1" />
+
+<dialogue text="Married off, to a foreign land and foreign man to end a war I never partook in!" owner="Margaret" position="1" />
+
+<dialogue text="A man I never loved!" owner="Margaret" position="1" />
+
+<dialogue text="For the last 12 years, the mother of your child your only heir !" owner="Margaret" position="1" />
+
+<dialogue text="Hear me well Henry, I care not for this land, I care not for it's people and I care not for its idiotic, meak and pathetic empty shell and lousy excuse of a king!" owner="Margaret" position="1" />
+
+<dialogue text="If you can't take the crown back, I'll do it myself !" owner="Margaret" position="1" />
+
+<dialogue text="So you do remember my name" owner="Margaret" position="1" />
+
+<dialogue text="I'll fight" owner="Henry VI" position="2" />
+
+<dialogue text="What's this?" owner="Margaret" position="1" />
+
+<dialogue text="All my life, other have been taking decisions for me. A king is meant to be the land's supreme authority but I was always afraid." owner="Henry VI" position="2" />
+
+<dialogue text="I'm confused, I don't know what's right ot wrong anymore, I want to go back to my mother. I'm so scared Margaret." owner="Henry VI" position="2" />
+
+<dialogue text="And yet. . . Edward is not here" owner="Henry VI" position="2" />
+
+<dialogue text="He's brave, he would be crying for you if he was like me" owner="Henry VI" position="2" />
+
+<dialogue text="I think Edward will be a good king" owner="Henry VI" position="2" />
+
+<dialogue text="You damn deranged fool, what good is saying that now!" owner="Margaret" position="1" />
+
+<dialogue text="I'm sorry please forgive me!" owner="Henry VI" position="2" />
+
+<dialogue text="(sigh) when you put out boy back on the throne Henry" owner="Margaret" position="1" />
+
+<dialogue text="I swear to teach that worm of York what happens when you mess with my family. Sadly that includes you too Henry." owner="Margaret" position="1" />
+
+<dialogue text="Margaret!!! You love me?" owner="Henry VI" position="2" />
+
+<dialogue text="Shut up you crazy fool!" owner="Margaret" position="1" />
+
+<dialogue text="Shut up you crazy fool!" owner="Margaret" position="1" />
+
+<!-- Another Scene -->
+<Scene num="2" dialogues ="53"/>
+
+<dialogue text="Scene 2 - Raby Castle" owner ="Narrator" background ="Assets/Textures/Backgrounds/NevilleDiner.png"  />
+
+<dialogue text ="The duke of York is celebrating his victory with his sons in the hospitality of his most Warwick, his most trusted compannion"/>
+	
+<dialogue text="Please a toast to his majesty, Richard the Third!!! The name of a true king!" position="2"  owner="Warwick"/>
+
+<dialogue text="Yes, to Richard the III" position="1" owner ="Richard of York" />
+
+<dialogue text="To Richard the III" position="1" owner ="George of York"/>
+
+<dialogue text="Cheers for king Richard" position="1" owner ="Edward of York" />
+
+<dialogue owner ="Duke of York" text="Nonsense, I wouldn't have come that far without the aid of my wonderful boys, you especially Richard. And of course, my debt for you grows ever larger my good friend Warwick." position="2" />
+
+<dialogue owner ="Duke of York" text="When I finally step into the throne you will all be rewarded handsomely." position="2" />
+
+<dialogue text="William Catesby, a member of the parliament, closely affiliated with house Neville enters the room anxiously" owner= "Narrator"/>
+
+<dialogue owner ="Catesby" text="My lords there is a-" position="1" />
+
+<dialogue owner="Warwick" text="Catesby, we are in the middle of a private celebration in honor of his majesty. Which you should address properly by the way." position="2" />
+
+<dialogue owner="Warwick" text="The times are changing Catesby, I advise you to be in the good side of our next rulers, house York" position="2" />
+
+<dialogue owner ="Catesby" text="I'm sorry your majesty but. . . the townsfolk are gathered around the Neville estate waiting for a public statement" position="1" />
+
+<dialogue owner ="Duke of York" text="Ah awaiting a public statement from their next monarch is only natural, you shouldn't act so concerned my friend. . . Catesby was it?" position="2" />
+
+<dialogue owner ="Edward of York" text="This is great, you should go and greet your followers father" position="2" />
+
+<dialogue owner ="Catesby" text="No your highness it's , it's King Henry" position="1" />
+
+<dialogue owner="Warwick" text="What did you say Catesby?" position="2" />
+
+<dialogue text="You will not refer to him as King any longer." position="2" owner ="George of York" />
+
+<dialogue owner ="Catesby" text="Yes, it's just that K- lord Henry has released a royal manifesto. It's all over the parliament and most nobles are already making their bets for the upcoming battle." position="1" />
+
+<dialogue text="The. . . next  battle?" position="1"  owner ="Richard of York"/>
+
+<dialogue owner="Warwick" text="grrr that miserable fool. Catesby fetch me that manifesto" position="2" />
+
+<dialogue owner ="Catesby" text="Here it is my lord" position="1" />
+
+<dialogue owner ="Duke of York" text="Let's see. . ." position="2" />
+
+<dialogue  owner ="Duke of York" text="Let's see '' People of England, I am Henry the sixth the King of this land and father to your crown prince. " position="2" />
+
+<dialogue owner ="Duke of York" text= "The house of Lancaster has long carried on the role entrusted to us by god, to govern this holy land through hardship and strife and rebuild it time and time again from the embers of ash." position ="2"/>
+
+<dialogue owner ="Duke of York" text="Together with my wife Queen Margaret, our house represents the bond with France and the ending of a century long conflict. However every house , much like roses, has their thorns.
+" position="2" />
+
+<dialogue owner ="Duke of York" text="The house of York are not but blood thirsty usurpers that aim to put an end to our long fought for peace to bring chaos and ruin to England once more.
+" position="2" />
+
+<dialogue owner ="Duke of York" text="Buckingham, Suffolk, Beafolk, Courtenay, Stanley, Clifford and any other noble houses that are tasked with the protection of England's citizens." position="2" />
+
+
+<dialogue owner ="Duke of York" text ="Heed your King's call and lend us your strength to put an end to this vile revolt by York and Neville." position ="2" />
+	
+<dialogue owner ="Duke of York" text="To maintain the unity and peace of this holy land the Red rose shall be preserved.
+With Lancastrian strength we prevail!
+" position="2" />
+
+<dialogue owner="Warwick" text="Curse him! That spineless" position="1" />
+
+<dialogue owner ="Duke of York" text="Jajajaja" position="2" />
+
+<dialogue owner="Warwick" text="Your highness?" position="1" />
+
+<dialogue owner ="Duke of York" text="Quite the stunt Margaret's putting right. Of course, she's a whole different beast compared to her pitiful husband" position="2" />
+
+
+	<dialogue text="My lord, Margaret is gathering forces in the North" position="2" owner="Catesby" />
+
+	<dialogue text="York rips the piece of paper in half" position="1" owner="Narrator" />
+
+	<dialogue text="I was born into the 'second branch of the Plantagenet family' watched that scumbag, Henry V take the credit for my father's victory against the French." position="1" owner="Duke of York" />
+
+	<dialogue text="All for his son, to make a mock out of our moral struggle, surrender our lands in exchange of woman to bed" position="1" owner="Duke of York" />
+
+	<dialogue text="Thousands of families who will remain to wait for sons who will never come home" position="1" owner="Duke of York" />
+
+	<dialogue text="Are we expected to swallow any semblance of pride to kiss the feet of a foreign Queen ?" position="1" owner="Duke of York" />
+
+	<dialogue text="My lord" position="2" owner="Warwick" />
+
+	<dialogue text="Mark my words and mark them well Warwick" position="1" owner="Duke of York" />
+
+	<dialogue text="A man who doesn't shoulder the responsibility of his actions has no honor" position="1" owner="Duke of York" />
+
+	<dialogue text="and a man with no honor, is no man, merely even half a man" position="1" owner="Duke of York" />
+
+	<dialogue text="I would sooner lose my head than follow in my cousin's footsteps." position="1" owner="Duke of York" />
+
+	<dialogue text="This war I wage, I will see through to the end. I won't back down, for I'm no coward." position="1" owner="Duke of York" />
+
+	<dialogue text="No, my lord . I always knew. You're England's true king. You're my true king." position="2" owner="Warwick" />
+
+	<dialogue text="Father, should we fortify our position in London castle." position="2" owner="George of York" />
+
+	<dialogue text="And allow that Lancaster scum to lay waste to our territories ? No, if Margaret is railing up forces in the North, then we'll meet her there." position="1" owner="Duke of York" />
+
+	<dialogue text="You hear that Edward, you must remember my word well, for you, my eldest are the one who will succeed me. A man is only with as much as he is willing to sacrifice." position="1" owner="Duke of York" />
+
+	<dialogue text="Yes father, your words I should honor in the upcoming fight." position="2" owner="Edward of York" />
+
+	<dialogue text="A man's worth. . . if sacrifice gifts of honor , what's the price for taking for oneself ?" position="1" owner="Richard of York" />
+
+		<dialogue text="A man's worth. . . if sacrifice gifts of honor , what's the price for taking for oneself ?" position="1" owner="Richard of York" />
+
+
+<!-- New SCENE here -->
+
+<Scene num="3" dialogues ="30"/>
+
+<dialogue text ="Scene 3 - City of Pontefract - West Yorkshire (Lancaster Camp)" owner ="narrator" background ="Assets/Textures/Backgrounds/Pontefract.png"/>
+
+	<dialogue text="It's unusual to see his majesty at the forefront of an offensive is it not?" position="2" owner="Archer" />
+
+<dialogue text="Don't let yourself be fooled, it's the Queen the one who's always taking every shot, no different right now. She probably gave him a good smacking for surrendering the crown to York." position="1" owner="Knight" />
+
+<dialogue text="Yes well, king henry sure has garnered quite a reputation, quite a difference when compared to his father the French conqueror" position="2" owner="Archer" />
+
+<dialogue text="His balls must've fallen off from the shame. Cowering in his tent while his 12 year old boy and his spouse fight a war for him, the yellow-bellied fool" position="1" owner="Knight" />
+
+<dialogue text="Oi, careful now. You could be hanged for that" position="2" owner="Archer" />
+
+<dialogue text="I swore an oath, I'd give my life for Lancaster. The king's not my favorite is all, kind hearted soul but unfit as any of us to rule." position="1" owner="Knight" />
+
+<dialogue text="I believe in the prince tho. Got me all inspired, being able to fight by his side." position="1" owner="Knight" />
+
+<dialogue text="Hope" position="1" owner="Knight" />
+
+<dialogue text="What's that" position="2" owner="Archer" />
+
+<dialogue text="Prince Edward, is hope . At least that's the way I like to thin of it you know" position="1" owner="Knight" />
+
+<dialogue text="Oh, valiant soldiers would you give me your names so that I may offer a prayer before the fight" position="1" owner="Henry VI" />
+
+<dialogue text="The 2 Knights look puzzled at one another for the fragile and effeminate well-dressed man that appeared before them" position="2" owner="Narrator" />
+
+<dialogue text="Cheers lad, but prayers never saved a man's life, too much devotion will mess with your head. Just look at the king." position="1" owner="Knight" />
+
+<dialogue text="Perhaps you may not see the use of praying , people always seem to have more pressing matters. There was a time were I prayed as thankyou, gratitude but now I seem only to pray for forgiveness." position="1" owner="Henry VI" />
+
+<dialogue text="Get back to your church lad, York won't dare lay a finger on the clerics." position="1" owner="Knight" />
+
+<dialogue text="As much as I'd prefer it, I did take an oath. When I was 1 yea rold, that I'd shoulder the fate of this land." position="1" owner="Henry VI" />
+
+<dialogue text="Th- the fate of this land" position="2" owner="Archer" />
+
+<dialogue text="At just one year old. . ." position="1" owner="Knight" />
+
+<dialogue text="Your highness there you are, you're horse has been prepared" position="1" owner="Jasper Tudor" />
+
+<dialogue text="As the knights realize that they've been mocking king henry right in front of him,  terror courses through their veins." position="2" owner="Narrator" />
+
+<dialogue text="Your majesty!" position="1" owner="Knight" />
+
+<dialogue text="We apologize!" position="1" owner="Archer" />
+
+<dialogue text="I don't deserve you're apologies, tell me good men have you ever killed another man?" position="1" owner="Henry VI" />
+
+<dialogue text="No sir!" position="2" owner="Archer" />
+
+<dialogue text="Yes, got about, 3 french corpses on my soldier, and 2 york soldiers." position="2" owner="Knight" />
+
+<dialogue text="That's good. Merely 5 prayers a day will suffice." position="1" owner="Henry VI" />
+
+<dialogue text="I struggle to find the time, for the 12000 prayers I must daily perform." position="1" owner="Henry VI" />
+
+<dialogue text="Your grace, our scouts have located Yorks hiding in the fortress of Sandal Castle, we must meet with lady Margaret to prepare the offensive." position="1" owner="Jasper Tudor" />
+
+<dialogue text="Your grace, our scouts have located Yorks hiding in the fortress of Sandal Castle, we must meet with lady Margaret to prepare the offensive." position="1" owner="Jasper Tudor" />
+
+<!--  new SCENE -->
+
+<Scene num="4" dialogues ="23"/>
+
+<dialogue text ="Scene 4: Sandal Castle - York Stronghold
+" owner ="Narrator"  background ="Assets/Textures/Backgrounds/SandalCastle.png" />
+
+<dialogue text="Father, I've been meaning to ask of you" owner="Richard of York" position="1" />
+
+<dialogue text="not now Richard, I must make sure my sword is properly sharpened, a man who goes into battle unprepared is a dead man." owner="Duke of York" position="2" />
+
+<dialogue text="About that, is this battle really necessary ?" owner="Richard of York" position="1" />
+
+<dialogue text="Is it necessary? Have you no pride, no honor, no shame?" owner="Duke of York" position="2" />
+
+<dialogue text="I. . ." owner="Richard of York" position="1" />
+
+<dialogue text="Do you expect me to sit idly waiting Margaret's punishment" owner="Duke of York" position="2" />
+
+<dialogue text="I just don't want Edward and Henry to get hurt" owner="Richard of York" position="1" />
+
+<dialogue text="What about me, or your brothers? What about the thousands of York men who lost their lives at Northampton Richard?" owner="Duke of York" position="2" />
+
+<dialogue text="If you've got so little pride that you'd show weak mercy for our foes then you are undeserving of being called-" owner="Duke of York" position="2" />
+
+<dialogue text="York stops himself as he spots the fear in the eyes of his son, he attempts to recompose himself." owner="Narrator" />
+
+<dialogue text="I'm sorry, I shouldn't have said that. I made a promise to you after all. And a man that breaks his promises has no honor." owner="Duke of York" position="2" />
+
+<dialogue text="I know that I'm being childish but. . ." owner="Richard of York" position="1" />
+
+<dialogue text="I was weak, I should've killed Henry back then. . . but I was afraid of dirtying my hands with the blood of a king, the blood of a cousin." owner="Duke of York" position="2" />
+
+<dialogue text="Hundreds of lives will be lost today because I was afraid. . . I shall see that I don't make the same mistake again." owner="Duke of York" position="2" />
+
+<dialogue text="I promise the young prince and earl will be kept safe" owner="Duke of York" position="2" />
+
+<dialogue text="Father let me join you in the front lines" owner="Richard of York" position="1" />
+
+<dialogue text="No, I will lead a charge and end Henry's life." owner="Duke of York" position="2" />
+
+<dialogue text="You and George are to stay here and hold the castle." owner="Duke of York" position="2" />
+
+<dialogue text="Why don't we wait at the castle, we've got the high ground, and fortified walls, it's an impenetrable fortress." owner="Richard of York" position="1" />
+
+<dialogue text="Because a war of attrition would weigh heavily on the morale of our men, we've dragged on this conflict long enough. These poor lads deserve to go back to their homes." owner="Duke of York" position="2" />
+
+<dialogue text="What's more, only a coward hides behind walls." owner="Duke of York" position="2" />
+
+<dialogue text="What's more, only a coward hides behind walls." owner="Duke of York" position="2" />
+
+<!-- new Scene -->
+
+<Scene num="5" dialogues ="20"/>
+
+<dialogue text ="Scene 5 - Ponterfract - King's Tent"  owner="Narrator" background ="Assets/Textures/Backgrounds/WakefieldMap2.png"/>
+
+<dialogue text="Meanwhile back in Ponterfract, the Lancaster generals discuss their move." owner="Narrator" />
+
+<dialogue text="York had made the astute move to fortify their army in Sandal Castle. A castle from the Norman reign,  with an excellent strategic placement." owner="Narrator" />
+
+<dialogue text="As was custom from the reigns of William the Conqueror, Sandal Castle stood on top of a hill, which gave clear excellent visibility and commanding views over the surrounding landscape, making surprise attacks near impossible" owner="Narrator" />
+
+
+<dialogue text="Sandal Castle. . . It's an architectural prowess, from the days of William the Conqueror." owner="Jasper Tudor" position="1"  />
+
+<dialogue text="I read about that in a book, how the Norman lords oversaw their people from incredible fortresses built on hills." owner="Prince Edward" position="1" />
+
+<dialogue text="Rebellions were easy to deal with, archers would rain down a sea of arrows before no men could even hope to reach the exterior wall." owner="Henry Tudor" position="1" />
+
+<dialogue text="Which is exactly why a siege is a suicide." owner="Margaret" position="2" />
+
+<dialogue text="Brother, any idea on how to proceed." owner="Jasper Tudor" position="1" />
+
+<dialogue text="arrows of faith pierce impurities of the heart" owner="Henry VI" position="2" />
+
+<dialogue text="Seriously Pembroke don't waste your time on him" owner="Margaret" position="2" />
+
+<dialogue text="Edward, you're a smart boy aren't you ?" owner="Margaret" position="2" />
+
+<dialogue text="I apply myself diligently mother!" owner="Prince Edward" position="1" />
+
+<dialogue text="We'll use the very same strategy William the conqueror used to defeat the Anglo-Saxons." owner="Margaret" position="2" />
+
+<dialogue text="Your Majesty, reports say that York is on the move!" owner="Soldier" position="2" />
+
+<dialogue text="Preposterous, is this a bait? Why would he willingly step out of such a perfect defense" owner="Margaret" position="2" />
+
+<dialogue text="Margaret, this is our chance" owner="Jasper Tudor" position="1" />
+
+<dialogue text="We shouldn't meet in a front-to-front clash." owner="Margaret" position="2" />
+
+<dialogue text="Henry, Edward and I will take 8,000 men to hold off York's attack." owner="Margaret" position="2" />
+
+<dialogue text="Pembroke! Make yourself worthy of being called a Lancaster, take your nephew with 10,000 men. Your orders are to take Sandal Castle." owner="Margaret" position="2" />
+
+<dialogue text="Pembroke! Make yourself worthy of being called a Lancaster, take your nephew with 10,000 men. Your orders are to take Sandal Castle." owner="Margaret" position="2" />
+
+</english>		
+
+
+
+</dialogues>

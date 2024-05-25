@@ -896,6 +896,7 @@ iPoint Player::LevelUp() {
 		break;
 	}
 
+	app->battleScene->StartRossing();
 	return iPoint(coin, coin2);
 
 }

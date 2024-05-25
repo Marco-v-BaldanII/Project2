@@ -117,6 +117,7 @@ private:
 public:
 	ParticleEffect* snowSystem = nullptr;
 	ParticleEffect* roseSystemRight = nullptr;
+	ParticleEffect* roseSystemLeft = nullptr;
 
 	List<Player*> party;
 	List<Enemy*> goons;

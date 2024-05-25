@@ -19,12 +19,17 @@ class ParticleEffect {
 
 public:
 
-	ParticleEffect(Particle* baseParticle, uint poolSize, float spawnRate, SDL_Rect spawnBox = SDL_Rect{0,0,0,0}) {
+	ParticleEffect(Particle* baseParticle, uint poolSize, float spawnRate,bool loop, bool flipped = false, SDL_Rect spawnBox = SDL_Rect{0,0,0,0}, bool animated = false) {
 
 		this->baseParticle = baseParticle;
 		this->poolSize = poolSize;
 		this->spawnRate = spawnRate;
 		this->spawnBox = spawnBox;
+		this->loop = loop;
+		this->animated = animated;
+		this->flipped = flipped;
+
+		counter = poolSize;
 
 		for (int i = poolSize; i > 0; --i) {
 			Particle* part = new Particle(baseParticle);
@@ -43,6 +48,7 @@ public:
 
 				if (pIt->data->active == false) {
 					pIt->data->ReActivate(spawnBox);
+					counter--;
 					break;
 				}
 
@@ -55,7 +61,7 @@ public:
 			if (pIt->data->active && pIt->data->CheckToDie() == false) {
 				Particle* p = pIt->data;
 
-				p->position.x += p->velocity.x * dt/10;
+				p->position.x += p->velocity.x +((float) p->currentSpeedXVariation/5.0f )* dt/10;
 				p->position.y += p->velocity.y * dt/10;
 
 				p->velocity.x += p->acceleration.x * dt/10;
@@ -64,6 +70,15 @@ public:
 
 			}
 		}
+
+
+		// If the effect is not loopeable when the pool has finished deactivate this effect
+
+		if (!loop && counter < 0) {
+			active = false;
+			return false;
+		}
+
 
 		return true;
 	}
@@ -75,14 +90,33 @@ public:
 
 				SDL_Rect r = particle->rect;
 				r.w *= (particle->currentVariation/10); r.h *= particle->currentVariation/10;
-
-				app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, false, particle->currentAlpha);
-
+				if (!animated) {
+					if (flipped) {
+						app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, true, particle->currentAlpha);
+					}
+					else {
+						app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, false, particle->currentAlpha);
+					}
+				}
+				else {
+					particle->currentAnim->Update();
+					if (flipped) {
+						app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &particle->currentAnim->GetCurrentFrame(), true, particle->currentAlpha);
+					}
+					else {
+						app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &particle->currentAnim->GetCurrentFrame(), false, particle->currentAlpha);
+					}
+				}
 			}
 		}
 
 		return true;
 
+	}
+
+	void Restart() {
+		counter = poolSize;
+		active = true;
 	}
 
 	~ParticleEffect() {
@@ -105,6 +139,12 @@ public:
 	Timer myTimer;
 
 	SDL_Rect spawnBox;
+
+	bool loop;
+	int counter;
+	bool  active = true;
+	bool animated;
+	bool flipped;
 
 };
 

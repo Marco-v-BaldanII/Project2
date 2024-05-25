@@ -57,10 +57,13 @@ bool ParticleSystem::Update(float dt) {
 
 	for (ListItem<ParticleEffect*>* pIt = pEffects.start; pIt != NULL; pIt = pIt->next) {
 
+		
 		ParticleEffect* Effect = pIt->data;
 
-		Effect->Update(dt);
-
+		if (Effect->active) {
+			bool alive = Effect->Update(dt);
+		}
+		
 	
 
 	}

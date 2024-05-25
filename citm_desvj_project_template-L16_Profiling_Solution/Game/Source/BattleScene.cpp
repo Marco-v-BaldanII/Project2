@@ -154,6 +154,8 @@ bool BattleScene::Start()
 			quest->isMain = true;
 
 			app->questManager->quests.Add(quest);
+			StartRossing();
+
 		}
 
 
@@ -315,6 +317,10 @@ bool BattleScene::PostUpdate()
 		}
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN) {
+		StartRossing();
+	}
+
 	return ret;
 }
 
@@ -357,9 +363,10 @@ void BattleScene::StartSnowStorm() {
 	// Initialize particle system
 	if (snowSystem == nullptr && app->dialogueManager->myState != CUTSCENE) {
 		const char* too = "Assets/snowP.png";
-		snowParticle = new Particle(too, fPoint(0, 0), fPoint(0, 2), 3.0f, SDL_Rect{ 0,0,8,8 }, 1.0f, 2.5f, 100, 255);
+		
+		snowParticle = new Particle(too, fPoint(0, 0), fPoint(0, 2), fPoint(0,0), 3.0f, SDL_Rect{ 0,0,8,8 }, 1.0f, 2.5f, 100, 255);
 
-		snowSystem = new ParticleEffect(snowParticle, 40, 0.1f, SDL_Rect{ 0,0, 512 , 0 });
+		snowSystem = new ParticleEffect(snowParticle, 40, 0.1f,true,false, SDL_Rect{ 0,0, 512 , 0 });
 
 		app->particleSystem->AddParticleEffect(snowSystem);
 	}
@@ -367,8 +374,38 @@ void BattleScene::StartSnowStorm() {
 
 void BattleScene::StartRossing() {
 
-	//Particle* roseParticle = new Particle("Assets/roseP.png", fPoint(0,400), fPoint(3,-5), 4.0f, )
+	if (roseSystemLeft == nullptr) {
+		Animation anim;	Animation anim2; 	Animation anim3;
+		anim.PushBack(SDL_Rect{ 0,0,32,32 }); anim.PushBack(SDL_Rect{ 32,0,32,32 }); anim.PushBack(SDL_Rect{ 64,0,32,32 });
+		anim.PushBack(SDL_Rect{ 96,0,32,32 }); anim.PushBack(SDL_Rect{ 128,0,32,32 }); anim.speed = 0.4f; anim.loop = true;
 
+		anim2.PushBack(SDL_Rect{ 0,32,32,32 }); anim2.PushBack(SDL_Rect{ 32,32,32,32 }); anim2.PushBack(SDL_Rect{ 64,32,32,32 });
+		anim2.PushBack(SDL_Rect{ 96,32,32,32 }); anim2.PushBack(SDL_Rect{ 128,32,32,32 }); anim2.speed = 0.4f; anim2.loop = true;
+
+		anim3.PushBack(SDL_Rect{ 0,64,32,32 }); anim3.PushBack(SDL_Rect{ 32,64,32,32 }); anim3.PushBack(SDL_Rect{ 64,64,32,32 });
+		anim3.PushBack(SDL_Rect{ 96,64,32,32 }); anim3.PushBack(SDL_Rect{ 128,64,32,32 }); anim3.speed = 0.4f; anim3.loop = true;
+
+		Animation animations[3] = { anim, anim2, anim3 };
+
+		SDL_Texture* tex1 = app->tex->Load("Assets/roseP.png");
+
+		Particle* roseParticle = new Particle(tex1, fPoint(20, 400), fPoint(1, -4), fPoint(0, 0.045f), 4.0f, SDL_Rect{ 0,0,32,32 }, 1, 1, 255, 255, fPoint(-2, 8), animations);
+
+		roseSystemRight = new ParticleEffect(roseParticle, 30, 0.03f, false, false, SDL_Rect{ 0,0,10,0 }, true);
+
+
+		Particle* roseParticle2 = new Particle(tex1, fPoint(492, 400), fPoint(-1, -4), fPoint(0, 0.045f), 4.0f, SDL_Rect{ 0,0,32,32 }, 1, 1, 255, 255, fPoint(-8, 2), animations);
+
+		roseSystemLeft = new ParticleEffect(roseParticle2, 30, 0.03f, false, true, SDL_Rect{ 0,0,10,0 }, true);
+
+
+		app->particleSystem->AddParticleEffect(roseSystemRight);
+		app->particleSystem->AddParticleEffect(roseSystemLeft);
+	}
+	else {
+		roseSystemRight->Restart();
+		roseSystemLeft->Restart();
+	}
 }
 
 bool BattleScene::OnGuiMouseClickEvent(GuiControl* control)
