@@ -31,6 +31,21 @@ Player::~Player() {
 
 }
 
+Player::Player(Player* p) : Entity(EntityType::PLAYER) {
+
+	hp = p->hp;
+	attack = p->attack;
+	maxHp = p->maxHp;
+	name = p->name;
+	precision = p->precision;
+	luck = p->luck;
+	movement = p->movement;
+	unitType = p->unitType;
+	level = p->level;
+	experiencePoints = p->experiencePoints;
+
+}
+
 bool Player::Awake() {
 
 	//Initialize Player parameters
@@ -73,11 +88,12 @@ bool Player::Awake() {
 bool Player::Start() {
 	//config.attribute("texturePath").as_string()
 	
-	walkingParticle = new Particle("Assets/snowP.png", fPoint(0, 0), fPoint(0, -0.5f), fPoint(0, 0), 0.5f, SDL_Rect{ 0,0,8,8 });
+	walkingParticle = new Particle("Assets/snowP.png", fPoint(0, 0), fPoint(0, -0.5f), fPoint(0, 0), 0.5f, SDL_Rect{ 0,0,8,8 },1,1,90,200);
 
-	walkingEffect = new ParticleEffect(walkingParticle, 10, 0.05f, true,false, SDL_Rect{0,0,8,0});
+	walkingEffect = new ParticleEffect(walkingParticle, 10, 0.05f, true,false, SDL_Rect{0,0,8,0},false, BACK, WORLD);
 
 	app->particleSystem->AddParticleEffect(walkingEffect);
+
 	walkingEffect->active = false;
 
 	moveTime = 32;
@@ -163,6 +179,9 @@ bool Player::Start() {
 		}
 		conversations.Add(conv);
 	}
+
+	experiencePoints = config.attribute("exp").as_int();
+	level = config.attribute("exp").as_int();
 
 	return true;
 }
@@ -411,6 +430,11 @@ bool Player::Update(float dt)
 				app->turnManager->DeSelectPlayer();
 			}
 
+
+			//save the player cause permadeath is off
+			Player* copeDead = new Player(this);
+			app->battleScene->deadPlayers.Add(copeDead); /*save a copy of the dead player*/
+
 			app->turnManager->availablePlayers--;
 			//app->battleScene->KillUnit(true, this); ESTO crashea y da muchisimos problemas
 			pendingToDelete = true;
@@ -478,7 +502,7 @@ bool Player::PostUpdate()
 			}
 			
 			// ! important, movement is the only item modifier that is added rather than multiplied
-			myFrame->Render(1.0 / 60.0, hp, attack * myItem->GetAtk(), speed * myItem->GetSpd(), precision * myItem->GetPrec(), luck * myItem->GetLck(), movement + myItem->GetMov());
+			myFrame->Render(1.0 / 60.0, hp, attack * myItem->GetAtk(), speed * myItem->GetSpd(), precision * myItem->GetPrec(), luck * myItem->GetLck(), movement + myItem->GetMov(),0,0,0,0,0,experiencePoints);
 
 
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
@@ -615,7 +639,7 @@ bool Player::PostUpdate()
 			atkMod = 2;
 			break;
 		}
-		myFrame->Render(1.0 / 60.0, hp - hpMod, attack* myItem->GetAtk() -atkMod, speed* myItem->GetSpd() - spdMod, precision* myItem->GetPrec(), luck* myItem->GetLck() - luckMod, movement + myItem->GetMov(), hpMod, atkMod, spdMod, 0 , luckMod);
+		myFrame->Render(1.0 / 60.0, hp - hpMod, attack* myItem->GetAtk() -atkMod, speed* myItem->GetSpd() - spdMod, precision* myItem->GetPrec(), luck* myItem->GetLck() - luckMod, movement + myItem->GetMov(), hpMod, atkMod, spdMod, 0 , luckMod, experiencePoints);
 		if ((app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN )&& showLvlUp.ReadSec() > 1) {
 			lvlMods = iPoint(-1, -1);
 		}

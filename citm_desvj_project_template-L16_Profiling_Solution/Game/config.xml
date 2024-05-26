@@ -44,21 +44,27 @@
 
 		<map value ="0">
 
-		     <item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="3" y="18" textPath ="Assets/Textures/Items/Warcry trumpet.png"/>
+		     <item name="Warcry Trumpet" type="E" movement ="2" speed="1.05" attack="0.9" x="3" y="18" textPath ="Assets/Textures/Items/Warcry trumpet.png" 
+				   description="Boosts the unit's speed by 5 percent and their movement range by 2 but decreases their attack by 10 percent                                             "/>
 		     
-		     <item name="Might Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png"/>
+		     <item name="Might Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png" 
+				   description="Boosts the unit's speed by 5 percent and their movement range by 2 but decreases their attack by 10 percent"/>/>
 		     
-		     <item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"/>
+		     <item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"
+				   description="Boosts the unit's luck by 20 percent but decreases their movement by 20 percent                                 "/>/>
 		</map>
 
 		<map value ="1">
 
 		
-		<item name="Optic Amplifier" type="C" precision ="1.2" speed="0.8" x="49" y="11" textPath ="Assets/Textures/Items/amplifier.png"/>
+		<item name="Optic Amplifier" type="C" precision ="1.2" speed="0.8" x="49" y="11" textPath ="Assets/Textures/Items/amplifier.png"
+			  description="Boosts the unit's precision by 20 percent but decreases their speed by 20 percent                          "/>/>
 
-		<item name="Ironclad Armor" type="C" speed ="0.8" hp ="1.2" x="30" y="6" textPath ="Assets/Textures/Items/armor.png"/>
+		<item name="Ironclad Armor" type="C" speed ="0.8" hp ="1.2" x="30" y="6" textPath ="Assets/Textures/Items/armor.png"
+			  description="Boosts the unit's speed by 5 per cent and their movement range by 2 but decreases their attack by 10 per cent                       "/>/>
 
-		<item name="Veil of Vanishing" type="C" atack ="1.85" precision="0.6" x="30" y="26" textPath ="Assets/Textures/Items/veil.png"/>		
+		<item name="Veil of Vanishing" type="C" atack ="1.85" precision="0.6" x="30" y="26" textPath ="Assets/Textures/Items/veil.png"
+			  description="Boosts the unit's attack by 85 percent but decreases their precision by 40 percent                            "/>/>		
 
 
 		     <door num ="1" x ="22" y="22" textPath="Assets/Textures/Items/puerta1.png"/>
@@ -433,7 +439,7 @@
 				<enemy name= "Archer" x="21" y="27" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" exp="140"/>
 
 
-				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="100"/>
+				<enemy name= "Knight" x="12" y="25" unit_type="2"  attack="8" hp="15" precision="75" luck="25" speed="20" movement="8" exp="60"/>
 				<enemy name= "Archer" x="26" y="30" unit_type="1"  attack="8" hp="12" precision="70" luck="25" speed="20" movement="8"  exp="60"/>
 				<enemy name= "Mage" x="24" y="32" unit_type="4"  attack="9" hp="12" precision="75" luck="20" speed="20" movement="8"  exp="60"/>
 				<enemy name= "Mage" x="46" y="22" unit_type="4"  attack="9" hp="12" precision="75" luck="20" speed="20" movement="8"  exp="60"/>

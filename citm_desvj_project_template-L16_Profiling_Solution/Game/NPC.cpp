@@ -90,13 +90,13 @@ bool Npc::Update(float dt)
 	return true;
 }
 
-bool Npc::PostUpdate()
-{
-	if(myMovement == MOVEMENT::RIGHT) app->render->DrawTexture(texture, position.x, position.y, &body, false );
+void Npc::Render() {
+
+	if (myMovement == MOVEMENT::RIGHT) app->render->DrawTexture(texture, position.x, position.y, &body, false);
 	else {
 		app->render->DrawTexture(texture, position.x, position.y, &body, true);
 	}
-	
+
 
 	if (questInfo == QUEST_TO_GIVE) {
 		SDL_Rect r = SDL_Rect{ 0,0,64,64 };
@@ -104,6 +104,11 @@ bool Npc::PostUpdate()
 		app->render->DrawTexture(exclamationTex, position.x + 20, position.y - 60, &r);
 
 	}
+}
+
+bool Npc::PostUpdate()
+{
+	
 
 	return true;
 }

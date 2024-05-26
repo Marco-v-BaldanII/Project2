@@ -111,14 +111,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(turnManager);
 	AddModule(fonts);
-	
+	AddModule(particleSystem);
 	
 	AddModule(entityManager);
 	AddModule(backstageplayer);
 	AddModule(questManager);
 	AddModule(dialogueManager);
 	AddModule(castingScene);
-	AddModule(particleSystem);
+	
 	AddModule(guiManager);
 	
 	AddModule(pauseMenu);

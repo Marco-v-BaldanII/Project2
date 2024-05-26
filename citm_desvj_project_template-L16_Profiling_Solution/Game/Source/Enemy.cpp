@@ -111,10 +111,19 @@ bool Enemy::Start() {
 	deathQuote = new Dialogue(name.GetString(), config.child("dialogue").attribute("text").as_string());
 	collider = app->physics->AddCollider(SDL_Rect{ 0,0,80 *3,80 *3 }, ColliderType::ENEMY_C, this, ColliderShape::QUAD);
 
+	walkingParticle = new Particle("Assets/snowP.png", fPoint(0, 0), fPoint(0, -0.5f), fPoint(0, 0), 0.5f, SDL_Rect{ 0,0,8,8 }, 1, 1, 90, 200);
+
+	walkingEffect = new ParticleEffect(walkingParticle, 10, 0.05f, true, false, SDL_Rect{ 0,0,8,0 }, false, BACK, WORLD);
+
+	app->particleSystem->AddParticleEffect(walkingEffect);
+
 	return true;
 }
 
 bool Enemy::PreUpdate() {
+
+	walkingEffect->spawnBox.x = position.x; walkingEffect->spawnBox.y = position.y + 15;
+
 	switch (state)
 	{
 	case IDLE:
@@ -221,12 +230,14 @@ bool Enemy::Update(float dt)
 	switch (state)
 	{
 	case IDLE:
+		walkingEffect->active = false;
 		curtains = false;
 		reachedTarget = false;
 		 if(!defending) Bposition = iPoint(300*3, 80*3);
 	
 		break;
 	case MOVE:
+		walkingEffect->active = true;
 		curtains = false;
 		reachedTarget = false;
 		currentAnim->Update();
@@ -274,7 +285,7 @@ bool Enemy::Update(float dt)
 
 		break;
 	case BATTLE:
-
+     	walkingEffect->active = false;
 		if (curtains == false) {
 			app->guiManager->OpenCloseCurtains();
 			curtains = true;

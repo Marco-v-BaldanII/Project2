@@ -432,7 +432,7 @@ bool Render::FillCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 }
 
 
-bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h, bool isDialogue, SDL_Color color, TextAlingment aligment) {
+bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h, bool isDialogue, SDL_Color color, TextAlingment aligment, int maxLineLength ) {
 	
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -441,14 +441,14 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h,
 
 	int numletters = text.length();
 
-	float numLines = static_cast<float>(numletters) / LINE_LENGTH; // 70 characters per line
+	float numLines = static_cast<float>(numletters) / maxLineLength; // 70 characters per line
 	if (numLines > 1.0f) {
 		// Copy rest to a new string
-		std::string newLine = text.substr(LINE_LENGTH);
-		DrawText(newLine, posx, posy + h, w, h,isDialogue, color);
+		std::string newLine = text.substr(maxLineLength);
+		DrawText(newLine, posx, posy + h, w, h,isDialogue, color, aligment, maxLineLength);
 
 		// Create the actual string for this line with a max of LINE_LENGTH chars
-		std::string thisLine = text.substr(0, LINE_LENGTH);
+		std::string thisLine = text.substr(0, maxLineLength);
 
 		
 		surface = TTF_RenderText_Solid(font, thisLine.c_str(), color);
@@ -463,7 +463,7 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h,
 	}
 
 
-	if(isDialogue) w = w / LINE_LENGTH * Clamp(numletters, 0,LINE_LENGTH);
+	if(isDialogue) w = w / maxLineLength * Clamp(numletters, 0, maxLineLength);
 
 
 	int texW = 0;

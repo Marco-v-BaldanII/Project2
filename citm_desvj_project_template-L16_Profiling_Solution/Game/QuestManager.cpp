@@ -108,6 +108,7 @@ void QuestManager::CheckQuestCompletion(string target) {
 			if (it->data->isMain == true)/* If it is a main quest end the lvl*/ {
 				app->turnManager->MainQuest = true;
 				app->guiManager->spotLight->mode = DIALOG;
+				app->SaveRequest(); /*save characters progression for the next map*/
 			}
 			delete it->data;
 			quests.Del(it);

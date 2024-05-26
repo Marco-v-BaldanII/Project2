@@ -60,6 +60,7 @@ public:
 	int selectedPlayer = 0;
 
 	SDL_Texture* inventoryUI = nullptr;
+	SDL_Texture* descriptionTex = nullptr;
 	SDL_Rect inventoryRect;
 
 	SDL_Rect itemRect;

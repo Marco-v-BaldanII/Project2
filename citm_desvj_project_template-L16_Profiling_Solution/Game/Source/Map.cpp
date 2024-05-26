@@ -116,10 +116,6 @@ bool Map::Update(float dt)
                     // L06: DONE 9: Complete the draw function
                     app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
 
-                    if (x == 50) {
-                        //LOG("test");
-                    }
-
                     if (showMinimap) {
                         if (mapLayer->data->myTiles[x][y] != nullptr) app->render->DrawRectangle(SDL_Rect{ mapCoord.x, mapCoord.y , mapData.tilewidth, mapData.tileheight }, mapLayer->data->myTiles[x][y]->GetColor(), true, true);
                     }

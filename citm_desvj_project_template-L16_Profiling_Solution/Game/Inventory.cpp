@@ -15,6 +15,7 @@ bool Inventory::Start()
 	players = app->battleScene->party;
 
 	inventoryUI = app->tex->Load("Assets/Textures/inventoryUI.png");
+	descriptionTex = app->tex->Load("Assets/Textures/UI/inventoryDescription.png");
 	inventoryRect = { 0,0,410,250 };
 	itemRect = { 0,0,100,100 };
 	playerRect = { 0,0,120,100 };
@@ -138,6 +139,9 @@ bool Inventory::PostUpdate()
 		{
 			app->render->DrawText(InventoryItems.At(selectedItem)->data->name, 300, 660, 150 * 2, 53 * 2);
 			app->render->DrawTexture(InventoryItems.At(selectedItem)->data->texture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, &itemRect);
+
+			app->render->DrawTexture(descriptionTex, 213 + (app->render->camera.x /-3), 70 + (app->render->camera.y / -3));
+			app->render->DrawText(InventoryItems.At(selectedItem)->data->description, 663, 250, 1.5f * InventoryItems.At(selectedItem)->data->description.length(), 20, false, SDL_Color{79,62,43,255}, LEFT_ALIGN, 15);
 		}
 
 		if (players.At(selectedPlayer) != nullptr && players.At(selectedPlayer)->data != nullptr)

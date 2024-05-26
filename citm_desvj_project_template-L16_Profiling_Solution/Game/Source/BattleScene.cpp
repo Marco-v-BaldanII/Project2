@@ -34,7 +34,10 @@ BattleScene::BattleScene(bool isActive) : Module(isActive)
 
 // Destructor
 BattleScene::~BattleScene()
-{}
+{
+	LOG("destructor");
+
+}
 
 // Called before render is available
 bool BattleScene::Awake(pugi::xml_node config)
@@ -161,27 +164,96 @@ bool BattleScene::Start()
 
 		// Read party members form config and instanciate them
 		int nPlayers = 0;
+
+		pugi::xml_document saveFile;
+		pugi::xml_parse_result result = saveFile.load_file("save_game.xml");
+
+		saveNode = saveFile.child("game_state").child("battle_scene");
+
+		
 		for (pugi::xml_node Pnode = mapNode.child("player"); Pnode != NULL; Pnode = Pnode.next_sibling("player")) {
 
-			Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-			p->config = Pnode;
+			if (app->map->level == 0) {
 
-			string name = p->config.attribute("name").as_string();
-			// Here assign the correct texture
+				Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+				p->config = Pnode;
 
-			p->Awake();
-			party.Add(p);
-			p->myTexture = spriteSheet;
-			p->myBattleTexture = portraitTextures[name];
-			p->UiTex = lancasterUI;
+				string name = p->config.attribute("name").as_string();
+				// Here assign the correct texture
 
-			// make each unit have their own unique control ID
-			p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 300);
-			p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+				p->Awake();
+				party.Add(p);
+				p->myTexture = spriteSheet;
+				p->myBattleTexture = portraitTextures[name];
+				p->UiTex = lancasterUI;
 
-			p->Start();
-			PassAnimations(p);
+				// make each unit have their own unique control ID
+				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+				p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
 
+				p->Start();
+				PassAnimations(p);
+			}
+			else {
+				
+ 				if (saveNode) {
+					bool spawned = false;
+					for (pugi::xml_node Pnode2 = saveNode.child("player"); Pnode2 != NULL; Pnode2 = Pnode2.next_sibling("player")) {
+
+						string n1 = Pnode.attribute("name").as_string(); string n2 = Pnode2.attribute("name").as_string();
+						if (n1 == n2)/*Load that player's save data*/ {
+							spawned = true;
+							Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+							p->config = Pnode2;
+
+							string name = p->config.attribute("name").as_string();
+							// Here assign the correct texture
+
+							p->Awake();
+							party.Add(p);
+							p->myTexture = spriteSheet;
+							p->myBattleTexture = portraitTextures[name];
+							p->UiTex = lancasterUI;
+
+							// make each unit have their own unique control ID
+							p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+							p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+
+							p->Start();
+							p->hp = p->maxHp; /* Reset its health */
+							PassAnimations(p);
+							p->position =  app->map->MapToWorld(Pnode.attribute("x").as_int(), Pnode.attribute("y").as_int()); /*The position in the new map*/
+
+						}
+						
+					}
+					if (!spawned) {
+					 /*Brand new unit which means they don't have save data*/ 
+						Player* p = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+						p->config = Pnode;
+
+						string name = p->config.attribute("name").as_string();
+						// Here assign the correct texture
+
+						p->Awake();
+						party.Add(p);
+						p->myTexture = spriteSheet;
+						p->myBattleTexture = portraitTextures[name];
+						p->UiTex = lancasterUI;
+
+						// make each unit have their own unique control ID
+						p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+						p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+
+						p->Start();
+						PassAnimations(p);
+
+					}
+					
+				}
+
+
+			}
 		}
 
 		// Read enemies from config and instantiate them
@@ -277,7 +349,7 @@ bool BattleScene::Update(float dt)
 			else if (p->data->name == "Richard III") {
 				p->data->hp = 0;
 			}
-
+			
 		}
 
 
@@ -361,7 +433,7 @@ bool BattleScene::CleanUp()
 void BattleScene::StartSnowStorm() {
 
 	// Initialize particle system
-	/*if (snowSystem == nullptr && app->dialogueManager->myState != CUTSCENE) {
+	if (snowSystem == nullptr && app->dialogueManager->myState != CUTSCENE) {
 		const char* too = "Assets/snowP.png";
 		
 		snowParticle = new Particle(too, fPoint(0, 0), fPoint(0, 2), fPoint(0,0), 3.0f, SDL_Rect{ 0,0,8,8 }, 1.0f, 2.5f, 100, 255);
@@ -369,12 +441,12 @@ void BattleScene::StartSnowStorm() {
 		snowSystem = new ParticleEffect(snowParticle, 40, 0.1f,true,false, SDL_Rect{ 0,0, 512 , 0 });
 
 		app->particleSystem->AddParticleEffect(snowSystem);
-	}*/
+	}
 }
 
 void BattleScene::StartRossing() {
 
-	/*if (roseSystemLeft == nullptr) {
+	if (roseSystemLeft == nullptr) {
 		Animation anim;	Animation anim2; 	Animation anim3;
 		anim.PushBack(SDL_Rect{ 0,0,32,32 }); anim.PushBack(SDL_Rect{ 32,0,32,32 }); anim.PushBack(SDL_Rect{ 64,0,32,32 });
 		anim.PushBack(SDL_Rect{ 96,0,32,32 }); anim.PushBack(SDL_Rect{ 128,0,32,32 }); anim.speed = 0.4f; anim.loop = true;
@@ -405,7 +477,7 @@ void BattleScene::StartRossing() {
 	else {
 		roseSystemRight->Restart();
 		roseSystemLeft->Restart();
-	}*/
+	}
 }
 
 bool BattleScene::OnGuiMouseClickEvent(GuiControl* control)
@@ -467,6 +539,8 @@ bool BattleScene::SaveState(pugi::xml_node node) {
 		playerNode.append_attribute("luck").set_value(pIt->data->luck);
 		playerNode.append_attribute("speed").set_value(pIt->data->speed);
 		playerNode.append_attribute("movement").set_value(pIt->data->movement);
+		playerNode.append_attribute("level").set_value((int) pIt->data->level);
+		playerNode.append_attribute("exp").set_value((int)pIt->data->experiencePoints);
 
 		nodes.Add(&playerNode);
 	}
@@ -1035,5 +1109,50 @@ bool BattleScene::DrawExpBar(float& xpB, float xpA) {
 
 	return false;
 
+
+}
+
+void BattleScene::SaveDeadPlayers() {
+
+	for (ListItem<Player*>* pIt = deadPlayers.start; pIt != NULL; pIt = pIt->next) {
+
+		pugi::xml_node playerNode = saveNode.append_child("player");
+		playerNode.append_attribute("name").set_value(pIt->data->name.GetString());
+		playerNode.append_attribute("x").set_value(pIt->data->position.x / 32);
+		playerNode.append_attribute("y").set_value(pIt->data->position.y / 32);
+
+		switch (pIt->data->unitType) {
+		case PALADIN:
+			playerNode.append_attribute("unit_type").set_value(0);
+			break;
+		case ARCHER:
+			playerNode.append_attribute("unit_type").set_value(1);
+			break;
+		case KNIGHT:
+			playerNode.append_attribute("unit_type").set_value(2);
+			break;
+		case ARMOURED_KNIGHT:
+			playerNode.append_attribute("unit_type").set_value(3);
+			break;
+		case MAGE:
+			playerNode.append_attribute("unit_type").set_value(4);
+			break;
+		case DARK_MAGE:
+			playerNode.append_attribute("unit_type").set_value(5);
+			break;
+		}
+
+		playerNode.append_attribute("attack").set_value(pIt->data->attack);
+		playerNode.append_attribute("hp").set_value(pIt->data->hp);
+		playerNode.append_attribute("precision").set_value(pIt->data->precision);
+		playerNode.append_attribute("luck").set_value(pIt->data->luck);
+		playerNode.append_attribute("speed").set_value(pIt->data->speed);
+		playerNode.append_attribute("movement").set_value(pIt->data->movement);
+		playerNode.append_attribute("level").set_value((int)pIt->data->level);
+		playerNode.append_attribute("exp").set_value((int)pIt->data->experiencePoints);
+
+
+	}
+	deadPlayers.Clear();
 
 }

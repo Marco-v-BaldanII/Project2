@@ -178,6 +178,35 @@ bool BackStage::PostUpdate()
 {
 	SDL_Rect r = { 0,0,720,384 };
 	app->render->DrawTexture(background, 0, 0, &r);
+
+	for (ListItem<Npc*>* nIt = npcsList.start; nIt != NULL; nIt = nIt->next) {
+
+		Npc* npc = nIt->data;
+		npc->drawn = false;
+		if (npc->position.y + npc->body.h < app->backstageplayer->position.y + app->backstageplayer->currentAnimation->GetCurrentFrame().h) {
+
+			npc->Render();
+			npc->drawn = true;
+
+		}
+	}
+
+	app->backstageplayer->Render();
+
+	for (ListItem<Npc*>* nIt = npcsList.start; nIt != NULL; nIt = nIt->next) {
+
+		Npc* npc = nIt->data;
+		if (npc->drawn == false) {
+
+			npc->Render();
+			npc->drawn = true;
+
+		}
+	}
+
+
+
+
 	// if the player is near an npc draw the talking prompt
 	if(near){ app->render->DrawTexture(talkPrompt, app->backstageplayer->position.x - 76, app->backstageplayer->position.y ); }
 

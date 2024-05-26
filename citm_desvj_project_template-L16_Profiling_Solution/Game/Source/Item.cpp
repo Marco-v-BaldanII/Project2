@@ -81,7 +81,7 @@ bool Item::PostUpdate() {
 	return true;
 }
 
-void Item::InitModifiers(int x, int y, float hpMod, float atkMod, float LckMod, float PrecMod, float EvsMod, float SpdMod, int movMod, const char* name, const char* textPath) {
+void Item::InitModifiers(int x, int y, float hpMod, float atkMod, float LckMod, float PrecMod, float EvsMod, float SpdMod, int movMod, const char* name, const char* textPath, const char* description) {
 
 	if(hpMod != 0) this->hpMod = hpMod;
 	if(atkMod != 0) this->atkMod = atkMod;
@@ -90,6 +90,7 @@ void Item::InitModifiers(int x, int y, float hpMod, float atkMod, float LckMod, 
 	if(EvsMod != 0) this->EvsMod = EvsMod;
 	if(SpdMod != 0) this->spdMod = SpdMod;
 	if(movMod != 0) this->movMod = movMod;
+	this->description = description;
 	this->name = name;
 	mapPos.x = x; mapPos.y = y;
 	mapPos =  app->map->MapToWorld(mapPos.x, mapPos.y);

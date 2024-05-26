@@ -37,6 +37,8 @@ enum States {
 class PhysBody;
 class Timer;
 class Easing;
+class ParticleEffect;
+class Particle;
 
 enum UnitType {
 
@@ -256,6 +258,10 @@ public:
 	uint hitFx;
 
 	bool onStage = false; /*If the entity is in a battleScene*/
+
+	protected:
+		ParticleEffect* walkingEffect;
+		Particle* walkingParticle;
 
 };
 

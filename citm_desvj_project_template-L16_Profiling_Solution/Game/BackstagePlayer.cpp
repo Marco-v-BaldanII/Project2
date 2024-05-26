@@ -240,6 +240,15 @@ bool BackStagePlayer::Update(float dt)
 	return true;
 }
 
+void BackStagePlayer::Render() {
+	//Render player
+	SDL_RendererFlip flips = (SDL_RendererFlip)(flipHorizontal);
+	SDL_Rect currentFrame = currentAnimation->GetCurrentFrame();
+	SDL_Rect destRect = { position.x - 5, position.y - 8, currentFrame.w, currentFrame.h };
+
+	app->render->DrawTexture(playerTexture, destRect.x, destRect.y, &currentFrame, flips);
+}
+
 bool BackStagePlayer::PostUpdate()
 {
 	// Set player position
@@ -247,12 +256,6 @@ bool BackStagePlayer::PostUpdate()
 
 	// Set all player animations
 	//IMPORTANTE
-
-	//Render player
-	SDL_RendererFlip flips = (SDL_RendererFlip)(flipHorizontal);
-	SDL_Rect currentFrame = currentAnimation->GetCurrentFrame();
-	SDL_Rect destRect = { position.x - 5, position.y - 8, currentFrame.w, currentFrame.h };
-	app->render->DrawTexture(playerTexture, destRect.x, destRect.y, &currentFrame, flips);
 
 	//camera follow player
 	app->render->camera.x = (-position.x + SCREEN_WIDTH / 2);

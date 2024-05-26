@@ -63,7 +63,9 @@ bool ParticleSystem::Update(float dt) {
 		if (Effect->active) {
 			bool alive = Effect->Update(dt);
 		}
-		
+		if (Effect->drawLayer == BACK) {
+			Effect->Render();
+		}
 	
 
 	}
@@ -76,8 +78,9 @@ bool ParticleSystem::PostUpdate() {
 
 		ParticleEffect* Effect = pIt->data;
 
-		Effect->Render();
-
+		if (Effect->drawLayer == FRONT) {
+			Effect->Render();
+		}
 
 
 	}

@@ -128,7 +128,7 @@ public:
 	}
 
 
-	void Render(float dt, int currentHP, int currentAtk, int currentSpeed, int currentPrecision, int currentLuck, int currentMovement, int hpMod = 0, int atkMod = 0, int spdMod = 0, int precMod = 0, int luckMod =0) {
+	void Render(float dt, int currentHP, int currentAtk, int currentSpeed, int currentPrecision, int currentLuck, int currentMovement, int hpMod = 0, int atkMod = 0, int spdMod = 0, int precMod = 0, int luckMod =0, int exp=0) {
 		//  we use linear interpolation from its given starting position to its target position
 		shown = true;
 		
@@ -198,6 +198,9 @@ public:
 		app->render->DrawText(name, (startingPos.x + 150 + 700-75)  + (app->render->camera.x / 3 ), (startingPos.y + 135) + (app->render->camera.y / 3), 42*5, 12*5, false, SDL_Color{ 81, 51, 19, 255 });
 
 		if(player != nullptr) app->render->DrawText(itemName, (startingPos.x + 120 + 700-75) + (app->render->camera.x / 3), (startingPos.y + 500) + (app->render->camera.y / 3), 10 * itemName.length(), 12 * 5, false, SDL_Color{ 254, 254, 0, 255 });
+
+		string gh = to_string(exp); gh += "/100";
+		app->render->DrawText(gh, (startingPos.x + 150 + 700 - 75) + (app->render->camera.x / 3), (startingPos.y + 55) + (app->render->camera.y / 3), 42 * 5, 12 * 5, false, SDL_Color{ 81, 51, 19, 255 });
 	}
 
 	void Update() {

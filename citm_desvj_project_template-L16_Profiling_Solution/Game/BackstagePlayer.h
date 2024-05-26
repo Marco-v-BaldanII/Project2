@@ -43,6 +43,8 @@ public:
 
 	bool LoadState(pugi::xml_node node);
 
+	void Render();
+
 
 	float32 velocity = 0.0f;
 

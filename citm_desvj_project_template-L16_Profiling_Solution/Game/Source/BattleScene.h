@@ -74,6 +74,8 @@ public:
 
 	void StartRossing();
 
+	void SaveDeadPlayers();
+
 
 private:
 	SDL_Texture* spriteSheet;
@@ -122,9 +124,13 @@ public:
 	List<Player*> party;
 	List<Enemy*> goons;
 
+
+	List<Player*> deadPlayers;
+
 	List<Quest*> quests;
 
 	pugi::xml_node mynode;
+	pugi::xml_node saveNode;
 
 	List<pugi::xml_node*> nodes;
 

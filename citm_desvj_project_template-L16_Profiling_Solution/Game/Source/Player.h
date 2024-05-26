@@ -25,6 +25,8 @@ public:
 	
 	virtual ~Player();
 
+	Player(Player* p);
+
 	bool Awake();
 
 	bool Start();
@@ -109,8 +111,7 @@ public:
 
 	bool hasWaited = false;
 
-	ParticleEffect* walkingEffect;
-	Particle* walkingParticle;
+	
 };
 
 #endif // __PLAYER_H__

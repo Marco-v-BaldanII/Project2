@@ -12,14 +12,24 @@
 #include "Lever.h"
 #include "Particle.h"
 #include <list>
+#include "../GuiManager.h"
 
 using namespace std;
+
+enum RenderLayer {
+
+	FRONT,
+	BACK
+
+};
+
+
 
 class ParticleEffect {
 
 public:
 
-	ParticleEffect(Particle* baseParticle, uint poolSize, float spawnRate,bool loop, bool flipped = false, SDL_Rect spawnBox = SDL_Rect{0,0,0,0}, bool animated = false) {
+	ParticleEffect(Particle* baseParticle, uint poolSize, float spawnRate,bool loop, bool flipped = false, SDL_Rect spawnBox = SDL_Rect{0,0,0,0}, bool animated = false, RenderLayer renderLayer = FRONT, VIEW v = SCREEN) {
 
 		this->baseParticle = baseParticle;
 		this->poolSize = poolSize;
@@ -28,6 +38,8 @@ public:
 		this->loop = loop;
 		this->animated = animated;
 		this->flipped = flipped;
+		this->drawLayer = renderLayer;
+		overlayPos = v;
 
 		counter = poolSize;
 
@@ -58,7 +70,7 @@ public:
 
 
 		for (ListItem<Particle*>* pIt = myParticles.start; pIt != NULL; pIt = pIt->next) {
-			if (pIt->data->active && pIt->data->CheckToDie() == false) {
+			if (pIt->data != NULL && pIt->data->active && pIt->data->CheckToDie() == false) {
 				Particle* p = pIt->data;
 
 				p->position.x += p->velocity.x +((float) p->currentSpeedXVariation/5.0f )* dt/10;
@@ -93,10 +105,16 @@ public:
 					r.w *= (particle->currentVariation / 10); r.h *= particle->currentVariation / 10;
 					if (!animated) {
 						if (flipped) {
-							app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, true, particle->currentAlpha);
+							if (overlayPos == SCREEN) {
+								app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, true, particle->currentAlpha);
+							}
+							else { app->render->DrawTexture(particle->texture, particle->position.x , particle->position.y , &r, true, particle->currentAlpha); }	
 						}
 						else {
-							app->render->DrawTexture(particle->texture, particle->position.x, particle->position.y, &r, false, particle->currentAlpha);
+							if (overlayPos == SCREEN) {
+								app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, false, particle->currentAlpha);
+							}
+							else { app->render->DrawTexture(particle->texture, particle->position.x , particle->position.y, &r, false, particle->currentAlpha); }
 						}
 					}
 					else {
@@ -129,6 +147,9 @@ public:
 		myParticles.Clear();
 		delete baseParticle;
 	}
+
+	RenderLayer drawLayer;
+	VIEW overlayPos;
 
 	List<Particle*> myParticles;
 

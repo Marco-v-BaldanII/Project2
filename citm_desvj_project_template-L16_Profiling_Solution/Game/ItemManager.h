@@ -54,6 +54,8 @@ public:
 	Lever* AddLever();
 
 	pugi::xml_node myNode;
+
+	pugi::xml_node mapNode;
 	
 	pugi::xml_node config;
 	List<Item*> items;

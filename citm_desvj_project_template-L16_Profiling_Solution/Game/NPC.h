@@ -57,6 +57,8 @@ public:
 
 	void Walk();
 
+	void Render();
+
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
@@ -72,6 +74,7 @@ public:
 
 	SDL_Texture* texture = nullptr;
 
+	bool drawn = false;
 	
 	int waitTime = 0;
 
