@@ -98,10 +98,12 @@ public:
 	GuiControlButton* atkButton = nullptr;
 	GuiControlButton* waitButton = nullptr;
 	GuiControlButton* talkButton = nullptr;
+	GuiControlButton* itemButton = nullptr;
 
 	int atkBtnId = -1;
 	int waitBtnId = -1;
 	int talkBtnId = -1;
+	int itemBtnId = -1;
 
 	List<Conversation*> conversations;
 
@@ -110,7 +112,6 @@ public:
 	bool misses[2];
 
 	bool hasWaited = false;
-
 	
 };
 

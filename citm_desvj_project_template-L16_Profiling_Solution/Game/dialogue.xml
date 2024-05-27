@@ -540,18 +540,18 @@
     <dialogue position="1" text="Very much, Edward. How can a king who's shaking in his boots expect any of his subjects to follow him to war." owner="Richard of York" />
     <dialogue position="4" text="Richard, that was uncalled for!" owner="Henry Tudor" />
     <dialogue position="2" text="Follow me into war, no. I'd like to reign over a peaceful land, where no English or foreigner blood has to be pointlessly spilled." owner="Prince Edward" />
-    <dialogue position="1" text="What rubbish! With all respect, Edward, just because we might know a few years of peace, doesn’t mean it’ll stay like this forever. It’s man’s natural state." owner="Richard of York" />
+    <dialogue position="1" text="What rubbish! With all respect, Edward, just because we might know a few years of peace, does't mean it'll stay like this forever. It's man's natural state." owner="Richard of York" />
     <dialogue position="4" text="You really think it so, Richard?" owner="Henry Tudor" />
-    <dialogue position="1" text="They'll never stop. Power, money, family, or love . people always have plenty of reasons to fight. Wherever there’s hate, war will soon ensue." owner="Richard of York" />
+    <dialogue position="1" text="They'll never stop. Power, money, family, or love . people always have plenty of reasons to fight. Wherever there's hate, war will soon ensue." owner="Richard of York" />
     <dialogue position="2" text="That may be so, still wouldn't you like it, Richard?" owner="Prince Edward" />
     <dialogue position="1" text="Me?" owner="Richard of York" />
     <dialogue position="2" text="If the world could stay like this, in this peace, at this age. If we could just stay the same, us three." owner="Prince Edward" />
     <dialogue position="1" text="That, is admittedly a nice thought, your majesty." owner="Richard of York" />
-    <dialogue position="2" text="I told you not to call me that. . . I wonder, how will history remember me? A grandiose warrior like my grandfather? That doesn’t suit me." owner="Prince Edward" />
+    <dialogue position="2" text="I told you not to call me that. . . I wonder, how will history remember me? A grandiose warrior like my grandfather? That doesn't suit me." owner="Prince Edward" />
     <dialogue position="1" text="Or a frail lunatic like your father?" owner="Richard of York" />
     <dialogue position="4" text="Richard, how dare you!" owner="Henry Tudor" />
     <dialogue position="1" text="It is what most nobles think, surely you've heard." owner="Richard of York" />
-    <dialogue position="2" text="It's also very much the truth, though it pains me to admit so. To admit that the rightful king, my own father, wasn’t born ready to be king. But such is the way of monarchy, I likely wasn’t born that way either." owner="Prince Edward" />
+    <dialogue position="2" text="It's also very much the truth, though it pains me to admit so. To admit that the rightful king, my own father, wasn't born ready to be king. But such is the way of monarchy, I likely wasn't born that way either." owner="Prince Edward" />
     <dialogue position="4" text=" Rubbish, you're empathic, not foolish, your majesty!" owner="Henry Tudor" />
     <dialogue position="1" text="Jah! For once, I think I actually agree with Henry." owner="Richard" />
     <dialogue position="2" text="You guys . . . I'll be a great king, and I'll need your help. When we have to fight, to preserve this peace, and these memories, for a gentler world." owner="Prince Edward" />
@@ -570,7 +570,7 @@
 	<Scene num="5" dialogues ="16"/>
 
 <dialogue text="Scene 5: Tower of London Outskirts" owner="Narrator"  voice ="Assets/Audio/lines/narrator013.ogg" background="Assets/Textures/Backgrounds/Castle_Outskirts.png"/>
-<dialogue position="1" text="Best be on our way, thank you Lady Margaret for your warm welcome, take good care of his majesty, let’s go boys!" owner="Duke of York"/>
+<dialogue position="1" text="Best be on our way, thank you Lady Margaret for your warm welcome, take good care of his majesty, let's go boys!" owner="Duke of York"/>
 <dialogue position="2" text="Thanks to you, Lord Richard, for your continued services and devotion to my husband." owner="Margaret"/>
 <dialogue text="(the Yorks leave)" owner="Narrator" voice ="Assets/Audio/lines/narrator045.ogg"/>
 <dialogue position="1" text="So father, how was the king?" owner="Richard of York"/>

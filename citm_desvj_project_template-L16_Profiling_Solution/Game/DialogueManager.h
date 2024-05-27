@@ -157,12 +157,12 @@ public:
 
 	//Text speed
 	float slowVelocity = 0.002;
-	float normalVelocity = 0.004;
-	float fastVelocity = 0.007;
+	float normalVelocity = 0.005;
+	float fastVelocity = 0.02;
 
 	Npc* currentNPC;
 
-	float textVelocity = normalVelocity;
+	float textVelocity = fastVelocity;
 
 	std::map <std::string, ActorSprite*> actorPortraits;
 
@@ -178,7 +178,7 @@ private:
 	DynArray<Dialogue*> shakespeareDialogues;
 	std::map <std::string, SDL_Texture*> portraitTextures; // diccionary used to identify textures by a name
 
-	
+	SDL_Texture* dialogueBoxTexture = nullptr;
 
 	uint dialogueSize = 0;
 	uint dialogueIndex = 0;
@@ -194,10 +194,10 @@ private:
 	bool scrolling = true;
 
 	// values used for interpolation of scrolling effect
-	int w1_1 = -dialogueBox.w;
-	int w2_1 = -dialogueBox.w;
-	int w3_1 = -dialogueBox.w;
-	int w4_1 = -dialogueBox.w;
+	int w1_1 = -dialogueBox.w-8 ;
+	int w2_1 = -dialogueBox.w-8 ;
+	int w3_1 = -dialogueBox.w-8 ;
+	int w4_1 = -dialogueBox.w-8 ;
 
 
 	Position currentPos;
@@ -227,6 +227,7 @@ private:
 
 	SDL_Rect skipRect = SDL_Rect{ 90,300,0,48 };
 	SDL_Texture* skipBttnTex = nullptr;
+	SDL_Texture* overlayTextBox = nullptr;
 
 	Dialogue* spontaneousDialogue;
 
@@ -236,6 +237,10 @@ private:
 	bool scriptWritten = false;
 
 	int DialogueChannel;
+
+	uint bitAudio[4];
+	bool audiolines[4] = { false };
+	int audioIndexes[4] = { 0 };
 
 };
 

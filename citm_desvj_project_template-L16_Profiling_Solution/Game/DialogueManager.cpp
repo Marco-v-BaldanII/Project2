@@ -51,6 +51,13 @@ bool DialogueManager::Awake(pugi::xml_node config)
 void DialogueManager::WriteTheScript() {
 	bool ret = true;
 
+	bitAudio[0] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice.ogg");
+	bitAudio[1] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice2.ogg");
+	bitAudio[2] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice3.ogg");
+	bitAudio[3] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice4.ogg");
+
+	dialogueBoxTexture = app->tex->Load("Assets/Textures/UI/DialogueBox.png");
+	overlayTextBox = app->tex->Load("Assets/Textures/UI/DialogueBoxOverlay.png");
 
 	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("portrait"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("portrait")) {
 
@@ -349,7 +356,7 @@ void DialogueManager::DrawBackground() {
 
 		//if (Scenes[sceneIndex]->dialogues[dialogueIndex]->background != nullptr) { background = Scenes[sceneIndex]->dialogues[dialogueIndex]->background; }
 		app->render->camera.x = 0;
-		app->render->camera.y = 0;
+ 		app->render->camera.y = 0;
 
 		SDL_Rect dsScreen = SDL_Rect{ 0,0,256 * 2,198 * 2 };
 		app->render->DrawTexture(backgrounds[backgroundIndex], 0, 0, &dsScreen);
@@ -375,17 +382,22 @@ void DialogueManager::ManageScrolling() {
 
 
 	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10, -dialogueBox.w , DIALOGUE_SIZE * 2 };
-	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + DIALOGUE_SIZE * 2, -dialogueBox.w , DIALOGUE_SIZE * 2 };
-	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
-	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 18 + DIALOGUE_SIZE * 2, -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 26 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 34 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
 
 	if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos != MIDDLE) {
-		r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 , -dialogueBox.w , DIALOGUE_SIZE * 2 };
-		r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
-		r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
-		r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 3 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
+		r1 = { dialogueBox.x+4 + dialogueBox.w , dialogueBox.y + 8 , -dialogueBox.w -4, DIALOGUE_SIZE * 2 };
+		r2 = { dialogueBox.x+4 + dialogueBox.w , dialogueBox.y + 16 + (DIALOGUE_SIZE * 2), -dialogueBox.w -4, DIALOGUE_SIZE * 2 };
+		r3 = { dialogueBox.x+4 + dialogueBox.w , dialogueBox.y + 24 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w -4, DIALOGUE_SIZE * 2 };
+		r4 = { dialogueBox.x+4 + dialogueBox.w , dialogueBox.y + 32 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w -4, DIALOGUE_SIZE * 2 };
 	}
-
+	if (myState == NPCS) {
+		r1 = { dialogueBox.x + 10 + dialogueBox.w , dialogueBox.y + 8 , -dialogueBox.w - 4, DIALOGUE_SIZE * 2 };
+		r2 = { dialogueBox.x + 10 + dialogueBox.w , dialogueBox.y + 16 + (DIALOGUE_SIZE * 2), -dialogueBox.w - 4, DIALOGUE_SIZE * 2 };
+		r3 = { dialogueBox.x + 10 + dialogueBox.w , dialogueBox.y + 24 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w - 4, DIALOGUE_SIZE * 2 };
+		r4 = { dialogueBox.x + 10 + dialogueBox.w , dialogueBox.y + 32 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w - 4, DIALOGUE_SIZE * 2 };
+	}
 
 
 
@@ -393,26 +405,59 @@ void DialogueManager::ManageScrolling() {
 	//Must investigate more robotic type of interpolation such as STEP
 	Lerp(w1_1, textVelocity, 0);
 	r1.w = w1_1;
+	if (audiolines[3] == false) {
+		if (myState == NPCS || currentPos != MIDDLE) {
+			app->audio->PlayFx(bitAudio[audioIndexes[3]]);
+			audiolines[3] = true;
+		}
+	}
 
 	if (w1_1 >= 0) /*first line interpolation finished*/ {
 		Lerp(w2_1, textVelocity, 0);
 		r2.w = w2_1;
+		if (myState == NPCS || currentPos != MIDDLE) {
+			if (audiolines[0] == false && numLines > 1) {
+
+				app->audio->PlayFx(bitAudio[audioIndexes[0]]);
+				audiolines[0] = true;
+			}
+		}
+
 	}
 
 	if (w2_1 >= 0) /*second line interpolation finished*/ {
 		Lerp(w3_1, textVelocity, 0);
 		r3.w = w3_1;
+
+		if (myState == NPCS || currentPos != MIDDLE) {
+			if (audiolines[1] == false && numLines > 2) {
+
+				app->audio->PlayFx(bitAudio[(int)audioIndexes[1]]);
+				audiolines[1] = true;
+			}
+		}
 	}
 	if (w3_1 >= 0) /*third line interpolation finished*/ {
 		Lerp(w4_1, textVelocity, 0);
 		r4.w = w4_1;
+
+		if (myState == NPCS || currentPos != MIDDLE) {
+			if (audiolines[2] == false && numLines > 3) {
+
+				app->audio->PlayFx(bitAudio[(int)audioIndexes[2]]);
+				audiolines[2] = true;
+			}
+		}
 	}
 
 	if (myState == NPCS || currentPos != MIDDLE) {
-		app->render->DrawRectangle(r1, whitey, true, true);
-		app->render->DrawRectangle(r2, whitey, true, true);
-		app->render->DrawRectangle(r3, whitey, true, true);
-		app->render->DrawRectangle(r4, whitey, true, true);
+		app->render->DrawRectangle(r1, b2Color(202.0f/ 255, 161.0f / 255, 106.0f/255, 1) , true, true);
+		app->render->DrawRectangle(r2, b2Color(202.0f / 255, 161.0f / 255, 106.0f / 255, 1), true, true);
+		app->render->DrawRectangle(r3, b2Color(202.0f / 255, 161.0f / 255, 106.0f / 255, 1), true, true);
+		app->render->DrawRectangle(r4, b2Color(202.0f / 255, 161.0f / 255, 106.0f / 255, 1), true, true);
+
+		if(myState == CUTSCENE) app->render->DrawTexture(overlayTextBox, dialogueBox.x - 10 + app->render->camera.x / -3, dialogueBox.y + app->render->camera.y / -3, NULL, false,120,1,255,255,255,0,0,0,SDL_BlendMode::SDL_BLENDMODE_ADD);
+		else if(myState == NPCS && currentNPC_Dialogues != nullptr){ app->render->DrawTexture(overlayTextBox, dialogueBox.x, dialogueBox.y,NULL, 1,120,1,255,255,255,0,1,1,SDL_BLENDMODE_ADD); }
 	}
 	else {
 
@@ -430,6 +475,12 @@ void DialogueManager::ResetScroll() {
 	w2_1 = -dialogueBox.w;
 	w3_1 = -dialogueBox.w;
 	w4_1 = -dialogueBox.w;
+
+	for (int i = 0; i < 4; ++i) {
+		audioIndexes[i] = getRandomNumber(0, 3);
+		audiolines[i] = false;
+	}
+
 }
 
 bool DialogueManager::HasScrollFinished() {
@@ -484,24 +535,26 @@ void DialogueManager::DrawTextBox(Position pos) {
 		}
 		else if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos == LEFT) {
 			dialogueBox = speechBox;
+			app->render->DrawTexture(dialogueBoxTexture, dialogueBox.x - 10 + app->render->camera.x / -3, dialogueBox.y + app->render->camera.y / -3);
 
-			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
+		/*	app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
-			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);*/
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+			app->render->DrawText(text, (dialogueBox.x + 7) * app->win->GetScale(), (dialogueBox.y + 8) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
 			app->render->DrawRectangle(nameBoxL, black, true, true);
 			app->render->DrawText(owner, (nameBoxL.x + 3) * app->win->GetScale(), (nameBoxL.y + 3) * app->win->GetScale(), nameBoxL.w * app->win->GetScale() - 5, (DIALOGUE_SIZE) * 2 * app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
 		}
 		else {
 			dialogueBox = speechBoxRight;
+			app->render->DrawTexture(dialogueBoxTexture, dialogueBox.x - 10 + app->render->camera.x / -3, dialogueBox.y + app->render->camera.y / -3);
 
-			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
+			/*app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3 , dialogueBox.y - 3 , dialogueBox.w + 6, dialogueBox.h + 6 }, whitey, true, true);
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2 , dialogueBox.y - 2 , dialogueBox.w + 4, dialogueBox.h + 4 }, whitey, true, true);
-			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
+			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);*/
 
-			app->render->DrawText(text, (dialogueBox.x + 8) * app->win->GetScale(), (dialogueBox.y + 3) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
+			app->render->DrawText(text, (dialogueBox.x + 7) * app->win->GetScale(), (dialogueBox.y + 8) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,255 });
 
 			app->render->DrawRectangle(nameBoxR, black, true, true);
 			app->render->DrawText(owner, (nameBoxR.x + 3) * app->win->GetScale(), (nameBoxR.y + 3) * app->win->GetScale(), nameBoxL.w * app->win->GetScale() - 5, (DIALOGUE_SIZE) * 2 * app->win->GetScale(), false, SDL_Color{ 255,255,255,255 });
@@ -550,7 +603,8 @@ void DialogueManager::DrawTextBox(Position pos) {
 			app->render->DrawRectangle(SDL_Rect{ dialogueBox.x , dialogueBox.y , dialogueBox.w , dialogueBox.h }, whitey, true, true);
 			app->render->DrawRectangle(nameBoxL, black, true, true);
 
-			app->render->DrawTexture(spontaneousDialogue->texture, 0 - (app->render->camera.x / 3), dialogueBox.y + 50, &portraitBoxL, true, 255, 1, 255, 150, 150);
+			app->render->DrawTexture(spontaneousDialogue->texture, 0 - (app->render->camera.x / 3), dialogueBox.y + 50, &portraitBoxL, true, 255);
+			if (spontaneousDialogue->actorSprite != nullptr) { app->render->DrawActor(spontaneousDialogue->actorSprite, 0 - (app->render->camera.x / 3), dialogueBox.y + 50, &portraitBoxL, true); }
 
 
 			dialogueBox.x += (app->render->camera.x / 3);
@@ -604,11 +658,13 @@ void DialogueManager::DrawTextBox(Position pos) {
 		dialogueBox.y -= (app->render->camera.y / 3);
 		string txt = currentNPC_Dialogues->dialogue->text;
 
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
-		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
-		app->render->DrawRectangle(dialogueBox, whitey, true, true);
+		app->render->DrawTexture(dialogueBoxTexture, dialogueBox.x  , dialogueBox.y );
 
-		app->render->DrawText(txt, (dialogueBox.x + (app->render->camera.x / 3) + 200), (dialogueBox.y + 10) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
+		/*app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 3, dialogueBox.y - 3, dialogueBox.w + 6, dialogueBox.h + 6 }, b2Color(0, 0, 10, 1), true, true);
+		app->render->DrawRectangle(SDL_Rect{ dialogueBox.x - 2, dialogueBox.y - 2, dialogueBox.w + 4, dialogueBox.h + 4 }, b2Color(0, 0, 0.5f, 1), true, true);
+		app->render->DrawRectangle(dialogueBox, whitey, true, true);*/
+
+		app->render->DrawText(txt, (dialogueBox.x + (app->render->camera.x / 3) + 200), (dialogueBox.y + 7) * app->win->GetScale(), (dialogueBox.w - 3) * app->win->GetScale(), DIALOGUE_SIZE * 2 * app->win->GetScale(), true, SDL_Color{ 0,0,0,1 });
 
 	}
 
@@ -860,11 +916,13 @@ void DialogueManager::Next_Dialogue() {
 		if (sceneIndex + 1 != Scenes.Count()) {
 			app->guiManager->OpenCloseCurtains();
 			sceneIndex++;
+			//DialogueChannel = app->audio->PlayFx(bitAudio);
 			if (app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999)DialogueChannel = app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 		}
 		else {
 			// the cutscene for act 1 has finished
 			myState = NPCS;
+			FinishScrolling();
 			
 			if (app->battleScene->snowSystem == nullptr) {
 				app->battleScene->StartSnowStorm();
@@ -881,6 +939,7 @@ void DialogueManager::Next_Dialogue() {
 	else {
 		// Play voice line
 		int h = Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine;
+		//DialogueChannel = app->audio->PlayFx(bitAudio);
 		if (app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine) != 999) DialogueChannel = app->audio->PlayFx(Scenes[sceneIndex]->dialogues[dialogueIndex]->voiceLine);
 	}
 }
@@ -891,6 +950,7 @@ void DialogueManager::SpontaneousDialogue(Dialogue* _dialogue) {
 		myState = SPONTANEOUS;
 
 		spontaneousDialogue->texture = portraitTextures[spontaneousDialogue->owner];
+		spontaneousDialogue->actorSprite = actorPortraits[spontaneousDialogue->owner];
 	}
 }
 

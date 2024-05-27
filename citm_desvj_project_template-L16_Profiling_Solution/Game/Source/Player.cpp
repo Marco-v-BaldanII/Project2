@@ -98,8 +98,8 @@ bool Player::Start() {
 
 	moveTime = 32;
 	counter = moveTime;
-	//initialize audio effect
-	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
+
+
 	state = IDLE;
 	app->entityManager->players.add(this);
 
@@ -161,8 +161,9 @@ bool Player::Start() {
 	if (atkButton == nullptr) atkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, atkBtnId, " Attack ", SDL_Rect{ 0,0,28  ,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{70,51,29,255});
 	if (waitButton == nullptr) waitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, waitBtnId, " Wait ", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
 	if (talkButton == nullptr) talkButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, talkBtnId, " Talk ", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
+	if (itemButton == nullptr)itemButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, itemBtnId, "PickUp", SDL_Rect{ 0,0,28,14 }, this, SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
 
-	atkButton->state = GuiControlState::DISABLED; waitButton->state = GuiControlState::DISABLED; talkButton->state = GuiControlState::DISABLED;
+	atkButton->state = GuiControlState::DISABLED; waitButton->state = GuiControlState::DISABLED; talkButton->state = GuiControlState::DISABLED; itemButton->state = GuiControlState::DISABLED;
 
 	for (pugi::xml_node no = config.child("conversation"); no != NULL; no = no.next_sibling("conversation")) {
 
@@ -191,8 +192,17 @@ bool Player::PreUpdate()
 	atkButton->bounds.x = position.x - 30; atkButton->bounds.y = position.y - 40;
 	waitButton->bounds.x = position.x + 30; waitButton->bounds.y = position.y - 40;
 	talkButton->bounds.x = position.x ; talkButton->bounds.y = position.y - 70;
+	itemButton->bounds.x = position.x; itemButton->bounds.y = position.y +30;
 
 	// if the player hasn't moved this turn it can be clicked on
+
+	if (myItem != nullptr && myItem->myType == CONSUMABLE) {
+		hp += myItem->GetHp();
+		myItem = nullptr;
+		if (hp > maxHp) { hp = maxHp; }
+		// Insert healing soundFx
+	}
+
 	
 	walkingEffect->spawnBox.x = position.x; walkingEffect->spawnBox.y = position.y +15;
 
@@ -209,6 +219,8 @@ bool Player::PreUpdate()
 		atkButton->state = GuiControlState::DISABLED;
 		waitButton->state = GuiControlState::DISABLED;
 		talkButton->state = GuiControlState::DISABLED;
+
+		
 		ExpandedBFS = false;
 		walkingEffect->active = false;
 	}
@@ -219,6 +231,7 @@ bool Player::PreUpdate()
 		if(atkButton->state == GuiControlState::DISABLED)atkButton->state = GuiControlState::NORMAL;
 		if(waitButton->state == GuiControlState::DISABLED) waitButton->state = GuiControlState::NORMAL;
 		if (talkButton->state == GuiControlState::DISABLED) talkButton->state = GuiControlState::NORMAL;
+		
 
 		//Select tile to move to
 
@@ -251,6 +264,7 @@ bool Player::PreUpdate()
 				if (atkButton->state == GuiControlState::DISABLED) atkButton->state = GuiControlState::NORMAL;
 				if (waitButton->state == GuiControlState::DISABLED) waitButton->state = GuiControlState::NORMAL;
 				if (talkButton->state == GuiControlState::DISABLED) talkButton->state = GuiControlState::NORMAL;
+				
 
 				int x, y;
 				app->input->GetMouseWorldPosition(x, y);
@@ -307,7 +321,7 @@ bool Player::Update(float dt)
 	case IDLE:
 		if(!defending) Bposition = iPoint(50 * 3, 80 * 3);
 		
-
+		
 
 		//if click enemy and enemay is on attack range engage combat
 	
@@ -328,39 +342,31 @@ bool Player::Update(float dt)
 
 
 
-		// Ability to pick up item
-
-		if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr && state == IDLE)/* If the tile i'm on has an item */ {
-
-			if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
-
-
-				app->audio->PlayFx(pickItemFx);
-
-				 app->map->myTiles[mapPos.x][mapPos.y]->myItem->overworld = false;
-
-				
-
-				app->inventory->InventoryItems.Add(app->map->myTiles[mapPos.x][mapPos.y]->myItem);
-				
-				app->questManager->CheckQuestCompletion(app->map->myTiles[mapPos.x][mapPos.y]->myItem->name);
-					app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
-			}
-
-		}
-
 		break;
 	case MOVE:
 		//app->guiManager->spotLight->visible = true;
 
-		
+		if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr) {
+			if (itemButton->state == GuiControlState::DISABLED)itemButton->state = GuiControlState::NORMAL;
+
+		}
+
+		else {
+			itemButton->state = GuiControlState::DISABLED;
+		}
 
 		//Expand tiles to available
 		if (!ExpandedBFS) {
 
 
+			if (myItem != nullptr) {
+				app->map->pathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());
+			}
+			else {
 
-			app->map->pathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());
+				app->map->pathfinding->GenerateWalkeableArea(tilePos, movement );
+			}
+			
 
 			ExpandedBFS = true;
 		}
@@ -483,8 +489,7 @@ bool Player::PostUpdate()
 			if (!defending) lerpingHp = hp; lerpingEXP = experiencePoints; Bposition = iPoint(50 * 3, 80 * 3);
 			//Draw spotLight
 			iPoint spotPos = iPoint(position.x + 16, position.y + 16);
-			app->render->DrawCircle(position.x +16, position.y +16, 2, 0, 0, 0, 255, true);
-			
+		
 
 			//app->render->CameraCenterOn(position.x -200, position.y -200);
 			app->guiManager->spotLight->Target = spotPos;
@@ -494,7 +499,8 @@ bool Player::PostUpdate()
 			if (app->turnManager->currentPlayer == this) 
 			{
 				
-					personalPathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());
+				if(myItem != nullptr)	personalPathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());
+				else { personalPathfinding->GenerateWalkeableArea(tilePos, movement); }
 				
 				
 				personalPathfinding->DrawBFSPath();
@@ -502,7 +508,8 @@ bool Player::PostUpdate()
 			}
 			
 			// ! important, movement is the only item modifier that is added rather than multiplied
-			myFrame->Render(1.0 / 60.0, hp, attack * myItem->GetAtk(), speed * myItem->GetSpd(), precision * myItem->GetPrec(), luck * myItem->GetLck(), movement + myItem->GetMov(),0,0,0,0,0,experiencePoints);
+			if(myItem != nullptr) myFrame->Render(1.0 / 60.0, hp, attack * myItem->GetAtk(), speed * myItem->GetSpd(), precision * myItem->GetPrec(), luck * myItem->GetLck(), movement + myItem->GetMov(),0,0,0,0,0,experiencePoints);
+			else { myFrame->Render(1.0 / 60.0, hp, attack, speed , precision , luck, movement , 0, 0, 0, 0, 0, experiencePoints); }
 
 
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
@@ -528,6 +535,7 @@ bool Player::PostUpdate()
 			atkButton->state = GuiControlState::DISABLED;
 			waitButton->state = GuiControlState::DISABLED;
 			talkButton->state = GuiControlState::DISABLED;
+			itemButton->state = GuiControlState::DISABLED;
 
 
 			if (curtainTimer.ReadSec() > 1) {
@@ -580,7 +588,9 @@ bool Player::PostUpdate()
 
 	if (lerpedExp == false && oponent != nullptr) {
 
-		bool finishedLERP = app->battleScene->DrawExpBar(lerpingEXP, experiencePoints + oponent->rewardEXP);
+		
+
+		bool finishedLERP = app->battleScene->DrawExpBar( lerpingEXP, experiencePoints + oponent->rewardEXP);
 		if (finishedLERP) {
 			if (!receivedEXP) {
 				receivedEXP = true;
@@ -639,7 +649,8 @@ bool Player::PostUpdate()
 			atkMod = 2;
 			break;
 		}
-		myFrame->Render(1.0 / 60.0, hp - hpMod, attack* myItem->GetAtk() -atkMod, speed* myItem->GetSpd() - spdMod, precision* myItem->GetPrec(), luck* myItem->GetLck() - luckMod, movement + myItem->GetMov(), hpMod, atkMod, spdMod, 0 , luckMod, experiencePoints);
+		if(myItem != nullptr) myFrame->Render(1.0 / 60.0, hp - hpMod, attack* myItem->GetAtk() -atkMod, speed* myItem->GetSpd() - spdMod, precision* myItem->GetPrec(), luck* myItem->GetLck() - luckMod, movement + myItem->GetMov(), hpMod, atkMod, spdMod, 0 , luckMod, experiencePoints);
+		else { myFrame->Render(1.0 / 60.0, hp - hpMod, attack  - atkMod, speed  - spdMod, precision , luck  - luckMod, movement , hpMod, atkMod, spdMod, 0, luckMod, experiencePoints); }
 		if ((app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN )&& showLvlUp.ReadSec() > 1) {
 			lvlMods = iPoint(-1, -1);
 		}
@@ -761,6 +772,9 @@ void Player::ClickOnMe() {
 			
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+
+				int i = getRandomNumber(0, battleVoiceLines.Count() - 1);
+				app->audio->PlayFx(battleVoiceLines[i]);
 
 				app->turnManager->DeSelectPlayer();
 
@@ -923,7 +937,9 @@ iPoint Player::LevelUp() {
 
 	switch (coin2) {
 	case 0:
-		hp += 4;
+		maxHp += 4;
+		hp = maxHp;
+		
 		break;
 	case 1:
 		attack += 2;
@@ -1052,6 +1068,25 @@ bool Player::OnGuiMouseClickEvent(GuiControl* control)  {
 		app->battleScene->talker1 = this;
 		
 
+	}
+
+	if (control->id == itemBtnId && app->turnManager->currentPlayer == this) {
+
+		// Ability to pick up item
+		iPoint mapPos = app->map->WorldToMap(position.x, position.y);
+
+		if (app->map->myTiles[mapPos.x][mapPos.y]->myItem != nullptr && state == MOVE)/* If the tile i'm on has an item */ {
+
+				app->audio->PlayFx(pickItemFx);
+
+				app->map->myTiles[mapPos.x][mapPos.y]->myItem->overworld = false;
+
+				app->inventory->InventoryItems.Add(app->map->myTiles[mapPos.x][mapPos.y]->myItem);
+
+				app->questManager->CheckQuestCompletion(app->map->myTiles[mapPos.x][mapPos.y]->myItem->name);
+				app->map->myTiles[mapPos.x][mapPos.y]->myItem = nullptr;
+			
+		}
 	}
 	return true;
 }

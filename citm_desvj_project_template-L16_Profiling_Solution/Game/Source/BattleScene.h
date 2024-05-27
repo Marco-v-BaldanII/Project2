@@ -179,6 +179,19 @@ public:
 	Animation lancasterDown;
 	Animation lancasterUp;
 
+	uint MargaretVoice1;
+	uint MargaretVoice2;
+	uint HenryTudorVoice1;
+	uint HenryTudorVoice2;
+	uint PrinceEdwardVoice1;
+	uint PrinceEdwardVoice2;
+	uint HenryVIVoice1;
+	uint HenryVIVoice2;
+	uint JasperTudorVoice1;
+	uint JasperTudorVoice2;
+
+	uint applauseFx;
+
 
 	SDL_Rect yorkHPBar = SDL_Rect{ 255 * 2,167 * 2,75 * 2,2 * 2 };
 	SDL_Rect LancasterHPBar = SDL_Rect{ 2 * 2,167 * 2,75 * 2,2* 2};

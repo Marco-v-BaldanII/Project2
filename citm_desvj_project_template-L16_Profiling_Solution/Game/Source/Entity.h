@@ -259,6 +259,8 @@ public:
 
 	bool onStage = false; /*If the entity is in a battleScene*/
 
+	DynArray<uint> battleVoiceLines;
+
 	protected:
 		ParticleEffect* walkingEffect;
 		Particle* walkingParticle;

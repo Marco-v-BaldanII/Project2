@@ -8,6 +8,7 @@
 #include "List.h"
 #include "Textures.h"
 #include "Render.h"
+#include "../Easing.h"
 
 struct SDL_Texture;
 class Easing;
@@ -184,6 +185,92 @@ public:
 
 	Timer curtainTimer;
 	bool curtainclosed = false;
+
+};
+
+class EasingText {
+public:
+
+	EasingText(SDL_Texture* texture, iPoint start, iPoint end, float time, float waitTimer = 1.5f) {
+
+		startPos = start;
+		endingPos = end;
+		this->texture = texture;
+		easing = new Easing(time);
+		waitTime = waitTimer;
+	}
+
+	Easing* easing = nullptr;
+	bool bPause = false;
+	Timer timer;
+	iPoint startPos;
+	iPoint endingPos;
+	SDL_Texture* texture;
+	float waitTime;
+
+	bool firstStep = false;
+
+	void Update() {
+
+		if (!easing->GetFinished())
+		{
+			int a, b;
+			int c, d;
+			EasingType easingT;
+
+			if (bPause) {
+				a = startPos.x; b = endingPos.x;
+				c = startPos.y; d = endingPos.y;
+				easingT = EasingType::EASE_INOUT_ELASTIC;
+			}
+			else {
+				a = endingPos.x;
+				b = startPos.x;
+				c = endingPos.y; d = startPos.y;
+				easingT = EasingType::EASE_INOUT_ELASTIC;
+			}
+
+			// Calculate interpolated position (tracktime, easinganimaion),
+			// and print to screen (DrawRectangle)
+			double t = easing->TrackTime(18);
+			double easedX = easing->EasingAnimation(a, b, t, easingT);
+			double easedY = easing->EasingAnimation(c, d, t, easingT);
+
+			SDL_Rect pauseBox = { easedX, 0, 300, 400 };
+			app->render->DrawTexture(texture, easedX + (app->render->camera.x / -3), easedY + (app->render->camera.y / -3));
+
+		}
+		else if (bPause)
+		{
+			app->render->DrawTexture(texture, endingPos.x + (app->render->camera.x / -3), endingPos.y + (app->render->camera.y / -3));
+
+			if (!firstStep) {
+				firstStep = true;
+				timer.Start();
+			}
+
+			if (timer.ReadMSec() > waitTime && firstStep) {
+				firstStep = false;
+
+				bPause = !bPause;
+				easing->SetFinished(false);
+
+			}
+
+		} 
+		else {
+
+			app->render->DrawTexture(texture, startPos.x + (app->render->camera.x / -3), startPos.y + (app->render->camera.y / -3));
+
+		}
+	}
+
+	void Activate() {
+
+
+		bPause = !bPause;
+		easing->SetFinished(false);
+	}
 
 };
 

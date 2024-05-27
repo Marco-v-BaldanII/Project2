@@ -46,6 +46,11 @@ bool TurnManager::Start() {
 	enemyTurnFinished = false;
 	noEnemyMoving = true;
 
+	SDL_Texture* t = app->tex->Load("Assets/Textures/UI/PlayerTurn.png");
+	SDL_Texture* t2 = app->tex->Load("Assets/Textures/UI/EnemyTurn.png");
+	playerTurnPopUp = new EasingText(t, iPoint(50, -360), iPoint(50, -120), 2.0f, 0.3f);
+	enemyTurnPopUp = new EasingText(t2, iPoint(50, -360), iPoint(50, -120), 2.0f, 0.3f);
+
 
 	return ret;
 }
@@ -66,7 +71,7 @@ bool TurnManager::CleanUp()
 bool TurnManager::PreUpdate()
 {
 	bool ret = true;
-
+	
 	return ret;
 }
 
@@ -87,6 +92,11 @@ bool TurnManager::Update(float dt)
 	}
 
 	if (availablePlayers <= 0) {
+		if (!enemySign) {
+			enemyTurnPopUp->Activate();
+			enemySign = true;
+		}
+
 		// enemy turn
 		LOG("All players have moved, initiating enemy turn");
 		currentTurn = ENEMY;
@@ -130,7 +140,12 @@ bool TurnManager::Update(float dt)
 bool TurnManager::PostUpdate()
 {
 	bool ret = true;
+	playerTurnPopUp->Update();
+	if (enemyTurnPopUp != nullptr) enemyTurnPopUp->Update();
 
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+		playerTurnPopUp->Activate();
+	}
 
 	return ret;
 }
@@ -207,6 +222,8 @@ bool TurnManager::EnemyTurn() {
 }
 void TurnManager::PlayerTurn() {
 	LOG("Starting player turn");
+	enemySign = false;
+	if(playerTurnPopUp != nullptr) playerTurnPopUp->Activate();
 
 	if (currentTurn != PLAYER) {
 		currentTurn = PLAYER;

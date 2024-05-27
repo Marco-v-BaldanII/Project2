@@ -70,16 +70,18 @@ public:
 
 
 		for (ListItem<Particle*>* pIt = myParticles.start; pIt != NULL; pIt = pIt->next) {
-			if (pIt->data != NULL && pIt->data->active && pIt->data->CheckToDie() == false) {
-				Particle* p = pIt->data;
+			if (pIt != nullptr && pIt->data != nullptr) {
+				if (pIt->data != NULL && pIt->data->active && pIt->data->CheckToDie() == false) {
+					Particle* p = pIt->data;
 
-				p->position.x += p->velocity.x +((float) p->currentSpeedXVariation/5.0f )* dt/10;
-				p->position.y += p->velocity.y * dt/10;
+					p->position.x += p->velocity.x + ((float)p->currentSpeedXVariation / 5.0f) * dt / 10;
+					p->position.y += p->velocity.y * dt / 10;
 
-				p->velocity.x += p->acceleration.x * dt/10;
-				p->velocity.y += p->acceleration.y * dt/10;
+					p->velocity.x += p->acceleration.x * dt / 10;
+					p->velocity.y += p->acceleration.y * dt / 10;
 
 
+				}
 			}
 		}
 

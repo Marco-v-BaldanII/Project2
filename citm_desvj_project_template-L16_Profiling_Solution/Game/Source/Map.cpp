@@ -160,9 +160,9 @@ void Map::CameraRestrictions() {
 
     }
     if (app->render->camera.y > 0) { app->render->camera.y = 0; }
-    if (app->render->camera.x < -43 * TILE_RESOLUTION * 3) { app->render->camera.x = -43 * TILE_RESOLUTION * 3; }
-    if (app->render->camera.y < -36 * TILE_RESOLUTION * 3) {
-        app->render->camera.y = -36 * TILE_RESOLUTION * 3;
+    if (app->render->camera.x < -39 * TILE_RESOLUTION * 3) { app->render->camera.x = -39 * TILE_RESOLUTION * 3; }
+    if (app->render->camera.y < -35 * TILE_RESOLUTION * 3) {
+        app->render->camera.y = -35 * TILE_RESOLUTION * 3;
     }
 }
 

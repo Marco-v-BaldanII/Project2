@@ -44,6 +44,15 @@ bool ItemManager::Start() {
 		for (pugi::xml_node n = mapNode.child("item"); n != NULL; n = n.next_sibling("item")) {
 
 			Item* item = AddItem();
+			string s = n.attribute("type").as_string();
+			if (s == "Z") {
+				item->myType = CONSUMABLE;
+			}
+			else {
+				item->myType = EQUIPABLE;
+			}
+
+			
 			item->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(), n.attribute("hp").as_float(), n.attribute("attack").as_float(), n.attribute("luck").as_float(),
 				n.attribute("precision").as_float(), n.attribute("evasion").as_float(), n.attribute("speed").as_float(), n.attribute("movement").as_int(), (const char*)n.attribute("name").as_string(),
 				n.attribute("textPath").as_string(), n.attribute("description").as_string());

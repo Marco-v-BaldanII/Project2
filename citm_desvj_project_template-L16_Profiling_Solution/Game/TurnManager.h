@@ -7,6 +7,7 @@
 #include <string>
 #include "../Player.h"
 #include "../Enemy.h"
+#include "../GuiManager.h"
 
 using namespace std;
 
@@ -64,7 +65,10 @@ public:
 	List<Enemy*> enemies;
 	Entity* currentenemy = nullptr;
 
-	
+	EasingText* playerTurnPopUp = nullptr;
+	EasingText* enemyTurnPopUp = nullptr;
+
+	bool enemySign = false;
 
 	bool enemyTurnFinished;
 

@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../random.h"
-
+#include "../Victory.h"
 #include <algorithm>
 #include <iostream>
 
@@ -58,7 +58,18 @@ bool BattleScene::Start()
 {
 	if (active) {
 		if (!started) {
-			
+			applauseFx = app->audio->LoadFx("Assets/audio/fx/ApplausosFX.ogg");
+
+			MargaretVoice1 = app->audio->LoadFx("Assets/Audio/lines/MargaretBattle01.wav");
+			MargaretVoice2 = app->audio->LoadFx("Assets/Audio/lines/MargaretBattle02.wav");
+			HenryTudorVoice1 = app->audio->LoadFx("Assets/Audio/lines/HenryTudorBattle01.wav");
+			HenryTudorVoice2 = app->audio->LoadFx("Assets/Audio/lines/HenryTudorBattle02.wav");
+			PrinceEdwardVoice1 = app->audio->LoadFx("Assets/Audio/lines/PrinceEdwardBattle01.wav");
+			PrinceEdwardVoice2 = app->audio->LoadFx("Assets/Audio/lines/PrinceEdwardBattle02.wav");
+			HenryVIVoice1 = app->audio->LoadFx("Assets/Audio/lines/HenryVIBattle01.wav");
+			HenryVIVoice2 = app->audio->LoadFx("Assets/Audio/lines/HenryVIBattle02.wav");
+			JasperTudorVoice1 = app->audio->LoadFx("Assets/Audio/lines/JasperTudorBattle01.wav");
+			JasperTudorVoice2 = app->audio->LoadFx("Assets/Audio/lines/JasperTudorBattle02.wav");
 
 			app->guiManager->spotLight->mode = BAT;
 			lancasterUI = app->tex->Load(mynode.child("lancasterUI").attribute("path").as_string());
@@ -190,6 +201,7 @@ bool BattleScene::Start()
 				// make each unit have their own unique control ID
 				p->atkBtnId = uniqueNumber.generateUniqueNumber(110, 300);
 				p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
+				p->itemBtnId = uniqueNumber.generateUniqueNumber(400, 800);
 
 				p->Start();
 				PassAnimations(p);
@@ -308,7 +320,7 @@ bool BattleScene::PreUpdate()
 // Called each loop iteration
 bool BattleScene::Update(float dt)
 {
-	if (!firstMap) app->render->camera.y = 100; firstMap = true;
+	if (!firstMap) app->render->camera.y = -2000; firstMap = true;
 	//attackPattern = rand() % 2;
 	//
 	//app->render->DrawText("Player Hp:" + to_string(playerHp), 100, 100, 1000, 100, false);
@@ -445,6 +457,8 @@ void BattleScene::StartSnowStorm() {
 }
 
 void BattleScene::StartRossing() {
+
+	app->audio->PlayFx(applauseFx);
 
 	if (roseSystemLeft == nullptr) {
 		Animation anim;	Animation anim2; 	Animation anim3;
@@ -960,7 +974,8 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->upAnim = princeEdUp;
 		entity->downAnim = princeEdDown;
 		entity->rightAnim = princeEdRight;
-		entity->hitFx = archerFx;
+		entity->hitFx = archerFx; entity->battleVoiceLines.PushBack(PrinceEdwardVoice2);
+		entity->battleVoiceLines.PushBack(PrinceEdwardVoice1);
 	}
 	else if (entity->name == "Duke of York") {
 		entity->upAnim = dukeYorkUp;
@@ -972,7 +987,8 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->upAnim = henryTudorUp;
 		entity->downAnim = henryTudorDown;
 		entity->rightAnim = henryTudorRight;
-		entity->hitFx = LancerFx;
+		entity->hitFx = LancerFx; 
+		entity->battleVoiceLines.PushBack(HenryTudorVoice2);
 	}
 	else if (entity->name == "Earl of Warwick") {
 
@@ -993,7 +1009,8 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->upAnim = margaretUp;
 		entity->rightAnim = margaretRight;
 		entity->downAnim = margaretDown;
-		entity->hitFx = knightFx;
+		entity->hitFx = knightFx; entity->battleVoiceLines.PushBack(MargaretVoice2);
+		entity->battleVoiceLines.PushBack(MargaretVoice1);
 	}
 	else if (entity->name == "Henry VI" || entity->name == "Jasper Tudor") {
 
@@ -1001,11 +1018,17 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->rightAnim = lancasterRight;
 		entity->downAnim = lancasterDown;
 		entity->hitFx = mageFx;
+		if (entity->name == "Henry VI") {
+			entity->battleVoiceLines.PushBack(HenryVIVoice1); entity->battleVoiceLines.PushBack(HenryVIVoice2);
+		}
+		else {
+			 entity->battleVoiceLines.PushBack(JasperTudorVoice2);
 
+		}
 
 	}
 	else if (entity->name == "Richard III") {
-
+		 
 		entity->upAnim = Richard3Up;
 		entity->rightAnim = Richard3Right;
 		entity->downAnim = Richard3Down;
@@ -1103,6 +1126,7 @@ bool BattleScene::DrawExpBar(float& xpB, float xpA) {
 	Lerp2(xpB, 0.03f, xpA);
 
 	expBar.w = 2 * xpB;
+	if (expBar.w > 200) expBar.w = 200;
 
 	app->render->DrawRectangle(SDL_Rect{ expBar.x - (app->render->camera.x / 3), expBar.y - (app->render->camera.y / 3) +2, expBar.w/2  , expBar.h   }, b2Color(1, 1, 1, 1), true, true);
 	app->render->DrawTexture(expTexture, expBar.x - (app->render->camera.x / 3), expBar.y - (app->render->camera.y / 3));

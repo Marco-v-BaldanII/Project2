@@ -10,6 +10,8 @@
 struct SDL_Texture;
 using namespace std;
 
+enum ItemTypes;
+
 enum ItemState {
 
 	OVERWORLD,
@@ -65,6 +67,8 @@ public:
 	bool overworld = true;
 
 	string description;
+
+	ItemTypes myType;
 
 private:
 

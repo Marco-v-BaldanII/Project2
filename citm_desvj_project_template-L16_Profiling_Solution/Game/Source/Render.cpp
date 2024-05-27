@@ -244,11 +244,10 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 		SDL_QueryTexture(texture, nullptr, nullptr, &textureWidth, &textureHeight);
 	}
 
-	// Calculate the scale factor for the width
-	float scaleWidth = (float)actualWidth / textureWidth;
+	
 
 	// Set the rectangle's dimensions
-	rect.w = (int)(textureWidth * scaleWidth * scale);
+	rect.w = (int)(textureWidth * 1 * scale);
 	rect.h = textureHeight * scale;
 
 	// Set the pivot point
@@ -445,7 +444,7 @@ bool Render::DrawText(const std::string& text, int posx, int posy, int w, int h,
 	if (numLines > 1.0f) {
 		// Copy rest to a new string
 		std::string newLine = text.substr(maxLineLength);
-		DrawText(newLine, posx, posy + h, w, h,isDialogue, color, aligment, maxLineLength);
+		DrawText(newLine, posx, posy + h*1.6f, w, h,isDialogue, color, aligment, maxLineLength);
 
 		// Create the actual string for this line with a max of LINE_LENGTH chars
 		std::string thisLine = text.substr(0, maxLineLength);
