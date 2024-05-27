@@ -312,7 +312,47 @@
 			
 		</Lancastrian>
 
+		<Jasper>
 
+			<animation name="wrigth">
+				<frame x="400" y="233" w="18" h="24" />
+				<frame x="400" y="264" w="18" h="24" />
+			</animation>
+
+			<animation name="up">
+				<frame x="400" y="166" w="19" h="26" />
+				<frame x="400" y="197" w="19" h="28" />
+			</animation>
+
+			<animation name="down">
+				<frame x="400" y="8" w="19" h="24" />
+				<frame x="400" y="37" w="19" h="27" />
+				<frame x="400" y="69" w="19" h="27" />
+			</animation>
+
+
+		</Jasper>
+
+		<Henry>
+
+			<animation name="wrigth">
+				<frame x="432" y="230" w="22" h="26" />
+				<frame x="432" y="262" w="22" h="26" />
+			</animation>
+
+			<animation name="up">
+				<frame x="432" y="167" w="21" h="25" />
+				<frame x="432" y="197" w="21" h="27" />
+			</animation>
+
+			<animation name="down">
+				<frame x="432" y="6" w="21" h="26" />
+				<frame x="432" y="37" w="21" h="28" />
+				<frame x="432" y="68" w="21" h="28" />
+			</animation>
+
+
+		</Henry>
 
 
 		<battleMaps>
