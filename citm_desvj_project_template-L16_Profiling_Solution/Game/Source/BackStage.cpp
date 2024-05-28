@@ -223,6 +223,8 @@ bool BackStage::CleanUp()
 	app->backstageplayer->Disable();
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+	npcsList.Clear();
+
 	//app->physics->CleanUp();
 	//app->audio->StopMusic();
 	return true;

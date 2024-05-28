@@ -10,6 +10,7 @@
 #include "BackStage.h"
 #include "../TurnManager.h"
 #include "BattleScene.h"
+#include "../CastingScene.h"
 
 using namespace std;
 
@@ -133,6 +134,10 @@ bool LevelManagement::Update(float dt)
 			{
 				currentScene = (Module*)app->mainMenu;
 				LOG("MainMenu");
+ 				app->castingScene->RemoveRoles();
+				app->battleScene->Disable();
+				app->render->camera.x = 0; app->render->camera.y = 0;
+				app->entityManager->entities.Clear();
 			}
 		}
 		break;

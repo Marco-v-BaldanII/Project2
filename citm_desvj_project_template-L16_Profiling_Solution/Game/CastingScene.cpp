@@ -36,32 +36,35 @@ bool CastingScene::Start() {
 	// Load the portrait box
 	if (active)
 	{
-		// Load all the actors from the config
-		for (pugi::xml_node ActorNode = config.child("actor"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("actor")) {
+		if (!loaded) {
+			// Load all the actors from the config
+			for (pugi::xml_node ActorNode = config.child("actor"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("actor")) {
 
-			Actor* actor = new Actor(ActorNode.attribute("name").as_string(), ActorNode.attribute("dialogue").as_string());
-			string t = ActorNode.attribute("path").as_string();
-			actor->texture = app->tex->Load(t.c_str());
+				Actor* actor = new Actor(ActorNode.attribute("name").as_string(), ActorNode.attribute("dialogue").as_string());
+				string t = ActorNode.attribute("path").as_string();
+				actor->texture = app->tex->Load(t.c_str());
 
-			actors.PushBack(actor);
+				actors.PushBack(actor);
+			}
+
+			for (pugi::xml_node ActorNode = config.child("role"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("role")) {
+
+				string role = ActorNode.attribute("text").as_string();
+				TextureDef* def = new TextureDef();
+				def->name = role;
+				def->texture = app->tex->Load(ActorNode.attribute("path").as_string());
+
+				roles.PushBack(def);
+				assignedRoles.PushBack(false); /* shares the same index as roles (tells you if a role is assigned ior not) */
+			}
+
+			//Load FX
+			//selectButton = app->audio->LoadFx("Assets/Audio/Fx/selectButton.wav");
+			//enterButton = app->audio->LoadFx("Assets/Audio/Fx/enterButton.wav");
+
+			background = app->tex->Load("Assets/Textures/Battle scene editted.png");
+			loaded = true;
 		}
-
-		for (pugi::xml_node ActorNode = config.child("role"); ActorNode != NULL; ActorNode = ActorNode.next_sibling("role")) {
-
-			string role = ActorNode.attribute("text").as_string();
-			TextureDef* def = new TextureDef();
-			def->name = role;
-			def->texture = app->tex->Load(ActorNode.attribute("path").as_string());
-
-			roles.PushBack(def);
-			assignedRoles.PushBack(false); /* shares the same index as roles (tells you if a role is assigned ior not) */
-		}
-
-		//Load FX
-		//selectButton = app->audio->LoadFx("Assets/Audio/Fx/selectButton.wav");
-		//enterButton = app->audio->LoadFx("Assets/Audio/Fx/enterButton.wav");
-
-		background = app->tex->Load("Assets/Textures/Battle scene editted.png");
 	}
 
 	return true;
@@ -173,6 +176,17 @@ void CastingScene::AssignRole() {
 
 		actorIndex++;
 	}
+}
+
+void CastingScene::RemoveRoles() {
+
+	app->dialogueManager->actorPortraits.clear();
+	finishedCasting = false;
+
+	for (int j = 0; j < assignedRoles.Count(); j++) {
+		assignedRoles[j] = false;
+	}
+
 }
 
 #endif // __CASTINGSCENE_H__

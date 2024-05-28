@@ -48,8 +48,15 @@ bool Entity::MovePath()
 
 			//if enemy has moved more than he can 
 			//clear the path to stop the movement
-			if (movement + myItem->GetMov() <= stepCounter)
-				app->map->pathfinding->ClearPath();
+			if (myItem != nullptr) {
+				if (movement + myItem->GetMov() <= stepCounter)
+					app->map->pathfinding->ClearPath();
+			}
+			else {
+				if (movement  <= stepCounter)
+					app->map->pathfinding->ClearPath();
+
+			}
 
 
 			currentP = app->map->pathfinding->GetLastPath()->At(stepCounter);

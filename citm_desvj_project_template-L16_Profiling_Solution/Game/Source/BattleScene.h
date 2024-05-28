@@ -55,10 +55,7 @@ public:
 
 	bool LoadState(pugi::xml_node node);
 
-	void Disable()
-	{
-		
-	}
+
 
 	void LoadAnimations();
 

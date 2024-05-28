@@ -51,130 +51,134 @@ bool DialogueManager::Awake(pugi::xml_node config)
 void DialogueManager::WriteTheScript() {
 	bool ret = true;
 
-	bitAudio[0] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice.ogg");
-	bitAudio[1] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice2.ogg");
-	bitAudio[2] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice3.ogg");
-	bitAudio[3] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice4.ogg");
 
-	dialogueBoxTexture = app->tex->Load("Assets/Textures/UI/DialogueBox.png");
-	overlayTextBox = app->tex->Load("Assets/Textures/UI/DialogueBoxOverlay.png");
+	if (!scriptWritten) {
 
-	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("portrait"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("portrait")) {
+		bitAudio[0] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice.ogg");
+		bitAudio[1] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice2.ogg");
+		bitAudio[2] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice3.ogg");
+		bitAudio[3] = app->audio->LoadFx("Assets/Audio/lines/EmmaVoice4.ogg");
 
-		TextureDef* texD = new TextureDef();
-		const char* path = dialogueNode.attribute("texturePath").as_string();
-		texD->texture = app->tex->Load(path);
-		texD->name = dialogueNode.attribute("texturePath").as_string();
+		dialogueBoxTexture = app->tex->Load("Assets/Textures/UI/DialogueBox.png");
+		overlayTextBox = app->tex->Load("Assets/Textures/UI/DialogueBoxOverlay.png");
 
-		texD->name.erase(0, 26);
-		texD->name.erase(texD->name.length() - 4, 4);
+		for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("portrait"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("portrait")) {
 
-		// insert TextureDefinition to the map diccionary
-		portraitTextures.insert(std::make_pair(texD->name, texD->texture));
+			TextureDef* texD = new TextureDef();
+			const char* path = dialogueNode.attribute("texturePath").as_string();
+			texD->texture = app->tex->Load(path);
+			texD->name = dialogueNode.attribute("texturePath").as_string();
 
+			texD->name.erase(0, 26);
+			texD->name.erase(texD->name.length() - 4, 4);
+
+			// insert TextureDefinition to the map diccionary
+			portraitTextures.insert(std::make_pair(texD->name, texD->texture));
+
+		}
+
+		for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("english").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
+
+			Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
+			int p = dialogueNode.attribute("position").as_int();
+
+			string path = dialogueNode.attribute("background").as_string();
+			D->background = app->tex->Load(dialogueNode.attribute("background").as_string());
+			// add to backgrounds array
+			if (D->background != nullptr) backgrounds.PushBack(D->background);
+
+			D->voiceLine = app->audio->LoadFx(dialogueNode.attribute("voice").as_string());
+
+			if (p == 1) {
+				D->myPos = RIGHT;
+			}
+			else if (p == 2 || p == 4) {
+				D->myPos = LEFT;
+			}
+
+			// Assign a texture portrait
+			if (D->owner != "Narrator") {
+				// use the keycode (owner name) to find the correct portrait
+				D->texture = portraitTextures[D->owner];
+
+				D->actorSprite = actorPortraits[D->owner];
+
+			}
+
+
+
+
+
+			dialogues.PushBack(D);
+			dialogueSize++;
+		}
+
+
+
+
+		// Shakespearean dialogues
+		for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("shakesperean").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
+
+			Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
+			int p = dialogueNode.attribute("position").as_int();
+			if (p == 1) {
+				D->myPos = RIGHT;
+			}
+			else if (p == 2 || p == 4) {
+				D->myPos = LEFT;
+			}
+
+			// Assign a texture portrait
+			if (D->owner != "Narrator") {
+				// use the keycode (owner name) to find the correct portrait
+				D->texture = portraitTextures[D->owner];
+				D->actorSprite = actorPortraits[D->owner];
+			}
+			shakespeareDialogues.PushBack(D);
+			//dialogueSize++;
+		}
+
+
+
+
+		// Load the scens info
+		sceneIndex = 0;
+		for (pugi::xml_node sNode = myConfig.child("dialogues").child("english").child("Scene"); sNode != NULL; sNode = sNode.next_sibling("Scene")) {
+
+			Scene* aScene = new Scene(sNode.attribute("num").as_int(), sNode.attribute("dialogues").as_int());
+			Scenes.PushBack(aScene);
+
+		}
+
+		// put dialogues in scenes
+		int prevAmount = 0;
+
+		int w = dialogues.Count();
+		int q = shakespeareDialogues.Count();
+
+		for (int i = 0; i < Scenes.Count(); ++i) {
+
+			if (i != 0) { prevAmount += Scenes[i - 1]->numDialogues; } /*Acumulative offset*/
+
+			int o = Scenes[i]->numDialogues;
+			for (int j = 0; j < Scenes[i]->numDialogues; ++j) {
+
+				Scenes[i]->dialogues.PushBack(dialogues[j + prevAmount]);
+				Scenes[i]->shakespeareDialogues.PushBack(shakespeareDialogues[j + prevAmount]);
+			}
+
+		}
+
+		//CHANGE
+		if (skipBttnTex == nullptr) skipBttnTex = app->tex->Load("Assets/Textures/Skip_button.png");
+
+
+		if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
+
+		if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
+
+		scriptWritten = true;
 	}
-
-	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("english").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
-
-		Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
-		int p = dialogueNode.attribute("position").as_int();
-
-		string path = dialogueNode.attribute("background").as_string();
-		D->background = app->tex->Load(dialogueNode.attribute("background").as_string());
-		// add to backgrounds array
-		if (D->background != nullptr) backgrounds.PushBack(D->background);
-
-		D->voiceLine = app->audio->LoadFx(dialogueNode.attribute("voice").as_string());
-
-		if (p == 1) {
-			D->myPos = RIGHT;
-		}
-		else if (p == 2 || p == 4) {
-			D->myPos = LEFT;
-		}
-
-		// Assign a texture portrait
-		if (D->owner != "Narrator") {
-			// use the keycode (owner name) to find the correct portrait
-			D->texture = portraitTextures[D->owner];
-
-			D->actorSprite = actorPortraits[D->owner];
-
-		}
-
-
-
-
-
-		dialogues.PushBack(D);
-		dialogueSize++;
-	}
-
-
-
-
-	// Shakespearean dialogues
-	for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("shakesperean").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
-
-		Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
-		int p = dialogueNode.attribute("position").as_int();
-		if (p == 1) {
-			D->myPos = RIGHT;
-		}
-		else if (p == 2 || p == 4) {
-			D->myPos = LEFT;
-		}
-
-		// Assign a texture portrait
-		if (D->owner != "Narrator") {
-			// use the keycode (owner name) to find the correct portrait
-			D->texture = portraitTextures[D->owner];
-			D->actorSprite = actorPortraits[D->owner];
-		}
-		shakespeareDialogues.PushBack(D);
-		//dialogueSize++;
-	}
-
-
-
-
-	// Load the scens info
-	sceneIndex = 0;
-	for (pugi::xml_node sNode = myConfig.child("dialogues").child("english").child("Scene"); sNode != NULL; sNode = sNode.next_sibling("Scene")) {
-
-		Scene* aScene = new Scene(sNode.attribute("num").as_int(), sNode.attribute("dialogues").as_int());
-		Scenes.PushBack(aScene);
-
-	}
-
-	// put dialogues in scenes
-	int prevAmount = 0;
-
-	int w = dialogues.Count();
-	int q = shakespeareDialogues.Count();
-
-	for (int i = 0; i < Scenes.Count(); ++i) {
-
-		if (i != 0) { prevAmount += Scenes[i - 1]->numDialogues; } /*Acumulative offset*/
-
-		int o = Scenes[i]->numDialogues;
-		for (int j = 0; j < Scenes[i]->numDialogues; ++j) {
-
-			Scenes[i]->dialogues.PushBack(dialogues[j + prevAmount]);
-			Scenes[i]->shakespeareDialogues.PushBack(shakespeareDialogues[j + prevAmount]);
-		}
-
-	}
-
-	//CHANGE
-	if (skipBttnTex == nullptr) skipBttnTex = app->tex->Load("Assets/Textures/Skip_button.png");
-
-
-	if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
-
-	if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
-
-	scriptWritten = true;
 }
 
 bool DialogueManager::Start() {
@@ -190,7 +194,7 @@ bool DialogueManager::Start() {
 
 	}
 
-	return ret;
+ 	return ret;
 }
 
 // Called before quitting
@@ -203,6 +207,9 @@ bool DialogueManager::CleanUp()
 
 	dialogues.Clear();
 	shakespeareDialogues.Clear();
+
+	dialogueIndex = 0;
+	sceneIndex = 0;
 
 	// Unload the backgrounds from the previous act
 	for (int i = 0; i < backgrounds.Count(); ++i) {
@@ -218,7 +225,7 @@ bool DialogueManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (scriptWritten) {
+ 	if (scriptWritten) {
 		//currentPos = dialogues[dialogueIndex]->myPos;
 		currentPos = Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos;
 
@@ -292,7 +299,7 @@ bool DialogueManager::Update(float dt)
 					app->entityManager->DestroyEntity(e);
 				}
 
-				app->backStage->npcsList.Clear();
+  				app->backStage->npcsList.Clear();
 
 			}
 			else if (currentNPC_Dialogues != nullptr && app->backStage->backStageID == 1 && currentNPC_Dialogues->ID == 469) {
@@ -921,7 +928,7 @@ void DialogueManager::Next_Dialogue() {
 		}
 		else {
 			// the cutscene for act 1 has finished
-			myState = NPCS;
+ 			myState = NPCS;
 			FinishScrolling();
 			
 			if (app->battleScene->snowSystem == nullptr) {
@@ -932,6 +939,9 @@ void DialogueManager::Next_Dialogue() {
 			app->backStage->Disable();*/
 			app->levelManager->LoadScene(GameScene::COMBAT);
 			app->backstageplayer->talking = false;
+
+  			dialogueIndex = 0;
+			sceneIndex = 0; backgroundIndex = 0;
 
 		}
 

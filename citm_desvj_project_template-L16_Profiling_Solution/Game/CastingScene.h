@@ -59,6 +59,8 @@ public:
 
 	void AssignRole();
 
+	void RemoveRoles();
+
 private:
 	//buttons and variables
 	//GuiControlButton* P_resume;
@@ -90,6 +92,7 @@ private:
 	 bool finishedCasting = false;
 
 	 ActorSprite* actorPortrait;
+	 bool loaded = false;
 
 };
 

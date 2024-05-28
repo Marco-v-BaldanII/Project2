@@ -48,13 +48,19 @@
 				   description="Boosts the unit's speed by 5 percent and their movement range by 2 but decreases their attack by 10 percent                                             "/>
 		     
 		     <item name="Might Medalion" type="E" movement ="2" speed="1.05" attack="0.9" x="25" y="24" textPath ="Assets/Textures/Items/medalion.png" 
-				   description="Boosts the unit's speed by 5 percent and their movement range by 2 but decreases their attack by 10 percent"/>/>
+				   description="Boosts the unit's speed by 5 percent and their movement range by 2 but decreases their attack by 10 percent"/>
 		     
 		     <item name="Serendipity Headgeat" type="C" movement ="-2" luck="1.2" x="22" y="16" textPath ="Assets/Textures/Items/helmet.png"
-				   description="Boosts the unit's luck by 20 percent but decreases their movement by 20 percent                                 "/>/>
+				   description="Boosts the unit's luck by 20 percent but decreases their movement by 20 percent                                 "/>
 				   
-			<item name="Vulnerary" type="Z" hp="10" x="3" y="19" textPath ="Assets/Textures/Items/Item1.png"
-		    description="Medicine made from healing herbs, restores 10hp                        "/>/>
+				   <item name="Vulnerary" type="Z" hp="10" x="3" y="19" textPath ="Assets/Textures/Items/vulnerary.png"
+                       description="Medicine made from healing herbs, restores 10hp                        "/>
+
+		<item name="Vulnerary" type="Z" hp="10" x="39" y="38" textPath ="Assets/Textures/Items/vulnerary.png"
+		    description="Medicine made from healing herbs, restores 10hp                        "/>
+
+			<item name="Vulnerary" type="Z" hp="10" x="37" y="11" textPath ="Assets/Textures/Items/vulnerary.png"
+		    description="Medicine made from healing herbs, restores 10hp                        "/>
 
 	</map>
 

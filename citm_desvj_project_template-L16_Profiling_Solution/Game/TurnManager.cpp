@@ -61,8 +61,8 @@ bool TurnManager::CleanUp()
 	bool ret = true;
 	// clear everything
 
-	players.Clear();
-	enemies.Clear();
+	List<Player*> p; players = p;
+	List<Enemy*> e; enemies = e;
 
 	return ret;
 }
@@ -321,8 +321,9 @@ void TurnManager::CheckBattleEnding() {
 				app->dialogueManager->CleanUp();
 
 
-
+				app->dialogueManager->scriptWritten = false;
 				app->dialogueManager->Enable();
+				app->dialogueManager->WriteTheScript();
 				app->dialogueManager->myState = NPCS;
 				app->entityManager->Enable();
 

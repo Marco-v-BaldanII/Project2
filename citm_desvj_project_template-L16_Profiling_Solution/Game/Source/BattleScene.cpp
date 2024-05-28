@@ -431,11 +431,15 @@ bool BattleScene::CleanUp()
 		app->entityManager->DestroyEntity(pEntity);
 
 	}*/
-	app->particleSystem->RemoveParticleEffect(snowSystem);
-	snowSystem = nullptr;
+	if (snowSystem != nullptr) {
+		app->particleSystem->RemoveParticleEffect(snowSystem);
+		snowSystem = nullptr;
+	}
 
 	app->entityManager->enemies.Clear();
 	party.Clear(); goons.Clear();
+
+	app->turnManager->Disable();
 
 	//app->audio->StopMusic();
 	return true;
