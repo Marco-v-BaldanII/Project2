@@ -22,6 +22,10 @@
 #include "Source/Window.h"
 #include "DialogueManager.h"
 #include "BackstagePlayer.h"
+#include "Source/BackStage.h"
+#include "Source/BattleScene.h"
+#include "TurnManager.h"
+#include "CastingScene.h"
 
 class PauseMenu : public Module
 {
@@ -40,15 +44,15 @@ private:
 	
 	bool pauseMenu = false;
 
-	GuiControlButton* P_resume;
-	GuiControlButton* P_FullScreen;
-	GuiControlButton* P_VSync;
-	GuiSlider* P_Music;
-	GuiSlider* P_FX;
-	GuiControlButton* P_laguage;
-	GuiControlButton* P_textSpeed;
-	GuiControlButton* P_save;
-	GuiControlButton* P_backtomenu;
+	GuiControlButton* P_resume = nullptr;
+	GuiControlButton* P_FullScreen = nullptr;
+	GuiControlButton* P_VSync = nullptr;
+	GuiSlider* P_Music = nullptr;
+	GuiSlider* P_FX = nullptr;
+	GuiControlButton* P_laguage = nullptr;
+	GuiControlButton* P_textSpeed = nullptr;
+	GuiControlButton* P_save = nullptr;
+	GuiControlButton* P_backtomenu = nullptr;
 
 	SDL_Rect pos1;
 	SDL_Rect pos2;
@@ -59,6 +63,12 @@ private:
 	SDL_Rect pos7;
 	SDL_Rect pos8;
 	SDL_Rect pos9;
+
+	uint windowW = 512 * 3;
+	uint windowH = 384 * 3;
+
+	float menuY = 0;
+	const float animationSpeed = 200.0f;
 
 	const char* laguageText;
 };

@@ -1,8 +1,12 @@
 #include "PauseMenu.h"
 #include "Source/Log.h"
+#include <stdio.h>
 
 PauseMenu::PauseMenu(bool isActive) : Module(isActive)
 {
+	name.Create("pauseMenu");
+
+	pauseMenu = false;
 }
 
 PauseMenu::~PauseMenu()
@@ -11,19 +15,17 @@ PauseMenu::~PauseMenu()
 }
 
 bool PauseMenu::Start()
-{
-	uint windowW = 512 * 3;
-	uint windowH = 384 * 3;
-	
-	pos1 = { (int)windowW / 2 - 140, (int)windowH / 2 - 140, 200,60 };
-	pos2 = { (int)windowW / 2 - 140, (int)windowH / 2 - 70, 200,60 };
-	pos3 = { (int)windowW / 2 - 140, (int)windowH / 2, 200,60 };
-	pos4 = { (int)windowW / 2 - 140, (int)windowH / 2 + 70, 200,60 };
-	pos5 = { (int)windowW / 2 - 140, (int)windowH / 2 + 140, 200,60 };
-	pos6 = { (int)windowW / 2 - 140, (int)windowH / 2 + 210, 200,60 };
-	pos7 = { (int)windowW / 2 - 140, (int)windowH / 2 + 280, 200,60 };
-	pos8 = { (int)windowW / 2 - 140, (int)windowH / 2 + 350, 200,60 };
-	pos9 = { (int)windowW / 2 - 140, (int)windowH / 2 + 420, 200,60 };
+{	
+	menuY = 300;
+	pos1 = { (int)windowW / 2 - 140, (int)windowH / 2 - 140 - (int)menuY, 200,60 };
+	pos2 = { (int)windowW / 2 - 140, (int)windowH / 2 - 70 - (int)menuY, 200,60 };
+	pos3 = { (int)windowW / 2 - 140, (int)windowH / 2 - (int)menuY, 200,60 };
+	pos4 = { (int)windowW / 2 - 140, (int)windowH / 2 + 70 - (int)menuY, 200,60 };
+	pos5 = { (int)windowW / 2 - 140, (int)windowH / 2 + 140 - (int)menuY, 200,60 };
+	pos6 = { (int)windowW / 2 - 140, (int)windowH / 2 + 210 - (int)menuY, 200,60 };
+	pos7 = { (int)windowW / 2 - 140, (int)windowH / 2 + 280 - (int)menuY, 200,60 };
+	pos8 = { (int)windowW / 2 - 140, (int)windowH / 2 + 350 - (int)menuY, 200,60 };
+	pos9 = { (int)windowW / 2 - 140, (int)windowH / 2 + 420 - (int)menuY, 200,60 };
 
 	P_resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, " Resume ", pos1, this);
 	P_FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, " FullScreen ", pos2, this);
@@ -84,6 +86,8 @@ bool PauseMenu::Update(float dt)
 
 	if (pauseMenu)
 	{
+		if (menuY > 0) menuY -= animationSpeed * dt;
+
 		if (app->levelManager->gameScene == GameScene::BACKSTAGE) app->backstageplayer->SetCanMove(false);
 
 		P_resume->state = GuiControlState::NORMAL;
@@ -98,17 +102,22 @@ bool PauseMenu::Update(float dt)
 	}
 	else if (!pauseMenu)
 	{
-		if (app->levelManager->gameScene == GameScene::BACKSTAGE) app->backstageplayer->SetCanMove(true);
+		if (menuY < 300) menuY += animationSpeed * dt;
+		
+		if (menuY >= 300)
+		{
+			if (app->levelManager->gameScene == GameScene::BACKSTAGE) app->backstageplayer->SetCanMove(true);
 
-		P_resume->state = GuiControlState::DISABLED;
-		P_FullScreen->state = GuiControlState::DISABLED;
-		P_VSync->state = GuiControlState::DISABLED;
-		P_Music->state = GuiControlState::DISABLED;
-		P_FX->state = GuiControlState::DISABLED;
-		P_laguage->state = GuiControlState::DISABLED;
-		P_textSpeed->state = GuiControlState::DISABLED;
-		P_save->state = GuiControlState::DISABLED;
-		P_backtomenu->state = GuiControlState::DISABLED;
+			P_resume->state = GuiControlState::DISABLED;
+			P_FullScreen->state = GuiControlState::DISABLED;
+			P_VSync->state = GuiControlState::DISABLED;
+			P_Music->state = GuiControlState::DISABLED;
+			P_FX->state = GuiControlState::DISABLED;
+			P_laguage->state = GuiControlState::DISABLED;
+			P_textSpeed->state = GuiControlState::DISABLED;
+			P_save->state = GuiControlState::DISABLED;
+			P_backtomenu->state = GuiControlState::DISABLED;
+		}
 	}
 
 	// Cosas de los botones
@@ -155,6 +164,17 @@ bool PauseMenu::Update(float dt)
 
 	if (app->levelManager->gameScene != GameScene::START) app->audio->SetFxVolume(P_FX->value);
 	if (app->levelManager->gameScene != GameScene::START) app->audio->SetMusicVolume(P_Music->value);
+
+	//update button positions
+	P_resume->bounds.y = (int)windowH / 2 - 140 - (int)menuY;
+	P_FullScreen->bounds.y = (int)windowH / 2 - 70 - (int)menuY;
+	P_VSync->bounds.y = (int)windowH / 2 - (int)menuY;
+	P_Music->bounds.y = (int)windowH / 2 + 70 - (int)menuY;
+	P_FX->bounds.y = (int)windowH / 2 + 140 - (int)menuY;
+	P_laguage->bounds.y = (int)windowH / 2 + 210 - (int)menuY;
+	P_textSpeed->bounds.y = (int)windowH / 2 + 280 - (int)menuY;
+	P_save->bounds.y = (int)windowH / 2 + 350 - (int)menuY;
+	P_backtomenu->bounds.y = (int)windowH / 2 + 420 - (int)menuY;
 
 	return true;
 }
@@ -230,6 +250,16 @@ bool PauseMenu::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	else if (control->id == 21)
 	{
+		//Before going to the main menu, we need to clean up all the modules
+		app->backStage->CleanUp();
+		app->turnManager->CleanUp();
+		app->battleScene->CleanUp();
+		app->castingScene->CleanUp();
+		app->backstageplayer->CleanUp();
+		app->mainMenu->CleanUp();
+		app->audio->CleanUp();
+
+		
 		//BACK TO MENU
 		app->levelManager->LoadScene(GameScene::START);
 		pauseMenu = false;
