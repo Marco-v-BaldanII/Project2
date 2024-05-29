@@ -176,6 +176,14 @@ public:
 	Animation lancasterDown;
 	Animation lancasterUp;
 
+	Animation henryVIRight;
+	Animation henryVIDown;
+	Animation henryVIUp;
+
+	Animation jasperRight;
+	Animation jasperDown;
+	Animation jasperUp;
+
 	uint MargaretVoice1;
 	uint MargaretVoice2;
 	uint HenryTudorVoice1;

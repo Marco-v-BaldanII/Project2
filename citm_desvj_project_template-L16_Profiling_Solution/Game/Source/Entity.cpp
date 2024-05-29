@@ -90,11 +90,13 @@ bool Entity::MovePath()
 			{
 				direction->x = MOVE_SPEED;
 				currentAnim = &rightAnim;
+				flippedSprite = false;
 			}
 			else if (direction->x <= -1)
 			{
 				direction->x = -MOVE_SPEED;
 				currentAnim = &rightAnim;
+				flippedSprite = true;
 			}
 			else {
 				direction->x = 0;
@@ -105,11 +107,13 @@ bool Entity::MovePath()
 			{
 				direction->y = MOVE_SPEED;
 				currentAnim = &downAnim;
+				flippedSprite = false;
 			}
 			else if (direction->y <= -1)
 			{
 				direction->y = -MOVE_SPEED;
 				currentAnim = &upAnim;
+				flippedSprite = false;
 			}
 			else {
 				direction->y = 0;

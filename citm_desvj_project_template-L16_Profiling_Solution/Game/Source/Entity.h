@@ -196,6 +196,7 @@ public:
 
 	Animation* currentAnim;
 	Animation rightAnim;
+	bool flippedSprite = false;
 	Animation upAnim;
 	Animation downAnim;
 

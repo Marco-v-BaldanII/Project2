@@ -969,6 +969,63 @@ void BattleScene::LoadAnimations() {
 			}
 		}
 	}
+	for (pugi::xml_node node = mynode.child("Henry").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				henryVIRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryVIRight.speed = 0.1f;
+			}
+			else if (s == "up") {
+				henryVIUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryVIUp.speed = 0.1f;
+			}
+			else if (s == "down") {
+				henryVIDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryVIDown.speed = 0.1f;
+			}
+		}
+	}
+	for (pugi::xml_node node = mynode.child("Henry").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				henryVIRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryVIRight.speed = 0.1f;
+			}
+			else if (s == "up") {
+				henryVIUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryVIUp.speed = 0.1f;
+			}
+			else if (s == "down") {
+				henryVIDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				henryVIDown.speed = 0.1f;
+			}
+		}
+	}
+	for (pugi::xml_node node = mynode.child("Jasper").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				jasperRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				jasperRight.speed = 0.1f;
+			}
+			else if (s == "up") {
+				jasperUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				jasperUp.speed = 0.1f;
+			}
+			else if (s == "down") {
+				jasperDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				jasperDown.speed = 0.1f;
+			}
+		}
+	}
 	
 }
 
@@ -1016,19 +1073,23 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->hitFx = knightFx; entity->battleVoiceLines.PushBack(MargaretVoice2);
 		entity->battleVoiceLines.PushBack(MargaretVoice1);
 	}
-	else if (entity->name == "Henry VI" || entity->name == "Jasper Tudor") {
+	else if (entity->name == "Henry VI" ) {
 
-		entity->upAnim = lancasterUp;
-		entity->rightAnim = lancasterRight;
-		entity->downAnim = lancasterDown;
+		entity->upAnim = henryVIUp;
+		entity->rightAnim = henryVIRight;
+		entity->downAnim = henryVIDown;
 		entity->hitFx = mageFx;
-		if (entity->name == "Henry VI") {
+		
 			entity->battleVoiceLines.PushBack(HenryVIVoice1); entity->battleVoiceLines.PushBack(HenryVIVoice2);
-		}
-		else {
-			 entity->battleVoiceLines.PushBack(JasperTudorVoice2);
-
-		}
+		
+	}
+	else if (entity->name == "Jasper Tudor") {
+		entity->upAnim = jasperUp;
+		entity->rightAnim = jasperRight;
+		entity->downAnim = jasperDown;
+		entity->hitFx = knightFx;
+	
+			entity->battleVoiceLines.PushBack(JasperTudorVoice2);
 
 	}
 	else if (entity->name == "Richard III") {

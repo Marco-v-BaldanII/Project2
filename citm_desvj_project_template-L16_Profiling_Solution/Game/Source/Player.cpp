@@ -354,7 +354,7 @@ bool Player::Update(float dt)
 		else {
 			itemButton->state = GuiControlState::DISABLED;
 		}
-
+		curtains = false;
 		//Expand tiles to available
 		if (!ExpandedBFS) {
 
@@ -404,19 +404,19 @@ bool Player::Update(float dt)
 		break;
 	}
 
-	if (hp > 0) {
+	if (hp >= 1) {
 		if (movedThisTurn) {
 			if (!hasWaited) {
 				app->turnManager->availablePlayers--;
 				hasWaited = true;
 			}
-			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 120);
-			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 60, 1, 255, 0, 0, 0, 0, SDL_BLENDMODE_ADD);
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), flippedSprite, 120);
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), flippedSprite, 60, 1, 255, 0, 0, 0, 0, SDL_BLENDMODE_ADD);
 		}
 		else {
 			
-			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 255);
-			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), false, 60, 1, 255, 0, 0, 0, 0, SDL_BLENDMODE_ADD);
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), flippedSprite, 255);
+			app->render->DrawTexture(myTexture, position.x, position.y, &currentAnim->GetCurrentFrame(), flippedSprite, 60, 1, 255, 0, 0, 0, 0, SDL_BLENDMODE_ADD);
 		}
 	}
 
@@ -424,7 +424,7 @@ bool Player::Update(float dt)
 
 	
 
-	if (hp <= 0 ) {
+	if (hp < 1 ) {
 		if (!lastWords) {
 			app->dialogueManager->SpontaneousDialogue(deathQuote);
 			 /* Last word quote */
@@ -460,7 +460,7 @@ bool Player::Update(float dt)
 bool Player::PostUpdate() 
 {
 
-	if (hp > 0) {
+	if (hp >= 1) {
 
 		if (!movedThisTurn) {
 			ClickOnMe();
@@ -609,6 +609,7 @@ bool Player::PostUpdate()
 				lerpingEXP = experiencePoints;
 				lerpedExp = true;
 				oponent = nullptr;
+				receivedEXP = false;
 			}
 			
 		}
@@ -625,6 +626,7 @@ bool Player::PostUpdate()
 			lerpedExp = true;
 			oponent = nullptr;
 			lvlMods = LevelUp();
+			receivedEXP = false;
 			showLvlUp.Start();
 			app->dialogueManager->SpontaneousDialogue(lvlUpQuote);
 		}
@@ -827,8 +829,6 @@ void Player::CalculateAttack() {
 void Player::OnCollision(Collider* physA, Collider* physB)  {
 
 	if (physA->type != physB->type && state == BATTLE) {
-		LOG("something");
-
 
 		if (opponentAttacking) {
 
@@ -848,7 +848,7 @@ void Player::OnCollision(Collider* physA, Collider* physB)  {
 /* when lerping hp finishes the number the turn siwtches to the opponent or the attack finishes*/
 bool Player::DealDMG() {
 
-	if (numberofAttacks <= 0 && !missed)/*finished attacks*/ {
+	if ((numberofAttacks <= 0 && !missed) || oponent->hp < 1)/*finished attacks*/ {
 		state = IDLE;
 		movedThisTurn = true;
 		app->battleScene->inBattle = false;
@@ -868,6 +868,16 @@ bool Player::DealDMG() {
 				oponent->hp -= (int) (attack * TypeMultiplier(oponent->unitType) );
 				oponent->lerpingHp = oponent->hp;
 				reachedTarget = false;
+
+				if ((numberofAttacks <= 0 && !missed) || oponent->hp < 1)/*finished attacks*/ {
+					state = IDLE;
+					movedThisTurn = true;
+					app->battleScene->inBattle = false;
+					HasAttackAction = false;
+					HasMoveAction = false;
+					reachedTarget = false;
+					battleTimer = 1;
+				}
 
 				// measures if the target is in attacking range, tewk to enable toe double attack of the player
 				int dist = app->map->DistanceBetweenTiles(tilePos, oponent->tilePos);
@@ -966,6 +976,7 @@ void Player::FigureStickMovement(float dt) {
 		state = IDLE;
 		movedThisTurn = true;
 		app->battleScene->inBattle = false;
+		curtains = false;
 		numberofAttacks = 1;
 		missed = false;
 		HasAttackAction = false;

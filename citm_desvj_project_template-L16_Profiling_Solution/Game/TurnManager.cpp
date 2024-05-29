@@ -223,6 +223,7 @@ bool TurnManager::EnemyTurn() {
 void TurnManager::PlayerTurn() {
 	LOG("Starting player turn");
 	enemySign = false;
+	isPlayerMoving = false;
 	if(playerTurnPopUp != nullptr) playerTurnPopUp->Activate();
 
 	if (currentTurn != PLAYER) {

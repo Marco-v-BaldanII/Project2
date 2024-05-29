@@ -555,6 +555,7 @@ bool Enemy::DealDMG() {
 		HasAttackAction = false;
 		HasMoveAction = false;
 		battleTimer = 0;
+		app->battleScene->inBattle = false;
 		
 	}
 	else if (!missed) {

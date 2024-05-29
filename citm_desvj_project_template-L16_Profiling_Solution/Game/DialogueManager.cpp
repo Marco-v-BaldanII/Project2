@@ -759,7 +759,7 @@ void DialogueManager::AdvanceText() {
 			}
 			if (myState == SPONTANEOUS) {
 
-				if (spontaneousDialogue != nullptr)/*Death quote*/ myState = NPCS;
+				if (spontaneousDialogue != nullptr)/*Death quote*/ { myState = NPCS; }
 
 
 				else /*Battle conversation*/ {

@@ -13,23 +13,20 @@
 	<start_menu />
 	<itemmanager />
 	<battle_scene>
-		<player name="Henry VI" x="7" y="41" unit_type="1" attack="12" hp="15" precision="75" luck="25" speed="25" movement="8" level="1" exp="0" />
-		<player name="Margaret" x="11" y="40" unit_type="3" attack="6" hp="18" precision="70" luck="20" speed="20" movement="6" level="0" exp="0" />
-		<player name="Prince Edward" x="9" y="41" unit_type="1" attack="8" hp="7" precision="75" luck="25" speed="20" movement="8" level="0" exp="0" />
-		<player name="Henry Tudor" x="10" y="41" unit_type="0" attack="5" hp="12" precision="90" luck="25" speed="20" movement="10" level="0" exp="0" />
-		<player name="Jasper Tudor" x="6" y="41" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="20" movement="11" level="0" exp="0" />
-		<enemy name="Duke of York" x="27" y="26" unit_type="0" attack="5.25" hp="0" precision="67.5" luck="18.75" speed="26" movement="11" />
-		<enemy name="Earl of Warwick" x="49" y="13" unit_type="3" attack="6" hp="18.75" precision="52.5" luck="15" speed="11" movement="6" />
-		<enemy name="Edward of York" x="7" y="7" unit_type="2" attack="7.5" hp="15" precision="56.25" luck="18.75" speed="18" movement="8" />
-		<enemy name="Richard III" x="10" y="7" unit_type="0" attack="5.25" hp="0" precision="67.5" luck="18.75" speed="26" movement="11" />
-		<enemy name="George of Clarence" x="3" y="25" unit_type="1" attack="7.5" hp="9" precision="56.25" luck="18.75" speed="18" movement="8" />
-		<enemy name="William Catesby" x="29" y="12" unit_type="1" attack="7.5" hp="15" precision="56.25" luck="18.75" speed="18" movement="8" />
-		<enemy name="Knight" x="7" y="40" unit_type="2" attack="5" hp="0" precision="37.5" luck="12.5" speed="12" movement="8" />
-		<enemy name="Archer" x="9" y="40" unit_type="1" attack="5" hp="2" precision="37.5" luck="12.5" speed="12" movement="8" />
-		<enemy name="Mage" x="18" y="26" unit_type="4" attack="8.25" hp="12" precision="56.25" luck="22.5" speed="15" movement="8" />
-		<enemy name="Mage" x="48" y="26" unit_type="4" attack="8.25" hp="12" precision="56.25" luck="22.5" speed="15" movement="8" />
-		<enemy name="Mage" x="38" y="12" unit_type="4" attack="8.25" hp="12" precision="56.25" luck="22.5" speed="15" movement="8" />
-		<enemy name="Archer" x="22" y="12" unit_type="1" attack="5" hp="10" precision="37.5" luck="12.5" speed="12" movement="8" />
+		<player name="Prince Edward" x="19" y="8" unit_type="1" attack="10" hp="20" precision="75" luck="35" speed="25" movement="8" level="3" exp="70" />
+		<player name="Henry Tudor" x="20" y="6" unit_type="0" attack="5" hp="4.25" precision="90" luck="25" speed="20" movement="10" level="0" exp="30" />
+		<player name="Margaret" x="32" y="10" unit_type="3" attack="6" hp="18" precision="70" luck="20" speed="20" movement="6" level="0" exp="0" />
+		<enemy name="Duke of York" x="19" y="6" unit_type="0" attack="3.75" hp="-1" precision="67.5" luck="18.75" speed="22" movement="10" />
+		<enemy name="Edward of York" x="41" y="25" unit_type="2" attack="6" hp="-8.75" precision="56.25" luck="18.75" speed="15" movement="8" />
+		<enemy name="Earl of Warwick" x="32" y="29" unit_type="3" attack="4.5" hp="-6.5" precision="52.5" luck="15" speed="11" movement="6" />
+		<enemy name="Archer" x="15" y="27" unit_type="1" attack="4" hp="-4" precision="37.5" luck="12.5" speed="10" movement="8" />
+		<enemy name="Knight" x="4" y="25" unit_type="2" attack="4" hp="-0.5" precision="37.5" luck="12.5" speed="10" movement="8" />
+		<enemy name="Archer" x="21" y="30" unit_type="1" attack="4" hp="-4" precision="35" luck="12.5" speed="10" movement="8" />
+		<enemy name="Mage" x="19" y="29" unit_type="4" attack="6.75" hp="-6" precision="56.25" luck="15" speed="15" movement="8" />
+		<enemy name="Mage" x="41" y="25" unit_type="4" attack="6.75" hp="-6" precision="56.25" luck="15" speed="15" movement="8" />
+		<enemy name="Mage" x="40" y="25" unit_type="4" attack="6.75" hp="-1" precision="56.25" luck="15" speed="15" movement="8" />
+		<enemy name="Archer" x="32" y="10" unit_type="1" attack="4" hp="-4" precision="35" luck="12.5" speed="10" movement="8" />
+		<enemy name="Knight" x="31" y="9" unit_type="2" attack="4" hp="-2.5" precision="37.5" luck="12.5" speed="10" movement="8" />
 	</battle_scene>
 	<backStage />
 	<turnmanager />
@@ -37,7 +34,7 @@
 	<:anonymous />
 	<entitymanager />
 	<:anonymous>
-		<Player x="464" y="194" />
+		<Player x="475" y="186" />
 	</:anonymous>
 	<questmanager />
 	<dialoguemanager>
@@ -51,6 +48,6 @@
 	<:anonymous />
 	<Fade />
 	<renderer>
-		<camera x="-30" y="-3090" />
+		<camera x="-1814" y="-290" />
 	</renderer>
 </game_state>
