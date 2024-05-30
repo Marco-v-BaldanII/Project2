@@ -67,8 +67,8 @@ private:
 	uint windowW = 512 * 3;
 	uint windowH = 384 * 3;
 
-	float menuY = 0;
-	const float animationSpeed = 200.0f;
+	float menuY = 1000;
+	const float animationSpeed = 30.0f;
 
 	const char* laguageText;
 };

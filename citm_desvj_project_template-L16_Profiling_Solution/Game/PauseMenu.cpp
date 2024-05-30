@@ -86,7 +86,8 @@ bool PauseMenu::Update(float dt)
 
 	if (pauseMenu)
 	{
-		if (menuY > 0) menuY -= animationSpeed * dt;
+		if (menuY > 0) menuY -= animationSpeed;
+		if (menuY <= 0) menuY = 0;
 
 		if (app->levelManager->gameScene == GameScene::BACKSTAGE) app->backstageplayer->SetCanMove(false);
 
@@ -102,9 +103,10 @@ bool PauseMenu::Update(float dt)
 	}
 	else if (!pauseMenu)
 	{
-		if (menuY < 300) menuY += animationSpeed * dt;
+		if (menuY < 1000) menuY += animationSpeed;
+		if (menuY >= 1000) menuY = 1000;
 		
-		if (menuY >= 300)
+		if (menuY >= 1000)
 		{
 			if (app->levelManager->gameScene == GameScene::BACKSTAGE) app->backstageplayer->SetCanMove(true);
 
@@ -165,16 +167,18 @@ bool PauseMenu::Update(float dt)
 	if (app->levelManager->gameScene != GameScene::START) app->audio->SetFxVolume(P_FX->value);
 	if (app->levelManager->gameScene != GameScene::START) app->audio->SetMusicVolume(P_Music->value);
 
-	//update button positions
-	P_resume->bounds.y = (int)windowH / 2 - 140 - (int)menuY;
-	P_FullScreen->bounds.y = (int)windowH / 2 - 70 - (int)menuY;
-	P_VSync->bounds.y = (int)windowH / 2 - (int)menuY;
-	P_Music->bounds.y = (int)windowH / 2 + 70 - (int)menuY;
-	P_FX->bounds.y = (int)windowH / 2 + 140 - (int)menuY;
-	P_laguage->bounds.y = (int)windowH / 2 + 210 - (int)menuY;
-	P_textSpeed->bounds.y = (int)windowH / 2 + 280 - (int)menuY;
-	P_save->bounds.y = (int)windowH / 2 + 350 - (int)menuY;
-	P_backtomenu->bounds.y = (int)windowH / 2 + 420 - (int)menuY;
+	//update position of the buttons
+	P_resume->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 - 140 - (int)menuY, 200,60 };
+	P_FullScreen->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 - 70 - (int)menuY, 200,60 };
+	P_VSync->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 - (int)menuY, 200,60 };
+	P_Music->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 70 - (int)menuY, 200,60 };
+	P_FX->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 140 - (int)menuY, 200,60 };
+	P_laguage->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 210 - (int)menuY, 200,60 };
+	P_textSpeed->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 280 - (int)menuY, 200,60 };
+	P_save->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 350 - (int)menuY, 200,60 };
+	P_backtomenu->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 420 - (int)menuY, 200,60 };
+
+	//update position of the sliders
 
 	return true;
 }
