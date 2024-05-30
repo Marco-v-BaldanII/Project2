@@ -172,10 +172,10 @@ void DialogueManager::WriteTheScript() {
 		//CHANGE
 		if (skipBttnTex == nullptr) skipBttnTex = app->tex->Load("Assets/Textures/Skip_button.png");
 
+		//SDL_Rect{ 0,0,0,0 }, WORLD, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 }
+		if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this, SDL_Rect{ 0,0,0,0 }, SCREEN, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
 
-		if (choiceA_button == nullptr) choiceA_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 100, " choiceA ", choiceABox, this);
-
-		if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this);
+		if (choiceB_button == nullptr) choiceB_button = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, " choiceB ", choiceBBox, this, SDL_Rect{ 0,0,0,0 }, SCREEN, SDL_Color{ 158,112,63,255 }, SDL_Color{ 70,51,29,255 });
 
 		scriptWritten = true;
 	}
@@ -1076,4 +1076,5 @@ void DialogueManager::NextAct() {
 	pugi::xml_parse_result res2 = dialogueFile2.load_file("dialogue2.xml");
 
 	myConfig = dialogueFile2;
+	spontaneousDialogue = nullptr;
 }

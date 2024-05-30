@@ -292,12 +292,13 @@ void TurnManager::CheckBattleEnding() {
 		}
 		ListItem<Enemy*>* e = enemies.start;
 		while (e != NULL) {
+			if (e->data != NULL) {
+				if (e->data->hp > 0) {
+					enemyLoss = false;
+				}
 
-			if (e->data->hp > 0) {
-				enemyLoss = false;
+				e = e->next;
 			}
-
-			e = e->next;
 		}
 
 		/*if (enemies.Count() == 0) {
@@ -336,6 +337,7 @@ void TurnManager::CheckBattleEnding() {
 
 				app->levelManager->LoadScene(GameScene::BACKSTAGE2);
 
+				List<Enemy*> es; enemies = es;
 
 				playerLoss = false; enemyLoss = false;
 				MainQuest = false;

@@ -232,6 +232,8 @@ bool BattleScene::Start()
 							p->waitBtnId = uniqueNumber.generateUniqueNumber(110, 300);
 
 							p->Start();
+							p->LoadConversation(Pnode);
+
 							p->hp = p->maxHp; /* Reset its health */
 							PassAnimations(p);
 							p->position =  app->map->MapToWorld(Pnode.attribute("x").as_int(), Pnode.attribute("y").as_int()); /*The position in the new map*/

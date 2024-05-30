@@ -37,6 +37,8 @@ bool Input::Awake(pugi::xml_node config)
 		ret = false;
 	}
 
+	SDL_ShowCursor(SDL_DISABLE);
+
 	return ret;
 }
 

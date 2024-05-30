@@ -215,6 +215,8 @@ private:
 	GuiControlButton* choiceA_button = nullptr;
 	GuiControlButton* choiceB_button = nullptr;
 
+	SDL_Texture* choiceButtontex = nullptr;
+
 	SDL_Rect choiceABox = SDL_Rect{ 368*3, 224*3, 128*3,48*3 };
 	SDL_Rect choiceBBox = SDL_Rect{ 368*3, 294*3, 128*3,48*3 };
 
