@@ -86,8 +86,8 @@ bool PauseMenu::Update(float dt)
 
 	if (pauseMenu)
 	{
-		if (menuY > 0) menuY -= animationSpeed;
-		if (menuY <= 0) menuY = 0;
+		if (menuY > 200) menuY -= animationSpeed;
+		if (menuY <= 200) menuY = 200;
 
 		if (app->levelManager->gameScene == GameScene::BACKSTAGE) app->backstageplayer->SetCanMove(false);
 
@@ -178,17 +178,17 @@ bool PauseMenu::Update(float dt)
 	P_save->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 350 - (int)menuY, 200,60 };
 	P_backtomenu->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 420 - (int)menuY, 200,60 };
 
-	//update position of the sliders
-	P_Music->thumbBounds = { 0,0 - (int)menuY,40,60 };
-	P_FX->thumbBounds = { 0,0 - (int)menuY,40,60 };
+	//update slider position
+	P_Music->thumbBounds.y = (int)windowH / 2 + 70 - (int)menuY;
+	P_FX->thumbBounds.y = (int)windowH / 2 + 140 - (int)menuY;
 
 	return true;
 }
 
 bool PauseMenu::PostUpdate()
 {
-	if (P_Music->state == GuiControlState::NORMAL) app->render->DrawText("FX", pos5.x, pos5.y + 10, pos5.w, pos5.h);
-	if (P_Music->state == GuiControlState::NORMAL) app->render->DrawText("Music", pos4.x, pos4.y + 10, pos4.w, pos4.h);
+	if (P_Music->state != GuiControlState::DISABLED) app->render->DrawText("FX", pos5.x, (int)windowH / 2 + 140 - (int)menuY, pos5.w, pos5.h);
+	if (P_Music->state != GuiControlState::DISABLED) app->render->DrawText("Music", pos4.x, (int)windowH / 2 + 70 - (int)menuY, pos4.w, pos4.h);
 
 	return true;
 }

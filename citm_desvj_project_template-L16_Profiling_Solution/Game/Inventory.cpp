@@ -20,9 +20,9 @@ bool Inventory::Start()
 	itemRect = { 0,0,100,100 };
 	playerRect = { 0,0,120,100 };
 	
-	I_Drop = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 71, "DROP", {490,930,150,100}, this);
-	I_Equip = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 72, "EQUIP", {690,930,150,100}, this);
-	I_Close = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 73, "CLOSE", { 890,930,150,100 }, this);
+	I_Drop = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 71, "DROP", {490,930 - (int)menuY,150,100}, this);
+	I_Equip = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 72, "EQUIP", {690,930 - (int)menuY,150,100}, this);
+	I_Close = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 73, "CLOSE", { 890,930 - (int)menuY,150,100 }, this);
 
 	I_Drop->state = GuiControlState::DISABLED;
 	I_Equip->state = GuiControlState::DISABLED;
@@ -69,6 +69,9 @@ bool Inventory::Update(float dt)
 
 	if (isVisible)
 	{
+		if (menuY > 0) menuY -= animationSpeed;
+		if (menuY <= 0) menuY = 0;
+
 		I_Drop->state = GuiControlState::NORMAL;
 		I_Equip->state = GuiControlState::NORMAL;
 		I_Close->state = GuiControlState::NORMAL;
@@ -122,10 +125,19 @@ bool Inventory::Update(float dt)
 	}
 	else
 	{
+		if (menuY < 1200) menuY += animationSpeed;
+		if (menuY >= 1200) menuY = 1200;
+		
 		I_Drop->state = GuiControlState::DISABLED;
 		I_Equip->state = GuiControlState::DISABLED;
 		I_Close->state = GuiControlState::DISABLED;
 	}
+
+	//update the position of the buttons
+	I_Drop->bounds = { 490,930 - (int)menuY,150,100 };
+	I_Equip->bounds = { 690,930 - (int)menuY,150,100 };
+	I_Close->bounds = { 890,930 - (int)menuY,150,100 };
+
 
 	return true;
 }
@@ -134,20 +146,20 @@ bool Inventory::PostUpdate()
 {
 	if (isVisible)
 	{
-		app->render->DrawTexture(inventoryUI, app->render->camera.x / -3 + 50 , app->render->camera.y / -3 + 50, &inventoryRect);
+		app->render->DrawTexture(inventoryUI, app->render->camera.x / -3 + 50 , app->render->camera.y / -3 + 50 - (int)menuY, &inventoryRect);
 		if (InventoryItems.At(selectedItem) != nullptr && InventoryItems.At(selectedItem)->data != nullptr)
 		{
-			app->render->DrawText(InventoryItems.At(selectedItem)->data->name, 300, 660, 150 * 2, 53 * 2);
-			app->render->DrawTexture(InventoryItems.At(selectedItem)->data->texture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100, &itemRect);
+			app->render->DrawText(InventoryItems.At(selectedItem)->data->name, 300, 660 - (int)menuY, 150 * 2, 53 * 2);
+			app->render->DrawTexture(InventoryItems.At(selectedItem)->data->texture, app->render->camera.x / -3 + 100, app->render->camera.y / -3 + 100 - (int)menuY, &itemRect);
 
-			app->render->DrawTexture(descriptionTex, 213 + (app->render->camera.x /-3), 70 + (app->render->camera.y / -3));
-			app->render->DrawText(InventoryItems.At(selectedItem)->data->description, 663, 250, 1.5f * InventoryItems.At(selectedItem)->data->description.length(), 20, false, SDL_Color{79,62,43,255}, LEFT_ALIGN, 15);
+			app->render->DrawTexture(descriptionTex, 213 + (app->render->camera.x /-3), 70 + (app->render->camera.y / -3) - (int)menuY);
+			app->render->DrawText(InventoryItems.At(selectedItem)->data->description, 663, 250 - (int)menuY, 1.5f * InventoryItems.At(selectedItem)->data->description.length(), 20, false, SDL_Color{79,62,43,255}, LEFT_ALIGN, 15);
 		}
 
 		if (players.At(selectedPlayer) != nullptr && players.At(selectedPlayer)->data != nullptr)
 		{
-			app->render->DrawText(players.At(selectedPlayer)->data->realname, 940, 660, 150 * 2, 53 * 2);
-			app->render->DrawTexture(players.At(selectedPlayer)->data->myBattleTexture, app->render->camera.x / -3 + 300, app->render->camera.y / -3 + 70, &playerRect);
+			app->render->DrawText(players.At(selectedPlayer)->data->realname, 940, 660 - (int)menuY, 150 * 2, 53 * 2);
+			app->render->DrawTexture(players.At(selectedPlayer)->data->myBattleTexture, app->render->camera.x / -3 + 300, app->render->camera.y / -3 + 70 - (int)menuY, &playerRect);
 		}
 	}
 

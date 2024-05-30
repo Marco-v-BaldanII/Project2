@@ -67,6 +67,9 @@ public:
 	SDL_Rect playerRect;
 
 	uint changeitemfx = 0;
+
+	float menuY = 1200;
+	const float animationSpeed = 30.0f;
 private:
 	
 	
