@@ -30,8 +30,8 @@ bool PauseMenu::Start()
 	P_resume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, " Resume ", pos1, this);
 	P_FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, " FullScreen ", pos2, this);
 	P_VSync = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, " VSync ", pos3, this);
-	P_Music = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 16, " Music ", pos4, this, { 0,0,40,60 });
-	P_FX = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 17, " FX ", pos5, this, { 0,0,40,60 });
+	P_Music = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 16, " Music ", pos4, this, { 0,0 - (int)menuY,40,60 });
+	P_FX = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 17, " FX ", pos5, this, { 0,0 - (int)menuY,40,60 });
 
 	P_Music->state = GuiControlState::NORMAL;
 	P_FX->state = GuiControlState::NORMAL;
@@ -179,6 +179,8 @@ bool PauseMenu::Update(float dt)
 	P_backtomenu->bounds = { (int)windowW / 2 - 140, (int)windowH / 2 + 420 - (int)menuY, 200,60 };
 
 	//update position of the sliders
+	P_Music->thumbBounds = { 0,0 - (int)menuY,40,60 };
+	P_FX->thumbBounds = { 0,0 - (int)menuY,40,60 };
 
 	return true;
 }
