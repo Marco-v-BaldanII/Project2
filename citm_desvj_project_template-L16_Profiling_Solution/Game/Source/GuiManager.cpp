@@ -46,6 +46,8 @@ bool GuiManager::Start()
 	buttonHoverFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
 	buttonClickFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
 
+	mouseCursor = app->tex->Load("Assets/Textures/UI/handCursor.png");
+
 	spotLight = new SpotLight(64, SDL_Color{ 242,149,98,200 }, 0.02f);
 	spotLight->visible = false;
 
@@ -78,13 +80,7 @@ bool GuiManager::Update(float dt)
 
 bool GuiManager::PostUpdate() {
 
-	ListItem<GuiControl*>* control = guiControlsList.start;
-
-	while (control != nullptr)
-	{
-		control->data->Update(0.16f);
-		control = control->next;
-	}
+	
 
 	
 	spotLight->Render();
@@ -200,6 +196,30 @@ bool GuiManager::PostUpdate() {
 	{
 		OpenCloseCurtains();
 	}
+
+
+
+	ListItem<GuiControl*>* control = guiControlsList.start;
+
+	while (control != nullptr)
+	{
+		control->data->Update(0.16f);
+		control = control->next;
+	}
+
+	iPoint mouse;
+	app->input->GetMousePosition(mouse.x, mouse.y);
+	SDL_Rect r = SDL_Rect{ 0,0,16,16 };
+	
+	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+	{
+		r.x += 16;
+		app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
+	}
+	else {
+		app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
+	}
+
 
 	return true;
 }

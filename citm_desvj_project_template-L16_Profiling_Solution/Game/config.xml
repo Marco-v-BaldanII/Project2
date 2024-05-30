@@ -515,8 +515,15 @@
 
 				<player  name="Henry VI"  x="7" y="38" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8">
 
-					<dialogue text ="-"/>
-					<lvlUp text = "-"/>
+					<dialogue text ="Is this the end? Finally I feel the weight of the corwn no more..."/>
+					<lvlUp text = "This is no doubt the lord's blessing"/>
+
+					<conversation owner ="Margaret">
+
+						<dialogue  owner ="Margaret" text="Henry are you doing ok out here on th field?"/>
+						<dialogue  owner ="Henry VI" text="Margaret... I ... I am , this is where had to be. So does the lord tell me"/>
+						<dialogue  owner ="Margaret" text="Jaja I thank the lord for his guidance, and you for being here. As much deadweight as you may be, it'll inspire Edward to see you fighting"/>
+					</conversation>
 
 				</player>
 
@@ -524,6 +531,41 @@
 
 					<dialogue text ="My Edward, you must flee to France, I'm sorry I wasn't able to protect you"/>
 					<lvlUp text = "Margaret of Anjuo feasts upon you feeble Yorks"/>
+
+					<conversation owner ="Prince Edward">
+						<dialogue  owner ="Margaret" text="Be on the look out Edward, In the tide of battle you can't afford to loose focus"/>
+						<dialogue  owner ="Prince Edward" text="Of course mother, this... this is what I trained for. Yet I didn't think the circumastances would be like this"/>
+						<dialogue  owner ="Prince Edward" text="Fighting againts our friends, our family"/>
+
+						<dialogue  owner ="Margaret" text="Tis a price to pay Edward, for the privileges of the dominant class. No king has ruled without having to dirty their blade with their bretheren"/>
+						<dialogue  owner ="Margaret" text="If you must weep, I shall not punish you for it. But do so after the fight , concentrate on staying alive !"/>
+
+					</conversation>
+
+					<conversation owner ="Henry Tudor">
+
+						<dialogue  owner ="Margaret" text="Henry, I'm glad to have a trusted ally of Lancaster like you standing beside my Edward"/>
+						<dialogue  owner ="Henry Tudor" text="You honour me my Queen. The prince is, such a gentle sword, I cannot but feat for him in a place like this"/>
+						<dialogue  owner ="Margaret" text="I knew this day would come yet, againts my wishes, he ended up bonding very closely with the York boy"/>
+						<dialogue  owner ="Henry Tudor" text="Yes, I did too. And yet , now that it has come to this. I know i must not waver with my blade"/>
+						<dialogue  owner ="Margaret" text="Just like your uncle, you're a smart boy. I swear, your loyalty will be rewarded"/>
+
+					</conversation>
+
+					<conversation owner ="Henry VI">
+
+						<dialogue  owner ="Margaret" text="Henry are you doing ok out here on th field?"/>
+						<dialogue  owner ="Henry VI" text="Margaret... I ... I am , this is where had to be. So does the lord tell me"/>
+						<dialogue  owner ="Margaret" text="Jaja I thank the lord for his guidance, and you for being here. As much deadweight as you may be, it'll inspire Edward to see you fighting"/>
+					</conversation>
+
+					<conversation owner ="Jasper Tudor">
+
+						<dialogue  owner ="Jasper Tudor" text="My Queen, please find somewhere safe, a lady such as yourself should not expose herself to th ruthlesness of war"/>
+						<dialogue  owner ="Margaret" text="You insult me lord Pembroke, since a young age I have been a witness to the cruelties of the battlefield, a mother's job is to protect those she loves"/>
+						<dialogue  owner ="Jasper Tudor" text="My cousin is so very lucky to have a strong woman like yourself by his side, please do forgive my insolency my Queen"/>
+						<dialogue  owner ="Margaret" text="You ought to make it up to me. Now bring me those traitor's heads"/>
+					</conversation>
 
 				</player>
 
@@ -543,8 +585,8 @@
 
 				<player  name="Jasper Tudor" x="6" y ="38" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
 
-					<dialogue text ="It seems you've won , jaja . . . to hell with you Richie"/>
-					<lvlUp text = "This strength will help me protect what I love"/>
+					<dialogue text ="Owen my brother... I'll see you soon"/>
+					<lvlUp text = "Lancaster and Tudor figh as one!"/>
 
 				</player>
 
@@ -558,7 +600,7 @@
 
 				<enemy name= "Earl of Warwick" x="49" y="13" unit_type="3"  attack="8" hp="25" precision="70" luck="20" speed="15" movement="6" exp = "40">
 
-					<dialogue text ="Grrrr :("/>
+					<dialogue text ="I can't fall here! I am the man who will shape this country!"/>
 
 				</enemy>
 
@@ -570,7 +612,7 @@
 
 				<enemy name= "Richard III" x="10" y="7" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
 
-					<dialogue text ="-"/>
+					<dialogue text ="Father please come back to me!"/>
 
 				</enemy>
 
@@ -582,7 +624,7 @@
 
 				<enemy name= "William Catesby" x="29" y="12" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
 
-					<dialogue text ="-"/>
+					<dialogue text ="Is this the script I was meant to play?"/>
 
 				</enemy>
 
@@ -607,6 +649,11 @@
 			<Sprite path="Assets/Textures/BattleScreenSprites/Mage.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Earl of Warwick.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Margaret.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Catesby.png"/>
+
+			<Sprite path="Assets/Textures/BattleScreenSprites/Edward of York.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Jasper Tudor.png"/>
+			<Sprite path="Assets/Textures/BattleScreenSprites/Henry VI.png"/>
 			<Sprite path="Assets/Textures/BattleScreenSprites/Catesby.png"/>
 
 		</battleSprites>

@@ -142,7 +142,7 @@ bool Player::Start() {
 	maxHp = hp;
 	lerpingHp = hp;
 
-	myItem = new Item();
+	//myItem = new Item();
 
 	HasMoveAction = true;
 	deathQuote = new Dialogue( name.GetString(), config.child("dialogue").attribute("text").as_string());
@@ -165,7 +165,17 @@ bool Player::Start() {
 
 	atkButton->state = GuiControlState::DISABLED; waitButton->state = GuiControlState::DISABLED; talkButton->state = GuiControlState::DISABLED; itemButton->state = GuiControlState::DISABLED;
 
-	for (pugi::xml_node no = config.child("conversation"); no != NULL; no = no.next_sibling("conversation")) {
+	LoadConversation(config);
+
+	experiencePoints = config.attribute("exp").as_int();
+	level = config.attribute("exp").as_int();
+
+	return true;
+}
+
+void Player::LoadConversation(pugi::xml_node node) {
+
+	for (pugi::xml_node no = node.child("conversation"); no != NULL; no = no.next_sibling("conversation")) {
 
 		Conversation* conv = new Conversation();
 		conv->name1 = this->name.GetString();
@@ -181,10 +191,7 @@ bool Player::Start() {
 		conversations.Add(conv);
 	}
 
-	experiencePoints = config.attribute("exp").as_int();
-	level = config.attribute("exp").as_int();
 
-	return true;
 }
 
 bool Player::PreUpdate() 
@@ -581,9 +588,6 @@ bool Player::PostUpdate()
 
 		app->input->GetMouseWorldPosition(mouseX, mouseY);
 
-
-		// Draw the cursor at the adjusted position
-		app->render->DrawCircle(mouseX, mouseY, 8, 1, 1, 1, 255, true);
 	}
 
 	if (lerpedExp == false && oponent != nullptr) {

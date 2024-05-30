@@ -47,6 +47,7 @@ public:
 
 	bool DealDMG();
 
+	void LoadConversation(pugi::xml_node node);
 
 	void FigureStickMovement(float dt);
 

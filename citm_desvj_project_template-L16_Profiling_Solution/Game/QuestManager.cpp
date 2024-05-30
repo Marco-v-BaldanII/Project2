@@ -78,7 +78,7 @@ bool QuestManager::PostUpdate() {
 		for (ListItem<Quest*>* it = quests.start; it != NULL; it = it->next) {
 
 			
-			app->render->DrawText(it->data->GetObjective(), 140, 60 + (i * 100), 12 * it->data->GetObjective().length(), 40, false, SDL_Color{0,0,0,255});
+			app->render->DrawText(it->data->GetObjective(), 140, 100 + (i * 100), 12 * it->data->GetObjective().length(), 40, false, SDL_Color{106,75,35,255});
 
 			i++;
 		}
