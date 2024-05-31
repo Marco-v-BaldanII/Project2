@@ -140,13 +140,14 @@ bool BackStagePlayer::PreUpdate()
 
 bool BackStagePlayer::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	currentAnimation->Update();
 	// Set player position
 	if (canMove && !talking)
 	{
 		SDL_RendererFlip flip = lastDirection;
 		// Set player direction
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.r2 == 1)
 		{
 			position.y -= velocity * dt;
 			goingLeft = false;

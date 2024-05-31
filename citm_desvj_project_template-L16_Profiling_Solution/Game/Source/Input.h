@@ -7,6 +7,13 @@
 #define NUM_MOUSE_BUTTONS 5
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
+
+#define MAX_PADS 4
+//GamePad libraries
+struct _SDL_GameController;
+struct _SDL_Haptic;
+
+
 struct SDL_Rect;
 
 enum EventWindow
@@ -25,12 +32,34 @@ enum KeyState
 	KEY_UP
 };
 
+
+struct GamePad
+{
+	//Input data
+	bool start, back, guide;
+	bool x, y, a, b, l1, r1, l3, r3;
+	bool up, down, left, right;
+	float l2, r2;
+	float l_x, l_y, r_x, r_y, l_dz, r_dz;
+
+	//Controller data
+	bool enabled;
+	int index;
+	_SDL_GameController* controller;
+	_SDL_Haptic* haptic;
+
+	//Rumble controller
+	int rumble_countdown;
+	float rumble_strength;
+};
+
+
 class Input : public Module
 {
 
 public:
 
-	Input(bool isActive);
+	Input(bool startEnabled);
 
 	// Destructor
 	virtual ~Input();
@@ -60,19 +89,40 @@ public:
 
 	// Check if a certain window event happened
 	bool GetWindowEvent(EventWindow ev);
-	void GetMouseWorldPosition(int& x, int& y);
+
 	// Get mouse / axis position
-	void GetMousePosition(int &x, int &y);
+	void GetMousePosition(int& x, int& y);
 	void GetMouseMotion(int& x, int& y);
+
+	void GetMouseWorldPosition(int& x, int& y);
+	
+	// Activates SDL device funcionallity when a gamepad has been connected
+	void HandleDeviceConnection(int index);
+
+	// Deactivates SDL device funcionallity when a gamepad has been disconnected
+	void HandleDeviceRemoval(int index);
+
+	// Called at PreUpdate
+	// Iterates through all active gamepads and update all input data
+	void UpdateGamepadsInput();
+
+	bool ShakeController(int id, int duration, float strength = 0.5f);
+	const char* GetControllerName(int id) const;
 
 private:
 	bool windowEvents[WE_COUNT];
-	KeyState*	keyboard;
+	KeyState* keyboard;
 	KeyState mouseButtons[NUM_MOUSE_BUTTONS];
 	int	mouseMotionX;
 	int mouseMotionY;
+
+
+public:
+	// An array to fill in all detected gamepads
+	GamePad pads[MAX_PADS];
 	int mouseX;
 	int mouseY;
+	bool once = false;
 };
 
 #endif // __INPUT_H__
