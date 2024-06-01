@@ -34,7 +34,7 @@
 	<:anonymous />
 	<entitymanager />
 	<:anonymous>
-		<Player x="486" y="208" />
+		<Player x="476" y="194" />
 	</:anonymous>
 	<questmanager />
 	<dialoguemanager>
@@ -43,9 +43,9 @@
 		<language value="english" />
 	</dialoguemanager>
 	<castingScene />
+	<:anonymous />
 	<guiManager />
 	<pauseMenu />
-	<:anonymous />
 	<Fade />
 	<renderer>
 		<camera x="0" y="-2000" />

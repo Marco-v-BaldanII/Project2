@@ -741,19 +741,19 @@
 			<!--comment 0,0 71, 150-->
 			<texture path="Assets/Textures/BackstageNPCs/Soldado2_medium.png"/>
 			
-			<dialogue text = "The play is about to start" ID="10"          />
-			<dialogue text = "I'm so very excited" ID="9"          />
-			<dialogue text = "Though I seem to have forgotten what the play is about" ID="8"          />
-			<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="7"          />
+			<dialogue text = "Grrr that scum the Earl of Warwick!" ID="10"          />
+			<dialogue text = "He killed my wife, my 7 children, my brother my sister, my parents and even my dog!" ID="9"          />
+			<dialogue text = "Please help me get my revenge on him" ID="8"          />
+			<dialogue text = "He's a knight , ideally you should use magic on him but if you don't have mages at least avoid exposing your archers to him" ID="7"          />
 			<dialogue text = "Please defeat Earl of Warwick in the next battle" ID="5" choiceA ="I accept" choiceB="I refuse" >
 
 				<sideQuest type="0" objective="Defeat Earl of Warwick in the battle of Northampton"  target="Earl of Warwick"/> <!--type: 0 = defeat, 1 = fetchQuest-->
 
 			</dialogue>
-			<dialogue text = "Watch out for his poisonous arrows" ID="4"         />
+			<dialogue text = "Yes! sweet EVIL revenge, jajajajajajjajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajjajajajajajajajajajajajajajajajajajajajajajajajaja" ID="4"         />
 			<!-- second branch-->
-			<dialogue text = "Are you trolling me?" ID="7"         />
-			<dialogue text = "I will have my revenge" ID="6"         />
+			<dialogue text = "Oh my poor dog , princess come back to me" ID="7"         />
+		
 		</npc>
 			
 			
@@ -787,25 +787,47 @@
 
 			</npc>
 
-			<npc name = "Maria Reina" x ="160" y="200" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
+			<npc name = "Maria Reina" x ="160" y="80" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
 
 				<!--comment 0,0 71, 150-->
-				<texture path="Assets/Textures/BackstageNPCs/Soldado2_medium.png"/>
+				<texture path="Assets/Textures/BackstageNPCs/DukeYork.png"/>
 
-				<dialogue text = "The play is about to start" ID="10"          />
-				<dialogue text = "I'm so very excited" ID="9"          />
-				<dialogue text = "Though I seem to have forgotten what the play is about" ID="8"          />
-				<dialogue text = "aswell as my name, adress and credit card info, but i remeber that my favourite color is baby blue" ID="7"          />
-				<dialogue text = "Please defeat George of York in the next battle" ID="5" choiceA ="I accept" choiceB="I refuse" >
+				<dialogue text = "I'm so proud of myself for scoring this role as the Duke of York." ID="10"          />
+				<dialogue text = "I retired from acrobatic gymnastics and because I'm not the youthful gal I once was." ID="9"          />
+				<dialogue text = "But I just can't help garnering all eyes on me. I guess I'm just prime to steal the spotlight." ID="8"          />
 
-					<sideQuest type="0" objective="Defeat George of York in the battle of Northampton"  target="George of York"/>
+			</npc>
+
+			<npc name = "Jasper Tudor" x ="260" y="80" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
+
+				<!--comment 0,0 71, 150-->
+				<texture path="Assets/Textures/BackstageNPCs/JasperTudor.png"/>
+
+				<dialogue text = "Finally it's my time on the spotlight, for Yes I will be joining the show in the next battle" ID="10"          />
+				<dialogue text = "I may be only the supportive character of a supportive character, but I'm still a crucial pivot point for the story and the development of this show" ID="9"          />
+				<dialogue text = "None will forget me!" ID="8"          />
+				<dialogue text = "Could you obtain the veil of vanishing in the upcoming battle ?" ID="8"          />
+
+				<dialogue text = "Could you obtain the veil of vanishing in the upcoming battle ?" ID="5" choiceA ="I accept" choiceB="I refuse" >
+
+					<sideQuest type="1" objective="Find the Veil of Vanishing"  target="Veil of Vanishing"/>
 					<!--type: 0 = defeat, 1 = fetchQuest-->
 
 				</dialogue>
-				<dialogue text = "Watch out for his poisonous arrows" ID="4"         />
-				<!-- second branch-->
-				<dialogue text = "Are you trolling me?" ID="7"         />
-				<dialogue text = "I will have my revenge" ID="6"         />
+				<dialogue text = "thanyou" ID="4"         />
+				<dialogue text = "I will stay in everyone's shadow forever" ID="6"         />
+
+			</npc>
+
+			<npc name = "Margaret" x ="260" y="140" wait="3" Bx ="0" By ="0" Bw="114" Bh ="223">
+
+				<!--comment 0,0 71, 150-->
+				<texture path="Assets/Textures/BackstageNPCs/Margaret.png"/>
+
+				<dialogue text = "The props in this play are so well detailed" ID="10"          />
+				<dialogue text = "This sword almos looks real, though I don't think it was necessary for it to weight 750 pounds" ID="9"          />
+
+
 			</npc>
 
 

@@ -118,11 +118,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(questManager);
 	AddModule(dialogueManager);
 	AddModule(castingScene);
-	
+	AddModule(inventory);
 	AddModule(guiManager);
 	
 	AddModule(pauseMenu);
-	AddModule(inventory);
+	
 	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);
