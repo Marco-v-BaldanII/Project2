@@ -386,10 +386,10 @@ void DialogueManager::DrawBackground() {
 void DialogueManager::ManageScrolling() {
 
 
-	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 10, -dialogueBox.w , DIALOGUE_SIZE * 2 };
-	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 18 + DIALOGUE_SIZE * 2, -dialogueBox.w , DIALOGUE_SIZE * 2 };
-	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 26 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
-	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 34 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r1 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 11, -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r2 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 19 + DIALOGUE_SIZE * 2, -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r3 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 27 + (DIALOGUE_SIZE * 2 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
+	SDL_Rect r4 = { dialogueBox.x + dialogueBox.w , dialogueBox.y + 35 + (DIALOGUE_SIZE * 3 * 2), -dialogueBox.w , DIALOGUE_SIZE * 2 };
 
 	if (Scenes[sceneIndex]->dialogues[dialogueIndex]->myPos != MIDDLE) {
 		r1 = { dialogueBox.x+4 + dialogueBox.w , dialogueBox.y + 8 , -dialogueBox.w -4, DIALOGUE_SIZE * 2 };

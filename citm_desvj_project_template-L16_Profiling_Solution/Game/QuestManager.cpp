@@ -109,6 +109,7 @@ void QuestManager::CheckQuestCompletion(string target) {
 				app->turnManager->MainQuest = true;
 				app->guiManager->spotLight->mode = DIALOG;
 				app->SaveRequest(); /*save characters progression for the next map*/
+				//quests.Del(it);
 			}
 			delete it->data;
 			quests.Del(it);
