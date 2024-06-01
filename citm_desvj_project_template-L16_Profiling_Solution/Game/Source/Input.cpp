@@ -259,7 +259,10 @@ bool Input::PreUpdate()
 		app->input->keyboard[SDL_SCANCODE_I] = KEY_DOWN;
 		ztimer = 0;
 	}
-
+	if (pad.r1 == 1 && ztimer > 50) {
+		app->input->keyboard[SDL_SCANCODE_Q] = KEY_DOWN;
+		ztimer = 0;
+	}
 
 	ztimer++;
 
