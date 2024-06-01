@@ -704,8 +704,8 @@
 
 			<talkBtn path ="Assets/Textures/UI/Z_Key_Light.png"/>
 
-		<npc name = "Guy4" x ="300" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
-		    <texture path="Assets/Textures/BackstageNPCs/Soldado1_medium.png"/>
+		<npc name = "Guy4" x ="400" y="150" wait="4"  Bx ="0" By ="0" Bw="114" Bh ="223">
+		    <texture path="Assets/Textures/BackstageNPCs/Catesby.png"/>
 			<dialogue text = "I am the battle master, it is my job to ensure that the fighting scenes are properly portrayed" ID="10"          />
 			<dialogue text = "Archers, Knights, Cavelliers... there are many different types of units in the battlefield, it is important that each of them play their part correctly" ID="8"          />
 			<dialogue text = "Would you like to now more about any of the units?" choiceA ="Yes" choiceB="No" ID="7"          />
