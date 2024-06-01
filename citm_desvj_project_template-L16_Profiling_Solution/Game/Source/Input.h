@@ -118,8 +118,8 @@ private:
 
 public:
 
-	int mousePadx = 0;
-	int mousePady = 0;
+	int mousePadx = 500;
+	int mousePady = 500;
 	// An array to fill in all detected gamepads
 	GamePad pads[MAX_PADS];
 	KeyState* keyboard;
