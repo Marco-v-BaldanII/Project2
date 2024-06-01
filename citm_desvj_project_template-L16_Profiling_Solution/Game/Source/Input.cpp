@@ -219,11 +219,11 @@ bool Input::PreUpdate()
 		ztimer = 0;
 	}
 	if (pad.a == 1 && ztimer > 200) {
-		app->input->mouseButtons[0] = KEY_DOWN;
-		app->input->mouseButtons[1] = KEY_DOWN;
-		app->input->mouseButtons[2] = KEY_DOWN;
-		app->input->mouseButtons[3] = KEY_DOWN;
-		app->input->mouseButtons[4] = KEY_DOWN;
+		app->input->mouseButtons[0] = KEY_UP;
+		app->input->mouseButtons[1] = KEY_UP;
+		app->input->mouseButtons[2] = KEY_UP;
+		app->input->mouseButtons[3] = KEY_UP;
+		app->input->mouseButtons[4] = KEY_UP;
 	
 		ztimer = 0;
 	}
