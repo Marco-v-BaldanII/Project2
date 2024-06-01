@@ -3,6 +3,7 @@
 #include "Window.h"
 
 #include "Defs.h"
+#include "BackStage.h"
 #include "Log.h"
 
 #include "SDL/include/SDL.h"
@@ -155,6 +156,120 @@ bool Input::PreUpdate()
 	}
 
 	UpdateGamepadsInput();
+
+	GamePad& pad = app->input->pads[0];
+
+	if (pad.r_x < -0.2f && pad.r_x < 0.0f) {
+		//app->input->keys[SDL_SCANCODE_A] = Key_State::KEY_REPEAT;
+		app->input->mousePadx -= 6;
+		SDL_WarpMouseInWindow(app->win->window, app->input->mousePadx, app->input->mousePady);
+	}
+	if (pad.r_x > 0.2f && pad.r_x > 0.0f) {
+		//app->input->keys[SDL_SCANCODE_D] = Key_State::KEY_REPEAT;
+		app->input->mousePadx += 6;
+		SDL_WarpMouseInWindow(app->win->window, app->input->mousePadx, app->input->mousePady);
+	}
+	if (pad.r_y > 0.2f && pad.r_y > 0.0f) {
+		//app->input->keys[SDL_SCANCODE_S] = Key_State::KEY_REPEAT;
+		app->input->mousePady += 6;
+		SDL_WarpMouseInWindow(app->win->window, app->input->mousePadx, app->input->mousePady);
+	}
+	if (pad.r_y < -0.2f && pad.r_y < 0.0f) {
+		//app->input->keys[SDL_SCANCODE_W] = Key_State::KEY_REPEAT;
+
+		app->input->mousePady -= 6;
+		SDL_WarpMouseInWindow(app->win->window, app->input->mousePadx, app->input->mousePady);
+	}
+
+
+
+	if (pad.l_x < -0.2f && pad.l_x < 0.0f) {
+		//app->input->keys[SDL_SCANCODE_A] = Key_State::KEY_REPEAT;
+
+		app->input->keyboard[SDL_SCANCODE_A] = KEY_REPEAT;
+		if (app->backStage->active == false)
+		app->input->keyboard[SDL_SCANCODE_LEFT] = KEY_REPEAT;
+	}
+	if (pad.l_x > 0.2f && pad.l_x > 0.0f) {
+		//app->input->keys[SDL_SCANCODE_D] = Key_State::KEY_REPEAT;
+
+		app->input->keyboard[SDL_SCANCODE_D] = KEY_REPEAT;
+		if (app->backStage->active == false)
+		app->input->keyboard[SDL_SCANCODE_RIGHT] = KEY_REPEAT;
+	}
+	if (pad.l_y > 0.2f && pad.l_y > 0.0f) {
+		//app->input->keys[SDL_SCANCODE_S] = Key_State::KEY_REPEAT;
+
+		app->input->keyboard[SDL_SCANCODE_S] = KEY_REPEAT;
+		if (app->backStage->active == false)
+		app->input->keyboard[SDL_SCANCODE_DOWN] = KEY_REPEAT;
+	}
+	if (pad.l_y < -0.2f && pad.l_y < 0.0f) {
+		//app->input->keys[SDL_SCANCODE_W] = Key_State::KEY_REPEAT;
+
+		app->input->keyboard[SDL_SCANCODE_W] = KEY_REPEAT;
+		if (app->backStage->active == false)
+		app->input->keyboard[SDL_SCANCODE_UP] = KEY_REPEAT;
+	}
+	if (pad.left && ztimer > 50)
+	{
+		app->input->keyboard[SDL_SCANCODE_LEFT] = KEY_DOWN;
+		ztimer = 0;
+	}
+	if (pad.right && ztimer > 50)
+	{
+		app->input->keyboard[SDL_SCANCODE_RIGHT] = KEY_DOWN;
+		ztimer = 0;
+	}
+	if (pad.up && ztimer > 50)
+	{
+		app->input->keyboard[SDL_SCANCODE_UP] = KEY_DOWN;
+		ztimer = 0;
+	}
+	if (pad.down && ztimer > 50)
+	{
+		app->input->keyboard[SDL_SCANCODE_DOWN] = KEY_DOWN;
+		ztimer = 0;
+	}
+
+
+
+
+	if (pad.x == 1 && ztimer > 50) {
+		app->input->keyboard[SDL_SCANCODE_Z] = KEY_DOWN;
+		ztimer = 0;
+	}
+	if (pad.a == 1 && ztimer > 50) {
+		app->input->mouseButtons[0] = KEY_UP;
+		app->input->mouseButtons[1] = KEY_UP;
+		app->input->mouseButtons[2] = KEY_UP;
+		app->input->mouseButtons[3] = KEY_UP;
+		app->input->mouseButtons[4] = KEY_UP;
+	
+		ztimer = 0;
+	}
+	if (pad.r2 == 1 && ztimer > 50) {
+		app->input->keyboard[SDL_SCANCODE_RETURN] = KEY_DOWN;
+		ztimer = 0;
+	}
+	if (pad.l2 == 1 ) {
+		app->input->keyboard[SDL_SCANCODE_SPACE] = KEY_REPEAT;
+		
+	}
+	if (pad.r2 == 1 && ztimer > 50) {
+		app->input->keyboard[SDL_SCANCODE_RETURN] = KEY_DOWN;
+		ztimer = 0;
+	}
+	if (pad.y == 1 && ztimer > 50) {
+		app->input->keyboard[SDL_SCANCODE_I] = KEY_DOWN;
+		ztimer = 0;
+	}
+	if (pad.r1 == 1 && ztimer > 50) {
+		app->input->keyboard[SDL_SCANCODE_Q] = KEY_DOWN;
+		ztimer = 0;
+	}
+
+	ztimer++;
 
 	return true;
 }
