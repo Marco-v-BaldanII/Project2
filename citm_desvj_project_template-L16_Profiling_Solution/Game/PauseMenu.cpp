@@ -1,5 +1,6 @@
 #include "PauseMenu.h"
 #include "Source/Log.h"
+#include "Source/StartMenu.h"
 #include <stdio.h>
 
 PauseMenu::PauseMenu(bool isActive) : Module(isActive)
@@ -38,11 +39,11 @@ bool PauseMenu::Start()
 
 	P_Music->minValue = 0;
 	P_Music->maxValue = 128;
-	P_Music->value = 128;
+	P_Music->value = app->audio->GetMusicVolume();
 
 	P_FX->minValue = 0;
 	P_FX->maxValue = 128;
-	P_FX->value = 128;
+	P_FX->value = app->audio->GetFxVolume();
 
 	if (app->dialogueManager->myLanguage == Language::SHAKESPEREAN)
 	{
@@ -257,14 +258,6 @@ bool PauseMenu::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 21)
 	{
 		//Before going to the main menu, we need to clean up all the modules
-		app->backStage->CleanUp();
-		app->turnManager->CleanUp();
-		app->battleScene->CleanUp();
-		app->castingScene->CleanUp();
-		app->backstageplayer->CleanUp();
-		app->mainMenu->CleanUp();
-		app->audio->CleanUp();
-
 		
 		//BACK TO MENU
 		app->levelManager->LoadScene(GameScene::START);

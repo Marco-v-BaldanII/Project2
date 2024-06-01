@@ -329,8 +329,6 @@ bool DialogueManager::Update(float dt)
 				app->battleScene->Start();
 
 				app->levelManager->LoadScene(GameScene::COMBAT);
-				
-
 			}
 
 

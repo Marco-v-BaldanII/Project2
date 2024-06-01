@@ -357,10 +357,10 @@ bool BattleScene::Update(float dt)
 
 		for (ListItem<Enemy*>* p = app->turnManager->enemies.start; p != NULL; p = p->next) {
 
-			if (p->data->name == "Duke of York") {
+			if (p->data->name == "Duke of York" == app->map->level == 0) {
 				p->data->hp = 0;
 			}
-			else if (p->data->name == "Richard III") {
+			else if (p->data->name == "Richard III" && app->map->level == 1) {
 				p->data->hp = 0;
 			}
 			

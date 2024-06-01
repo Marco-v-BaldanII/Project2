@@ -75,6 +75,9 @@ public:
 	uint enemyIndex = 0;
 	uint maxEnemies;
 
+	bool playerLoss = true;
+	bool enemyLoss = true;
+
 	bool MainQuest = false;
 
 };

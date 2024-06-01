@@ -8,27 +8,46 @@
 	<:anonymous />
 	<:anonymous />
 	<intro />
+	<Victory />
+	<lose />
 	<start_menu />
-	<battle_scene />
-	<backStage>
-		<Npc x="268" y="150" name="Guy4" />
-		<Npc x="226" y="200" name="Guy3" />
-		<Npc x="500" y="100" name="PlayWritter" />
-	</backStage>
+	<itemmanager />
+	<battle_scene>
+		<player name="Prince Edward" x="3" y="23" unit_type="1" attack="8" hp="12" precision="75" luck="25" speed="20" movement="8" level="0" exp="0" />
+		<player name="Henry Tudor" x="3" y="24" unit_type="0" attack="5" hp="12" precision="90" luck="25" speed="20" movement="10" level="0" exp="0" />
+		<player name="Margaret" x="3" y="25" unit_type="3" attack="6" hp="18" precision="70" luck="20" speed="20" movement="6" level="0" exp="0" />
+		<enemy name="Duke of York" x="11" y="4" unit_type="0" attack="3.75" hp="0" precision="67.5" luck="18.75" speed="22" movement="10" />
+		<enemy name="Edward of York" x="40" y="13" unit_type="2" attack="6" hp="11.25" precision="56.25" luck="18.75" speed="15" movement="8" />
+		<enemy name="Earl of Warwick" x="38" y="29" unit_type="3" attack="4.5" hp="13.5" precision="52.5" luck="15" speed="11" movement="6" />
+		<enemy name="Archer" x="21" y="27" unit_type="1" attack="4" hp="6" precision="37.5" luck="12.5" speed="10" movement="8" />
+		<enemy name="Knight" x="12" y="25" unit_type="2" attack="4" hp="7.5" precision="37.5" luck="12.5" speed="10" movement="8" />
+		<enemy name="Archer" x="26" y="30" unit_type="1" attack="4" hp="6" precision="35" luck="12.5" speed="10" movement="8" />
+		<enemy name="Mage" x="24" y="32" unit_type="4" attack="6.75" hp="9" precision="56.25" luck="15" speed="15" movement="8" />
+		<enemy name="Mage" x="46" y="22" unit_type="4" attack="6.75" hp="9" precision="56.25" luck="15" speed="15" movement="8" />
+		<enemy name="Mage" x="43" y="18" unit_type="4" attack="6.75" hp="9" precision="56.25" luck="15" speed="15" movement="8" />
+		<enemy name="Archer" x="24" y="10" unit_type="1" attack="4" hp="6" precision="35" luck="12.5" speed="10" movement="8" />
+		<enemy name="Knight" x="23" y="9" unit_type="2" attack="4" hp="7.5" precision="37.5" luck="12.5" speed="10" movement="8" />
+	</battle_scene>
+	<backStage />
 	<turnmanager />
 	<fonts />
+	<:anonymous />
 	<entitymanager />
 	<:anonymous>
-		<Player x="30" y="120" />
+		<Player x="480" y="206" />
 	</:anonymous>
+	<questmanager />
 	<dialoguemanager>
 		<index scene="0" dialogue="0" background="0" />
 		<mode value="1" />
 		<language value="english" />
 	</dialoguemanager>
+	<castingScene />
 	<guiManager />
+	<pauseMenu />
+	<:anonymous />
 	<Fade />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="0" y="-2000" />
 	</renderer>
 </game_state>

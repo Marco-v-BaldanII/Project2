@@ -277,8 +277,7 @@ void TurnManager::PlayerTurn() {
 
 void TurnManager::CheckBattleEnding() {
 
-	bool playerLoss = true;
-	bool enemyLoss = true;
+	
 	if (players.Count() != 0) {
 
 		ListItem<Player*>* p = players.start;
@@ -342,7 +341,8 @@ void TurnManager::CheckBattleEnding() {
 				playerLoss = false; enemyLoss = false;
 				MainQuest = false;
 			}
-			else {
+			else if (app->map->level == 1)
+			{
 				app->battleScene->CleanUp();
 				app->entityManager->Disable();
 
@@ -354,8 +354,6 @@ void TurnManager::CheckBattleEnding() {
 
 				playerLoss = false; enemyLoss = false;
 				MainQuest = false;
-
-
 			}
 			// Instanciate retry buttons
 		}

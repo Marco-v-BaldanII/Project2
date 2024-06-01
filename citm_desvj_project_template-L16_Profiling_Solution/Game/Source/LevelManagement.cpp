@@ -149,6 +149,8 @@ bool LevelManagement::Update(float dt)
 				currentScene = (Module*)app->battleScene;
 				app->turnManager->Enable();
   				app->battleScene->StartSnowStorm();
+				app->turnManager->playerLoss = false;
+				app->turnManager->enemyLoss = false;
 				LOG("BattleScene");
 			}
 		}
