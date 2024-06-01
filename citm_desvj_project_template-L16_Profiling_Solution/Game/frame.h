@@ -200,7 +200,7 @@ public:
 		if(player != nullptr) app->render->DrawText(itemName, (startingPos.x + 120 + 700-75) + (app->render->camera.x / 3), (startingPos.y + 500) + (app->render->camera.y / 3), 10 * itemName.length(), 12 * 5, false, SDL_Color{ 254, 254, 0, 255 });
 
 		string gh = to_string(exp); gh += "/100";
-		app->render->DrawText(gh, (startingPos.x + 150 + 700 - 75) + (app->render->camera.x / 3), (startingPos.y + 55) + (app->render->camera.y / 3), 42 * 5, 12 * 5, false, SDL_Color{ 81, 51, 19, 255 });
+		//app->render->DrawText(gh, (startingPos.x + 150 + 700 - 75) + (app->render->camera.x / 3), (startingPos.y + 55) + (app->render->camera.y / 3), 42 * 5, 12 * 5, false, SDL_Color{ 81, 51, 19, 255 });
 	}
 
 	void Update() {

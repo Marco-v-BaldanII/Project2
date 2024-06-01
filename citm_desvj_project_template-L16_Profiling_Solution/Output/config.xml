@@ -610,7 +610,7 @@
 
 				</enemy>
 
-				<enemy name= "Richard III" x="27" y="26" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
+				<enemy name= "Richard III" x="26" y="27" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
 
 					<dialogue text ="Father please come back to me!"/>
 

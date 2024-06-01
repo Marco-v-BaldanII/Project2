@@ -236,20 +236,20 @@
 <dialogue text="Very much Edward. How can a king who is shaking in his boots expecteth any of his subjects to followeth into war?" owner="Richard of York" position="1"/>
 <dialogue text="Richard, yond wast uncalled for!" owner="Henry Tudor" position="4"/>
 <dialogue text="Followeth me into war, nay. I'd liketh to reigneth over a peaceful landeth, where nay English nor foreign'r blood hast to beest pointlessly spilled" owner="Edward" position="2"/>
-<dialogue text="What rubbish! With all respect Edward, just because we might knoweth a few years of peace, doesn't cullionly it'll stayeth liketh this forever. It's man's natural state." owner="Richard of York" position="1"/>
+<dialogue text="What rubbish! With all respect Edward, just because we might knoweth a few years of peace, doesn’t cullionly it’ll stayeth liketh this forever. It’s man’s natural state." owner="Richard of York" position="1"/>
 <dialogue text="Thee very much bethink it so Richard?" owner="Henry Tudor" position="4"/>
 <dialogue text="They'll never stand ho. Power, wage, family and love . . . people at each moment has't plenty reasons to square, wherever there's misprise, war shall ensue." owner="Richard of York" position="1"/>
 <dialogue text="Yond may be so, still wouldn't thee liketh it Richard?" owner="Edward" position="2"/>
 <dialogue text="me?" owner="Richard" position="1"/>
 <dialogue text="If 't be true the w'rld couldst stayeth liketh this, in this peace, at this age. If it be true we could  just stayeth the same, us three" owner="Edward" position="2"/>
 <dialogue text="That. . . is admittedly a nice though, thy majesty" owner="Richard" position="1"/>
-<dialogue text="I toldeth thee not to calleth me that. . . i wonder, how shall history remember me? A grandiose warrior liketh mine own grandfather? Yond doesn't suiteth me." owner="Edward" position="2"/>
+<dialogue text="I toldeth thee not to calleth me that. . . i wonder, how shall history remember me? A grandiose warrior liketh mine own grandfather? Yond doesn’t suiteth me." owner="Edward" position="2"/>
 <dialogue text="Or a frail lunatic liketh thy father?" owner="Richard of York" position="1"/>
 <dialogue text="Richard, how dareth thee!" owner="Henry Tudor" position="4"/>
 <dialogue text="Tis what most nobles bethink, for certain you've hath heard." owner="Richard of York" position="1"/>
-<dialogue text="Tis eke very much the sooth, though it pains me to admiteth so. To admiteth yond the rightful king, mine own owneth father, wasn't born eft to beest king. But such is the way of monarchy, i likely wasn’t born yond way either." owner="Edward" position="2"/>
+<dialogue text="Tis eke very much the sooth, though it pains me to admiteth so. To admiteth yond the rightful king, mine own owneth father, wasn’t born eft to beest king. But such is the way of monarchy, i likely wasn’t born yond way either." owner="Edward" position="2"/>
 <dialogue text="Rubbish, thy empathic, not foolish thy majesty!" owner="Henry Tudor" position="4"/>
-<dialogue text="Jah! for once, i think i actually concur with Henry" owner="Richard of York" position="1"/>
+<dialogue text="Jah! for once, i think i actually concur with henry" owner="Richard of York" position="1"/>
 <dialogue text="You guys. . . I'll beest a most wondrous king, and I'll needeth thy help.  At which hour we hadn't to fight, to preserve this peace, and these memories." owner="Edward" position="2"/>
 <dialogue text="Aye f'r a gentl'r w'rld, us three togeth'r.  Yond can beest our covenant." owner="Henry Tudor" position="4"/>
 <dialogue text="Wow, so gentle Henry !" owner="Edward" position="2"/>
@@ -267,7 +267,7 @@
 
 
 <dialogue text="Scene 5: Left Thy Swords" owner="Narrator"/>
-<dialogue position="1" text="Most wondrous beest on our way, thanketh thee Mistress Margaret for thy warmeth welcometh, taketh valorous art of his majesty, let's wend boys!" owner="Richard of York"/>
+<dialogue position="1" text="Most wondrous beest on our way, thanketh thee Mistress Margaret for thy warmeth welcometh, taketh valorous art of his majesty, let’s wend boys!" owner="Richard of York"/>
 <dialogue position="2" text="Grant you mercy to thee Lord Richard, for thy hath continued services and devotion to mine own husband." owner="Margaret"/>
 <dialogue text="(the Yorks leaveth)" owner="Narrator"/>
 <dialogue position="1" text="So father, how wast the king?" owner="Richard of York"/>
@@ -577,7 +577,7 @@
 <dialogue position="2" text="An utter fool, deranged in a swamp of his own madness." owner="Duke of York"/>
 <dialogue position="1" text="Father?" owner="George of York"/>
 <dialogue position="2" text="You aren't planning on?" owner="Edward of York"/>
-<dialogue position="1" text="He may be my cousin, but that man is not fit to be king." owner="Duke of York"/>
+<dialogue position="1" text="He may be my cousin, but that man is not fit to be king." owner="Richard of York"/>
 <dialogue position="1" text="Aren't you being rash, father?" owner="Richard of York"/>
 <dialogue position="2" text="On the contrary Richard, this visit was just a means to test the waters, Warwick has already been making preparations. We march for them, to war!" owner="Duke of York"/>
 <dialogue position="1" text="What about the peace of the land? Is it right for us to drag commoners into this family feud?" owner="Richard of York"/>
