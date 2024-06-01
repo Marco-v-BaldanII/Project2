@@ -111,15 +111,19 @@ public:
 
 private:
 	bool windowEvents[WE_COUNT];
-	KeyState* keyboard;
-	KeyState mouseButtons[NUM_MOUSE_BUTTONS];
+	
 	int	mouseMotionX;
 	int mouseMotionY;
 
 
 public:
+
+	int mousePadx = 0;
+	int mousePady = 0;
 	// An array to fill in all detected gamepads
 	GamePad pads[MAX_PADS];
+	KeyState* keyboard;
+	KeyState mouseButtons[NUM_MOUSE_BUTTONS];
 	int mouseX;
 	int mouseY;
 	bool once = false;
