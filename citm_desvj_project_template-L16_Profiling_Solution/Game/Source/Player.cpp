@@ -257,13 +257,17 @@ bool Player::PreUpdate()
 				p.y = y;
 				p = app->map->WorldToMap(x, y);
 
-				if (app->map->pathfinding->IsTileEmpty(p) && app->map->pathfinding->DistanceBetweenTiles(p, tilePos) < movement) {
-					if (!InitPath(p)) {
-						ExpandedBFS = false;
-						app->map->pathfinding->ResetBFSPath();
-						state = IDLE;
+				int extraMove = 0;
+				if (myItem != nullptr) { extraMove = myItem->GetMov(); }
+					if (app->map->pathfinding->IsTileEmpty(p) && app->map->pathfinding->DistanceBetweenTiles(p, tilePos) < movement + extraMove) {
+						if (!InitPath(p)) {
+							ExpandedBFS = false;
+							app->map->pathfinding->ResetBFSPath();
+							state = IDLE;
+						}
 					}
-				}
+				
+
 			}
 			if (!Move && app->turnManager->currentPlayer == this ) {
 
