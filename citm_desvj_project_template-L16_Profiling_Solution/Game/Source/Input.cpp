@@ -203,24 +203,33 @@ bool Input::PreUpdate()
 
 		app->input->keyboard[SDL_SCANCODE_W] = KEY_REPEAT;
 	}
-	if (pad.left) 
+	if (pad.left && ztimer > 200)
 	{
 		app->input->keyboard[SDL_SCANCODE_LEFT] = KEY_DOWN;
+		ztimer = 0;
 	}
-	if (pad.right)
+	if (pad.right && ztimer > 200)
 	{
 		app->input->keyboard[SDL_SCANCODE_RIGHT] = KEY_DOWN;
+		ztimer = 0;
 	}
 
-	if (pad.x == 1 && ztimer > 50) {
+	if (pad.x == 1 && ztimer > 200) {
 		app->input->keyboard[SDL_SCANCODE_Z] = KEY_DOWN;
 		ztimer = 0;
 	}
-	if (pad.a == 1) {
-		app->input->mouseButtons[SDL_BUTTON(1)] = KEY_DOWN;
+	if (pad.a == 1 && ztimer > 200) {
+		app->input->mouseButtons[0] = KEY_DOWN;
+		app->input->mouseButtons[1] = KEY_DOWN;
+		app->input->mouseButtons[2] = KEY_DOWN;
+		app->input->mouseButtons[3] = KEY_DOWN;
+		app->input->mouseButtons[4] = KEY_DOWN;
+	
+		ztimer = 0;
 	}
-	if (pad.r2 == 1) {
+	if (pad.r2 == 1 && ztimer > 200) {
 		app->input->keyboard[SDL_SCANCODE_RETURN] = KEY_DOWN;
+		ztimer = 0;
 	}
 
 	ztimer++;
