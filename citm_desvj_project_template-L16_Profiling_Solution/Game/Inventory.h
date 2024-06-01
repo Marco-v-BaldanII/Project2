@@ -52,8 +52,7 @@ public:
 	GuiControlButton* I_Equip;
 	GuiControlButton* I_Close;
 
-	void UseItem(Player* player, Item* item);
-	void DropItem(Item* item);
+	void DeleteItemAndReorderInventory(Item* item);
 	void EquipItem(Player* player, Item* item);
 
 	int selectedItem = 0;

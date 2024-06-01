@@ -82,21 +82,11 @@ bool Inventory::Update(float dt)
 			{
 				selectedItem--;
 				app->audio->PlayFx(changeitemfx);
-
-				if (selectedItem < 0)
-				{
-					selectedItem = InventoryItems.Count() - 1;
-				}
 			}
 			else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 			{
 				selectedItem++;
 				app->audio->PlayFx(changeitemfx);
-
-				if (selectedItem >= InventoryItems.Count())
-				{
-					selectedItem = 0;
-				}
 			}
 		}
 		if (players.Count() > 0)
@@ -105,23 +95,19 @@ bool Inventory::Update(float dt)
 			{
 				selectedPlayer++;
 				app->audio->PlayFx(changeitemfx);
-
-				if (selectedPlayer >= players.Count())
-				{
-					selectedPlayer = 0;
-				}
 			}
 			else if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 			{
 				selectedPlayer--;
 				app->audio->PlayFx(changeitemfx);
-
-				if (selectedPlayer < 0)
-				{
-					selectedPlayer = players.Count() - 1;
-				}
 			}
 		}
+
+		if (selectedItem < 0) selectedItem = InventoryItems.Count() - 1;
+		if (selectedItem >= InventoryItems.Count()) selectedItem = 0;
+
+		if (selectedPlayer < 0) selectedPlayer = players.Count() - 1;
+		if (selectedPlayer >= players.Count()) selectedPlayer = 0;
 	}
 	else
 	{
@@ -137,7 +123,6 @@ bool Inventory::Update(float dt)
 	I_Drop->bounds = { 490,930 - (int)menuY,150,100 };
 	I_Equip->bounds = { 690,930 - (int)menuY,150,100 };
 	I_Close->bounds = { 890,930 - (int)menuY,150,100 };
-
 
 	return true;
 }
@@ -169,6 +154,14 @@ bool Inventory::PostUpdate()
 bool Inventory::CleanUp()
 {
 	app->tex->UnLoad(inventoryUI);
+	app->tex->UnLoad(descriptionTex);
+	for (int i = 0; i < InventoryItems.Count(); i++)
+	{
+		app->tex->UnLoad(InventoryItems.At(i)->data->texture);
+		DeleteItemAndReorderInventory(InventoryItems.At(i)->data);
+	}
+	InventoryItems.Clear();
+
 	return true;
 }
 
@@ -187,29 +180,22 @@ void Inventory::EquipItem(Player* player, Item* item) {
 	}
 
 	player->myItem = item;
-
-	if (selectedItem >= InventoryItems.Count() - 1) {
-		selectedItem = InventoryItems.Count() - 2;
-	}
-
-	DropItem(item);
-	selectedItem = 0;
+	DeleteItemAndReorderInventory(item);
 }
 
 
-void Inventory::DropItem(Item* item) 
+void Inventory::DeleteItemAndReorderInventory(Item* item)
 {
-	int itemIndex = InventoryItems.Find(item);
-
-	if (itemIndex != -1) {
-		InventoryItems.Del(InventoryItems.At(itemIndex));
-
-		if (selectedItem >= InventoryItems.Count()) {
-			selectedItem = InventoryItems.Count() - 1;
+	for (int i = 0; i < InventoryItems.Count(); i++)
+	{
+		if (InventoryItems.At(i)->data == item)
+		{
+			InventoryItems.Del(InventoryItems.At(i));
+			break;
 		}
 	}
 
-	selectedItem = 0;
+	InventoryItems.BubbleSort();
 }
 
 
@@ -220,15 +206,15 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (control->id == 71)
 		{
-			DropItem(InventoryItems.At(selectedItem)->data);
+			DeleteItemAndReorderInventory(InventoryItems.At(selectedItem)->data);
 		}
 		else if (control->id == 72)
 		{
 			EquipItem(players.At(selectedPlayer)->data, InventoryItems.At(selectedItem)->data);
-			if (selectedItem < InventoryItems.Count())
+			/*if (selectedItem < InventoryItems.Count())
 			{
-				DropItem(InventoryItems.At(selectedItem)->data);
-			}
+				DeleteItemAndReorderInventory(InventoryItems.At(selectedItem)->data);
+			}*/
 		}
 	}
 	
