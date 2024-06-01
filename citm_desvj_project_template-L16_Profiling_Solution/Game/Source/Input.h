@@ -117,7 +117,7 @@ private:
 
 
 public:
-
+	int ztimer;
 	int mousePadx = 500;
 	int mousePady = 500;
 	// An array to fill in all detected gamepads
