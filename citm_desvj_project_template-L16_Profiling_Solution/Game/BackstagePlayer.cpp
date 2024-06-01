@@ -1,5 +1,6 @@
 #include "BackstagePlayer.h"
 #include "Source/Log.h"
+#include "../Window.h"
 
 BackStagePlayer::BackStagePlayer(bool isActive) : Module(isActive)
 {
@@ -142,38 +143,58 @@ bool BackStagePlayer::Update(float dt)
 {
 	GamePad& pad = app->input->pads[0];
 
-	if (pad.l_x < -0.2f && pad.l_x < 0.0f) {
+	if (pad.r_x < -0.2f && pad.r_x < 0.0f) {
 		//app->input->keys[SDL_SCANCODE_A] = Key_State::KEY_REPEAT;
 		app->input->mousePadx--;
-		SDL_WarpMouseGlobal(app->input->mousePadx,app->input->mousePady);
+		SDL_WarpMouseInWindow(app->win->window,app->input->mousePadx,app->input->mousePady);
+	}
+	if (pad.r_x > 0.2f && pad.r_x > 0.0f) {
+		//app->input->keys[SDL_SCANCODE_D] = Key_State::KEY_REPEAT;
+		app->input->mousePadx++;
+		SDL_WarpMouseInWindow(app->win->window,app->input->mousePadx, app->input->mousePady);
+	}
+	if (pad.r_y > 0.2f && pad.r_y > 0.0f) {
+		//app->input->keys[SDL_SCANCODE_S] = Key_State::KEY_REPEAT;
+		app->input->mousePady--;
+		SDL_WarpMouseInWindow(app->win->window,app->input->mousePadx, app->input->mousePady);
+	}
+	if (pad.r_y < -0.2f && pad.r_y < 0.0f) {
+		//app->input->keys[SDL_SCANCODE_W] = Key_State::KEY_REPEAT;
+		app->input->mousePady++;
+		SDL_WarpMouseInWindow(app->win->window,app->input->mousePadx, app->input->mousePady);
+	}
+
+
+	if (pad.l_x < -0.2f && pad.l_x < 0.0f) {
+		//app->input->keys[SDL_SCANCODE_A] = Key_State::KEY_REPEAT;
+	
+		app->input->keyboard[SDL_SCANCODE_A] = KEY_REPEAT;
 	}
 	if (pad.l_x > 0.2f && pad.l_x > 0.0f) {
 		//app->input->keys[SDL_SCANCODE_D] = Key_State::KEY_REPEAT;
-		app->input->mousePadx++;
-		SDL_WarpMouseGlobal(app->input->mousePadx, app->input->mousePady);
+	
+		app->input->keyboard[SDL_SCANCODE_D] = KEY_REPEAT;
+	
 	}
 	if (pad.l_y > 0.2f && pad.l_y > 0.0f) {
 		//app->input->keys[SDL_SCANCODE_S] = Key_State::KEY_REPEAT;
-		app->input->mousePady--;
-		SDL_WarpMouseGlobal(app->input->mousePadx, app->input->mousePady);
+
+		app->input->keyboard[SDL_SCANCODE_S] = KEY_REPEAT;
 	}
 	if (pad.l_y < -0.2f && pad.l_y < 0.0f) {
 		//app->input->keys[SDL_SCANCODE_W] = Key_State::KEY_REPEAT;
-		app->input->mousePady++;
-		SDL_WarpMouseGlobal(app->input->mousePadx, app->input->mousePady);
-	}
-	if (pad.up == 1) {
+		
 		app->input->keyboard[SDL_SCANCODE_W] = KEY_REPEAT;
 	}
-	if (pad.left == 1) {
-		app->input->keyboard[SDL_SCANCODE_A] = KEY_REPEAT;
+
+
+	if (pad.x == 1) {
+		app->input->keyboard[SDL_SCANCODE_Z] = KEY_DOWN;
 	}
-	if (pad.right == 1) {
-		app->input->keyboard[SDL_SCANCODE_D] = KEY_REPEAT;
+	if (pad.a == 1) {
+		app->input->mouseButtons[SDL_BUTTON_LEFT] = KEY_DOWN;
 	}
-	if (pad.down == 1) {
-		app->input->keyboard[SDL_SCANCODE_S] = KEY_REPEAT;
-	}
+	
 	currentAnimation->Update();
 	// Set player position
 	if (canMove && !talking)
