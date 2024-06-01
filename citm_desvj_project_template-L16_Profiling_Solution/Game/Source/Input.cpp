@@ -3,6 +3,7 @@
 #include "Window.h"
 
 #include "Defs.h"
+#include "BackStage.h"
 #include "Log.h"
 
 #include "SDL/include/SDL.h"
@@ -186,25 +187,29 @@ bool Input::PreUpdate()
 		//app->input->keys[SDL_SCANCODE_A] = Key_State::KEY_REPEAT;
 
 		app->input->keyboard[SDL_SCANCODE_A] = KEY_REPEAT;
+		if (app->backStage->active == false)
 		app->input->keyboard[SDL_SCANCODE_LEFT] = KEY_REPEAT;
 	}
 	if (pad.l_x > 0.2f && pad.l_x > 0.0f) {
 		//app->input->keys[SDL_SCANCODE_D] = Key_State::KEY_REPEAT;
 
 		app->input->keyboard[SDL_SCANCODE_D] = KEY_REPEAT;
+		if (app->backStage->active == false)
 		app->input->keyboard[SDL_SCANCODE_RIGHT] = KEY_REPEAT;
 	}
 	if (pad.l_y > 0.2f && pad.l_y > 0.0f) {
 		//app->input->keys[SDL_SCANCODE_S] = Key_State::KEY_REPEAT;
 
 		app->input->keyboard[SDL_SCANCODE_S] = KEY_REPEAT;
-		app->input->keyboard[SDL_SCANCODE_DOWN] = KEY_REPEAT;
+		if (app->backStage->active == false)
+		app->input->keyboard[SDL_SCANCODE_UP] = KEY_REPEAT;
 	}
 	if (pad.l_y < -0.2f && pad.l_y < 0.0f) {
 		//app->input->keys[SDL_SCANCODE_W] = Key_State::KEY_REPEAT;
 
 		app->input->keyboard[SDL_SCANCODE_W] = KEY_REPEAT;
-		app->input->keyboard[SDL_SCANCODE_UP] = KEY_REPEAT;
+		if (app->backStage->active == false)
+		app->input->keyboard[SDL_SCANCODE_DOWN] = KEY_REPEAT;
 	}
 	if (pad.left && ztimer > 50)
 	{
