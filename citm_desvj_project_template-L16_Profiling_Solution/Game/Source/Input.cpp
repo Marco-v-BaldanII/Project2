@@ -214,6 +214,7 @@ bool Input::PreUpdate()
 	if (pad.left && ztimer > 50)
 	{
 		app->input->keyboard[SDL_SCANCODE_LEFT] = KEY_DOWN;
+
 		ztimer = 0;
 	}
 	if (pad.right && ztimer > 50)
@@ -248,6 +249,15 @@ bool Input::PreUpdate()
 	
 		ztimer = 0;
 	}
+	if (pad.b == 1 && ztimer > 50) {
+		app->input->mouseButtons[0] = KEY_DOWN;
+		app->input->mouseButtons[1] = KEY_DOWN;
+		app->input->mouseButtons[2] = KEY_DOWN;
+		app->input->mouseButtons[3] = KEY_DOWN;
+		app->input->mouseButtons[4] = KEY_DOWN;
+
+		ztimer = 0;
+	}
 	if (pad.r2 == 1 && ztimer > 50) {
 		app->input->keyboard[SDL_SCANCODE_RETURN] = KEY_DOWN;
 		ztimer = 0;
@@ -266,6 +276,10 @@ bool Input::PreUpdate()
 	}
 	if (pad.r1 == 1 && ztimer > 50) {
 		app->input->keyboard[SDL_SCANCODE_Q] = KEY_DOWN;
+		ztimer = 0;
+	}
+	if (pad.l1 == 1 && ztimer > 50) {
+		app->input->keyboard[SDL_SCANCODE_ESCAPE] = KEY_DOWN;
 		ztimer = 0;
 	}
 
