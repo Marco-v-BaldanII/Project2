@@ -181,7 +181,7 @@
 <dialogue text="Ri-chard ?"
    owner="Henry VI" position="1"   />
 <dialogue text="Richard of york, thy majesty"
-   owner="Jasper" position="2" />
+   owner="Jasper Tudor" position="2" />
 <dialogue text="Valorous afternoon thy highness"
    owner="Duke of York" position="2" />
 <dialogue text="Richard, mine own valorous cousin richard, how art thee ?"
@@ -199,7 +199,7 @@
 <dialogue text="Heavy?"
    owner="Duke of York" position="2" />
 <dialogue text="Henry, our mother hasn't visited for years"
-   owner="Jasper" position="2" />
+   owner="Jasper Tudor" position="2" />
 <dialogue text="If 't be true i weareth this trinket, shall the lady behold at me?"
    owner="Henry VI" position="1" />
 <dialogue text="I can't standeth to seeth thee liketh this henry ! (leaves the room)"
@@ -501,7 +501,7 @@
 <dialogue text="Ri-chard ?"
    owner="Henry VI" position="1"   />
 <dialogue text="Richard of York, your majesty"
-   owner="Jasper" position="2" />
+   owner="Jasper Tudor" position="2" />
 <dialogue text="Good afternoon your highness"
    owner="Duke of York" position="2" />
 <dialogue text="Richard, my good cousin Richard, how are you ?"
@@ -519,7 +519,7 @@
 <dialogue text="Heavy?"
    owner="Duke of York" position="2" />
 <dialogue text="Henry, our mother hasn't visited for years"
-   owner="Jasper" position="2" />
+   owner="Jasper Tudor" position="2" />
 <dialogue text="If I wear this trinket, will she look at me?"
    owner="Henry VI" position="1" />
 <dialogue text="I can't stand to see you like this Henry ! (leaves the room)"

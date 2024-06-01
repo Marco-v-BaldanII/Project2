@@ -143,7 +143,7 @@ bool CastingScene::PostUpdate() {
 	else {
 		app->render->DrawText(roles[roleIndex]->name, 270 * 3, 100 * 3, 470 * 3, 20 * 3, true, SDL_Color {255,0,0,255});
 	}
-	app->render->DrawTexture(actors[actorIndex]->texture, 32 , 224 , &portraitBox);
+	app->render->DrawTexture(actors[actorIndex]->texture, 32 , 224 );
 
 
 	if (actorPortrait != nullptr) {

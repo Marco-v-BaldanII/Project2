@@ -140,8 +140,9 @@ bool TurnManager::Update(float dt)
 bool TurnManager::PostUpdate()
 {
 	bool ret = true;
-	playerTurnPopUp->Update();
+	
 	if (enemyTurnPopUp != nullptr) enemyTurnPopUp->Update();
+	if (playerTurnPopUp != nullptr) playerTurnPopUp->Update();
 
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
 		playerTurnPopUp->Activate();

@@ -182,9 +182,10 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 bool Render::DrawActor(ActorSprite* sprite, int x, int y, const SDL_Rect* section, bool flipped, int opacity, float speed, int R, int G, int B, double angle, int pivotX, int pivotY) const
 {
 	if (sprite != nullptr) {
-		app->render->DrawTexture(sprite->actor->texture, x, y, section, flipped, opacity, speed, R, G, B, angle, pivotX, pivotY);
+		
 
-		app->render->DrawTexture(sprite->role->texture, x, y, section, flipped, opacity, speed, R, G, B, angle, pivotX, pivotY);
+		app->render->DrawTexture(sprite->role->texture, x, y - 15, section, flipped, opacity, speed, R, G, B, angle, pivotX, pivotY);
+		app->render->DrawTexture(sprite->actor->texture, x, y -15, section, flipped, opacity, speed, R, G, B, angle, pivotX, pivotY);
 	}
 	return true;
 }
