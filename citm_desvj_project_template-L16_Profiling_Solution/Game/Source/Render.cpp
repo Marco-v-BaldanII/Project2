@@ -183,7 +183,6 @@ bool Render::DrawActor(ActorSprite* sprite, int x, int y, const SDL_Rect* sectio
 {
 	if (sprite != nullptr) {
 		
-
 		app->render->DrawTexture(sprite->role->texture, x, y - 15, section, flipped, opacity, speed, R, G, B, angle, pivotX, pivotY);
 		app->render->DrawTexture(sprite->actor->texture, x, y -15, section, flipped, opacity, speed, R, G, B, angle, pivotX, pivotY);
 	}

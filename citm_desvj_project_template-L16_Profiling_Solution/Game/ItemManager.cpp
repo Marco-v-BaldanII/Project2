@@ -25,13 +25,20 @@ ItemManager::ItemManager(bool isActive) : Module(isActive)
 bool ItemManager::Start() {
 
 	// Call start for all items
+	
+ 	return true;
+
+}
+
+void ItemManager::Init() {
+
 	if (active) {
-		
+
 		for (pugi::xml_node mN = config.child("map"); mN != NULL; mN = mN.next_sibling("map")) {
 
 
 			int n = mN.attribute("value").as_int();
- 			if (n == app->map->level) {
+			if (n == app->map->level) {
 				mapNode = mN;
 				break;
 			}
@@ -52,7 +59,7 @@ bool ItemManager::Start() {
 				item->myType = EQUIPABLE;
 			}
 
-			
+
 			item->InitModifiers(n.attribute("x").as_int(), n.attribute("y").as_int(), n.attribute("hp").as_float(), n.attribute("attack").as_float(), n.attribute("luck").as_float(),
 				n.attribute("precision").as_float(), n.attribute("evasion").as_float(), n.attribute("speed").as_float(), n.attribute("movement").as_int(), (const char*)n.attribute("name").as_string(),
 				n.attribute("textPath").as_string(), n.attribute("description").as_string());
@@ -78,7 +85,6 @@ bool ItemManager::Start() {
 		}
 	}
 
-	return true;
 
 }
 
@@ -191,7 +197,9 @@ bool ItemManager::PostUpdate() {
 bool ItemManager::CleanUp() {
 
 	// Delet all items
-	items.Clear();
+  	items.Clear();
+	doors.Clear();
+	levers.Clear();
 
 	return true;
 

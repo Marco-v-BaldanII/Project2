@@ -110,6 +110,7 @@ void QuestManager::CheckQuestCompletion(string target) {
 				app->guiManager->spotLight->mode = DIALOG;
 				app->SaveRequest(); /*save characters progression for the next map*/
 				//quests.Del(it);
+				//app->map->level++;
 			}
 			delete it->data;
 			quests.Del(it);

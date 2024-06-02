@@ -42,7 +42,10 @@ bool Credits::Start()
 {
 	if (active)
 	{
-		app->dialogueManager->PrevAct();
+		app->itemManager->CleanUp();
+
+		//app->dialogueManager->PrevAct();
+		app->dialogueManager->myState = NPCS;
 		position = iPoint(0, 0);
 		thanked = false;
 		img = app->tex->Load("Assets/Textures/WarOfRosesCreditsDark.png");

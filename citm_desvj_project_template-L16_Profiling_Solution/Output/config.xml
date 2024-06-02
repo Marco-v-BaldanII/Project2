@@ -604,21 +604,21 @@
 
 				</enemy>
 
-				<enemy name= "Edward of York" x="7" y="7" unit_type="2"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
+				<enemy name= "Edward of York" x="26" y="27" unit_type="2"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
 
 					<dialogue text ="I must not die here, father I'll support you from the back lines"/>
 
 				</enemy>
 
-				<enemy name= "Richard III" x="26" y="27" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
+				<enemy name= "Richard III" x="7" y="7" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
 
 					<dialogue text ="Father please come back to me!"/>
 
 				</enemy>
 
-				<enemy name= "George of Clarence" x="8" y="28" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
+				<enemy name= "Archer" x="8" y="28" unit_type="1"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
 
-					<dialogue text ="May my final arrow find its mark, even in death"/>
+		
 
 				</enemy>
 
