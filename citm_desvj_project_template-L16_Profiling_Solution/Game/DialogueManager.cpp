@@ -1076,3 +1076,16 @@ void DialogueManager::NextAct() {
 	myConfig = dialogueFile2;
 	spontaneousDialogue = nullptr;
 }
+
+void DialogueManager::PrevAct() {
+
+	CleanUp();
+
+	pugi::xml_parse_result res2 = dialogueFile2.load_file("dialogue.xml");
+
+	myConfig = dialogueFile2;
+	spontaneousDialogue = nullptr;
+	app->map->level = 0;
+	scriptWritten = false;
+
+}

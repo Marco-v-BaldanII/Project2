@@ -43,6 +43,7 @@ public:
 	bool Start() {
 		if (active)
 		{
+			app->guiManager->credits = true;
 			app->itemManager->CleanUp();
 
 			//app->dialogueManager->PrevAct();
@@ -130,6 +131,7 @@ public:
 		//app->guiManager->credits = false;
 		active = false;
 		img = nullptr;
+		app->guiManager->credits = false;
 		return true;
 	}
 

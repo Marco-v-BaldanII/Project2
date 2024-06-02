@@ -55,14 +55,14 @@ public:
 		if (position.x == Target.x) {
 			int u = 9;
 		}
-		
+
 
 		Lerp3(position.x, 0.1f, Target.x);
 		Lerp3(position.y, 0.1f, Target.y);
 	}
 	void Render() {
 		if (visible == true) {
-			app->map->drawGrid = true;
+
 			/*
 				app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a / 2.6f, true, SDL_BLENDMODE_ADD);
 				app->render->FillCircle(position.x, position.y, radius * 1.2f, color.r, color.g, color.b, color.a / 3.0f, true, SDL_BLENDMODE_ADD);
@@ -71,22 +71,22 @@ public:
 			if (mode == BAT) {
 				app->render->DrawTexture(texture, position.x - 32, position.y - 32, (const SDL_Rect*)0, true, 210, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD);
 				SDL_Rect rect = SDL_Rect{ 0,0,1000,1000 };
-
+				app->map->drawGrid = true;
 				app->render->DrawTexture(vigneteText, position.x - 500, position.y - 500, &rect, false, 80);
 			}
 			else {
 
-			/*	SDL_Rect BigRect = SDL_Rect{ 0,0,196,196 };
+				/*	SDL_Rect BigRect = SDL_Rect{ 0,0,196,196 };
 
-				app->render->DrawTexture(texture, position.x - 32, position.y - 32, &BigRect, true, 210, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD);
-				SDL_Rect rect = SDL_Rect{ 0,0,1000,1000 };
+					app->render->DrawTexture(texture, position.x - 32, position.y - 32, &BigRect, true, 210, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD);
+					SDL_Rect rect = SDL_Rect{ 0,0,1000,1000 };
 
-				app->render->DrawTexture(vigneteText, position.x - 500, position.y - 500, &BigRect, false, 190);*/
+					app->render->DrawTexture(vigneteText, position.x - 500, position.y - 500, &BigRect, false, 190);*/
 			}
-				/*Circle c; c = Circle { position, (uint)radius };
-				SDL_Rect rect = SDL_Rect{ 0,0,800,800 };
-				app->render->DrawRectMask(rect,c, 0,0,0,200, true, true);*/
-			
+			/*Circle c; c = Circle { position, (uint)radius };
+			SDL_Rect rect = SDL_Rect{ 0,0,800,800 };
+			app->render->DrawRectMask(rect,c, 0,0,0,200, true, true);*/
+
 
 			//app->render->FillCircle(position.x, position.y, radius*2, color.r, color.g, color.b, color.a/1.5f, true);
 			//app->render->DrawCircle(Target.x, Target.y, 2, 255, 0, 0, 255, true);
@@ -120,7 +120,7 @@ public:
 	// Called before the first frame
 	bool Start();
 
-	 // Called each loop iteration
+	// Called each loop iteration
 	bool PreUpdate();
 	bool Update(float dt);
 	bool PostUpdate();
@@ -128,7 +128,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{255,255,255,255});
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{ 255,255,255,255 });
 
 	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Entity* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, VIEW viewMode = SCREEN, SDL_Color color = SDL_Color{ 0, 0, 200, 255 }, SDL_Color textColor = SDL_Color{ 255,255,255,255 });
 
@@ -156,6 +156,8 @@ public:
 
 	SDL_Texture* mouseCursor = nullptr;
 
+	SDL_Texture* spotTexture = nullptr;
+
 	pugi::xml_node myNode;
 
 	uint buttonClickFx = 0;
@@ -175,8 +177,8 @@ public:
 	SpotLight* spotLight = nullptr;
 
 	SDL_Texture* Curtain;
-	SDL_Rect leftCurtain = SDL_Rect{ 0,0,281,384};
-	SDL_Rect rightCurtain = SDL_Rect{ 284,0,296,384};
+	SDL_Rect leftCurtain = SDL_Rect{ 0,0,281,384 };
+	SDL_Rect rightCurtain = SDL_Rect{ 284,0,296,384 };
 
 	Easing* easing = nullptr;
 	Easing* easingR = nullptr;
@@ -187,6 +189,9 @@ public:
 
 	Timer curtainTimer;
 	bool curtainclosed = false;
+
+	bool credits = false;
+	bool shouldCurtainsReOpen = true;
 
 };
 
@@ -259,7 +264,7 @@ public:
 
 			}
 
-		} 
+		}
 		else {
 
 			app->render->DrawTexture(texture, startPos.x + (app->render->camera.x / -3), startPos.y + (app->render->camera.y / -3));

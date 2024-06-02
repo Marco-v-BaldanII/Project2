@@ -184,6 +184,10 @@ public:
 	Animation jasperDown;
 	Animation jasperUp;
 
+	Animation catesbyRight;
+	Animation catesbyDown;
+	Animation catesbyUp;
+
 	uint MargaretVoice1;
 	uint MargaretVoice2;
 	uint HenryTudorVoice1;

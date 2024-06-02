@@ -266,6 +266,25 @@
 			<frame x="240" y="69" w="19" h="27" />
 		</animation>
 	</Warwick>
+
+		<Catesby>
+			<animation name="wrigth">
+				<frame x="272" y="232" w="14" h="24" />
+				<frame x="272" y="265" w="14" h="24" />
+			</animation>
+
+			<animation name="up">
+				<frame x="272" y="169" w="17" h="23" />
+				<frame x="272" y="200" w="17" h="24" />
+			</animation>
+
+			<animation name="down">
+				<frame x="272" y="10" w="17" h="23" />
+				<frame x="272" y="39" w="17" h="25" />
+				<frame x="272" y="71" w="17" h="25" />
+			</animation>
+	</Catesby>
+		
 		
 		<EdwardVI>
 
@@ -604,13 +623,13 @@
 
 				</enemy>
 
-				<enemy name= "Edward of York" x="7" y="7" unit_type="2"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
+				<enemy name= "Edward of York" x="26" y="27" unit_type="2"  attack="10" hp="20" precision="75" luck="25" speed="25" movement="8" exp ="40">
 
 					<dialogue text ="I must not die here, father I'll support you from the back lines"/>
 
 				</enemy>
 
-				<enemy name= "Richard III" x="26" y="27" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
+				<enemy name= "Richard III" x="7" y="7" unit_type="0" attack="7" hp="16" precision="90" luck="25" speed="35" movement="11">
 
 					<dialogue text ="Father please come back to me!"/>
 

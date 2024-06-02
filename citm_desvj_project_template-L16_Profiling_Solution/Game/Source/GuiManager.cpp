@@ -47,6 +47,7 @@ bool GuiManager::Start()
 	buttonClickFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
 
 	mouseCursor = app->tex->Load("Assets/Textures/UI/handCursor.png");
+	spotTexture = app->tex->Load("Assets/Textures/spotLight.png");
 
 	spotLight = new SpotLight(64, SDL_Color{ 242,149,98,200 }, 0.02f);
 	spotLight->visible = false;
@@ -73,18 +74,18 @@ bool GuiManager::Update(float dt)
 	//spotLight->Target = MousePose;
 
 	spotLight->MoveToTarget();
-	
+
 
 	return true;
 }
 
 bool GuiManager::PostUpdate() {
 
-	
 
-	
+
+
 	spotLight->Render();
-    
+
 
 	// Animation not finished? 
 	if (!easing->GetFinished())
@@ -101,7 +102,7 @@ bool GuiManager::PostUpdate() {
 			b = -230;
 			easingT = EasingType::EASE_IN_BACK;
 		}
-		
+
 
 		// TODO 1: Implement easings on pause menu
 		// Calculate interpolated position (tracktime, easinganimaion),
@@ -110,13 +111,13 @@ bool GuiManager::PostUpdate() {
 		double easedX = easing->EasingAnimation(a, b, t, easingT);
 
 		SDL_Rect pauseBox = { easedX, 0, 300, 400 };
-		app->render->DrawTexture(Curtain, easedX + (app->render->camera.x /-3), 0 + (app->render->camera.y / -3), &leftCurtain);
-		
+		app->render->DrawTexture(Curtain, easedX + (app->render->camera.x / -3), 0 + (app->render->camera.y / -3), &leftCurtain);
+
 	}
 	else if (bPause)
 	{
 		// Draw black background
-		SDL_Rect screenRect = SDL_Rect{ 0 + (app->render->camera.x / -3),0 + (app->render->camera.y / -3),256 * 2, 198 * 2};
+		SDL_Rect screenRect = SDL_Rect{ 0 + (app->render->camera.x / -3),0 + (app->render->camera.y / -3),256 * 2, 198 * 2 };
 		app->render->DrawRectangle(screenRect, b2Color(0, 0, 0, 1), true, true);
 		// static pause menu (animation finished, menu open)
 		SDL_Rect pauseBox = { -20 , 0 , 300, 400 };
@@ -127,8 +128,8 @@ bool GuiManager::PostUpdate() {
 			curtainclosed = true;
 			curtainTimer.Start();
 		}
-		
-		if (curtainTimer.ReadMSec() > 100 && curtainclosed) {
+
+		if (curtainTimer.ReadMSec() > 100 && curtainclosed && shouldCurtainsReOpen) {
 			curtainclosed = false;
 
 			bPause = !bPause;
@@ -175,7 +176,7 @@ bool GuiManager::PostUpdate() {
 		app->render->DrawTexture(Curtain, easedX + (app->render->camera.x / -3), 0 + (app->render->camera.y / -3), &rightCurtain);
 
 	}
-	else if (bPause)  
+	else if (bPause)
 	{
 		// static pause menu (animation finished, menu open)
 		SDL_Rect pauseBox = { 250 , 0 , 300, 400 };
@@ -191,7 +192,7 @@ bool GuiManager::PostUpdate() {
 		app->render->DrawTexture(Curtain, pauseBox.x + (app->render->camera.x / -3), pauseBox.y + (app->render->camera.y / -3), &rightCurtain);
 
 	}
-	
+
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
 		OpenCloseCurtains();
@@ -210,14 +211,17 @@ bool GuiManager::PostUpdate() {
 	iPoint mouse;
 	app->input->GetMousePosition(mouse.x, mouse.y);
 	SDL_Rect r = SDL_Rect{ 0,0,16,16 };
-	
+	SDL_Rect rlight = SDL_Rect{ 0,0,200,200 };
+
 	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 	{
 		r.x += 16;
-		app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
+		if (!credits) app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
+		else { app->render->DrawTexture(spotTexture, mouse.x, mouse.y, &rlight, 1, 200, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD); }
 	}
 	else {
-		app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
+		if (!credits) app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
+		else { app->render->DrawTexture(spotTexture, mouse.x, mouse.y, &rlight, 1, 200, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD); }
 	}
 
 
@@ -226,13 +230,13 @@ bool GuiManager::PostUpdate() {
 
 void GuiManager::TurnOffSpotLight() {
 
-	if(spotLight->visible != false) spotLight->visible = false;
+	if (spotLight->visible != false) spotLight->visible = false;
 	// play fx
 
 }
 void GuiManager::TurnOnSpotLight() {
-	if(spotLight->visible != true)spotLight->visible = true;
-	
+	if (spotLight->visible != true)spotLight->visible = true;
+
 	// play fx
 
 }
@@ -308,9 +312,9 @@ bool GuiManager::OnGuiMouseClickEvent(GuiControl* control)
 }
 
 void GuiManager::OpenCloseCurtains() {
-	
-		bPause = !bPause;
-		easing->SetFinished(false);
-		easingR->SetFinished(false);
-	
+
+	bPause = !bPause;
+	easing->SetFinished(false);
+	easingR->SetFinished(false);
+
 }

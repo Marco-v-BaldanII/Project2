@@ -85,12 +85,11 @@ bool Victory::Update(float dt)
 		app->guiManager->OpenCloseCurtains();
 		curtainTimer.Start();
 		curtains = true;
+		
 	}
-	if (curtainTimer.ReadMSec() > 1900 && curtains) {
+	if (curtainTimer.ReadMSec() > 300 && curtains) {
 		app->levelManager->LoadScene(GameScene::START);
-		//app->guiManager->shouldCurtainsReOpen = true;
-		app->guiManager->OpenCloseCurtains();
-		Disable();
+		app->guiManager->credits = false;
 		app->credits->Disable();
 	}
 

@@ -267,9 +267,9 @@
 		</animation>
 	</Warwick>
 
-		<Warwick>
+		<Castesby>
 
-			<!--Negro -->
+
 			<animation name="wrigth">
 				<frame x="272" y="232" w="14" h="24" />
 				<frame x="272" y="265" w="14" h="24" />
@@ -285,7 +285,7 @@
 				<frame x="272" y="39" w="17" h="25" />
 				<frame x="272" y="71" w="17" h="25" />
 			</animation>
-		</Warwick>
+		</Catesby>
 		
 		
 		

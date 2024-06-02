@@ -1028,7 +1028,25 @@ void BattleScene::LoadAnimations() {
 			}
 		}
 	}
-	
+	for (pugi::xml_node node = mynode.child("Catesby").child("animation"); node != NULL; node = node.next_sibling("animation")) {
+
+		string s = node.attribute("name").as_string();
+		for (pugi::xml_node fNode = node.child("frame"); fNode != NULL; fNode = fNode.next_sibling("frame")) {
+
+			if (s == "wrigth") {
+				catesbyRight.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				catesbyRight.speed = 0.1f;
+			}
+			else if (s == "up") {
+				catesbyUp.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				catesbyUp.speed = 0.1f;
+			}
+			else if (s == "down") {
+				catesbyDown.PushBack(SDL_Rect{ fNode.attribute("x").as_int(), fNode.attribute("y").as_int(), fNode.attribute("w").as_int(), fNode.attribute("h").as_int() });
+				catesbyDown.speed = 0.1f;
+			}
+		}
+	}
 }
 
 void BattleScene::PassAnimations(Entity* entity) {
@@ -1100,6 +1118,15 @@ void BattleScene::PassAnimations(Entity* entity) {
 		entity->rightAnim = Richard3Right;
 		entity->downAnim = Richard3Down;
 		entity->hitFx = mageFx;
+
+
+	}
+	else if (entity->name == "William Catesby") {
+
+		entity->upAnim = catesbyUp;
+		entity->rightAnim = catesbyRight;
+		entity->downAnim = catesbyDown;
+		entity->hitFx = knightFx;
 
 
 	}
