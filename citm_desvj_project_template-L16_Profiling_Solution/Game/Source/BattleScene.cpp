@@ -125,6 +125,7 @@ bool BattleScene::Start()
 
 		
 
+		app->itemManager->Enable();
 		List<Player*> l;
 		party = l;
 		List<Enemy*> le; goons = le;
@@ -304,9 +305,6 @@ bool BattleScene::Start()
 		expTexture = app->tex->Load("Assets/Textures/UI/expBar-export.png");
 		lvlUpTexture = app->tex->Load("Assets/Textures/UI/LevelUpText.png");
 
-		if (!app->itemManager->active) app->itemManager->Enable();
-		else { app->itemManager->Start(); }
-		
 	}
 
 	//6

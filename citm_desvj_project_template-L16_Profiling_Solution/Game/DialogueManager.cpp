@@ -1088,7 +1088,6 @@ void DialogueManager::NextAct() {
 
 	myConfig = dialogueFile2;
 	spontaneousDialogue = nullptr;
-	app->map->level = 1;
 }
 
 void DialogueManager::PrevAct() {
@@ -1099,7 +1098,7 @@ void DialogueManager::PrevAct() {
 
 	myConfig = dialogueFile2;
 	spontaneousDialogue = nullptr;
-	app->map->level = 0;
+
 	scriptWritten = false;
 
 }

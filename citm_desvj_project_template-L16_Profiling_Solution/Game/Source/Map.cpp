@@ -47,8 +47,6 @@ bool Map::Start() {
     else if (level == 1)
     mapPath = myNode.child("lvl2").attribute("path").as_string();
 
-    
-
     drawGrid = false;
 
     Load(mapPath);
@@ -424,12 +422,6 @@ bool Map::Load(SString mapFileName)
     }
 
     mapLoaded = ret;
-
-
-    if (!app->itemManager->active) { app->itemManager->active = true; app->itemManager->Init();}
-    else { app->itemManager->Init(); }
-
-
     return ret;
 }
 
