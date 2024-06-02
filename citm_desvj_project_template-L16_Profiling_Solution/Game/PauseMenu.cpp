@@ -261,8 +261,6 @@ bool PauseMenu::OnGuiMouseClickEvent(GuiControl* control)
 		
 		//BACK TO MENU
 		app->levelManager->LoadScene(GameScene::START);
-		app->map->level = 0;
-		app->dialogueManager->PrevAct();
 		pauseMenu = false;
 	}
 

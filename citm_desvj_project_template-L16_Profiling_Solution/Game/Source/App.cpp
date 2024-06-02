@@ -34,7 +34,7 @@
 #include "../Inventory.h"
 #include "Victory.h"
 #include "Lose.h"
-#include "../Credits.h"
+
 #include "Defs.h"
 #include "Log.h"
 
@@ -86,7 +86,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	particleSystem = new ParticleSystem(true);
 	guiManager = new GuiManager(true);
 	fade = new FadeToBlack(true);
-	credits = new Credits(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -104,16 +103,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//AddModule(scene);
 	AddModule(intro);
 	AddModule(victory);
-	
+	AddModule(lose);
+	AddModule(mainMenu);
 	AddModule(itemManager);
 	AddModule(battleScene);
 	AddModule(backStage);
-	AddModule(lose);
-	AddModule(mainMenu);
 
 	AddModule(turnManager);
 	AddModule(fonts);
-	AddModule(credits);
 	AddModule(particleSystem);
 	
 	AddModule(entityManager);
@@ -127,7 +124,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pauseMenu);
 	
 	AddModule(fade);
-
 	// Render last to swap buffer
 	AddModule(render);
 	

@@ -100,7 +100,6 @@
   <ItemGroup>
     <ClCompile Include="BackstagePlayer.cpp" />
     <ClCompile Include="CastingScene.cpp" />
-    <ClCompile Include="Credits.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Easing.cpp" />
@@ -147,7 +146,6 @@
     <ClCompile Include="TurnManager.cpp" />
     <ClInclude Include="BackstagePlayer.h" />
     <ClInclude Include="CastingScene.h" />
-    <ClInclude Include="Credits.h" />
     <ClInclude Include="Dialogue.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Door.h" />

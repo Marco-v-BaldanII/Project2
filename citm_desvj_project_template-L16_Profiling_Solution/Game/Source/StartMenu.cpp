@@ -110,12 +110,12 @@ bool StartMenu::Start()
 		laguage->state = GuiControlState::DISABLED;
 		textSpeed->state = GuiControlState::DISABLED;
 
-		backstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, " New Game ", pos2, this);
-		combatstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, " Combatstage ", pos5, this);
+		backstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, " Backstage ", pos2, this);
+		combatstage = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, " Combatstage ", pos3, this);
 		backstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 69, " Backstage 2", pos4, this);
-		win = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 40, " Credits ", pos3, this);
+		win = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 40, " Win ", pos5, this);
 		lose = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 41, " Lose ", pos6, this);
-		combatstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 420, " Combatstage2 ", pos9, this);
+		combatstage2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 420, " combatstage2 ", pos9, this);
 
 		backstage->state = GuiControlState::DISABLED;
 		combatstage->state = GuiControlState::DISABLED;
@@ -390,8 +390,6 @@ bool StartMenu::OnGuiMouseClickEvent(GuiControl* control)
 		app->dialogueManager->Enable();
 	 	app->levelManager->LoadScene(GameScene::CASTING);
 		state = MenuState::OFF;
-		app->map->level = 0;
-		app->dialogueManager->PrevAct();
 
 	}
 	else if (control->id == 11)

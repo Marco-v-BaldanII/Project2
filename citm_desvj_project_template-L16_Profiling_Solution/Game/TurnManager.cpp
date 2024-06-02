@@ -338,7 +338,6 @@ void TurnManager::CheckBattleEnding() {
 				app->levelManager->LoadScene(GameScene::BACKSTAGE2);
 
 				List<Enemy*> es; enemies = es;
-				List<Player*> ps; players = ps;
 
 				playerLoss = false; enemyLoss = false;
 				MainQuest = false;

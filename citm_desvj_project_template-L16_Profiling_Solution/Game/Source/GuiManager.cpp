@@ -47,7 +47,6 @@ bool GuiManager::Start()
 	buttonClickFx = app->audio->LoadFx("Assets/Audio/Fx/coin.ogg");
 
 	mouseCursor = app->tex->Load("Assets/Textures/UI/handCursor.png");
-	spotTexture = app->tex->Load("Assets/Textures/spotLight.png");
 
 	spotLight = new SpotLight(64, SDL_Color{ 242,149,98,200 }, 0.02f);
 	spotLight->visible = false;
@@ -129,7 +128,7 @@ bool GuiManager::PostUpdate() {
 			curtainTimer.Start();
 		}
 		
-		if (curtainTimer.ReadMSec() > 100 && curtainclosed && shouldCurtainsReOpen) {
+		if (curtainTimer.ReadMSec() > 100 && curtainclosed) {
 			curtainclosed = false;
 
 			bPause = !bPause;
@@ -211,17 +210,14 @@ bool GuiManager::PostUpdate() {
 	iPoint mouse;
 	app->input->GetMousePosition(mouse.x, mouse.y);
 	SDL_Rect r = SDL_Rect{ 0,0,16,16 };
-	SDL_Rect rlight = SDL_Rect{ 0,0,200,200 };
 	
 	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 	{
 		r.x += 16;
-		if(!credits) app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
-		else { app->render->DrawTexture(spotTexture, mouse.x, mouse.y, &rlight, 1, 200, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD); }
+		app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
 	}
 	else {
-		if(!credits) app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
-		else { app->render->DrawTexture(spotTexture, mouse.x, mouse.y, &rlight, 1, 200, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD); }
+		app->render->DrawTexture(mouseCursor, mouse.x, mouse.y, &r);
 	}
 
 

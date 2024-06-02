@@ -118,7 +118,6 @@ bool LevelManagement::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
 
-
 //	LOG("%s",currentScene->name.GetString());
 	switch (gameScene)
 	{
@@ -192,7 +191,7 @@ bool LevelManagement::Update(float dt)
 	case WIN:
 		if (currentScene != (Module*)app->victory) {
 
-			if (app->fade->Fade(currentScene, (Module*)app->credits, 60))
+			if (app->fade->Fade(currentScene, (Module*)app->victory, 60))
 			{
 				currentScene = (Module*)app->victory;
 				LOG("Win");

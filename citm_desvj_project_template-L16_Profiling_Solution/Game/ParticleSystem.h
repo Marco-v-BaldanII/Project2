@@ -108,13 +108,13 @@ public:
 					if (!animated) {
 						if (flipped) {
 							if (overlayPos == SCREEN) {
-								app->render->DrawTexture(particle->maintexture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, true, particle->currentAlpha);
+								app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, true, particle->currentAlpha);
 							}
-							else { app->render->DrawTexture(particle->maintexture, particle->position.x , particle->position.y , &r, true, particle->currentAlpha); }
+							else { app->render->DrawTexture(particle->texture, particle->position.x , particle->position.y , &r, true, particle->currentAlpha); }	
 						}
 						else {
 							if (overlayPos == SCREEN) {
-								app->render->DrawTexture(particle->maintexture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, false, particle->currentAlpha);
+								app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &r, false, particle->currentAlpha);
 							}
 							else { app->render->DrawTexture(particle->texture, particle->position.x , particle->position.y, &r, false, particle->currentAlpha); }
 						}
@@ -122,10 +122,10 @@ public:
 					else {
 						particle->currentAnim->Update();
 						if (flipped) {
-							app->render->DrawTexture(particle->maintexture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &particle->currentAnim->GetCurrentFrame(), true, particle->currentAlpha);
+							app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &particle->currentAnim->GetCurrentFrame(), true, particle->currentAlpha);
 						}
 						else {
-							app->render->DrawTexture(particle->maintexture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &particle->currentAnim->GetCurrentFrame(), false, particle->currentAlpha);
+							app->render->DrawTexture(particle->texture, particle->position.x + app->render->camera.x / -3, particle->position.y + app->render->camera.y / -3, &particle->currentAnim->GetCurrentFrame(), false, particle->currentAlpha);
 						}
 					}
 				}
