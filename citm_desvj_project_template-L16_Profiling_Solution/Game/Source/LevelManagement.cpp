@@ -191,7 +191,8 @@ bool LevelManagement::Update(float dt)
 	case WIN:
 		if (currentScene != (Module*)app->victory) {
 
-			if (app->fade->Fade(currentScene, (Module*)app->victory, 60))
+
+			if (app->fade->Fade(currentScene, (Module*)app->credits, 60))
 			{
 				currentScene = (Module*)app->victory;
 				LOG("Win");

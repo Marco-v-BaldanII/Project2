@@ -1,3 +1,7 @@
+#ifndef __CREDITS_H__
+#define __CREDITS_H__
+
+
 #pragma once
 #include "../Module.h"
 #include "../p2List.h"
@@ -95,4 +99,7 @@ private:
 	 bool loaded = false;
 
 };
+
+#endif // __CREDITS_H__
+
 

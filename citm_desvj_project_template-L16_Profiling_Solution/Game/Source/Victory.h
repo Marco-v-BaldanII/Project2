@@ -9,6 +9,7 @@
 
 struct SDL_Texture;
 class EnemyDummy;
+class Timer;
 
 class Victory : public Module
 {
@@ -43,15 +44,18 @@ private:
 	SDL_Rect rect;
 
 	pugi::xml_node myNode;
-	
+
 	bool playintro = true;
 
 	int waitTime;
+	Timer curtainTimer;
+	Timer timer;
 
 	int logoXpos;
 	uint music;
 	float easingTime = 500; //millisec
 	float counter = 0;
+	bool curtains = false;
 };
 
 #endif // __VICTORY_H__

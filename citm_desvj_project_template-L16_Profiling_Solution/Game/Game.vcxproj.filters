@@ -99,6 +99,9 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="Credits.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -246,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Credits.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

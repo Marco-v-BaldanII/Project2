@@ -19,7 +19,7 @@
 #include "Log.h"
 #include "Intro.h"
 #include "StartMenu.h"
-
+#include "../Credits.h"
 #include <iostream>
 #include <sstream>
 #include "Pathfinding.h"
@@ -80,6 +80,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	castingScene = new CastingScene(false);
 	entityManager = new EntityManager(true);
 	backstageplayer = new BackStagePlayer(false);
+	credits = new Credits(false);
 	
 	pauseMenu = new PauseMenu(true);
 	inventory = new Inventory(true);
@@ -111,6 +112,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(turnManager);
 	AddModule(fonts);
+	AddModule(credits);
 	AddModule(particleSystem);
 	
 	AddModule(entityManager);
@@ -388,6 +390,11 @@ bool App::DoUpdate()
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
+		if (item->data->name == "credits") {
+
+   			int y = 9;
+			y++;
+		}
 		pModule = item->data;
 
 		if(pModule->active == false) {
