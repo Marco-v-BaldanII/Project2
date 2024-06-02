@@ -606,7 +606,8 @@ void PathFinding::DrawBFSPath()
 
 		item = item->next;
 	}
-
+	int y = 4;
+	y++;
 	// Draw frontier
 	//for (uint i = 0; i < frontier.Count(); ++i)
 	//{

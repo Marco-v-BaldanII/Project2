@@ -196,9 +196,9 @@ void Player::LoadConversation(pugi::xml_node node) {
 
 bool Player::PreUpdate() 
 {
-	atkButton->bounds.x = position.x - 30; atkButton->bounds.y = position.y - 40;
-	waitButton->bounds.x = position.x + 30; waitButton->bounds.y = position.y - 40;
-	talkButton->bounds.x = position.x ; talkButton->bounds.y = position.y - 70;
+	atkButton->bounds.x = position.x - 30; atkButton->bounds.y = position.y - 10;
+	waitButton->bounds.x = position.x + 30; waitButton->bounds.y = position.y - 10;
+	talkButton->bounds.x = position.x ; talkButton->bounds.y = position.y - 30;
 	itemButton->bounds.x = position.x; itemButton->bounds.y = position.y +30;
 
 	// if the player hasn't moved this turn it can be clicked on
@@ -507,7 +507,7 @@ bool Player::PostUpdate()
 			app->guiManager->TurnOnSpotLight();
 			
 			//Draw path
-			if (app->turnManager->currentPlayer == this) 
+			if (app->turnManager->currentPlayer == this && movedThisTurn == false && HasMoveAction) 
 			{
 				
 				if(myItem != nullptr)	personalPathfinding->GenerateWalkeableArea(tilePos, movement + myItem->GetMov());

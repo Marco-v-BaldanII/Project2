@@ -62,7 +62,7 @@ public:
 	}
 	void Render() {
 		if (visible == true) {
-			app->map->drawGrid = true;
+			
 			/*
 				app->render->FillCircle(position.x, position.y, radius, color.r, color.g, color.b, color.a / 2.6f, true, SDL_BLENDMODE_ADD);
 				app->render->FillCircle(position.x, position.y, radius * 1.2f, color.r, color.g, color.b, color.a / 3.0f, true, SDL_BLENDMODE_ADD);
@@ -71,7 +71,7 @@ public:
 			if (mode == BAT) {
 				app->render->DrawTexture(texture, position.x - 32, position.y - 32, (const SDL_Rect*)0, true, 210, 1, 255, 255, 255, 0, 0, 0, SDL_BLENDMODE_ADD);
 				SDL_Rect rect = SDL_Rect{ 0,0,1000,1000 };
-
+				app->map->drawGrid = true;
 				app->render->DrawTexture(vigneteText, position.x - 500, position.y - 500, &rect, false, 80);
 			}
 			else {
@@ -156,6 +156,8 @@ public:
 
 	SDL_Texture* mouseCursor = nullptr;
 
+	SDL_Texture* spotTexture = nullptr;
+
 	pugi::xml_node myNode;
 
 	uint buttonClickFx = 0;
@@ -187,6 +189,9 @@ public:
 
 	Timer curtainTimer;
 	bool curtainclosed = false;
+
+	bool credits = false;
+	bool shouldCurtainsReOpen = true;
 
 };
 

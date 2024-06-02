@@ -47,6 +47,7 @@ bool Map::Start() {
     else if (level == 1)
     mapPath = myNode.child("lvl2").attribute("path").as_string();
 
+    drawGrid = false;
 
     Load(mapPath);
 

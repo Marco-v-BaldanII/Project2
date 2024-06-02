@@ -296,7 +296,7 @@ bool BattleScene::Start()
 		//AttackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Attack", btPos, this);
 		//HealButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Heal", btPos2, this);
 		//img = app->tex->Load("Assets/Textures/portrait1.png");
-		music = app->audio->PlayMusic("assets/audio/music/Battle-screen-music.wav", 0.5f);
+		
 		//app->dialogueManager->Enable();
 
 		rect = { 0,0,64,90 };
@@ -397,11 +397,11 @@ bool BattleScene::PostUpdate()
 		talker2 = nullptr;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+	/*if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
 		for (ListItem<Player*>* pIt = party.start; pIt != NULL; pIt = pIt->next) {
 			pIt->data->hp = 0;
 		}
-	}
+	}*/
 	
 	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN) {
 		StartRossing();
@@ -563,6 +563,7 @@ bool BattleScene::SaveState(pugi::xml_node node) {
 		playerNode.append_attribute("exp").set_value((int)pIt->data->experiencePoints);
 
 		nodes.Add(&playerNode);
+		
 	}
 	for (ListItem<Enemy*>* pIt = goons.start; pIt != nullptr; pIt = pIt->next) {
 		//<player  name="PrinceEdward"  x="0" y="0" unit_type="1"  attack="8" hp="12" precision="75" luck="25" speed="20" movement="8"           />

@@ -117,6 +117,7 @@ void DialogueManager::WriteTheScript() {
 
 
 		// Shakespearean dialogues
+
 		for (pugi::xml_node dialogueNode = myConfig.child("dialogues").child("shakesperean").child("dialogue"); dialogueNode != NULL; dialogueNode = dialogueNode.next_sibling("dialogue")) {
 
 			Dialogue* D = new Dialogue(dialogueNode.attribute("owner").as_string(), dialogueNode.attribute("text").as_string());
@@ -321,11 +322,11 @@ bool DialogueManager::Update(float dt)
 				app->entityManager->Enable();
 
 				app->map->blockedGid = 187;
-				app->map->Disable();
-				app->map->CleanUp();
-				app->map->mapData.layers.Clear();
+				//app->map->Disable();
+				//app->map->CleanUp();
+				//app->map->mapData.layers.Clear();
 				app->map->level = 1;
-				app->map->Enable();
+				//app->map->Enable();
 				app->battleScene->Start();
 
 				app->levelManager->LoadScene(GameScene::COMBAT);
@@ -928,18 +929,30 @@ void DialogueManager::Next_Dialogue() {
 			// the cutscene for act 1 has finished
  			myState = NPCS;
 			FinishScrolling();
+			app->audio->PlayMusic("assets/audio/music/Battle-screen-music.wav", 0.5f);
 			
 			if (app->battleScene->snowSystem == nullptr) {
 				app->battleScene->StartSnowStorm();
 			}
 
+			if (app->map->level == 1) {
+				app->render->camera.y = -2750;
+				app->map->drawGrid = false;
+			}
+
 			/*app->battleScene->Enable();
 			app->backStage->Disable();*/
-			app->levelManager->LoadScene(GameScene::COMBAT);
+  			app->levelManager->LoadScene(GameScene::COMBAT);
 			app->backstageplayer->talking = false;
 
   			dialogueIndex = 0;
 			sceneIndex = 0; backgroundIndex = 0;
+
+			app->map->Disable();
+			app->map->CleanUp();
+			app->map->mapData.layers.Clear();
+		
+			app->map->Enable();
 
 		}
 
@@ -1075,4 +1088,17 @@ void DialogueManager::NextAct() {
 
 	myConfig = dialogueFile2;
 	spontaneousDialogue = nullptr;
+}
+
+void DialogueManager::PrevAct() {
+
+	CleanUp();
+
+	pugi::xml_parse_result res2 = dialogueFile2.load_file("dialogue.xml");
+
+	myConfig = dialogueFile2;
+	spontaneousDialogue = nullptr;
+
+	scriptWritten = false;
+
 }

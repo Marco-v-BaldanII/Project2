@@ -22,7 +22,7 @@ class Particle {
 public:
 
 	Particle(SDL_Texture* tex, fPoint startingPos, fPoint velocity, fPoint acceleration, float aliveTime, SDL_Rect rect, float minSize = 0.3f, float maxSize = 1.2f, 
-		float minAlpha = 255, float maxAlpha = 255, fPoint speedXVariation = fPoint(0,0), Animation animations[] = nullptr) {
+		float minAlpha = 255, float maxAlpha = 255, fPoint speedXVariation = fPoint(0,0), Animation animations[] = nullptr, SDL_Texture* tex2 = nullptr) {
 
 		texture = tex;
 		position = startingPos;
@@ -36,6 +36,7 @@ public:
 		alphaVariation.x = minAlpha; alphaVariation.y = maxAlpha;
 		sizeVariation.x = minSize; sizeVariation.y = maxSize;
 		this->speedXVariation = speedXVariation;
+		this->texture2 = tex2;
 		if (animations != nullptr) {
 			for (int i = 0; i < 3; ++i) {
 				this->possibleAnimations[i] = animations[i];
@@ -68,6 +69,7 @@ public:
 
 	Particle(Particle* p) {
 		this->texture = p->texture;
+		this->texture2 = p->texture2;
 		
 		for (int i = 0; i < 3; ++i) {
 			possibleAnimations[i] = p->possibleAnimations[i];
@@ -107,6 +109,19 @@ public:
 		int index = getRandomNumber(0, 3);
 
 		currentAnim = &possibleAnimations[index];
+		if (texture2 != nullptr) {
+			int i = getRandomNumber(0, 1);
+			if (i == 0) {
+				maintexture = texture;
+			}
+			else {
+				maintexture = texture2;
+			}
+		}
+		else {
+			maintexture = texture;
+		}
+
 	}
 
 	bool CheckToDie() {
@@ -117,8 +132,9 @@ public:
 		}
 		return false;
 	}
-
+	SDL_Texture* maintexture;
 	SDL_Texture* texture;
+	SDL_Texture* texture2 = nullptr;
 	SDL_Rect rect;
 
 	Animation possibleAnimations[3];

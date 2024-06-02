@@ -178,7 +178,7 @@ public:
 
 		app->render->DrawText(attack, (startingPos.x + 150+950-75)  + (app->render->camera.x / 3), (startingPos.y + 73+200)  + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });
 		s = "+ "; s += to_string(atkMod);
-		if(atkMod != 0)app->render->DrawText(s, (startingPos.x + 150 + 925) + (app->render->camera.x / 3) + 30, (startingPos.y + 73 + 200) + (app->render->camera.y / 3) - 30, 70, 50, false, SDL_Color{ 254, 254, 254, 255 }, CENTER_ALIGN);
+		if(atkMod != 0)app->render->DrawText(s, (startingPos.x + 150 + 910) + (app->render->camera.x / 3) + 30, (startingPos.y + 73 + 200) + (app->render->camera.y / 3) - 30, 70, 50, false, SDL_Color{ 254, 254, 254, 255 }, CENTER_ALIGN);
 
 
 		app->render->DrawText(speed, (startingPos.x + 95+830-50)  + (app->render->camera.x / 3), (startingPos.y + 100+250) + (app->render->camera.y / 3), 30, 50, false, SDL_Color{ 254, 254, 0, 255 });

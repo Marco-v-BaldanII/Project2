@@ -72,7 +72,7 @@ bool GuiControlButton::Update(float dt)
 			if (mouseX > bounds3.x && mouseX < bounds3.x + bounds3.w && mouseY > bounds3.y && mouseY < bounds3.y + bounds3.h) {
 
 				state = GuiControlState::FOCUSED;
-				//app->audio->PlayFx(app->guiManager->buttonHoverFx);
+				app->audio->PlayFx(app->guiManager->buttonHoverFx);
 
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
 					state = GuiControlState::PRESSED;
@@ -119,7 +119,7 @@ bool GuiControlButton::Update(float dt)
 
 			break;
 		case GuiControlState::PRESSED:
-			//app->render->DrawRectangle(bounds, color.r+ 50, color.g+ 50, color.b+ 50, color.a, true, false);
+			if(viewMode == VIEW::SCREEN) app->render->DrawRectangle(bounds, color.r+ 50, color.g+ 50, color.b+ 50, color.a, true, false);
 
 			break;
 		}

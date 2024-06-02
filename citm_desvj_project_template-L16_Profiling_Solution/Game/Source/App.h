@@ -44,6 +44,7 @@ class BackStage;
 class CastingScene;
 class PauseMenu;
 class Inventory;
+class Credits;
 
 
 class App
@@ -138,6 +139,7 @@ public:
 	PauseMenu* pauseMenu;
 	Inventory* inventory;
 	ParticleSystem* particleSystem;
+	Credits* credits;
 
 
 	//scenes

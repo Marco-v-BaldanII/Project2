@@ -143,6 +143,8 @@ public:
 
 	void NextAct();
 
+	void PrevAct();
+
 	void WriteTheScript();
 
 public:
